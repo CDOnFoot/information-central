@@ -136,7 +136,6 @@
         // this.mbIndex = param;
         // this.setFlag = true;
         this.mbTempIndex = param;
-        // this.setTempFlag = true;
       },
       handleOk(e) {
         let self = this;
@@ -167,7 +166,6 @@
      
 
         this.mbIndex = this.mbTempIndex;
-        // this.setFlag = this.setTempFlag;
         this.resetFlag = true;
         console.log("save 保存模版")
         // this.menuIndex = this.mbIndex;

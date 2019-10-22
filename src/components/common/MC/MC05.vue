@@ -354,7 +354,7 @@ export default {
 
       var sizeFunction = function(x) {
         var y = Math.sqrt(x / 5e8) + 0.1;
-        return y * 40;
+        return y * 80;
       };
       // Schema:
       var schema = [
@@ -373,8 +373,8 @@ export default {
             inverse: true,
             playInterval: 2000,
             left: null,
-            right: 20,
-            top: 10,
+            right: 0,
+            top: 20,
             bottom: 10,
             width: 55,
             height: null,
@@ -403,8 +403,8 @@ export default {
               showNextBtn: false,
               showPrevBtn: false,
               normal: {
-                color: "#fff",
-                borderColor: "#fff"
+                color: "#666",
+                borderColor: "#666"
               },
               emphasis: {
                 color: "#fff",
@@ -413,29 +413,7 @@ export default {
             },
             data: []
           },
-          // backgroundColor: '#404a59',
-          title: [
-            {
-              text: data.timeline[0],
-              textAlign: "center",
-              left: "63%",
-              top: "55%",
-              textStyle: {
-                fontSize: 100,
-                color: "rgba(255, 255, 255, 0.7)"
-              }
-            },
-            {
-              // text: '车站聚类分析',
-              left: "left",
-              top: 10,
-              textStyle: {
-                color: "#aaa",
-                fontWeight: "normal",
-                fontSize: 20
-              }
-            }
-          ],
+
           tooltip: {
             padding: 5,
             backgroundColor: "#222",
@@ -466,9 +444,10 @@ export default {
             }
           },
           grid: {
-            top: 60,
+            top: 80,
+            bottom: 30,
             containLabel: true,
-            left: 5,
+            left: 10,
             right: "110"
           },
           xAxis: {
@@ -621,9 +600,10 @@ canvas {
   left: -6px !important;
   margin-top: 5% !important;
   margin-left: -5% !important;
+
 }
 #splashes {
   width: 470px;
-  height: 240px;
+  height: 278px;
 }
 </style>

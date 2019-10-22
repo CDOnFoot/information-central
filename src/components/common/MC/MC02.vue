@@ -4,7 +4,7 @@
   <div>
     <div class="main">
       <div class="borde">{{mcTitle}}</div>
-      <div id="structure" :style="{width: '470px', height: '240px',margin:'0px 10px'}"></div>
+      <div id="structure" ></div>
     </div>
   </div>
 </template>
@@ -138,15 +138,28 @@ export default {
 
 <style scoped>
 .main {
-  /* background: rgba(78, 58, 58, 0.411); */
   color: #ffffff;
-  padding: 10px;
+  padding: 1%;
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 .borde {
   font-weight: 700;
   color: #3467c5;
   border-left: #3467c5 solid 4px;
-  padding-left: 10px;
-  margin: 0px 0px 0px 30px;
+  position: absolute;
+  top: 4%;
+  left: 6%;
+  padding-left: 3%;
+}
+canvas{
+  width: 100% !important;
+  height: 100% !important;
+  left: -6px !important;
+}
+#structure{
+  width: 100%;
+  height: 100%;
 }
 </style>

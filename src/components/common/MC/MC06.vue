@@ -2,11 +2,8 @@
   <!--    模块内容一-->
     <div class="main" :style="{width: '100%', height: '100%'}">
       <div class="borde">{{mcTitle}}</div>
-      <div :style="{width: '470px', height: '255px',margin:'-31px 10px 0px'}">
-        <div :style="{width: '100%', height: '100%'}" class="bluee">
-            <a-table :columns="columns" :dataSource="data" size="small" :pagination="false" :showHeader="false"
-            class="taablee" />
-        </div>
+      <div class="bluee">
+            <a-table :columns="columns" :dataSource="data" size="small" :pagination="false" :showHeader="false"/>
       </div>
     </div>
 </template>
@@ -113,20 +110,27 @@ export default {
 
 <style scoped>
 .main {
-  /* background: rgba(78, 58, 58, 0.411); */
   color: #ffffff;
-  padding: 10px;
+  padding: 1%;
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 .borde {
   font-weight: 700;
   color: #3467c5;
   border-left: #3467c5 solid 4px;
-  padding-left: 10px;
-  margin: 0px 0px 0px 30px;
+  position: absolute;
+  top: 4%;
+  left: 6%;
+  padding-left: 3%;
 }
-
-.bluee {
-  padding-top: 50px;
+.bluee{
+  width: 100%;
+  height: 100%;
+    padding-left: 10%;
+    padding-top: 10%;;
   background: url("../../../assets/img/排行.png") no-repeat;
 }
+
 </style>

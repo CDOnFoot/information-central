@@ -4,16 +4,15 @@
 <template>
   <!--    模块内容一-->
   <div>
-    <div class="main" :style="{width: '100%', height: '100%'}">
+    <div class="main">
       <div class="borde">{{mcTitle}}</div>
 
-      <div id="Energy" :style="{width: '470px', height: '240px',margin:'0px 10px'}"></div>
+      <div id="Energy"></div>
     </div>
   </div>
 </template>
 <script>
 import echarts from "echarts";
-
 export default {
   name: "MC01",
   data() {
@@ -51,11 +50,7 @@ export default {
           }
         },
         legend: {
-          textStyle: {
-            //图例文字的样式
-            color: "white"
-          },
-          data: ["总能耗"]
+          show:false
         },
         grid: {
           left: "3%",
@@ -91,7 +86,6 @@ export default {
             "火车北站",
             "白龙路站",
             "大树营站",
-            "菊花村站"
           ]
         },
         series: [
@@ -109,7 +103,6 @@ export default {
               82354,
               92341,
               101231,
-              152125
             ]
           }
         ]
@@ -121,15 +114,28 @@ export default {
 
 <style scoped>
 .main {
-  /* background: rgba(78, 58, 58, 0.411); */
   color: #ffffff;
-  padding: 10px;
+  padding: 1%;
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 .borde {
   font-weight: 700;
   color: #3467c5;
   border-left: #3467c5 solid 4px;
-  padding-left: 10px;
-  margin: 0px 0px 0px 30px;
+  position: absolute;
+  top: 4%;
+  left: 6%;
+  padding-left: 3%;
+}
+canvas{
+  width: 100% !important;
+  height: 100% !important;
+  left: -6px !important;
+}
+#Energy{
+  width: 100%;
+  height: 100%;
 }
 </style>

@@ -209,11 +209,11 @@
       props: ['setFlag','resetFlag'],
       watch: {
         setFlag: function (val) {
-          console.log(val);
+          // console.log(val);
           this.setFlag = val;
         },
         resetFlag: function (val) {
-          console.log(val)
+          // console.log(val)
 
           // 检测当选择模版后会清空当前所有的模块内容
           // 此时重新调用获取当前模块内容信息
@@ -251,7 +251,7 @@
                     });
                     self.confirmLoading = false;
               }else{
-                console.log("执行")
+                // console.log("执行")
                 this.saveHandleOk();
               }
             }else{
@@ -263,7 +263,7 @@
                     });
                     self.confirmLoading = false;
               }else{
-                console.log("执行")
+                // console.log("执行")
                 this.saveHandleOk();
               }
             }
@@ -296,33 +296,31 @@
           },
           // 保存模块内容信息
           saveMCFunction:function(){
-            console.log("保存模块内容信息：",this.mcList[this.mcTempIndex].title,this.mcList[this.mcTempIndex].id,this.mcTempIndex);
+            // console.log("保存模块内容信息：",this.mcList[this.mcTempIndex].title,this.mcList[this.mcTempIndex].id,this.mcTempIndex);
             this.mcIndex = this.mcTempIndex;
             this.currentMC.mc[this.visibleIndex].key = this.$common.mcList[this.mcTempIndex].id;
             this.currentMC.mc[this.visibleIndex].type = this.$common.mcList[this.mcTempIndex].type;
             this.currentMC.mc[this.visibleIndex].title = this.$common.mcList[this.mcTempIndex].title;
-
           },
           handleCancel(e) {
             this.visible = false;
             this.mcIndex = 0;
           },
           mcChangeItem:function(index,type){
-            console.log(this.menuList[0].mb.mk[index].title,this.menuList[0].mb.mk[index].id,index);
-            console.log(this.btnList[type].title,type);
+            // console.log(this.menuList[0].mb.mk[index].title,this.menuList[0].mb.mk[index].id,index);
+            // console.log(this.btnList[type].title,type);
           
             let self = this;
             if(type!=2){
               this.visible = true;
               this.visibleIndex = index;
-              console.log(this.visibleIndex,"添加或者替换模块内容");
+              // console.log(this.visibleIndex,"添加或者替换模块内容");
             }else{
-              console.log("移除模块内容");
+              // console.log("移除模块内容");
               this.visibleIndex = index;
-              console.log(this.visibleIndex,"删除模块内容");
+              // console.log(this.visibleIndex,"删除模块内容");
               this.showDeleteConfirm();
             }
-            
           },
           showDeleteConfirm:function(){
             let self = this;
@@ -333,14 +331,14 @@
               okType: 'danger',
               cancelText: '取消',
               onOk() {
-                console.log('删除成功');
+                // console.log('删除成功');
                 //  self.mcIndex = 0;
                   self.currentMC.mc[self.visibleIndex].key = '';
                   self.currentMC.mc[self.visibleIndex].type = '';
                   self.currentMC.mc[self.visibleIndex].title = '';
               },
               onCancel() {
-                console.log('取消删除');
+                // console.log('取消删除');
               },
             });
           },
@@ -353,13 +351,12 @@
           },
           initMC:function(callback){
             let self = this;
-            console.log("MB01: "+self.resetFlag);
+            // console.log("MB01: "+self.resetFlag);
             this.menuList = this.$common.menuList;
             this.menuList.some((item,index)=>{
               if(item.mb){
                 if(item.mb.id === self.currentMC.mbId){
                   item.mb.mk.some((items,indexs)=>{
-
                     if(self.resetFlag){
                         self.currentMC.mc[indexs].key = '';
                         self.currentMC.mc[indexs].type = '';
@@ -369,11 +366,9 @@
                         self.currentMC.mc[indexs].key = self.$common.menuList[index].mb.mk[indexs].mc.id;
                         self.currentMC.mc[indexs].type = self.$common.menuList[index].mb.mk[indexs].mc.type;
                         self.currentMC.mc[indexs].title = self.$common.menuList[index].mb.mk[indexs].mc.title;
-                        
                         return false;
                       }
                     }
-                   
                   });
                   callback(this.currentMC);
                 }
@@ -381,9 +376,8 @@
             });
           },
           currentMcInfo:function(data){
-            console.log(data);
+            // console.log(data);
           },
-
         },
         components:{
             MC01,
@@ -395,11 +389,12 @@
             MC07,
             MC08,
             MC09,
-
         },
     }
 </script>
-
 <style scoped>
-
+  .mc-content{
+    width: 100%;
+    height: 100%;
+  }
 </style>

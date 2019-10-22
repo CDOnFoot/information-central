@@ -4,7 +4,7 @@
   <div>
     <div class="main">
       <div class="borde">{{mcTitle}}</div>
-      <div id="flow" :style="{width: '470px', height: '240px',margin:'0px 10px'}"></div>
+      <div id="flow"></div>
     </div>
   </div>
 </template>
@@ -59,7 +59,7 @@ export default {
             //图例文字的样式
             color: "white"
           },
-        data:['邮件营销','联盟广告','视频广告','直接访问','搜索引擎']
+        data:['直接访问','搜索引擎']
     },
     toolbox: {
         feature: {
@@ -81,7 +81,7 @@ export default {
           },
             type : 'category',
             boundaryGap : false,
-            data : ['周一','周二','周三','周四','周五','周六','周日']
+            data : ['05:00','06:00','07:00','08:00','09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00']
         }
     ],
     yAxis : [
@@ -100,7 +100,7 @@ export default {
             type:'line',
             stack: '总量',
             areaStyle: {normal: {}},
-            data:[320, 332, 301, 334, 390, 330, 320]
+            data:[920, 332, 301, 334, 390, 330, 320, 332, 301, 334, 390, 330]
         },
         {
             name:'搜索引擎',
@@ -113,7 +113,7 @@ export default {
                 }
             },
             areaStyle: {normal: {}},
-            data:[820, 932, 901, 934, 1290, 1330, 1320]
+            data:[820, 932, 901, 934, 1290, 1330, 1320, 334, 390, 330, 320, 332]
         }
     ]
       });
@@ -124,15 +124,28 @@ export default {
 
 <style scoped>
 .main {
-  /* background: rgba(78, 58, 58, 0.411); */
   color: #ffffff;
-  padding: 10px;
+  padding: 1%;
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 .borde {
   font-weight: 700;
   color: #3467c5;
   border-left: #3467c5 solid 4px;
-  padding-left: 10px;
-  margin: 0px 0px 0px 30px;
+  position: absolute;
+  top: 4%;
+  left: 6%;
+  padding-left: 3%;
+}
+canvas{
+  width: 100% !important;
+  height: 100% !important;
+  left: -6px !important;
+}
+#flow{
+  width: 100%;
+  height: 100%;
 }
 </style>

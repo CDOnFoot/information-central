@@ -110,7 +110,7 @@
     width: 100%;
     z-index: 1;
     overflow: hidden;
-    background: url(/static/img/login-bg.df431c2.png) center center no-repeat #000d19;
+    background: url(../../assets/img/login-bg.png) center center no-repeat #000d19;
     background-size: 100%;
   }
 

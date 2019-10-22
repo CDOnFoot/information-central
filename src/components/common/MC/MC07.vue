@@ -1,19 +1,18 @@
 <template>
   <!--    模块内容一-->
   <div>
-    <div class="main" :style="{width: '100%', height: '100%'}">
+    <div class="main">
       <div class="borde">{{mcTitle}}</div>
-      <div :style="{width: '470px', height: '240px',margin:'0px 10px'}">
-        <div :style="{width: '100%', height: '100%'}">
+      <div class="better ">
           <div class="fon">
-            <div :style="{ margin:'0px 0px 0px 25px'}">100%</div>
-            <div :style="{ margin:'0px 0px 0px 25px'}">正点率</div>
+            <div class="Pleft">100%</div>
+            <div class="Pleft">正点率</div>
           </div>
           <div class="fon1">
-            <div :style="{ margin:'0px 0px 0px 25px'}">100%</div>
-            <div :style="{ margin:'0px 0px 0px 25px'}">兑现率</div>
+            <div class="Pleft">100%</div>
+            <div class="Pleft">兑现率</div>
           </div>
-        </div>
+          </div>
       </div>
     </div>
   </div>
@@ -53,18 +52,27 @@ export default {
 
 <style scoped>
 .main {
-  /* background: rgba(78, 58, 58, 0.411); */
   color: #ffffff;
-  padding: 10px;
+  padding: 1%;
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 .borde {
   font-weight: 700;
   color: #3467c5;
   border-left: #3467c5 solid 4px;
-  padding-left: 10px;
-  margin: 0px 0px 0px 30px;
+  position: absolute;
+  top: 4%;
+  left: 6%;
+  padding-left: 3%;
 }
-
+.better{
+  width: 100%;
+  height: 100%;
+    padding-left: 3%;
+    padding-top: 4%;;
+}
 .fon1,
 .fon{
   height:80%;
@@ -76,7 +84,8 @@ export default {
   font-size: 26px;
   padding: 60px 40px;
 }
-.turn{
-  transform:rotate(300deg);
+.Pleft{
+  padding-left: 24px;
 }
+
 </style>

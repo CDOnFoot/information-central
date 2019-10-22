@@ -89,22 +89,22 @@ export default {
           [
             [815, 34.05, 351014, "小菜园", "2018年9月"],
             [1314, 39, 645526, "大树营", "2018年9月"],
-            [985, 32, 2216750, "陈家营", "2018年9月"],
+            [985, 32, 321675013, "陈家营", "2018年9月"],
             [864, 32.2, 345043, "黑土", "2018年9月"],
             [1244, 36.5731262, 977662, "牛街庄", "2018年9月"],
-            [1803, 33.96717024, 2935511, "大塘子", "2018年9月"],
+            [1803, 33.96717024, 29355111, "大塘子", "2018年9月"],
             [1639, 38.37, 22886919, "莲花池", "2018年9月"],
             [926, 42.84559912, 61428, "菊华", "2018年9月"],
-            [1052, 25.4424, 1685795, "东华", "2018年9月"],
-            [1050, 36.4, 3029378, "昆明东站", "2018年9月"],
+            [1052, 25.4424, 168574895, "东华", "2018年9月"],
+            [1050, 36.4, 30294378, "昆明东站", "2018年9月"],
             [579, 26, 4345000, "小喜村", "2018年9月"],
-            [576, 25.8, 939500, "洋甫", "2018年9月"],
+            [576, 25.8, 9395000, "洋甫", "2018年9月"],
             [658, 34.05, 100000, "螺狮湾北", "2018年9月"],
             [1278, 37.91620899, 868570, "螺狮湾", "2018年9月"],
             [1213, 35.9, 9508747, "昆明南站", "2018年9月"],
-            [1430, 29.5734572, 3108898, "席子营", "2018年9月"],
-            [1221, 35, 977346, "龙街", "2018年9月"],
-            [3431, 38.6497603, 123466, "大河梗", "2018年9月"],
+            [1430, 29.5734572, 31088398, "席子营", "2018年9月"],
+            [1221, 35, 9773456, "龙街", "2018年9月"],
+            [3431, 38.6497603, 12327466, "大河梗", "2018年9月"],
             [2128, 39.41, 6801854, "火车北站", "2018年9月"]
           ],
           [
@@ -354,7 +354,7 @@ export default {
 
       var sizeFunction = function(x) {
         var y = Math.sqrt(x / 5e8) + 0.1;
-        return y * 80;
+        return y * 40;
       };
       // Schema:
       var schema = [
@@ -373,15 +373,15 @@ export default {
             inverse: true,
             playInterval: 2000,
             left: null,
-            right: 0,
-            top: 20,
-            bottom: 20,
+            right: 20,
+            top: 10,
+            bottom: 10,
             width: 55,
             height: null,
             label: {
               normal: {
                 textStyle: {
-                  color: "#999"
+                  color: "#fff"
                 }
               },
               emphasis: {
@@ -403,12 +403,12 @@ export default {
               showNextBtn: false,
               showPrevBtn: false,
               normal: {
-                color: "#666",
-                borderColor: "#666"
+                color: "#fff",
+                borderColor: "#fff"
               },
               emphasis: {
-                color: "#aaa",
-                borderColor: "#aaa"
+                color: "#fff",
+                borderColor: "#fff"
               }
             },
             data: []
@@ -466,9 +466,9 @@ export default {
             }
           },
           grid: {
-            top: 100,
+            top: 60,
             containLabel: true,
-            left: 30,
+            left: 5,
             right: "110"
           },
           xAxis: {
@@ -484,14 +484,14 @@ export default {
             nameGap: 25,
             nameLocation: "middle",
             nameTextStyle: {
-              fontSize: 18
+              fontSize: 12
             },
             splitLine: {
               show: false
             },
             axisLine: {
               lineStyle: {
-                color: "#ccc"
+                color: "#fff"
               }
             },
             axisLabel: {
@@ -508,12 +508,12 @@ export default {
             name: "能耗",
             max: 100,
             nameTextStyle: {
-              color: "#ccc",
-              fontSize: 18
+              color: "#fff",
+              fontSize: 12
             },
             axisLine: {
               lineStyle: {
-                color: "#ccc"
+                color: "#fff"
               }
             },
             splitLine: {
@@ -532,7 +532,7 @@ export default {
               precision: 0.1,
               textGap: 30,
               textStyle: {
-                color: "#ccc"
+                color: "#fff"
               },
               inRange: {
                 color: (function() {
@@ -621,7 +621,6 @@ canvas {
   left: -6px !important;
   margin-top: 5% !important;
   margin-left: -5% !important;
-
 }
 #splashes {
   width: 470px;

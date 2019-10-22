@@ -100,7 +100,7 @@
         mbList:'',
         mbIndex:0,
         mbTempIndex:'',
-        setTempFlag:false,
+        // setTempFlag:false,
         resetFlag:false,
       }
     },
@@ -136,7 +136,7 @@
         // this.mbIndex = param;
         // this.setFlag = true;
         this.mbTempIndex = param;
-        this.setTempFlag = true;
+        // this.setTempFlag = true;
       },
       handleOk(e) {
         let self = this;
@@ -148,13 +148,14 @@
               content: '所选模版内容即为当前界面模版，请重新选择',
               onOk() {},
             });
-            this.confirmLoading = false;
+            self.confirmLoading = false;
+            self.mbTempIndex = '';
             return false;
         }else{
           setTimeout(() => {
-            this.visible = false;
-            this.mcTempIndex = 0;
-            this.confirmLoading = false;
+            self.visible = false;
+            self.mcTempIndex = 0;
+            self.confirmLoading = false;
           }, 1000);
         this.saveMBFunction();
         }
@@ -166,7 +167,7 @@
      
 
         this.mbIndex = this.mbTempIndex;
-        this.setFlag = this.setTempFlag;
+        // this.setFlag = this.setTempFlag;
         this.resetFlag = true;
         console.log("save 保存模版")
         // this.menuIndex = this.mbIndex;
@@ -175,7 +176,9 @@
       },
       handleCancel(e) {
         this.visible = false;
-        this.mbIndex = 0;
+        // this.mbIndex = 0;
+        this.mbTempIndex = '';
+
       },
       saveSet:function(){
         this.setFlag = false;

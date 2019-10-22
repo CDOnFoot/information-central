@@ -174,7 +174,7 @@
     display: flex;
     flex-flow: wrap;
     justify-content: space-between;
-    height: 38rem;
+    /* height: 38rem; */
   }
   .main-item-mk{
     overflow: auto;
@@ -366,4 +366,7 @@
       }
       .marginLeft{
         margin-left: 5px;
+      }
+      .content-main-mb{
+        height: 38rem;
       }

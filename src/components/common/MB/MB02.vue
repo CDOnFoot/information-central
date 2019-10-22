@@ -47,7 +47,7 @@
           <div class="hide-sub-left" v-show="setFlag">
               <div class="sub-btn">
                   <div class="sub-btn-item" v-for="(item,index) in btnList" :key="index" :class="(index===0 || index===2)?'marginLeft':''">
-                  <a-button size="small" class="item-btn" @click="mcChangeItem(1,index)" v-show="(index===0 && !currentMC.mc[0].key) || (index===1 && currentMC.mc[0].key) || (index===2 && currentMC.mc[0].key)">
+                  <a-button size="small" class="item-btn" @click="mcChangeItem(1,index)" v-show="(index===0 && !currentMC.mc[1].key) || (index===1 && currentMC.mc[1].key) || (index===2 && currentMC.mc[1].key)">
                   {{item.title}}</a-button>
                 </div>
               </div>
@@ -66,7 +66,7 @@
           <div class="hide-sub-left" v-show="setFlag">
               <div class="sub-btn">
                 <div class="sub-btn-item" v-for="(item,index) in btnList" :key="index" :class="(index===0 || index===2)?'marginLeft':''">
-                  <a-button size="small" class="item-btn" @click="mcChangeItem(2,index)" v-show="(index===0 && !currentMC.mc[0].key) || (index===1 && currentMC.mc[0].key) || (index===2 && currentMC.mc[0].key)">
+                  <a-button size="small" class="item-btn" @click="mcChangeItem(2,index)" v-show="(index===0 && !currentMC.mc[2].key) || (index===1 && currentMC.mc[2].key) || (index===2 && currentMC.mc[2].key)">
                   {{item.title}}</a-button>
                 </div>
               </div>
@@ -83,7 +83,7 @@
         <div class="hide-sub-key" v-show="setFlag">
             <div class="sub-btn">
                 <div class="sub-btn-item" v-for="(item,index) in btnList" :key="index" :class="(index===0 || index===2)?'marginLeft':''">
-                  <a-button size="small" class="item-btn" @click="mcChangeItem(3,index)" v-show="(index===0 && !currentMC.mc[0].key) || (index===1 && currentMC.mc[0].key) || (index===2 && currentMC.mc[0].key)">
+                  <a-button size="small" class="item-btn" @click="mcChangeItem(3,index)" v-show="(index===0 && !currentMC.mc[3].key) || (index===1 && currentMC.mc[3].key) || (index===2 && currentMC.mc[3].key)">
                   {{item.title}}</a-button>
                 </div>
             </div>
@@ -98,7 +98,7 @@
         <div class="hide-sub-key-b" v-show="setFlag">
             <div class="sub-btn">
                  <div class="sub-btn-item" v-for="(item,index) in btnList" :key="index" :class="(index===0 || index===2)?'marginLeft':''">
-                  <a-button size="small" class="item-btn" @click="mcChangeItem(4,index)" v-show="(index===0 && !currentMC.mc[0].key) || (index===1 && currentMC.mc[0].key) || (index===2 && currentMC.mc[0].key)">
+                  <a-button size="small" class="item-btn" @click="mcChangeItem(4,index)" v-show="(index===0 && !currentMC.mc[4].key) || (index===1 && currentMC.mc[4].key) || (index===2 && currentMC.mc[4].key)">
                   {{item.title}}</a-button>
                 </div>
             </div>
@@ -116,7 +116,7 @@
           <div class="hide-sub-right" v-show="setFlag">
               <div class="sub-btn">
                 <div class="sub-btn-item" v-for="(item,index) in btnList" :key="index" :class="(index===0 || index===2)?'marginLeft':''">
-                  <a-button size="small" class="item-btn" @click="mcChangeItem(5,index)" v-show="(index===0 && !currentMC.mc[0].key) || (index===1 && currentMC.mc[0].key) || (index===2 && currentMC.mc[0].key)">
+                  <a-button size="small" class="item-btn" @click="mcChangeItem(5,index)" v-show="(index===0 && !currentMC.mc[5].key) || (index===1 && currentMC.mc[5].key) || (index===2 && currentMC.mc[5].key)">
                   {{item.title}}</a-button>
                 </div>
               </div>
@@ -132,7 +132,7 @@
           <div class="hide-sub-right" v-show="setFlag">
               <div class="sub-btn">
                 <div class="sub-btn-item" v-for="(item,index) in btnList" :key="index" :class="(index===0 || index===2)?'marginLeft':''">
-                  <a-button size="small" class="item-btn" @click="mcChangeItem(6,index)" v-show="(index===0 && !currentMC.mc[0].key) || (index===1 && currentMC.mc[0].key) || (index===2 && currentMC.mc[0].key)">
+                  <a-button size="small" class="item-btn" @click="mcChangeItem(6,index)" v-show="(index===0 && !currentMC.mc[6].key) || (index===1 && currentMC.mc[6].key) || (index===2 && currentMC.mc[6].key)">
                   {{item.title}}</a-button>
                 </div>
               </div>
@@ -148,7 +148,7 @@
           <div class="hide-sub-right" v-show="setFlag">
               <div class="sub-btn">
                 <div class="sub-btn-item" v-for="(item,index) in btnList" :key="index" :class="(index===0 || index===2)?'marginLeft':''">
-                  <a-button size="small" class="item-btn" @click="mcChangeItem(7,index)" v-show="(index===0 && !currentMC.mc[0].key) || (index===1 && currentMC.mc[0].key) || (index===2 && currentMC.mc[0].key)">
+                  <a-button size="small" class="item-btn" @click="mcChangeItem(7,index)" v-show="(index===0 && !currentMC.mc[7].key) || (index===1 && currentMC.mc[7].key) || (index===2 && currentMC.mc[7].key)">
                   {{item.title}}</a-button>
                 </div>
               </div>

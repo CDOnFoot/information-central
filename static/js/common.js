@@ -225,7 +225,7 @@ var common = {
     },
     {
       id:'MC03',
-      title:'当日累计进/出站人数',
+      title:'客流走势/预测',
       type:'sub'
     },
     {
@@ -235,7 +235,7 @@ var common = {
     },
     {
       id:'MC05',
-      title:'计划开行/实际开行',
+      title:'车站聚类',
       type:'sub'
 
     },

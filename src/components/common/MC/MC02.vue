@@ -48,7 +48,8 @@ export default {
             textStyle: {
               //图例文字的样式
               color: "white"
-            }
+            },
+            top: "top" 
           },
           tooltip: {
             trigger: "axis",
@@ -97,7 +98,7 @@ export default {
               type: "pie",
               id: "pie",
               radius: "30%",
-              center: ["50%", "25%"],
+              center: ["50%", "30%"],
               label: {
                 formatter: "{b}: {@2012} ({d}%)"
               },
@@ -159,7 +160,8 @@ canvas{
   left: -6px !important;
 }
 #structure{
-  width: 100%;
-  height: 100%;
+  width: 470px;
+  height: 300px;
+  margin: 1% 0 0 2%;
 }
 </style>

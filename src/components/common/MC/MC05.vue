@@ -624,7 +624,7 @@ canvas {
 
 }
 #splashes {
-  width: 100%;
-  height: 100%;
+  width: 470px;
+  height: 240px;
 }
 </style>

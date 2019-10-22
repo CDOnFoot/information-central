@@ -12,7 +12,6 @@
             <div class="Pleft">100%</div>
             <div class="Pleft">兑现率</div>
           </div>
-          </div>
       </div>
     </div>
   </div>

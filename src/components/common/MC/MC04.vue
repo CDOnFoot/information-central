@@ -647,11 +647,11 @@ export default {
 
 }
 .subwa {
-        height: 99.2%;
-    width: 98%;
+  height: 99.2%;
+  width: 98%;
   background: url("../../../assets/img/列车实时运营图.png");
-      margin-top: 0.8%;
-    margin-left: -.3%;
+  margin-top: 0.8%;
+  margin-left: -.3%;
 }
 
 </style>

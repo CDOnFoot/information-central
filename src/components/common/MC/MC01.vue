@@ -41,10 +41,9 @@ export default {
     drawLine() {
       let self = this;
       // 基于准备好的dom，初始化echarts实例
-      console.log(self.mcId);
-      let Energy = this.$echarts.init(document.getElementById(self.mcId));
+      let mc = this.$echarts.init(document.getElementById(self.mcId));
       // 绘制图表
-      Energy.setOption({
+      mc.setOption({
         tooltip: {
           trigger: "axis",
           axisPointer: {
@@ -138,6 +137,6 @@ canvas{
 }
 .main-id{
   width: 470px;
-  height: 240px;
+  height: 250px;
 }
 </style>

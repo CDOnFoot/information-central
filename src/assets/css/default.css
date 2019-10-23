@@ -370,3 +370,13 @@
       .content-main-mb{
         height: 38rem;
       }
+      .select-main{
+        display: flex;
+        align-items: center;
+      }
+      .select-main-title{
+        margin: 0 0.6% 0 1.6%;
+      }
+      .select-btn-search{
+        margin-left: 0.6%;
+      }

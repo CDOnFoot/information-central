@@ -11,7 +11,17 @@
             width="50%"
         >
          <div class="modal-content-mk">
+           
           <div class="content-main-mk">
+            <div class="select-main">
+              <div class="select-main-title">指标类型：</div>
+              <a-select defaultValue="all" style="width: 120px" @change="handleChange">
+                <a-select-option value="all">全部</a-select-option>
+                <a-select-option value="main">主要</a-select-option>
+                <a-select-option value="sub">次要</a-select-option>
+              </a-select>
+              <!-- <a-button type="primary" shape="circle" icon="search" class="select-btn-search"></a-button> -->
+            </div>
             <div class="main-item-mk">
               <div class="item-mk" v-for="(item,index) in mcList" :key="index" @click="mcSelect(index)">
                 <div class="item-mk-content" :class="index===mcTempIndex?'active':''">
@@ -231,6 +241,32 @@
         created(){
         },
         methods:{
+          handleChange(value) {
+            let self = this;
+            self.mcList =[];
+            self.mcTempIndex = '';
+            switch (value){
+              case 'all':
+                self.mcList = self.$common.mcList;
+                break;
+
+              case 'main':
+              self.$common.mcList.map((item,index)=>{
+                if(item.type ==='main'){
+                  self.mcList.push(item);
+                }
+              })
+              break;
+
+              case 'sub':
+              self.$common.mcList.map((item,index)=>{
+                if(item.type ==='sub'){
+                  self.mcList.push(item);
+                }
+              })
+                break;
+            }
+          },
           mcSelect:function(param){
             // this.mcIndex = param;
             this.mcTempIndex = param;

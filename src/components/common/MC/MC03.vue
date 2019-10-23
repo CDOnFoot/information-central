@@ -102,7 +102,7 @@ export default {
                 type:'line',
                 stack: '总量',
                 areaStyle: {normal: {}},
-                data:[920, 332, 301, 334, 390, 330, 320, 332, 301, 334, 390, 330]
+                data:[920, 332, 301, 334, 390, 330,null,null,null,null,null,null]
             },
             {
                 name:'预测',

@@ -27,13 +27,13 @@ const columns = [
     {
       key: '1',
       name: '1',
-      age: '大树营站 - 东华站',
+      age: '大树营站-东华站',
       address: '87282',
     },
     {
       key: '2',
       name: '2',
-      age: '可乐村站 - 东华站',
+      age: '可乐村站-东华站',
       address: '82999',
     },
     {

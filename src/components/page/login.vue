@@ -69,7 +69,6 @@
         this.loadFlag = true;
         var username = this.userName;
         var userpwd =  this.userPassword;
-
         if(username === "admin" && userpwd === "123456"){
           this.$common.setCookie('username',username,24 * 60);
           this.$common.setCookie('userpwd',userpwd,24 * 60);

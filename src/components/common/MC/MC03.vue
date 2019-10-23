@@ -43,79 +43,77 @@ export default {
       let flow = this.$echarts.init(document.getElementById("flow"));
       // 绘制图表
       flow.setOption({
-           title: {
-    },
-    tooltip : {
-        trigger: 'axis',
-        axisPointer: {
-            type: 'cross',
-            label: {
-                backgroundColor: '#6a7985'
-            }
-        }
-    },
-    legend: {
-      textStyle: {
-            //图例文字的样式
-            color: "white"
-          },
-        data:['直接访问','搜索引擎']
-    },
-    toolbox: {
-        feature: {
-            saveAsImage: {}
-        }
-    },
-    grid: {
-        left: '3%',
-        right: '4%',
-        bottom: '3%',
-        containLabel: true
-    },
-    xAxis : [
-        {
-                     axisLine: {
-            lineStyle: {
-              color: "white"
-            }
-          },
-            type : 'category',
-            boundaryGap : false,
-            data : ['05:00','06:00','07:00','08:00','09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00']
-        }
-    ],
-    yAxis : [
-        {
-                     axisLine: {
-            lineStyle: {
-              color: "white"
-            }
-          },
-            type : 'value'
-        }
-    ],
-    series : [
-        {
-            name:'直接访问',
-            type:'line',
-            stack: '总量',
-            areaStyle: {normal: {}},
-            data:[920, 332, 301, 334, 390, 330, 320, 332, 301, 334, 390, 330]
-        },
-        {
-            name:'搜索引擎',
-            type:'line',
-            stack: '总量',
-            label: {
-                normal: {
-                    show: true,
-                    position: 'top'
+        color:['#c23531', '#61a0a8'],
+        tooltip : {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'cross',
+                label: {
+                    backgroundColor: '#6a7985'
                 }
+            }
+        },
+        legend: {
+          textStyle: {
+                color: "white"
+              },
+            data:['走势','预测']
+        },
+        toolbox: {
+            // feature: {
+            //     saveAsImage: {}
+            // }
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        xAxis : [
+            {
+                axisLine: {
+                lineStyle: {
+                  color: "white"
+                }
+              },
+                type : 'category',
+                boundaryGap : false,
+                data : ['05:00','06:00','07:00','08:00','09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00']
+            }
+        ],
+        yAxis : [
+            {
+                axisLine: {
+                  lineStyle: {
+                    color: "white"
+                  }
+              },
+                type : 'value'
+            }
+        ],
+        series : [
+            {
+                name:'走势',
+                type:'line',
+                stack: '总量',
+                areaStyle: {normal: {}},
+                data:[920, 332, 301, 334, 390, 330, 320, 332, 301, 334, 390, 330]
             },
-            areaStyle: {normal: {}},
-            data:[820, 932, 901, 934, 1290, 1330, 1320, 334, 390, 330, 320, 332]
-        }
-    ]
+            {
+                name:'预测',
+                type:'line',
+                stack: '总量',
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'top'
+                    }
+                },
+                areaStyle: {normal: {}},
+                data:[820, 932, 901, 934, 1290, 1330, 1320, 334, 390, 330, 320, 332]
+            }
+        ]
       });
     }
   }

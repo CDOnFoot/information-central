@@ -39,11 +39,14 @@ export default {
   created() {},
   methods: {
     drawLine() {
+
+      var option = null;
       // 基于准备好的dom，初始化echarts实例
       let structure = this.$echarts.init(document.getElementById("structure"));
       // 绘制图表
       setTimeout(function() {
-        structure.setOption({
+        option = ({
+        // structure.setOption({
           legend: {
             textStyle: {
               //图例文字的样式
@@ -100,12 +103,12 @@ export default {
               radius: "30%",
               center: ["50%", "30%"],
               label: {
-                formatter: "{b}: {@2012} ({d}%)"
+                formatter: "{b}: {@2019/9/23}kWh ({d}%)"
               },
               encode: {
                 itemName: "date",
-                value: "2012",
-                tooltip: "2012"
+                value: "2019/9/23",
+                tooltip: "2019/9/23"
               }
             }
           ]
@@ -119,7 +122,9 @@ export default {
               series: {
                 id: "pie",
                 label: {
-                  formatter: "{b}: {@[" + dimension + "]}kWh"
+                  // formatter: "{b}: {@[" + dimension + "]}kWh"
+                  formatter: "{b}: {@2019/9/23}kWh ({d}%)"
+
                 },
                 encode: {
                   value: dimension,
@@ -130,7 +135,7 @@ export default {
           }
         });
 
-        // myChart.setOption(option);
+        structure.setOption(option);
       });
     }
   }

@@ -35,7 +35,7 @@
             </div>
           </div>
           <div class="sub-content">
-             <component :is="currentMC.mc[0].key" :mcTitle="currentMC.mc[0].title"  :mcStatus="0" class="mc-content"></component>
+             <component :is="currentMC.mc[0].key" :mcTitle="currentMC.mc[0].title"  :mcStatus="0" :mcId="currentMC.mc[0].key" class="mc-content"></component>
           </div>
         </div>
       </div>
@@ -52,7 +52,7 @@
             </div>
       
             <div class="sub-content">
-             <component :is="currentMC.mc[1].key" :mcTitle="currentMC.mc[1].title" :mcStatus="1" class="mc-content"></component>
+             <component :is="currentMC.mc[1].key" :mcTitle="currentMC.mc[1].title" :mcStatus="1"  :mcId="currentMC.mc[1].key" class="mc-content"></component>
           </div>
         </div>
       </div>
@@ -68,7 +68,7 @@
               </div>
             </div>
           <div class="sub-content">
-             <component :is="currentMC.mc[2].key" :mcTitle="currentMC.mc[2].title" :mcStatus="2" class="mc-content"></component>
+             <component :is="currentMC.mc[2].key" :mcTitle="currentMC.mc[2].title" :mcStatus="2"  :mcId="currentMC.mc[2].key" class="mc-content"></component>
           </div>
         </div>
       </div>
@@ -85,7 +85,7 @@
             </div>
           </div>
         <div class="sub-content">
-             <component :is="currentMC.mc[3].key"  :mcTitle="currentMC.mc[3].title"  :mcStatus="3" class="mc-content"></component>
+             <component :is="currentMC.mc[3].key"  :mcTitle="currentMC.mc[3].title"  :mcStatus="3"  :mcId="currentMC.mc[3].key" class="mc-content"></component>
           </div>
       </div>
     </div>
@@ -102,7 +102,7 @@
               </div>
             </div>
           <div class="sub-content">
-             <component :is="currentMC.mc[4].key" :mcTitle="currentMC.mc[4].title"  :mcStatus="4" class="mc-content"></component>
+             <component :is="currentMC.mc[4].key" :mcTitle="currentMC.mc[4].title"  :mcStatus="4"  :mcId="currentMC.mc[4].key" class="mc-content"></component>
           </div>
         </div>
       </div>
@@ -118,7 +118,7 @@
               </div>
             </div>
           <div class="sub-content">
-             <component :is="currentMC.mc[5].key" :mcTitle="currentMC.mc[5].title"  :mcStatus="5" class="mc-content"></component>
+             <component :is="currentMC.mc[5].key" :mcTitle="currentMC.mc[5].title"  :mcStatus="5"  :mcId="currentMC.mc[5].key" class="mc-content"></component>
           </div>
         </div>
       </div>
@@ -134,7 +134,7 @@
               </div>
             </div>
           <div class="sub-content">
-             <component :is="currentMC.mc[6].key"  :mcTitle="currentMC.mc[6].title" :mcStatus="6" class="mc-content"></component>
+             <component :is="currentMC.mc[6].key"  :mcTitle="currentMC.mc[6].title" :mcStatus="6"  :mcId="currentMC.mc[6].key" class="mc-content"></component>
           </div>
         </div>
       </div>

@@ -4,7 +4,8 @@
   <div>
     <div class="main">
       <div class="borde">{{mcTitle}}</div>
-      <div id="flow"></div>
+      <!-- <div id="flow"></div> -->
+      <div :id="mcId" class="main-id"></div>
     </div>
   </div>
 </template>
@@ -16,16 +17,18 @@ export default {
   data() {
     return {
         mcList:'',
-        mcId:'',
       };
     },
-    props:['mcStatus','mcTitle'],
+    props:['mcStatus','mcTitle','mcId'],
     watch: {
       mcStatus: function (val) {
         this.mcStatus = val;
       },
       mcTitle: function (val) {
         this.mcTitle = val;
+      },
+       mcId:function(val){
+        this.mcId = val;
       }
     },
   mounted() {
@@ -39,8 +42,9 @@ export default {
   created() {},
   methods: {
     drawLine() {
+      let self = this;
       // 基于准备好的dom，初始化echarts实例
-      let flow = this.$echarts.init(document.getElementById("flow"));
+      let flow = this.$echarts.init(document.getElementById(self.mcId));
       // 绘制图表
       flow.setOption({
         color:['#c23531', '#61a0a8'],
@@ -142,7 +146,11 @@ canvas{
   height: 100% !important;
   left: -6px !important;
 }
-#flow{
+/* #flow{
+  width: 470px;
+  height: 240px;
+} */
+.main-id{
   width: 470px;
   height: 240px;
 }

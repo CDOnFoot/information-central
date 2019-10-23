@@ -5,7 +5,7 @@
     <div class="main">
       <div class="borde">{{mcTitle}}</div>
 
-      <div id="Energy"></div>
+      <div :id="mcId" class="main-id"></div>
     </div>
   </div>
 </template>
@@ -16,17 +16,19 @@ export default {
   data() {
     return {
        mcList:'',
-    mcId:'',
       };
     },
-    props:['mcStatus','mcTitle'],
+    props:['mcStatus','mcTitle','mcId'],
     watch: {
       mcStatus: function (val) {
         this.mcStatus = val;
       },
       mcTitle: function (val) {
         this.mcTitle = val;
-      }
+      },
+      mcId: function (val) {
+        this.mcId = val;
+      },
     },
   mounted() {
     var self = this;
@@ -37,8 +39,10 @@ export default {
   created() {},
   methods: {
     drawLine() {
+      let self = this;
       // 基于准备好的dom，初始化echarts实例
-      let Energy = this.$echarts.init(document.getElementById("Energy"));
+      console.log(self.mcId);
+      let Energy = this.$echarts.init(document.getElementById(self.mcId));
       // 绘制图表
       Energy.setOption({
         tooltip: {
@@ -132,7 +136,7 @@ canvas{
   height: 100% !important;
   left: -6px !important;
 }
-#Energy{
+.main-id{
   width: 470px;
   height: 240px;
 }

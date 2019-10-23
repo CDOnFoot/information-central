@@ -4,7 +4,8 @@
   <div>
     <div class="main">
       <div class="borde">{{mcTitle}}</div>
-      <div id="splashes"></div>
+      <!-- <div id="splashes"></div> -->
+      <div :id="mcId" class="main-id"></div>
     </div>
   </div>
 </template>
@@ -16,17 +17,19 @@ export default {
   data() {
     return {
       mcList: "",
-      mcId: ""
     };
   },
-  props: ["mcStatus", "mcTitle"],
+  props: ["mcStatus", "mcTitle",'mcId'],
   watch: {
     mcStatus: function(val) {
       this.mcStatus = val;
     },
     mcTitle: function(val) {
       this.mcTitle = val;
-    }
+    },
+     mcId:function(val){
+        this.mcId = val;
+      }
   },
   mounted() {
     var self = this;
@@ -42,7 +45,10 @@ export default {
       // 基于准备好的dom，初始化echarts实例
       // let splashes = this.$echarts.init(document.getElementById("splashes"));
       // 绘制图表
-      var dom = document.getElementById("splashes");
+      let self = this;
+      var dom = document.getElementById(self.mcId);
+
+      // 基于准备好的dom，初始化echarts实例
       var myChart = echarts.init(dom);
       var app = {};
       var option = null;
@@ -602,7 +608,7 @@ canvas {
   margin-left: -5% !important;
 
 }
-#splashes {
+.main-id {
   width: 470px;
   height: 278px;
 }

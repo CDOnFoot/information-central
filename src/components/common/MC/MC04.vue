@@ -5,9 +5,9 @@
   <div>
     <div class="main">
       <div class="borde">{{mcTitle}}</div>
-      <div id="stations">
+      <!-- <div id="stations"> -->
+      <div :id="mcId" class="main-id">
         <div class="subwa"></div>
-
           <div
             v-for="(item,index) in list"
             :title="item.title"
@@ -27,7 +27,6 @@ export default {
   data() {
     return {
       mcList: "",
-      mcId: "",
       n: 0,
       list: [
         {
@@ -604,14 +603,17 @@ export default {
       ]
     };
   },
-  props: ["mcStatus", "mcTitle"],
+  props: ["mcStatus", "mcTitle",'mcId'],
   watch: {
     mcStatus: function(val) {
       this.mcStatus = val;
     },
     mcTitle: function(val) {
       this.mcTitle = val;
-    }
+    },
+     mcId:function(val){
+        this.mcId = val;
+      }
   },
   mounted() {
     var self = this;
@@ -638,13 +640,16 @@ export default {
   border-left: #3467c5 solid 4px;
   position: absolute;
   top: 4%;
-  left: 6%;
+  right: 6%;
   padding-left: 3%;
 }
-#stations{
+/* #stations{
   width: 100%;
   height: 100%;
-
+} */
+.main-id{
+  width: 100%;
+  height: 100%;
 }
 .subwa {
   height: 99.2%;

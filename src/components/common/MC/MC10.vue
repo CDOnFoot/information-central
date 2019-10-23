@@ -4,7 +4,8 @@
   <div>
     <div class="main">
       <div class="borde">{{mcTitle}}</div>
-      <div id="passenger" :style="{width: '470px', height: '240px',margin:'0px 10px'}"></div>
+      <!-- <div id="passenger" :style="{width: '470px', height: '240px',margin:'0px 10px'}"></div> -->
+      <div :id="mcId" class="main-id"></div>
     </div>
   </div>
 </template>
@@ -16,16 +17,18 @@ export default {
   data() {
     return {
         mcList:'',
-        mcId:'',
       };
     },
-    props:['mcStatus','mcTitle'],
+    props:['mcStatus','mcTitle','mcId'],
     watch: {
       mcStatus: function (val) {
         this.mcStatus = val;
       },
       mcTitle: function (val) {
         this.mcTitle = val;
+      },
+      mcId:function(val){
+        this.mcId = val;
       }
     },
   mounted() {
@@ -189,5 +192,10 @@ export default {
   border-left: #3467c5 solid 4px;
   padding-left: 10px;
   margin: 0px 0px 0px 30px;
+}
+.main-id{
+  width: 470px;
+  height: 240px;
+  margin: 0px 10px;
 }
 </style>

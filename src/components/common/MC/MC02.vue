@@ -4,7 +4,9 @@
   <div>
     <div class="main">
       <div class="borde">{{mcTitle}}</div>
-      <div id="structure" ></div>
+      <!-- <div id="structure" ></div> -->
+      <div :id="mcId" class="main-id"></div>
+
     </div>
   </div>
 </template>
@@ -16,33 +18,37 @@ export default {
   data() {
     return {
         mcList:'',
-        mcId:'',
       };
     },
-    props:['mcStatus','mcTitle'],
+    props:['mcStatus','mcTitle','mcId'],
     watch: {
       mcStatus: function (val) {
         this.mcStatus = val;
       },
       mcTitle: function (val) {
         this.mcTitle = val;
+      },
+      mcId:function(val){
+        this.mcId = val;
       }
     },
   mounted() {
     var self = this;
     this.mcList = this.$common.mcList;
-    console.log(this.mcStatus);
+    // console.log(this.mcStatus);
     // this.mcId = this.$common.menuList[0].mb.mk[Number(self.mcStatus)].mc.id;
 
     this.drawLine();
   },
-  created() {},
-  methods: {
-    drawLine() {
-
-      var option = null;
+    created() {
+      
+    },
+    methods: {
+      drawLine() {
+      let option = null;
+      let self = this;
       // 基于准备好的dom，初始化echarts实例
-      let structure = this.$echarts.init(document.getElementById("structure"));
+      let structure = this.$echarts.init(document.getElementById(self.mcId));
       // 绘制图表
       setTimeout(function() {
         option = ({
@@ -164,7 +170,7 @@ canvas{
   height: 100% !important;
   left: -6px !important;
 }
-#structure{
+.main-id{
   width: 470px;
   height: 300px;
   margin: 1% 0 0 2%;

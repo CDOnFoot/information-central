@@ -202,9 +202,10 @@ canvas {
   height: 270px;
 }
 .time {
-  font-size: 16px;
-  color: #3467c5;
-  margin-top: -11%;
-  margin-right: 4%;
+    font-size: 16px;
+    color: #3467c5;
+    margin-top: -18%;
+    margin-right: 4%;
+    height: 9%;
 }
 </style>

@@ -60,6 +60,19 @@ export default {
         legend: {
           show: false
         },
+        toolbox: {
+        show : true,
+        feature : {
+            dataView : {show: true, readOnly: false},
+
+        },
+         iconStyle:{
+                    normal:{
+                      color:'white',//设置颜色
+                      top:"50%",
+                    }
+                }
+    },
         grid: {
           left: "3%",
           right: "4%",
@@ -145,11 +158,13 @@ canvas {
 .main-id {
   width: 470px;
   height: 270px;
+  padding-top: 24px;
 }
 .time {
-  font-size: 16px;
-  color: #3467c5;
-  margin-top: -11%;
-  margin-right: 4%;
+    font-size: 16px;
+    color: #3467c5;
+    margin-top: -18%;
+    margin-right: 4%;
+    height: 9%;
 }
 </style>

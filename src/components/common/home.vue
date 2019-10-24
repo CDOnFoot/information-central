@@ -52,12 +52,12 @@
             <img src="../../assets/img/title-sub-bg.png" alt="" class="menu-sub-img">
           </div>
         </div>
-        <div v-for="(item,index) in menuList" class="menu-item" :class="menuIndex==index?'font-active':''" :key="index"
+        <div v-for="(item,index) in menuList.records" class="menu-item" :class="menuIndex==index?'font-active':''" :key="index"
              @click="selectMenu(index)">
           <div class="item-info">
             <img :src="menuIndex === index?require('../../assets/img/titleBg-active.png'):require('../../assets/img/titleBg.png')" alt="" class="menu-img">
             <div class="item-title">
-              {{item.title}}
+              {{item.menuName}}
             </div>
           </div>
         </div>
@@ -120,6 +120,10 @@
     // },
     mounted() {
       let self = this;
+      
+      // 查看菜单栏数据信息
+      this.getMenuInfo();
+
       this.menuList = this.$common.menuList;
       this.mbList = this.$common.mbList;
       document.ondragstart = function() {
@@ -132,6 +136,34 @@
     },
 
     methods:{
+      // 查看菜单栏数据信息
+      getMenuInfo:function(){
+        let self = this;
+        this.menuInfoList(function(data){
+          self.menuInfo(data);
+        })
+      },
+
+      // 查看菜单栏数据信息接口
+      menuInfoList:function(callback){
+        let self = this;
+        let param={
+        };
+        this.$http.post(self.$api.getMenuInfo, param).then(res =>{
+          //调取数据成功
+          if(res.data){
+            if (res.data.code === "0") {
+              console.log(res.data.data);
+              callback(res.data.data)
+            }
+          }
+        });
+      },
+
+      // 处理菜单栏信息接口
+      menuInfo:function(data){
+        this.menuList = data;
+      },
       mbSelect:function(param){
         // this.mbIndex = param;
         // this.setFlag = true;

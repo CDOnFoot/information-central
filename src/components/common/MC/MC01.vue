@@ -4,6 +4,7 @@
   <div>
     <div class="main">
       <div class="borde">{{mcTitle}}</div>
+      <div class="time">{{timeStamp}}</div>
 
       <div :id="mcId" class="main-id"></div>
     </div>
@@ -15,22 +16,28 @@ export default {
   name: "MC01",
   data() {
     return {
-       mcList:'',
-      };
+      timeInterval: "",
+      timeStamp: this.$common.timestampToTime(new Date()),
+      mcList: ""
+    };
+  },
+  props: ["mcStatus", "mcTitle", "mcId"],
+  watch: {
+    mcStatus: function(val) {
+      this.mcStatus = val;
     },
-    props:['mcStatus','mcTitle','mcId'],
-    watch: {
-      mcStatus: function (val) {
-        this.mcStatus = val;
-      },
-      mcTitle: function (val) {
-        this.mcTitle = val;
-      },
-      mcId: function (val) {
-        this.mcId = val;
-      },
+    mcTitle: function(val) {
+      this.mcTitle = val;
     },
+    mcId: function(val) {
+      this.mcId = val;
+    }
+  },
   mounted() {
+    clearInterval(this.timeInterval);
+    this.timeInterval = setInterval(function() {
+      self.timeStamp = self.$common.timestampToTime(new Date());
+    }, 1000);
     var self = this;
     this.mcList = this.$common.mcList;
     // this.mcId = this.$common.menuList[0].mb.mk[Number(self.mcStatus)].mc.id;
@@ -51,7 +58,7 @@ export default {
           }
         },
         legend: {
-          show:false
+          show: false
         },
         grid: {
           left: "3%",
@@ -86,7 +93,7 @@ export default {
             "小菜园站",
             "火车北站",
             "白龙路站",
-            "大树营站",
+            "大树营站"
           ]
         },
         series: [
@@ -103,7 +110,7 @@ export default {
               72141,
               82354,
               92341,
-              101231,
+              101231
             ]
           }
         ]
@@ -130,13 +137,19 @@ export default {
   left: 6%;
   padding-left: 3%;
 }
-canvas{
+canvas {
   width: 100% !important;
   height: 100% !important;
   left: -6px !important;
 }
-.main-id{
+.main-id {
   width: 470px;
-  height: 250px;
+  height: 270px;
+}
+.time {
+  font-size: 16px;
+  color: #3467c5;
+  margin-top: -11%;
+  margin-right: 4%;
 }
 </style>

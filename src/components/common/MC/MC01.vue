@@ -5,7 +5,6 @@
     <div class="main">
       <div class="borde">{{mcTitle}}</div>
       <div class="time">{{timeStamp}}</div>
-
       <div :id="mcId" class="main-id"></div>
     </div>
   </div>

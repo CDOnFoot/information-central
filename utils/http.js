@@ -12,7 +12,7 @@
 
     //配置信息
     var useStaging = false;
-    var host = useStaging ? 'http://10.66.1.192:28070':'http://10.28.3.201:8180';
+    var host = useStaging ? 'http://10.66.1.102:28070':'http://10.66.1.102:28070';
 
     // **路由请求拦截**
     // http request 拦截器
@@ -147,7 +147,6 @@
           timeout: 20000,
           headers: {
             'content-Type': 'application/x-www-form-urlencoded;',
-
           },
         }).then(
           (response) => {

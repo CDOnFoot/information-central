@@ -161,8 +161,6 @@
     import MC07 from '../../../components/common/MC/MC07';
     import MC08 from '../../../components/common/MC/MC08';
     import MC09 from '../../../components/common/MC/MC09';
-
-
     export default {
         name: "MB01",
         data(){
@@ -224,7 +222,6 @@
         },
         resetFlag: function (val) {
           // console.log(val)
-
           // 检测当选择模版后会清空当前所有的模块内容
           // 此时重新调用获取当前模块内容信息
           this.resetFlag = val;

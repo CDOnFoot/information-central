@@ -13,5 +13,4 @@ export default {
   
   updateUserContentInfo: '/server-0.0.1-SNAPSHOT/visualizationLayout/updateUserContentInfo',   //修改自动化布局信息
 
-
 }

@@ -124,7 +124,9 @@
       // 查看菜单栏数据信息
       this.getMenuInfo();
 
-      this.menuList = this.$common.menuList;
+      this.getTemplateInfo();
+
+      // this.menuList = this.$common.menuList;
       this.mbList = this.$common.mbList;
       document.ondragstart = function() {
         return false;
@@ -153,18 +155,27 @@
           //调取数据成功
           if(res.data){
             if (res.data.code === "0") {
-              console.log(res.data.data);
               callback(res.data.data)
             }
           }
         });
       },
-
       // 处理菜单栏信息接口
       menuInfo:function(data){
         this.menuList = data;
       },
-      mbSelect:function(param){
+
+
+      getTemplateInfo:function(){
+        let self = this;
+        this.templateInfoList(function(data){
+          self.templateInfo(data);
+        })
+      },
+      templateInfoList:function(){
+
+      },
+      templateInfo:function(param){
         // this.mbIndex = param;
         // this.setFlag = true;
         this.mbTempIndex = param;
@@ -195,8 +206,6 @@
       },
       // 保存模版信息
       saveMBFunction:function(){
-     
-
         this.mbIndex = this.mbTempIndex;
         this.resetFlag = true;
         console.log("save 保存模版")
@@ -206,9 +215,7 @@
       },
       handleCancel(e) {
         this.visible = false;
-        // this.mbIndex = 0;
         this.mbTempIndex = '';
-
       },
       saveSet:function(){
         this.setFlag = false;
@@ -226,9 +233,7 @@
           this.$router.push('/home/'+this.menuList[param].key);
           this.$router.push({path: '/home/'+this.menuList[param].key, query: {flag: false}});
           }
-
         }
-
       },
       getCurrentRoute:function(routerVal){
         for(var i=0;i<this.$common.menuList.length;i++){
@@ -241,7 +246,6 @@
       layoutSetting:function(){
         this.setFlag = !this.setFlag;
       },
-
       //选择模版操作
       layoutSelect:function(){
         this.visible = true;

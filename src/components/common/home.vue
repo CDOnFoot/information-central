@@ -12,7 +12,7 @@
         <div class="modal-content-mb">
           <div class="content-main-mb">
             <div class="main-item-mb">
-              <div class="item-mb" v-for="(item,index) in mbList" :key="index" @click="mbSelect(index)">
+              <div class="item-mb" v-for="(item,index) in mbList.records" :key="index" @click="mbSelect(index)">
                 
                 <div class="item-mb-content" :class="index===mbTempIndex?'active':''">
                   <div class="mb-item-title">{{item.title}}</div>
@@ -164,26 +164,36 @@
       menuInfo:function(data){
         this.menuList = data;
       },
-
-
       getTemplateInfo:function(){
         let self = this;
         this.templateInfoList(function(data){
           self.templateInfo(data);
         })
       },
-      templateInfoList:function(){
-
+      templateInfoList:function(callback){
+         let self = this;
+        let param={
+          };
+        this.$http.post(self.$api.getTemplateInfo, param).then(res =>{
+          //调取数据成功
+          if(res.data){
+            if (res.data.code === "0") {
+              callback(res.data.data)
+            }
+          }
+        });
       },
-      templateInfo:function(param){
-        // this.mbIndex = param;
-        // this.setFlag = true;
-        this.mbTempIndex = param;
+      templateInfo:function(data){
+        this.mbList = data
+      },
+      mbSelect:function(param){
+        if(param<=1){
+          this.mbTempIndex = param
+        }
       },
       handleOk(e) {
         let self = this;
         this.confirmLoading = true;
-
         if(self.$common.menuList[0].mb.id === this.mbList[self.mbTempIndex].id){
             self.$info({
               title: '提示',

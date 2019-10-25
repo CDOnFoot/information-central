@@ -44,9 +44,36 @@
       mounted() {
         // this.setFlag = this.$route.query.flag;
         this.currentMB = this.$common.menuList[this.menuIndex].mb.id;
+
+        // 查看可视化界面内容数据信息
+        this.getUserVisualization();
       },
       methods:{
-
+        // 查看可视化界面内容数据信息
+        getUserVisualization:function(){
+          let self = this;
+          this.userVisualizationList(function(data){
+            self.visualizationInfo(data);
+          })
+        },
+        userVisualizationList:function(callback){
+          let self = this;
+          let param={
+            userNum: self.$common.getCookie('userNum'),
+            menuNum:'CD01'
+            };
+          this.$http.post(self.$api.getUserVisualization, param).then(res =>{
+            //调取数据成功
+            if(res.data){
+              if (res.data.code === "0") {
+                callback(res.data.data)
+              }
+            }
+          });
+        },
+        visualizationInfo:function(data){
+          this.mbList = data
+        },
       }
     }
 </script>

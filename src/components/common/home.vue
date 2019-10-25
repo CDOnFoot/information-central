@@ -124,10 +124,12 @@
       // 查看菜单栏数据信息
       this.getMenuInfo();
 
+      // 查看模版内容数据信息
       this.getTemplateInfo();
 
+
       // this.menuList = this.$common.menuList;
-      this.mbList = this.$common.mbList;
+      // this.mbList = this.$common.mbList;
       document.ondragstart = function() {
         return false;
       };
@@ -186,6 +188,7 @@
       templateInfo:function(data){
         this.mbList = data
       },
+     
       mbSelect:function(param){
         if(param<=1){
           this.mbTempIndex = param

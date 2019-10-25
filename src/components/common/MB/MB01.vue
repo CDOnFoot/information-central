@@ -25,7 +25,7 @@
             <div class="main-item-mk">
               <div class="item-mk" v-for="(item,index) in mcList" :key="index" @click="mcSelect(index)">
                 <div class="item-mk-content" :class="index===mcTempIndex?'active':''">
-                  <div class="mk-item-title">{{item.title}}</div>
+                  <div class="mk-item-title">{{item.contentName}}</div>
                   <img :src="require('../../../assets/img/mcBg'+index+'.png') "  alt="" class="item-mk-img"> 
                 </div>
               </div>
@@ -232,7 +232,7 @@
           // 初始化模版内容
           this.initCurrentMC();
           this.btnList = this.$common.btnList;
-          this.mcList = this.$common.mcList;
+          // this.mcList = this.$common.mcList;
         },
 
         created(){
@@ -384,32 +384,44 @@
           },
           initMC:function(callback){
             let self = this;
-            // console.log("MB01: "+self.resetFlag);
-            this.menuList = this.$common.menuList;
-            this.menuList.some((item,index)=>{
-              if(item.mb){
-                if(item.mb.id === self.currentMC.mbId){
-                  item.mb.mk.some((items,indexs)=>{
-                    if(self.resetFlag){
-                        self.currentMC.mc[indexs].key = '';
-                        self.currentMC.mc[indexs].type = '';
-                        self.currentMC.mc[indexs].title = '';
-                    }else{
-                      if(items.mc){
-                        self.currentMC.mc[indexs].key = self.$common.menuList[index].mb.mk[indexs].mc.id;
-                        self.currentMC.mc[indexs].type = self.$common.menuList[index].mb.mk[indexs].mc.type;
-                        self.currentMC.mc[indexs].title = self.$common.menuList[index].mb.mk[indexs].mc.title;
-                        return false;
-                      }
-                    }
-                  });
-                  callback(this.currentMC);
+            let param={
+            };
+            this.$http.post(self.$api.getContentInfo, param).then(res =>{
+              //调取数据成功
+              if(res.data){
+                if (res.data.code === "0") {
+                  callback(res.data.data)
                 }
               }
             });
+
+            // console.log("MB01: "+self.resetFlag);
+            // this.menuList = this.$common.menuList;
+            // this.menuList.some((item,index)=>{
+            //   if(item.mb){
+            //     if(item.mb.id === self.currentMC.mbId){
+            //       item.mb.mk.some((items,indexs)=>{
+            //         if(self.resetFlag){
+            //             self.currentMC.mc[indexs].key = '';
+            //             self.currentMC.mc[indexs].type = '';
+            //             self.currentMC.mc[indexs].title = '';
+            //         }else{
+            //           if(items.mc){
+            //             self.currentMC.mc[indexs].key = self.$common.menuList[index].mb.mk[indexs].mc.id;
+            //             self.currentMC.mc[indexs].type = self.$common.menuList[index].mb.mk[indexs].mc.type;
+            //             self.currentMC.mc[indexs].title = self.$common.menuList[index].mb.mk[indexs].mc.title;
+            //             return false;
+            //           }
+            //         }
+            //       });
+            //       callback(this.currentMC);
+            //     }
+            //   }
+            // });
           },
           currentMcInfo:function(data){
-            // console.log(data);
+            console.log(data);
+            this.mcList = data.records;
           },
         },
         components:{

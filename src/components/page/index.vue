@@ -13,11 +13,11 @@
         data(){
             return{
               currentMB:'',
+              visualList:'',
             }
         },
-      props: ['menuIndex','setFlag','mbIndex','resetFlag'],
-      created(){
-        },
+      props: ['menuIndex','setFlag','mbIndex','resetFlag','menuId'],
+ 
          components:{
             MB01,
             MB02
@@ -34,19 +34,26 @@
         menuIndex: function (val) {
           console.log(val);
           this.currentMB = this.$common.menuList[val].mb.id;
-          
         },
          mbIndex: function (val) {
            console.log(val);
           this.currentMB = this.$common.mbList[val].id;
-        }
+        },
+        menuId:function(val){
+          console.log(val);
+          this.menuId = val;
+        },
+      },
+      created(){
+        console.log(this.menuIndex);
+        console.log(this.menuId);
+        this.getUserVisualization();
       },
       mounted() {
         // this.setFlag = this.$route.query.flag;
-        this.currentMB = this.$common.menuList[this.menuIndex].mb.id;
+
 
         // 查看可视化界面内容数据信息
-        this.getUserVisualization();
       },
       methods:{
         // 查看可视化界面内容数据信息
@@ -60,7 +67,7 @@
           let self = this;
           let param={
             userNum: self.$common.getCookie('userNum'),
-            menuNum:'CD01'
+            menuNum: self.menuId
             };
           this.$http.post(self.$api.getUserVisualization, param).then(res =>{
             //调取数据成功
@@ -72,7 +79,10 @@
           });
         },
         visualizationInfo:function(data){
-          this.mbList = data
+          this.visualList = data.menuList;
+          // this.currentMB = data.menuList[this.menuIndex].mb.id;
+
+          console.log(this.visualList);
         },
       }
     }

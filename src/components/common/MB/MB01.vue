@@ -15,18 +15,18 @@
           <div class="content-main-mk">
             <div class="select-main">
               <div class="select-main-title">指标类型：</div>
-              <a-select defaultValue="all" style="width: 120px" @change="handleChange">
-                <a-select-option value="all">全部</a-select-option>
-                <a-select-option value="main">主要</a-select-option>
-                <a-select-option value="sub">次要</a-select-option>
+              <a-select defaultValue="" style="width: 120px" @change="handleChange">
+                <a-select-option value="">全部</a-select-option>
+                <a-select-option value="1">主要</a-select-option>
+                <a-select-option value="2">次要</a-select-option>
               </a-select>
               <!-- <a-button type="primary" shape="circle" icon="search" class="select-btn-search"></a-button> -->
             </div>
             <div class="main-item-mk">
               <div class="item-mk" v-for="(item,index) in mcList" :key="index" @click="mcSelect(index)">
                 <div class="item-mk-content" :class="index===mcTempIndex?'active':''">
-                  <div class="mk-item-title">{{item.contentName}}</div>
-                  <img :src="require('../../../assets/img/mcBg'+index+'.png') "  alt="" class="item-mk-img"> 
+                  <div class="mk-item-title">{{item.contentNum}}</div>
+                  <img :src="require('../../../assets/img/'+item.contentNum+'.png') "  alt="" class="item-mk-img"> 
                 </div>
               </div>
             </div>
@@ -225,12 +225,12 @@
           // 检测当选择模版后会清空当前所有的模块内容
           // 此时重新调用获取当前模块内容信息
           this.resetFlag = val;
-          this.initCurrentMC();
+          this.getContentInfo();
         }
       },
       mounted(){
           // 初始化模版内容
-          this.initCurrentMC();
+          this.getContentInfo();
           this.btnList = this.$common.btnList;
           // this.mcList = this.$common.mcList;
         },
@@ -239,33 +239,11 @@
         },
         methods:{
           handleChange(value) {
-            let self = this;
-            self.mcList =[];
-            self.mcTempIndex = '';
-            switch (value){
-              case 'all':
-                self.mcList = self.$common.mcList;
-                break;
-
-              case 'main':
-              self.$common.mcList.map((item,index)=>{
-                if(item.type ==='main'){
-                  self.mcList.push(item);
-                }
-              })
-              break;
-
-              case 'sub':
-              self.$common.mcList.map((item,index)=>{
-                if(item.type ==='sub'){
-                  self.mcList.push(item);
-                }
-              })
-                break;
-            }
+            this.mcList =[];
+            this.mcTempIndex = '';
+            this.getContentInfo(value);
           },
           mcSelect:function(param){
-            // this.mcIndex = param;
             this.mcTempIndex = param;
           },
           // 确定选择模块内容操作信息
@@ -275,7 +253,6 @@
             let self = this;
 
             if(this.$common.mcList[self.mcTempIndex].type ==='main'){
-
               if(this.visibleIndex !=3){
                   self.$info({
                       title: '提示',
@@ -284,7 +261,6 @@
                     });
                     self.confirmLoading = false;
               }else{
-                // console.log("执行")
                 this.saveHandleOk();
               }
             }else{
@@ -296,11 +272,9 @@
                     });
                     self.confirmLoading = false;
               }else{
-                // console.log("执行")
                 this.saveHandleOk();
               }
             }
-
           },
           // 保存至选择项内操作信息
           saveHandleOk:function(){
@@ -342,7 +316,6 @@
           mcChangeItem:function(index,type){
             // console.log(this.menuList[0].mb.mk[index].title,this.menuList[0].mb.mk[index].id,index);
             // console.log(this.btnList[type].title,type);
-          
             let self = this;
             if(type!=2){
               this.visible = true;
@@ -376,16 +349,18 @@
             });
           },
           // 初始化模版内容
-          initCurrentMC:function(){
+          getContentInfo:function(param){
             let self = this;
-            this.initMC(function(data){
-              self.currentMcInfo(data);
-            })
+            this.contentInfoList(function(data,param){
+              self.contentInfo(data);
+            },param)
           },
-          initMC:function(callback){
+          contentInfoList:function(callback,params){
             let self = this;
-            let param={
-            };
+            let param={};
+            if(params){
+              param['contentIndex'] = params;
+            }
             this.$http.post(self.$api.getContentInfo, param).then(res =>{
               //调取数据成功
               if(res.data){
@@ -419,7 +394,7 @@
             //   }
             // });
           },
-          currentMcInfo:function(data){
+          contentInfo:function(data){
             console.log(data);
             this.mcList = data.records;
           },

@@ -15,7 +15,7 @@
               <div class="item-mb" v-for="(item,index) in mbList.records" :key="index" @click="mbSelect(index)">
                 
                 <div class="item-mb-content" :class="index===mbTempIndex?'active':''">
-                  <div class="mb-item-title">{{item.title}}</div>
+                  <div class="mb-item-title">{{item.templateName}}</div>
                   <img :src="require('../../assets/img/mbBg'+index+'.png') "  alt="" class="item-mb-img"> 
                 </div>
                 
@@ -37,7 +37,7 @@
       </div>
     </a-layout-header>
     <a-layout-content style="padding: 0 1%;height:100%;min-height: calc(100vh - 8.3%);">
-      <router-view :menuIndex="menuIndex" :setFlag="setFlag" :mbIndex="mbIndex" :resetFlag="resetFlag"></router-view>
+      <router-view :menuIndex="menuIndex" :setFlag="setFlag" :mbIndex="mbIndex" :menuId="menuId" :resetFlag="resetFlag"></router-view>
     </a-layout-content>
     <a-layout-footer style="text-align: center">
       <div class="menu-list">
@@ -91,6 +91,7 @@
       return{
         menuList:{},
         menuIndex:0,
+        menuId:'',
         timeStamp: this.$common.timestampToTime(new Date()),
         timeInterval:'',
         setFlag:false,
@@ -112,6 +113,7 @@
 
     },
     // beforeRouteUpdate (to, from, next) {
+    //   console.log(to.matched[1].path);
     //   if(to.matched[1].path=='/home/index'){
     //       next();
     //   }else{
@@ -157,7 +159,7 @@
           //调取数据成功
           if(res.data){
             if (res.data.code === "0") {
-              callback(res.data.data)
+              callback(res.data.data);
             }
           }
         });
@@ -165,6 +167,9 @@
       // 处理菜单栏信息接口
       menuInfo:function(data){
         this.menuList = data;
+        console.log(data.records[0].menuNum);
+        this.menuId = data.records[0].menuNum;
+
       },
       getTemplateInfo:function(){
         let self = this;
@@ -186,12 +191,13 @@
         });
       },
       templateInfo:function(data){
-        this.mbList = data
+        this.mbList = data;
       },
      
       mbSelect:function(param){
         if(param<=1){
-          this.mbTempIndex = param
+          this.mbTempIndex = param;
+        
         }
       },
       handleOk(e) {
@@ -242,6 +248,7 @@
             this.$message.warning('功能暂未开启');
           }else{
           this.menuIndex = param;
+          this.menuId = this.menuList.records[param].menuNum;
           this.setFlag = false;
           this.$router.push('/home/'+this.menuList[param].key);
           this.$router.push({path: '/home/'+this.menuList[param].key, query: {flag: false}});

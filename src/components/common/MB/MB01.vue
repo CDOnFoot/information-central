@@ -39,13 +39,13 @@
           <div class="hide-sub-left" v-show="setFlag">
             <div class="sub-btn">
                 <div class="sub-btn-item" v-for="(item,index) in btnList" :key="index" :class="(index===0 || index===2)?'marginLeft':''">
-                  <a-button size="small" class="item-btn" @click="mcChangeItem(0,index)" v-show="(index===0 && !currentMC.mc[0].key) || (index===1 && currentMC.mc[0].key) || (index===2 && currentMC.mc[0].key)">
+                  <a-button size="small" class="item-btn" @click="mcChangeItem(0,index)" v-show="(index===0 && !visualList.mb.mk[0].mc.contentNum) || (index===1 && visualList.mb.mk[0].mc.contentNum) || (index===2 && visualList.mb.mk[0].mc.contentNum)">
                   {{item.title}}</a-button>
               </div>
             </div>
           </div>
           <div class="sub-content">
-             <component :is="currentMC.mc[0].key" :mcTitle="currentMC.mc[0].title"  :mcStatus="0" :mcId="currentMC.mc[0].key" class="mc-content"></component>
+             <component :is="visualList.mb.mk[0].mc.contentNum" :mcTitle="visualList.mb.mk[0].mc.contentName"  :mcStatus="0" :mcId="visualList.mb.mk[0].mc.contentNum" class="mc-content"></component>
           </div>
         </div>
       </div>
@@ -55,14 +55,14 @@
           <div class="hide-sub-left" v-show="setFlag">
               <div class="sub-btn">
                 <div class="sub-btn-item" v-for="(item,index) in btnList" :key="index" :class="(index===0 || index===2)?'marginLeft':''">
-                    <a-button size="small" class="item-btn" @click="mcChangeItem(1,index)" v-show="(index===0 && !currentMC.mc[1].key) || (index===1 && currentMC.mc[1].key) || (index===2 && currentMC.mc[1].key)">
+                    <a-button size="small" class="item-btn" @click="mcChangeItem(1,index)" v-show="(index===0 && !visualList.mb.mk[1].mc.contentNum) || (index===1 && visualList.mb.mk[1].mc.contentNum) || (index===2 && visualList.mb.mk[1].mc.contentNum)">
                   {{item.title}}</a-button>
                 </div>
               </div>
             </div>
       
             <div class="sub-content">
-             <component :is="currentMC.mc[1].key" :mcTitle="currentMC.mc[1].title" :mcStatus="1"  :mcId="currentMC.mc[1].key" class="mc-content"></component>
+             <component :is="visualList.mb.mk[1].mc.contentNum" :mcTitle="visualList.mb.mk[1].mc.contentName" :mcStatus="1"  :mcId="visualList.mb.mk[1].mc.contentNum" class="mc-content"></component>
           </div>
         </div>
       </div>
@@ -72,13 +72,13 @@
           <div class="hide-sub-left" v-show="setFlag">
               <div class="sub-btn">
                 <div class="sub-btn-item" v-for="(item,index) in btnList" :key="index" :class="(index===0 || index===2)?'marginLeft':''">
-                   <a-button size="small" class="item-btn" @click="mcChangeItem(2,index)" v-show="(index===0 && !currentMC.mc[2].key) || (index===1 && currentMC.mc[2].key) || (index===2 && currentMC.mc[2].key)">
+                   <a-button size="small" class="item-btn" @click="mcChangeItem(2,index)" v-show="(index===0 && !visualList.mb.mk[2].mc.contentNum) || (index===1 && visualList.mb.mk[2].mc.contentNum) || (index===2 && visualList.mb.mk[2].mc.contentNum)">
                   {{item.title}}</a-button>
                 </div>
               </div>
             </div>
           <div class="sub-content">
-             <component :is="currentMC.mc[2].key" :mcTitle="currentMC.mc[2].title" :mcStatus="2"  :mcId="currentMC.mc[2].key" class="mc-content"></component>
+             <component :is="visualList.mb.mk[2].mc.contentNum" :mcTitle="visualList.mb.mk[2].mc.contentName" :mcStatus="2"  :mcId="visualList.mb.mk[2].mc.contentNum" class="mc-content"></component>
           </div>
         </div>
       </div>
@@ -89,13 +89,13 @@
         <div class="hide-sub-key" v-show="setFlag">
             <div class="sub-btn">
                 <div class="sub-btn-item" v-for="(item,index) in btnList" :key="index" :class="(index===0 || index===2)?'marginLeft':''">
-                 <a-button size="small" class="item-btn" @click="mcChangeItem(3,index)" v-show="(index===0 && !currentMC.mc[3].key) || (index===1 && currentMC.mc[3].key) || (index===2 && currentMC.mc[3].key)">
+                 <a-button size="small" class="item-btn" @click="mcChangeItem(3,index)" v-show="(index===0 && !visualList.mb.mk[3].mc.contentNum) || (index===1 && visualList.mb.mk[3].mc.contentNum) || (index===2 && visualList.mb.mk[3].mc.contentNum)">
                   {{item.title}}</a-button>
               </div>
             </div>
           </div>
         <div class="sub-content">
-             <component :is="currentMC.mc[3].key"  :mcTitle="currentMC.mc[3].title"  :mcStatus="3"  :mcId="currentMC.mc[3].key" class="mc-content"></component>
+             <component :is="visualList.mb.mk[3].mc.contentNum"  :mcTitle="visualList.mb.mk[3].mc.contentName"  :mcStatus="3"  :mcId="visualList.mb.mk[3].mc.contentNum" class="mc-content"></component>
           </div>
       </div>
     </div>
@@ -106,13 +106,13 @@
           <div class="hide-sub-right" v-show="setFlag">
               <div class="sub-btn">
                 <div class="sub-btn-item" v-for="(item,index) in btnList" :key="index" :class="(index===0 || index===2)?'marginLeft':''">
-                  <a-button size="small" class="item-btn" @click="mcChangeItem(4,index)" v-show="(index===0 && !currentMC.mc[4].key) || (index===1 && currentMC.mc[4].key) || (index===2 && currentMC.mc[4].key)">
+                  <a-button size="small" class="item-btn" @click="mcChangeItem(4,index)" v-show="(index===0 && !visualList.mb.mk[4].mc.contentNum) || (index===1 && visualList.mb.mk[4].mc.contentNum) || (index===2 && visualList.mb.mk[4].mc.contentNum)">
                   {{item.title}}</a-button>
                 </div>
               </div>
             </div>
           <div class="sub-content">
-             <component :is="currentMC.mc[4].key" :mcTitle="currentMC.mc[4].title"  :mcStatus="4"  :mcId="currentMC.mc[4].key" class="mc-content"></component>
+             <component :is="visualList.mb.mk[4].mc.contentNum" :mcTitle="visualList.mb.mk[4].mc.contentName"  :mcStatus="4"  :mcId="visualList.mb.mk[4].mc.contentNum" class="mc-content"></component>
           </div>
         </div>
       </div>
@@ -122,13 +122,13 @@
           <div class="hide-sub-right" v-show="setFlag">
               <div class="sub-btn">
                 <div class="sub-btn-item" v-for="(item,index) in btnList" :key="index" :class="(index===0 || index===2)?'marginLeft':''">
-                    <a-button size="small" class="item-btn" @click="mcChangeItem(5,index)" v-show="(index===0 && !currentMC.mc[5].key) || (index===1 && currentMC.mc[5].key) || (index===2 && currentMC.mc[5].key)">
+                    <a-button size="small" class="item-btn" @click="mcChangeItem(5,index)" v-show="(index===0 && !visualList.mb.mk[5].mc.contentNum) || (index===1 && visualList.mb.mk[5].mc.contentNum) || (index===2 && visualList.mb.mk[5].mc.contentNum)">
                   {{item.title}}</a-button>
                 </div>
               </div>
             </div>
           <div class="sub-content">
-             <component :is="currentMC.mc[5].key" :mcTitle="currentMC.mc[5].title"  :mcStatus="5"  :mcId="currentMC.mc[5].key" class="mc-content"></component>
+             <component :is="visualList.mb.mk[5].mc.contentNum" :mcTitle="visualList.mb.mk[5].mc.contentName"  :mcStatus="5"  :mcId="visualList.mb.mk[5].mc.contentNum" class="mc-content"></component>
           </div>
         </div>
       </div>
@@ -138,13 +138,13 @@
           <div class="hide-sub-right" v-show="setFlag">
               <div class="sub-btn">
                 <div class="sub-btn-item" v-for="(item,index) in btnList" :key="index" :class="(index===0 || index===2)?'marginLeft':''">
-                   <a-button size="small" class="item-btn" @click="mcChangeItem(6,index)" v-show="(index===0 && !currentMC.mc[6].key) || (index===1 && currentMC.mc[6].key) || (index===2 && currentMC.mc[6].key)">
+                   <a-button size="small" class="item-btn" @click="mcChangeItem(6,index)" v-show="(index===0 && !visualList.mb.mk[6].mc.contentNum) || (index===1 && visualList.mb.mk[6].mc.contentNum) || (index===2 && visualList.mb.mk[6].mc.contentNum)">
                   {{item.title}}</a-button>
                 </div>
               </div>
             </div>
           <div class="sub-content">
-             <component :is="currentMC.mc[6].key"  :mcTitle="currentMC.mc[6].title" :mcStatus="6"  :mcId="currentMC.mc[6].key" class="mc-content"></component>
+             <component :is="visualList.mb.mk[6].mc.contentNum"  :mcTitle="visualList.mb.mk[6].mc.contentName" :mcStatus="6"  :mcId="visualList.mb.mk[6].mc.contentNum" class="mc-content"></component>
           </div>
         </div>
       </div>
@@ -159,49 +159,49 @@
     import MC05 from '../../../components/common/MC/MC05';
     import MC06 from '../../../components/common/MC/MC06';
     import MC07 from '../../../components/common/MC/MC07';
-    import MC08 from '../../../components/common/MC/MC08';
-    import MC09 from '../../../components/common/MC/MC09';
+    // import MC08 from '../../../components/common/MC/MC08';
+    // import MC09 from '../../../components/common/MC/MC09';
     export default {
         name: "MB01",
         data(){
           return{
-            currentMC:{
-              mbId:'MB01',
-              mc:[{
-                key:'',
-                type:'',
-                title:'',
-              },{
-                key:'',
-                type:'',
-                title:'',
+            // currentMC:{
+            //   mbId:'MB01',
+            //   mc:[{
+            //     key:'',
+            //     type:'',
+            //     title:'',
+            //   },{
+            //     key:'',
+            //     type:'',
+            //     title:'',
 
-              },{
-                key:'',
-                type:'',
-                title:'',
+            //   },{
+            //     key:'',
+            //     type:'',
+            //     title:'',
 
-              },{
-                key:'',
-                type:'',
-                title:'',
+            //   },{
+            //     key:'',
+            //     type:'',
+            //     title:'',
 
-              },{
-                key:'',
-                type:'',
-                title:'',
+            //   },{
+            //     key:'',
+            //     type:'',
+            //     title:'',
 
-              },{
-                key:'',
-                type:'',
-                title:'',
+            //   },{
+            //     key:'',
+            //     type:'',
+            //     title:'',
 
-              },{
-                key:'',
-                type:'',
-                title:'',
-              }]
-            },
+            //   },{
+            //     key:'',
+            //     type:'',
+            //     title:'',
+            //   }]
+            // },
             menuList:'',
             btnList:'',
             setItemFlag:false,
@@ -212,23 +212,29 @@
             mcIndex:0,
             mcTempIndex:'',
             visibleIndex:0,
+            visualList:'',
           }
         },
-      props: ['setFlag','resetFlag'],
+      props: ['setFlag','resetFlag','menuTempId'],
       watch: {
         setFlag: function (val) {
-          // console.log(val);
           this.setFlag = val;
         },
         resetFlag: function (val) {
-          // console.log(val)
           // 检测当选择模版后会清空当前所有的模块内容
           // 此时重新调用获取当前模块内容信息
           this.resetFlag = val;
           this.getContentInfo();
+        },
+         menuTempId: function (val) {
+          this.menuList = val;
+          this.menuTempId = val;
+          this.getUserVisualization();
         }
       },
       mounted(){
+          this.getUserVisualization();
+
           // 初始化模版内容
           this.getContentInfo();
           this.btnList = this.$common.btnList;
@@ -238,6 +244,34 @@
         created(){
         },
         methods:{
+          // 查看可视化界面内容数据信息
+        getUserVisualization:function(){
+          let self = this;
+          this.userVisualizationList(function(data){
+            self.visualizationInfo(data);
+          })
+        },
+        userVisualizationList:function(callback){
+          let self = this;
+          let param={
+            userNum: self.$common.getCookie('userNum'),
+            menuNum: self.menuTempId
+            };
+          this.$http.post(self.$api.getUserVisualization, param).then(res =>{
+            //调取数据成功
+            if(res.data){
+              if (res.data.code === "0") {
+                callback(res.data.data)
+              }
+            }
+          });
+        },
+        visualizationInfo:function(data){
+          this.visualList = data.menuList;
+          console.log(this.visualList);
+          console.log(this.visualList.mb.mk[3].mc.contentName);
+        },
+
           handleChange(value) {
             this.mcList =[];
             this.mcTempIndex = '';
@@ -407,8 +441,8 @@
             MC05,
             MC06,
             MC07,
-            MC08,
-            MC09,
+            // MC08,
+            // MC09,
         },
     }
 </script>

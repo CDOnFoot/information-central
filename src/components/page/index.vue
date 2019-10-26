@@ -1,7 +1,7 @@
 <!--首页信息-->
 <template>
     <keep-alive>
-        <component :is="currentMB" :setFlag="setFlag" :menuIndex = "menuIndex" :resetFlag = "resetFlag" class="mb-content"></component>
+        <component :is="currentMB" :setFlag="setFlag" :resetFlag = "resetFlag" :menuTempId= "menuTempId" class="mb-content"></component>
     </keep-alive>
 </template>
 
@@ -14,6 +14,7 @@
             return{
               currentMB:'',
               visualList:'',
+              menuTempId:'',
             }
         },
       props: ['menuIndex','setFlag','mbIndex','resetFlag','menuId'],
@@ -25,35 +26,26 @@
       watch: {
         setFlag: function (val) {
           this.setFlag = val;
-          console.log(val);
         },
         resetFlag: function (val) {
           this.resetFlag = val;
-          console.log(val);
         },
         menuIndex: function (val) {
-          console.log(val);
           this.currentMB = this.$common.menuList[val].mb.id;
         },
          mbIndex: function (val) {
-           console.log(val);
           this.currentMB = this.$common.mbList[val].id;
         },
         menuId:function(val){
-          console.log(val);
           this.menuId = val;
+          this.menuTempId = val;
+          this.getUserVisualization();
+
         },
       },
       created(){
-        console.log(this.menuIndex);
-        console.log(this.menuId);
-        this.getUserVisualization();
       },
       mounted() {
-        // this.setFlag = this.$route.query.flag;
-
-
-        // 查看可视化界面内容数据信息
       },
       methods:{
         // 查看可视化界面内容数据信息
@@ -80,7 +72,7 @@
         },
         visualizationInfo:function(data){
           this.visualList = data.menuList;
-          // this.currentMB = data.menuList[this.menuIndex].mb.id;
+          this.currentMB = data.menuList.mb.templateNum;
 
           console.log(this.visualList);
         },

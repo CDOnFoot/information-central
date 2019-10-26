@@ -5,11 +5,16 @@
     <div class="main">
       <div class="borde">{{mcTitle}}</div>
       <div class="time">{{timeStamp}}</div>
-        <a-select defaultValue="1" @change="handleChange" class="timeChange">
+        <!-- <a-select defaultValue="1" @change="handleChange" class="timeChange">
           <a-select-option value="1">日</a-select-option>
           <a-select-option value="2">周</a-select-option>
           <a-select-option value="3">月</a-select-option>
-        </a-select>
+        </a-select> -->
+        <a-radio-group @change="handleChange" v-model="valueTime"   class="timeChange">
+          <a-radio :value="1">过去一天</a-radio>
+          <a-radio :value="2">过去7天</a-radio>
+          <a-radio  :value="3">过去30天</a-radio>
+        </a-radio-group>
       <div :id="mcId" class="main-id"></div>
     </div>
   </div>
@@ -24,6 +29,7 @@ export default {
       // timeStamp: this.$common.timestampToTime(new Date()),
       timeStamp: "2019/10/4-2019/10/11",
       mcList: "",
+      valueTime:"1",
       mc:""
     };
   },
@@ -68,8 +74,10 @@ export default {
         },
         toolbox: {
           show: true,
+          left: '50%',
+          top:'3%',
           feature: {
-            dataView: { show: true, readOnly: true,lang:['数据视图', '关闭','']}
+            dataView: {show: true, readOnly: true,lang:['数据视图', '关闭','']}
           },
           iconStyle: {
             normal: {
@@ -143,8 +151,8 @@ export default {
 
     },
     //下拉框change事件
-    handleChange(value){
-      console.log(value)
+    handleChange(e){
+      console.log(e.target.value)
     }
   }
 };
@@ -193,18 +201,19 @@ canvas {
 .time {
   font-size: 16px;
   color: #fff;
-  margin-top: -18%;
+  margin-top: -13%;
   /* margin-right: 4%; */
-  left:-10%;
+  left:-45%;
   height: 9%;
 }
 .timeChange{
-  background:#000;
-  font:#fff;
-  /* width:80px; */
+  color:#fff;
   position: absolute;
-  right:10%;
+  right:15%;
   top:4%;
   z-index: 100;
+}
+.ant-radio-wrapper{
+  color:#1890ff;
 }
 </style>

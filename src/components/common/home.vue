@@ -37,6 +37,9 @@
       </div>
     </a-layout-header>
     <a-layout-content style="padding: 0 1%;height:100%;min-height: calc(100vh - 8.3%);">
+      <div class="load-content" v-show="loadFlag">
+        <a-spin class="load-img" size="large" />
+      </div>
       <router-view :menuIndex="menuIndex" :setFlag="setFlag" :mbIndex="mbIndex" :menuId="menuId" :resetFlag="resetFlag"></router-view>
     </a-layout-content>
     <a-layout-footer style="text-align: center">
@@ -103,6 +106,7 @@
         mbTempIndex:'',
         // setTempFlag:false,
         resetFlag:false,
+        loadFlag:false,
       }
     },
     computed:{
@@ -145,6 +149,7 @@
       // 查看菜单栏数据信息
       getMenuInfo:function(){
         let self = this;
+        this.loadFlag = true;
         this.menuInfoList(function(data){
           self.menuInfo(data);
         })
@@ -160,16 +165,22 @@
           if(res.data){
             if (res.data.code === "0") {
               callback(res.data.data);
+            }else{
+               this.$message.error(res.data.msg);
+               self.loadFlag = false;
             }
           }
         });
       },
       // 处理菜单栏信息接口
       menuInfo:function(data){
+        let self = this;
         this.menuList = data;
-        console.log(data.records[0].menuNum);
         this.menuId = data.records[0].menuNum;
-
+        console.log(this.menuId);
+        setTimeout(()=>{
+          self.loadFlag = false;
+        },300);
       },
       getTemplateInfo:function(){
         let self = this;
@@ -178,7 +189,7 @@
         })
       },
       templateInfoList:function(callback){
-         let self = this;
+        let self = this;
         let param={
           };
         this.$http.post(self.$api.getTemplateInfo, param).then(res =>{
@@ -186,12 +197,16 @@
           if(res.data){
             if (res.data.code === "0") {
               callback(res.data.data)
+            }else{
+               this.$message.error(res.data.msg);
             }
           }
         });
       },
       templateInfo:function(data){
+        let self = this;
         this.mbList = data;
+      
       },
      
       mbSelect:function(param){
@@ -276,5 +291,16 @@
 </script>
 
 <style scoped>
-  
+  .load-content{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+  .load-img{
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 199;
+  }
 </style>

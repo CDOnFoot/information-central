@@ -368,7 +368,8 @@
         margin-left: 5px;
       }
       .content-main-mb{
-        height: 38rem;
+        height: 36rem;
+        overflow: auto;
       }
       .select-main{
         display: flex;

@@ -72,6 +72,9 @@
         if(username === "admin" && userpwd === "123456"){
           this.$common.setCookie('username',username,24 * 60);
           this.$common.setCookie('userpwd',userpwd,24 * 60);
+          this.$common.setCookie('token','530c1597-c5ec-43b0-9f32-e6b61986a9b9',24 * 60);
+          this.$common.setCookie('userNum','16279',24 * 60);
+
           setTimeout(()=>{
             self.loadFlag = false;
             self.$router.push('/home/index');

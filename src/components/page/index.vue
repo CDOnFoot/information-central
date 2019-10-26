@@ -1,7 +1,7 @@
 <!--首页信息-->
 <template>
     <keep-alive>
-        <component :is="currentMB" :setFlag="setFlag" :menuIndex = "menuIndex" :resetFlag = "resetFlag" class="mb-content"></component>
+        <component :is="currentMB" :setFlag="setFlag" :resetFlag = "resetFlag" :menuTempId= "menuTempId" class="mb-content"></component>
     </keep-alive>
 </template>
 
@@ -13,11 +13,12 @@
         data(){
             return{
               currentMB:'',
+              visualList:'',
+              menuTempId:'',
             }
         },
-      props: ['menuIndex','setFlag','mbIndex','resetFlag'],
-      created(){
-        },
+      props: ['menuIndex','setFlag','mbIndex','resetFlag','menuId'],
+ 
          components:{
             MB01,
             MB02
@@ -25,28 +26,56 @@
       watch: {
         setFlag: function (val) {
           this.setFlag = val;
-          console.log(val);
         },
         resetFlag: function (val) {
           this.resetFlag = val;
-          console.log(val);
         },
         menuIndex: function (val) {
-          console.log(val);
           this.currentMB = this.$common.menuList[val].mb.id;
-          
         },
          mbIndex: function (val) {
-           console.log(val);
           this.currentMB = this.$common.mbList[val].id;
-        }
+        },
+        menuId:function(val){
+          this.menuId = val;
+          this.menuTempId = val;
+          this.getUserVisualization();
+
+        },
+      },
+      created(){
       },
       mounted() {
-        // this.setFlag = this.$route.query.flag;
-        this.currentMB = this.$common.menuList[this.menuIndex].mb.id;
       },
       methods:{
+        // 查看可视化界面内容数据信息
+        getUserVisualization:function(){
+          let self = this;
+          this.userVisualizationList(function(data){
+            self.visualizationInfo(data);
+          })
+        },
+        userVisualizationList:function(callback){
+          let self = this;
+          let param={
+            userNum: self.$common.getCookie('userNum'),
+            menuNum: self.menuId
+            };
+          this.$http.post(self.$api.getUserVisualization, param).then(res =>{
+            //调取数据成功
+            if(res.data){
+              if (res.data.code === "0") {
+                callback(res.data.data)
+              }
+            }
+          });
+        },
+        visualizationInfo:function(data){
+          this.visualList = data.menuList;
+          this.currentMB = data.menuList.mb.templateNum;
 
+          console.log(this.visualList);
+        },
       }
     }
 </script>

@@ -14,6 +14,9 @@
     var useStaging = false;
     var host = useStaging ? 'http://10.66.1.102:28070':'http://10.66.1.102:28070';
 
+    // 指标配置临时ip
+    var hosts = 'http://10.66.1.65:28070';
+
     // **路由请求拦截**
     // http request 拦截器
     axios.interceptors.request.use(config => {
@@ -143,6 +146,23 @@
         return axios({
           method: 'post',
           baseURL: host, url,
+          data: qs.stringify(params),
+          timeout: 20000,
+          headers: {
+            'content-Type': 'application/x-www-form-urlencoded;',
+          },
+        }).then(
+          (response) => {
+            return checkStatus(response)
+          }).then(
+          (res) => {
+            return checkCode(res)
+          })
+      },
+      posts (url, params) {
+        return axios({
+          method: 'post',
+          baseURL: hosts, url,
           data: qs.stringify(params),
           timeout: 20000,
           headers: {

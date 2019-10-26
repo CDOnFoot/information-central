@@ -116,17 +116,7 @@
     text-align: center;
     z-index: 99;
   }
-  .time{
-    position: absolute;
-    right: 1%;
-    top: 30%;
-    transform: translateY(-50%);
-    font-size: 18px;
-    line-height: 82px;
-    color: #ffffff;
-    text-align: center;
-    z-index: 99;
-  }
+
   .weather{
     position: absolute;
     right: 1%;

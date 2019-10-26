@@ -13,7 +13,7 @@
         <a-radio-group @change="handleChange" v-model="valueTime"   class="timeChange">
           <a-radio :value="1">过去一天</a-radio>
           <a-radio :value="2">过去7天</a-radio>
-          <a-radio  :value="3">过去30天</a-radio>
+          <a-radio :value="3">过去30天</a-radio>
         </a-radio-group>
       <div :id="mcId" class="main-id"></div>
     </div>
@@ -27,7 +27,7 @@ export default {
     return {
       timeInterval: "",
       // timeStamp: this.$common.timestampToTime(new Date()),
-      timeStamp: "2019/10/4-2019/10/11",
+      timeStamp: "",
       mcList: "",
       valueTime:"1",
       mc:""
@@ -53,11 +53,42 @@ export default {
     var self = this;
     this.mcList = this.$common.mcList;
     // this.mcId = this.$common.menuList[0].mb.mk[Number(self.mcStatus)].mc.id;
-    this.drawLine();
+
+    this.initChart(this.valueTime);
   },
   created() {},
   methods: {
-    drawLine() {
+
+    // 查看可视化界面内容数据信息
+    initChart:function(type){
+      let self = this;
+      this.chartInfo(function(data){
+        self.chartInfoList(data);
+      },type)
+    },
+    chartInfo:function(callback,type){
+      let self = this;
+      let param={
+        queryType: type
+        };
+      this.$http.posts(self.$api.getEnergytopten, param).then(res =>{
+        //调取数据成功
+        if(res.data){
+          if (res.data.code === "0") {
+            callback(res.data.data)
+          }else{
+            this.$message.error(res.data.msg);
+          }
+        }
+      });
+    },
+    chartInfoList:function(data){
+      console.log(data);
+      this.timeStamp = data.time;
+      this.drawLine(data);
+    },
+
+    drawLine(paramData) {
       let self = this;
       // 基于准备好的dom，初始化echarts实例
       self.mc = this.$echarts.init(document.getElementById(self.mcId));
@@ -77,7 +108,13 @@ export default {
           left: '50%',
           top:'3%',
           feature: {
-            dataView: {show: true, readOnly: true,lang:['数据视图', '关闭','']}
+            dataView: {
+              show: true, 
+              readOnly: true,
+              icon: '../../../assets/img/btn-data.png',
+              // icon:'image://http://echarts.baidu.com/images/favicon.png',
+              lang:['数据视图', '关闭','']
+              }
           },
           iconStyle: {
             normal: {
@@ -110,7 +147,7 @@ export default {
           },
           type: "category",
           data: [
-            "金川路站",
+             "金川路站",
             "大河梗站",
             "海屯路站",
             "小屯站",
@@ -141,21 +178,24 @@ export default {
           }
         ]
       };
+
+      // 动态放置数据
+      option.series[0].data = paramData.energy;
+      option.yAxis.data = paramData.station;
       console.info(self.mc);
       // 绘制图表
       self.mc.setOption(option,true)
       //默认数据
-    },
-    //动态获取数据
-    dataFrom(){
-
-    },
-    //下拉框change事件
-    handleChange(e){
-      console.log(e.target.value)
+      },
+    
+      //下拉框change事件
+      handleChange(e){
+        // console.log();
+        // 动态获取能耗排行数据信息
+        this.initChart(e.target.value);
+      }
     }
-  }
-};
+  };
 </script>
 
 <style scoped>
@@ -182,38 +222,29 @@ canvas {
 }
 .main-id {
   width: 470px;
-  height: 270px;
-  padding-top: 24px;
+  height: 258px;
+  margin-top: 24px;
 }
-/* .time {
+.time{
+  position: absolute;
+  right: 4%;
   font-size: 16px;
-  color: #3467c5;
-  margin-top: -18%;
-  margin-right: 4%;
-  height: 9%;
-} */
-/* .time {
-  font-size: 16px;
-  color:#fff;
-  margin-top: -12.5%;
-  left:-10%;
-} */
-.time {
-  font-size: 16px;
-  color: #fff;
-  margin-top: -13%;
-  /* margin-right: 4%; */
-  left:-45%;
-  height: 9%;
+  top: 16%;
+  color: #ffffff;
+  text-align: right;
 }
 .timeChange{
-  color:#fff;
+  color: #fff;
   position: absolute;
-  right:15%;
-  top:4%;
-  z-index: 100;
+  left: 5%;
+  top: 12%;
 }
 .ant-radio-wrapper{
-  color:#1890ff;
+  color:#ffffff;
 }
 </style>
+
+
+
+           
+          

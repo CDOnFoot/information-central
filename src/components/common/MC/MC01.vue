@@ -5,6 +5,11 @@
     <div class="main">
       <div class="borde">{{mcTitle}}</div>
       <div class="time">{{timeStamp}}</div>
+        <a-select defaultValue="1" @change="handleChange" class="timeChange">
+          <a-select-option value="1">日</a-select-option>
+          <a-select-option value="2">周</a-select-option>
+          <a-select-option value="3">月</a-select-option>
+        </a-select>
       <div :id="mcId" class="main-id"></div>
     </div>
   </div>
@@ -16,8 +21,10 @@ export default {
   data() {
     return {
       timeInterval: "",
-      timeStamp: this.$common.timestampToTime(new Date()),
-      mcList: ""
+      // timeStamp: this.$common.timestampToTime(new Date()),
+      timeStamp: "2019/10/4-2019/10/11",
+      mcList: "",
+      mc:""
     };
   },
   props: ["mcStatus", "mcTitle", "mcId"],
@@ -35,7 +42,7 @@ export default {
   mounted() {
     clearInterval(this.timeInterval);
     this.timeInterval = setInterval(function() {
-      self.timeStamp = self.$common.timestampToTime(new Date());
+      // self.timeStamp = self.$common.timestampToTime(new Date());
     }, 1000);
     var self = this;
     this.mcList = this.$common.mcList;
@@ -47,9 +54,9 @@ export default {
     drawLine() {
       let self = this;
       // 基于准备好的dom，初始化echarts实例
-      let mc = this.$echarts.init(document.getElementById(self.mcId));
-      // 绘制图表
-      mc.setOption({
+      self.mc = this.$echarts.init(document.getElementById(self.mcId));
+      //初始化option
+      let option={
         tooltip: {
           trigger: "axis",
           axisPointer: {
@@ -60,18 +67,17 @@ export default {
           show: false
         },
         toolbox: {
-        show : true,
-        feature : {
-            dataView : {show: true, readOnly: false},
-
+          show: true,
+          feature: {
+            dataView: { show: true, readOnly: true,lang:['数据视图', '关闭','']}
+          },
+          iconStyle: {
+            normal: {
+              color: "white", //设置颜色
+              top: "50%"
+            }
+          }
         },
-         iconStyle:{
-                    normal:{
-                      color:'white',//设置颜色
-                      top:"50%",
-                    }
-                }
-    },
         grid: {
           left: "3%",
           right: "4%",
@@ -126,7 +132,19 @@ export default {
             ]
           }
         ]
-      });
+      };
+      console.info(self.mc);
+      // 绘制图表
+      self.mc.setOption(option,true)
+      //默认数据
+    },
+    //动态获取数据
+    dataFrom(){
+
+    },
+    //下拉框change事件
+    handleChange(value){
+      console.log(value)
     }
   }
 };
@@ -159,11 +177,34 @@ canvas {
   height: 270px;
   padding-top: 24px;
 }
+/* .time {
+  font-size: 16px;
+  color: #3467c5;
+  margin-top: -18%;
+  margin-right: 4%;
+  height: 9%;
+} */
+/* .time {
+  font-size: 16px;
+  color:#fff;
+  margin-top: -12.5%;
+  left:-10%;
+} */
 .time {
-    font-size: 16px;
-    color: #3467c5;
-    margin-top: -18%;
-    margin-right: 4%;
-    height: 9%;
+  font-size: 16px;
+  color: #fff;
+  margin-top: -18%;
+  /* margin-right: 4%; */
+  left:-10%;
+  height: 9%;
+}
+.timeChange{
+  background:#000;
+  font:#fff;
+  /* width:80px; */
+  position: absolute;
+  right:10%;
+  top:4%;
+  z-index: 100;
 }
 </style>

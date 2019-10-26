@@ -46,6 +46,7 @@
       created(){
       },
       mounted() {
+          this.getUserVisualization();
       },
       methods:{
         // 查看可视化界面内容数据信息

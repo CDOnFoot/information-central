@@ -38,12 +38,13 @@
           <img src="../../../assets/img/sub-border-l.png" alt="" class="sub-bg">
           <div class="hide-sub-left" v-show="setFlag">
             <div class="sub-btn">
-                <div class="sub-btn-item" v-for="(item,index) in btnList" :key="index" :class="(index===0 || index===2)?'marginLeft':''">
-                  <a-button size="small" class="item-btn" @click="mcChangeItem(0,index)" v-show="(index===0 && !visualList.mb.mk[0].mc.contentNum) || (index===1 && visualList.mb.mk[0].mc.contentNum) || (index===2 && visualList.mb.mk[0].mc.contentNum)">
-                  {{item.title}}</a-button>
+              <div class="sub-btn-item" v-for="(item,index) in btnList" :key="index" :class="(index===0 || index===2)?'marginLeft':''">
+                <a-button size="small" class="item-btn" @click="mcChangeItem(0,index)" v-show="(index===0 && !visualList.mb.mk[0].mc.contentNum) || (index===1 && visualList.mb.mk[0].mc.contentNum) || (index===2 && visualList.mb.mk[0].mc.contentNum)">
+                {{item.title}}</a-button>
               </div>
             </div>
           </div>
+
           <div class="sub-content">
              <component :is="visualList.mb.mk[0].mc.contentNum" :mcTitle="visualList.mb.mk[0].mc.contentName"  :mcStatus="0" :mcId="visualList.mb.mk[0].mc.contentNum" class="mc-content"></component>
           </div>
@@ -99,7 +100,7 @@
           </div>
       </div>
     </div>
-   <div class="mb-right">
+    <div class="mb-right">
       <div class="right">
          <div class="right-sub">
           <img src="../../../assets/img/sub-border-r.png" alt="" class="sub-bg">
@@ -132,21 +133,21 @@
           </div>
         </div>
       </div>
-       <div class="right">
-         <div class="right-sub">
+      <div class="right">
+        <div class="right-sub">
           <img src="../../../assets/img/sub-border-r.png" alt="" class="sub-bg">
           <div class="hide-sub-right" v-show="setFlag">
-              <div class="sub-btn">
-                <div class="sub-btn-item" v-for="(item,index) in btnList" :key="index" :class="(index===0 || index===2)?'marginLeft':''">
-                   <a-button size="small" class="item-btn" @click="mcChangeItem(6,index)" v-show="(index===0 && !visualList.mb.mk[6].mc.contentNum) || (index===1 && visualList.mb.mk[6].mc.contentNum) || (index===2 && visualList.mb.mk[6].mc.contentNum)">
-                  {{item.title}}</a-button>
-                </div>
+            <div class="sub-btn">
+              <div class="sub-btn-item" v-for="(item,index) in btnList" :key="index" :class="(index===0 || index===2)?'marginLeft':''">
+                  <a-button size="small" class="item-btn" @click="mcChangeItem(6,index)" v-show="(index===0 && !visualList.mb.mk[6].mc.contentNum) || (index===1 && visualList.mb.mk[6].mc.contentNum) || (index===2 && visualList.mb.mk[6].mc.contentNum)">
+                {{item.title}}</a-button>
               </div>
             </div>
+          </div>
           <div class="sub-content">
              <component :is="visualList.mb.mk[6].mc.contentNum"  :mcTitle="visualList.mb.mk[6].mc.contentName" :mcStatus="6"  :mcId="visualList.mb.mk[6].mc.contentNum" class="mc-content"></component>
           </div>
-        </div>
+        </div> 
       </div>
     </div>
   </div>
@@ -174,7 +175,33 @@
             mcIndex:0,
             mcTempIndex:'',
             visibleIndex:0,
-            visualList:'',
+            visualList:{
+              mb:{
+                mk:[
+                  {
+                    mc:{},
+                  },
+                  {
+                    mc:{},
+                  },
+                  {
+                    mc:{},
+                  },
+                  {
+                    mc:{},
+                  },
+                  {
+                    mc:{},
+                  },
+                  {
+                    mc:{},
+                  },
+                  {
+                    mc:{},
+                  },
+                ]
+              }
+            },
           }
         },
       props: ['setFlag','resetFlag','menuTempId'],
@@ -192,11 +219,12 @@
           this.menuList = val;
           this.menuTempId = val;
           this.getUserVisualization();
+          console.log(1);
         }
       },
       mounted(){
+          console.log(2);
           this.getUserVisualization();
-
           // 初始化模版内容
           this.getContentInfo();
           this.btnList = this.$common.btnList;
@@ -231,7 +259,6 @@
         visualizationInfo:function(data){
           this.visualList = data.menuList;
           console.log(this.visualList);
-          console.log(this.visualList.mb.mk[3].mc.contentName);
         },
 
           handleChange(value) {

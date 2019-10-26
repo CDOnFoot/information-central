@@ -267,193 +267,195 @@
           console.log(this.visualList);
         },
 
-          handleChange(value) {
-            this.mcList =[];
-            this.mcTempIndex = '';
-            this.getContentInfo(value);
-          },
-          mcSelect:function(param){
-            this.mcTempIndex = param;
-          },
-          // 确定选择模块内容操作信息
-          handleOk(e) {
-            this.confirmLoading = true;
-            var flag = false;
-            let self = this;
-
-            if(this.$common.mcList[self.mcTempIndex].type ==='main'){
-              if(this.visibleIndex !=3){
-                  self.$info({
-                      title: '提示',
-                      content: '所选模块内容为主要指标，不可保存至次要指标区域内，请重新选择',
-                      onOk() {},
-                    });
-                    self.confirmLoading = false;
-              }else{
-                this.saveHandleOk();
-              }
-            }else{
-              if(this.visibleIndex ===3){
-                  self.$info({
-                      title: '提示',
-                      content: '所选模块内容为次要指标，不可保存至主要指标区域内，请重新选择',
-                      onOk() {},
-                    });
-                    self.confirmLoading = false;
-              }else{
-                this.saveHandleOk();
-              }
-            }
-          },
-          // 保存至选择项内操作信息
-          saveHandleOk:function(){
-            let self = this;
-            var flag = false;
-            this.visualList.mb.mk.some((items,indexs)=>{
-              if(items.mc.contentNum === self.mcList[self.mcTempIndex].contentNum){
-                   self.$info({
-                      title: '提示',
-                      content: '所选模块内容在当前界面已存在，请重新选择',
-                      onOk() {},
-                    });
-                    flag = true;
-                    this.confirmLoading = false;
-                    return false;
-              }
-            });
-            if(!flag){
-              setTimeout(() => {
-                this.visible = false;
-                this.mcTempIndex = '';
-                this.confirmLoading = false;
-              }, 1000);
-            this.saveMCFunction();
-            }
-          },
-          // 保存模块内容信息
-          saveMCFunction:function(){
-            let self = this;
-            // console.log("保存模块内容信息：",this.mcList[this.mcTempIndex].title,this.mcList[this.mcTempIndex].id,this.mcTempIndex);
-            this.mcIndex = this.mcTempIndex;
-
-            this.visualParamList.mb.mk[self.visibleIndex].mc= {
-              contentIndex : self.mcList[this.mcTempIndex].contentIndex,
-              contentName : self.mcList[this.mcTempIndex].contentName,
-              contentNum : self.mcList[this.mcTempIndex].contentNum,
-            };
-            this.visualList.mb.mk[self.visibleIndex].mc = {
-              contentIndex : self.mcList[this.mcTempIndex].contentIndex,
-              contentName : self.mcList[this.mcTempIndex].contentName,
-              contentNum : self.mcList[this.mcTempIndex].contentNum,
-            };
-
-            // this.currentMC.mc[this.visibleIndex].key = this.$common.mcList[this.mcTempIndex].id;
-            // this.currentMC.mc[this.visibleIndex].type = this.$common.mcList[this.mcTempIndex].type;
-            // this.currentMC.mc[this.visibleIndex].title = this.$common.mcList[this.mcTempIndex].title;
-          },
-          handleCancel(e) {
-            this.visible = false;
-            this.mcIndex = '';
-            this.mcTempIndex ='';
-          },
-          mcChangeItem:function(index,type){
-            // console.log(this.menuList[0].mb.mk[index].title,this.menuList[0].mb.mk[index].id,index);
-            // console.log(this.btnList[type].title,type);
-            let self = this;
-            if(type!=2){
-              this.visible = true;
-              this.visibleIndex = index;
-              // console.log(this.visibleIndex,"添加或者替换模块内容");
-            }else{
-              // console.log("移除模块内容");
-              this.visibleIndex = index;
-              // console.log(this.visibleIndex,"删除模块内容");
-              this.showDeleteConfirm(index);
-            }
-          },
-          showDeleteConfirm:function(paramIndex){
-            let self = this;
-            this.$confirm({
-              title: '提醒',
-              content: '确定移除该模块内容?',
-              okText: '删除',
-              okType: 'danger',
-              cancelText: '取消',
-              onOk() {
-                // console.log('删除成功');
-                //  self.mcIndex = 0;
-                  self.visualParamList.mb.mk[paramIndex].mc= {};
-                  self.visualList.mb.mk[paramIndex].mc = {};
-              },
-              onCancel() {
-                // console.log('取消删除');
-              },
-            });
-          },
-          // 初始化模版内容
-          getContentInfo:function(param){
-            let self = this;
-            this.contentInfoList(function(data,param){
-              self.contentInfo(data);
-            },param)
-          },
-          contentInfoList:function(callback,params){
-            let self = this;
-            let param={};
-            if(params){
-              param['contentIndex'] = params;
-            }
-            this.$http.post(self.$api.getContentInfo, param).then(res =>{
-              //调取数据成功
-              if(res.data){
-                if (res.data.code === "0") {
-                  callback(res.data.data)
-                }else{
-                  this.$message.error(res.data.msg);
-                }
-              }
-            });
-
-            // console.log("MB01: "+self.resetFlag);
-            // this.menuList = this.$common.menuList;
-            // this.menuList.some((item,index)=>{
-            //   if(item.mb){
-            //     if(item.mb.id === self.currentMC.mbId){
-            //       item.mb.mk.some((items,indexs)=>{
-            //         if(self.resetFlag){
-            //             self.currentMC.mc[indexs].key = '';
-            //             self.currentMC.mc[indexs].type = '';
-            //             self.currentMC.mc[indexs].title = '';
-            //         }else{
-            //           if(items.mc){
-            //             self.currentMC.mc[indexs].key = self.$common.menuList[index].mb.mk[indexs].mc.id;
-            //             self.currentMC.mc[indexs].type = self.$common.menuList[index].mb.mk[indexs].mc.type;
-            //             self.currentMC.mc[indexs].title = self.$common.menuList[index].mb.mk[indexs].mc.title;
-            //             return false;
-            //           }
-            //         }
-            //       });
-            //       callback(this.currentMC);
-            //     }
-            //   }
-            // });
-          },
-          contentInfo:function(data){
-            console.log(data);
-            this.mcList = data.records;
-          },
+        handleChange(value) {
+          this.mcList =[];
+          this.mcTempIndex = '';
+          this.getContentInfo(value);
         },
-        components:{
-            MC01,
-            MC02,
-            MC03,
-            MC04,
-            MC05,
-            MC06,
-            MC07,
-            // MC08,
-            // MC09,
+        mcSelect:function(param){
+          this.mcTempIndex = param;
         },
+        // 确定选择模块内容操作信息
+        handleOk(e) {
+          let self = this;
+          this.confirmLoading = true;
+          let flag = false;
+          if(this.$common.mcList[self.mcTempIndex].type ==='main'){
+            if(this.visibleIndex !=3){
+                self.$info({
+                    title: '提示',
+                    content: '所选模块内容为主要指标，不可保存至次要指标区域内，请重新选择',
+                    onOk() {},
+                  });
+                  self.confirmLoading = false;
+            }else{
+              this.saveHandleOk();
+            }
+          }else{
+            if(this.visibleIndex ===3){
+                self.$info({
+                    title: '提示',
+                    content: '所选模块内容为次要指标，不可保存至主要指标区域内，请重新选择',
+                    onOk() {},
+                  });
+                  self.confirmLoading = false;
+            }else{
+              this.saveHandleOk();
+            }
+          }
+        },
+        // 保存至选择项内操作信息
+        saveHandleOk:function(){
+          let self = this;
+          var flag = false;
+          this.visualList.mb.mk.some((items,indexs)=>{
+            if(items.mc.contentNum === self.mcList[self.mcTempIndex].contentNum){
+                  self.$info({
+                    title: '提示',
+                    content: '所选模块内容在当前界面已存在，请重新选择',
+                    onOk() {},
+                  });
+                  flag = true;
+                  this.confirmLoading = false;
+                  return false;
+            }
+          });
+          if(!flag){
+            setTimeout(() => {
+              this.visible = false;
+              this.mcTempIndex = '';
+              this.confirmLoading = false;
+            }, 1000);
+          this.saveMCFunction();
+          }
+        },
+        // 保存模块内容信息
+        saveMCFunction:function(){
+          let self = this;
+          // console.log("保存模块内容信息：",this.mcList[this.mcTempIndex].title,this.mcList[this.mcTempIndex].id,this.mcTempIndex);
+          this.mcIndex = this.mcTempIndex;
+
+          this.visualParamList.mb.mk[self.visibleIndex].mc= {
+            contentIndex : self.mcList[this.mcTempIndex].contentIndex,
+            contentName : self.mcList[this.mcTempIndex].contentName,
+            contentNum : self.mcList[this.mcTempIndex].contentNum,
+          };
+          this.visualList.mb.mk[self.visibleIndex].mc = {
+            contentIndex : self.mcList[this.mcTempIndex].contentIndex,
+            contentName : self.mcList[this.mcTempIndex].contentName,
+            contentNum : self.mcList[this.mcTempIndex].contentNum,
+          };
+
+          // this.currentMC.mc[this.visibleIndex].key = this.$common.mcList[this.mcTempIndex].id;
+          // this.currentMC.mc[this.visibleIndex].type = this.$common.mcList[this.mcTempIndex].type;
+          // this.currentMC.mc[this.visibleIndex].title = this.$common.mcList[this.mcTempIndex].title;
+          this.$emit('saveSetMessage', this.visualList);
+        },
+        handleCancel(e) {
+          this.visible = false;
+          this.mcIndex = '';
+          this.mcTempIndex ='';
+        },
+        mcChangeItem:function(index,type){
+          // console.log(this.menuList[0].mb.mk[index].title,this.menuList[0].mb.mk[index].id,index);
+          // console.log(this.btnList[type].title,type);
+          let self = this;
+          if(type!=2){
+            this.visible = true;
+            this.visibleIndex = index;
+            // console.log(this.visibleIndex,"添加或者替换模块内容");
+          }else{
+            // console.log("移除模块内容");
+            this.visibleIndex = index;
+            // console.log(this.visibleIndex,"删除模块内容");
+            this.showDeleteConfirm(index);
+          }
+        },
+        showDeleteConfirm:function(paramIndex){
+          let self = this;
+          this.$confirm({
+            title: '提醒',
+            content: '确定移除该模块内容?',
+            okText: '删除',
+            okType: 'danger',
+            cancelText: '取消',
+            onOk() {
+              // console.log('删除成功');
+              //  self.mcIndex = 0;
+                self.visualParamList.mb.mk[paramIndex].mc= '';
+                self.visualList.mb.mk[paramIndex].mc = '';
+                self.$emit('saveSetMessage', self.visualList);
+
+            },
+            onCancel() {
+              // console.log('取消删除');
+            },
+          });
+        },
+        // 初始化模版内容
+        getContentInfo:function(param){
+          let self = this;
+          this.contentInfoList(function(data,param){
+            self.contentInfo(data);
+          },param)
+        },
+        contentInfoList:function(callback,params){
+          let self = this;
+          let param={};
+          if(params){
+            param['contentIndex'] = params;
+          }
+          this.$http.post(self.$api.getContentInfo, param).then(res =>{
+            //调取数据成功
+            if(res.data){
+              if (res.data.code === "0") {
+                callback(res.data.data)
+              }else{
+                this.$message.error(res.data.msg);
+              }
+            }
+          });
+
+          // console.log("MB01: "+self.resetFlag);
+          // this.menuList = this.$common.menuList;
+          // this.menuList.some((item,index)=>{
+          //   if(item.mb){
+          //     if(item.mb.id === self.currentMC.mbId){
+          //       item.mb.mk.some((items,indexs)=>{
+          //         if(self.resetFlag){
+          //             self.currentMC.mc[indexs].key = '';
+          //             self.currentMC.mc[indexs].type = '';
+          //             self.currentMC.mc[indexs].title = '';
+          //         }else{
+          //           if(items.mc){
+          //             self.currentMC.mc[indexs].key = self.$common.menuList[index].mb.mk[indexs].mc.id;
+          //             self.currentMC.mc[indexs].type = self.$common.menuList[index].mb.mk[indexs].mc.type;
+          //             self.currentMC.mc[indexs].title = self.$common.menuList[index].mb.mk[indexs].mc.title;
+          //             return false;
+          //           }
+          //         }
+          //       });
+          //       callback(this.currentMC);
+          //     }
+          //   }
+          // });
+        },
+        contentInfo:function(data){
+          console.log(data);
+          this.mcList = data.records;
+        },
+      },
+      components:{
+          MC01,
+          MC02,
+          MC03,
+          MC04,
+          MC05,
+          MC06,
+          MC07,
+          // MC08,
+          // MC09,
+      },
     }
 </script>
 <style scoped>

@@ -40,7 +40,7 @@
       <div class="load-content" v-show="loadFlag">
         <a-spin class="load-img" size="large" />
       </div>
-      <router-view :menuIndex="menuIndex" :setFlag="setFlag" :mbIndex="mbIndex" :menuId="menuId" :resetFlag="resetFlag"></router-view>
+      <router-view :menuIndex="menuIndex" :setFlag="setFlag" :mbIndex="mbIndex" :menuId="menuId" :resetFlag="resetFlag" @uploadSetMsg="uploadSaveSetMsg"></router-view>
     </a-layout-content>
     <a-layout-footer style="text-align: center">
       <div class="menu-list">
@@ -146,6 +146,11 @@
     },
 
     methods:{
+
+      // 由子界面子路由传值结果
+      uploadSaveSetMsg:function(msgList){
+        console.log('由子界面子路由传值结果：',msgList)
+      },
       // 查看菜单栏数据信息
       getMenuInfo:function(){
         let self = this;
@@ -241,10 +246,7 @@
       saveMBFunction:function(){
         this.mbIndex = this.mbTempIndex;
         this.resetFlag = true;
-        console.log("save 保存模版")
-        // this.menuIndex = this.mbIndex;
         // this.$set("menuIndex",this.mbIndex);
-        // console.log(this.menuIndex,this.mbIndex);
       },
       handleCancel(e) {
         this.visible = false;

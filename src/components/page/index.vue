@@ -1,7 +1,7 @@
 <!--首页信息-->
 <template>
     <keep-alive>
-        <component :is="currentMB" :setFlag="setFlag" :resetFlag = "resetFlag" :menuTempId= "menuTempId" class="mb-content"></component>
+        <component :is="currentMB" :setFlag="setFlag" :resetFlag = "resetFlag" :menuTempId= "menuTempId" @saveSetMessage="saveSetMsg" class="mb-content"></component>
     </keep-alive>
 </template>
 
@@ -49,6 +49,14 @@
           this.getUserVisualization();
       },
       methods:{
+
+        // 获取从子组件MB传值 模版可视化内容信息
+        saveSetMsg:function(msgList){
+          console.log(msgList);
+          let self = this;
+          // 再次上传至上一层home组件内/嵌套路由传值
+          this.$emit('uploadSetMsg',msgList);
+        },
         // 查看可视化界面内容数据信息
         getUserVisualization:function(){
           let self = this;

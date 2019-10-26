@@ -78,8 +78,8 @@
       </div>
       <div class="layout-btn">
         <a-button size="large" class="btn-item" @click="layoutSetting">布局配置</a-button>
-        <a-button size="large" class="btn-item" v-show="setFlag" @click="saveSet">保存</a-button>
-        <a-button size="large" class="btn-item" v-show="setFlag" @click="cancelSet">取消</a-button>
+        <a-button size="large" class="btn-item" v-show="setFlag" @click="saveSetMsg">保存</a-button>
+        <a-button size="large" class="btn-item" v-show="setFlag" @click="cancelSetMsg">取消</a-button>
       </div>
       <div class="layout-selectBtn">
         <a-button size="large" class="btn-item" @click="layoutSelect" v-show="setFlag">选择模版</a-button>
@@ -107,6 +107,8 @@
         // setTempFlag:false,
         resetFlag:false,
         loadFlag:false,
+        visualParamList:'',//参数可视化布局信息
+        visualFormList:''//标准可视化布局信息
       }
     },
     computed:{
@@ -148,8 +150,11 @@
     methods:{
 
       // 由子界面子路由传值结果
-      uploadSaveSetMsg:function(msgList){
-        console.log('由子界面子路由传值结果：',msgList)
+      uploadSaveSetMsg:function(msgList,msgFormList){
+        console.log('由子界面子路由传值结果：',msgList,msgFormList);
+        this.visualParamList = msgList;
+        this.visualFormList = msgFormList;
+
       },
       // 查看菜单栏数据信息
       getMenuInfo:function(){
@@ -159,7 +164,6 @@
           self.menuInfo(data);
         })
       },
-
       // 查看菜单栏数据信息接口
       menuInfoList:function(callback){
         let self = this;
@@ -252,12 +256,76 @@
         this.visible = false;
         this.mbTempIndex = '';
       },
-      saveSet:function(){
+      saveSetMsg:function(){
+        let self = this;
+        this.setFlag = false;
+
+        if(this.visualParamList === this.visualFormList){
+          this.$info({
+            title: '提醒',
+            content:'当前无可视化布局设置信息更改.',
+            onOk() {},
+          });
+        }else{
+          this.$confirm({
+            title: '提醒',
+            content: '确定保存当前界面的可视化布局信息?',
+            okText: '确定',
+            okType: 'danger',
+            cancelText: '取消',
+            onOk() {
+              console.log('保存可视化布局信息');
+              self.updateUserContentInfo();
+            },
+            onCancel() {
+              console.log('确定取消保存');
+            },
+          });
+        }
+      },
+      cancelSetMsg:function(){
         this.setFlag = false;
       },
-      cancelSet:function(){
-        this.setFlag = false;
+
+      // 调起更新保存可视化数据信息
+      updateUserContentInfo:function(){
+        let self = this;
+        this.loadFlag = true;
+        this.updateUserContentInfoList(function(data){
+          self.UserContentInfo(data);
+        })
       },
+      // 更新可视化数据信息
+      updateUserContentInfoList:function(callback){
+        let self = this;
+        let param={
+          userNum: self.$common.getCookie('userNum'),
+          menuNum: self.menuId,
+          templateNum: self.visualParamList.mb.templateNum,
+          moduleAndContent: JSON.stringify(self.visualParamList),
+        };
+        console.log(param);
+        this.$http.post(self.$api.updateUserContentInfo, param).then(res =>{
+          //调取数据成功
+          if(res.data){
+            if (res.data.code === "0") {
+              callback(res.data.data);
+            }else{
+               this.$message.success(res.data.msg);
+               self.loadFlag = false;
+            }
+          }
+        });
+      },
+      // 处理菜单栏信息接口
+      UserContentInfo:function(data){
+        let self = this;
+        this.$message.error("更新布局设置信息成功.");
+        setTimeout(()=>{
+          self.loadFlag = false;
+        },300);
+      },
+
       selectMenu:function(param){
         if(this.menuIndex!=param){
           if(param!=0){

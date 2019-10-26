@@ -202,7 +202,7 @@
                 ]
               }
             },
-            visualParamList:'',
+            // visualParamList:'',
             visualFormList:'',
           }
         },
@@ -262,7 +262,7 @@
         },
         visualizationInfo:function(data){
           this.visualList = data.menuList;
-          this.visualParamList = data.menuList;
+          // this.visualParamList = data.menuList;
           this.visualFormList = data.menuList;
           console.log(this.visualList);
         },
@@ -335,21 +335,19 @@
           // console.log("保存模块内容信息：",this.mcList[this.mcTempIndex].title,this.mcList[this.mcTempIndex].id,this.mcTempIndex);
           this.mcIndex = this.mcTempIndex;
 
-          this.visualParamList.mb.mk[self.visibleIndex].mc= {
-            contentIndex : self.mcList[this.mcTempIndex].contentIndex,
-            contentName : self.mcList[this.mcTempIndex].contentName,
-            contentNum : self.mcList[this.mcTempIndex].contentNum,
-          };
+          // this.visualParamList.mb.mk[self.visibleIndex].mc= {
+          //   contentIndex : self.mcList[this.mcTempIndex].contentIndex,
+          //   contentName : self.mcList[this.mcTempIndex].contentName,
+          //   contentNum : self.mcList[this.mcTempIndex].contentNum,
+          // };
           this.visualList.mb.mk[self.visibleIndex].mc = {
             contentIndex : self.mcList[this.mcTempIndex].contentIndex,
             contentName : self.mcList[this.mcTempIndex].contentName,
             contentNum : self.mcList[this.mcTempIndex].contentNum,
           };
+          // 传值给父组件 如菜单index.vue
+          self.$emit('saveSetMessage', self.visualList,self.visualFormList);
 
-          // this.currentMC.mc[this.visibleIndex].key = this.$common.mcList[this.mcTempIndex].id;
-          // this.currentMC.mc[this.visibleIndex].type = this.$common.mcList[this.mcTempIndex].type;
-          // this.currentMC.mc[this.visibleIndex].title = this.$common.mcList[this.mcTempIndex].title;
-          this.$emit('saveSetMessage', this.visualList);
         },
         handleCancel(e) {
           this.visible = false;
@@ -357,17 +355,12 @@
           this.mcTempIndex ='';
         },
         mcChangeItem:function(index,type){
-          // console.log(this.menuList[0].mb.mk[index].title,this.menuList[0].mb.mk[index].id,index);
-          // console.log(this.btnList[type].title,type);
           let self = this;
           if(type!=2){
             this.visible = true;
             this.visibleIndex = index;
-            // console.log(this.visibleIndex,"添加或者替换模块内容");
           }else{
-            // console.log("移除模块内容");
             this.visibleIndex = index;
-            // console.log(this.visibleIndex,"删除模块内容");
             this.showDeleteConfirm(index);
           }
         },
@@ -382,10 +375,9 @@
             onOk() {
               // console.log('删除成功');
               //  self.mcIndex = 0;
-                self.visualParamList.mb.mk[paramIndex].mc= '';
+                // self.visualParamList.mb.mk[paramIndex].mc= '';
                 self.visualList.mb.mk[paramIndex].mc = '';
-                self.$emit('saveSetMessage', self.visualList);
-
+                self.$emit('saveSetMessage', self.visualList,self.visualFormList);
             },
             onCancel() {
               // console.log('取消删除');
@@ -416,29 +408,6 @@
             }
           });
 
-          // console.log("MB01: "+self.resetFlag);
-          // this.menuList = this.$common.menuList;
-          // this.menuList.some((item,index)=>{
-          //   if(item.mb){
-          //     if(item.mb.id === self.currentMC.mbId){
-          //       item.mb.mk.some((items,indexs)=>{
-          //         if(self.resetFlag){
-          //             self.currentMC.mc[indexs].key = '';
-          //             self.currentMC.mc[indexs].type = '';
-          //             self.currentMC.mc[indexs].title = '';
-          //         }else{
-          //           if(items.mc){
-          //             self.currentMC.mc[indexs].key = self.$common.menuList[index].mb.mk[indexs].mc.id;
-          //             self.currentMC.mc[indexs].type = self.$common.menuList[index].mb.mk[indexs].mc.type;
-          //             self.currentMC.mc[indexs].title = self.$common.menuList[index].mb.mk[indexs].mc.title;
-          //             return false;
-          //           }
-          //         }
-          //       });
-          //       callback(this.currentMC);
-          //     }
-          //   }
-          // });
         },
         contentInfo:function(data){
           console.log(data);
@@ -464,3 +433,27 @@
     height: 100%;
   }
 </style>
+
+          // console.log("MB01: "+self.resetFlag);
+          // this.menuList = this.$common.menuList;
+          // this.menuList.some((item,index)=>{
+          //   if(item.mb){
+          //     if(item.mb.id === self.currentMC.mbId){
+          //       item.mb.mk.some((items,indexs)=>{
+          //         if(self.resetFlag){
+          //             self.currentMC.mc[indexs].key = '';
+          //             self.currentMC.mc[indexs].type = '';
+          //             self.currentMC.mc[indexs].title = '';
+          //         }else{
+          //           if(items.mc){
+          //             self.currentMC.mc[indexs].key = self.$common.menuList[index].mb.mk[indexs].mc.id;
+          //             self.currentMC.mc[indexs].type = self.$common.menuList[index].mb.mk[indexs].mc.type;
+          //             self.currentMC.mc[indexs].title = self.$common.menuList[index].mb.mk[indexs].mc.title;
+          //             return false;
+          //           }
+          //         }
+          //       });
+          //       callback(this.currentMC);
+          //     }
+          //   }
+          // });

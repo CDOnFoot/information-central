@@ -165,44 +165,6 @@
         name: "MB01",
         data(){
           return{
-            // currentMC:{
-            //   mbId:'MB01',
-            //   mc:[{
-            //     key:'',
-            //     type:'',
-            //     title:'',
-            //   },{
-            //     key:'',
-            //     type:'',
-            //     title:'',
-
-            //   },{
-            //     key:'',
-            //     type:'',
-            //     title:'',
-
-            //   },{
-            //     key:'',
-            //     type:'',
-            //     title:'',
-
-            //   },{
-            //     key:'',
-            //     type:'',
-            //     title:'',
-
-            //   },{
-            //     key:'',
-            //     type:'',
-            //     title:'',
-
-            //   },{
-            //     key:'',
-            //     type:'',
-            //     title:'',
-            //   }]
-            // },
-            menuList:'',
             btnList:'',
             setItemFlag:false,
             title:'选择模块内容',

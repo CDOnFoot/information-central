@@ -172,9 +172,9 @@
             visible: false,
             confirmLoading: false,
             mcList:'',
-            mcIndex:0,
+            mcIndex:'',
             mcTempIndex:'',
-            visibleIndex:0,
+            visibleIndex:'',
             visualList:{
               mb:{
                 mk:[
@@ -202,6 +202,8 @@
                 ]
               }
             },
+            visualParamList:'',
+            visualFormList:'',
           }
         },
       props: ['setFlag','resetFlag','menuTempId'],
@@ -252,12 +254,16 @@
             if(res.data){
               if (res.data.code === "0") {
                 callback(res.data.data)
+              }else{
+               this.$message.error(res.data.msg);
               }
             }
           });
         },
         visualizationInfo:function(data){
           this.visualList = data.menuList;
+          this.visualParamList = data.menuList;
+          this.visualFormList = data.menuList;
           console.log(this.visualList);
         },
 
@@ -303,8 +309,8 @@
           saveHandleOk:function(){
             let self = this;
             var flag = false;
-            this.currentMC.mc.some((items,indexs)=>{
-              if(items.key ===self.$common.mcList[self.mcTempIndex].id){
+            this.visualList.mb.mk.some((items,indexs)=>{
+              if(items.mc.contentNum === self.mcList[self.mcTempIndex].contentNum){
                    self.$info({
                       title: '提示',
                       content: '所选模块内容在当前界面已存在，请重新选择',
@@ -326,15 +332,29 @@
           },
           // 保存模块内容信息
           saveMCFunction:function(){
+            let self = this;
             // console.log("保存模块内容信息：",this.mcList[this.mcTempIndex].title,this.mcList[this.mcTempIndex].id,this.mcTempIndex);
             this.mcIndex = this.mcTempIndex;
-            this.currentMC.mc[this.visibleIndex].key = this.$common.mcList[this.mcTempIndex].id;
-            this.currentMC.mc[this.visibleIndex].type = this.$common.mcList[this.mcTempIndex].type;
-            this.currentMC.mc[this.visibleIndex].title = this.$common.mcList[this.mcTempIndex].title;
+
+            this.visualParamList.mb.mk[self.visibleIndex].mc= {
+              contentIndex : self.mcList[this.mcTempIndex].contentIndex,
+              contentName : self.mcList[this.mcTempIndex].contentName,
+              contentNum : self.mcList[this.mcTempIndex].contentNum,
+            };
+            this.visualList.mb.mk[self.visibleIndex].mc = {
+              contentIndex : self.mcList[this.mcTempIndex].contentIndex,
+              contentName : self.mcList[this.mcTempIndex].contentName,
+              contentNum : self.mcList[this.mcTempIndex].contentNum,
+            };
+
+            // this.currentMC.mc[this.visibleIndex].key = this.$common.mcList[this.mcTempIndex].id;
+            // this.currentMC.mc[this.visibleIndex].type = this.$common.mcList[this.mcTempIndex].type;
+            // this.currentMC.mc[this.visibleIndex].title = this.$common.mcList[this.mcTempIndex].title;
           },
           handleCancel(e) {
             this.visible = false;
-            this.mcIndex = 0;
+            this.mcIndex = '';
+            this.mcTempIndex ='';
           },
           mcChangeItem:function(index,type){
             // console.log(this.menuList[0].mb.mk[index].title,this.menuList[0].mb.mk[index].id,index);
@@ -348,10 +368,10 @@
               // console.log("移除模块内容");
               this.visibleIndex = index;
               // console.log(this.visibleIndex,"删除模块内容");
-              this.showDeleteConfirm();
+              this.showDeleteConfirm(index);
             }
           },
-          showDeleteConfirm:function(){
+          showDeleteConfirm:function(paramIndex){
             let self = this;
             this.$confirm({
               title: '提醒',
@@ -362,9 +382,8 @@
               onOk() {
                 // console.log('删除成功');
                 //  self.mcIndex = 0;
-                  self.currentMC.mc[self.visibleIndex].key = '';
-                  self.currentMC.mc[self.visibleIndex].type = '';
-                  self.currentMC.mc[self.visibleIndex].title = '';
+                  self.visualParamList.mb.mk[paramIndex].mc= {};
+                  self.visualList.mb.mk[paramIndex].mc = {};
               },
               onCancel() {
                 // console.log('取消删除');
@@ -389,6 +408,8 @@
               if(res.data){
                 if (res.data.code === "0") {
                   callback(res.data.data)
+                }else{
+                  this.$message.error(res.data.msg);
                 }
               }
             });

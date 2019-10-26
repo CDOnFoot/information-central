@@ -177,7 +177,6 @@
         let self = this;
         this.menuList = data;
         this.menuId = data.records[0].menuNum;
-        console.log(this.menuId);
         setTimeout(()=>{
           self.loadFlag = false;
         },300);

@@ -1,16 +1,11 @@
 
 <template>
-  <!--    模块内容一-->
+  <!--    能耗排行/模块内容一-->
   <div>
     <div class="main">
       <div class="borde">{{mcTitle}}</div>
-      <div class="time">{{timeStamp}}</div>
-        <!-- <a-select defaultValue="1" @change="handleChange" class="timeChange">
-          <a-select-option value="1">日</a-select-option>
-          <a-select-option value="2">周</a-select-option>
-          <a-select-option value="3">月</a-select-option>
-        </a-select> -->
-        <a-radio-group @change="handleChange" v-model="valueTime"   class="timeChange">
+      <div class="timeStamp">{{timeStamp}}</div>
+        <a-radio-group @change="handleChange" v-model="valueTime" class="timeChange">
           <a-radio :value="1">过去一天</a-radio>
           <a-radio :value="2">过去7天</a-radio>
           <a-radio :value="3">过去30天</a-radio>
@@ -26,10 +21,9 @@ export default {
   data() {
     return {
       timeInterval: "",
-      // timeStamp: this.$common.timestampToTime(new Date()),
       timeStamp: "2019/10/28-2019/10/28",
       mcList: "",
-      valueTime:"1",
+      valueTime:1,
       mc:""
     };
   },
@@ -46,153 +40,166 @@ export default {
     }
   },
   mounted() {
+
+    // 定时器刷新
     clearInterval(this.timeInterval);
     this.timeInterval = setInterval(function() {
-      // self.timeStamp = self.$common.timestampToTime(new Date());
-    }, 1000);
+      self.initChart(self.valueTime,'update');
+    }, 1000 * 30);
+
     var self = this;
     this.mcList = this.$common.mcList;
-    // this.mcId = this.$common.menuList[0].mb.mk[Number(self.mcStatus)].mc.id;
-    this.drawLine();
-    this.initChart(this.valueTime);
-  },
-  created() {},
-  methods: {
 
+    // 初始化能耗排行数据信息
+    this.initChart(this.valueTime,'init');
+  },
+  created() {
+
+  },
+  methods: {
+    //下拉框change事件
+    handleChange(e){
+      // 动态获取能耗排行数据信息
+      let self = this;
+      this.initChart(e.target.value);
+      this.refreshData();
+    },
     // 查看可视化界面内容数据信息
-    initChart:function(type){
+    initChart:function(dateType,type){
       let self = this;
       this.chartInfo(function(data){
-        self.chartInfoList(data);
-      },type)
+        self.chartInfoList(data,type);
+      },dateType,type)
     },
-    chartInfo:function(callback,type){
+    chartInfo:function(callback,dateType,type){
       let self = this;
       let param={
-        queryType: type
+        queryType: dateType
         };
       this.$http.posts(self.$api.getEnergytopten, param).then(res =>{
         //调取数据成功
         if(res.data){
           if (res.data.code === "0") {
-            callback(res.data.data)
+            callback(res.data.data,type)
           }else{
             this.$message.error(res.data.msg);
           }
         }
       });
     },
-    chartInfoList:function(data){
-      console.log(data);
+    chartInfoList:function(data,type){
       this.timeStamp = data.time;
-      this.drawLine(data);
+      this.drawLine(data,type);
     },
 
-    drawLine(paramData) {
+    drawLine(paramData,type) {
       let self = this;
+      let option= null;
       // 基于准备好的dom，初始化echarts实例
-      self.mc = this.$echarts.init(document.getElementById(self.mcId));
+      if(type==='init'){
+      this.mc = this.$echarts.init(document.getElementById(self.mcId));
       //初始化option
-      let option={
-        tooltip: {
-          trigger: "axis",
-          axisPointer: {
-            type: "shadow"
-          }
-        },
-        legend: {
-          show: false
-        },
-        toolbox: {
-          show: true,
-          top:'1%',
-          feature: {
-            dataView: {
-              show: true, 
-              readOnly: true,
-              // icon: '../../../assets/img/btn-data.png',
-              // icon:'image://http://echarts.baidu.com/images/favicon.png',
-              lang:['数据视图', '关闭','']
+        option={
+          tooltip: {
+            trigger: "axis",
+            axisPointer: {
+              type: "shadow"
+            }
+          },
+          legend: {
+            show: false
+          },
+          toolbox: {
+            show: true,
+            top:'1%',
+            feature: {
+              dataView: {
+                show: true, 
+                readOnly: true,
+                // icon: '../../../assets/img/btn-data.png',
+                lang:['数据视图', '关闭','']
+                }
+            },
+            iconStyle: {
+              normal: {
+                color: "white", //设置颜色
+                top: "50%",
               }
-          },
-          iconStyle: {
-            normal: {
-              color: "white", //设置颜色
-              top: "50%",
-            }
-          }
-        },
-        grid: {
-          left: "3%",
-          right: "4%",
-          bottom: "3%",
-          containLabel: true
-        },
-        xAxis: {
-          axisLine: {
-            lineStyle: {
-              color: "white"
             }
           },
-
-          type: "value",
-          boundaryGap: [0, 0.01]
-        },
-        yAxis: {
-          axisLine: {
-            lineStyle: {
-              color: "white"
-            }
+          grid: {
+            left: "3%",
+            right: "4%",
+            bottom: "3%",
+            containLabel: true
           },
-          type: "category",
-          data: [
-             "金川路站",
-            "大河梗站",
-            "海屯路站",
-            "小屯站",
-            "金鼎山北路站",
-            "苏家塘站",
-            "小菜园站",
-            "火车北站",
-            "白龙路站",
-            "大树营站"
-          ]
-        },
-        series: [
-          {
-            name: "总能耗",
-            type: "bar",
+          xAxis: {
+            axisLine: {
+              lineStyle: {
+                color: "white"
+              }
+            },
+            type: "value",
+            boundaryGap: [0, 0.01]
+          },
+          yAxis: {
+            axisLine: {
+              lineStyle: {
+                color: "white"
+              }
+            },
+            type: "category",
             data: [
-              19325,
-              23438,
-              31000,
-              45194,
-              54141,
-              68207,
-              72141,
-              82354,
-              92341,
-              101231
+              "金川路站",
+              "大河梗站",
+              "海屯路站",
+              "小屯站",
+              "金鼎山北路站",
+              "苏家塘站",
+              "小菜园站",
+              "火车北站",
+              "白龙路站",
+              "大树营站"
             ]
-          }
-        ]
-      };
-
+          },
+          series: [
+            {
+              name: "总能耗",
+              type: "bar",
+              data: [
+                19325,
+                23438,
+                31000,
+                45194,
+                54141,
+                68207,
+                72141,
+                82354,
+                92341,
+                101231
+              ]
+            }
+          ]
+        };
       // 动态放置数据
-      // option.series[0].data = paramData.energy;
-      // option.yAxis.data = paramData.station;
-      console.info(self.mc);
-      // 绘制图表
-      self.mc.setOption(option,true)
-      //默认数据
-      },
-    
-      //下拉框change事件
-      handleChange(e){
-        // console.log();
-        // 动态获取能耗排行数据信息
-        this.initChart(e.target.value);
+        option.series[0].data = paramData.energy;
+        option.yAxis.data = paramData.station;
+        console.info(self.mc);
+        self.mc.setOption(option,true)
+
+      }else{
+        //更新刷新记录信息
+        self.refreshData(paramData);
       }
+    },
+      // 数据刷新
+    refreshData:function(paramData){
+      let self = this;
+      let option = (self.mc).getOption();
+      option.series[0].data = paramData.energy;
+      option.yAxis.data = paramData.station;
+      self.mc.setOption(option);    
+    },
     }
   };
 </script>
@@ -224,23 +231,24 @@ canvas {
   height: 258px;
   margin-top: 24px;
 }
-.time{
-  position: absolute;
-  left: 5%;
-  font-size: 16px;
-  top: 11%;
-  color: #ffffff;
-  text-align: right;
-}
-.timeChange{
-  color: #fff;
-  position: absolute;
-  left: 5%;
-  top: 18%;
-}
+
 .ant-radio-wrapper{
   color:#ffffff;
 }
+  .timeStamp{
+    position: absolute;
+    left: 22%;
+    font-size: 16px;
+    top: 3%;
+    color: #ffffff;
+    text-align: right;
+  }
+  .timeChange{
+    color: #fff;
+    position: absolute;
+    left: 6%;
+    top: 13%;
+  }
 </style>
 
 

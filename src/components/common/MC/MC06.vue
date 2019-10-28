@@ -2,7 +2,7 @@
   <!--    模块内容一-->
   <div class="main" :style="{width: '100%', height: '100%'}">
     <div class="borde">{{mcTitle}}</div>
-    <div class="time">{{timeStamp}}</div>
+    <div class="timeStamp">{{timeStamp}}</div>
 
     <div class="bluee">
       <a-table
@@ -141,11 +141,12 @@ export default {
   padding-top: 10%;
   background: url("../../../assets/img/排行.png") no-repeat;
 }
-.time {
-    font-size: 16px;
-    color: #3467c5;
-    margin-top: -18%;
-    margin-right: 4%;
-    height: 9%;
+.timeStamp {
+  position: absolute;
+  left: 6%;
+  font-size: 16px;
+  top: 10%;
+  color: #ffffff;
+  text-align: right;
 }
 </style>

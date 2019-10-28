@@ -27,7 +27,7 @@ export default {
     return {
       timeInterval: "",
       // timeStamp: this.$common.timestampToTime(new Date()),
-      timeStamp: "",
+      timeStamp: "2019/10/28-2019/10/28",
       mcList: "",
       valueTime:"1",
       mc:""
@@ -53,7 +53,7 @@ export default {
     var self = this;
     this.mcList = this.$common.mcList;
     // this.mcId = this.$common.menuList[0].mb.mk[Number(self.mcStatus)].mc.id;
-
+    this.drawLine();
     this.initChart(this.valueTime);
   },
   created() {},
@@ -105,13 +105,12 @@ export default {
         },
         toolbox: {
           show: true,
-          left: '50%',
-          top:'3%',
+          top:'1%',
           feature: {
             dataView: {
               show: true, 
               readOnly: true,
-              icon: '../../../assets/img/btn-data.png',
+              // icon: '../../../assets/img/btn-data.png',
               // icon:'image://http://echarts.baidu.com/images/favicon.png',
               lang:['数据视图', '关闭','']
               }
@@ -119,7 +118,7 @@ export default {
           iconStyle: {
             normal: {
               color: "white", //设置颜色
-              top: "50%"
+              top: "50%",
             }
           }
         },
@@ -180,8 +179,8 @@ export default {
       };
 
       // 动态放置数据
-      option.series[0].data = paramData.energy;
-      option.yAxis.data = paramData.station;
+      // option.series[0].data = paramData.energy;
+      // option.yAxis.data = paramData.station;
       console.info(self.mc);
       // 绘制图表
       self.mc.setOption(option,true)
@@ -227,9 +226,9 @@ canvas {
 }
 .time{
   position: absolute;
-  right: 4%;
+  left: 5%;
   font-size: 16px;
-  top: 16%;
+  top: 11%;
   color: #ffffff;
   text-align: right;
 }
@@ -237,7 +236,7 @@ canvas {
   color: #fff;
   position: absolute;
   left: 5%;
-  top: 12%;
+  top: 18%;
 }
 .ant-radio-wrapper{
   color:#ffffff;

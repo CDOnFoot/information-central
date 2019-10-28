@@ -25,7 +25,7 @@
             <div class="main-item-mk">
               <div class="item-mk" v-for="(item,index) in mcList" :key="index" @click="mcSelect(index)">
                 <div class="item-mk-content" :class="index===mcTempIndex?'active':''">
-                  <div class="mk-item-title">{{item.contentNum}}</div>
+                  <div class="mk-item-title">{{item.contentName}}</div>
                   <img :src="require('../../../assets/img/'+item.contentNum+'.png') "  alt="" class="item-mk-img"> 
                 </div>
               </div>
@@ -261,10 +261,13 @@
           });
         },
         visualizationInfo:function(data){
-          this.visualList = data.menuList;
-          // this.visualParamList = data.menuList;
-          this.visualFormList = data.menuList;
-          console.log(this.visualList);
+          let dataMap = data.menuList;
+          this.visualList = dataMap;
+          // this.visualParamList = dataMap;
+          this.visualFormList =JSON.parse(JSON.stringify(dataMap));
+          // console.log(this.visualList.mb.mk[4].mc.contentIndex,this.visualParamList.mb.mk[4].mc.contentIndex,this.visualFormList.mb.mk[4].mc.contentIndex);
+
+          // console.log(this.visualList);
         },
 
         handleChange(value) {
@@ -332,7 +335,6 @@
         // 保存模块内容信息
         saveMCFunction:function(){
           let self = this;
-          // console.log("保存模块内容信息：",this.mcList[this.mcTempIndex].title,this.mcList[this.mcTempIndex].id,this.mcTempIndex);
           this.mcIndex = this.mcTempIndex;
 
           // this.visualParamList.mb.mk[self.visibleIndex].mc= {
@@ -345,6 +347,9 @@
             contentName : self.mcList[this.mcTempIndex].contentName,
             contentNum : self.mcList[this.mcTempIndex].contentNum,
           };
+          // console.log(this.visualList.mb.mk[4].mc,this.visualParamList.mb.mk[4].mc,this.visualFormList.mb.mk[4].mc);
+
+
           // 传值给父组件 如菜单index.vue
           self.$emit('saveSetMessage', self.visualList,self.visualFormList);
 
@@ -365,18 +370,20 @@
           }
         },
         showDeleteConfirm:function(paramIndex){
+          // console.log(this.visualList.mb.mk[4].mc.contentIndex,this.visualParamList.mb.mk[4].mc.contentIndex,this.visualFormList.mb.mk[4].mc.contentIndex);
+
           let self = this;
           this.$confirm({
             title: '提醒',
             content: '确定移除该模块内容?',
-            okText: '删除',
+            okText: '移除',
             okType: 'danger',
             cancelText: '取消',
             onOk() {
               // console.log('删除成功');
-              //  self.mcIndex = 0;
                 // self.visualParamList.mb.mk[paramIndex].mc= '';
                 self.visualList.mb.mk[paramIndex].mc = '';
+                // console.log(self.visualList.mb.mk[4].mc,self.visualParamList.mb.mk[4].mc,self.visualFormList.mb.mk[4].mc);
                 self.$emit('saveSetMessage', self.visualList,self.visualFormList);
             },
             onCancel() {

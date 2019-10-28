@@ -1,7 +1,9 @@
 <!--首页信息-->
 <template>
     <keep-alive>
-        <component :is="currentMB" :setFlag="setFlag" :resetFlag = "resetFlag" :menuTempId= "menuTempId" @saveSetMessage="saveSetMsg" class="mb-content"></component>
+        <component :is="currentMB" :setFlag="setFlag" :resetFlag = "resetFlag" 
+        :menuTempId= "menuTempId" @saveSetMessage="saveSetMsg" :formTempFlag="formTempFlag" :updateTempFlag="updateTempFlag"
+        class="mb-content"></component>
     </keep-alive>
 </template>
 
@@ -15,14 +17,16 @@
               currentMB:'',
               visualList:'',
               menuTempId:'',
+              formTempFlag:'',
+              updateTempFlag:'',
             }
         },
-      props: ['menuIndex','setFlag','mbIndex','resetFlag','menuId'],
+      props: ['menuIndex','setFlag','mbIndex','resetFlag','menuId','formListFlag','updateFlag'],
  
-         components:{
-            MB01,
-            MB02
-        },
+      components:{
+        MB01,
+        MB02
+      },
       watch: {
         setFlag: function (val) {
           this.setFlag = val;
@@ -42,6 +46,16 @@
           this.getUserVisualization();
 
         },
+        //从父元素home.vue获取重置取消flag
+        formListFlag:function(val){
+          this.formListFlag = val;
+          this.formTempFlag = val;
+        },
+        updateFlag:function(val){
+          this.updateFlag = val;
+          this.updateTempFlag = val;
+
+        }
       },
       created(){
       },
@@ -49,7 +63,6 @@
           // this.getUserVisualization();
       },
       methods:{
-
         // 获取从子组件MB传值 模版可视化内容信息
         saveSetMsg:function(msgList,msgFormList){
           console.log(msgList);

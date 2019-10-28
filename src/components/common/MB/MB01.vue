@@ -202,11 +202,10 @@
                 ]
               }
             },
-            // visualParamList:'',
             visualFormList:'',
           }
         },
-      props: ['setFlag','resetFlag','menuTempId'],
+      props: ['setFlag','resetFlag','menuTempId','formTempFlag','updateTempFlag'],
       watch: {
         setFlag: function (val) {
           this.setFlag = val;
@@ -221,16 +220,27 @@
           this.menuList = val;
           this.menuTempId = val;
           this.getUserVisualization();
-          console.log(1);
+        },
+        formTempFlag:function(val){
+          let self = this;
+          this.formTempFlag = val;
+          console.log(val);
+          if(this.formTempFlag){
+            this.visualList = JSON.parse(JSON.stringify(self.visualFormList));
+          }
+        },
+        updateTempFlag:function(val){
+          this.updateTempFlag = val;
+          if(this.updateTempFlag){
+            this.getUserVisualization();
+          }
         }
       },
       mounted(){
-          console.log(2);
           this.getUserVisualization();
           // 初始化模版内容
           this.getContentInfo();
           this.btnList = this.$common.btnList;
-          // this.mcList = this.$common.mcList;
         },
 
         created(){
@@ -263,11 +273,7 @@
         visualizationInfo:function(data){
           let dataMap = data.menuList;
           this.visualList = dataMap;
-          // this.visualParamList = dataMap;
           this.visualFormList =JSON.parse(JSON.stringify(dataMap));
-          // console.log(this.visualList.mb.mk[4].mc.contentIndex,this.visualParamList.mb.mk[4].mc.contentIndex,this.visualFormList.mb.mk[4].mc.contentIndex);
-
-          // console.log(this.visualList);
         },
 
         handleChange(value) {
@@ -312,6 +318,8 @@
           let self = this;
           var flag = false;
           this.visualList.mb.mk.some((items,indexs)=>{
+
+            // 判断是否发生了布局信息的变化
             if(items.mc.contentNum === self.mcList[self.mcTempIndex].contentNum){
                   self.$info({
                     title: '提示',
@@ -336,20 +344,11 @@
         saveMCFunction:function(){
           let self = this;
           this.mcIndex = this.mcTempIndex;
-
-          // this.visualParamList.mb.mk[self.visibleIndex].mc= {
-          //   contentIndex : self.mcList[this.mcTempIndex].contentIndex,
-          //   contentName : self.mcList[this.mcTempIndex].contentName,
-          //   contentNum : self.mcList[this.mcTempIndex].contentNum,
-          // };
           this.visualList.mb.mk[self.visibleIndex].mc = {
             contentIndex : self.mcList[this.mcTempIndex].contentIndex,
             contentName : self.mcList[this.mcTempIndex].contentName,
             contentNum : self.mcList[this.mcTempIndex].contentNum,
           };
-          // console.log(this.visualList.mb.mk[4].mc,this.visualParamList.mb.mk[4].mc,this.visualFormList.mb.mk[4].mc);
-
-
           // 传值给父组件 如菜单index.vue
           self.$emit('saveSetMessage', self.visualList,self.visualFormList);
 
@@ -370,8 +369,6 @@
           }
         },
         showDeleteConfirm:function(paramIndex){
-          // console.log(this.visualList.mb.mk[4].mc.contentIndex,this.visualParamList.mb.mk[4].mc.contentIndex,this.visualFormList.mb.mk[4].mc.contentIndex);
-
           let self = this;
           this.$confirm({
             title: '提醒',
@@ -380,14 +377,10 @@
             okType: 'danger',
             cancelText: '取消',
             onOk() {
-              // console.log('删除成功');
-                // self.visualParamList.mb.mk[paramIndex].mc= '';
                 self.visualList.mb.mk[paramIndex].mc = '';
-                // console.log(self.visualList.mb.mk[4].mc,self.visualParamList.mb.mk[4].mc,self.visualFormList.mb.mk[4].mc);
                 self.$emit('saveSetMessage', self.visualList,self.visualFormList);
             },
             onCancel() {
-              // console.log('取消删除');
             },
           });
         },
@@ -414,10 +407,8 @@
               }
             }
           });
-
         },
         contentInfo:function(data){
-          console.log(data);
           this.mcList = data.records;
         },
       },

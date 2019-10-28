@@ -395,4 +395,11 @@
     transform: translate(-50%,-50%);
     z-index: 199;
   }
+  .time{
+    position: absolute;
+    right: 3%;
+    top: 4%;
+    color: #ffffff;
+    font-size: 16px;
+  }
 </style>

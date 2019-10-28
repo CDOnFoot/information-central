@@ -43,15 +43,15 @@ export default {
 
     // 定时器刷新
     clearInterval(this.timeInterval);
-    // this.timeInterval = setInterval(function() {
-    //   self.initChart(self.valueTime,'update');
-    // }, 1000 * 30);
+    this.timeInterval = setInterval(function() {
+      self.initChart(self.valueTime,'update');
+    }, 1000 * 30);
 
     var self = this;
     this.mcList = this.$common.mcList;
 
     // 初始化能耗排行数据信息
-    // this.initChart(this.valueTime,'init');
+    this.initChart(this.valueTime,'init');
   },
   created() {
 

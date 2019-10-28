@@ -15,7 +15,7 @@
             :style="{position:'absolute',top:item.dot[0],left:item.dot[1]}">
               <a-popover placement="topLeft" arrowPointAtCenter class="popover-item">
               <template slot="content">
-                <p>{{'2019-10-29'}}</p>
+                <p>{{'2019-10-29 19:00:00'}}</p>
                 <p>当前车次：{{item.runId}}({{'xxx类型'}})</p>
                 <p>前方到站：{{'xxxx站'}}</p>
               </template>

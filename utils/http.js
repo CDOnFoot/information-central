@@ -3,6 +3,7 @@
     import axios from 'axios'
     // import {SHA1} from "./SHA";
     import qs from 'qs'
+    import common from '../static/js/common.js'
     import api from './api'
 
     // import {imToken,pin} from "./AppSetup"
@@ -20,6 +21,17 @@
     // **路由请求拦截**
     // http request 拦截器
     axios.interceptors.request.use(config => {
+      let token = common.getCookie('token');
+      if (token === 'null' || token === '') {
+        router.replace({
+          path: '/login' // 到登录页重新获取token
+        })
+      } 
+      // 拦截器在请求头中加token/authorization
+      // if (localStorage.getItem('Authorization')) {
+      //   config.headers.Authorization = localStorage.getItem('Authorization');
+      // }
+      
       return config
     }, error => {
       return Promise.reject(error)

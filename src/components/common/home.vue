@@ -31,9 +31,15 @@
         <img src="../../assets/img/logo.png" alt="">
       </div>
       <div class="title">大数据分析决策平台</div>
-      <div class="time">{{timeStamp}}</div>
-      <div class="weather">
-        <!-- <iframe width="70%" scrolling="no" height="36" frameborder="0" allowtransparency="false" src="//i.tianqi.com/index.php?c=code&id=1&color=%23FFFFFF&icon=1&py=beijing&wind=0&num=1&site=12" style="float:right;"></iframe> -->
+      <div class="time-interval">{{timeStamp}}</div>
+      <!-- <div class="weather">
+        <iframe width="60%" scrolling="no" height="36" frameborder="0" allowtransparency="false" src="//i.tianqi.com/index.php?c=code&id=1&color=%23FFFFFF&icon=1&py=beijing&wind=0&num=1&site=12" style="float:right;"></iframe>
+      </div> -->
+      <div class="user-register">
+        <div class="register-name">{{userName}}</div>
+        <div class="register-group">
+          <a-button icon=''></a-button>
+        </div>
       </div>
     </a-layout-header>
     <a-layout-content style="padding: 0 1%;height:100%;min-height: calc(100vh - 8.3%);">
@@ -112,6 +118,7 @@
         visualFormList:'',//标准可视化布局信息
         formListFlag:false,//取消布局重置信息
         updateFlag:'',//布局更新信息falg
+        userName:'',
       }
     },
     computed:{
@@ -151,7 +158,17 @@
     },
 
     methods:{
-
+      // 用户登出注销后 清除session信息 ，并返回登录页
+      loginOut(){
+        localStorage.removeItem('Authorization');
+        this.$info({
+          title: '提示',
+          content: '注销成功',
+          onOk() {
+          },
+        });
+        this.$router.push('/login'); 
+      },
       // 由子界面子路由传值结果
       uploadSaveSetMsg:function(msgList,msgFormList){
         console.log('由子界面子路由传值结果：',msgList,msgFormList);
@@ -193,6 +210,17 @@
         setTimeout(()=>{
           self.loadFlag = false;
         },300);
+
+// 用户登录过期验证
+        // if(!this.$common.getCookie('userNum')){
+        //   this.$router.push('/login');
+        //   this.$error({
+        //     title: '提醒',
+        //     content:'用户信息已过期请重新登录.',
+        //     onOk() {
+        //     },
+        //   });
+        // }
       },
       getTemplateInfo:function(){
         let self = this;
@@ -383,23 +411,6 @@
 </script>
 
 <style scoped>
-  .load-content{
-    position: absolute;
-    width: 100%;
-    height: 100%;
-  }
-  .load-img{
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    z-index: 199;
-  }
-  .time{
-    position: absolute;
-    right: 3%;
-    top: 4%;
-    color: #ffffff;
-    font-size: 16px;
-  }
+
+
 </style>

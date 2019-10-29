@@ -5,7 +5,9 @@ import App from './App'
 import router from './router'
 import  common from  '../static/js/common'
 import $ from 'jquery'
-
+import  Vuex from 'vuex'
+import store from './store'
+import '../static/css/iconfont.css';
 import 'ant-design-vue/dist/antd.css';  // or 'ant-design-vue/dist/antd.less'
 import '../static/css/animate.css';
 import './assets/css/default.css';
@@ -18,11 +20,13 @@ import VueWechatTitle from 'vue-wechat-title'
 Vue.use(VueWechatTitle)
 Vue.config.productionTip = false
 Vue.use(Antd);
-
+Vue.use(Vuex)
 
 import echarts from '../node_modules/echarts'
 Vue.prototype.$echarts = echarts
 
+// 支持IE浏览器兼容问题（Promise）
+import 'es6-promise/auto'
 
 Vue.prototype.$common= common;
 Vue.prototype.$api= api;
@@ -33,6 +37,7 @@ Vue.prototype.$http= http;
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })

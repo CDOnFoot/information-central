@@ -83,13 +83,18 @@ export default {
 .main-id{
   width: 100%;
   height: 100%;
+  position: relative;
 }
 .subway {
-  height: 99.2%;
-  width: 98%;
-  background: url("../../../assets/img/subway-bg.png");
-  margin-top: 0.8%;
-  margin-left: -.3%;
+  height: 99%;
+  width: 99%;
+  position: absolute;
+  border-radius: 10px;
+  left: 48.8%;
+  top: 50.4%;
+  background: url(/static/img/subway-bg.f023cae.png) no-repeat;
+  background-size: cover;
+  transform: translate(-50%,-50%);
 }
 .subway-item:hover{
   transform: scale(1.3);

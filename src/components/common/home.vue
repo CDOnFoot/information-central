@@ -30,15 +30,19 @@
       <div class="logo">
         <img src="../../assets/img/logo.png" alt="">
       </div>
-      <div class="title">大数据分析决策平台</div>
-      <div class="time-interval">{{timeStamp}}</div>
-      <!-- <div class="weather">
-        <iframe width="60%" scrolling="no" height="36" frameborder="0" allowtransparency="false" src="//i.tianqi.com/index.php?c=code&id=1&color=%23FFFFFF&icon=1&py=beijing&wind=0&num=1&site=12" style="float:right;"></iframe>
-      </div> -->
-      <div class="user-register">
-        <div class="register-name">{{userName}}</div>
-        <div class="register-group">
-          <a-button icon=''></a-button>
+      <div class="header-canvas">
+        <div class="title">大数据分析决策平台</div>
+        <div class="time-interval">{{timeStamp}}</div>
+        <!-- <div class="weather">
+          <iframe width="60%" scrolling="no" height="36" frameborder="0" allowtransparency="false" src="//i.tianqi.com/index.php?c=code&id=1&color=%23FFFFFF&icon=1&py=beijing&wind=0&num=1&site=12" style="float:right;"></iframe>
+        </div> -->
+        <div class="user-register">
+          <div class="register-name">{{userName}}</div>
+          <div class="register-group" @click="loginOut">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-dianyuan"></use>
+            </svg>
+          </div>
         </div>
       </div>
     </a-layout-header>
@@ -94,9 +98,12 @@
     </a-layout-footer>
   </a-layout>
 </template>
+
 <script>
+
   export default {
     name: "home",
+   
     data(){
       return{
         menuList:{},
@@ -118,7 +125,7 @@
         visualFormList:'',//标准可视化布局信息
         formListFlag:false,//取消布局重置信息
         updateFlag:'',//布局更新信息falg
-        userName:'',
+        userName:'Chan',
       }
     },
     computed:{
@@ -159,15 +166,23 @@
 
     methods:{
       // 用户登出注销后 清除session信息 ，并返回登录页
-      loginOut(){
-        localStorage.removeItem('Authorization');
-        this.$info({
-          title: '提示',
-          content: '注销成功',
+      loginOut:function(){
+        let self = this;
+        this.$confirm({
+          title: '提醒',
+          content: '是否退出登录?',
+          okText: '确定',
+          okType: 'danger',
+          cancelText: '取消',
           onOk() {
+            self.$common.delCookie('token');
+            self.$message.info("注销成功.");
+            self.$router.push('/login'); 
+          },
+          onCancel() {
           },
         });
-        this.$router.push('/login'); 
+      
       },
       // 由子界面子路由传值结果
       uploadSaveSetMsg:function(msgList,msgFormList){

@@ -7,7 +7,7 @@ import  common from  '../static/js/common'
 import $ from 'jquery'
 import  Vuex from 'vuex'
 import store from './store'
-import '../static/css/iconfont.css';
+// import '../static/css/iconfont.css';
 import 'ant-design-vue/dist/antd.css';  // or 'ant-design-vue/dist/antd.less'
 import '../static/css/animate.css';
 import './assets/css/default.css';
@@ -27,6 +27,10 @@ Vue.prototype.$echarts = echarts
 
 // 支持IE浏览器兼容问题（Promise）
 import 'es6-promise/auto'
+
+// 添加图标按钮 引用iconfont
+import '../src/assets/font/iconfont.css';
+import '../src/assets/font/iconfont.js';
 
 Vue.prototype.$common= common;
 Vue.prototype.$api= api;

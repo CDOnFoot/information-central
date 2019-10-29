@@ -40,7 +40,8 @@
       <div class="load-content" v-show="loadFlag">
         <a-spin class="load-img" size="large" />
       </div>
-      <router-view :menuIndex="menuIndex" :setFlag="setFlag" :mbIndex="mbIndex" :menuId="menuId" :resetFlag="resetFlag" @uploadSetMsg="uploadSaveSetMsg"></router-view>
+      <router-view :menuIndex="menuIndex" :setFlag="setFlag" :mbIndex="mbIndex" :menuId="menuId" 
+      :resetFlag="resetFlag" @uploadSetMsg="uploadSaveSetMsg" :formListFlag="formListFlag" :updateFlag="updateFlag"></router-view>
     </a-layout-content>
     <a-layout-footer style="text-align: center">
       <div class="menu-list">
@@ -108,7 +109,9 @@
         resetFlag:false,
         loadFlag:false,
         visualParamList:'',//参数可视化布局信息
-        visualFormList:''//标准可视化布局信息
+        visualFormList:'',//标准可视化布局信息
+        formListFlag:false,//取消布局重置信息
+        updateFlag:'',//布局更新信息falg
       }
     },
     computed:{
@@ -154,6 +157,7 @@
         console.log('由子界面子路由传值结果：',msgList,msgFormList);
         this.visualParamList = msgList;
         this.visualFormList = msgFormList;
+        console.log(this.visualParamList.mb.mk[4].mc,this.visualFormList.mb.mk[4].mc);
 
       },
       // 查看菜单栏数据信息
@@ -241,7 +245,7 @@
             self.mcTempIndex = 0;
             self.confirmLoading = false;
           }, 1000);
-        this.saveMBFunction();
+          this.saveMBFunction();
         }
      
 
@@ -258,13 +262,14 @@
       },
       saveSetMsg:function(){
         let self = this;
-        this.setFlag = false;
-
+        // console.log(this.visualParamList,this.visualFormList);
         if(this.visualParamList === this.visualFormList){
           this.$info({
             title: '提醒',
             content:'当前无可视化布局设置信息更改.',
-            onOk() {},
+            onOk() {
+
+            },
           });
         }else{
           this.$confirm({
@@ -279,14 +284,26 @@
             },
             onCancel() {
               console.log('确定取消保存');
+              // self.formListFlag = true;
             },
           });
         }
       },
       cancelSetMsg:function(){
+        let self = this;
         this.setFlag = false;
+        this.formListFlag = true;
       },
-
+      layoutSetting:function(){
+        let self = this;
+        this.setFlag = !this.setFlag;
+        if(!this.setFlag){
+          this.formListFlag = true;
+        }else{
+          this.formListFlag = false;
+          this.updateFlag = false;
+        }
+      },
       // 调起更新保存可视化数据信息
       updateUserContentInfo:function(){
         let self = this;
@@ -304,7 +321,6 @@
           templateNum: self.visualParamList.mb.templateNum,
           moduleAndContent: JSON.stringify(self.visualParamList),
         };
-        console.log(param);
         this.$http.post(self.$api.updateUserContentInfo, param).then(res =>{
           //调取数据成功
           if(res.data){
@@ -314,15 +330,24 @@
                this.$message.success(res.data.msg);
                self.loadFlag = false;
             }
+          }else{
+              self.loadFlag = false;
           }
         });
       },
       // 处理菜单栏信息接口
       UserContentInfo:function(data){
         let self = this;
-        this.$message.error("更新布局设置信息成功.");
+        this.$message.success("更新布局设置信息成功.");
+
+        this.visualParamList = '';
+        this.visualFormList = '';
+
         setTimeout(()=>{
           self.loadFlag = false;
+          self.formListFlag = false;
+          self.setFlag = false;
+          self.updateFlag = true;
         },300);
       },
 
@@ -347,9 +372,7 @@
           }
         }
       },
-      layoutSetting:function(){
-        this.setFlag = !this.setFlag;
-      },
+
       //选择模版操作
       layoutSelect:function(){
         this.visible = true;
@@ -371,5 +394,12 @@
     left: 50%;
     transform: translate(-50%,-50%);
     z-index: 199;
+  }
+  .time{
+    position: absolute;
+    right: 3%;
+    top: 4%;
+    color: #ffffff;
+    font-size: 16px;
   }
 </style>

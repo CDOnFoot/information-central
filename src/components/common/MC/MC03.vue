@@ -4,7 +4,7 @@
   <div>
     <div class="main">
       <div class="borde">{{mcTitle}}</div>
-      <div class="time">{{timeStamp}}</div>
+      <div class="timeStamp">{{timeStamp}}</div>
 
       <!-- <div id="flow"></div> -->
       <div :id="mcId" class="main-id"></div>
@@ -201,11 +201,12 @@ canvas {
   width: 470px;
   height: 270px;
 }
-.time {
+  .timeStamp{
+    position: absolute;
+    left: 6%;
     font-size: 16px;
-    color: #3467c5;
-    margin-top: -18%;
-    margin-right: 4%;
-    height: 9%;
-}
+    top: 10%;
+    color: #ffffff;
+    text-align: right;
+  }
 </style>

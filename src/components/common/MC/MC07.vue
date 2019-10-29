@@ -3,7 +3,7 @@
   <div>
     <div class="main">
       <div class="borde">{{mcTitle}}</div>
-      <div class="time">{{timeStamp}}</div>
+      <div class="timeStamp">{{timeStamp}}</div>
 
       <div class="better">
         <div class="fon">
@@ -92,11 +92,12 @@ export default {
 .Pleft {
   padding-left: 24px;
 }
-.time {
-    font-size: 16px;
-    color: #3467c5;
-    margin-top: -18%;
-    margin-right: 4%;
-    height: 9%;
+.timeStamp {
+  position: absolute;
+  left: 6%;
+  font-size: 16px;
+  top: 10%;
+  color: #ffffff;
+  text-align: right;
 }
 </style>

@@ -124,7 +124,8 @@
 
     position: absolute;
     right: 10%;
-    top: 9%;
+    top: 8%;
+    vertical-align: middle;
   }
   .layout-btn{
     position: absolute;

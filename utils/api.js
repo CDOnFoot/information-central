@@ -5,6 +5,8 @@ export default {
   // 自定义布局信息
 
   login: 'auth.crias.com/Authorization/api/Authentication/Login',   //login登录
+  
+  loginIn: 'login',   //login登录
 
   getMenuInfo: '/server-0.0.1-SNAPSHOT/visualizationLayout/getMenuInfo',   //获取菜单栏显示信息
 

@@ -293,136 +293,155 @@
       z-index: 199;
     }
     .hide-sub-right{
-        border: dashed 2px;
-        border-radius: 10px;
-        border-color: #ffffff;
-        width: 95%;
-        height: 95%;
-        position: absolute;
-        left: 49%;
-        top: 50%;
-        transform: translate(-50%,-50%);
-        z-index: 199;
-      }
-      .keyMain-top{
-        width: 100%;
-        position: relative;
-        height: 68.5%;
-        margin-bottom: 1.5%;
-      }
-      .keyMain-bottom{
-        position: relative;
-        width: 100%;
-        height: 30%;
-      }
-      .hide-sub-key{
-        border: dashed 2px;
-        border-radius: 10px;
-        border-color: #ffffff;
-        width: 97%;
-        height: 97%;
-        position: absolute;
-        left: 50%;
-        top: 51%;
-        transform: translate(-50%,-50%);
-        z-index: 199;
-      }
-      .hide-sub-key-b{
-        border: dashed 2px;
-        border-radius: 10px;
-        border-color: #ffffff;
-        width: 95%;
-        height: 88%;
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%,-50%);
-        z-index: 199;
-      }
-      .ant-table-small > .ant-table-content > .ant-table-body > table > .ant-table-tbody > tr > td{
-        padding: 4px 8px !important;
-      }
-      .ant-table-tbody > tr > td {
-        border-bottom: none !important;     
-        color: #fff;
-        background: transparent !important;
+      border: dashed 2px;
+      border-radius: 10px;
+      border-color: #ffffff;
+      width: 95%;
+      height: 95%;
+      position: absolute;
+      left: 49%;
+      top: 50%;
+      transform: translate(-50%,-50%);
+      z-index: 199;
     }
-      .ant-table-tbody > tr > td:hover{
-        background: transparent !important;
-      }
-      .taablee{
-        padding-left: 60px;
-        height: 200px;
-        width: 460px;
-        font-weight: 700;
-      }
-      .ant-table-small{
-        border: none;
-      }
-      .marginLeft{
-        margin-left: 5px;
-      }
-      .content-main-mb{
-        height: 36rem;
-        overflow: auto;
-      }
-      .select-main{
-        display: flex;
-        align-items: center;
-      }
-      .select-main-title{
-        margin: 0 0.6% 0 1.6%;
-      }
-      .select-btn-search{
-        margin-left: 0.6%;
-      }
-      .time-interval{
-        position: absolute;
-        right: 0.8%;
-        line-height: 24px;
-        top: 9%;
-        color: #ffffff;
-        font-size: 16px;
-      }
-      .load-content{
-        position: absolute;
-        width: 100%;
-        height: 100%;
-      }
-      .load-img{
-        position: absolute;
-        top: 40%;
-        left: 50%;
-        transform: translate(-50%,-50%);
-        z-index: 199;
-      }
-      .group-btn{
-        background: transparent;
-        border: none;
-        outline: none;
-      }
-      .register-name {
-        font-size: 16px;
-        color: #ffffff;
-        margin-right: 10px;
-        line-height: 30px;
+    .keyMain-top{
+      width: 100%;
+      position: relative;
+      height: 68.5%;
+      margin-bottom: 1.5%;
     }
-      .user-register{
-        display: flex;
-        align-items: center;
-        position: absolute;
-        right: 1%;
-        top: 34%;
-      }
-      .register-group{
-        position: relative;
-        height: 30px;
-        line-height: 30px;
-        vertical-align: middle;
-      }
-      .header-canvas{
-        position: relative;
-        width:100%;
-        height: 100%;
-        z-index: 99;
-      }
+    .keyMain-bottom{
+      position: relative;
+      width: 100%;
+      height: 30%;
+    }
+    .hide-sub-key{
+      border: dashed 2px;
+      border-radius: 10px;
+      border-color: #ffffff;
+      width: 97%;
+      height: 97%;
+      position: absolute;
+      left: 50%;
+      top: 51%;
+      transform: translate(-50%,-50%);
+      z-index: 199;
+    }
+    .hide-sub-key-b{
+      border: dashed 2px;
+      border-radius: 10px;
+      border-color: #ffffff;
+      width: 95%;
+      height: 88%;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%,-50%);
+      z-index: 199;
+    }
+    .ant-table-small > .ant-table-content > .ant-table-body > table > .ant-table-tbody > tr > td{
+      padding: 4px 8px !important;
+    }
+    .ant-table-tbody > tr > td {
+      border-bottom: none !important;     
+      color: #fff;
+      background: transparent !important;
+  }
+    .ant-table-tbody > tr > td:hover{
+      background: transparent !important;
+    }
+    .taablee{
+      padding-left: 60px;
+      height: 200px;
+      width: 460px;
+      font-weight: 700;
+    }
+    .ant-table-small{
+      border: none;
+    }
+    .marginLeft{
+      margin-left: 5px;
+    }
+    .content-main-mb{
+      height: 36rem;
+      overflow: auto;
+    }
+    .select-main{
+      display: flex;
+      align-items: center;
+    }
+    .select-main-title{
+      margin: 0 0.6% 0 1.6%;
+    }
+    .select-btn-search{
+      margin-left: 0.6%;
+    }
+    .time-interval{
+      position: absolute;
+      right: 0.8%;
+      line-height: 24px;
+      top: 9%;
+      color: #ffffff;
+      font-size: 16px;
+    }
+    .load-content{
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+    .load-img{
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+      z-index: 199;
+    }
+    .group-btn{
+      background: transparent;
+      border: none;
+      outline: none;
+    }
+    .register-name {
+      font-size: 16px;
+      color: #ffffff;
+      margin-right: 10px;
+      line-height: 30px;
+  }
+    .user-register{
+      display: flex;
+      align-items: center;
+      position: absolute;
+      right: 1%;
+      top: 34%;
+    }
+    .register-group{
+      position: relative;
+      height: 30px;
+      line-height: 30px;
+      vertical-align: middle;
+    }
+    .header-canvas{
+      position: relative;
+      width:100%;
+      height: 100%;
+      z-index: 99;
+    }
+    .ant-form-item{
+      margin-bottom: 18px !important;
+      font-size: 12px;
+    }
+    .ant-form-explain {
+      text-align: left;
+    }
+    .input-login{
+      height: 40px !important;
+    }
+    .has-error .ant-form-explain{
+      color: #e5b989 !important;
+      position: absolute;
+      top: 100%;
+      left: 0;
+  }
+  .has-error .ant-input-prefix {
+    color: rgba(0, 0, 0, 0.65);
+}

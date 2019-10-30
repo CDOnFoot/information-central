@@ -112,7 +112,7 @@ router.beforeEach((to, from, next) => {
   if (to.path === '/login') {
     next();
   } else {
-    let token = common.getCookie('token');
+    let token = common.getCookie('dvptToken');
     if (token === 'null' || token === '') {
       next('/login');
     } else {

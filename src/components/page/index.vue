@@ -81,7 +81,7 @@
         userVisualizationList:function(callback){
           let self = this;
           let param={
-            userNum: self.$common.getCookie('userNum'),
+            userNum: self.$common.getCookie('dvptId'),
             menuNum: self.menuId
             };
           this.$http.post(self.$api.getUserVisualization, param).then(res =>{

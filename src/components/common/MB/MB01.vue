@@ -205,7 +205,7 @@
             visualFormList:'',
           }
         },
-      props: ['setFlag','resetFlag','menuTempId','formTempFlag','updateTempFlag'],
+      props: ['setFlag','resetFlag','menuTempId','formTempFlag','updateTempFlag','visualTempList'],
       watch: {
         setFlag: function (val) {
           this.setFlag = val;
@@ -234,10 +234,14 @@
           if(this.updateTempFlag){
             this.getUserVisualization();
           }
+        },
+         visualTempList:function(val){
+          console.log("visualTempList:"+val);
+          this.visualList = JSON.parse(JSON.stringify(val));
         }
       },
       mounted(){
-          this.getUserVisualization();
+          // this.getUserVisualization();
           // 初始化模版内容
           this.getContentInfo();
           this.btnList = this.$common.btnList;
@@ -289,7 +293,7 @@
           let self = this;
           this.confirmLoading = true;
           let flag = false;
-          if(this.$common.mcList[self.mcTempIndex].type ==='main'){
+          if(self.mcList[self.mcTempIndex].contentIndex ==='1'){
             if(this.visibleIndex !=3){
                 self.$info({
                     title: '提示',
@@ -432,26 +436,26 @@
   }
 </style>
 
-          // console.log("MB01: "+self.resetFlag);
-          // this.menuList = this.$common.menuList;
-          // this.menuList.some((item,index)=>{
-          //   if(item.mb){
-          //     if(item.mb.id === self.currentMC.mbId){
-          //       item.mb.mk.some((items,indexs)=>{
-          //         if(self.resetFlag){
-          //             self.currentMC.mc[indexs].key = '';
-          //             self.currentMC.mc[indexs].type = '';
-          //             self.currentMC.mc[indexs].title = '';
-          //         }else{
-          //           if(items.mc){
-          //             self.currentMC.mc[indexs].key = self.$common.menuList[index].mb.mk[indexs].mc.id;
-          //             self.currentMC.mc[indexs].type = self.$common.menuList[index].mb.mk[indexs].mc.type;
-          //             self.currentMC.mc[indexs].title = self.$common.menuList[index].mb.mk[indexs].mc.title;
-          //             return false;
-          //           }
-          //         }
-          //       });
-          //       callback(this.currentMC);
-          //     }
-          //   }
-          // });
+  // console.log("MB01: "+self.resetFlag);
+  // this.menuList = this.$common.menuList;
+  // this.menuList.some((item,index)=>{
+  //   if(item.mb){
+  //     if(item.mb.id === self.currentMC.mbId){
+  //       item.mb.mk.some((items,indexs)=>{
+  //         if(self.resetFlag){
+  //             self.currentMC.mc[indexs].key = '';
+  //             self.currentMC.mc[indexs].type = '';
+  //             self.currentMC.mc[indexs].title = '';
+  //         }else{
+  //           if(items.mc){
+  //             self.currentMC.mc[indexs].key = self.$common.menuList[index].mb.mk[indexs].mc.id;
+  //             self.currentMC.mc[indexs].type = self.$common.menuList[index].mb.mk[indexs].mc.type;
+  //             self.currentMC.mc[indexs].title = self.$common.menuList[index].mb.mk[indexs].mc.title;
+  //             return false;
+  //           }
+  //         }
+  //       });
+  //       callback(this.currentMC);
+  //     }
+  //   }
+  // });

@@ -29,7 +29,7 @@
               <!-- <br><small>还未拥有账号? </small><a href="register.html" class="signup">注册</a> -->
                <a-form-item>
                 <div class="login-register" @click="open">忘记密码</div>
-                 <a-button type="primary" html-type="submit" class="btn-login" :loading="loadFlag" @click="checkUser">
+                 <a-button type="primary" html-type="submit" class="btn-login" :loading="loadFlag">
                   登录
                 </a-button>
                 <!-- <a-button type="primary" size="large" class="btn-login" :loading="loadFlag" @click="checkUser" @keyup.enter="checkUser">登录</a-button> -->
@@ -72,69 +72,45 @@ import sha256 from "js-sha256";
     },
 
     methods:{
-      handleSubmit(e) {
-          e.preventDefault();
-          this.form.validateFields((err, values) => {
-            if (!err) {
-              console.log('Received values of form: ', values);
-            }
-          });
-        },
-      ...mapMutations(['changeLogin']),
+ 
+      ...mapMutations(['changeLogin']),//存储login状态到vuex
 
-      emitEmpty (e) {
-        var id= e.currentTarget.dataset.id;
-        if(id==="name"){
-          this.$refs.userNameInput.focus();
-          this.userName = ''
-        }else if(id==="pwd"){
-          this.$refs.userPasswordInput.focus();
-          this.userPassword = ''
-        }
+     handleSubmit(e) {
+        let self = this;
+        this.loadFlag = true;
+        let param = null;
+        e.preventDefault();
 
-      },
-      checkUser:function() {
-        this.form.validateFields(err => {
-        if (!err) {
-          let self = this;
-          this.loadFlag = true;
-          let param={
-            loginname:this.userName,
-            password:sha256(this.userPassword)
-          };
-          // this.$http.post(self.$api.loginIn, param).then(res =>{
-          //   //调取数据成功
-          //   if(res.data){
-          //     if (res.data.code === "0") {
-                self.$common.setCookie('dvptName',self.userName,24 * 60);
-                self.$common.setCookie('dvptId','16279',24 * 60);
-                self.$common.setCookie('dvptPwd',sha256(self.userPassword),24 * 60);
-                self.$common.setCookie('dvptToken',sha256(self.userPassword),24 * 60);
-
-          //       self.$common.setCookie('dvptToken',sha256(res.data.token),24 * 60);
-          //       self.changeLogin({ token: res.data.token });
-
-                setTimeout(()=>{
-                  self.loadFlag = false;
-                  self.$router.push('/home/index');
-                },200);
-          //     }else{
-          //        this.$message.error(res.data.msg);
-          //        self.loadFlag = false;
-          //     }
-          //   }
-          // });
-            // setTimeout(()=>{
-            //   self.loadFlag = false;
-            //   self.$error({
-            //     title: '错误信息',
-            //     content: '用户名或密码错误，请重新输入',
-            //     okText:'知道了'
-            //   });
-            // },200);
+        // this.form.validateFields((err, values) => {
+        //   if (!err) {
+        //     self.userName = values.userName;
+        //     self.userPassword = values.password;
           
-        }
-      });
+        //     param={
+        //       loginname:self.userName,
+        //       password:sha256(self.userPassword)
+        //     };
+        //     this.$http.posts(self.$api.loginIn, param).then(res =>{
+        //     //调取数据成功
+        //       if(res.data){
+        //         if (res.data.code === "0") {
+                  self.$common.setCookie('dvptName',self.userName,24 * 60);
+                  self.$common.setCookie('dvptId','16279',24 * 60);
+                  self.$common.setCookie('dvptPwd',sha256(self.userPassword),24 * 60);
+                  self.$common.setCookie('dvptToken',sha256(self.userPassword),24 * 60);
+            //       self.$common.setCookie('dvptToken',sha256(res.data.token),24 * 60);
+            //       self.changeLogin({ token: res.data.token });
+                  setTimeout(()=>{
+                    self.$router.push('/home/index');
+                  },200);
+        //         }else{
+        //           this.$message.error(res.data.msg);
+        //         }
+        //       }
+        //       self.loadFlag = false;
+        //     });
+        // }
+      // });
        
       },
       accountCheck:function(){
@@ -365,3 +341,14 @@ import sha256 from "js-sha256";
       padding-left: 40px !important;
   }
 </style>
+
+      // emitEmpty (e) {
+      //   var id= e.currentTarget.dataset.id;
+      //   if(id==="name"){
+      //     this.$refs.userNameInput.focus();
+      //     this.userName = ''
+      //   }else if(id==="pwd"){
+      //     this.$refs.userPasswordInput.focus();
+      //     this.userPassword = ''
+      //   }
+      // },

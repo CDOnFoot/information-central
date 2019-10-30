@@ -50,7 +50,7 @@
       <div class="load-content" v-show="loadFlag">
         <a-spin class="load-img" size="large" />
       </div>
-      <router-view :menuIndex="menuIndex" :setFlag="setFlag" :mbIndex="mbIndex" :menuId="menuId" 
+      <router-view :menuIndex="menuIndex" :setFlag="setFlag" :menuId="menuId" :mbId="mbId"
       :resetFlag="resetFlag" @uploadSetMsg="uploadSaveSetMsg" :formListFlag="formListFlag" :updateFlag="updateFlag"></router-view>
     </a-layout-content>
     <a-layout-footer style="text-align: center">
@@ -66,7 +66,7 @@
             <img src="../../assets/img/title-sub-bg.png" alt="" class="menu-sub-img">
           </div>
         </div>
-        <div v-for="(item,index) in menuList.records" class="menu-item" :class="menuIndex==index?'font-active':''" :key="index"
+        <div v-for="(item,index) in menuList" class="menu-item" :class="menuIndex==index?'font-active':''" :key="index"
              @click="selectMenu(index)">
           <div class="item-info">
             <img :src="menuIndex === index?require('../../assets/img/titleBg-active.png'):require('../../assets/img/titleBg.png')" alt="" class="menu-img">
@@ -116,8 +116,9 @@
         visible: false,
         confirmLoading: false,
         mbList:'',
-        mbIndex:0,
+        // mbIndex:0,
         mbTempIndex:'',
+        mbId:'',
         // setTempFlag:false,
         resetFlag:false,
         loadFlag:false,
@@ -126,6 +127,7 @@
         formListFlag:false,//取消布局重置信息
         updateFlag:'',//布局更新信息falg
         userName:'Chan',
+        visualList:'',//接口查询布局信息
       }
     },
     computed:{
@@ -152,9 +154,8 @@
       // 查看模版内容数据信息
       this.getTemplateInfo();
 
+     
 
-      // this.menuList = this.$common.menuList;
-      // this.mbList = this.$common.mbList;
       document.ondragstart = function() {
         return false;
       };
@@ -165,6 +166,33 @@
     },
 
     methods:{
+      // 查看可视化界面内容数据信息
+      getUserVisualization:function(){
+        let self = this;
+        this.userVisualizationList(function(data){
+          self.visualizationInfo(data);
+        })
+      },
+      userVisualizationList:function(callback){
+        let self = this;
+        let param={
+          userNum: self.$common.getCookie('dvptId'),
+          menuNum: self.menuId
+          };
+        this.$http.post(self.$api.getUserVisualization, param).then(res =>{
+          //调取数据成功
+          if(res.data){
+            if (res.data.code === "0") {
+              callback(res.data.data)
+            }
+          }
+        });
+      },
+      visualizationInfo:function(data){
+        this.visualList = data.menuList;
+        this.mbId = this.visualList.mb.templateNum;
+      },
+
       // 用户登出注销后 清除session信息 ，并返回登录页
       loginOut:function(){
         let self = this;
@@ -189,7 +217,7 @@
         console.log('由子界面子路由传值结果：',msgList,msgFormList);
         this.visualParamList = msgList;
         this.visualFormList = msgFormList;
-        console.log(this.visualParamList.mb.mk[4].mc,this.visualFormList.mb.mk[4].mc);
+        // console.log(this.visualParamList.mb.mk[4].mc,this.visualFormList.mb.mk[4].mc);
 
       },
       // 查看菜单栏数据信息
@@ -220,13 +248,25 @@
       // 处理菜单栏信息接口
       menuInfo:function(data){
         let self = this;
-        this.menuList = data;
+        this.menuList = data.records;
         this.menuId = data.records[0].menuNum;
+        this.menuList.map((item,index)=>{
+          self.$common.menuList.map((items,indexs)=>{
+            if(items.id === item.menuNum){
+              item.key=items.key;
+            }
+          })
+        })
+        console.log(this.menuList)
+
+         //查看界面可视化布局信息 
+        this.getUserVisualization();
+
         setTimeout(()=>{
           self.loadFlag = false;
         },300);
 
-// 用户登录过期验证
+        // 用户登录过期验证
         // if(!this.$common.getCookie('userNum')){
         //   this.$router.push('/login');
         //   this.$error({
@@ -261,19 +301,27 @@
       templateInfo:function(data){
         let self = this;
         this.mbList = data;
-      
       },
-     
       mbSelect:function(param){
         if(param<=1){
           this.mbTempIndex = param;
-        
         }
       },
+      // 选中模版内容判断信息
       handleOk(e) {
         let self = this;
+        let param = null;
+        if(this.visualParamList!=undefined && this.visualParamList!=null && this.visualParamList!=''){
+          param = this.visualParamList;
+        }else{
+          param = this.visualList;
+          this.visualParamList = JSON.parse(JSON.stringify(this.visualList));
+        }
         this.confirmLoading = true;
-        if(self.$common.menuList[0].mb.id === this.mbList[self.mbTempIndex].id){
+        // console.log(this.visualList);
+        // console.log(param.mb.templateNum);
+        // console.log(this.mbList.records[self.mbTempIndex].templateNum);
+        if(param.mb.templateNum === this.mbList.records[self.mbTempIndex].templateNum){
             self.$info({
               title: '提示',
               content: '所选模版内容即为当前界面模版，请重新选择',
@@ -288,16 +336,30 @@
             self.mcTempIndex = 0;
             self.confirmLoading = false;
           }, 1000);
+
           this.saveMBFunction();
         }
-     
 
       },
       // 保存模版信息
       saveMBFunction:function(){
-        this.mbIndex = this.mbTempIndex;
+        // this.mbIndex = this.mbTempIndex;
+        let self = this;
+        console.log(this.mbList);
+        console.log(this.visualParamList);
+        this.mbId = this.mbList.records[this.mbTempIndex].templateNum;
+        this.$common.visualList.some((item,index)=>{
+          if(item.mb.templateNum === self.mbId){
+            self.visualParamList = item;
+            return false;
+          }
+        })
+        // this.visualParamList.mb.templateNum = this.mbList.records[this.mbTempIndex].templateNum;
+        // this.visualParamList.mb.templateName = this.mbList.records[this.mbTempIndex].templateName;
+        // this.visualParamList.mb.mc = '';
+        console.log(this.visualParamList);
+        console.log(this.mbId);
         this.resetFlag = true;
-        // this.$set("menuIndex",this.mbIndex);
       },
       handleCancel(e) {
         this.visible = false;
@@ -305,7 +367,6 @@
       },
       saveSetMsg:function(){
         let self = this;
-        // console.log(this.visualParamList,this.visualFormList);
         if(this.visualParamList === this.visualFormList){
           this.$info({
             title: '提醒',
@@ -359,7 +420,7 @@
       updateUserContentInfoList:function(callback){
         let self = this;
         let param={
-          userNum: self.$common.getCookie('userNum'),
+          userNum: self.$common.getCookie('dvptId'),
           menuNum: self.menuId,
           templateNum: self.visualParamList.mb.templateNum,
           moduleAndContent: JSON.stringify(self.visualParamList),
@@ -408,8 +469,8 @@
         }
       },
       getCurrentRoute:function(routerVal){
-        for(var i=0;i<this.$common.menuList.length;i++){
-          if('/home/'+this.$common.menuList[i].key === routerVal){
+        for(var i=0;i<this.menuList.length;i++){
+          if('/home/'+this.menuList[i].key === routerVal){
             this.menuIndex = i;
             return false;
           }

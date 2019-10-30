@@ -118,13 +118,11 @@
   }
 
   .weather{
-    /* position: absolute;
-    right: 0.8%;
-    top: 40%; */
-
     position: absolute;
     right: 10%;
-    top: 8%;
+    /* top: 8%; */
+    top:41%;
+    right: 1%;
     vertical-align: middle;
   }
   .layout-btn{
@@ -347,101 +345,117 @@
       color: #fff;
       background: transparent !important;
   }
-    .ant-table-tbody > tr > td:hover{
-      background: transparent !important;
-    }
-    .taablee{
-      padding-left: 60px;
-      height: 200px;
-      width: 460px;
-      font-weight: 700;
-    }
-    .ant-table-small{
-      border: none;
-    }
-    .marginLeft{
-      margin-left: 5px;
-    }
-    .content-main-mb{
-      height: 36rem;
-      overflow: auto;
-    }
-    .select-main{
-      display: flex;
-      align-items: center;
-    }
-    .select-main-title{
-      margin: 0 0.6% 0 1.6%;
-    }
-    .select-btn-search{
-      margin-left: 0.6%;
-    }
-    .time-interval{
-      position: absolute;
-      right: 0.8%;
-      line-height: 24px;
-      top: 9%;
-      color: #ffffff;
-      font-size: 16px;
-    }
-    .load-content{
-      position: absolute;
-      width: 100%;
-      height: 100%;
-    }
-    .load-img{
-      position: absolute;
-      top: 40%;
-      left: 50%;
-      transform: translate(-50%,-50%);
-      z-index: 199;
-    }
-    .group-btn{
-      background: transparent;
-      border: none;
-      outline: none;
-    }
-    .register-name {
-      font-size: 16px;
-      color: #ffffff;
-      margin-right: 10px;
-      line-height: 30px;
+  .ant-table-tbody > tr > td:hover{
+    background: transparent !important;
   }
-    .user-register{
-      display: flex;
-      align-items: center;
-      position: absolute;
-      right: 1%;
-      top: 34%;
-    }
-    .register-group{
-      position: relative;
-      height: 30px;
-      line-height: 30px;
-      vertical-align: middle;
-    }
-    .header-canvas{
-      position: relative;
-      width:100%;
-      height: 100%;
-      z-index: 99;
-    }
-    .ant-form-item{
-      margin-bottom: 18px !important;
-      font-size: 12px;
-    }
-    .ant-form-explain {
-      text-align: left;
-    }
-    .input-login{
-      height: 40px !important;
-    }
-    .has-error .ant-form-explain{
-      color: #e5b989 !important;
-      position: absolute;
-      top: 100%;
-      left: 0;
+  .taablee{
+    padding-left: 60px;
+    height: 200px;
+    width: 460px;
+    font-weight: 700;
   }
+  .ant-table-small{
+    border: none;
+  }
+  .marginLeft{
+    margin-left: 5px;
+  }
+  .content-main-mb{
+    height: 36rem;
+    overflow: auto;
+  }
+  .select-main{
+    display: flex;
+    align-items: center;
+  }
+  .select-main-title{
+    margin: 0 0.6% 0 1.6%;
+  }
+  .select-btn-search{
+    margin-left: 0.6%;
+  }
+  .time-interval{
+    /* right: 0.8%; */
+  position: absolute;
+  right: 6%;
+  line-height: 24px;
+  top: 12%;
+  color: #ffffff;
+  font-size: 16px;
+  }
+  .load-content{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+  .load-img{
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 199;
+  }
+  .group-btn{
+    background: transparent;
+    border: none;
+    outline: none;
+  }
+  .register-name {
+    font-size: 16px;
+    color: #ffffff;
+    margin-right: 10px;
+    line-height: 30px;
+}
+  .user-register{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    right: 1%;
+    top: 9%;
+  }
+  .register-group{
+    position: relative;
+    height: 30px;
+    line-height: 30px;
+    vertical-align: middle;
+  }
+  .header-canvas{
+    position: relative;
+    width:100%;
+    height: 100%;
+    z-index: 99;
+  }
+  .ant-form-item{
+    margin-bottom: 18px !important;
+    font-size: 12px;
+  }
+  .ant-form-explain {
+    text-align: left;
+  }
+  .input-login{
+    height: 40px !important;
+  }
+  .has-error .ant-form-explain{
+    color: #e5b989 !important;
+    position: absolute;
+    top: 100%;
+    left: 0;
+}
   .has-error .ant-input-prefix {
     color: rgba(0, 0, 0, 0.65);
-}
+  }
+  .ant-popover-inner {
+    background-color: #315c85e0;
+    box-shadow: 0 0 6px 2px rgba(255, 255, 255, 0.5);
+  }
+  .ant-popover-title {
+    color: #ffffff;
+    background: #438cc7e0;
+  }
+  .ant-popover-inner-content {
+    color: #ffffff;
+  }
+  .ant-popover-placement-topLeft > .ant-popover-content > .ant-popover-arrow{
+    border-right-color: #315c85;
+    border-bottom-color: #315c85;
+  }

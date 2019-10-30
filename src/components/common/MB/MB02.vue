@@ -15,64 +15,64 @@
             <div class="main-item-mk">
               <div class="item-mk" v-for="(item,index) in mcList" :key="index" @click="mcSelect(index)">
                 <div class="item-mk-content" :class="index===mcTempIndex?'active':''">
-                  <div class="mk-item-title">{{item.title}}</div>
-                  <img :src="require('../../../assets/img/mcBg'+index+'.png') "  alt="" class="item-mk-img"> 
+                  <div class="mk-item-title">{{item.contentName}}</div>
+                  <img :src="require('../../../assets/img/'+item.contentNum+'.png') "  alt="" class="item-mk-img"> 
+
                 </div>
               </div>
             </div>
           </div>
         </div>
       </a-modal>
-      <!-- 1 -->
       <div class="left">
         <div class="left-sub">
           <img src="../../../assets/img/sub-border-l.png" alt="" class="sub-bg">
           <div class="hide-sub-left" v-show="setFlag">
             <div class="sub-btn">
                 <div class="sub-btn-item" v-for="(item,index) in btnList" :key="index" :class="(index===0 || index===2)?'marginLeft':''">
-                  <a-button size="small" class="item-btn" @click="mcChangeItem(0,index)" v-show="(index===0 && !currentMC.mc[0].key) || (index===1 && currentMC.mc[0].key) || (index===2 && currentMC.mc[0].key)">
+                  <a-button size="small" class="item-btn" @click="mcChangeItem(0,index)" v-show="(index===0 && !visualList.mb.mk[0].mc.contentNum) || (index===1 && visualList.mb.mk[0].mc.contentNum) || (index===2 && visualList.mb.mk[0].mc.contentNum)">
                   {{item.title}}</a-button>
                 </div>
             </div>
           </div>
           <div class="sub-content">
-             <component :is="currentMC.mc[0].key" :mcTitle="currentMC.mc[0].title"  :mcStatus="0" class="mc-content"></component>
+             <component :is="visualList.mb.mk[0].mc.contentNum" :mcTitle="visualList.mb.mk[0].mc.contentName"  :mcStatus="0" :mcId="visualList.mb.mk[0].mc.contentNum" class="mc-content"></component>
+
           </div>
         </div>
       </div>
-      <!-- 2 -->
       <div class="left">
          <div class="left-sub">
           <img src="../../../assets/img/sub-border-l.png" alt="" class="sub-bg">
           <div class="hide-sub-left" v-show="setFlag">
               <div class="sub-btn">
                   <div class="sub-btn-item" v-for="(item,index) in btnList" :key="index" :class="(index===0 || index===2)?'marginLeft':''">
-                  <a-button size="small" class="item-btn" @click="mcChangeItem(1,index)" v-show="(index===0 && !currentMC.mc[1].key) || (index===1 && currentMC.mc[1].key) || (index===2 && currentMC.mc[1].key)">
+                  <a-button size="small" class="item-btn" @click="mcChangeItem(1,index)" v-show="(index===0 && !visualList.mb.mk[1].mc.contentNum) || (index===1 && visualList.mb.mk[1].mc.contentNum) || (index===2 && visualList.mb.mk[1].mc.contentNum)">
                   {{item.title}}</a-button>
                 </div>
               </div>
             </div>
       
             <div class="sub-content">
-             <component :is="currentMC.mc[1].key" :mcTitle="currentMC.mc[1].title" :mcStatus="1" class="mc-content"></component>
+             <component :is="visualList.mb.mk[1].mc.contentNum" :mcTitle="visualList.mb.mk[1].mc.contentName" :mcStatus="1"  :mcId="visualList.mb.mk[1].mc.contentNum" class="mc-content"></component>
           </div>
         </div>
       </div>
 
-      <!-- 3 -->
       <div class="left">
          <div class="left-sub">
           <img src="../../../assets/img/sub-border-l.png" alt="" class="sub-bg">
           <div class="hide-sub-left" v-show="setFlag">
               <div class="sub-btn">
                 <div class="sub-btn-item" v-for="(item,index) in btnList" :key="index" :class="(index===0 || index===2)?'marginLeft':''">
-                  <a-button size="small" class="item-btn" @click="mcChangeItem(2,index)" v-show="(index===0 && !currentMC.mc[2].key) || (index===1 && currentMC.mc[2].key) || (index===2 && currentMC.mc[2].key)">
+                  <a-button size="small" class="item-btn" @click="mcChangeItem(2,index)" v-show="(index===0 && !visualList.mb.mk[2].mc.contentNum) || (index===1 && visualList.mb.mk[2].mc.contentNum) || (index===2 && visualList.mb.mk[2].mc.contentNum)">
                   {{item.title}}</a-button>
                 </div>
               </div>
             </div>
           <div class="sub-content">
-             <component :is="currentMC.mc[2].key" :mcTitle="currentMC.mc[2].title" :mcStatus="2" class="mc-content"></component>
+             <component :is="visualList.mb.mk[2].mc.contentNum" :mcTitle="visualList.mb.mk[2].mc.contentName" :mcStatus="2"  :mcId="visualList.mb.mk[2].mc.contentNum" class="mc-content"></component>
+
           </div>
         </div>
       </div>
@@ -83,13 +83,14 @@
         <div class="hide-sub-key" v-show="setFlag">
             <div class="sub-btn">
                 <div class="sub-btn-item" v-for="(item,index) in btnList" :key="index" :class="(index===0 || index===2)?'marginLeft':''">
-                  <a-button size="small" class="item-btn" @click="mcChangeItem(3,index)" v-show="(index===0 && !currentMC.mc[3].key) || (index===1 && currentMC.mc[3].key) || (index===2 && currentMC.mc[3].key)">
+                 <a-button size="small" class="item-btn" @click="mcChangeItem(3,index)" v-show="(index===0 && !visualList.mb.mk[3].mc.contentNum) || (index===1 && visualList.mb.mk[3].mc.contentNum) || (index===2 && visualList.mb.mk[3].mc.contentNum)">
                   {{item.title}}</a-button>
                 </div>
             </div>
           </div>
         <div class="sub-content">
-             <component :is="currentMC.mc[3].key" :mcTitle="currentMC.mc[3].title"  :mcStatus="3" class="mc-content"></component>
+             <component :is="visualList.mb.mk[3].mc.contentNum"  :mcTitle="visualList.mb.mk[3].mc.contentName"  :mcStatus="3"  :mcId="visualList.mb.mk[3].mc.contentNum" class="mc-content"></component>
+
           </div>
       </div>
 
@@ -98,13 +99,14 @@
         <div class="hide-sub-key-b" v-show="setFlag">
             <div class="sub-btn">
                  <div class="sub-btn-item" v-for="(item,index) in btnList" :key="index" :class="(index===0 || index===2)?'marginLeft':''">
-                  <a-button size="small" class="item-btn" @click="mcChangeItem(4,index)" v-show="(index===0 && !currentMC.mc[4].key) || (index===1 && currentMC.mc[4].key) || (index===2 && currentMC.mc[4].key)">
+                  <a-button size="small" class="item-btn" @click="mcChangeItem(4,index)" v-show="(index===0 && !visualList.mb.mk[4].mc.contentNum) || (index===1 && visualList.mb.mk[4].mc.contentNum) || (index===2 && visualList.mb.mk[4].mc.contentNum)">
                   {{item.title}}</a-button>
                 </div>
             </div>
           </div>
         <div class="sub-content">
-             <component :is="currentMC.mc[4].key" :mcTitle="currentMC.mc[4].title"  :mcStatus="4" class="mc-content"></component>
+             <component :is="visualList.mb.mk[4].mc.contentNum" :mcTitle="visualList.mb.mk[4].mc.contentName"  :mcStatus="4"  :mcId="visualList.mb.mk[4].mc.contentNum" class="mc-content"></component>
+
           </div>
       </div>
 
@@ -116,13 +118,14 @@
           <div class="hide-sub-right" v-show="setFlag">
               <div class="sub-btn">
                 <div class="sub-btn-item" v-for="(item,index) in btnList" :key="index" :class="(index===0 || index===2)?'marginLeft':''">
-                  <a-button size="small" class="item-btn" @click="mcChangeItem(5,index)" v-show="(index===0 && !currentMC.mc[5].key) || (index===1 && currentMC.mc[5].key) || (index===2 && currentMC.mc[5].key)">
+                  <a-button size="small" class="item-btn" @click="mcChangeItem(5,index)" v-show="(index===0 && !visualList.mb.mk[5].mc.contentNum) || (index===1 && visualList.mb.mk[5].mc.contentNum) || (index===2 && visualList.mb.mk[5].mc.contentNum)">
                   {{item.title}}</a-button>
                 </div>
               </div>
             </div>
           <div class="sub-content">
-             <component :is="currentMC.mc[5].key"  :mcTitle="currentMC.mc[5].title"  :mcStatus="5" class="mc-content"></component>
+             <component :is="visualList.mb.mk[5].mc.contentNum" :mcTitle="visualList.mb.mk[5].mc.contentName"  :mcStatus="5"  :mcId="visualList.mb.mk[5].mc.contentNum" class="mc-content"></component>
+
           </div>
         </div>
       </div>
@@ -132,29 +135,30 @@
           <div class="hide-sub-right" v-show="setFlag">
               <div class="sub-btn">
                 <div class="sub-btn-item" v-for="(item,index) in btnList" :key="index" :class="(index===0 || index===2)?'marginLeft':''">
-                  <a-button size="small" class="item-btn" @click="mcChangeItem(6,index)" v-show="(index===0 && !currentMC.mc[6].key) || (index===1 && currentMC.mc[6].key) || (index===2 && currentMC.mc[6].key)">
+                  <a-button size="small" class="item-btn" @click="mcChangeItem(6,index)" v-show="(index===0 && !visualList.mb.mk[6].mc.contentNum) || (index===1 && visualList.mb.mk[6].mc.contentNum) || (index===2 && visualList.mb.mk[6].mc.contentNum)">
                   {{item.title}}</a-button>
                 </div>
               </div>
             </div>
           <div class="sub-content">
-             <component :is="currentMC.mc[6].key"  :mcTitle="currentMC.mc[6].title" :mcStatus="6" class="mc-content"></component>
+             <component :is="visualList.mb.mk[6].mc.contentNum"  :mcTitle="visualList.mb.mk[6].mc.contentName" :mcStatus="6"  :mcId="visualList.mb.mk[6].mc.contentNum" class="mc-content"></component>
+
           </div>
         </div>
       </div>
-       <div class="right">
+      <div class="right">
          <div class="right-sub">
           <img src="../../../assets/img/sub-border-r.png" alt="" class="sub-bg">
           <div class="hide-sub-right" v-show="setFlag">
               <div class="sub-btn">
                 <div class="sub-btn-item" v-for="(item,index) in btnList" :key="index" :class="(index===0 || index===2)?'marginLeft':''">
-                  <a-button size="small" class="item-btn" @click="mcChangeItem(7,index)" v-show="(index===0 && !currentMC.mc[7].key) || (index===1 && currentMC.mc[7].key) || (index===2 && currentMC.mc[7].key)">
+                  <a-button size="small" class="item-btn" @click="mcChangeItem(7,index)" v-show="(index===0 && !visualList.mb.mk[7].mc.contentNum) || (index===1 && visualList.mb.mk[7].mc.contentNum) || (index===2 && visualList.mb.mk[7].mc.contentNum)">
                   {{item.title}}</a-button>
                 </div>
               </div>
             </div>
           <div class="sub-content">
-             <component :is="currentMC.mc[7].key"  :mcTitle="currentMC.mc[7].title" :mcStatus="7" class="mc-content"></component>
+             <component :is="visualList.mb.mk[7].mc.contentNum"  :mcTitle="visualList.mb.mk[7].mc.contentName" :mcStatus="7"  :mcId="visualList.mb.mk[7].mc.contentNum" class="mc-content"></component>
           </div>
         </div>
       </div>
@@ -170,51 +174,39 @@
     import MC06 from '../../../components/common/MC/MC06';
     import MC07 from '../../../components/common/MC/MC07';
     import MC08 from '../../../components/common/MC/MC08';
-    import MC09 from '../../../components/common/MC/MC09';
     export default {
         name: "MB02",
         data(){
           return{
-            currentMC:{
-              mbId:'MB02',
-             mc:[{
-                key:'',
-                type:'',
-                title:'',
-              },{
-                key:'',
-                type:'',
-                title:'',
-
-              },{
-                key:'',
-                type:'',
-                title:'',
-
-              },{
-                key:'',
-                type:'',
-                title:'',
-
-              },{
-                key:'',
-                type:'',
-                title:'',
-
-              },{
-                key:'',
-                type:'',
-                title:'',
-
-              },{
-                key:'',
-                type:'',
-                title:'',
-              },{
-                key:'',
-                type:'',
-                title:'',
-              }]
+              visualList:{
+              mb:{
+                mk:[
+                  {
+                    mc:{},
+                  },
+                  {
+                    mc:{},
+                  },
+                  {
+                    mc:{},
+                  },
+                  {
+                    mc:{},
+                  },
+                  {
+                    mc:{},
+                  },
+                  {
+                    mc:{},
+                  },
+                  {
+                    mc:{},
+                  },
+                   {
+                    mc:{},
+                  },
+                ]
+              }
             },
             menuList:'',
             btnList:'',
@@ -226,35 +218,102 @@
             mcIndex:0,
             mcTempIndex:'',
             visibleIndex:0,
+            visualFormList:'',
 
           }
         },
-      props: ['setFlag'],
+      props: ['setFlag','resetFlag','menuTempId','formTempFlag','updateTempFlag','visualTempList'],
+
       watch: {
         setFlag: function (val) {
           this.setFlag = val;
+        },
+        resetFlag: function (val) {
+          // 检测当选择模版后会清空当前所有的模块内容
+          // 此时重新调用获取当前模块内容信息
+          this.resetFlag = val;
+          this.getContentInfo();
+        },
+         menuTempId: function (val) {
+           console.log("menuTempId:"+val);
+          this.menuList = val;
+          this.menuTempId = val;
+          this.getUserVisualization();
+        },
+        formTempFlag:function(val){
+          console.log("formTempFlag:"+val);
+          let self = this;
+          this.formTempFlag = val;
+          if(this.formTempFlag){
+            this.visualList = JSON.parse(JSON.stringify(self.visualFormList));
+          }
+        },
+        updateTempFlag:function(val){
+          console.log("updateTempFlag:"+val);
+          this.updateTempFlag = val;
+          if(this.updateTempFlag){
+            this.getUserVisualization();
+          }
+        },
+        visualTempList:function(val){
+          console.log("visualTempList:"+val);
+          this.visualList = val;
         }
       },
       mounted(){
+          // this.getUserVisualization();
           // 初始化模版内容
-          this.initCurrentMC();
+          this.getContentInfo();
           this.btnList = this.$common.btnList;
-          this.mcList = this.$common.mcList;
         },
 
         created(){
         },
         methods:{
+           // 查看可视化界面内容数据信息
+          getUserVisualization:function(){
+            let self = this;
+            this.userVisualizationList(function(data){
+              self.visualizationInfo(data);
+            })
+          },
+          userVisualizationList:function(callback){
+            let self = this;
+            let param={
+              userNum: self.$common.getCookie('dvptId'),
+              menuNum: self.menuTempId
+              };
+            this.$http.post(self.$api.getUserVisualization, param).then(res =>{
+              //调取数据成功
+              if(res.data){
+                if (res.data.code === "0") {
+                  callback(res.data.data)
+                }else{
+                this.$message.error(res.data.msg);
+                }
+              }
+            });
+          },
+          visualizationInfo:function(data){
+            let dataMap = data.menuList;
+            this.visualList = dataMap;
+            this.visualFormList =JSON.parse(JSON.stringify(dataMap));
+          },
+
+          handleChange(value) {
+            this.mcList =[];
+            this.mcTempIndex = '';
+            this.getContentInfo(value);
+          },
           mcSelect:function(param){
             this.mcTempIndex = param;
           },
+          // 确定选择模块内容操作信息
           handleOk(e) {
-            this.confirmLoading = true;
-            var flag = false;
             let self = this;
-
-            if(this.$common.mcList[self.mcTempIndex].type ==='main'){
-
+            this.confirmLoading = true;
+            let flag = false;
+            if(self.mcList[self.mcTempIndex].contentIndex ==='1'){
               if(this.visibleIndex !=3){
                   self.$info({
                       title: '提示',
@@ -263,7 +322,6 @@
                     });
                     self.confirmLoading = false;
               }else{
-                console.log("执行")
                 this.saveHandleOk();
               }
             }else{
@@ -275,18 +333,19 @@
                     });
                     self.confirmLoading = false;
               }else{
-                console.log("执行")
                 this.saveHandleOk();
               }
             }
           },
-         // 保存至选择项内操作信息
+          // 保存至选择项内操作信息
           saveHandleOk:function(){
             let self = this;
             var flag = false;
-            this.currentMC.mc.some((items,indexs)=>{
-              if(items.key ===self.$common.mcList[self.mcTempIndex].id){
-                   self.$info({
+            this.visualList.mb.mk.some((items,indexs)=>{
+
+              // 判断是否发生了布局信息的变化
+              if(items.mc.contentNum === self.mcList[self.mcTempIndex].contentNum){
+                    self.$info({
                       title: '提示',
                       content: '所选模块内容在当前界面已存在，请重新选择',
                       onOk() {},
@@ -307,86 +366,74 @@
           },
           // 保存模块内容信息
           saveMCFunction:function(){
-            console.log("保存模块内容信息：",this.mcList[this.mcTempIndex].title,this.mcList[this.mcTempIndex].id,this.mcTempIndex);
+            let self = this;
             this.mcIndex = this.mcTempIndex;
-            this.currentMC.mc[this.visibleIndex].key = this.$common.mcList[this.mcTempIndex].id;
-            this.currentMC.mc[this.visibleIndex].type = this.$common.mcList[this.mcTempIndex].type;
-            this.currentMC.mc[this.visibleIndex].title = this.$common.mcList[this.mcTempIndex].title;
+            this.visualList.mb.mk[self.visibleIndex].mc = {
+              contentIndex : self.mcList[this.mcTempIndex].contentIndex,
+              contentName : self.mcList[this.mcTempIndex].contentName,
+              contentNum : self.mcList[this.mcTempIndex].contentNum,
+            };
+            // 传值给父组件 如菜单index.vue
+            self.$emit('saveSetMessage', self.visualList,self.visualFormList);
 
           },
           handleCancel(e) {
             this.visible = false;
-            this.mcIndex = 0;
+            this.mcIndex = '';
+            this.mcTempIndex ='';
           },
-    
           mcChangeItem:function(index,type){
-            console.log(this.menuList[0].mb.mk[index].title,this.menuList[0].mb.mk[index].id,index);
-            console.log(this.btnList[type].title,type);
-          
             let self = this;
             if(type!=2){
               this.visible = true;
               this.visibleIndex = index;
-              console.log(this.visibleIndex,"添加或者替换模块内容");
             }else{
-              console.log("移除模块内容");
               this.visibleIndex = index;
-              console.log(this.visibleIndex,"删除模块内容");
-              this.showDeleteConfirm();
+              this.showDeleteConfirm(index);
             }
-            
           },
-          showDeleteConfirm:function(){
+          showDeleteConfirm:function(paramIndex){
             let self = this;
             this.$confirm({
               title: '提醒',
               content: '确定移除该模块内容?',
-              okText: '删除',
+              okText: '移除',
               okType: 'danger',
               cancelText: '取消',
               onOk() {
-                console.log('删除成功');
-                //  self.mcIndex = 0;
-                  self.currentMC.mc[self.visibleIndex].key = '';
-                  self.currentMC.mc[self.visibleIndex].type = '';
-                  self.currentMC.mc[self.visibleIndex].title = '';
+                  self.visualList.mb.mk[paramIndex].mc = '';
+                  self.$emit('saveSetMessage', self.visualList,self.visualFormList);
               },
               onCancel() {
-                console.log('取消删除');
               },
             });
           },
-        // 初始化模版内容
-          initCurrentMC:function(){
+          // 初始化模版内容
+          getContentInfo:function(param){
             let self = this;
-            this.initMC(function(data){
-              self.currentMcInfo(data);
-            })
+            this.contentInfoList(function(data,param){
+              self.contentInfo(data);
+            },param)
           },
-          initMC:function(callback){
+          contentInfoList:function(callback,params){
             let self = this;
-            this.menuList = this.$common.menuList;
-
-            this.menuList.some((item,index)=>{
-              if(item.mb){
-                if(item.mb.id === self.currentMC.mbId){
-                  item.mb.mk.some((items,indexs)=>{
-                    if(items.mc){
-                      self.currentMC.mc[indexs].key = self.$common.menuList[index].mb.mk[indexs].mc.id;
-                      self.currentMC.mc[indexs].type = self.$common.menuList[index].mb.mk[indexs].mc.type;
-                      self.currentMC.mc[indexs].title = self.$common.menuList[index].mb.mk[indexs].mc.title;
-                      
-                      return false;
-                    }
-                  });
-                  callback(this.currentMC);
+            let param={};
+            if(params){
+              param['contentIndex'] = params;
+            }
+            this.$http.post(self.$api.getContentInfo, param).then(res =>{
+              //调取数据成功
+              if(res.data){
+                if (res.data.code === "0") {
+                  callback(res.data.data)
+                }else{
+                  this.$message.error(res.data.msg);
                 }
               }
-          
             });
           },
-          currentMcInfo:function(data){
-            console.log(data);
+          contentInfo:function(data){
+            this.mcList = data.records;
           },
         },
         components:{
@@ -398,8 +445,6 @@
             MC06,
             MC07,
             MC08,
-            MC09,
-
         },
     }
 </script>

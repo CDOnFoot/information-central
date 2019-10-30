@@ -1,0 +1,16 @@
+{
+  "id": "1482489",
+  "name": "dvpt-ui",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "10487548",
+      "name": "电源",
+      "font_class": "dianyuan",
+      "unicode": "e695",
+      "unicode_decimal": 59029
+    }
+  ]
+}

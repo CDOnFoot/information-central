@@ -9,6 +9,7 @@ import energy from '../components/page/energy';
 import passenger from '../components/page/passenger';
 import index from '../components/page/index';
 import rail from '../components/page/rail';
+import common from '../../static/js/common.js'
 // 模版
 import MB01 from '../components/common/MB/MB01';
 import MB02 from '../components/common/MB/MB02';
@@ -31,14 +32,18 @@ const routerPush = Router.prototype.push
 Router.prototype.push = function push(location) {
   return routerPush.call(this, location).catch(error=> error)
 }
-export default new Router({
+
+// export default new Router({
+
+const router =  new Router({
   routes:[
     {
       path:'/',
       redirect:'/login',
       meta:{
         title:'登录',
-        keepAlive:false
+        keepAlive:false,
+        needLogin: false
       }
     },
     {
@@ -46,8 +51,8 @@ export default new Router({
       component: login,
       meta:{
         title:'登录',
-        keepAlive:false
-
+        keepAlive:false,
+        needLogin: false
       }
     },
     {
@@ -56,15 +61,14 @@ export default new Router({
       meta:{
         title:'首页',
         keepAlive:false
-
       },
       children:[{
           path:'index',
           component: index,
           meta:{
             title:'首页',
-            keepAlive:false
-
+            keepAlive:false,
+            needLogin: true
           }
         },
         {
@@ -72,8 +76,8 @@ export default new Router({
           component: energy,
           meta:{
             title:'能耗分析',
-            keepAlive:false
-
+            keepAlive:false,
+            needLogin: true
           }
         },
         {
@@ -81,8 +85,8 @@ export default new Router({
           component: passenger,
           meta:{
             title:'客流分析',
-            keepAlive:false
-
+            keepAlive:false,
+            needLogin: true
           },
         },
         {
@@ -90,7 +94,8 @@ export default new Router({
           component: rail,
           meta:{
             title:'线路概况',
-            keepAlive:false
+            keepAlive:false,
+            needLogin: true
 
           },
         },
@@ -98,5 +103,20 @@ export default new Router({
     },
 
   ]
-})
+});
+export default router;
 
+// 使用 router.beforeEach 注册一个全局前置守卫，判断用户是否登陆
+router.beforeEach((to, from, next) => {
+  console.log(to.path);
+  if (to.path === '/login') {
+    next();
+  } else {
+    let token = common.getCookie('token');
+    if (token === 'null' || token === '') {
+      next('/login');
+    } else {
+      next();
+    }
+  }
+});

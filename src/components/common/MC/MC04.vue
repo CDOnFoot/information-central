@@ -15,7 +15,7 @@
             :style="{position:'absolute',top:item.dot[0],left:item.dot[1]}">
               <a-popover placement="topLeft" arrowPointAtCenter class="popover-item">
               <template slot="content">
-                <p>{{'2019-10-29'}}</p>
+                <p>{{'2019-10-29 19:00:00'}}</p>
                 <p>当前车次：{{item.runId}}({{'xxx类型'}})</p>
                 <p>前方到站：{{'xxxx站'}}</p>
               </template>
@@ -83,13 +83,18 @@ export default {
 .main-id{
   width: 100%;
   height: 100%;
+  position: relative;
 }
 .subway {
-  height: 99.2%;
-  width: 98%;
-  background: url("../../../assets/img/subway-bg.png");
-  margin-top: 0.8%;
-  margin-left: -.3%;
+  height: 99%;
+  width: 99%;
+  position: absolute;
+  border-radius: 10px;
+  left: 48.8%;
+  top: 50.4%;
+  background: url(/static/img/subway-bg.f023cae.png) no-repeat;
+  background-size: cover;
+  transform: translate(-50%,-50%);
 }
 .subway-item:hover{
   transform: scale(1.3);

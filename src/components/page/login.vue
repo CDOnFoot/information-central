@@ -38,6 +38,9 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex';
+import preventBack from 'vue-prevent-browser-back';
+
   export default {
     name: "login",
     data(){
@@ -48,11 +51,15 @@
         loadFlag:false,
       }
     },
+    // 防止登录页回退到上一页登录页面
+    mixins: [preventBack],//注入
     mounted(){
       this.$router.push("/login");
     },
 
     methods:{
+      ...mapMutations(['changeLogin']),
+
       emitEmpty (e) {
         var id= e.currentTarget.dataset.id;
         if(id==="name"){
@@ -74,6 +81,8 @@
           this.$common.setCookie('userpwd',userpwd,24 * 60);
           this.$common.setCookie('token','530c1597-c5ec-43b0-9f32-e6b61986a9b9',24 * 60);
           this.$common.setCookie('userNum','16279',24 * 60);
+
+          this.changeLogin({ token: '530c1597-c5ec-43b0-9f32-e6b61986a9b9' });
 
           setTimeout(()=>{
             self.loadFlag = false;

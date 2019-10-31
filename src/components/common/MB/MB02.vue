@@ -178,32 +178,58 @@
         name: "MB02",
         data(){
           return{
-              visualList:{
+           visualList:{
               mb:{
+                templateName:"模版二",
+                templateNum:"MB02",
                 mk:[
                   {
-                    mc:{},
-                  },
-                  {
-                    mc:{},
-                  },
-                  {
-                    mc:{},
-                  },
-                  {
-                    mc:{},
-                  },
-                  {
-                    mc:{},
-                  },
-                  {
-                    mc:{},
-                  },
-                  {
-                    mc:{},
+                    moduleNum:"MK01",
+                    moduleName:"模块一",
+                    mc:"",
+
                   },
                    {
-                    mc:{},
+                    moduleNum:"MK02",
+                    moduleName:"模块二",
+                    mc:"",
+
+                  },
+                  {
+                    moduleNum:"MK03",
+                    moduleName:"模块三",
+                    mc:"",
+
+                  },
+                   {
+                    moduleNum:"MK04",
+                    moduleName:"模块四",
+                    mc:"",
+
+                  },
+                   {
+                    moduleNum:"MK05",
+                    moduleName:"模块五",
+                    mc:"",
+
+                  },
+                   {
+                    moduleNum:"MK06",
+                    moduleName:"模块六",
+                    mc:"",
+
+                  },
+                   {
+                    moduleNum:"MK07",
+                    moduleName:"模块七",
+                    mc:"",
+
+                  },
+                   {
+                    moduleNum:"MK08",
+                    moduleName:"模块八",
+                    mc:"",
+
                   },
                 ]
               }
@@ -223,6 +249,7 @@
           }
         },
       props: ['setFlag','resetFlag','menuTempId','formTempFlag','updateTempFlag','visualTempList'],
+
 
       watch: {
         setFlag: function (val) {
@@ -245,7 +272,9 @@
           let self = this;
           this.formTempFlag = val;
           if(this.formTempFlag){
-            this.visualList = JSON.parse(JSON.stringify(self.visualFormList));
+            if(this.visualFormList){
+              this.visualList = JSON.parse(JSON.stringify(self.visualFormList));
+            }
           }
         },
         updateTempFlag:function(val){
@@ -255,12 +284,15 @@
             this.getUserVisualization();
           }
         },
-        visualTempList:function(val){
-          console.log("visualTempList:"+val);
-          this.visualList = val;
+         visualTempList:function(val){
+          console.log(val);
+          this.visualList = JSON.parse(JSON.stringify(this.visualTempList));
         }
       },
       mounted(){
+        // 接收监听值
+          this.visualList = JSON.parse(JSON.stringify(this.visualTempList));
+
           // this.getUserVisualization();
           // 初始化模版内容
           this.getContentInfo();

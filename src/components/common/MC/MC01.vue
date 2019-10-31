@@ -51,7 +51,7 @@ export default {
     this.mcList = this.$common.mcList;
 
     // 初始化能耗排行数据信息
-    // this.initChart(this.valueTime,'init');
+    this.initChart(this.valueTime,'init');
   },
   created() {
 

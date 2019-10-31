@@ -20,9 +20,10 @@
               menuTempId:'',
               formTempFlag:'',
               updateTempFlag:'',
+              visualHomeTempList:'',
             }
         },
-      props: ['setFlag','mbId','resetFlag','menuId','formListFlag','updateFlag'],
+      props: ['setFlag','mbId','resetFlag','menuId','formListFlag','updateFlag','visualHomeList'],
 //  'menuIndex',
       components:{
         MB01,
@@ -35,19 +36,15 @@
         resetFlag: function (val) {
           this.resetFlag = val;
         },
-        // menuIndex: function (val) {
-        //   this.currentMB = this.$common.menuList[val].mb.id;
-        // },
         mbId: function (val) {
-          // this.mbIndex = val;
-          // this.currentMB = this.$common.mbList[val].id;
           console.log(val);
           this.currentMB = val;
         },
         menuId:function(val){
           this.menuId = val;
           this.menuTempId = val;
-          this.getUserVisualization();
+          console.log(this.menuId);
+          // this.getUserVisualization();
         },
         //从父元素home.vue获取重置取消flag
         formListFlag:function(val){
@@ -57,13 +54,20 @@
         updateFlag:function(val){
           this.updateFlag = val;
           this.updateTempFlag = val;
+        },
+        visualHomeList:function(val){
+          this.visualHomeTempList = val;
+          this.visualTempList = JSON.parse(JSON.stringify(val));
+          this.currentMB = this.visualTempList.mb.templateNum;
+          console.log(this.visualHomeTempList);
+          console.log(this.visualTempList);
 
         }
       },
       created(){
       },
       mounted() {
-          this.getUserVisualization();
+          // this.getUserVisualization();
       },
       methods:{
         // 获取从子组件MB传值 模版可视化内容信息
@@ -99,8 +103,9 @@
         visualizationInfo:function(data){
           this.visualList = data.menuList;
           this.visualTempList = data.menuList;
-          console.log(this.visualTempList);
           this.currentMB = data.menuList.mb.templateNum;
+          // console.log(this.visualTempList);
+          // console.log(this.currentMB);
         },
       }
     }
@@ -113,3 +118,6 @@
         height: 90%;
     }
 </style>
+
+
+

@@ -63,7 +63,7 @@
       created(){
       },
       mounted() {
-          // this.getUserVisualization();
+          this.getUserVisualization();
       },
       methods:{
         // 获取从子组件MB传值 模版可视化内容信息

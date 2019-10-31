@@ -90,10 +90,10 @@ import sha256 from "js-sha256";
               loginname:self.userName,
               password:sha256(self.userPassword)
             };
-            // this.$http.post(self.$api.loginIn, param).then(res =>{
-            // //调取数据成功
-            //   if(res.data){
-            //     if (res.data.code === "0") {
+            this.$http.posts(self.$api.loginIn, param).then(res =>{
+            //调取数据成功
+              if(res.data){
+                if (res.data.code === "0") {
                   self.$common.setCookie('dvptName',self.userName,24 * 60);
                   self.$common.setCookie('dvptId','16279',24 * 60);
                   self.$common.setCookie('dvptPwd',sha256(self.userPassword),24 * 60);
@@ -103,11 +103,11 @@ import sha256 from "js-sha256";
                   setTimeout(()=>{
                     self.$router.push('/home/index');
                   },200);
-                // }else{
-                //   this.$message.error(res.data.msg);
-                // }
-            //   }
-            // });
+                }else{
+                  this.$message.error(res.data.msg);
+                }
+              }
+            });
         }
         self.loadFlag = false;
       });

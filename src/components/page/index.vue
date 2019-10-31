@@ -2,7 +2,7 @@
 <template>
     <keep-alive>
         <component :is="currentMB" :setFlag="setFlag" :resetFlag = "resetFlag" 
-        :menuTempId= "menuTempId" @saveSetMessage="saveSetMsg" :formTempFlag="formTempFlag" :updateTempFlag="updateTempFlag"
+        :menuTempId= "menuTempId" @saveSetMessage="saveSetMsg" :formTempFlag="formTempFlag" :updateTempFlag="updateTempFlag" :visualTempList="visualTempList"
         class="mb-content"></component>
     </keep-alive>
 </template>
@@ -16,13 +16,14 @@
             return{
               currentMB:'',
               visualList:'',
+              visualTempList:'',//临时传参给模版界面 'MB0X'
               menuTempId:'',
               formTempFlag:'',
               updateTempFlag:'',
             }
         },
-      props: ['menuIndex','setFlag','mbIndex','resetFlag','menuId','formListFlag','updateFlag'],
- 
+      props: ['setFlag','mbId','resetFlag','menuId','formListFlag','updateFlag'],
+//  'menuIndex',
       components:{
         MB01,
         MB02
@@ -34,17 +35,19 @@
         resetFlag: function (val) {
           this.resetFlag = val;
         },
-        menuIndex: function (val) {
-          this.currentMB = this.$common.menuList[val].mb.id;
-        },
-         mbIndex: function (val) {
-          this.currentMB = this.$common.mbList[val].id;
+        // menuIndex: function (val) {
+        //   this.currentMB = this.$common.menuList[val].mb.id;
+        // },
+        mbId: function (val) {
+          // this.mbIndex = val;
+          // this.currentMB = this.$common.mbList[val].id;
+          console.log(val);
+          this.currentMB = val;
         },
         menuId:function(val){
           this.menuId = val;
           this.menuTempId = val;
           this.getUserVisualization();
-
         },
         //从父元素home.vue获取重置取消flag
         formListFlag:function(val){
@@ -60,7 +63,7 @@
       created(){
       },
       mounted() {
-          // this.getUserVisualization();
+          this.getUserVisualization();
       },
       methods:{
         // 获取从子组件MB传值 模版可视化内容信息
@@ -81,7 +84,7 @@
         userVisualizationList:function(callback){
           let self = this;
           let param={
-            userNum: self.$common.getCookie('userNum'),
+            userNum: self.$common.getCookie('dvptId'),
             menuNum: self.menuId
             };
           this.$http.post(self.$api.getUserVisualization, param).then(res =>{
@@ -95,9 +98,9 @@
         },
         visualizationInfo:function(data){
           this.visualList = data.menuList;
+          this.visualTempList = data.menuList;
+          console.log(this.visualTempList);
           this.currentMB = data.menuList.mb.templateNum;
-
-          console.log(this.visualList);
         },
       }
     }

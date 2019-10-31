@@ -8,26 +8,37 @@
               大数据分析决策平台
           </div>
           <div class="form-content">
-            <div class="components-input-demo-presuffix">
-              <a-input placeholder="用户名" v-model="userName" ref="userNameInput" size="large">
-                <a-icon slot="prefix" type="user" />
-                <a-icon v-if="userName" slot="suffix" type="close-circle" @click="emitEmpty" data-id="name"/>
-              </a-input>
-            </div>
-            <div class="components-input-demo-presuffix">
-              <a-input placeholder="密码" v-model="userPassword" ref="userPasswordInput" size="large" type="password">
-                <a-icon slot="prefix" type="lock" />
-                <a-icon v-if="userPassword" slot="suffix" type="close-circle" @click="emitEmpty" data-id="pwd"/>
-              </a-input>
-            </div>
-            <div class="login-register" @click="open">忘记密码</div>
-            <!-- <br><small>还未拥有账号? </small><a href="register.html" class="signup">注册</a> -->
-            <a-button type="primary" size="large" class="btn-login" :loading="loadFlag" @click="checkUser" @keyup.enter="checkUser">登录</a-button>
+            
+            <a-form :form="form" @submit="handleSubmit" id="components-form-demo-normal-login">
+              <div class="components-input-demo-presuffix">
+                <a-form-item>
+                  <a-input v-decorator="[ 'userName', { rules: [{ required: true, message: '请输入用户名' }] },]"
+                      placeholder="用户名" class="input-login">
+                    <a-icon slot="prefix" type="user" />
+                  </a-input>
+                </a-form-item>
+              </div>
+              <div class="components-input-demo-presuffix">
+                <a-form-item>
+                  <a-input v-decorator="[ 'password', { rules: [{ required: true, message: '请输入密码' }] },
+                    ]" type="password" placeholder="密码" class="input-login">
+                      <a-icon slot="prefix" type="lock" />
+                  </a-input>
+                  </a-form-item>
+              </div>
+              <!-- <br><small>还未拥有账号? </small><a href="register.html" class="signup">注册</a> -->
+               <a-form-item>
+                <div class="login-register" @click="open">忘记密码</div>
+                 <a-button type="primary" html-type="submit" class="btn-login" :loading="loadFlag">
+                  登录
+                </a-button>
+                <!-- <a-button type="primary" size="large" class="btn-login" :loading="loadFlag" @click="checkUser" @keyup.enter="checkUser">登录</a-button> -->
+               </a-form-item>
+            </a-form>
           </div>
         </div>
       </div>
-      <img src="../../assets/img/sun.png" alt="" class="sun-btn-img">
-
+      <!-- <img src="../../assets/img/sun.png" alt="" class="sun-btn-img"> -->
       <!--动效区域-->
       <div :class="'trangle'+index " class="trangle" v-for="(item,index) of trangleList" :key="index"></div>
       <div class="copyrights">
@@ -40,7 +51,7 @@
 <script>
 import { mapMutations } from 'vuex';
 import preventBack from 'vue-prevent-browser-back';
-
+import sha256 from "js-sha256";
   export default {
     name: "login",
     data(){
@@ -51,6 +62,9 @@ import preventBack from 'vue-prevent-browser-back';
         loadFlag:false,
       }
     },
+    beforeCreate() {
+      this.form = this.$form.createForm(this, { name: 'normal_login' });
+    },
     // 防止登录页回退到上一页登录页面
     mixins: [preventBack],//注入
     mounted(){
@@ -58,47 +72,46 @@ import preventBack from 'vue-prevent-browser-back';
     },
 
     methods:{
-      ...mapMutations(['changeLogin']),
+ 
+      ...mapMutations(['changeLogin']),//存储login状态到vuex
 
-      emitEmpty (e) {
-        var id= e.currentTarget.dataset.id;
-        if(id==="name"){
-          this.$refs.userNameInput.focus();
-          this.userName = ''
-        }else if(id==="pwd"){
-          this.$refs.userPasswordInput.focus();
-          this.userPassword = ''
-        }
-
-      },
-      checkUser:function() {
-        var self = this;
+     handleSubmit(e) {
+        let self = this;
         this.loadFlag = true;
-        var username = this.userName;
-        var userpwd =  this.userPassword;
-        if(username === "admin" && userpwd === "123456"){
-          this.$common.setCookie('username',username,24 * 60);
-          this.$common.setCookie('userpwd',userpwd,24 * 60);
-          this.$common.setCookie('token','530c1597-c5ec-43b0-9f32-e6b61986a9b9',24 * 60);
-          this.$common.setCookie('userNum','16279',24 * 60);
+        let param = null;
+        e.preventDefault();
 
-          this.changeLogin({ token: '530c1597-c5ec-43b0-9f32-e6b61986a9b9' });
-
-          setTimeout(()=>{
-            self.loadFlag = false;
-            self.$router.push('/home/index');
-          },200);
-        }else{
-          setTimeout(()=>{
-            self.loadFlag = false;
-            self.$error({
-              title: '错误信息',
-              content: '用户名或密码错误，请重新输入',
-              okText:'知道了'
-            });
-          },200);
-        }
-        
+        // this.form.validateFields((err, values) => {
+        //   if (!err) {
+        //     self.userName = values.userName;
+        //     self.userPassword = values.password;
+          
+        //     param={
+        //       loginname:self.userName,
+        //       password:sha256(self.userPassword)
+        //     };
+        //     this.$http.posts(self.$api.loginIn, param).then(res =>{
+        //     //调取数据成功
+        //       if(res.data){
+        //         if (res.data.code === "0") {
+                  self.$common.setCookie('dvptName',self.userName,24 * 60);
+                  self.$common.setCookie('dvptId','16279',24 * 60);
+                  self.$common.setCookie('dvptPwd',sha256(self.userPassword),24 * 60);
+                  self.$common.setCookie('dvptToken',sha256(self.userPassword),24 * 60);
+            //       self.$common.setCookie('dvptToken',sha256(res.data.token),24 * 60);
+            //       self.changeLogin({ token: res.data.token });
+                  setTimeout(()=>{
+                    self.$router.push('/home/index');
+                  },200);
+        //         }else{
+        //           this.$message.error(res.data.msg);
+        //         }
+        //       }
+        //       self.loadFlag = false;
+        //     });
+        // }
+      // });
+       
       },
       accountCheck:function(){
         this.$message.warning("功能暂未开启");
@@ -173,24 +186,10 @@ import preventBack from 'vue-prevent-browser-back';
     line-height:25px;
   }
   .form-detail{
-    /* padding: 10px;
-    z-index: 9;
-    width: 320px;
-    height: 300px;
-    margin-left: 250px;
-    border-radius: 4px;
-    border: 1px solid #EBEEF5;
-    background-color: #FFFFFF;
-    background: #0f3b5b;
-    overflow: hidden;
-    color: #303133;
-    transition: 0.3s;
-    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1); */
     position: relative;
     z-index: 199;
     padding: 10px;
     width: 320px;
-    height: 300px;
     margin-left: 250px;
     border-radius: 4px;
     border: 1px solid #0f3b5b;
@@ -199,8 +198,7 @@ import preventBack from 'vue-prevent-browser-back';
     color: #303133;
     -webkit-transition: 0.3s;
     transition: 0.3s;
-    -webkit-box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-    box-shadow: 0 2px 12px 0 rgba(255, 255, 255, 0.39);
+    box-shadow: 0 0px 10px 2px rgba(255, 255, 255, 0.39);
   }
   .form-content{
     position: relative;
@@ -209,9 +207,7 @@ import preventBack from 'vue-prevent-browser-back';
     padding: 0 10px;
     z-index: 199;
   }
-  .form-content .components-input-demo-presuffix:nth-child(2){
-    margin-top: 15px;
-  }
+
   .copyrights{
     text-align: center;
     position: absolute;
@@ -223,10 +219,9 @@ import preventBack from 'vue-prevent-browser-back';
   }
   .login-register{
     position: relative;
-    margin-top: 20px;
+    /* margin-top: 20px; */
     font-size: 14px;
     float: right;
-    /* color: #666; */
     color: #ffffff;
 
   }
@@ -244,7 +239,8 @@ import preventBack from 'vue-prevent-browser-back';
   }
   .btn-login{
     margin-top: 3%;
-    width: 80%;
+    width: 100%;
+    height: 40px;
   }
   .sun-btn-img{
      position: absolute;
@@ -345,3 +341,14 @@ import preventBack from 'vue-prevent-browser-back';
       padding-left: 40px !important;
   }
 </style>
+
+      // emitEmpty (e) {
+      //   var id= e.currentTarget.dataset.id;
+      //   if(id==="name"){
+      //     this.$refs.userNameInput.focus();
+      //     this.userName = ''
+      //   }else if(id==="pwd"){
+      //     this.$refs.userPasswordInput.focus();
+      //     this.userPassword = ''
+      //   }
+      // },

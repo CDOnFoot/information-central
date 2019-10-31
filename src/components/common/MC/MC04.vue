@@ -38,6 +38,7 @@ export default {
       n: 0,
       wayList:this.$common.wayList,
       runList:this.$common.runList,
+      
     };
   },
   props: ["mcStatus", "mcTitle",'mcId'],

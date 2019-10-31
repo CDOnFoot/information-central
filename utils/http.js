@@ -21,7 +21,7 @@
     // **路由请求拦截**
     // http request 拦截器
     axios.interceptors.request.use(config => {
-      let token = common.getCookie('token');
+      let token = common.getCookie('dvptToken');
       if (token === 'null' || token === '') {
         router.replace({
           path: '/login' // 到登录页重新获取token

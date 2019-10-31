@@ -51,7 +51,7 @@
         <a-spin class="load-img" size="large" />
       </div>
       <router-view :menuIndex="menuIndex" :setFlag="setFlag" :menuId="menuId" :mbId="mbId"
-      :resetFlag="resetFlag" @uploadSetMsg="uploadSaveSetMsg" :formListFlag="formListFlag" :updateFlag="updateFlag"></router-view>
+      :resetFlag="resetFlag" @uploadSetMsg="uploadSaveSetMsg" :formListFlag="formListFlag" :updateFlag="updateFlag" :visualHomeList="visualHomeList"></router-view>
     </a-layout-content>
     <a-layout-footer style="text-align: center">
       <div class="menu-list">
@@ -128,6 +128,7 @@
         updateFlag:'',//布局更新信息falg
         userName:'Chan',
         visualList:'',//接口查询布局信息
+        visualHomeList:'',
       }
     },
     computed:{
@@ -154,7 +155,6 @@
       // 查看模版内容数据信息
       this.getTemplateInfo();
 
-     
 
       document.ondragstart = function() {
         return false;
@@ -190,6 +190,8 @@
       },
       visualizationInfo:function(data){
         this.visualList = data.menuList;
+        this.visualHomeList = JSON.parse(JSON.stringify(data.menuList));
+        console.log(this.visualHomeList);
         this.mbId = this.visualList.mb.templateNum;
       },
 
@@ -358,6 +360,9 @@
         // this.visualParamList.mb.templateName = this.mbList.records[this.mbTempIndex].templateName;
         // this.visualParamList.mb.mc = '';
         console.log(this.visualParamList);
+        this.visualHomeList = JSON.parse(JSON.stringify(this.visualParamList));
+
+
         console.log(this.mbId);
         this.resetFlag = true;
       },
@@ -372,7 +377,6 @@
             title: '提醒',
             content:'当前无可视化布局设置信息更改.',
             onOk() {
-
             },
           });
         }else{
@@ -397,6 +401,12 @@
         let self = this;
         this.setFlag = false;
         this.formListFlag = true;
+
+        // 取消传参数
+        this.visualHomeList = JSON.parse(JSON.stringify(this.visualList));
+
+        this.visualParamList = '';//参数可视化布局信息
+        this.visualFormList= '';//标准可视化布局信息
       },
       layoutSetting:function(){
         let self = this;
@@ -407,6 +417,8 @@
           this.formListFlag = false;
           this.updateFlag = false;
         }
+         // 取消传参数
+        this.visualHomeList = JSON.parse(JSON.stringify(this.visualList));
       },
       // 调起更新保存可视化数据信息
       updateUserContentInfo:function(){

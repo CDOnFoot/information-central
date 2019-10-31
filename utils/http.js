@@ -14,6 +14,7 @@
     //配置信息
     var useStaging = false;
     var host = useStaging ? 'http://10.66.1.102:28070':'http://10.66.1.102:28070';
+    // var host = useStaging ? 'http://10.66.1.102:28070':'http://10.66.1.65:28070';
 
     // 指标配置临时ip
     var hosts = 'http://10.66.1.65:28070';
@@ -190,6 +191,31 @@
       },
       //  get请求
       get (url, params) {
+        var param;
+        //判断校验情况
+        if (url === "/login") {
+          param = params;
+        }else {
+          param = formateParm(params);
+        }
+        var urlencode = urlEncode(host + url,param);
+        return axios({
+          method: 'get',
+          url:urlencode,
+          timeout: 20000,
+          headers: {'content-Type': 'application/json'},
+          request: 'XMLHttpRequest',
+          }).then(
+          (response) => {
+            return checkStatus(response)
+          }
+          ).then(
+          (res) => {
+            return checkCode(res)
+          }
+        )
+      },
+      gets (url, params) {
         var param;
         //判断校验情况
         if (url === "/login") {

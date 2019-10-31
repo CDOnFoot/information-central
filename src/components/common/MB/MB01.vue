@@ -177,27 +177,50 @@
             visibleIndex:'',
             visualList:{
               mb:{
+                templateName:"模版一",
+                templateNum:"MB01",
                 mk:[
                   {
-                    mc:{},
+                    moduleNum:"MK01",
+                    moduleName:"模块一",
+                    mc:"",
+
+                  },
+                   {
+                    moduleNum:"MK02",
+                    moduleName:"模块二",
+                    mc:"",
+
                   },
                   {
-                    mc:{},
+                    moduleNum:"MK03",
+                    moduleName:"模块三",
+                    mc:"",
+
                   },
-                  {
-                    mc:{},
+                   {
+                    moduleNum:"MK04",
+                    moduleName:"模块四",
+                    mc:"",
+
                   },
-                  {
-                    mc:{},
+                   {
+                    moduleNum:"MK05",
+                    moduleName:"模块五",
+                    mc:"",
+
                   },
-                  {
-                    mc:{},
+                   {
+                    moduleNum:"MK06",
+                    moduleName:"模块六",
+                    mc:"",
+
                   },
-                  {
-                    mc:{},
-                  },
-                  {
-                    mc:{},
+                   {
+                    moduleNum:"MK07",
+                    moduleName:"模块七",
+                    mc:"",
+
                   },
                 ]
               }
@@ -208,39 +231,48 @@
       props: ['setFlag','resetFlag','menuTempId','formTempFlag','updateTempFlag','visualTempList'],
       watch: {
         setFlag: function (val) {
+          console.log(val);
           this.setFlag = val;
         },
         resetFlag: function (val) {
+          console.log(val);
           // 检测当选择模版后会清空当前所有的模块内容
           // 此时重新调用获取当前模块内容信息
           this.resetFlag = val;
           this.getContentInfo();
         },
          menuTempId: function (val) {
+          console.log(val);
           this.menuList = val;
           this.menuTempId = val;
           this.getUserVisualization();
         },
         formTempFlag:function(val){
+          console.log(val);
           let self = this;
           this.formTempFlag = val;
-          console.log(val);
           if(this.formTempFlag){
-            this.visualList = JSON.parse(JSON.stringify(self.visualFormList));
+            if(this.visualFormList){
+              this.visualList = JSON.parse(JSON.stringify(self.visualFormList));
+            }
           }
         },
         updateTempFlag:function(val){
+          console.log(val);
           this.updateTempFlag = val;
           if(this.updateTempFlag){
             this.getUserVisualization();
           }
         },
          visualTempList:function(val){
-          console.log("visualTempList:"+val);
-          this.visualList = JSON.parse(JSON.stringify(val));
+          console.log(val);
+          this.visualList = JSON.parse(JSON.stringify(this.visualTempList));
         }
       },
       mounted(){
+        // 接收监听值
+          this.visualList = JSON.parse(JSON.stringify(this.visualTempList));
+
           // this.getUserVisualization();
           // 初始化模版内容
           this.getContentInfo();

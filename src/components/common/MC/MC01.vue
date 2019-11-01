@@ -5,11 +5,21 @@
     <div class="main">
       <div class="borde">{{mcTitle}}</div>
       <div class="timeStamp">{{timeStamp}}</div>
-        <a-radio-group @change="handleChange" v-model="valueTime" class="timeChange">
+      <div class="change-time">
+        <a-dropdown>
+          <a-menu slot="overlay" @click="handleMenuClick">
+            <a-menu-item key="1"><a-icon type="user" />昨日</a-menu-item>
+            <a-menu-item key="2"><a-icon type="user" />近7天</a-menu-item>
+            <a-menu-item key="3"><a-icon type="user" />近30天</a-menu-item>
+          </a-menu>
+          <a-button class="change-btn"> 筛选日期 <a-icon type="down" /> </a-button>
+        </a-dropdown>
+      </div>
+        <!-- <a-radio-group @change="handleChange" v-model="valueTime" class="timeChange">
           <a-radio :value="1">过去一天</a-radio>
           <a-radio :value="2">过去7天</a-radio>
           <a-radio :value="3">过去30天</a-radio>
-        </a-radio-group>
+        </a-radio-group> -->
       <div :id="mcId" class="main-id"></div>
     </div>
   </div>
@@ -21,7 +31,7 @@ export default {
   data() {
     return {
       timeInterval: "",
-      timeStamp: "2019/10/28-2019/10/28",
+      timeStamp: "",
       mcList: "",
       valueTime:1,
       mc:""
@@ -57,13 +67,17 @@ export default {
 
   },
   methods: {
+     handleMenuClick(e) {
+        console.log('click', e.key);
+        this.initChart(e.key);
+      },
     //下拉框change事件
-    handleChange(e){
-      // 动态获取能耗排行数据信息
-      let self = this;
-      this.initChart(e.target.value);
-      // this.refreshData();
-    },
+    // handleChange(e){
+    //   // 动态获取能耗排行数据信息
+    //   let self = this;
+    //   this.initChart(e.target.value);
+    //   // this.refreshData();
+    // },
     // 查看可视化界面内容数据信息
     initChart:function(dateType,type){
       let self = this;
@@ -113,12 +127,11 @@ export default {
             show: true,
             top:'1%',
             feature: {
-              dataView: {
-                show: true, 
-                readOnly: true,
-                // icon: '../../../assets/img/btn-data.png',
-                lang:['数据视图', '关闭','']
-                }
+              // dataView: {
+              //   show: true, 
+              //   readOnly: true,
+              //   lang:['数据视图', '关闭','']
+              //   }
             },
             iconStyle: {
               normal: {
@@ -229,26 +242,38 @@ canvas {
 .main-id {
   width: 470px;
   height: 258px;
-  margin-top: 24px;
+  margin: 0 auto;
 }
-
 .ant-radio-wrapper{
   color:#ffffff;
 }
-  .timeStamp{
+.timeStamp{
     position: absolute;
-    left: 22%;
-    font-size: 16px;
-    top: 3%;
+    right: 44%;
+    font-size: 14px;
+    top: 7%;
     color: #ffffff;
     text-align: right;
-  }
-  .timeChange{
+}
+.change-time{
     color: #fff;
     position: absolute;
-    left: 6%;
-    top: 13%;
-  }
+    right: 26%;
+    top: 7%;
+    font-size: 14px;
+    z-index: 99;
+    background: transparent;
+}
+.change-btn{
+    width: 80px;
+    height: 22px;
+    line-height: 22px;
+    text-align: center;
+    font-size: 12px;
+    background: transparent;
+    color: #fff;
+    padding: 0;
+}
 </style>
 
 

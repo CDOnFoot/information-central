@@ -193,20 +193,16 @@ canvas {
   height: 100% !important;
   left: -6px !important;
 }
-/* #flow{
-  width: 470px;
-  height: 240px;
-} */
 .main-id {
   width: 470px;
   height: 270px;
 }
-  .timeStamp{
-    position: absolute;
-    left: 6%;
-    font-size: 16px;
-    top: 10%;
-    color: #ffffff;
-    text-align: right;
-  }
+.timeStamp{
+  position: absolute;
+  right: 10%;
+  font-size: 16px;
+  top: 10%;
+  color: #ffffff;
+  text-align: right;
+}
 </style>

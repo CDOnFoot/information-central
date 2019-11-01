@@ -22,6 +22,13 @@
       if(config.url!='login'){
         if (token === 'null' || token === '' || token==="undefined") {
           console.log(token);
+          self.$info({
+            title: '提示',
+            content: '当前登录状态已过期！',
+            onOk() {
+              self.$router.push('/login');
+            },
+          });
           // router.replace({
           //   path: '/login' // 到登录页重新获取token
           // })

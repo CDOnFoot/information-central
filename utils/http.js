@@ -223,7 +223,7 @@
         }else {
           param = formateParm(params);
         }
-        var urlencode = urlEncode(host + url,param);
+        var urlencode = urlEncode(hosts + url,param);
         return axios({
           method: 'get',
           url:urlencode,

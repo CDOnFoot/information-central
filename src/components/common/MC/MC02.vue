@@ -40,7 +40,7 @@ export default {
     clearInterval(this.timeTimeOut);
     this.timeTimeOut = setTimeout(function() {
       self.initChart('update');
-    }, 200);
+    }, 20);
   },
     created() {
       
@@ -57,7 +57,7 @@ export default {
         let self = this;
         let param={
           };
-        this.$http.gets(self.$api.energystructure, param).then(res =>{
+        this.$http.get(self.$api.energystructure, param).then(res =>{
           //调取数据成功
           if(res.data){
             if (res.data.code === "0") {

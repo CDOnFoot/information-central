@@ -76,7 +76,7 @@ export default {
       let param={
         queryType: dateType
         };
-      this.$http.posts(self.$api.getEnergytopten, param).then(res =>{
+      this.$http.post(self.$api.getEnergytopten, param).then(res =>{
         //调取数据成功
         if(res.data){
           if (res.data.code === "0") {

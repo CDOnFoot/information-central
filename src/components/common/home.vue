@@ -403,7 +403,7 @@
         this.formListFlag = true;
 
         // 取消传参数
-        this.visualHomeList = JSON.parse(JSON.stringify(this.visualList));
+        // this.visualHomeList = JSON.parse(JSON.stringify(this.visualList));
 
         this.visualParamList = '';//参数可视化布局信息
         this.visualFormList= '';//标准可视化布局信息
@@ -413,12 +413,13 @@
         this.setFlag = !this.setFlag;
         if(!this.setFlag){
           this.formListFlag = true;
+          // this.visualHomeList = JSON.parse(JSON.stringify(this.visualList));
         }else{
           this.formListFlag = false;
           this.updateFlag = false;
+          // this.visualHomeList = JSON.parse(JSON.stringify(this.visualList));
         }
-         // 取消传参数
-        this.visualHomeList = JSON.parse(JSON.stringify(this.visualList));
+         
       },
       // 调起更新保存可视化数据信息
       updateUserContentInfo:function(){
@@ -456,8 +457,9 @@
         let self = this;
         this.$message.success("更新布局设置信息成功.");
 
-        this.visualParamList = '';
-        this.visualFormList = '';
+
+        console.log(this.visualParamList);
+        this.visualHomeList = JSON.parse(JSON.stringify(self.visualParamList));
 
         setTimeout(()=>{
           self.loadFlag = false;
@@ -465,6 +467,8 @@
           self.setFlag = false;
           self.updateFlag = true;
         },300);
+        this.visualParamList = '';
+        this.visualFormList = '';
       },
 
       selectMenu:function(param){

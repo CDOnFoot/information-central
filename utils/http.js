@@ -19,11 +19,14 @@
     // http request 拦截器
     axios.interceptors.request.use(config => {
       let token = common.getCookie('dvptToken');
-      if (token === 'null' || token === '') {
-        router.replace({
-          path: '/login' // 到登录页重新获取token
-        })
-      } 
+      if(config.url!='login'){
+        if (token === 'null' || token === '') {
+          router.replace({
+            path: '/login' // 到登录页重新获取token
+          })
+        } 
+      }
+   
       // 拦截器在请求头中加token/authorization
       // if (localStorage.getItem('Authorization')) {
       //   config.headers.Authorization = localStorage.getItem('Authorization');

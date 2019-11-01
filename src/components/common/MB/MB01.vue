@@ -335,6 +335,7 @@
           //       self.confirmLoading = false;
           //   }
           // }
+          
           if(self.mcList[self.mcTempIndex].contentIndex ==='1'){
             if(this.visibleIndex !=3){
                 self.$info({

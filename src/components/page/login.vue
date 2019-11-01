@@ -90,7 +90,7 @@ import sha256 from "js-sha256";
               loginname:self.userName,
               password:sha256(self.userPassword)
             };
-            this.$http.posts(self.$api.loginIn, param).then(res =>{
+            this.$http.post(self.$api.loginIn, param).then(res =>{
             //调取数据成功
               if(res.data){
                 if (res.data.code === "0") {

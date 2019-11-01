@@ -15,7 +15,7 @@
           <div class="content-main-mk">
             <div class="select-main">
               <div class="select-main-title">指标类型：</div>
-              <a-select defaultValue="" style="width: 120px" @change="handleChange">
+              <a-select defaultValue="" style="width: 120px" v-model="selectVal" @change="handleChange">
                 <a-select-option value="">全部</a-select-option>
                 <a-select-option value="1">主要</a-select-option>
                 <a-select-option value="2">次要</a-select-option>
@@ -166,6 +166,7 @@
         name: "MB01",
         data(){
           return{
+            selectVal:'',
             btnList:'',
             setItemFlag:false,
             title:'选择模块内容',
@@ -410,6 +411,9 @@
           if(type!=2){
             this.visible = true;
             this.visibleIndex = index;
+            this.selectVal ='';
+            this.getContentInfo();
+
           }else{
             this.visibleIndex = index;
             this.showDeleteConfirm(index);

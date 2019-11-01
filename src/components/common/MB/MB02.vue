@@ -2,7 +2,7 @@
 <!--    模版一-->
   <div class="mb-main">
     <div class="mb-left">
-            <a-modal
+                   <a-modal
             :title="title"
             :visible="visible"
             @ok="handleOk"
@@ -11,13 +11,22 @@
             width="50%"
         >
          <div class="modal-content-mk">
+           
           <div class="content-main-mk">
+            <div class="select-main">
+              <div class="select-main-title">指标类型：</div>
+              <a-select defaultValue="" style="width: 120px" @change="handleChange">
+                <a-select-option value="">全部</a-select-option>
+                <a-select-option value="1">主要</a-select-option>
+                <a-select-option value="2">次要</a-select-option>
+              </a-select>
+              <!-- <a-button type="primary" shape="circle" icon="search" class="select-btn-search"></a-button> -->
+            </div>
             <div class="main-item-mk">
               <div class="item-mk" v-for="(item,index) in mcList" :key="index" @click="mcSelect(index)">
                 <div class="item-mk-content" :class="index===mcTempIndex?'active':''">
                   <div class="mk-item-title">{{item.contentName}}</div>
                   <img :src="require('../../../assets/img/'+item.contentNum+'.png') "  alt="" class="item-mk-img"> 
-
                 </div>
               </div>
             </div>
@@ -178,7 +187,8 @@
         name: "MB02",
         data(){
           return{
-           visualList:{
+            selectVal:'',
+            visualList:{
               mb:{
                 templateName:"模版二",
                 templateNum:"MB02",
@@ -419,6 +429,9 @@
             if(type!=2){
               this.visible = true;
               this.visibleIndex = index;
+
+              this.selectVal ='';
+              this.getContentInfo();
             }else{
               this.visibleIndex = index;
               this.showDeleteConfirm(index);

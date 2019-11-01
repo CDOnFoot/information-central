@@ -19,8 +19,10 @@
     // http request 拦截器
     axios.interceptors.request.use(config => {
       let token = common.getCookie('dvptToken');
+      console.log(config.url,token)
       if(config.url!='login'){
-        if (token === 'null' || token === '') {
+        if (token === 'null' || token === '' || token===undefined) {
+          console.log(router);
           router.replace({
             path: '/login' // 到登录页重新获取token
           })

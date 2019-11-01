@@ -62,7 +62,7 @@ export default {
       // 动态获取能耗排行数据信息
       let self = this;
       this.initChart(e.target.value);
-      this.refreshData();
+      // this.refreshData();
     },
     // 查看可视化界面内容数据信息
     initChart:function(dateType,type){

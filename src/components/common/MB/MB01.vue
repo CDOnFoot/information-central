@@ -325,6 +325,16 @@
           let self = this;
           this.confirmLoading = true;
           let flag = false;
+          // if(this.visibleIndex === 3){
+          //   if(self.mcList[self.mcTempIndex].contentIndex ==='1'){
+          //       self.$info({
+          //         title: '提示',
+          //         content: '所选模块内容为主要指标，不可保存至次要指标区域内，请重新选择',
+          //         onOk() {},
+          //       });
+          //       self.confirmLoading = false;
+          //   }
+          // }
           if(self.mcList[self.mcTempIndex].contentIndex ==='1'){
             if(this.visibleIndex !=3){
                 self.$info({

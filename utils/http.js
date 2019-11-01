@@ -13,11 +13,7 @@
 
     //配置信息
     var useStaging = false;
-    var host = useStaging ? 'http://10.66.1.102:28070':'http://10.66.1.102:28070';
-    // var host = useStaging ? 'http://10.66.1.102:28070':'http://10.66.1.65:28070';
-
-    // 指标配置临时ip
-    var hosts = 'http://10.66.1.65:28070';
+    var host = useStaging ? 'http://10.66.1.102:28070':'http://10.66.1.160:28070';
 
     // **路由请求拦截**
     // http request 拦截器
@@ -172,23 +168,6 @@
             return checkCode(res)
           })
       },
-      posts (url, params) {
-        return axios({
-          method: 'post',
-          baseURL: hosts, url,
-          data: qs.stringify(params),
-          timeout: 20000,
-          headers: {
-            'content-Type': 'application/x-www-form-urlencoded;',
-          },
-        }).then(
-          (response) => {
-            return checkStatus(response)
-          }).then(
-          (res) => {
-            return checkCode(res)
-          })
-      },
       //  get请求
       get (url, params) {
         var param;
@@ -215,30 +194,6 @@
           }
         )
       },
-      gets (url, params) {
-        var param;
-        //判断校验情况
-        if (url === "/login") {
-          param = params;
-        }else {
-          param = formateParm(params);
-        }
-        var urlencode = urlEncode(hosts + url,param);
-        return axios({
-          method: 'get',
-          url:urlencode,
-          timeout: 20000,
-          headers: {'content-Type': 'application/json'},
-          request: 'XMLHttpRequest',
-          }).then(
-          (response) => {
-            return checkStatus(response)
-          }
-          ).then(
-          (res) => {
-            return checkCode(res)
-          }
-        )
-      }
+      
     }
 

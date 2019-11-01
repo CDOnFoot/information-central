@@ -7,11 +7,11 @@
 
       <div class="better">
         <div class="fon">
-          <div class="Pleft">100%</div>
+          <div class="Pleft">{{ontimerate}}</div>
           <div class="Pleft">正点率</div>
         </div>
         <div class="fon1">
-          <div class="Pleft">100%</div>
+          <div class="Pleft">{{fullfillment}}</div>
           <div class="Pleft">兑现率</div>
         </div>
       </div>
@@ -28,7 +28,9 @@ export default {
       timeInterval: "",
       timeStamp: this.$common.timestampToTime(new Date()),
       mcList: "",
-      mcId: ""
+      mcId: "",
+      ontimerate:"100%",  //正点率
+      fullfillment:"100%"  //兑现率
     };
   },
   props: ["mcStatus", "mcTitle"],
@@ -48,10 +50,38 @@ export default {
 
     var self = this;
     this.mcList = this.$common.mcList;
-    // this.mcId = this.$common.menuList[0].mb.mk[Number(self.mcStatus)].mc.id;
+    self.getData();
+    //每15分钟刷新一次数据
+    clearInterval(this.timeIntervalData);
+    this.timeIntervalData = setInterval(self.getData(), 1000*60*15);
   },
   created() {},
-  methods: {}
+  methods: {
+    //小数转百分数
+    changeData(point){
+      var str=Number(point*100).toFixed();
+        str+="%";
+        return str;
+    },
+    //获取数据
+    getData(){
+      let self = this;
+        let param={
+          };
+      self.$http.get(self.$api.getOntimeAndFullfillment, param).then(res =>{
+          //调取数据成功
+          if(res.data){
+            if (res.data.code === "0") {
+              console.log(res.data.data)
+              self.ontimerate = self.changeData(res.data.data.ontimerate)
+              self.fullfillment = self.changeData(res.data.data.fullfillment)
+            }else{
+              this.$message.error(res.data.msg);
+            }
+          }
+        });
+    }
+  }
 };
 </script>
 

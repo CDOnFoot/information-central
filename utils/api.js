@@ -38,4 +38,6 @@ export default {
 
   getOntimeAndFullfillment:'/other/getOntimeAndFullfillment', //兑现率/正点率
 
+  getODTopTen:'/passenger/ODTopTen', //OD排行
+
 }

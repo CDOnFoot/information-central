@@ -3,89 +3,48 @@
   <div class="main" :style="{width: '100%', height: '100%'}">
     <div class="borde">{{mcTitle}}</div>
     <div class="timeStamp">{{timeStamp}}</div>
-
-    <div class="bluee">
+    <div class="table-content">
+      <img src="../../../assets/img/table-bg.png" alt="" class="table-bg">
       <a-table
         :columns="columns"
-        :dataSource="data"
+        :dataSource="dataList"
         size="small"
         :pagination="false"
         :showHeader="false"
+        :loading="loadFlag"
+        class="table-main"
       />
     </div>
   </div>
 </template>
 <script>
-import echarts from "echarts";
-const columns = [
-  {
-    title: "Name",
-    dataIndex: "name"
-  },
-  {
-    title: "Age",
-    dataIndex: "age"
-  },
-  {
-    title: "Address",
-    dataIndex: "address"
-  }
-];
-const data = [
-  {
-    key: "1",
-    name: "1",
-    age: "大树营站-东华站",
-    address: "87282"
-  },
-  {
-    key: "2",
-    name: "2",
-    age: "可乐村站-东华站",
-    address: "82999"
-  },
-  {
-    key: "3",
-    name: "3",
-    age: "大树营站 - 昆明南站",
-    address: "73299"
-  },
-  {
-    key: "4",
-    name: "4",
-    age: "可乐村站 - 昆明南站",
-    address: "73022"
-  },
-  {
-    key: "5",
-    name: "5",
-    age: "大树营站 - 斗南站",
-    address: "69364"
-  },
-  {
-    key: "6",
-    name: "6",
-    age: "古城站 - 东华站",
-    address: "67299"
-  },
-  {
-    key: "7",
-    name: "7",
-    age: "大树营站 - 吴家营站",
-    address: "60938"
-  }
-];
 
 export default {
   name: "MC06",
   data() {
     return {
       timeInterval: "",
-      timeStamp: this.$common.timestampToTime(new Date()),
-      data,
-      columns,
+      timeStamp: "",
+      // timeStamp: this.$common.timestampToTime(new Date()),
+      dataList:[],
+      columns:[{
+        title: "Name",
+        dataIndex: "name",
+         width: '15%',
+      },
+      {
+        title: "OD",
+        dataIndex: "od",
+         width: '35%',
+      },
+      {
+        title: "Flows",
+        dataIndex: "flows",
+         width: '50%',
+      }],
       mcList: "",
-      mcId: ""
+      mcId: "",
+      loadFlag:true,
     };
   },
   props: ["mcStatus", "mcTitle"],
@@ -98,22 +57,49 @@ export default {
     }
   },
   mounted() {
-    clearInterval(this.timeInterval);
-    this.timeInterval = setInterval(function() {
-      self.timeStamp = self.$common.timestampToTime(new Date());
-    }, 1000);
-    var self = this;
-    this.mcList = this.$common.mcList;
-    // this.mcId = this.$common.menuList[0].mb.mk[Number(self.mcStatus)].mc.id;
-    // this.mcList.some((item,index)=>{
-    //   if(item.id === this.mcId){
-    //     self.mcTitle = self.mcList[index].title;
-    //     return false;
-    //   }
-    // });
+    // clearInterval(this.timeInterval);
+    // this.timeInterval = setInterval(function() {
+    //   self.timeStamp = self.$common.timestampToTime(new Date());
+    // }, 1000);
+    // var self = this;
+    // this.mcList = this.$common.mcList;
+    this.initSeniority();
   },
   created() {},
-  methods: {}
+  methods: {
+    initSeniority:function(){
+        let self = this;
+        this.seniorityInfo(function(data){
+          self.seniorityInfoList(data);
+        })
+      },
+      seniorityInfo:function(callback){
+        let self = this;
+        let param={
+          };
+        this.$http.get(self.$api.getODTopTen, param).then(res =>{
+          //调取数据成功
+          if(res.data){
+            if (res.data.code === "0") {
+              callback(res.data.data);
+            }else{
+              this.$message.error(res.data.msg);
+            }
+          }
+        });
+      },
+      seniorityInfoList:function(data){
+        this.timeStamp = data.daytime;
+        this.dataList = [];
+        data.result.map((item,index)=>{
+          if(index<=6){
+            item.key=JSON.stringify(item.name);
+            this.dataList.push(item);
+          }
+        });
+        this.loadFlag = false;
+      },
+  }
 };
 </script>
 
@@ -134,19 +120,32 @@ export default {
   left: 6%;
   padding-left: 3%;
 }
-.bluee {
+.table-content{
+  position: relative;
   width: 100%;
   height: 100%;
-  padding-left: 10%;
-  padding-top: 10%;
-  background: url("../../../assets/img/排行.png") no-repeat;
+  overflow: hidden;
+}
+.table-bg{
+  position: absolute;
+  left: 0%;
+  top: 3%;
+  width: 100%;
+
 }
 .timeStamp {
   position: absolute;
-  left: 6%;
+  right: 10%;
   font-size: 16px;
   top: 10%;
   color: #ffffff;
   text-align: right;
 }
+.table-main{
+  position: absolute;
+  width: 100%;
+  top: 20%;
+  left: 7%;
+}
+
 </style>

@@ -3,16 +3,16 @@
   <div>
     <div class="main">
       <div class="borde">{{mcTitle}}</div>
-      <div class="timeStamp">{{timeStamp}}</div>
+      <!-- <div class="timeStamp">{{timeStamp}}</div> -->
 
-      <div class="better">
-        <div class="fon">
-          <div class="Pleft">{{ontimerate}}</div>
-          <div class="Pleft">正点率</div>
+      <div class="dot-main">
+        <div class="dot-num">
+          <div>{{ontimerate}}</div>
+          <div>正点率</div>
         </div>
-        <div class="fon1">
-          <div class="Pleft">{{fullfillment}}</div>
-          <div class="Pleft">兑现率</div>
+        <div class="dot-num">
+          <div>{{fullfillment}}</div>
+          <div>兑现率</div>
         </div>
       </div>
     </div>
@@ -26,7 +26,7 @@ export default {
   data() {
     return {
       timeInterval: "",
-      timeStamp: this.$common.timestampToTime(new Date()),
+      // timeStamp: this.$common.timestampToTime(new Date()),
       mcList: "",
       mcId: "",
       ontimerate:"100%",  //正点率
@@ -43,10 +43,10 @@ export default {
     }
   },
   mounted() {
-    clearInterval(this.timeInterval);
-    this.timeInterval = setInterval(function() {
-      self.timeStamp = self.$common.timestampToTime(new Date());
-    }, 1000);
+    // clearInterval(this.timeInterval);
+    // this.timeInterval = setInterval(function() {
+    //   self.timeStamp = self.$common.timestampToTime(new Date());
+    // }, 1000);
 
     var self = this;
     this.mcList = this.$common.mcList;
@@ -102,26 +102,22 @@ export default {
   left: 6%;
   padding-left: 3%;
 }
-.better {
-  width: 100%;
-  height: 100%;
-  padding-left: 3%;
-  padding-top: 4%;
+.dot-main {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-.fon1,
-.fon {
+.dot-num{
   height: 80%;
   width: 40%;
-  background: url("../../../assets/img/兑现率.png") no-repeat;
-  float: left;
-  margin-left: 20px;
-  margin-top: 20px;
+  background: url("../../../assets/img/dot-bg.png") no-repeat;
   font-size: 26px;
-  padding: 60px 40px;
+  padding: 12% 10%;
+  text-align: center;
 }
-.Pleft {
-  padding-left: 24px;
-}
+
 .timeStamp {
   position: absolute;
   left: 6%;

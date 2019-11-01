@@ -10,24 +10,21 @@
     import { message } from 'ant-design-vue'
     Vue.use(message);
 
-
     //配置信息
     var useStaging = false;
     var host = useStaging ? 'http://10.66.1.102:28070':'http://10.66.1.160:28070';
 
+    var self = this;
     // **路由请求拦截**
     // http request 拦截器
     axios.interceptors.request.use(config => {
       let token = common.getCookie('dvptToken');
-      console.log(config.url)
-      console.log(token);
-      console.log(typeof token);
       if(config.url!='login'){
-        if (token === 'null' || token === '' || token===undefined) {
-          console.log(router);
-          router.replace({
-            path: '/login' // 到登录页重新获取token
-          })
+        if (token === 'null' || token === '' || token==="undefined") {
+          console.log(token);
+          // router.replace({
+          //   path: '/login' // 到登录页重新获取token
+          // })
         } 
       }
    
@@ -43,6 +40,7 @@
     // **路由响应拦截**
     axios.interceptors.response.use(response => {
       // console.log(response);
+      
       return response;
     }, err => {
       // 请求的错误判断,根据不同的错误码不同消息提醒

@@ -220,6 +220,7 @@ import sha256 from "js-sha256";
   .login-register{
     position: relative;
     /* margin-top: 20px; */
+    cursor: pointer;
     font-size: 14px;
     float: right;
     color: #ffffff;

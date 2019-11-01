@@ -433,6 +433,7 @@
     text-align: left;
   }
   .input-login{
+    color: #000000;
     height: 40px !important;
   }
   .has-error .ant-form-explain{
@@ -459,3 +460,19 @@
     border-right-color: #315c85;
     border-bottom-color: #315c85;
   }
+  .ant-spin-blur{
+    display: none;
+  }
+  .ant-table-wrapper {
+    width: 100%;
+    height: 100%;
+  }
+  .ant-spin-nested-loading {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  .ant-spin-nested-loading > div > .ant-spin .ant-spin-dot {
+    top: 33% !important;
+    left: 44% !important;
+}

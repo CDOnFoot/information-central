@@ -98,7 +98,7 @@ export default {
       };
       // Schema:
       var schema = [
-        { name: "Income", index: 0, text: "月累计客流量", unit: "万人次" },
+        { name: "Income", index: 0, text: "月累计客流量", unit: "人次" },
         { name: "LifeExpectancy", index: 1, text: "车站面积", unit: "m²" },
         { name: "Population", index: 2, text: "月累计耗电量", unit: "kWh" },
         { name: "Country", index: 3, text: "车站名称", unit: "" }
@@ -214,7 +214,7 @@ export default {
               }
             },
             axisLabel: {
-              formatter: "{value} 万人次"
+              formatter: "{value} 人次"
             }
           },
           yAxis: {
@@ -256,16 +256,41 @@ export default {
               inRange: {
                 color: (function() {
                   var colors = [
-                    "#bcd3bb",
-                    "#e88f70",
-                    "#edc1a5",
-                    "#9dc5c8",
-                    "#e1e8c8",
-                    "#7b7c68",
-                    "#e5b5b5",
-                    "#f0b489",
-                    "#928ea8",
-                    "#bda29a"
+                    "#dd6b66",
+                    "#759aa0",
+                    "#e69d87",
+                    "#8dc1a9",
+                    "#ea7e53",
+
+                    "#eedd78",
+                    "#73a373",
+                    "#7289ab",
+                    "#91ca8c",
+                    "#f49f42",
+
+                    "#9b8bba",
+                    "#e098c7",
+                    "#8fd3e8",
+                    "#71669e",
+                    "#cc70af",
+
+                    "#7cb4cc",
+                    "#ff715e",
+                    "#ffaf51",
+                    "#ffee51",
+                    "#8c6ac4",
+
+                    "#715c87",
+                    "#fc97af",
+                    "#87f7cf",
+                    "#f7f494",
+                    "#72ccff",
+
+                    "#f7c5a0",
+                    "#d4a4eb",
+                    "#d2f5a6",
+                    "#76f2f2"
+
                   ];
                   return colors.concat(colors);
                 })()
@@ -278,7 +303,7 @@ export default {
               itemStyle: itemStyle,
               data: data.series[0],
               symbolSize: function(val) {
-                return sizeFunction(val[1]);
+                return sizeFunction(val[1] * 10000);
               }
             }
           ],
@@ -301,7 +326,7 @@ export default {
             itemStyle: itemStyle,
             data: data.series[n],
             symbolSize: function(val) {
-              return sizeFunction(val[1]);
+              return sizeFunction(val[1] * 10000);
             }
           }
         });

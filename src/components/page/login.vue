@@ -60,6 +60,7 @@ import sha256 from "js-sha256";
         userName: '',
         userPassword: '',
         loadFlag:false,
+        userInfo:''
       }
     },
     beforeCreate() {
@@ -94,12 +95,11 @@ import sha256 from "js-sha256";
             //调取数据成功
               if(res.data){
                 if (res.data.code === "0") {
-                  self.$common.setCookie('dvptName',self.userName,24 * 60);
-                  self.$common.setCookie('dvptId','16279',24 * 60);
-                  self.$common.setCookie('dvptPwd',sha256(self.userPassword),24 * 60);
-                  self.$common.setCookie('dvptToken',sha256(self.userPassword),24 * 60);
-            //       self.$common.setCookie('dvptToken',sha256(res.data.token),24 * 60);
-            //       self.changeLogin({ token: res.data.token });
+                  self.userInfo = res.data.data;
+                  self.$common.setCookie('dvptName',self.userName,self.userInfo.expiryTime);
+                  self.$common.setCookie('dvptId', self.userInfo.userId,self.userInfo.expiryTime);
+                  self.$common.setCookie('dvptToken',self.userInfo.custom_token,self.userInfo.expiryTime);
+                  self.changeLogin({ token: self.userInfo.custom_token });
                   setTimeout(()=>{
                     self.$router.push('/home/index');
                   },200);

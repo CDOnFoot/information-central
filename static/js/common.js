@@ -20,13 +20,18 @@ var common = {
     return sessionStorage.getItem('accountInfo');
   },
 
-  // 设置cookie
-  setCookie: function(c_name,value,expiremMinutes){
-    var exdate = new Date();
-    exdate.setTime(exdate.getTime() + expiremMinutes * 60 * 1000);
-    document.cookie= c_name + "=" + escape(value)+((expiremMinutes==null) ? "" : ";expires="+exdate.toGMTString());
+  // 设置cookie 后台传入过期时间
+  setCookie: function(c_name,value,expirem){
+    var exdate = new Date(expirem);
+    exdate.setTime(exdate.getTime());
+    document.cookie= c_name + "=" + escape(value)+((expirem==null) ? "" : ";expires="+exdate.toGMTString());
   },
 
+  // setCookie: function(c_name,value,expiremMinutes){
+  //   var exdate = new Date();
+  //   exdate.setTime(exdate.getTime() + expiremMinutes * 60 * 1000);
+  //   document.cookie= c_name + "=" + escape(value)+((expiremMinutes==null) ? "" : ";expires="+exdate.toGMTString());
+  // },
 // 读取cookie
   getCookie: function(c_name){
     if (document.cookie.length>0)

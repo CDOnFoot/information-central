@@ -6,7 +6,7 @@ export default {
 
   // login: 'auth.crias.com/Authorization/api/Authentication/Login',   //login登录
   
-  loginIn: 'login',   //login登录
+  loginIn: '/login',   //login登录
 
   // getMenuInfo: '/server-0.0.1-SNAPSHOT/visualizationLayout/getMenuInfo',   //获取菜单栏显示信息
 
@@ -34,9 +34,9 @@ export default {
 
   energystructure:'/energy/structure', //获取能耗结构数据信息
 
-  getStationCluster:'/other/stationCluster', //车站聚类
+  getStationCluster:'/other/stationcluster', //车站聚类
 
-  getOntimeAndFullfillment:'/other/ontimeAndFullfillment', //兑现率/正点率
+  getOntimeAndFullfillment:'/other/ontimeandfullfillment', //兑现率/正点率
 
   getODTopTen:'/passenger/odtopten', //OD排行
 

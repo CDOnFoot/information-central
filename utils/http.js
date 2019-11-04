@@ -18,8 +18,12 @@
     // **路由请求拦截**
     // http request 拦截器
     axios.interceptors.request.use(config => {
+      console.log(config);
       let token = common.getCookie('dvptToken');
-      if(config.url!='login'){
+      // 拦截器在请求头中加token/authorization
+      console.log(common.getCookie('dvptId'));
+      console.log(common.getCookie('dvptToken'));
+      if(config.url!='/login'){
         if (token === 'null' || token === '' || token==="undefined") {
           console.log(token);
           self.$info({
@@ -31,20 +35,24 @@
           });
           // router.replace({
           //   path: '/login' // 到登录页重新获取token
-          // })
-        } 
+          // });
+        } else{
+          config.headers={
+            userId: common.getCookie("dvptId"),
+            custom_token: common.getCookie("dvptToken"),
+            'content-Type': "application/x-www-form-urlencoded"
+          };
+          console.log(config.headers);
+        }
+        
+      }else{
+        console.log(config.url)
       }
+     
    
-      // 拦截器在请求头中加token/authorization
-      console.log(self.$common.getCookie('dvptId'));
-      console.log(self.$common.getCookie('dvptToken'));
+      
 
-      if (self.$common.getCookie('dvptId')) {
-        config.headers.userId = self.$common.getCookie('dvptId');
-      }
-      if (self.$common.getCookie('dvptToken')) {
-        config.headers.custom_token = self.$common.getCookie('dvptToken');
-      }
+      
       
       return config
     }, error => {
@@ -175,11 +183,7 @@
           baseURL: host, url,
           data: qs.stringify(params),
           timeout: 20000,
-          headers: {
-            'content-Type': 'application/x-www-form-urlencoded;',
-            // 'userId':userId,
-            // 'custom_token':custom_token
-          },
+         
         }).then(
           (response) => {
             return checkStatus(response)
@@ -202,12 +206,7 @@
           method: 'get',
           url:urlencode,
           timeout: 20000,
-          headers: {
-            'content-Type': 'application/json',
-            // 'userId':userId,
-            // 'custom_token':custom_token
-          },
-          request: 'XMLHttpRequest',
+          // request: 'XMLHttpRequest',
           }).then(
           (response) => {
             return checkStatus(response)

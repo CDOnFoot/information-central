@@ -153,7 +153,14 @@ export default {
           {
             name: "走势",
             type: "line",
-            stack: "总量",
+            // stack: "总量",
+            label: {
+              normal: {
+                show: true,
+                position: "top",
+                // color:'#fff'
+              }
+            },
             areaStyle: { normal: {} },
             data: [
               920,
@@ -173,13 +180,8 @@ export default {
           {
             name: "预测",
             type: "line",
-            stack: "总量",
-            label: {
-              normal: {
-                show: true,
-                position: "top"
-              }
-            },
+            // stack: "总量",
+            
             areaStyle: { normal: {} },
             data: [
               820,
@@ -199,10 +201,10 @@ export default {
         ]
       };
       // 动态放置数据
-      option.xAxis[0].data = paramData.timeList;
-      option.series[0].data = paramData.realTimeList;
-      option.series[1].data = paramData.forecastList;
-      console.info(self.mc);
+      // option.xAxis[0].data = paramData.timeList;
+      // option.series[0].data = paramData.realTimeList;
+      // option.series[1].data = paramData.forecastList;
+      // console.info(self.mc);
       self.mc.setOption(option,true)
 
       }else{
@@ -214,9 +216,9 @@ export default {
     refreshData:function(paramData){
       let self = this;
       let option = (self.mc).getOption();
-      option.xAxis[0].data = paramData.time;
-      option.series[0].data = paramData.realTimeList;
-      option.series[1].data = paramData.forecastList;
+      // option.xAxis[0].data = paramData.time;
+      // option.series[0].data = paramData.realTimeList;
+      // option.series[1].data = paramData.forecastList;
       self.mc.setOption(option);    
     },
   }

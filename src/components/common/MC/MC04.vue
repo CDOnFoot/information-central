@@ -59,8 +59,41 @@ export default {
     // this.mcId = this.$common.menuList[0].mb.mk[Number(self.mcStatus)].mc.id;
     // this.drawLine();
   },
-  created() {},
-  methods: {}
+  created() {
+     //页面刚进入时开启长连接
+      // this.initWebSocket();
+  },
+   destroyed: function() {
+    //页面销毁时关闭长连接
+      // this.websocketclose();
+    },
+  methods: {
+ initWebSocket:function(){
+    const wsuri = "wss://www.chg.red/app/api/dollMachine/";//ws地址
+    this.websocket = new WebSocket(wsuri);
+    this.websocket.onopen = this.websocketonopen;
+    this.websocket.onerror = this.websocketonerror;
+    this.websocket.onmessage = this.websocketonmessage;
+    this.websocket.onclose = this.websocketclose;
+    },
+    websocketonopen() {
+        // console.log("WebSocket连接成功");
+    },
+    websocketonerror(e) { //错误
+        // console.log("WebSocket连接发生错误:"+e);
+    },
+    websocketonmessage(e){ //数据接收
+        // console.log(e);
+        const redata = JSON.parse(e.data);
+        let code = JSON.stringify(redata.code);
+    },
+    websocketsend(agentData){//数据发送
+        this.websocket.send(agentData);
+    },
+    websocketclose(e){  //关闭
+        console.log("connection closed"+ e);
+    },
+  }
 };
 </script>
 
@@ -72,15 +105,7 @@ export default {
   width: 102.3%;
   height: 100.7%;
 }
-.borde {
-  font-weight: 700;
-  color: #3467c5;
-  border-left: #3467c5 solid 4px;
-  position: absolute;
-  top: 4%;
-  right: 6%;
-  padding-left: 3%;
-}
+
 .main-id{
   width: 100%;
   height: 100%;

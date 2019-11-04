@@ -92,15 +92,7 @@ export default {
   width: 100%;
   height: 100%;
 }
-.borde {
-  font-weight: 700;
-  color: #3467c5;
-  border-left: #3467c5 solid 4px;
-  position: absolute;
-  top: 4%;
-  left: 6%;
-  padding-left: 3%;
-}
+
 .dot-main {
     width: 100%;
     height: 100%;

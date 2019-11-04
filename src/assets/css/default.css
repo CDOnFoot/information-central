@@ -404,7 +404,7 @@
   }
   .register-name {
     font-size: 16px;
-    color: #3467c5;
+    color: #ffffff;
     margin-right: 10px;
     line-height: 30px;
 }
@@ -477,4 +477,13 @@
   .ant-spin-nested-loading > div > .ant-spin .ant-spin-dot {
     top: 33% !important;
     left: 44% !important;
+}
+.borde{
+  font-weight: 700;
+  color: #ffffff;
+  border-left: #3467c5 solid 4px;
+  position: absolute;
+  top: 4%;
+  left: 6%;
+  padding-left: 3%;
 }

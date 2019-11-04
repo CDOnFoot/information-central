@@ -37,10 +37,10 @@ export default {
     var self = this;
     this.mcList = this.$common.mcList; 
     this.initChart('init')
-    clearInterval(this.timeTimeOut);
-    this.timeTimeOut = setTimeout(function() {
-      self.initChart('update');
-    }, 20);
+    // clearInterval(this.timeTimeOut);
+    // this.timeTimeOut = setTimeout(function() {
+    //   self.initChart('update');
+    // }, 20);
   },
     created() {
       
@@ -195,15 +195,7 @@ export default {
   width: 100%;
   height: 100%;
 }
-.borde {
-  font-weight: 700;
-  color: #3467c5;
-  border-left: #3467c5 solid 4px;
-  position: absolute;
-  top: 4%;
-  left: 6%;
-  padding-left: 3%;
-}
+
 canvas{
   width: 100% !important;
   height: 100% !important;

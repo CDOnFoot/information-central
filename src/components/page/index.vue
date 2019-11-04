@@ -73,6 +73,8 @@
         // 获取从子组件MB传值 模版可视化内容信息
         saveSetMsg:function(msgList,msgFormList){
           console.log(msgList);
+          console.log(msgFormList);
+
           let self = this;
           // 再次上传至上一层home组件内/嵌套路由传值
           this.$emit('uploadSetMsg',msgList,msgFormList);

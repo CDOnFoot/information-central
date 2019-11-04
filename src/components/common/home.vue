@@ -217,7 +217,9 @@
       },
       // 由子界面子路由传值结果
       uploadSaveSetMsg:function(msgList,msgFormList){
-        console.log('由子界面子路由传值结果：',msgList,msgFormList);
+        console.log('由子界面子路由传值结果 msg：',msgList);
+        console.log('由子界面子路由传值结果 form：',msgFormList);
+
         this.visualParamList = msgList;
         this.visualFormList = msgFormList;
         // console.log(this.visualParamList.mb.mk[4].mc,this.visualFormList.mb.mk[4].mc);

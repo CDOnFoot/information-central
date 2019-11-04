@@ -2,7 +2,7 @@
   <!--    模块内容一-->
   <div class="main" :style="{width: '100%', height: '100%'}">
     <div class="borde">{{mcTitle}}</div>
-    <div class="timeStamp">{{timeStamp}}</div>
+    <div class="timeStamp">查询时间：{{timeStamp}}</div>
     <div class="table-content">
       <img src="../../../assets/img/table-bg.png" alt="" class="table-bg">
       <a-table
@@ -111,15 +111,7 @@ export default {
   width: 100%;
   height: 100%;
 }
-.borde {
-  font-weight: 700;
-  color: #3467c5;
-  border-left: #3467c5 solid 4px;
-  position: absolute;
-  top: 4%;
-  left: 6%;
-  padding-left: 3%;
-}
+
 .table-content{
   position: relative;
   width: 100%;
@@ -135,7 +127,7 @@ export default {
 }
 .timeStamp {
   position: absolute;
-  right: 75%;
+  right: 10%;
   font-size: 16px;
   top: 12%;
   color: #ffffff;

@@ -252,6 +252,7 @@
           console.log(val);
           let self = this;
           this.formTempFlag = val;
+          console.log(this.visualFormList)
           if(this.formTempFlag){
             if(this.visualFormList){
               this.visualList = JSON.parse(JSON.stringify(self.visualFormList));
@@ -274,7 +275,7 @@
         // 接收监听值
           this.visualList = JSON.parse(JSON.stringify(this.visualTempList));
 
-          // this.getUserVisualization();
+          this.getUserVisualization();
           // 初始化模版内容
           this.getContentInfo();
           this.btnList = this.$common.btnList;
@@ -311,6 +312,7 @@
           let dataMap = data.menuList;
           this.visualList = dataMap;
           this.visualFormList =JSON.parse(JSON.stringify(dataMap));
+          console.log(this.visualFormList);
         },
 
         handleChange(value) {
@@ -337,7 +339,11 @@
           //   }
           // }
           
-          if(self.mcList[self.mcTempIndex].contentIndex ==='1'){
+          console.log(self.mcList[self.mcTempIndex].contentIndex);
+          console.log(self.visibleIndex);
+          console.log(typeof(self.visibleIndex));
+
+          if(self.mcList[self.mcTempIndex].contentIndex === 1){
             if(this.visibleIndex !=3){
                 self.$info({
                     title: '提示',
@@ -397,6 +403,9 @@
             contentName : self.mcList[this.mcTempIndex].contentName,
             contentNum : self.mcList[this.mcTempIndex].contentNum,
           };
+          console.log(self.visualList);
+          console.log(self.visualFormList)
+
           // 传值给父组件 如菜单index.vue
           self.$emit('saveSetMessage', self.visualList,self.visualFormList);
 

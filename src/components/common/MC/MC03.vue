@@ -4,7 +4,7 @@
   <div>
     <div class="main">
       <div class="borde">{{mcTitle}}</div>
-      <div class="timeStamp">{{timeStamp}}</div>
+      <div class="timeStamp">查询时间：{{timeStamp}}</div>
       <div :id="mcId" class="main-id"></div>
     </div>
   </div>
@@ -18,7 +18,7 @@ export default {
     return {
       mcList: "",
       timeInterval: "",
-      timeStamp: this.$common.timestampToTime(new Date()),
+      timeStamp: "",
       mc:'',
     };
   },
@@ -204,6 +204,8 @@ export default {
       option.xAxis[0].data = paramData.timeList;
       option.series[0].data = paramData.realTimeList;
       option.series[1].data = paramData.forecastList;
+      self.timeStamp = paramData.queryTime;
+
       console.info(self.mc);
       self.mc.setOption(option,true)
 
@@ -219,6 +221,7 @@ export default {
       option.xAxis[0].data = paramData.time;
       option.series[0].data = paramData.realTimeList;
       option.series[1].data = paramData.forecastList;
+      self.timeStamp = paramData.queryTime;
       self.mc.setOption(option);    
     },
   }
@@ -233,15 +236,7 @@ export default {
   width: 100%;
   height: 100%;
 }
-.borde {
-  font-weight: 700;
-  color: #3467c5;
-  border-left: #3467c5 solid 4px;
-  position: absolute;
-  top: 4%;
-  left: 6%;
-  padding-left: 3%;
-}
+
 canvas {
   width: 100% !important;
   height: 100% !important;

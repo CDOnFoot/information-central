@@ -30,14 +30,14 @@ export default {
 
 
   // 指标信息
-  getEnergytopten: '/energy/energytopten',   //获取能耗排行数据信息
+  getEnergytopten: '/energy/topten',   //获取能耗排行数据信息
 
-  energystructure:'/energy/energystructure', //获取能耗结构数据信息
+  energystructure:'/energy/structure', //获取能耗结构数据信息
 
-  getStationCluster:'/other/getStationCluster', //车站聚类
+  getStationCluster:'/other/stationCluster', //车站聚类
 
-  getOntimeAndFullfillment:'/other/getOntimeAndFullfillment', //兑现率/正点率
+  getOntimeAndFullfillment:'/other/ontimeAndFullfillment', //兑现率/正点率
 
-  getODTopTen:'/passenger/ODTopTen', //OD排行
+  getODTopTen:'/passenger/odtopten', //OD排行
 
 }

@@ -36,9 +36,15 @@
       }
    
       // 拦截器在请求头中加token/authorization
-      // if (localStorage.getItem('Authorization')) {
-      //   config.headers.Authorization = localStorage.getItem('Authorization');
-      // }
+      console.log(self.$common.getCookie('dvptId'));
+      console.log(self.$common.getCookie('dvptToken'));
+
+      if (self.$common.getCookie('dvptId')) {
+        config.headers.userId = self.$common.getCookie('dvptId');
+      }
+      if (self.$common.getCookie('dvptToken')) {
+        config.headers.custom_token = self.$common.getCookie('dvptToken');
+      }
       
       return config
     }, error => {
@@ -171,6 +177,8 @@
           timeout: 20000,
           headers: {
             'content-Type': 'application/x-www-form-urlencoded;',
+            // 'userId':userId,
+            // 'custom_token':custom_token
           },
         }).then(
           (response) => {
@@ -194,7 +202,11 @@
           method: 'get',
           url:urlencode,
           timeout: 20000,
-          headers: {'content-Type': 'application/json'},
+          headers: {
+            'content-Type': 'application/json',
+            // 'userId':userId,
+            // 'custom_token':custom_token
+          },
           request: 'XMLHttpRequest',
           }).then(
           (response) => {

@@ -199,7 +199,7 @@ export default {
         ]
       };
       // 动态放置数据
-      option.xAxis[0].data = paramData.time;
+      option.xAxis[0].data = paramData.timeList;
       option.series[0].data = paramData.realTimeList;
       option.series[1].data = paramData.forecastList;
       console.info(self.mc);

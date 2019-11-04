@@ -126,7 +126,7 @@
         visualFormList:'',//标准可视化布局信息
         formListFlag:false,//取消布局重置信息
         updateFlag:'',//布局更新信息falg
-        userName:'Chan',
+        userName:this.$common.getCookie('dvptId'),
         visualList:'',//接口查询布局信息
         visualHomeList:'',
       }

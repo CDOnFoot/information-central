@@ -282,6 +282,7 @@
       border: dashed 2px;
       border-radius: 10px;
       border-color: #ffffff;
+      background: rgba(0, 0, 0, 0.4);
       width: 95%;
       height: 95%;
       position: absolute;
@@ -292,6 +293,7 @@
     }
     .hide-sub-right{
       border: dashed 2px;
+      background: rgba(0, 0, 0, 0.4);
       border-radius: 10px;
       border-color: #ffffff;
       width: 95%;
@@ -314,6 +316,7 @@
       height: 30%;
     }
     .hide-sub-key{
+      background: rgba(0, 0, 0, 0.4);
       border: dashed 2px;
       border-radius: 10px;
       border-color: #ffffff;
@@ -402,7 +405,7 @@
   }
   .register-name {
     font-size: 16px;
-    color: #ffffff;
+    color: #3467c5;
     margin-right: 10px;
     line-height: 30px;
 }

@@ -135,9 +135,9 @@ export default {
 }
 .timeStamp {
   position: absolute;
-  right: 10%;
+  right: 75%;
   font-size: 16px;
-  top: 10%;
+  top: 12%;
   color: #ffffff;
   text-align: right;
 }

@@ -5,8 +5,6 @@
     import qs from 'qs'
     import common from '../static/js/common.js'
     import api from './api'
-
-    // import {imToken,pin} from "./AppSetup"
     import { message } from 'ant-design-vue'
     Vue.use(message);
 

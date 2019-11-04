@@ -8,9 +8,9 @@
       <div class="change-time">
         <a-dropdown>
           <a-menu slot="overlay" @click="handleMenuClick">
-            <a-menu-item key="1"><a-icon type="user" />昨日</a-menu-item>
-            <a-menu-item key="2"><a-icon type="user" />近7天</a-menu-item>
-            <a-menu-item key="3"><a-icon type="user" />近30天</a-menu-item>
+            <a-menu-item key="1">昨日</a-menu-item>
+            <a-menu-item key="2">近7天</a-menu-item>
+            <a-menu-item key="3">近30天</a-menu-item>
           </a-menu>
           <a-button class="change-btn"> 筛选日期 <a-icon type="down" /> </a-button>
         </a-dropdown>
@@ -125,13 +125,13 @@ export default {
           },
           toolbox: {
             show: true,
-            top:'1%',
+            top:'15%',
             feature: {
-              // dataView: {
-              //   show: true, 
-              //   readOnly: true,
-              //   lang:['数据视图', '关闭','']
-              //   }
+              dataView: {
+                show: true, 
+                readOnly: true,
+                lang:['数据视图', '关闭','']
+                }
             },
             iconStyle: {
               normal: {
@@ -261,7 +261,7 @@ canvas {
     right: 26%;
     top: 7%;
     font-size: 14px;
-    z-index: 99;
+    z-index: 19;
     background: transparent;
 }
 .change-btn{
@@ -272,6 +272,7 @@ canvas {
     font-size: 12px;
     background: transparent;
     color: #fff;
+    border: #fff;
     padding: 0;
 }
 </style>

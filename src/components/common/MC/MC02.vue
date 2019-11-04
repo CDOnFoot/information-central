@@ -123,8 +123,8 @@ export default {
             series: [
               { type: "line", smooth: true, seriesLayoutBy: "row" },
               { type: "line", smooth: true, seriesLayoutBy: "row" },
-              { type: "line", smooth: true, seriesLayoutBy: "row" },
-              { type: "line", smooth: true, seriesLayoutBy: "row" },
+              // { type: "line", smooth: true, seriesLayoutBy: "row" },
+              // { type: "line", smooth: true, seriesLayoutBy: "row" },
               {
                 type: "pie",
                 id: "pie",
@@ -140,7 +140,7 @@ export default {
                 }
               }
             ],
-            color:['#c23531', '#61a0a8', '#d48265', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3']
+            // color:['#c23531', '#61a0a8', '#d48265', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3']
           };
           //鼠标的随着日期移动 饼图变动的监听事件
           self.structure.on("updateAxisPointer", function(event) {
@@ -172,7 +172,15 @@ export default {
       refreshData(paramData){
         let self = this;
         let option = (self.structure).getOption();
+        console.log(paramData)
+        console.log(option.series)
+        var serLast = option.series[option.series.length-1]
+        option.series=[serLast]
         option.dataset[0].source = paramData;
+        for(var i=1;i<paramData.length;i++){
+          option.series.unshift({ type: "line", smooth: true, seriesLayoutBy: "row" })
+        }
+        console.log(option.series)
         self.structure.setOption(option);     
     },
   }

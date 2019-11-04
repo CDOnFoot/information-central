@@ -1,4 +1,4 @@
-    'use strict'
+'use strict'
     import Vue from "vue";
     import axios from 'axios'
     // import {SHA1} from "./SHA";
@@ -217,4 +217,3 @@
       },
       
     }
-

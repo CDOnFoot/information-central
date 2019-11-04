@@ -72,7 +72,6 @@ export default {
           //调取数据成功
           if(res.data){
             if (res.data.code === "0") {
-              console.log(res.data.data)
               self.ontimerate = self.changeData(res.data.data.ontimerate)
               self.fullfillment = self.changeData(res.data.data.fullfillment)
             }else{

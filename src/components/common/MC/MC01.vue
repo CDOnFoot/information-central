@@ -197,7 +197,6 @@ export default {
       // 动态放置数据
         option.series[0].data = paramData.energy;
         option.yAxis.data = paramData.station;
-        console.info(self.mc);
         self.mc.setOption(option,true)
 
       }else{
@@ -213,8 +212,8 @@ export default {
       option.yAxis.data = paramData.station;
       self.mc.setOption(option);    
     },
-    }
-  };
+  }
+};
 </script>
 
 <style scoped>

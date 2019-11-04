@@ -11,19 +11,14 @@
     //配置信息
     var useStaging = false;
     var host = useStaging ? 'http://10.66.1.102:28070':'http://10.66.1.160:28070';
-
     var self = this;
     // **路由请求拦截**
     // http request 拦截器
     axios.interceptors.request.use(config => {
-      console.log(config);
       let token = common.getCookie('dvptToken');
-      // 拦截器在请求头中加token/authorization
-      console.log(common.getCookie('dvptId'));
-      console.log(common.getCookie('dvptToken'));
+      // 拦截器在请求头中加token/userId
       if(config.url!='/login'){
         if (token === 'null' || token === '' || token==="undefined") {
-          console.log(token);
           self.$info({
             title: '提示',
             content: '当前登录状态已过期！',
@@ -40,17 +35,9 @@
             custom_token: common.getCookie("dvptToken"),
             'content-Type': "application/x-www-form-urlencoded"
           };
-          console.log(config.headers);
         }
         
-      }else{
-        console.log(config.url)
       }
-     
-   
-      
-
-      
       
       return config
     }, error => {

@@ -282,7 +282,7 @@
       border: dashed 2px;
       border-radius: 10px;
       border-color: #ffffff;
-      background: rgba(0, 0, 0, 0.4);
+      background: rgba(0, 0, 0, 0.5);
       width: 95%;
       height: 95%;
       position: absolute;
@@ -293,7 +293,7 @@
     }
     .hide-sub-right{
       border: dashed 2px;
-      background: rgba(0, 0, 0, 0.4);
+      background: rgba(0, 0, 0, 0.5);
       border-radius: 10px;
       border-color: #ffffff;
       width: 95%;
@@ -316,7 +316,7 @@
       height: 30%;
     }
     .hide-sub-key{
-      background: rgba(0, 0, 0, 0.4);
+      background: rgba(0, 0, 0, 0.5);
       border: dashed 2px;
       border-radius: 10px;
       border-color: #ffffff;
@@ -378,13 +378,12 @@
     margin-left: 0.6%;
   }
   .time-interval{
-    /* right: 0.8%; */
-  position: absolute;
-  right: 6%;
-  line-height: 24px;
-  top: 12%;
-  color: #ffffff;
-  font-size: 16px;
+    position: absolute;
+    right: 7%;
+    line-height: 24px;
+    top: 12%;
+    color: #ffffff;
+    font-size: 16px;
   }
   .load-content{
     position: absolute;

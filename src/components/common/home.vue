@@ -37,7 +37,7 @@
           <iframe width="60%" scrolling="no" height="24" frameborder="0" allowtransparency="false" src="//i.tianqi.com/index.php?c=code&id=1&color=%23FFFFFF&icon=1&py=beijing&wind=0&num=1&site=12" style="float:right;"></iframe>
         </div> -->
         <div class="user-register">
-          <div class="register-name">{{userName}}</div>
+          <div class="register-name"><a-icon type="user" />{{userName}}</div>
           <div class="register-group" @click="loginOut">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-dianyuan"></use>
@@ -205,14 +205,15 @@
           okType: 'danger',
           cancelText: '取消',
           onOk() {
-            self.$common.delCookie('token');
-            self.$message.info("注销成功.");
-            self.$router.push('/login'); 
+            self.$http.get(self.$api.loginOut).then(res =>{
+              self.$common.delCookie('token');
+              self.$message.info("注销成功.");
+              self.$router.push('/login'); 
+            });
           },
           onCancel() {
           },
         });
-      
       },
       // 由子界面子路由传值结果
       uploadSaveSetMsg:function(msgList,msgFormList){

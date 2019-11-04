@@ -6,6 +6,8 @@ export default {
   
   loginIn: '/login',   //login登录
 
+  loginOut: '/logout',   //login登出
+
   getMenuInfo: '/visualizationLayout/getMenuInfo',   //获取菜单栏显示信息
 
   getTemplateInfo: '/visualizationLayout/getTemplateInfo',   //查看模版列表信息
@@ -27,5 +29,9 @@ export default {
   getOntimeAndFullfillment:'/other/ontimeandfullfillment', //兑现率/正点率
 
   getODTopTen:'/passenger/odtopten', //OD排行
+
+  getPassenger:'/passenger/passengerforecast',//查询客流走势/客流预测
+
+  getRailInfo:'/passenger/getrailinfo'//查询列车实时运行图
 
 }

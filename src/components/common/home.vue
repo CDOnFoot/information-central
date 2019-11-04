@@ -33,9 +33,9 @@
       <div class="header-canvas">
         <div class="title">大数据分析决策平台</div>
         <div class="time-interval">{{timeStamp}}</div>
-        <!-- <div class="weather">
+        <div class="weather">
           <iframe width="60%" scrolling="no" height="24" frameborder="0" allowtransparency="false" src="//i.tianqi.com/index.php?c=code&id=1&color=%23FFFFFF&icon=1&py=beijing&wind=0&num=1&site=12" style="float:right;"></iframe>
-        </div> -->
+        </div>
         <div class="user-register">
           <div class="register-name"><a-icon type="user" />{{userName}}</div>
           <div class="register-group" @click="loginOut">
@@ -191,7 +191,7 @@
       visualizationInfo:function(data){
         this.visualList = data.menuList;
         this.visualHomeList = JSON.parse(JSON.stringify(data.menuList));
-        console.log(this.visualHomeList);
+        // console.log(this.visualHomeList);
         this.mbId = this.visualList.mb.templateNum;
       },
 
@@ -217,8 +217,8 @@
       },
       // 由子界面子路由传值结果
       uploadSaveSetMsg:function(msgList,msgFormList){
-        console.log('由子界面子路由传值结果 msg：',msgList);
-        console.log('由子界面子路由传值结果 form：',msgFormList);
+        // console.log('由子界面子路由传值结果 msg：',msgList);
+        // console.log('由子界面子路由传值结果 form：',msgFormList);
 
         this.visualParamList = msgList;
         this.visualFormList = msgFormList;
@@ -262,7 +262,7 @@
             }
           })
         })
-        console.log(this.menuList)
+        // console.log(this.menuList)
 
          //查看界面可视化布局信息 
         this.getUserVisualization();

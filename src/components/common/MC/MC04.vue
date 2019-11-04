@@ -15,11 +15,12 @@
             :style="{position:'absolute',top:item.dot[0],left:item.dot[1]}">
               <a-popover placement="topLeft" arrowPointAtCenter class="popover-item">
               <template slot="content">
-                <p>{{'2019-10-29 19:00:00'}}</p>
-                <p>当前车次：{{item.runId}}({{'xxx类型'}})</p>
+                <!-- <p>{{'2019-10-29 19:00:00'}}</p> -->
+                <p>当前车次：{{item.runId}}</p>
+                <p>车次类型：{{'xxx类型'}}</p>
                 <p>前方到站：{{'xxxx站'}}</p>
               </template>
-              <span slot="title">{{item.title}}</span>
+              <span slot="title">{{item.dotName}}</span>
               <a-button class="runway-item"></a-button>
             </a-popover>
           </div>
@@ -57,7 +58,6 @@ export default {
     var self = this;
     this.mcList = this.$common.mcList;
     // this.mcId = this.$common.menuList[0].mb.mk[Number(self.mcStatus)].mc.id;
-    // this.drawLine();
   },
   created() {
      //页面刚进入时开启长连接

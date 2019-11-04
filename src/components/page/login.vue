@@ -101,8 +101,8 @@ import sha256 from "js-sha256";
                   self.$common.setCookie('dvptId', self.userInfo.userId,self.userInfo.expiryTime);
                   self.$common.setCookie('dvptToken',self.userInfo.custom_token,self.userInfo.expiryTime);
 
-                  console.log(self.$common.getCookie('dvptId'));
-                  console.log(self.$common.getCookie('dvptToken'));
+                  // console.log(self.$common.getCookie('dvptId'));
+                  // console.log(self.$common.getCookie('dvptToken'));
 
                   self.changeLogin({ token: self.userInfo.custom_token });
                   setTimeout(()=>{

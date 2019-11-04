@@ -37,13 +37,13 @@
           this.resetFlag = val;
         },
         mbId: function (val) {
-          console.log(val);
+          // console.log(val);
           this.currentMB = val;
         },
         menuId:function(val){
           this.menuId = val;
           this.menuTempId = val;
-          console.log(this.menuId);
+          // console.log(this.menuId);
           // this.getUserVisualization();
         },
         //从父元素home.vue获取重置取消flag
@@ -59,8 +59,8 @@
           this.visualHomeTempList = val;
           this.visualTempList = JSON.parse(JSON.stringify(val));
           this.currentMB = this.visualTempList.mb.templateNum;
-          console.log(this.visualHomeTempList);
-          console.log(this.visualTempList);
+          // console.log(this.visualHomeTempList);
+          // console.log(this.visualTempList);
 
         }
       },
@@ -72,8 +72,8 @@
       methods:{
         // 获取从子组件MB传值 模版可视化内容信息
         saveSetMsg:function(msgList,msgFormList){
-          console.log(msgList);
-          console.log(msgFormList);
+          // console.log(msgList);
+          // console.log(msgFormList);
 
           let self = this;
           // 再次上传至上一层home组件内/嵌套路由传值

@@ -232,24 +232,24 @@
       props: ['setFlag','resetFlag','menuTempId','formTempFlag','updateTempFlag','visualTempList'],
       watch: {
         setFlag: function (val) {
-          console.log(val);
+          // console.log(val);
           this.setFlag = val;
         },
         resetFlag: function (val) {
-          console.log(val);
+          // console.log(val);
           // 检测当选择模版后会清空当前所有的模块内容
           // 此时重新调用获取当前模块内容信息
           this.resetFlag = val;
           this.getContentInfo();
         },
          menuTempId: function (val) {
-          console.log(val);
+          // console.log(val);
           this.menuList = val;
           this.menuTempId = val;
           this.getUserVisualization();
         },
         formTempFlag:function(val){
-          console.log(val);
+          // console.log(val);
           let self = this;
           this.formTempFlag = val;
           console.log(this.visualFormList)
@@ -260,14 +260,14 @@
           }
         },
         updateTempFlag:function(val){
-          console.log(val);
+          // console.log(val);
           this.updateTempFlag = val;
           if(this.updateTempFlag){
             this.getUserVisualization();
           }
         },
          visualTempList:function(val){
-          console.log(val);
+          // console.log(val);
           this.visualList = JSON.parse(JSON.stringify(this.visualTempList));
         }
       },
@@ -312,7 +312,7 @@
           let dataMap = data.menuList;
           this.visualList = dataMap;
           this.visualFormList =JSON.parse(JSON.stringify(dataMap));
-          console.log(this.visualFormList);
+          // console.log(this.visualFormList);
         },
 
         handleChange(value) {

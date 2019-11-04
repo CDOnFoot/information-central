@@ -205,8 +205,7 @@ export default {
       option.series[0].data = paramData.realTimeList;
       option.series[1].data = paramData.forecastList;
       self.timeStamp = paramData.queryTime;
-
-      console.info(self.mc);
+      // console.info(self.mc);
       self.mc.setOption(option,true)
 
       }else{

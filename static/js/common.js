@@ -124,13 +124,13 @@ var common = {
     {
       runId: "XC01",
       dotId: "CZ012",
-      title: "苏-小",
+      dotName: "苏-小",
       dot: ["18.5%", "30.5%"]
     },
     {
       runId: "XC02",
       dotId: "CZ029",
-      title: "朱家村站",
+      dotName: "朱家村站",
       dot: ["43%", "58%"]
     },
   ],

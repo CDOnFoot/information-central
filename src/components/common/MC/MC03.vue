@@ -155,11 +155,11 @@ export default {
             type: "line",
             // stack: "总量",
             label: {
-              normal: {
-                show: true,
-                position: "top",
-                // color:'#fff'
-              }
+              // normal: {
+              //   show: true,
+              //   position: "top",
+              //   // color:'#fff'
+              // }
             },
             areaStyle: { normal: {} },
             data: [
@@ -201,10 +201,10 @@ export default {
         ]
       };
       // 动态放置数据
-      // option.xAxis[0].data = paramData.timeList;
-      // option.series[0].data = paramData.realTimeList;
-      // option.series[1].data = paramData.forecastList;
-      // console.info(self.mc);
+      option.xAxis[0].data = paramData.timeList;
+      option.series[0].data = paramData.realTimeList;
+      option.series[1].data = paramData.forecastList;
+      console.info(self.mc);
       self.mc.setOption(option,true)
 
       }else{
@@ -216,9 +216,9 @@ export default {
     refreshData:function(paramData){
       let self = this;
       let option = (self.mc).getOption();
-      // option.xAxis[0].data = paramData.time;
-      // option.series[0].data = paramData.realTimeList;
-      // option.series[1].data = paramData.forecastList;
+      option.xAxis[0].data = paramData.time;
+      option.series[0].data = paramData.realTimeList;
+      option.series[1].data = paramData.forecastList;
       self.mc.setOption(option);    
     },
   }

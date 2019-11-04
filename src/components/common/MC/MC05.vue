@@ -302,7 +302,7 @@ export default {
               itemStyle: itemStyle,
               data: data.series[0],
               symbolSize: function(val) {
-                return sizeFunction(val[1] * 10000);
+                return sizeFunction(val[1] * 1000);
               }
             }
           ],
@@ -325,7 +325,7 @@ export default {
             itemStyle: itemStyle,
             data: data.series[n],
             symbolSize: function(val) {
-              return sizeFunction(val[1] * 10000);
+              return sizeFunction(val[1] * 1000);
             }
           }
         });

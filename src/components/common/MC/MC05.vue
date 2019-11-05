@@ -36,10 +36,10 @@ export default {
     this.mcList = this.$common.mcList;
 
    self.initChart('init');
-   clearInterval(this.timeTimeOut);
-    self.timeTimeOut = setTimeout(function() {
-      self.initChart('update');
-    }, 20);
+  //  clearInterval(this.timeTimeOut);
+  //   self.timeTimeOut = setTimeout(function() {
+  //     self.initChart('update');
+  //   }, 20);
   },
   created() {},
   methods: {

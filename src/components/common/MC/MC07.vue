@@ -29,8 +29,8 @@ export default {
       // timeStamp: this.$common.timestampToTime(new Date()),
       mcList: "",
       mcId: "",
-      ontimerate:"100%",  //正点率
-      fullfillment:"100%"  //兑现率
+      ontimerate:"0%",  //正点率
+      fullfillment:"0%"  //兑现率
     };
   },
   props: ["mcStatus", "mcTitle"],

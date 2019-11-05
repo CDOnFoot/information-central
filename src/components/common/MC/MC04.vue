@@ -37,9 +37,9 @@ export default {
     return {
       mcList: "",
       n: 0,
-      wayList:this.$common.wayList,
-      runList:this.$common.runList,
-      
+      wayList: this.$common.wayList,
+      runList: this.$common.runList,
+      noticeList: [],
     };
   },
   props: ["mcStatus", "mcTitle",'mcId'],
@@ -57,41 +57,55 @@ export default {
   mounted() {
     var self = this;
     this.mcList = this.$common.mcList;
-    // this.mcId = this.$common.menuList[0].mb.mk[Number(self.mcStatus)].mc.id;
+    setTimeout(()=>{
+      self.pushDataInfo();
+    },1000 * 5);
   },
   created() {
      //页面刚进入时开启长连接
-      // this.initWebSocket();
+    console.log(window.location.protocol);
+    this.initWebSocket();
   },
    destroyed: function() {
     //页面销毁时关闭长连接
       // this.websocketclose();
     },
   methods: {
- initWebSocket:function(){
-    const wsuri = "wss://www.chg.red/app/api/dollMachine/";//ws地址
-    this.websocket = new WebSocket(wsuri);
-    this.websocket.onopen = this.websocketonopen;
-    this.websocket.onerror = this.websocketonerror;
-    this.websocket.onmessage = this.websocketonmessage;
-    this.websocket.onclose = this.websocketclose;
+    // 消息推送
+    pushDataInfo:function(){
+    },
+
+// 初始化websocket连接数据
+    initWebSocket:function(){
+      const wsuri = "ws://10.66.1.102:28070/wsMy?jspCode=AA";//ws地址
+      this.websocket = new WebSocket(wsuri);
+      this.websocket.onopen = this.websocketonopen;
+      this.websocket.onerror = this.websocketonerror;
+      this.websocket.onmessage = this.websocketonmessage;
+      this.websocket.onclose = this.websocketclose;
     },
     websocketonopen() {
-        // console.log("WebSocket连接成功");
+      console.log("WebSocket连接成功");
     },
-    websocketonerror(e) { //错误
-        // console.log("WebSocket连接发生错误:"+e);
+    websocketonerror(e) { 
+      //错误
+      console.log(e);
+      console.log("WebSocket连接发生错误:"+e);
     },
-    websocketonmessage(e){ //数据接收
-        // console.log(e);
-        const redata = JSON.parse(e.data);
-        let code = JSON.stringify(redata.code);
+    websocketonmessage(event){ //数据接收
+      console.log(e);
+      console.log(event.data)
+      // const redata = JSON.parse(e.data);
+      // let code = JSON.stringify(redata.code);
     },
-    websocketsend(agentData){//数据发送
-        this.websocket.send(agentData);
+    websocketsend(agentData){
+      //数据发送
+      this.websocket.send(agentData);
     },
-    websocketclose(e){  //关闭
-        console.log("connection closed"+ e);
+    websocketclose(e){  
+      //关闭
+      console.log(e);
+      console.log("connection closed"+ e);
     },
   }
 };

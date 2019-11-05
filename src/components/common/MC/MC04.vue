@@ -40,6 +40,7 @@ export default {
       wayList: this.$common.wayList,
       runList: this.$common.runList,
       noticeList: [],
+      timeInterval:'',
     };
   },
   props: ["mcStatus", "mcTitle",'mcId'],
@@ -50,34 +51,59 @@ export default {
     mcTitle: function(val) {
       this.mcTitle = val;
     },
-     mcId:function(val){
-        this.mcId = val;
-      }
+    mcId:function(val){
+      this.mcId = val;
+    }
   },
   mounted() {
     var self = this;
     this.mcList = this.$common.mcList;
-    setTimeout(()=>{
-      self.pushDataInfo();
-    },1000 * 5);
+ 
   },
   created() {
-     //页面刚进入时开启长连接
-    console.log(window.location.protocol);
-    this.initWebSocket();
+    //页面刚进入时开启长连接
+    // this.initWebSocket();
+    let self = this;
+    clearInterval(this.timeInterval);
+    this.timeInterval = setInterval(function() {
+      self.pushDataInfo();
+    }, 1000 * 30);
   },
-   destroyed: function() {
+  destroyed: function() {
     //页面销毁时关闭长连接
-      // this.websocketclose();
-    },
+    // this.websocketclose();
+  },
   methods: {
     // 消息推送
     pushDataInfo:function(){
+      this.noticeList = {
+        'id':'CZ01',
+        'type':'固定',
+        'carId':'079',
+        'carStatus':'下行',
+        'status':'',
+        'stationId':'16',
+        'stationLeave':'四方坪',
+        'stationArrive':'\N'
+      };
+      console.log(this.noticeList);
+      this.noticeCarFunc();
     },
 
+
+    // 初始化列车运行图信息
+    noticeCarFunc:function(){
+      let self = this;
+      this.wayList.some((item,index)=>{
+        if(item.dotId === self.noticeList.id){
+          
+          return false;
+        }
+      });
+    },
 // 初始化websocket连接数据
     initWebSocket:function(){
-      const wsuri = "ws://10.66.1.102:28070/wsMy?jspCode=AA";//ws地址
+      const wsuri = "ws://10.66.1.65:28070/subway/info/ws/123";//ws地址
       this.websocket = new WebSocket(wsuri);
       this.websocket.onopen = this.websocketonopen;
       this.websocket.onerror = this.websocketonerror;
@@ -89,23 +115,28 @@ export default {
     },
     websocketonerror(e) { 
       //错误
+      console.log("WebSocket连接发生错误:");
       console.log(e);
-      console.log("WebSocket连接发生错误:"+e);
+
     },
-    websocketonmessage(event){ //数据接收
+    websocketonmessage(e){ //数据接收
+      console.log("WebSocket连接数据接收中:");
       console.log(e);
-      console.log(event.data)
+  
+      // console.log(event.data)
       // const redata = JSON.parse(e.data);
       // let code = JSON.stringify(redata.code);
     },
     websocketsend(agentData){
       //数据发送
+      console.log("WebSocket数据发送消息中:");
       this.websocket.send(agentData);
     },
     websocketclose(e){  
       //关闭
-      console.log(e);
-      console.log("connection closed"+ e);
+      console.log("connection closed");
+      this.websocket.close();
+
     },
   }
 };

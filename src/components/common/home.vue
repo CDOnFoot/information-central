@@ -7,8 +7,7 @@
         @ok="handleOk"
         :confirmLoading="confirmLoading"
         @cancel="handleCancel"
-        width="50%"
-      >
+        width="50%">
         <div class="modal-content-mb">
           <div class="content-main-mb">
             <div class="main-item-mb">
@@ -18,7 +17,6 @@
                   <div class="mb-item-title">{{item.templateName}}</div>
                   <img :src="require('../../assets/img/mbBg'+index+'.png') "  alt="" class="item-mb-img"> 
                 </div>
-                
               </div>
             </div>
           </div>
@@ -50,8 +48,7 @@
       <div class="load-content" v-show="loadFlag">
         <a-spin class="load-img" size="large" />
       </div>
-      <router-view :menuIndex="menuIndex" :setFlag="setFlag" :menuId="menuId" :mbId="mbId"
-      :resetFlag="resetFlag" @uploadSetMsg="uploadSaveSetMsg" :formListFlag="formListFlag" :updateFlag="updateFlag" :visualHomeList="visualHomeList"></router-view>
+      <router-view :menuIndex="menuIndex" :setFlag="setFlag" :menuId="menuId" :mbId="mbId" @uploadSetMsg="uploadSaveSetMsg" :visualHomeList="visualHomeList"></router-view>
     </a-layout-content>
     <a-layout-footer style="text-align: center">
       <div class="menu-list">
@@ -120,15 +117,12 @@
         mbTempIndex:'',
         mbId:'',
         // setTempFlag:false,
-        resetFlag:false,
         loadFlag:false,
         visualParamList:'',//参数可视化布局信息
-        visualFormList:'',//标准可视化布局信息
         formListFlag:false,//取消布局重置信息
-        updateFlag:'',//布局更新信息falg
         userName:this.$common.getCookie('dvptName'),
         visualList:'',//接口查询布局信息
-        visualHomeList:'',
+        visualHomeList:'',//传值布局信息
       }
     },
     computed:{
@@ -189,10 +183,11 @@
         });
       },
       visualizationInfo:function(data){
-        this.visualList = data.menuList;
+        this.visualList = JSON.parse(JSON.stringify(data.menuList));
         this.visualHomeList = JSON.parse(JSON.stringify(data.menuList));
-        // console.log(this.visualHomeList);
+        this.visualParamList = JSON.parse(JSON.stringify(data.menuList));
         this.mbId = this.visualList.mb.templateNum;
+
       },
 
       // 用户登出注销后 清除session信息 ，并返回登录页
@@ -216,14 +211,9 @@
         });
       },
       // 由子界面子路由传值结果
-      uploadSaveSetMsg:function(msgList,msgFormList){
-        // console.log('由子界面子路由传值结果 msg：',msgList);
-        // console.log('由子界面子路由传值结果 form：',msgFormList);
-
+      uploadSaveSetMsg:function(msgList){
+        console.log('由子界面子路由传值结果 msg：',msgList);
         this.visualParamList = msgList;
-        this.visualFormList = msgFormList;
-        // console.log(this.visualParamList.mb.mk[4].mc,this.visualFormList.mb.mk[4].mc);
-
       },
       // 查看菜单栏数据信息
       getMenuInfo:function(){
@@ -262,7 +252,6 @@
             }
           })
         })
-        // console.log(this.menuList)
 
          //查看界面可视化布局信息 
         this.getUserVisualization();
@@ -323,9 +312,6 @@
           this.visualParamList = JSON.parse(JSON.stringify(this.visualList));
         }
         this.confirmLoading = true;
-        // console.log(this.visualList);
-        // console.log(param.mb.templateNum);
-        // console.log(this.mbList.records[self.mbTempIndex].templateNum);
         if(param.mb.templateNum === this.mbList.records[self.mbTempIndex].templateNum){
             self.$info({
               title: '提示',
@@ -341,7 +327,6 @@
             self.mcTempIndex = 0;
             self.confirmLoading = false;
           }, 1000);
-
           this.saveMBFunction();
         }
 
@@ -350,8 +335,6 @@
       saveMBFunction:function(){
         // this.mbIndex = this.mbTempIndex;
         let self = this;
-        console.log(this.mbList);
-        console.log(this.visualParamList);
         this.mbId = this.mbList.records[this.mbTempIndex].templateNum;
         this.$common.visualList.some((item,index)=>{
           if(item.mb.templateNum === self.mbId){
@@ -359,15 +342,7 @@
             return false;
           }
         })
-        // this.visualParamList.mb.templateNum = this.mbList.records[this.mbTempIndex].templateNum;
-        // this.visualParamList.mb.templateName = this.mbList.records[this.mbTempIndex].templateName;
-        // this.visualParamList.mb.mc = '';
-        console.log(this.visualParamList);
         this.visualHomeList = JSON.parse(JSON.stringify(this.visualParamList));
-
-
-        console.log(this.mbId);
-        this.resetFlag = true;
       },
       handleCancel(e) {
         this.visible = false;
@@ -375,7 +350,9 @@
       },
       saveSetMsg:function(){
         let self = this;
-        if(this.visualParamList === this.visualFormList){
+
+        console.log(JSON.stringify(this.visualParamList) == JSON.stringify(this.visualList));
+        if(JSON.stringify(this.visualParamList) == JSON.stringify(this.visualList)){
           this.$info({
             title: '提醒',
             content:'当前无可视化布局设置信息更改.',
@@ -395,7 +372,6 @@
             },
             onCancel() {
               console.log('确定取消保存');
-              // self.formListFlag = true;
             },
           });
         }
@@ -406,23 +382,22 @@
         this.formListFlag = true;
 
         // 取消传参数
-        // this.visualHomeList = JSON.parse(JSON.stringify(this.visualList));
-
-        this.visualParamList = '';//参数可视化布局信息
-        this.visualFormList= '';//标准可视化布局信息
+        this.visualHomeList = JSON.parse(JSON.stringify(this.visualList));
+        this.visualParamList = JSON.parse(JSON.stringify(this.visualList));
+        //参数可视化布局信息
       },
       layoutSetting:function(){
         let self = this;
         this.setFlag = !this.setFlag;
         if(!this.setFlag){
-          this.formListFlag = true;
-          // this.visualHomeList = JSON.parse(JSON.stringify(this.visualList));
+          this.visualHomeList = JSON.parse(JSON.stringify(this.visualList));
+
         }else{
-          this.formListFlag = false;
-          this.updateFlag = false;
-          // this.visualHomeList = JSON.parse(JSON.stringify(this.visualList));
+          if(this.visualParamList){
+            this.visualHomeList = JSON.parse(JSON.stringify(this.visualParamList));
+          }
         }
-         
+        this.visualParamList = JSON.parse(JSON.stringify(this.visualList));
       },
       // 调起更新保存可视化数据信息
       updateUserContentInfo:function(){
@@ -459,9 +434,6 @@
       UserContentInfo:function(data){
         let self = this;
         this.$message.success("更新布局设置信息成功.");
-
-
-        console.log(this.visualParamList);
         this.visualHomeList = JSON.parse(JSON.stringify(self.visualParamList));
 
         setTimeout(()=>{
@@ -470,8 +442,8 @@
           self.setFlag = false;
           self.updateFlag = true;
         },300);
-        this.visualParamList = '';
-        this.visualFormList = '';
+        this.getUserVisualization();
+
       },
 
       selectMenu:function(param){

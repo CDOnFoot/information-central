@@ -296,7 +296,9 @@
         },
          visualTempList:function(val){
           console.log(val);
-          this.visualList = JSON.parse(JSON.stringify(this.visualTempList));
+          // this.visualList = JSON.parse(JSON.stringify(this.visualTempList));
+          this.visualList = JSON.parse(JSON.stringify(val));
+
         }
       },
       mounted(){

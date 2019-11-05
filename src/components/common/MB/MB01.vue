@@ -168,7 +168,6 @@
           return{
             selectVal:'',
             btnList:'',
-            setItemFlag:false,
             title:'选择模块内容',
             visible: false,
             confirmLoading: false,
@@ -176,6 +175,7 @@
             mcIndex:'',
             mcTempIndex:'',
             visibleIndex:'',
+            visualDataList:'',
             visualList:{
               mb:{
                 templateName:"模版一",
@@ -226,56 +226,26 @@
                 ]
               }
             },
-            visualFormList:'',
           }
         },
-      props: ['setFlag','resetFlag','menuTempId','formTempFlag','updateTempFlag','visualTempList'],
+      props: ['menuTempId','visualTempList','setFlag'],
       watch: {
-        setFlag: function (val) {
-          // console.log(val);
-          this.setFlag = val;
-        },
-        resetFlag: function (val) {
-          // console.log(val);
-          // 检测当选择模版后会清空当前所有的模块内容
-          // 此时重新调用获取当前模块内容信息
-          this.resetFlag = val;
-          this.getContentInfo();
-        },
          menuTempId: function (val) {
-          // console.log(val);
           this.menuList = val;
           this.menuTempId = val;
-          this.getUserVisualization();
-        },
-        formTempFlag:function(val){
-          // console.log(val);
-          let self = this;
-          this.formTempFlag = val;
-          console.log(this.visualFormList)
-          if(this.formTempFlag){
-            if(this.visualFormList){
-              this.visualList = JSON.parse(JSON.stringify(self.visualFormList));
-            }
-          }
-        },
-        updateTempFlag:function(val){
-          // console.log(val);
-          this.updateTempFlag = val;
-          if(this.updateTempFlag){
-            this.getUserVisualization();
-          }
+          // this.getUserVisualization();
         },
          visualTempList:function(val){
-          // console.log(val);
-          this.visualList = JSON.parse(JSON.stringify(this.visualTempList));
+          this.visualList = JSON.parse(JSON.stringify(val));
+        },
+         setFlag:function(val){
+          this.setFlag = val;
         }
       },
       mounted(){
         // 接收监听值
           this.visualList = JSON.parse(JSON.stringify(this.visualTempList));
-
-          this.getUserVisualization();
+          // this.getUserVisualization();
           // 初始化模版内容
           this.getContentInfo();
           this.btnList = this.$common.btnList;
@@ -284,90 +254,73 @@
         created(){
         },
         methods:{
-          // 查看可视化界面内容数据信息
-        getUserVisualization:function(){
-          let self = this;
-          this.userVisualizationList(function(data){
-            self.visualizationInfo(data);
-          })
-        },
-        userVisualizationList:function(callback){
-          let self = this;
-          let param={
-            userNum: self.$common.getCookie('dvptId'),
-            menuNum: self.menuTempId
-            };
-          this.$http.post(self.$api.getUserVisualization, param).then(res =>{
-            //调取数据成功
-            if(res.data){
-              if (res.data.code === "0") {
-                callback(res.data.data)
+            // 查看可视化界面内容数据信息
+          getUserVisualization:function(){
+            let self = this;
+            this.userVisualizationList(function(data){
+              self.visualizationInfo(data);
+            })
+          },
+          userVisualizationList:function(callback){
+            let self = this;
+            let param={
+              userNum: self.$common.getCookie('dvptId'),
+              menuNum: self.menuTempId
+              };
+            this.$http.post(self.$api.getUserVisualization, param).then(res =>{
+              //调取数据成功
+              if(res.data){
+                if (res.data.code === "0") {
+                  callback(res.data.data)
+                }else{
+                this.$message.error(res.data.msg);
+                }
+              }
+            });
+          },
+          visualizationInfo:function(data){
+            let dataMap = data.menuList;
+            this.visualListData = dataMap;
+          },
+
+          handleChange(value) {
+            this.mcList =[];
+            this.mcTempIndex = '';
+            this.getContentInfo(value);
+          },
+          mcSelect:function(param){
+            this.mcTempIndex = param;
+          },
+          // 确定选择模块内容操作信息
+          handleOk(e) {
+            let self = this;
+            this.confirmLoading = true;
+            let flag = false;
+            if(self.mcList[self.mcTempIndex].contentIndex === 1){
+              if(this.visibleIndex !=3){
+                  self.$info({
+                      title: '提示',
+                      content: '所选模块内容为主要指标，不可保存至次要指标区域内，请重新选择',
+                      onOk() {},
+                    });
+                    self.confirmLoading = false;
               }else{
-               this.$message.error(res.data.msg);
+                this.saveHandleOk();
+              }
+            }else{
+              if(this.visibleIndex ===3){
+                  self.$info({
+                      title: '提示',
+                      content: '所选模块内容为次要指标，不可保存至主要指标区域内，请重新选择',
+                      onOk() {},
+                    });
+                    self.confirmLoading = false;
+              }else{
+                this.saveHandleOk();
               }
             }
-          });
-        },
-        visualizationInfo:function(data){
-          let dataMap = data.menuList;
-          this.visualList = dataMap;
-          this.visualFormList =JSON.parse(JSON.stringify(dataMap));
-          // console.log(this.visualFormList);
-        },
-
-        handleChange(value) {
-          this.mcList =[];
-          this.mcTempIndex = '';
-          this.getContentInfo(value);
-        },
-        mcSelect:function(param){
-          this.mcTempIndex = param;
-        },
-        // 确定选择模块内容操作信息
-        handleOk(e) {
-          let self = this;
-          this.confirmLoading = true;
-          let flag = false;
-          // if(this.visibleIndex === 3){
-          //   if(self.mcList[self.mcTempIndex].contentIndex ==='1'){
-          //       self.$info({
-          //         title: '提示',
-          //         content: '所选模块内容为主要指标，不可保存至次要指标区域内，请重新选择',
-          //         onOk() {},
-          //       });
-          //       self.confirmLoading = false;
-          //   }
-          // }
-          
-          console.log(self.mcList[self.mcTempIndex].contentIndex);
-          console.log(self.visibleIndex);
-          console.log(typeof(self.visibleIndex));
-
-          if(self.mcList[self.mcTempIndex].contentIndex === 1){
-            if(this.visibleIndex !=3){
-                self.$info({
-                    title: '提示',
-                    content: '所选模块内容为主要指标，不可保存至次要指标区域内，请重新选择',
-                    onOk() {},
-                  });
-                  self.confirmLoading = false;
-            }else{
-              this.saveHandleOk();
-            }
-          }else{
-            if(this.visibleIndex ===3){
-                self.$info({
-                    title: '提示',
-                    content: '所选模块内容为次要指标，不可保存至主要指标区域内，请重新选择',
-                    onOk() {},
-                  });
-                  self.confirmLoading = false;
-            }else{
-              this.saveHandleOk();
-            }
-          }
-        },
-        // 保存至选择项内操作信息
+          },
+          // 保存至选择项内操作信息
         saveHandleOk:function(){
           let self = this;
           var flag = false;
@@ -403,11 +356,12 @@
             contentName : self.mcList[this.mcTempIndex].contentName,
             contentNum : self.mcList[this.mcTempIndex].contentNum,
           };
-          console.log(self.visualList);
-          console.log(self.visualFormList)
-
+          console.log(self.visualDataList);
+          
           // 传值给父组件 如菜单index.vue
-          self.$emit('saveSetMessage', self.visualList,self.visualFormList);
+          self.$emit('saveSetMessage', self.visualList);
+          // self.$emit('saveSetMessage', self.visualDataList);
+
 
         },
         handleCancel(e) {
@@ -438,7 +392,7 @@
             cancelText: '取消',
             onOk() {
                 self.visualList.mb.mk[paramIndex].mc = '';
-                self.$emit('saveSetMessage', self.visualList,self.visualFormList);
+                self.$emit('saveSetMessage', self.visualList);
             },
             onCancel() {
             },
@@ -491,27 +445,3 @@
     height: 100%;
   }
 </style>
-
-  // console.log("MB01: "+self.resetFlag);
-  // this.menuList = this.$common.menuList;
-  // this.menuList.some((item,index)=>{
-  //   if(item.mb){
-  //     if(item.mb.id === self.currentMC.mbId){
-  //       item.mb.mk.some((items,indexs)=>{
-  //         if(self.resetFlag){
-  //             self.currentMC.mc[indexs].key = '';
-  //             self.currentMC.mc[indexs].type = '';
-  //             self.currentMC.mc[indexs].title = '';
-  //         }else{
-  //           if(items.mc){
-  //             self.currentMC.mc[indexs].key = self.$common.menuList[index].mb.mk[indexs].mc.id;
-  //             self.currentMC.mc[indexs].type = self.$common.menuList[index].mb.mk[indexs].mc.type;
-  //             self.currentMC.mc[indexs].title = self.$common.menuList[index].mb.mk[indexs].mc.title;
-  //             return false;
-  //           }
-  //         }
-  //       });
-  //       callback(this.currentMC);
-  //     }
-  //   }
-  // });

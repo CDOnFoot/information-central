@@ -1,12 +1,9 @@
 <!--首页信息-->
 <template>
     <keep-alive>
-        <component :is="currentMB" :setFlag="setFlag" :resetFlag = "resetFlag" 
-        :menuTempId= "menuTempId" @saveSetMessage="saveSetMsg" :formTempFlag="formTempFlag" :updateTempFlag="updateTempFlag" :visualTempList="visualTempList"
-        class="mb-content"></component>
+        <component :is="currentMB" :setFlag="setFlag" :menuTempId= "menuTempId" @saveSetMessage="saveSetMsg" :visualTempList="visualTempList" class="mb-content"></component>
     </keep-alive>
 </template>
-
 <script>
     import MB01 from '../../components/common/MB/MB01';
     import MB02 from '../../components/common/MB/MB02';
@@ -15,52 +12,34 @@
         data(){
             return{
               currentMB:'',
-              visualList:'',
-              visualTempList:'',//临时传参给模版界面 'MB0X'
+              visualTempList:'',//临时传参给模版界面 'MB0X',
+              visualList:'',//实际查询到的数据List
+              mb:'',//实际查询到的MBID
               menuTempId:'',
-              formTempFlag:'',
-              updateTempFlag:'',
               visualHomeTempList:'',
             }
         },
-      props: ['setFlag','mbId','resetFlag','menuId','formListFlag','updateFlag','visualHomeList'],
+      props: ['setFlag','mbId','menuId','visualHomeList'],
 //  'menuIndex',
       components:{
         MB01,
         MB02
       },
       watch: {
-        setFlag: function (val) {
+         setFlag: function (val) {
           this.setFlag = val;
         },
-        resetFlag: function (val) {
-          this.resetFlag = val;
-        },
         mbId: function (val) {
-          // console.log(val);
           this.currentMB = val;
         },
         menuId:function(val){
           this.menuId = val;
           this.menuTempId = val;
-          // console.log(this.menuId);
-          // this.getUserVisualization();
-        },
-        //从父元素home.vue获取重置取消flag
-        formListFlag:function(val){
-          this.formListFlag = val;
-          this.formTempFlag = val;
-        },
-        updateFlag:function(val){
-          this.updateFlag = val;
-          this.updateTempFlag = val;
         },
         visualHomeList:function(val){
           this.visualHomeTempList = val;
           this.visualTempList = JSON.parse(JSON.stringify(val));
           this.currentMB = this.visualTempList.mb.templateNum;
-          // console.log(this.visualHomeTempList);
-          // console.log(this.visualTempList);
 
         }
       },
@@ -71,13 +50,11 @@
       },
       methods:{
         // 获取从子组件MB传值 模版可视化内容信息
-        saveSetMsg:function(msgList,msgFormList){
-          // console.log(msgList);
-          // console.log(msgFormList);
-
+        saveSetMsg:function(msgList){
+          console.log(msgList);
           let self = this;
           // 再次上传至上一层home组件内/嵌套路由传值
-          this.$emit('uploadSetMsg',msgList,msgFormList);
+          this.$emit('uploadSetMsg',msgList);
 
         },
         // 查看可视化界面内容数据信息
@@ -104,10 +81,7 @@
         },
         visualizationInfo:function(data){
           this.visualList = data.menuList;
-          this.visualTempList = data.menuList;
-          this.currentMB = data.menuList.mb.templateNum;
-          // console.log(this.visualTempList);
-          // console.log(this.currentMB);
+          this.mb = data.menuList.mb.templateNum;
         },
       }
     }

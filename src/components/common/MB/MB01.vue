@@ -175,7 +175,6 @@
             mcIndex:'',
             mcTempIndex:'',
             visibleIndex:'',
-            visualDataList:'',
             visualList:{
               mb:{
                 templateName:"模版一",
@@ -245,7 +244,6 @@
       mounted(){
         // 接收监听值
           this.visualList = JSON.parse(JSON.stringify(this.visualTempList));
-          // this.getUserVisualization();
           // 初始化模版内容
           this.getContentInfo();
           this.btnList = this.$common.btnList;
@@ -356,11 +354,8 @@
             contentName : self.mcList[this.mcTempIndex].contentName,
             contentNum : self.mcList[this.mcTempIndex].contentNum,
           };
-          console.log(self.visualDataList);
-          
           // 传值给父组件 如菜单index.vue
           self.$emit('saveSetMessage', self.visualList);
-          // self.$emit('saveSetMessage', self.visualDataList);
 
 
         },

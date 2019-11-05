@@ -35,17 +35,17 @@ export default {
     }
   },
   mounted() {
-    clearInterval(this.timeInterval);
-    this.timeInterval = setInterval(function() {
-      self.timeStamp = self.$common.timestampToTime(new Date());
-    }, 1000);
+    // clearInterval(this.timeInterval);
+    // this.timeInterval = setInterval(function() {
+    //   self.timeStamp = self.$common.timestampToTime(new Date());
+    // }, 1000);
     var self = this;
     this.mcList = this.$common.mcList;
     // this.mcId = this.$common.menuList[0].mb.mk[Number(self.mcStatus)].mc.id;
     // this.drawLine();
 
         // 定时器刷新
-    clearInterval(this.timeInterval);
+    // clearInterval(this.timeInterval);
     // this.timeInterval = setInterval(function() {
     //   self.initChart(self.valueTime,'update');
     // }, 1000 * 30);

@@ -45,15 +45,17 @@ export default {
     // this.drawLine();
 
         // 定时器刷新
-    // clearInterval(this.timeInterval);
-    // this.timeInterval = setInterval(function() {
-    //   self.initChart(self.valueTime,'update');
-    // }, 1000 * 30);
+    clearInterval(this.timeInterval);
+    this.timeInterval = setInterval(function() {
+      self.initChart(self.valueTime,'update');
+    }, 1000 * 60 * 15);
 
      // 初始化客流走势/预测数据信息
     this.initChart('init');
   },
-  created() {},
+  created() {
+    
+  },
   methods: {
       // 查看可视化界面内容数据信息
     initChart:function(type){

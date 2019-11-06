@@ -52,8 +52,8 @@ export default {
     this.mcList = this.$common.mcList;
     self.getData();
     //每15分钟刷新一次数据
-    clearInterval(this.timeIntervalData);
-    this.timeIntervalData = setInterval(self.getData(), 1000*60*15);
+    clearInterval(this.timeInterval);
+    this.timeInterval = setInterval(self.getData(), 1000*60*15);
   },
   created() {},
   methods: {

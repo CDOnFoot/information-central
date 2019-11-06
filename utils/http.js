@@ -1,6 +1,9 @@
 'use strict'
+
     import Vue from "vue";
     import axios from 'axios'
+    import Cookies from 'js-cookie'
+
     // import {SHA1} from "./SHA";
     import qs from 'qs'
     import common from '../static/js/common.js'
@@ -15,7 +18,7 @@
     // **路由请求拦截**
     // http request 拦截器
     axios.interceptors.request.use(config => {
-      let token = common.getCookie('dvptToken');
+      let token = Cookies.get('dvptToken');
       // 拦截器在请求头中加token/userId
       if(config.url!='/login'){
         if (token === 'null' || token === '' || token==="undefined") {
@@ -31,8 +34,8 @@
           // });
         } else{
           config.headers={
-            userId: common.getCookie("dvptId"),
-            custom_token: common.getCookie("dvptToken"),
+            userId: Cookies.get("dvptId"),
+            custom_token: Cookies.get("dvptToken"),
             'content-Type': "application/x-www-form-urlencoded"
           };
         }

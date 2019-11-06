@@ -1,8 +1,8 @@
 <!--首页信息-->
 <template>
-    <keep-alive>
+    <!-- <keep-alive> -->
         <component :is="currentMB" :setFlag="setFlag" :menuTempId= "menuTempId" @saveSetMessage="saveSetMsg" :visualTempList="visualTempList" class="mb-content"></component>
-    </keep-alive>
+    <!-- </keep-alive> -->
 </template>
 <script>
     import MB01 from '../../components/common/MB/MB01';

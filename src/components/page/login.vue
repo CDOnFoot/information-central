@@ -49,7 +49,8 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex';
+// import { mapMutations } from 'vuex';
+import Cookies from 'js-cookie'
 import preventBack from 'vue-prevent-browser-back';
 import sha256 from "js-sha256";
   export default {
@@ -74,7 +75,7 @@ import sha256 from "js-sha256";
 
     methods:{
  
-      ...mapMutations(['changeLogin']),//存储login状态到vuex
+      // ...mapMutations(['changeLogin']),//存储login状态到vuex
 
      handleSubmit(e) {
         let self = this;
@@ -95,19 +96,23 @@ import sha256 from "js-sha256";
             //调取数据成功
               if(res.data){
                 if (res.data.code === "0") {
-                  
+                  console.log(res.data);
                   self.userInfo = res.data.data;
-                  self.$common.setCookie('dvptName',self.userName,self.userInfo.expiryTime);
-                  self.$common.setCookie('dvptId', self.userInfo.userId,self.userInfo.expiryTime);
-                  self.$common.setCookie('dvptToken',self.userInfo.custom_token,self.userInfo.expiryTime);
+                  Cookies.set('dvptName',self.userName,self.userInfo.expiryTime);
+                  Cookies.set('dvptId', self.userInfo.userId,self.userInfo.expiryTime);
+                  Cookies.set('dvptToken',self.userInfo.custom_token,self.userInfo.expiryTime);
+
+                  // self.$common.setCookie('dvptName',self.userName,self.userInfo.expiryTime);
+                  // self.$common.setCookie('dvptId', self.userInfo.userId,self.userInfo.expiryTime);
+                  // self.$common.setCookie('dvptToken',self.userInfo.custom_token,self.userInfo.expiryTime);
 
                   // console.log(self.$common.getCookie('dvptId'));
                   // console.log(self.$common.getCookie('dvptToken'));
+                  self.$router.push('/home/index');
 
-                  self.changeLogin({ token: self.userInfo.custom_token });
-                  setTimeout(()=>{
-                    self.$router.push('/home/index');
-                  },200);
+                  // self.changeLogin({ token: self.userInfo.custom_token });
+                  // setTimeout(()=>{
+                  // },200);
                 }else{
                   this.$message.error(res.data.msg);
                 }

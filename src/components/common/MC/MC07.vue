@@ -53,7 +53,9 @@ export default {
     self.getData();
     //每15分钟刷新一次数据
     clearInterval(this.timeInterval);
-    this.timeInterval = setInterval(self.getData(), 1000*60*15);
+    this.timeInterval = setInterval(function() {
+      self.getData();
+    }, 1000 * 60 * 15);
   },
   created() {},
   methods: {

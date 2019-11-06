@@ -14,6 +14,8 @@
     //配置信息
     var useStaging = false;
     var host = useStaging ? 'http://10.66.1.102:28070':'http://10.66.1.160:28070';
+    // var host = useStaging ? 'http://10.66.1.102:28070':'http://10.66.11.144:28070';
+
     var self = this;
     // **路由请求拦截**
     // http request 拦截器
@@ -52,6 +54,7 @@
       
       return response;
     }, err => {
+      console.log(err);
       // 请求的错误判断,根据不同的错误码不同消息提醒
       if (err && err.response) {
         console.log(err.response);

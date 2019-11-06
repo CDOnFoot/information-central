@@ -12,6 +12,7 @@
 </template>
 <script>
 import echarts from "echarts";
+import { setInterval } from 'timers';
 
 export default {
   name: "MC02",
@@ -37,10 +38,17 @@ export default {
     var self = this;
     this.mcList = this.$common.mcList; 
     this.initChart('init')
-    // clearInterval(this.timeTimeOut);
-    // this.timeTimeOut = setTimeout(function() {
-    //   self.initChart('update');
-    // }, 20);
+    var timeStamp=1572980400000;  //11月6日凌晨3点的毫秒数
+    var dayMins = 86400000;   //每天的毫秒数
+    var setIntervalMins = 1000*60  //定时器刷新的时间间隔
+    setInterval(()=>{
+      let currwntTime = Date.now();
+      let minsMore = (currwntTime-timeStamp)%dayMins
+      if(minsMore>0 && minsMore<=setIntervalMins){  //(当前时间-固定时间)对每日毫秒数 取余
+        console.log("凌晨三点定时刷新数据")
+        self.initChart('update');
+      }
+    },setIntervalMins)
   },
     created() {
       

@@ -3,6 +3,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import login from '../components/page/login';
+import Cookies from 'js-cookie'
 
 import home from '../components/common/home';
 import energy from '../components/page/energy';
@@ -112,7 +113,7 @@ router.beforeEach((to, from, next) => {
   if (to.path === '/login') {
     next();
   } else {
-    let token = common.getCookie('dvptToken');
+    let token = Cookies.get('dvptToken');
     if (token === 'null' || token === '') {
       next('/login');
     } else {

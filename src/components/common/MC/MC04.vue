@@ -63,11 +63,11 @@ export default {
   created() {
     //页面刚进入时开启长连接
     // this.initWebSocket();
-    let self = this;
-    clearInterval(this.timeInterval);
-    this.timeInterval = setInterval(function() {
-      self.pushDataInfo();
-    }, 1000 * 30);
+    // let self = this;
+    // clearInterval(this.timeInterval);
+    // this.timeInterval = setInterval(function() {
+    //   self.pushDataInfo();
+    // }, 1000 * 30);
   },
   destroyed: function() {
     //页面销毁时关闭长连接

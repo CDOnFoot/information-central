@@ -3,6 +3,7 @@
     import Vue from "vue";
     import axios from 'axios'
     import Cookies from 'js-cookie'
+    import Antd from 'ant-design-vue'
 
     // import {SHA1} from "./SHA";
     import qs from 'qs'
@@ -10,11 +11,14 @@
     import api from './api'
     import { message } from 'ant-design-vue'
     Vue.use(message);
+    Vue.use(Antd);
 
     //配置信息
     var useStaging = false;
-    // var host = useStaging ? 'http://10.66.1.102:28070':'http://10.66.1.192:28070';
+    // var host = useStaging ? 'http://10.66.1.102:28070':'http://10.28.3.81:28070';
     var host = useStaging ? 'http://10.66.1.102:28070':'http://10.66.1.160:28070';
+    // var host = useStaging ? 'http://10.66.1.102:28070':'http://10.66.1.102:28070';
+
     // var host = useStaging ? 'http://10.66.1.102:28070':'http://10.66.11.144:28070';
 
     var self = this;
@@ -32,14 +36,13 @@
               self.$router.push('/login');
             },
           });
-          // router.replace({
-          //   path: '/login' // 到登录页重新获取token
-          // });
         } else{
           config.headers={
             userId: Cookies.get("dvptId"),
             custom_token: Cookies.get("dvptToken"),
-            'content-Type': "application/x-www-form-urlencoded"
+            'content-Type': "application/x-www-form-urlencoded;charset=utf-8;",
+            // "Access-Control-Allow-Origin":"*"
+            
           };
         }
         
@@ -51,14 +54,10 @@
     });
     // **路由响应拦截**
     axios.interceptors.response.use(response => {
-      // console.log(response);
-      
       return response;
     }, err => {
-      console.log(err);
       // 请求的错误判断,根据不同的错误码不同消息提醒
       if (err && err.response) {
-        console.log(err.response);
         switch (err.response.status) {
           case 400:
             err.message = '错误请求';
@@ -103,7 +102,6 @@
       } else {
         err.message = "连接到服务器失败";
       }
-      console.log(err.message);
       message.error(err.message,3);
       // 错误提示,记得引入message
       return Promise.resolve(err.response)
@@ -127,7 +125,8 @@
     function checkCode (res) {
       // 如果code异常(这里已经包括网络错误，服务器错误，后端抛出的错误)，可以弹出一个错误提示，告诉用户
       if (res.status === -404) {
-        console.log(res.msg)
+        console.log(res.msg);
+    
       }
       // if (!res.data && (res.data.msg != "success" || res.data.msg != "SUCCESS")) {
       //    console.log(res.data.msg)
@@ -175,7 +174,6 @@
           baseURL: host, url,
           data: qs.stringify(params),
           timeout: 20000,
-         
         }).then(
           (response) => {
             return checkStatus(response)
@@ -198,7 +196,6 @@
           method: 'get',
           url:urlencode,
           timeout: 20000,
-          // request: 'XMLHttpRequest',
           }).then(
           (response) => {
             return checkStatus(response)

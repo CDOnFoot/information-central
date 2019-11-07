@@ -2,7 +2,7 @@
   <!--    模块内容一-->
   <div class="main" :style="{width: '100%', height: '100%'}">
     <div class="borde">{{mcTitle}}</div>
-    <div class="timeStamp">查询时间：{{timeStamp}}</div>
+    <div class="timeStamp">展示日期：{{timeStamp}}</div>
     <div class="table-content">
       <img src="../../../assets/img/table-bg.png" alt="" class="table-bg">
       <a-table
@@ -27,7 +27,8 @@ export default {
       timeStamp: "",
       // timeStamp: this.$common.timestampToTime(new Date()),
       dataList:[],
-      columns:[{
+      columns:[
+        {
         title: "Name",
         dataIndex: "name",
          width: '15%',

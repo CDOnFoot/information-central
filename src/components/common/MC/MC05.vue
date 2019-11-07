@@ -112,7 +112,7 @@ export default {
       var schema = [
         { name: "Income", index: 0, text: "月累计客流量", unit: "人次" },
         { name: "LifeExpectancy", index: 1, text: "车站面积", unit: "m²" },
-        { name: "Population", index: 2, text: "月累计耗电量", unit: "kWh" },
+        { name: "Population", index: 2, text: "月累计耗电量", unit: "kwh" },
         { name: "Country", index: 3, text: "车站名称", unit: "" }
       ];
 
@@ -190,7 +190,7 @@ export default {
                 "<br>" +
                 schema[2].text +
                 "：" +
-                value[2] +
+                value[2] +' '+schema[2].unit +
                 "<br>"
               );
             }
@@ -251,7 +251,7 @@ export default {
               show: false
             },
             axisLabel: {
-              formatter: "{value} Kwh"
+              formatter: "{value} kwh"
             }
           },
           visualMap: [

@@ -115,7 +115,7 @@ export default {
             trigger: "axis",
             axisPointer: {
               type: "shadow"
-            }
+            },
           },
           legend: {
             show: false
@@ -139,11 +139,12 @@ export default {
           // },
           grid: {
             left: "3%",
-            right: "4%",
+            right: "10%",
             bottom: "3%",
             containLabel: true
           },
           xAxis: {
+            name:"(kwh)",
             axisLine: {
               lineStyle: {
                 color: "white"

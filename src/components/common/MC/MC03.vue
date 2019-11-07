@@ -45,11 +45,11 @@ export default {
     var dayMins = 900000;   //15分钟
     var setIntervalMins = 1000*30  //30秒
     self.dataRef = setInterval(()=>{
-      console.log(new Date())
+      // console.log(new Date())
       let currwntTime = Date.now();
       let minsMore = (currwntTime-timeStamp)%dayMins
       if(minsMore>0 && minsMore<=setIntervalMins){  //(当前时间-固定时间)对每日毫秒数 取余
-        console.log("15分钟定点刷新")
+        // console.log("15分钟定点刷新")
         self.initChart('init');
       }
     },setIntervalMins)

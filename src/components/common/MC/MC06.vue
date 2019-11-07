@@ -101,6 +101,7 @@ export default {
         data.result.map((item,index)=>{
           if(index<=6){
             item.key=JSON.stringify(item.name);
+            item.flows = item.flows+'人次';
             this.dataList.push(item);
           }
         });

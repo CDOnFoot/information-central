@@ -210,8 +210,8 @@ export default {
             },
             type: "log",
             name: "客流量",
-            // max: 10000000,
-            // min: 0,
+            max: 100000000,
+            min: 1000000,
             nameGap: 25,
             nameLocation: "middle",
             nameTextStyle: {

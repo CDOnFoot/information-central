@@ -20,6 +20,7 @@ export default {
       timeInterval: "",
       timeStamp: "",
       mc:'',
+      dataRef:"",   //定点刷新
     };
   },
   props: ["mcStatus", "mcTitle", "mcId"],
@@ -35,23 +36,23 @@ export default {
     }
   },
   mounted() {
-    // clearInterval(this.timeInterval);
-    // this.timeInterval = setInterval(function() {
-    //   self.timeStamp = self.$common.timestampToTime(new Date());
-    // }, 1000);
+    window.clearInterval(this.dataRef)
     var self = this;
     this.mcList = this.$common.mcList;
-    // this.mcId = this.$common.menuList[0].mb.mk[Number(self.mcStatus)].mc.id;
-    // this.drawLine();
-
-        // 定时器刷新
-    clearInterval(this.timeInterval);
-    this.timeInterval = setInterval(function() {
-      self.initChart(self.valueTime,'update');
-    }, 1000 * 60 * 15);
-
      // 初始化客流走势/预测数据信息
     this.initChart('init');
+    var timeStamp=1573056120000;  //11月6日凌晨d点02分的毫秒数
+    var dayMins = 900000;   //15分钟
+    var setIntervalMins = 1000*30  //30秒
+    self.dataRef = setInterval(()=>{
+      console.log(new Date())
+      let currwntTime = Date.now();
+      let minsMore = (currwntTime-timeStamp)%dayMins
+      if(minsMore>0 && minsMore<=setIntervalMins){  //(当前时间-固定时间)对每日毫秒数 取余
+        console.log("15分钟定点刷新")
+        self.initChart('init');
+      }
+    },setIntervalMins)
   },
   created() {
     

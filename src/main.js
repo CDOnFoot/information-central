@@ -15,7 +15,6 @@ import './assets/css/default.css';
 import Antd from 'ant-design-vue'
 import api from '../utils/api'
 import http from '../utils/http'
-
 import VueWechatTitle from 'vue-wechat-title'
 Vue.use(VueWechatTitle)
 Vue.config.productionTip = false

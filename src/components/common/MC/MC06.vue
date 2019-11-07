@@ -41,7 +41,7 @@ export default {
       {
         title: "Flows",
         dataIndex: "flows",
-         width: '50%',
+        width: '50%',
       }],
       mcList: "",
       mcId: "",

@@ -4,7 +4,7 @@
   <div>
     <div class="main">
       <div class="borde">{{mcTitle}}</div>
-      <div class="timeStamp">查询时间：{{timeStamp}}</div>
+      <div class="timeStamp">展示时间：{{timeStamp}}</div>
       <div :id="mcId" class="main-id"></div>
     </div>
   </div>

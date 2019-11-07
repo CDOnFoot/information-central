@@ -458,7 +458,7 @@
 
       selectMenu:function(param){
         if(this.menuIndex!=param){
-          if(param!=0){
+          if(param!=2){
             this.$message.warning('功能暂未开启');
           }else{
           this.menuIndex = param;

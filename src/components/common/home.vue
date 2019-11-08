@@ -103,7 +103,7 @@
    
     data(){
       return{
-        menuList:{},
+        menuList:'',
         menuIndex:0,
         menuId:'',
         timeStamp: this.$common.timestampToTime(new Date()),
@@ -457,16 +457,19 @@
       },
 
       selectMenu:function(param){
+        console.log(this.menuIndex);
+        console.log(param);
         if(this.menuIndex!=param){
-          if(param!=2){
-            this.$message.warning('功能暂未开启');
-          }else{
+          // if(param!=2){
+          //   this.$message.warning('功能暂未开启');
+          // }else{
           this.menuIndex = param;
           this.menuId = this.menuList.records[param].menuNum;
+          console.log(this.menuId);
           this.setFlag = false;
-          this.$router.push('/home/'+this.menuList[param].key);
-          this.$router.push({path: '/home/'+this.menuList[param].key, query: {flag: false}});
-          }
+          this.$router.push('/home/'+this.menuList.records[param].menuNum);
+          this.$router.push({path: '/home/'+this.menuList.records[param].menuNum, query: {flag: false}});
+          // }
         }
       },
       getCurrentRoute:function(routerVal){

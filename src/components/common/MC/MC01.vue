@@ -34,7 +34,8 @@ export default {
       timeStamp: "",
       mcList: "",
       valueTime:1,
-      mc:""
+      mc:"",
+      dataRef:''
     };
   },
   props: ["mcStatus", "mcTitle", "mcId"],
@@ -50,27 +51,19 @@ export default {
     }
   },
   mounted() {
-
-    // 定时器刷新
-    clearInterval(this.timeInterval);
-    // this.timeInterval = setInterval(function() {
-    //   self.initChart(self.valueTime,'update');
-    // }, 1000 * 30);
-
+    window.clearInterval(this.dataRef)
     var self = this;
     this.mcList = this.$common.mcList;
-
     // 初始化能耗排行数据信息
     this.initChart(this.valueTime,'init');
-    var timeStamp=1572980400000;  //11月6日凌晨3点的毫秒数
+    var timeStamp=1573066800000;  //11月7日凌晨3点的毫秒数
     var dayMins = 86400000;   //每天的毫秒数
-    var setIntervalMins = 1000*60  //定时器刷新的时间间隔
-    setInterval(()=>{
+    var setIntervalMins = 1000*30  //定时器刷新的时间间隔
+    self.dataRef = setInterval(()=>{
       let currwntTime = Date.now();
       let minsMore = (currwntTime-timeStamp)%dayMins
       if(minsMore>0 && minsMore<=setIntervalMins){  //(当前时间-固定时间)对每日毫秒数 取余
-        console.log("凌晨三点定时刷新数据")
-        self.initChart(self.valueTime,'update');
+        self.initChart(self.valueTime,'init');
       }
     },setIntervalMins)
   },
@@ -79,16 +72,9 @@ export default {
   },
   methods: {
      handleMenuClick(e) {
-        console.log('click', e.key);
+        // console.log('click', e.key);
         this.initChart(e.key);
       },
-    //下拉框change事件
-    // handleChange(e){
-    //   // 动态获取能耗排行数据信息
-    //   let self = this;
-    //   this.initChart(e.target.value);
-    //   // this.refreshData();
-    // },
     // 查看可视化界面内容数据信息
     initChart:function(dateType,type){
       let self = this;
@@ -129,35 +115,36 @@ export default {
             trigger: "axis",
             axisPointer: {
               type: "shadow"
-            }
+            },
           },
           legend: {
             show: false
           },
-          toolbox: {
-            show: true,
-            top:'15%',
-            feature: {
-              dataView: {
-                show: true, 
-                readOnly: true,
-                lang:['数据视图', '关闭','']
-                }
-            },
-            iconStyle: {
-              normal: {
-                color: "white", //设置颜色
-                top: "50%",
-              }
-            }
-          },
+          // toolbox: {
+          //   show: true,
+          //   top:'15%',
+          //   feature: {
+          //     dataView: {
+          //       show: true, 
+          //       readOnly: true,
+          //       lang:['数据视图', '关闭','']
+          //       }
+          //   },
+          //   iconStyle: {
+          //     normal: {
+          //       color: "white", //设置颜色
+          //       top: "50%",
+          //     }
+          //   }
+          // },
           grid: {
             left: "3%",
-            right: "4%",
+            right: "10%",
             bottom: "3%",
             containLabel: true
           },
           xAxis: {
+            name:"(kwh)",
             axisLine: {
               lineStyle: {
                 color: "white"
@@ -251,7 +238,7 @@ canvas {
 }
 .timeStamp{
     position: absolute;
-    right: 44%;
+    right: 23%;
     font-size: 14px;
     top: 7%;
     color: #ffffff;
@@ -260,7 +247,7 @@ canvas {
 .change-time{
     color: #fff;
     position: absolute;
-    right: 26%;
+    right: 5%;
     top: 7%;
     font-size: 14px;
     z-index: 19;

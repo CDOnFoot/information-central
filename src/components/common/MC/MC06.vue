@@ -2,7 +2,7 @@
   <!--    模块内容一-->
   <div class="main" :style="{width: '100%', height: '100%'}">
     <div class="borde">{{mcTitle}}</div>
-    <div class="timeStamp">查询时间：{{timeStamp}}</div>
+    <div class="timeStamp">展示日期：{{timeStamp}}</div>
     <div class="table-content">
       <img src="../../../assets/img/table-bg.png" alt="" class="table-bg">
       <a-table
@@ -27,7 +27,8 @@ export default {
       timeStamp: "",
       // timeStamp: this.$common.timestampToTime(new Date()),
       dataList:[],
-      columns:[{
+      columns:[
+        {
         title: "Name",
         dataIndex: "name",
          width: '15%',
@@ -40,7 +41,7 @@ export default {
       {
         title: "Flows",
         dataIndex: "flows",
-         width: '50%',
+        width: '50%',
       }],
       mcList: "",
       mcId: "",
@@ -57,22 +58,16 @@ export default {
     }
   },
   mounted() {
-    // clearInterval(this.timeInterval);
-    // this.timeInterval = setInterval(function() {
-    //   self.timeStamp = self.$common.timestampToTime(new Date());
-    // }, 1000);
-    // var self = this;
-    // this.mcList = this.$common.mcList;
+   var self = this;
+    this.mcList = this.$common.mcList;
     this.initSeniority();
-
-      var timeStamp=1572980400000;  //11月6日凌晨3点的毫秒数
+    var timeStamp=1573066800000;  //11月7日凌晨3点的毫秒数
     var dayMins = 86400000;   //每天的毫秒数
-    var setIntervalMins = 1000*60  //定时器刷新的时间间隔
-    setInterval(()=>{
+    var setIntervalMins = 1000*30  //定时器刷新的时间间隔
+    self.dataRef = setInterval(()=>{
       let currwntTime = Date.now();
       let minsMore = (currwntTime-timeStamp)%dayMins
       if(minsMore>0 && minsMore<=setIntervalMins){  //(当前时间-固定时间)对每日毫秒数 取余
-        console.log("凌晨三点定时刷新数据")
         self.initSeniority();
       }
     },setIntervalMins)
@@ -106,6 +101,7 @@ export default {
         data.result.map((item,index)=>{
           if(index<=6){
             item.key=JSON.stringify(item.name);
+            item.flows = item.flows+'人次';
             this.dataList.push(item);
           }
         });

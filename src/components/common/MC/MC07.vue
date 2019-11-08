@@ -30,7 +30,8 @@ export default {
       mcList: "",
       mcId: "",
       ontimerate:"0%",  //正点率
-      fullfillment:"0%"  //兑现率
+      fullfillment:"0%",  //兑现率
+      dataRef:"",   //定点刷新
     };
   },
   props: ["mcStatus", "mcTitle"],
@@ -43,25 +44,28 @@ export default {
     }
   },
   mounted() {
-    // clearInterval(this.timeInterval);
-    // this.timeInterval = setInterval(function() {
-    //   self.timeStamp = self.$common.timestampToTime(new Date());
-    // }, 1000);
-
+    window.clearInterval(this.dataRef)
     var self = this;
-    this.mcList = this.$common.mcList;
+    self.mcList = this.$common.mcList;
     self.getData();
-    //每15分钟刷新一次数据
-    clearInterval(this.timeInterval);
-    this.timeInterval = setInterval(function() {
-      self.getData();
-    }, 1000 * 60 * 15);
+    var timeStamp=1573056120000;  //11月6日凌晨d点02分的毫秒数
+    var dayMins = 900000;   //15分钟
+    var setIntervalMins = 1000*30  //30秒
+    self.dataRef = setInterval(()=>{
+      // console.log(new Date())
+      let currwntTime = Date.now();
+      let minsMore = (currwntTime-timeStamp)%dayMins
+      if(minsMore>0 && minsMore<=setIntervalMins){  //(当前时间-固定时间)对每日毫秒数 取余
+        // console.log("15分钟定点刷新")
+        self.getData();
+      }
+    },setIntervalMins)
   },
   created() {},
   methods: {
     //小数转百分数
     changeData(point){
-      var str=Number(point*100).toFixed();
+      var str=Number(point*100).toFixed(2);
         str+="%";
         return str;
     },
@@ -77,7 +81,7 @@ export default {
               self.ontimerate = self.changeData(res.data.data.ontimerate)
               self.fullfillment = self.changeData(res.data.data.fullfillment)
             }else{
-              this.$message.error(res.data.msg);
+              self.$message.error(res.data.msg);
             }
           }
         });

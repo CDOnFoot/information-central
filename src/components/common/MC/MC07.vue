@@ -100,8 +100,8 @@ export default {
 }
 
 .dot-main {
-    width: 100%;
-    height: 100%;
+    min-width: 470px;
+    min-height: 270px;
     display: flex;
     align-items: center;
     justify-content: center;

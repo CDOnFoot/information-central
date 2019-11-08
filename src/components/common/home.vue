@@ -229,7 +229,7 @@
         let param={
         };
         this.$http.post(self.$api.getMenuInfo, param).then(res =>{
-          if(res.status===200){
+          // if(res.status===200){
             //调取数据成功
             if(res.data){
               if (res.data.code === "0") {
@@ -239,15 +239,15 @@
                 self.loadFlag = false;
               }
             }
-          }else if(res.status ===-404){
-            self.$info({
-              title: '提示',
-              content: '连接到服务器失败，请重试.',
-              onOk() {
-                self.$router.push('/login');
-              },
-            });
-          }
+          // }else if(res.status ===-404){
+          //   self.$info({
+          //     title: '提示',
+          //     content: '连接到服务器失败，请重试.',
+          //     onOk() {
+          //       self.$router.push('/login');
+          //     },
+          //   });
+          // }
         })
       },
       // 处理菜单栏信息接口

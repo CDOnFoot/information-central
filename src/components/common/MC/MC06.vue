@@ -122,14 +122,14 @@ export default {
 
 .table-content{
   position: relative;
-  width: 100%;
-  height: 100%;
+  min-width: 470px;
+  min-height: 290px;
   overflow: hidden;
 }
 .table-bg{
   position: absolute;
   left: 0%;
-  top: 3%;
+  top: 4%;
   width: 100%;
 
 }

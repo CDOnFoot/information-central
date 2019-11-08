@@ -217,27 +217,24 @@
     }
     .keyTemp{
       width: 46%;
-      height:100%;
+      height:auto;
       /* height: 92.1%; */
-  
-      /* background: #4a4a4a; */
       border-radius: 10px;
       margin: 0 1%;
       position: relative;
     }
     .mb-left,.mb-right{
       width: 27%;
-      height: 100%;
-  
+      height: auto;
       display: flex;
       align-items: center;
       flex-flow: column;
     }
     .left,.right{
-      /* background: #aa2f2f; */
       width: 100%;
-      height: 100%;
+      min-height: 32.6%;
       margin: 1.5% 0;
+      display:inline-block;
     }
     .keyMain{
       width: 100%;

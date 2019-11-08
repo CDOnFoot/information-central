@@ -4,7 +4,8 @@
     import axios from 'axios'
     import Cookies from 'js-cookie'
     import Antd from 'ant-design-vue'
-
+    import router from '../src/router'
+  
     // import {SHA1} from "./SHA";
     import qs from 'qs'
     import common from '../static/js/common.js'
@@ -41,7 +42,8 @@
             userId: Cookies.get("dvptId"),
             custom_token: Cookies.get("dvptToken"),
             'content-Type': "application/x-www-form-urlencoded;charset=utf-8;",
-            // "Access-Control-Allow-Origin":"*"
+            // "Access-Control-Allow-Origin":"*",
+            // "Access-Control-Allow-Headers" : "Content-Type"
             
           };
         }
@@ -56,6 +58,7 @@
     axios.interceptors.response.use(response => {
       return response;
     }, err => {
+      console.log(err);
       // 请求的错误判断,根据不同的错误码不同消息提醒
       if (err && err.response) {
         switch (err.response.status) {
@@ -104,7 +107,7 @@
       }
       message.error(err.message,3);
       // 错误提示,记得引入message
-      return Promise.resolve(err.response)
+      return Promise.resolve(err.response);
     });
 
     function checkStatus (response) {
@@ -124,6 +127,10 @@
       // 如果code异常(这里已经包括网络错误，服务器错误，后端抛出的错误)，可以弹出一个错误提示，告诉用户
       if (res.status === -404) {
         // console.log(res.msg);
+        message.error("连接服务器失败，请重新登录");
+        router.push({
+          path: '/login' // 到登录页重新获取token
+        });
       }
       // if (!res.data && (res.data.msg != "success" || res.data.msg != "SUCCESS")) {
       //    console.log(res.data.msg)

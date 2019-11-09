@@ -3,8 +3,6 @@
   <div>
     <div class="main">
       <div class="borde">{{mcTitle}}</div>
-      <!-- <div class="timeStamp">{{timeStamp}}</div> -->
-
       <div class="dot-main">
         <div class="dot-num">
           <div>{{ontimerate}}</div>

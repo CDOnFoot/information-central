@@ -459,16 +459,38 @@
       selectMenu:function(param){
         console.log(this.menuIndex);
         console.log(param);
+        let self = this;
         if(this.menuIndex!=param){
           // if(param!=2){
           //   this.$message.warning('功能暂未开启');
           // }else{
-          this.menuIndex = param;
-          this.menuId = this.menuList.records[param].menuNum;
-          console.log(this.menuId);
-          this.setFlag = false;
-          this.$router.push('/home/'+this.menuList.records[param].menuNum);
-          this.$router.push({path: '/home/'+this.menuList.records[param].menuNum, query: {flag: false}});
+
+            new Promise((resolve,reject)=>{
+              let paramList={
+                userNum: self.$common.getCookie('dvptId'),
+                menuNum: self.menuId
+                };
+              this.$http.post(self.$api.getUserVisualization, paramList).then(res =>{
+                //调取数据成功
+                if(res.data){
+                  if (res.data.code === "0") {
+                    this.visualList = JSON.parse(JSON.stringify(res.data.data.menuList));
+                    this.visualHomeList = JSON.parse(JSON.stringify(res.data.data.menuList));
+                    this.visualParamList = JSON.parse(JSON.stringify(res.data.data.menuList));
+                    this.mbId = this.visualList.mb.templateNum;
+                    resolve();
+                  }
+                }
+              });
+            }).then(()=>{
+              this.menuIndex = param;
+              this.menuId = this.menuList[param].menuNum;
+              this.setFlag = false;
+              this.$router.push('/home/'+self.menuList[param].key);
+            })
+       
+
+          // this.$router.push({path: '/home/'+this.menuList[param].key, query: {flag: false}});
           // }
         }
       },
@@ -476,7 +498,7 @@
         for(var i=0;i<this.menuList.length;i++){
           if('/home/'+this.menuList[i].key === routerVal){
             this.menuIndex = i;
-            return false;
+            return false;1
           }
         }
       },

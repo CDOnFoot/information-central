@@ -29,6 +29,7 @@
 </template>
 <script>
 import echarts from "echarts";
+import Cookies from 'js-cookie';
 export default {
   name: "MC04",
   data() {
@@ -39,6 +40,9 @@ export default {
       runList: this.$common.runList,
       noticeList: [],
       timeInterval:'',
+      userId:Cookies.get("dvptId"),
+      customToken:Cookies.get("dvptToken"),
+
     };
   },
   props: ["mcStatus", "mcTitle",'mcId'],
@@ -60,7 +64,7 @@ export default {
   },
   created() {
     //页面刚进入时开启长连接
-    // this.initWebSocket();
+    this.initWebSocket();
     // let self = this;
     // clearInterval(this.timeInterval);
     // this.timeInterval = setInterval(function() {
@@ -69,7 +73,7 @@ export default {
   },
   destroyed: function() {
     //页面销毁时关闭长连接
-    // this.websocketclose();
+    this.websocketclose();
   },
   methods: {
     // 消息推送
@@ -77,12 +81,11 @@ export default {
       this.noticeList = {
         'id':'CZ01',
         'type':'固定',
-        'carId':'079',
-        'carStatus':'下行',
-        'status':'',
+        'subWayNum':'079',
+        'upDownStatus':'下行',
+        'subwayStatus':'',
         'stationId':'16',
-        'stationLeave':'四方坪',
-        'stationArrive':'\N'
+        'stationName':'四方坪',
       };
       console.log(this.noticeList);
       this.noticeCarFunc();
@@ -101,7 +104,8 @@ export default {
     },
 // 初始化websocket连接数据
     initWebSocket:function(){
-      const wsuri = "ws://10.66.1.65:28070/subway/info/ws/123";//ws地址
+      console.log(this.userId);
+      const wsuri = "ws://10.66.1.160:28070/subway/info/ws/{"+this.userId+"}/{"+this.customToken+"}";//ws地址
       this.websocket = new WebSocket(wsuri);
       this.websocket.onopen = this.websocketonopen;
       this.websocket.onerror = this.websocketonerror;
@@ -122,7 +126,8 @@ export default {
       console.log(e);
   
       // console.log(event.data)
-      // const redata = JSON.parse(e.data);
+      const redata = JSON.parse(e.data);
+      console.log(redata);
       // let code = JSON.stringify(redata.code);
     },
     websocketsend(agentData){
@@ -132,7 +137,7 @@ export default {
     },
     websocketclose(e){  
       //关闭
-      console.log("connection closed");
+      console.log("connection closed："+this.userId);
       this.websocket.close();
 
     },

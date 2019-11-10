@@ -128,7 +128,9 @@ export default {
       // console.log(event.data)
       const redata = JSON.parse(e.data);
       console.log(redata);
+      this.noticeList = redata;
       // let code = JSON.stringify(redata.code);
+
     },
     websocketsend(agentData){
       //数据发送

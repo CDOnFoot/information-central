@@ -202,120 +202,165 @@ var common = {
       dot: ["16%", "23%"]
     },
     {
-      dotId: "CZ09",
+      dotId: "6753",
       title: "金鼎山北路站",
+      status:'上行',
+      dotType:'common',
       dot: ["18.5%", "24.5%"]
     },
     {
-      dotId: "CZ010",
-      title: "金-苏",
+      dotId: "6753",
+      title: "金鼎山北路站-苏家塘站",
+      status:'上行',
+      dotType:'middle',
       dot: ["18%", "26.3%"]
     },
     {
-      dotId: "CZ011",
+      dotId: "6737",
       title: "苏家塘站",
+      status:'上行',
+      dotType:'common',
       dot: ["19%", "27.8%"]
     },
     {
-      dotId: "CZ012",
-      title: "苏-小",
+      dotId: "6737",
+      title: "苏家塘站-星沙文体中心",
+      status:'上行',
+      dotType:'middle',
       dot: ["18.5%", "30.5%"]
     },
     {
-      dotId: "CZ013",
-      title: "小菜园站",
+      dotId: "6721",
+      title: "星沙文体中心",
+      status:'上行',
+      dotType:'common',
       dot: ["19.8%", "33%"]
     },
     {
-      dotId: "CZ014",
-      title: "小-火",
+      dotId: "6721",
+      title: "星沙文体中心-火车北站",
+      status:'上行',
+      dotType:'middle',
       dot: ["20%", "35%"]
     },
     {
-      dotId: "CZ015",
+      dotId: "6705",
       title: "火车北站",
+      status:'上行',
+      dotType:'common',
       dot: ["21.3%", "37.2%"]
     },
     {
-      dotId: "CZ016",
-      title: "火-白",
+      dotId: "6705",
+      title: "火车北站-白龙路站",
+      status:'上行',
+      dotType:'middle',
       dot: ["22%", "39.5%"]
     },
     {
-      dotId: "CZ017",
+      dotId: "6689",
       title: "白龙路站",
+      status:'上行',
+      dotType:'common',
       dot: ["24%", "41.5%"]
     },
     {
-      dotId: "CZ018",
-      title: "白-大",
+      dotId: "6689",
+      title: "白龙路站-大村营站",
+      status:'上行',
+      dotType:'middle',
       dot: ["25.4%", "42.5%"]
     },
     {
-      dotId: "CZ019",
+      dotId: "6673",
       title: "大树营站",
       dot: ["27.6%", "42.5%"]
     },
     {
-      dotId: "CZ020",
-      title: "大-菊",
+      dotId: "6673",
+      title: "大树营站-菊花村站",
+      status:'上行',
+      dotType:'middle',
       dot: ["29%", "43.5%"]
     },
     {
-      dotId: "CZ021",
+      dotId: "6657",
       title: "菊花村站",
+      status:'上行',
+      dotType:'common',
       dot: ["30.5%", "44%"]
     },
     {
-      dotId: "CZ022",
-      title: "菊-华",
+      dotId: "6657",
+      status:'上行',
+      dotType:'middle',
+      title: "菊花村站-菊华站",
       dot: ["31.8%", "45.5%"]
     },
     {
-      dotId: "CZ023",
+      dotId: "6641",
       title: "菊华站",
+      status:'上行',
+      dotType:'common',
       dot: ["33%", "46.5%"]
     },
     {
-      dotId: "CZ024",
-      title: "菊-和",
+      dotId: "6641",
+      title: "菊华站-和甸营",
+      status:'上行',
+      dotType:'middle',
       dot: ["35%", "48.5%"]
     },
     {
-      dotId: "CZ025",
+      dotId: "6625",
       title: "和甸营站",
+      status:'上行',
+      dotType:'common',
       dot: ["36.2%", "51%"]
     },
     {
-      dotId: "CZ026",
-      title: "和-牛",
+      dotId: "6625",
+      title: "和甸营-麻苴",
+      status:'上行',
+      dotType:'middle',
       dot: ["38.5%", "55%"]
     },
     {
-      dotId: "CZ027",
-      title: "牛街庄站",
+      dotId: "6609",
+      title: "麻苴",
+      status:'上行',
+      dotType:'common',
       dot: ["40%", "58%"]
     },
     {
-      dotId: "CZ028",
-      title: "牛-朱",
+      dotId: "6609",
+      title: "麻苴-牛街庄",
+      status:'上行',
+      dotType:'middle',
       dot: ["41.6%", "59%"]
     },
     {
-      dotId: "CZ029",
-      title: "朱家村站",
+      dotId: "6593",
+      title: "牛街庄",
+      status:'上行',
+      dotType:'common',
       dot: ["43%", "58%"]
     },
     {
-      dotId: "CZ030",
-      title: "朱-羊",
+      dotId: "6593",
+      title: "牛街庄-朱家村",
+      status:'上行',
+      dotType:'middle',
       dot: ["46%", "58.5%"]
     },
     {
-      dotId: "CZ031",
-      title: "羊甫头站",
+      dotId: "6577",
+      title: "朱家村",
+      status:'上行',
+      dotType:'common',
       dot: ["48.8%", "59.5%"]
     },
+    
     {
       dotId: "CZ032",
       title: "羊-玉",

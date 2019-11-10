@@ -9,14 +9,14 @@
           :style="{position:'absolute',top:item.dot[0],left:item.dot[1]}">
           </div>
           <div class="runway">
-            <div :key="index" v-for="(item,index) in runList" 
+            <div :key="index" v-for="(item,index) in noticeList" 
             :style="{position:'absolute',top:item.dot[0],left:item.dot[1]}">
               <a-popover placement="topLeft" arrowPointAtCenter class="popover-item">
               <template slot="content">
                 <!-- <p>{{'2019-10-29 19:00:00'}}</p> -->
-                <p>当前车次：{{item.runId}}</p>
-                <p>车次类型：{{'xxx类型'}}</p>
-                <p>前方到站：{{'xxxx站'}}</p>
+                <p>当前车次：{{item.subwayNum}}</p>
+                <p>车次类型：{{item.type}}</p>
+                <!-- <p>前方到站：{{'xxxx站'}}</p> -->
               </template>
               <span slot="title">{{item.dotName}}</span>
               <a-button class="runway-item"></a-button>
@@ -83,7 +83,7 @@ export default {
         'type':'固定',
         'subWayNum':'079',
         'upDownStatus':'下行',
-        'subwayStatus':'',
+        'subwayStatus':'离开',
         'stationId':'16',
         'stationName':'四方坪',
       };
@@ -96,9 +96,13 @@ export default {
     noticeCarFunc:function(){
       let self = this;
       this.wayList.some((item,index)=>{
-        if(item.dotId === self.noticeList.id){
-          
-          return false;
+        if(item.dotId === self.tempNoticeList.stationId){
+            if(iself.tempNoticeList.subwayStatus==='离开'){
+              self.tempNoticeList.dot = this.wayList[index+1].dot;
+              return false;
+            }else if(iself.tempNoticeList.subwayStatus==='到达')
+              self.tempNoticeList.dot = item.dot;
+              return false;
         }
       });
     },
@@ -128,7 +132,9 @@ export default {
       // console.log(event.data)
       const redata = JSON.parse(e.data);
       console.log(redata);
-      this.noticeList = redata;
+      this.tempNoticeList = redata;
+      // this.noticeList.push(redata);
+      this.noticeCarFunc();
       // let code = JSON.stringify(redata.code);
 
     },

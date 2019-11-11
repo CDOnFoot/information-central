@@ -79,13 +79,13 @@ export default {
     // 消息推送
     pushDataInfo:function(){
       this.noticeList = {
-        'id':'CZ01',
+        'id':'01',
         'type':'固定',
-        'subWayNum':'079',
-        'upDownStatus':'下行',
+        'subWayNum':'A0101',
+        'upDownStatus':'上行',
         'subwayStatus':'离开',
-        'stationId':'16',
-        'stationName':'四方坪',
+        'stationId':'6737',
+        'stationName':'苏家塘站',
       };
       console.log(this.noticeList);
       this.noticeCarFunc();

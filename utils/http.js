@@ -50,7 +50,7 @@
         
       }
       
-      return config
+      return config;
     }, error => {
       return Promise.reject(error)
     });
@@ -58,7 +58,7 @@
     axios.interceptors.response.use(response => {
       return response;
     }, err => {
-      console.log(err);
+    
       // 请求的错误判断,根据不同的错误码不同消息提醒
       if (err && err.response) {
         switch (err.response.status) {

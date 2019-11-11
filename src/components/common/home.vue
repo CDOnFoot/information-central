@@ -91,6 +91,8 @@
       </div>
       <div class="layout-selectBtn">
         <a-button size="large" class="btn-item" @click="layoutSelect" v-show="setFlag">选择模版</a-button>
+        <a-button size="large" class="btn-item" @click="layoutAuto" v-show="setFlag">恢复默认</a-button>
+
       </div>
     </a-layout-footer>
   </a-layout>
@@ -408,6 +410,16 @@
           }
         }
         this.visualParamList = JSON.parse(JSON.stringify(this.visualList));
+      },
+
+      // 恢复默认布局信息
+      layoutAuto:function(){
+        let self = this;
+        console.log("layoutSetting.");
+        
+        this.visualHomeList = JSON.parse(JSON.stringify(this.visualList));
+        this.visualParamList = JSON.parse(JSON.stringify(this.visualList));
+        this.mbId = this.visualList.mb.templateNum;
       },
       // 调起更新保存可视化数据信息
       updateUserContentInfo:function(){

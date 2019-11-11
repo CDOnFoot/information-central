@@ -165,7 +165,17 @@ export default {
             },
             data: []
           },
-
+          title: [
+                {
+                text: data.timeline[0],
+                textAlign: 'center',
+                right: '10%',
+                top: '6%',
+                textStyle: {
+                    fontSize: 16,
+                    color: '#dd6b66'
+                }
+            }],
           tooltip: {
             padding: 5,
             backgroundColor: "#222",
@@ -329,7 +339,7 @@ export default {
         option.baseOption.timeline.data.push(data.timeline[n]);
         option.options.push({
           title: {
-            show: false,
+            show: true,
             text: data.timeline[n] + ""
           },
           series: {

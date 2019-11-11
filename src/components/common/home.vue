@@ -31,9 +31,9 @@
       <div class="header-canvas">
         <div class="title">大数据分析决策平台</div>
         <div class="time-interval">{{timeStamp}}</div>
-        <div class="weather">
+        <!-- <div class="weather">
           <iframe width="66%" scrolling="no" height="24" frameborder="0" allowtransparency="false" src="//i.tianqi.com/index.php?c=code&id=1&color=%23FFFFFF&icon=1&py=beijing&wind=0&num=1&site=12" style="float:right;"></iframe>
-        </div>
+        </div> -->
         <div class="user-register">
           <div class="register-name"><a-icon type="user" />{{userName}}</div>
           <div class="register-group" @click="loginOut">

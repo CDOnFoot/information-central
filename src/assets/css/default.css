@@ -376,9 +376,9 @@
   }
   .time-interval{
     position: absolute;
-    right: 7%;
+    right: 1%;
     line-height: 24px;
-    top: 12%;
+    top: 9%;
     color: #ffffff;
     font-size: 16px;
   }
@@ -410,7 +410,7 @@
     align-items: center;
     position: absolute;
     right: 1%;
-    top: 9%;
+    top: 36%;
   }
   .register-group{
     position: relative;

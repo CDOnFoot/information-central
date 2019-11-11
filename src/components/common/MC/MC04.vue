@@ -64,7 +64,7 @@ export default {
   },
   created() {
     //页面刚进入时开启长连接
-    this.initWebSocket();
+    // this.initWebSocket();
     // let self = this;
     // clearInterval(this.timeInterval);
     // this.timeInterval = setInterval(function() {
@@ -73,7 +73,7 @@ export default {
   },
   destroyed: function() {
     //页面销毁时关闭长连接
-    this.websocketclose();
+    // this.websocketclose();
   },
   methods: {
     // 消息推送

@@ -415,11 +415,50 @@
       // 恢复默认布局信息
       layoutAuto:function(){
         let self = this;
-        console.log("layoutSetting.");
-        
-        this.visualHomeList = JSON.parse(JSON.stringify(this.visualList));
-        this.visualParamList = JSON.parse(JSON.stringify(this.visualList));
-        this.mbId = this.visualList.mb.templateNum;
+        this.$confirm({
+            title: '提醒',
+            content: '确定恢复当前界面的默认布局信息，并自动保存?',
+            okText: '确定',
+            okType: 'danger',
+            cancelText: '取消',
+            onOk() {
+              console.log("恢复默认");
+              self.layoutRestoreDefaults();
+            },
+            onCancel() {
+              console.log('确定取消保存');
+            },
+          });
+      },
+
+      // 恢复默认布局信息
+      layoutRestoreDefaults:function(){
+        let self = this;
+        let param={
+          userNum: self.$common.getCookie('dvptId'),
+          menuNum: self.menuId,
+        };
+        this.$http.post(self.$api.layoutRestoreDefaults, param).then(res =>{
+          //调取数据成功
+          if(res.data){
+            if (res.data.code === "0") {
+              self.$message.success("更新布局设置信息成功.");
+              setTimeout(()=>{
+                self.loadFlag = false;
+                self.formListFlag = false;
+                self.setFlag = false;
+                self.updateFlag = true;
+              },300);
+              this.getUserVisualization();
+
+            }else{
+               this.$message.success(res.data.msg);
+               self.loadFlag = false;
+            }
+          }else{
+              self.loadFlag = false;
+          }
+        });
       },
       // 调起更新保存可视化数据信息
       updateUserContentInfo:function(){

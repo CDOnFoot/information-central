@@ -18,6 +18,8 @@ export default {
   
   updateUserContentInfo: '/visualizationLayout/updateUserContentInfo',   //修改自动化布局信息
 
+  layoutRestoreDefaults: '/visualizationLayout/layoutRestoreDefaults',   //恢复默认自动化布局信息
+
 
   // 指标信息
   getEnergytopten: '/energy/topten',   //获取能耗排行数据信息

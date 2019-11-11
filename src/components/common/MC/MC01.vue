@@ -20,7 +20,7 @@
           <a-radio :value="2">过去7天</a-radio>
           <a-radio :value="3">过去30天</a-radio>
         </a-radio-group> -->
-      <div :id="mcId" class="main-id"></div>
+        <div :id="mcId" class="main-id"></div>
     </div>
   </div>
 </template>
@@ -54,8 +54,10 @@ export default {
     window.clearInterval(this.dataRef)
     var self = this;
     this.mcList = this.$common.mcList;
+
     // 初始化能耗排行数据信息
     this.initChart(this.valueTime,'init');
+
     var timeStamp=1573066800000;  //11月7日凌晨3点的毫秒数
     var dayMins = 86400000;   //每天的毫秒数
     var setIntervalMins = 1000*30  //定时器刷新的时间间隔

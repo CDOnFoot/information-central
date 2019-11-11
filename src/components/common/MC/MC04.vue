@@ -66,7 +66,7 @@ export default {
   },
   created() {
     //页面刚进入时开启长连接
-    // this.initWebSocket();
+    this.initWebSocket();
     this.pushDataInfo();
     // let self = this;
     // clearInterval(this.timeInterval);
@@ -76,7 +76,7 @@ export default {
   },
   destroyed: function() {
     //页面销毁时关闭长连接
-    // this.websocketclose();
+    this.websocketclose();
   },
   methods: {
     // 消息推送
@@ -134,7 +134,7 @@ export default {
     websocketonmessage(e){ //数据接收
       console.log("WebSocket连接数据接收中:");
       const redata = JSON.parse(e.data);
-      console.log(redata)
+      // console.log(redata)
       console.log(redata.data)
       this.showData(redata.data)
       

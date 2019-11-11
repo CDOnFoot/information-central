@@ -228,24 +228,24 @@
                     mc:"",
 
                   },
-                   {
-                    moduleNum:"MK06",
-                    moduleName:"模块六",
-                    mc:"",
+                  //  {
+                  //   moduleNum:"MK06",
+                  //   moduleName:"模块六",
+                  //   mc:"",
 
-                  },
-                   {
-                    moduleNum:"MK07",
-                    moduleName:"模块七",
-                    mc:"",
+                  // },
+                  //  {
+                  //   moduleNum:"MK07",
+                  //   moduleName:"模块七",
+                  //   mc:"",
 
-                  },
-                   {
-                    moduleNum:"MK08",
-                    moduleName:"模块八",
-                    mc:"",
+                  // },
+                  //  {
+                  //   moduleNum:"MK08",
+                  //   moduleName:"模块八",
+                  //   mc:"",
 
-                  },
+                  // },
                 ]
               }
             },

@@ -156,14 +156,15 @@
         return false;
       };
       clearInterval(this.timeInterval)
-      this.timeInterval = setInterval(function(){
-        self.timeStamp = self.$common.timestampToTime(new Date());
-      },1000)
-    },
+        this.timeInterval = setInterval(function(){
+          self.timeStamp = self.$common.timestampToTime(new Date());
+        },1000)
+     },
 
     methods:{
       // 查看可视化界面内容数据信息
       getUserVisualization:function(){
+        this.loadFlag= true;
         let self = this;
         this.userVisualizationList(function(data){
           self.visualizationInfo(data);
@@ -175,16 +176,21 @@
           userNum: self.$common.getCookie('dvptId'),
           menuNum: self.menuId
           };
+          console.log(self.menuId);
         this.$http.post(self.$api.getUserVisualization, param).then(res =>{
           //调取数据成功
           if(res.data){
             if (res.data.code === "0") {
               callback(res.data.data)
+            }else{
+                self.loadFlag= false;
+               self.$message.error(res.data.msg);
             }
           }
         });
       },
       visualizationInfo:function(data){
+        this.loadFlag= false;
         this.visualList = JSON.parse(JSON.stringify(data.menuList));
         this.visualHomeList = JSON.parse(JSON.stringify(data.menuList));
         this.visualParamList = JSON.parse(JSON.stringify(data.menuList));
@@ -220,7 +226,6 @@
       // 查看菜单栏数据信息
       getMenuInfo:function(){
         let self = this;
-        this.loadFlag = true;
         this.menuInfoList(function(data){
           self.menuInfo(data);
         })
@@ -238,7 +243,6 @@
                 callback(res.data.data);
               }else{
                 this.$message.error(res.data.msg);
-                self.loadFlag = false;
               }
             }
           // }else if(res.status ===-404){
@@ -512,6 +516,9 @@
         console.log(param);
         let self = this;
         if(this.menuIndex!=param){
+          this.menuId = this.menuList[param].menuNum;
+          this.menuIndex = param;
+
           // if(param!=2){
           //   this.$message.warning('功能暂未开启');
           // }else{
@@ -534,12 +541,10 @@
                 }
               });
             }).then(()=>{
-              this.menuIndex = param;
-              this.menuId = this.menuList[param].menuNum;
               this.setFlag = false;
+              console.log('/home/'+self.menuList[param].key);
               this.$router.push('/home/'+self.menuList[param].key);
             })
-       
 
           // this.$router.push({path: '/home/'+this.menuList[param].key, query: {flag: false}});
           // }

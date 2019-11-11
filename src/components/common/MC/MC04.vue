@@ -59,6 +59,7 @@ export default {
     }
   },
   mounted() {
+    console.log(this.wayList)
     var self = this;
     this.mcList = this.$common.mcList;
     // this.showData();

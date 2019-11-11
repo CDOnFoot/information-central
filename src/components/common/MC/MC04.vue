@@ -38,7 +38,8 @@ export default {
       n: 0,
       wayList: this.$common.wayList,
       runList: this.$common.runList,
-      noticeList: [],
+      noticeList: [],  //页面所有车的点图集合
+      tempNoticeList:{}, // 最新消息的数据
       timeInterval:'',
       userId:Cookies.get("dvptId"),
       customToken:Cookies.get("dvptToken"),
@@ -60,11 +61,13 @@ export default {
   mounted() {
     var self = this;
     this.mcList = this.$common.mcList;
- 
+    // this.showData();
+    // this.pushDataInfo();
   },
   created() {
     //页面刚进入时开启长连接
     // this.initWebSocket();
+    this.pushDataInfo();
     // let self = this;
     // clearInterval(this.timeInterval);
     // this.timeInterval = setInterval(function() {
@@ -78,17 +81,20 @@ export default {
   methods: {
     // 消息推送
     pushDataInfo:function(){
-      this.noticeList = {
-        'id':'01',
-        'type':'固定',
-        'subWayNum':'A0101',
-        'upDownStatus':'上行',
-        'subwayStatus':'离开',
-        'stationId':'6737',
-        'stationName':'苏家塘站',
-      };
+      this.noticeList = [
+        {
+          id:"18",
+            stationId: "6498",
+            dotId: "CZ012",
+            stationName: "菊花",
+            subwayStatus:"到达",
+            dot: ["18.5%", "30.5%"]
+          }
+      ];
+      
+      // this.noticeCarFunc();
+      // this.showData();
       console.log(this.noticeList);
-      this.noticeCarFunc();
     },
 
 
@@ -96,11 +102,11 @@ export default {
     noticeCarFunc:function(){
       let self = this;
       this.wayList.some((item,index)=>{
-        if(item.dotId === self.tempNoticeList.stationId){
-            if(iself.tempNoticeList.subwayStatus==='离开'){
+        if(item.dotId === self.tempNoticeList.id){
+            if(self.tempNoticeList.subwayStatus==='离开'){
               self.tempNoticeList.dot = this.wayList[index+1].dot;
               return false;
-            }else if(iself.tempNoticeList.subwayStatus==='到达')
+            }else if(self.tempNoticeList.subwayStatus==='到达')
               self.tempNoticeList.dot = item.dot;
               return false;
         }
@@ -127,15 +133,11 @@ export default {
     },
     websocketonmessage(e){ //数据接收
       console.log("WebSocket连接数据接收中:");
-      console.log(e);
-  
-      // console.log(event.data)
       const redata = JSON.parse(e.data);
-      console.log(redata);
-      this.tempNoticeList = redata;
-      // this.noticeList.push(redata);
-      this.noticeCarFunc();
-      // let code = JSON.stringify(redata.code);
+      console.log(redata)
+      console.log(redata.data)
+      this.showData(redata.data)
+      
 
     },
     websocketsend(agentData){
@@ -149,6 +151,27 @@ export default {
       this.websocket.close();
 
     },
+    showData(redata){
+      // let stationMessage = {"code":"0","data":{"id":"4175","stationId":"20","stationName":"大树营","subwayNum":"264","subwayStatus":"离开","type":"固定","upDownStatus":"上行","dot": ["29%", "43.5%"]},"msg":"成功","success":true}
+      // this.tempNoticeList = stationMessage.data;
+      // console.log()
+      // this.noticeList.push(stationMessage.data)
+      // this.noticeCarFunc();
+      console.log(redata)
+      let self = this;
+      this.wayList.some((item,index)=>{
+        if(item.dotId === redata.stationId){
+            if(redata.subwayStatus==='离开'){
+              redata.dot = this.wayList[index+1].dot;
+              self.noticeList.push(item)
+              return false;
+            }else if(redata.subwayStatus==='到达')
+              redata.dot = item.dot;
+              self.noticeList.push(item)
+              return false;
+        }
+      });
+    }
   }
 };
 </script>

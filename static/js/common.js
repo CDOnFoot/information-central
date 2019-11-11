@@ -230,14 +230,14 @@ var common = {
       dot: ["18.5%", "30.5%"]
     },
     {
-      dotId: "6721",
+      dotId: "6521",
       title: "星沙文体中心",
       status:'上行',
       dotType:'common',
       dot: ["19.8%", "33%"]
     },
     {
-      dotId: "6721",
+      dotId: "6521",
       title: "星沙文体中心-火车北站",
       status:'上行',
       dotType:'middle',
@@ -272,12 +272,12 @@ var common = {
       dot: ["25.4%", "42.5%"]
     },
     {
-      dotId: "6673",
+      dotId: "4175",
       title: "大树营站",
       dot: ["27.6%", "42.5%"]
     },
     {
-      dotId: "6673",
+      dotId: "4175",
       title: "大树营站-菊花村站",
       status:'上行',
       dotType:'middle',
@@ -312,14 +312,14 @@ var common = {
       dot: ["35%", "48.5%"]
     },
     {
-      dotId: "6625",
+      dotId: "6514",
       title: "和甸营站",
       status:'上行',
       dotType:'common',
       dot: ["36.2%", "51%"]
     },
     {
-      dotId: "6625",
+      dotId: "6514",
       title: "和甸营-麻苴",
       status:'上行',
       dotType:'middle',

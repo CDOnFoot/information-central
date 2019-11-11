@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import common from '../../static/js/common.js';
+import common from '../../utils/common.js';
 Vue.use(Vuex);
  
 const store = new Vuex.Store({

@@ -10,7 +10,7 @@ import energy from '../components/page/energy';
 import passenger from '../components/page/passenger';
 import index from '../components/page/index';
 import rail from '../components/page/rail';
-import common from '../../static/js/common.js'
+import common from '../../utils/common.js'
 // 模版
 import MB01 from '../components/common/MB/MB01';
 import MB02 from '../components/common/MB/MB02';

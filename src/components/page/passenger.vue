@@ -47,8 +47,17 @@
         }
       },
       created(){
+        this.visualHomeTempList = this.visualHomeList;
+        this.visualTempList = JSON.parse(JSON.stringify(this.visualHomeList));
+
+        if(this.visualTempList){
+          this.currentMB = this.visualTempList.mb.templateNum;
+        }
+        this.menuTempId = this.menuId;
       },
       mounted() {
+        this.currentMB = this.mbId;
+        console.log(this.currentMB);
       },
       methods:{
         // 获取从子组件MB传值 模版可视化内容信息

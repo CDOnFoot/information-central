@@ -147,7 +147,6 @@ export default {
     },
     websocketclose(e){  
       //关闭
-      console.log("connection closed："+this.userId);
       this.websocket.close();
 
     },

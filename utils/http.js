@@ -16,8 +16,8 @@
 
     //配置信息
     var useStaging = false;
-    var host = useStaging ? 'http://10.66.1.102:28070':'http://10.28.3.81:28070';
-    // var host = useStaging ? 'http://10.66.1.102:28070':'http://10.66.1.160:28070';
+    // var host = useStaging ? 'http://10.66.1.102:28070':'http://10.28.3.81:28070';
+    var host = useStaging ? 'http://10.66.1.102:28070':'http://10.66.1.160:28070';
     // var host = useStaging ? 'http://10.66.1.102:28070':'http://10.66.1.102:28070';
 
     // var host = useStaging ? 'http://10.66.1.102:28070':'http://10.66.11.144:28070';

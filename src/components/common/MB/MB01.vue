@@ -247,6 +247,7 @@
       mounted(){
         // 接收监听值
           this.visualList = JSON.parse(JSON.stringify(this.visualTempList));
+          console.log(this.visualList);
           // 初始化模版内容
           this.getContentInfo();
           this.btnList = this.$common.btnList;

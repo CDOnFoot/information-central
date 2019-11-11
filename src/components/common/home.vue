@@ -141,13 +141,13 @@
     //         this.$message.warning('功能暂未开启');
     //   }
     // },
-    
+    activated(){
+
+    },
     mounted() {
       let self = this;
-      
       // 查看菜单栏数据信息
       this.getMenuInfo();
-
       // 查看模版内容数据信息
       this.getTemplateInfo();
 
@@ -247,8 +247,8 @@
       menuInfo:function(data){
         let self = this;
         // this.menuList.push(data.records[0]);
-        this.menuList = data.records;
         let menuIndex = Number(self.$common.getCookie("menuIndex"));
+        this.menuList = data.records;
         if(menuIndex && menuIndex!='' && menuIndex!=null){
           this.menuId = data.records[menuIndex].menuNum;
           this.menuIndex = menuIndex;
@@ -362,7 +362,6 @@
       },
       saveSetMsg:function(){
         let self = this;
-
         console.log(JSON.stringify(this.visualParamList) == JSON.stringify(this.visualList));
         if(JSON.stringify(this.visualParamList) == JSON.stringify(this.visualList)){
           this.$info({

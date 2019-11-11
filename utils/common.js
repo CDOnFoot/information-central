@@ -1,6 +1,5 @@
 // 20191014
 var common = {
-  a:1,
   imToken: function () {
     return sessionStorage.getItem('imToken');
   },

@@ -100,6 +100,8 @@ import sha256 from "js-sha256";
                   self.$common.setCookie('dvptToken',self.userInfo.custom_token,60 * 6);
                   self.$common.setCookie('dvptId',self.userInfo.userId,60 * 6);
                   self.$common.setCookie('dvptName',self.userName,60 * 6);
+                  self.$common.setCookie('menuIndex','0');
+
                   self.loadFlag = false;
                   self.$router.push('/home/index');
                   // self.changeLogin({ token: self.userInfo.custom_token });
@@ -111,6 +113,8 @@ import sha256 from "js-sha256";
                 }
               }
             });
+        }else{
+          this.loadFlag = false;
         }
       });
        

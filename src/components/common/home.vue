@@ -105,7 +105,7 @@
    
     data(){
       return{
-        menuList:'',
+        menuList:[],
         menuIndex:0,
         menuId:'',
         timeStamp: this.$common.timestampToTime(new Date()),
@@ -176,7 +176,6 @@
           userNum: self.$common.getCookie('dvptId'),
           menuNum: self.menuId
           };
-          console.log(self.menuId);
         this.$http.post(self.$api.getUserVisualization, param).then(res =>{
           //调取数据成功
           if(res.data){
@@ -259,8 +258,15 @@
       // 处理菜单栏信息接口
       menuInfo:function(data){
         let self = this;
-        this.menuList = data.records;
-        this.menuId = data.records[0].menuNum;
+        
+        this.menuList.push(data.records[0]);
+        let menuIndex = this.$common.getCookie("menuIndex");
+        if(menuIndex && menuIndex!='' && menuIndex!=null){
+         this.menuId = data.records[menuIndex].menuNum;
+        }else{
+          this.menuId = data.records[0].menuNum;
+        }
+        console.log(this.menuId);
         this.menuList.map((item,index)=>{
           self.$common.menuList.map((items,indexs)=>{
             if(items.id === item.menuNum){
@@ -512,12 +518,13 @@
       },
 
       selectMenu:function(param){
-        console.log(this.menuIndex);
-        console.log(param);
         let self = this;
         if(this.menuIndex!=param){
-          this.menuId = this.menuList[param].menuNum;
           this.menuIndex = param;
+          self.$common.setCookie('menuIndex',this.menuIndex);
+          this.menuId = this.menuList[param].menuNum;
+
+          // self.$common.setCookie('menuId',this.menuId);
 
           // if(param!=2){
           //   this.$message.warning('功能暂未开启');
@@ -554,7 +561,7 @@
         for(var i=0;i<this.menuList.length;i++){
           if('/home/'+this.menuList[i].key === routerVal){
             this.menuIndex = i;
-            return false;1
+            return false;
           }
         }
       },

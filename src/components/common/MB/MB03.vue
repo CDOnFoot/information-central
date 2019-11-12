@@ -6,6 +6,8 @@
 </template>
 <script>
 import MC13 from '../../../components/common/MC/MC13';
+import MC14 from '../../../components/common/MC/MC14';
+
 export default {
     name:'MB03',
      data(){
@@ -29,6 +31,7 @@ export default {
     },
     components:{
         MC13,
+        MC14,
     } 
 }
 </script>

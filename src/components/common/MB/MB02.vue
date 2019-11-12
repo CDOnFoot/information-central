@@ -186,6 +186,8 @@
     import MC10 from '../../../components/common/MC/MC10';
     import MC11 from '../../../components/common/MC/MC11';
     import MC12 from '../../../components/common/MC/MC12';
+    import MC13 from '../../../components/common/MC/MC13';
+    import MC14 from '../../../components/common/MC/MC14';
 
     export default {
         name: "MB02",
@@ -467,7 +469,9 @@
             MC09,
             MC10,
             MC11,
-            MC12
+            MC12,
+            MC13,
+            MC14,
         },
     }
 </script>

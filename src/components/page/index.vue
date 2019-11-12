@@ -7,6 +7,8 @@
 <script>
     import MB01 from '../../components/common/MB/MB01';
     import MB02 from '../../components/common/MB/MB02';
+    import MB03 from '../../components/common/MB/MB03';
+
     export default {
         name: "index",
         data(){
@@ -22,7 +24,9 @@
       props: ['setFlag','mbId','menuId','visualHomeList'],
       components:{
         MB01,
-        MB02
+        MB02,
+        MB03
+
       },
       watch: {
          setFlag: function (val) {

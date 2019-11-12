@@ -3,7 +3,6 @@
   <div>
     <div class="main">
       <div class="borde">{{mcTitle}}</div>
-      <!-- <div id="splashes"></div> -->
       <div :id="mcId" class="main-id"></div>
     </div>
   </div>
@@ -16,7 +15,7 @@ export default {
   data() {
     return {
       mcList: "",
-      structure:""
+      mc:""
     };
   },
   props: ["mcStatus", "mcTitle",'mcId'],
@@ -54,7 +53,14 @@ export default {
     },setIntervalMins)
 
   },
-  created() {},
+  created() {
+
+  },
+  beforeDestroy () {
+    if(this.mc){
+      this.mc.clear();
+    }
+  },
   methods: {
     // 查看可视化界面内容数据信息
     initChart:function(type){
@@ -83,16 +89,16 @@ export default {
       },
     drawLine(paramData,type){
       let self = this;
-      self.structure = self.$echarts.init(document.getElementById(self.mcId));
       var option = null;
-      self.structure.showLoading();
-
+      let obj = document.getElementById(self.mcId);
+      if(obj){
+        self.mc = self.$echarts.init(obj);
+      }
       var data = {
         counties:paramData.stationNameList,
         timeline:paramData.timeList,
         series:paramData.resultList
       };
-      self.structure.hideLoading();
 
       var itemStyle = {
         normal: {
@@ -353,22 +359,23 @@ export default {
           }
         });
       }
-
-      self.structure.setOption(option,true);
-
-      if (option && typeof option === "object") {
-        self.structure.setOption(option, true);
+      if(obj){
+        self.mc.setOption(option,true);
+         if (option && typeof option === "object") {
+          self.mc.setOption(option, true);
+        }
       }
+     
       
     },
     // refreshData(paramData){
     //   let self = this;
-    //   let option = (self.structure).getOption();
+    //   let option = (self.mc).getOption();
     //   console.log(option)
     //   // option.dataset[0].source = paramData;
     //   // option.baseOption.visualMap[0].categories = paramData.stationNameList;
     //   // option.series[0].data = paramData.resultList[0];
-    //   self.structure.setOption(option);  
+    //   self.mc.setOption(option);  
     // }
   }
 };

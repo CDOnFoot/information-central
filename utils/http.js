@@ -8,7 +8,7 @@
   
     // import {SHA1} from "./SHA";
     import qs from 'qs'
-    import common from '../static/js/common.js'
+    import common from '../utils/common.js'
     import api from './api'
     import { message } from 'ant-design-vue'
     Vue.use(message);

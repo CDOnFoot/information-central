@@ -4,37 +4,181 @@
   <div>
     <div class="main">
       <div class="borde">{{mcTitle}}</div>
+      <div class="timeStamp">展示时间：{{timeStamp}}</div>
       <div :id="mcId" class="main-id"></div>
     </div>
   </div>
 </template>
 <script>
 import echarts from "echarts";
+import { setInterval } from "timers";
 
 export default {
-  name: "MC10",
+  name: "MC02",
   data() {
     return {
-   mcList:'',
- mcId:'',
-      };
+      mcList: "",
+      structure: "",
+      dataRef: "",
+      timeStamp:"2019/11/1-2019/11/7"
+    };
+  },
+  props: ["mcStatus", "mcTitle", "mcId"],
+  watch: {
+    mcStatus: function(val) {
+      this.mcStatus = val;
     },
-    props:['mcStatus','mcTitle'],
-    watch: {
-      mcStatus: function (val) {
-        this.mcStatus = val;
-      },
-      mcTitle: function (val) {
-        this.mcTitle = val;
-      }
+    mcTitle: function(val) {
+      this.mcTitle = val;
     },
+    mcId: function(val) {
+      this.mcId = val;
+    }
+  },
   mounted() {
     var self = this;
     this.mcList = this.$common.mcList;
+    this.initChart("init");
+    var timeStamp = 1573066800000; //11月7日凌晨3点的毫秒数
+    var dayMins = 86400000; //每天的毫秒数
+    var setIntervalMins = 1000 * 30; //定时器刷新的时间间隔
+    window.clearInterval(this.dataRef);
+    self.dataRef = setInterval(() => {
+      let currwntTime = Date.now();
+      let minsMore = (currwntTime - timeStamp) % dayMins;
+      if (minsMore > 0 && minsMore <= setIntervalMins) {
+        //(当前时间-固定时间)对每日毫秒数 取余
+        self.initChart("init");
+      }
+    }, setIntervalMins);
   },
   created() {},
   methods: {
-
+    // 查看可视化界面内容数据信息
+    initChart: function(type) {
+      let self = this;
+      this.chartInfo(function(data) {
+        self.chartInfoList(data, type);
+      }, type);
+    },
+    chartInfo: function(callback, type) {
+      let self = this;
+      let param = {};
+      this.$http.get(self.$api.energystructure, param).then(res => {
+        //调取数据成功
+        if (res.data) {
+          if (res.data.code === "0") {
+            let arr = [];
+            arr = res.data.data.dataList;
+            arr.unshift(res.data.data.timeList);
+            callback(arr, type);
+          } else {
+            this.$message.error(res.data.msg);
+          }
+        }
+      });
+    },
+    chartInfoList: function(data, type) {
+      this.drawLine(data, type);
+    },
+    drawLine(paramData, type) {
+      let self = this;
+      let option = null;
+      if (type === "init") {
+        // 基于准备好的dom，初始化echarts实例
+        self.structure = self.$echarts.init(document.getElementById(self.mcId));
+        option = {
+          tooltip: {
+            trigger: "axis",
+            axisPointer: {
+              // 坐标轴指示器，坐标轴触发有效
+              type: "shadow" // 默认为直线，可选为：'line' | 'shadow'
+            }
+          },
+          legend: {
+            data: ["各站进站人数", "各站出站人数"],
+            textStyle: {
+                //图例文字的样式
+                color: "white"
+              },
+            right:"5%",
+          },
+          grid: {
+            left: "3%",
+            right: "12%",
+            bottom: "9%",
+            containLabel: true
+          },
+          xAxis: {
+            name: "(人次)",
+            type: "value",
+            axisLine: {
+                lineStyle: {
+                  color: "white"
+                }
+              },
+          },
+          yAxis: {
+            type: "category",
+            data: ["周一", "周二", "周三", "周四", "周五", "周六", "周日","周日","周日","周日"],
+            axisLine: {
+                lineStyle: {
+                  color: "white"
+                }
+              },
+          },
+          series: [
+            {
+              name: "各站进站人数",
+              type: "bar",
+              stack: "总量",
+              label: {
+                normal: {
+                  show: true,
+                  position: "insideRight"
+                }
+              },
+              data: [320, 302, 301, 334, 390, 330, 320,320,320,320]
+            },
+            {
+              name: "各站出站人数",
+              type: "bar",
+              stack: "总量",
+              label: {
+                normal: {
+                  show: true,
+                  position: "insideRight"
+                }
+              },
+              data: [120, 132, 101, 134, 90, 230, 210,210,210,210]
+            }
+          ]
+        }; 
+        self.structure.setOption(option);
+      } else {
+        //更新刷新记录信息
+        self.refreshData(paramData);
+      }
+    },
+    //更新数据方法
+    refreshData(paramData) {
+      let self = this;
+      let option = self.structure.getOption();
+      console.log(paramData);
+      console.log(option.series);
+      var serLast = option.series[option.series.length - 1];
+      option.series = [serLast];
+      option.dataset[0].source = paramData;
+      for (var i = 1; i < paramData.length; i++) {
+        option.series.unshift({
+          type: "line",
+          smooth: true,
+          seriesLayoutBy: "row"
+        });
+      }
+      console.log(option.series);
+      self.structure.setOption(option);
+    }
   }
 };
 </script>
@@ -42,13 +186,28 @@ export default {
 <style scoped>
 .main {
   color: #ffffff;
-  padding: 10px;
+  padding: 1%;
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
-.borde {
-  font-weight: 700;
-  color: #3467c5;
-  border-left: #3467c5 solid 4px;
-  padding-left: 10px;
-  margin: 0px 0px 0px 30px;
+
+canvas {
+  width: 100% !important;
+  height: 100% !important;
+  left: -6px !important;
+}
+.main-id {
+  width: 470px;
+  height: 300px;
+  margin: 1% 0 0 2%;
+}
+.timeStamp{
+  position: absolute;
+  right: 8%;
+  font-size: 14px;
+  top: 12%;
+  color: #ffffff;
+  text-align: right;
 }
 </style>

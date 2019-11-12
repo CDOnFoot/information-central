@@ -2,7 +2,7 @@
 <!--    模版一-->
   <div class="mb-main">
     <div class="mb-left">
-                   <a-modal
+        <a-modal
             :title="title"
             :visible="visible"
             @ok="handleOk"
@@ -11,7 +11,6 @@
             width="50%"
         >
          <div class="modal-content-mk">
-           
           <div class="content-main-mk">
             <div class="select-main">
               <div class="select-main-title">指标类型：</div>
@@ -33,7 +32,7 @@
           </div>
         </div>
       </a-modal>
-      <div class="left">
+      <!-- <div class="left">
         <div class="left-sub">
           <img src="../../../assets/img/sub-border-l.png" alt="" class="sub-bg">
           <div class="hide-sub-left" v-show="setFlag">
@@ -49,8 +48,8 @@
 
           </div>
         </div>
-      </div>
-      <div class="left">
+      </div> -->
+      <!-- <div class="left">
          <div class="left-sub">
           <img src="../../../assets/img/sub-border-l.png" alt="" class="sub-bg">
           <div class="hide-sub-left" v-show="setFlag">
@@ -66,9 +65,9 @@
              <component :is="visualList.mb.mk[1].mc.contentNum" :mcTitle="visualList.mb.mk[1].mc.contentName" :mcStatus="1"  :mcId="visualList.mb.mk[1].mc.contentNum" class="mc-content"></component>
           </div>
         </div>
-      </div>
+      </div> -->
 
-      <div class="left">
+      <!-- <div class="left">
          <div class="left-sub">
           <img src="../../../assets/img/sub-border-l.png" alt="" class="sub-bg">
           <div class="hide-sub-left" v-show="setFlag">
@@ -86,7 +85,7 @@
         </div>
       </div>
     </div>
-    <div class="keyTemp">
+   <div class="keyTemp">
       <div class="keyMain-top">
         <img src="../../../assets/img/main-border.png" alt="" class="main-bg">
         <div class="hide-sub-key" v-show="setFlag">
@@ -101,9 +100,9 @@
              <component :is="visualList.mb.mk[3].mc.contentNum"  :mcTitle="visualList.mb.mk[3].mc.contentName"  :mcStatus="3"  :mcId="visualList.mb.mk[3].mc.contentNum" class="mc-content"></component>
 
           </div>
-      </div>
+      </div> -->
 
-      <div class="keyMain-bottom">
+      <!-- <div class="keyMain-bottom">
         <img src="../../../assets/img/main-border-b.png" alt="" class="main-bg">
         <div class="hide-sub-key-b" v-show="setFlag">
             <div class="sub-btn">
@@ -117,10 +116,10 @@
              <component :is="visualList.mb.mk[4].mc.contentNum" :mcTitle="visualList.mb.mk[4].mc.contentName"  :mcStatus="4"  :mcId="visualList.mb.mk[4].mc.contentNum" class="mc-content"></component>
 
           </div>
-      </div>
+      </div> -->
 
-    </div>
-   <div class="mb-right">
+    <!-- </div> -->
+   <!-- <div class="mb-right">
       <div class="right">
          <div class="right-sub">
           <img src="../../../assets/img/sub-border-r.png" alt="" class="sub-bg">
@@ -170,7 +169,7 @@
              <component :is="visualList.mb.mk[7].mc.contentNum"  :mcTitle="visualList.mb.mk[7].mc.contentName" :mcStatus="7"  :mcId="visualList.mb.mk[7].mc.contentNum" class="mc-content"></component>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -187,6 +186,8 @@
     import MC10 from '../../../components/common/MC/MC10';
     import MC11 from '../../../components/common/MC/MC11';
     import MC12 from '../../../components/common/MC/MC12';
+    import MC13 from '../../../components/common/MC/MC13';
+    import MC14 from '../../../components/common/MC/MC14';
 
     export default {
         name: "MB02",
@@ -228,24 +229,24 @@
                     mc:"",
 
                   },
-                   {
-                    moduleNum:"MK06",
-                    moduleName:"模块六",
-                    mc:"",
+                  //  {
+                  //   moduleNum:"MK06",
+                  //   moduleName:"模块六",
+                  //   mc:"",
 
-                  },
-                   {
-                    moduleNum:"MK07",
-                    moduleName:"模块七",
-                    mc:"",
+                  // },
+                  //  {
+                  //   moduleNum:"MK07",
+                  //   moduleName:"模块七",
+                  //   mc:"",
 
-                  },
-                   {
-                    moduleNum:"MK08",
-                    moduleName:"模块八",
-                    mc:"",
+                  // },
+                  //  {
+                  //   moduleNum:"MK08",
+                  //   moduleName:"模块八",
+                  //   mc:"",
 
-                  },
+                  // },
                 ]
               }
             },
@@ -468,7 +469,9 @@
             MC09,
             MC10,
             MC11,
-            MC12
+            MC12,
+            MC13,
+            MC14,
         },
     }
 </script>

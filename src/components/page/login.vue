@@ -96,30 +96,26 @@ import sha256 from "js-sha256";
             //调取数据成功
               if(res.data){
                 if (res.data.code === "0") {
-                  console.log(self.userInfo.expiryTime);
                   self.userInfo = res.data.data;
-                  Cookies.set('dvptName',self.userName,self.userInfo.expiryTime);
-                  Cookies.set('dvptId', self.userInfo.userId,self.userInfo.expiryTime);
-                  Cookies.set('dvptToken',self.userInfo.custom_token,self.userInfo.expiryTime);
+                  self.$common.setCookie('dvptToken',self.userInfo.custom_token,60 * 6);
+                  self.$common.setCookie('dvptId',self.userInfo.userId,60 * 6);
+                  self.$common.setCookie('dvptName',self.userName,60 * 6);
+                  self.$common.setCookie('menuIndex','0');
 
-                  // self.$common.setCookie('dvptName',self.userName,self.userInfo.expiryTime);
-                  // self.$common.setCookie('dvptId', self.userInfo.userId,self.userInfo.expiryTime);
-                  // self.$common.setCookie('dvptToken',self.userInfo.custom_token,self.userInfo.expiryTime);
-
-                  // console.log(self.$common.getCookie('dvptId'));
-                  // console.log(self.$common.getCookie('dvptToken'));
+                  self.loadFlag = false;
                   self.$router.push('/home/index');
-
                   // self.changeLogin({ token: self.userInfo.custom_token });
                   // setTimeout(()=>{
                   // },200);
                 }else{
-                  this.$message.error(res.data.msg);
+                  self.$message.error(res.data.msg);
+                  self.loadFlag = false;
                 }
               }
             });
+        }else{
+          this.loadFlag = false;
         }
-        self.loadFlag = false;
       });
        
       },

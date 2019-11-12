@@ -10,10 +10,14 @@ import energy from '../components/page/energy';
 import passenger from '../components/page/passenger';
 import index from '../components/page/index';
 import rail from '../components/page/rail';
-import common from '../../static/js/common.js'
+import safe from '../components/page/safe';
+import flow from '../components/page/flow';
+
+import common from '../../utils/common.js'
 // 模版
 import MB01 from '../components/common/MB/MB01';
 import MB02 from '../components/common/MB/MB02';
+import MB03 from '../components/common/MB/MB03';
 
 // 模块内容
 import MC01 from '../components/common/MC/MC01';
@@ -28,6 +32,8 @@ import MC09 from '../components/common/MC/MC09';
 import MC10 from '../components/common/MC/MC10';
 import MC11 from '../components/common/MC/MC11';
 import MC12 from '../components/common/MC/MC12';
+import MC13 from '../components/common/MC/MC13';
+import MC14 from '../components/common/MC/MC14';
 
 
 Vue.use(Router);
@@ -89,6 +95,24 @@ const router =  new Router({
           component: passenger,
           meta:{
             title:'客流分析',
+            keepAlive:false,
+            needLogin: true
+          },
+        },
+        {
+          path:'flow',
+          component: flow,
+          meta:{
+            title:'智能客流',
+            keepAlive:false,
+            needLogin: true
+          },
+        },
+        {
+          path:'safe',
+          component: safe,
+          meta:{
+            title:'安全防范',
             keepAlive:false,
             needLogin: true
           },

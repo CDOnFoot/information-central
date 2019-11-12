@@ -3,7 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import  common from  '../static/js/common'
+import  common from  '../utils/common.js'
 import $ from 'jquery'
 import  Vuex from 'vuex'
 import store from './store'
@@ -16,6 +16,7 @@ import Antd from 'ant-design-vue'
 import api from '../utils/api'
 import http from '../utils/http'
 import VueWechatTitle from 'vue-wechat-title'
+
 Vue.use(VueWechatTitle)
 Vue.config.productionTip = false
 Vue.use(Antd);

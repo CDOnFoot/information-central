@@ -105,7 +105,7 @@
    
     data(){
       return{
-        menuList:'',
+        menuList:[],
         menuIndex:0,
         menuId:'',
         timeStamp: this.$common.timestampToTime(new Date()),
@@ -132,7 +132,6 @@
     created(){
       var routerVal = this.$router.currentRoute.path;
       this.getCurrentRoute(routerVal);
-
     },
     // beforeRouteUpdate (to, from, next) {
     //   console.log(to.matched[1].path);
@@ -142,28 +141,29 @@
     //         this.$message.warning('功能暂未开启');
     //   }
     // },
+    activated(){
+
+    },
     mounted() {
       let self = this;
-      
       // 查看菜单栏数据信息
       this.getMenuInfo();
-
       // 查看模版内容数据信息
       this.getTemplateInfo();
-
 
       document.ondragstart = function() {
         return false;
       };
       clearInterval(this.timeInterval)
-      this.timeInterval = setInterval(function(){
-        self.timeStamp = self.$common.timestampToTime(new Date());
-      },1000)
-    },
+        this.timeInterval = setInterval(function(){
+          self.timeStamp = self.$common.timestampToTime(new Date());
+        },1000);
+     },
 
     methods:{
       // 查看可视化界面内容数据信息
       getUserVisualization:function(){
+        this.loadFlag= true;
         let self = this;
         this.userVisualizationList(function(data){
           self.visualizationInfo(data);
@@ -180,16 +180,19 @@
           if(res.data){
             if (res.data.code === "0") {
               callback(res.data.data)
+            }else{
+                self.loadFlag= false;
+               self.$message.error(res.data.msg);
             }
           }
         });
       },
       visualizationInfo:function(data){
+        this.loadFlag= false;
         this.visualList = JSON.parse(JSON.stringify(data.menuList));
         this.visualHomeList = JSON.parse(JSON.stringify(data.menuList));
         this.visualParamList = JSON.parse(JSON.stringify(data.menuList));
         this.mbId = this.visualList.mb.templateNum;
-
       },
 
       // 用户登出注销后 清除session信息 ，并返回登录页
@@ -220,7 +223,6 @@
       // 查看菜单栏数据信息
       getMenuInfo:function(){
         let self = this;
-        this.loadFlag = true;
         this.menuInfoList(function(data){
           self.menuInfo(data);
         })
@@ -231,32 +233,30 @@
         let param={
         };
         this.$http.post(self.$api.getMenuInfo, param).then(res =>{
-          // if(res.status===200){
             //调取数据成功
             if(res.data){
               if (res.data.code === "0") {
                 callback(res.data.data);
               }else{
                 this.$message.error(res.data.msg);
-                self.loadFlag = false;
               }
             }
-          // }else if(res.status ===-404){
-          //   self.$info({
-          //     title: '提示',
-          //     content: '连接到服务器失败，请重试.',
-          //     onOk() {
-          //       self.$router.push('/login');
-          //     },
-          //   });
-          // }
         })
       },
       // 处理菜单栏信息接口
       menuInfo:function(data){
         let self = this;
+        // this.menuList.push(data.records[0]);
+        let menuIndex = Number(self.$common.getCookie("menuIndex"));
         this.menuList = data.records;
-        this.menuId = data.records[0].menuNum;
+        if(menuIndex && menuIndex!='' && menuIndex!=null){
+          this.menuId = data.records[menuIndex].menuNum;
+          this.menuIndex = menuIndex;
+        }else{
+          this.menuId = data.records[0].menuNum;
+          this.menuIndex = 0;
+
+        }
         this.menuList.map((item,index)=>{
           self.$common.menuList.map((items,indexs)=>{
             if(items.id === item.menuNum){
@@ -362,7 +362,6 @@
       },
       saveSetMsg:function(){
         let self = this;
-
         console.log(JSON.stringify(this.visualParamList) == JSON.stringify(this.visualList));
         if(JSON.stringify(this.visualParamList) == JSON.stringify(this.visualList)){
           this.$info({
@@ -508,10 +507,14 @@
       },
 
       selectMenu:function(param){
-        console.log(this.menuIndex);
-        console.log(param);
         let self = this;
         if(this.menuIndex!=param){
+          this.menuIndex = param;
+          self.$common.setCookie('menuIndex',this.menuIndex);
+          this.menuId = this.menuList[param].menuNum;
+
+          // self.$common.setCookie('menuId',this.menuId);
+
           // if(param!=2){
           //   this.$message.warning('功能暂未开启');
           // }else{
@@ -534,12 +537,10 @@
                 }
               });
             }).then(()=>{
-              this.menuIndex = param;
-              this.menuId = this.menuList[param].menuNum;
               this.setFlag = false;
+              console.log('/home/'+self.menuList[param].key);
               this.$router.push('/home/'+self.menuList[param].key);
             })
-       
 
           // this.$router.push({path: '/home/'+this.menuList[param].key, query: {flag: false}});
           // }
@@ -549,7 +550,7 @@
         for(var i=0;i<this.menuList.length;i++){
           if('/home/'+this.menuList[i].key === routerVal){
             this.menuIndex = i;
-            return false;1
+            return false;
           }
         }
       },
@@ -562,8 +563,5 @@
     }
   }
 </script>
-
 <style scoped>
-
-
 </style>

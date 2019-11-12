@@ -1,0 +1,305 @@
+{
+"菜单列表信息":[
+    {
+      "title":"首页",
+      "key":"index",
+      "id":"CD01"
+    },
+    {
+      "title":"客流分析",
+      "key":"passenger",
+      "id":"CD02"
+    },
+    {
+      "title":"智能客流",
+      "key":"flow",
+      "id":"CD03"
+    },
+    {
+      "title":"安全防范",
+      "key":"safe",
+      "id":"CD04"
+    },
+    {
+      "title":"能耗分析",
+      "key":"energy",
+      "id":"CD05"
+    },
+    {
+      "title":"线路概况",
+      "key":"rail",
+      "id":"CD06"
+    }
+  ],
+  "模版信息":
+  [
+        {
+            "mb":{
+            "templateName":"模版一",
+            "templateNum":"MB01",
+            "mk":[{"mc":"","moduleName":"模块一","moduleNum":"MK01"},{"mc":"","moduleName":"模块二","moduleNum":"MK02"},{"mc":"","moduleName":"模块三","moduleNum":"MK03"},
+            {"mc":"","moduleName":"模块四","moduleNum":"MK04"},{"mc":"","moduleName":"模块五","moduleNum":"MK05"},{"mc":"","moduleName":"模块六","moduleNum":"MK06"},
+            {"mc":"","moduleName":"模块七","moduleNum":"MK07"}]}
+        },
+        {
+            "mb":{
+                "templateName":"模版二",
+                "templateNum":"MB02",
+                "mk":[{"mc":"","moduleName":"模块一","moduleNum":"MK01"},{"mc":"","moduleName":"模块二","moduleNum":"MK02"},{"mc":"","moduleName":"模块三","moduleNum":"MK03"},
+                {"mc":"","moduleName":"模块四","moduleNum":"MK04"},{"mc":"","moduleName":"模块五","moduleNum":"MK05"},{"mc":"","moduleName":"模块六","moduleNum":"MK06"},
+                {"mc":"","moduleName":"模块七","moduleNum":"MK07"},{"mc":"","moduleName":"模块七","moduleNum":"MK07"}]}
+        },
+      {
+        "mb":{
+        "templateName":"模版三",
+        "templateNum":"MB03",
+        "mk":[{"mc":"","moduleName":"模块一","moduleNum":"MK01"}]}
+      },
+      {
+        "mb":{
+        "templateName":"模版三",
+        "templateNum":"MB03",
+        "mk":[{"mc":"","moduleName":"模块一","moduleNum":"MK01"}]}
+      }
+    ],
+    
+    "可视化布局信息":[
+        {
+            "menuNum":"CD01", "menuName":"首页",
+            "mbList":{
+                "mb":{
+                    "templateName":"模版一",
+                    "templateNum":"MB01",
+                    "mk":[{
+                        "moduleNum":"MK01",
+                        "mc":{
+                            "contentIndex":"2",
+                            "contentNum":"MC01",
+                            "contentName":"能耗排行"},
+                            "moduleName":"模块一"
+                        },
+                        {
+                            "moduleNum":"MK02",
+                            "mc":{
+                                "contentIndex":"2",
+                                "contentNum":"MC02",
+                                "contentName":"能耗结构"
+                            },
+                            "moduleName":"模块二"
+                        },
+                        {
+                            "moduleNum":"MK03",
+                            "mc":{
+                                "contentIndex":"2",
+                                "contentNum":"MC03",
+                                "contentName":"客流走势/预测"
+                            },
+                            "moduleName":"模块三"
+                        },
+                        {
+                            "moduleNum":"MK04",
+                            "mc":{
+                                "contentIndex":"1",
+                                "contentNum":"MC04",
+                                "contentName":"列车实时运行图"
+                            },
+                            "moduleName":"模块四"
+                        },
+                        {
+                            "moduleNum":"MK05",
+                            "mc":{
+                                "contentIndex":"2",
+                                "contentNum":"MC11",
+                                "contentName":"当日累计进出站人数"
+                            },
+                            "moduleName":"模块五"
+                        },{
+                            "moduleNum":"MK06",
+                            "mc":{
+                                "contentIndex":"2",
+                                "contentNum":"MC06",
+                                "contentName":"昨日OD排行top10"
+                            },
+                            "moduleName":"模块六"
+                        },{
+                            "moduleNum":"MK07",
+                            "mc":{
+                                "contentIndex":"2",
+                                "contentNum":"MC07",
+                                "contentName":"兑现率/正点率"
+                            },
+                            "moduleName":"模块七"
+                        }]
+                    }
+                }
+            },
+            {
+                "menuNum":"CD02", "menuName":"客流分析",
+                "mbList":{
+                    "mb": {
+                     "templateName": "模版二",
+                     "templateNum": "MB02",
+                     "mk": [{
+                       "moduleNum": "MK01",
+                       "mc": {
+                        "contentIndex": "1",
+                        "contentNum": "MC08",
+                        "contentName": "线路热点图"
+                       },
+                       "moduleName": "模块一"
+                      },
+                      {
+                       "moduleNum": "MK02",
+                       "mc": {
+                        "contentIndex": "2",
+                        "contentNum": "MC09",
+                        "contentName": "各站实时客流"
+                       },
+                       "moduleName": "模块二"
+                      },
+                      {
+                       "moduleNum": "MK03",
+                       "mc": {
+                        "contentIndex": "2",
+                        "contentNum": "MC10",
+                        "contentName": "昨日客流进出站排行"
+                       },
+                       "moduleName": "模块三"
+                      },
+                      {
+                       "moduleNum": "MK04",
+                       "mc": {
+                        "contentIndex": "2",
+                        "contentNum": "MC06",
+                        "contentName": "昨日OD排行Top7"
+                       },
+                       "moduleName": "模块四"
+                      },
+                      {
+                       "moduleNum": "MK05",
+                       "mc": {
+                        "contentIndex": "2",
+                        "contentNum": "MC11",
+                        "contentName": "当日累计进出站人数"
+                       },
+                       "moduleName": "模块五"
+                      }
+                     ]
+                    }
+                   }
+            },
+            {
+                "menuNum":"CD03", "menuName":"智能客流",
+                "mbList":{
+                    "mb": {
+                     "templateName": "模版三",
+                     "templateNum": "MB03",
+                     "mk": [{
+                       "moduleNum": "MK01",
+                       "mc": {
+                        "contentIndex": "1",
+                        "contentNum": "MC13",
+                        "contentName": "智能客流"
+                       },
+                       "moduleName": "模块一"
+                      }]
+                    }
+                }
+            },
+            {
+                "menuNum":"CD04", "menuName":"安全防范",
+                "mbList":{
+                    "mb": {
+                     "templateName": "模版三",
+                     "templateNum": "MB14",
+                     "mk": [{
+                       "moduleNum": "MK01",
+                       "mc": {
+                        "contentIndex": "1",
+                        "contentNum": "MC13",
+                        "contentName": "安全防范"
+                       },
+                       "moduleName": "模块一"
+                      }]
+                    }
+                }
+            }
+        
+    ],
+    "模块内容信息":
+    {
+        "mc":[
+            {
+                "contentIndex": "2",
+                "contentName": "能耗排行",
+                "contentNum": "MC01"
+            },
+            {
+                "contentIndex": "2",
+                "contentNum": "MC02",
+                "contentName": "能耗结构"
+            },
+            {
+                "contentIndex": "2",
+                "contentName": "客流走势/预测",
+                "contentNum": "MC03"
+            },
+            {
+                "contentIndex": "1",
+                "contentName": "列车实时运行图",
+                "contentNum": "MC04"
+            },
+            {
+                "contentIndex": "2",
+                "contentName": "车站聚类",
+                "contentNum": "MC05"
+            },
+            {
+                "contentIndex": "2",
+                "contentName": "昨日OD排行Top7",
+                "contentNum": "MC06"
+            },
+            {
+                "contentIndex": "2",
+                "contentName": "兑现率/正点率",
+                "contentNum": "MC07"
+            },
+            {
+                "contentIndex": "1",
+                "contentName": "线路热点图",
+                "contentNum": "MC08"
+            },
+            {
+                "contentIndex": "2",
+                "contentName": "各站实时客流",
+                "contentNum": "MC09"
+            },
+            {
+                "contentIndex": "2",
+                "contentName": "昨日客流进出站排行",
+                "contentNum": "MC10"
+            },
+            {
+                "contentIndex": "2",
+                "contentName": "当日累计进出站人数",
+                "contentNum": "MC11"
+            },
+            {
+                "contentIndex": "2",
+                "contentName": "能耗车辆次",
+                "contentNum": "MC12"
+            },
+            {
+                "contentIndex": "2",
+                "contentName": "智能客流",
+                "contentNum": "MC13"
+            },
+            {
+                "contentIndex": "2",
+                "contentName": "安全防范",
+                "contentNum": "MC14"
+            }
+        ]
+    }
+}
+ 

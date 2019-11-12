@@ -34,6 +34,12 @@ export default {
 
   getPassenger:'/passenger/passengerforecast',//查询客流走势/客流预测
 
-  getRailInfo:'/passenger/getrailinfo'//查询列车实时运行图
+  getRailInfo:'/passenger/getrailinfo',//查询列车实时运行图
+
+  passengerEntryExitTopTen:'/passenger/passengerEntryExitTopTen',  //昨日进出站客流量排行
+
+  energyVehicleTimes:'/energy/energyVehicleTimes',   //能耗车辆次
+
+  passengerflowaccumulated:'/passenger/passengerflowaccumulated',  //当日累计进出站人数
 
 }

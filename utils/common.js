@@ -197,21 +197,21 @@ var common = {
       title: "金川路",
       status:'下行',
       dotType:'common',
-      dot: ["1.6%", "13%"]
+      dot: ["4.3%", "14%"]
     },
     {
       dotId: "1",
       title: "金川路-大河埂",
       status:'下行',
       dotType:'middle',
-      dot: ["4.7%", "14%"]
+      dot: ["5.7%", "13.6%"]
     },
     {
       dotId: "2",
       title: "大河埂",
       status:'下行',
       dotType:'common',
-      dot: ["6.6%", "13.2%"]
+      dot: ["7%", "13.2%"]
     },
     {
       dotId: "2",
@@ -225,14 +225,14 @@ var common = {
       title: "海屯路",
       status:'下行',
       dotType:'common',
-      dot: ["13%", "16%"]
+      dot: ["13%", "16.2%"]
     },
     {
       dotId: "3",
       title: "海屯路-小屯",
       status:'下行',
       dotType:'middle',
-      dot: ["14%", "19%"]
+      dot: ["14.3%", "18.6%"]
     },
 
     {
@@ -240,14 +240,14 @@ var common = {
       title: "小屯",
       status:'下行',
       dotType:'common',
-      dot: ["16%", "21%"]
+      dot: ["15.6%", "20.4%"]
     },
     {
       dotId: "4",
       title: "小屯-金鼎山北路",
       status:'下行',
       dotType:'middle',
-      dot: ["16%", "23%"]
+      dot: ["16.6%", "22.4%"]
     },
     
     {
@@ -255,49 +255,49 @@ var common = {
       title: "金鼎山北路",
       status:'下行',
       dotType:'common',
-      dot: ["18.5%", "24.5%"]
+      dot: ["17.7%", "24%"]
     },
     {
       dotId: "5",
       title: "金鼎山北路-苏家塘",
       status:'下行',
       dotType:'middle',
-      dot: ["18%", "26.3%"]
+      dot: ["18%", "25.7%"]
     },
     {
       dotId: "6",
       title: "苏家塘",
       status:'下行',
       dotType:'common',
-      dot: ["19%", "27.8%"]
+      dot: ["18.2%", "27.2%"]
     },
     {
       dotId: "6",
       title: "苏家塘-小菜园",
       status:'下行',
       dotType:'middle',
-      dot: ["18.5%", "30.5%"]
+      dot: ["18.5%", "30%"]
     },
     {
       dotId: "7",
       title: "小菜园",
       status:'下行',
       dotType:'common',
-      dot: ["19.8%", "33%"]
+      dot: ["19.3%", "32.6%"]
     },
     {
       dotId: "7",
       title: "小菜园-火车北",
       status:'下行',
       dotType:'middle',
-      dot: ["20%", "35%"]
+      dot: ["20.3%", "34.8%"]
     },
     {
       dotId: "8",
       title: "火车北",
       status:'下行',
       dotType:'common',
-      dot: ["21.3%", "37.2%"]
+      dot: ["21%", "36.6%"]
     },
     {
       dotId: "8",
@@ -311,49 +311,49 @@ var common = {
       title: "白龙路",
       status:'下行',
       dotType:'common',
-      dot: ["24%", "41.5%"]
+      dot: ["23.6%", "41.2%"]
     },
     {
       dotId: "9",
       title: "白龙路-大村营",
       status:'下行',
       dotType:'middle',
-      dot: ["25.4%", "42.5%"]
+      dot: ["25.4%", "42.3%"]
     },
     {
       dotId: "10",
       title: "大树营",
       status:'下行',
       dotType:'common',
-      dot: ["27.6%", "42.5%"]
+      dot: ["27.5%", "42.7%"]
     },
     {
       dotId: "10",
       title: "大树营站-菊花村",
       status:'下行',
       dotType:'middle',
-      dot: ["29%", "43.5%"]
+      dot: ["28.7%", "43.5%"]
     },
     {
       dotId: "11",
       title: "菊花村",
       status:'下行',
       dotType:'common',
-      dot: ["30.5%", "44%"]
+      dot: ["30.1%", "44%"]
     },
     {
       dotId: "11",
       itle: "菊花村-菊华",
       status:'下行',
       dotType:'middle',
-      dot: ["31.8%", "45.5%"]
+      dot: ["31.5%", "45.2%"]
     },
     {
       dotId: "12",
       title: "菊华",
       status:'下行',
       dotType:'common',
-      dot: ["33%", "46.5%"]
+      dot: ["32.7%", "46.5%"]
     },
     {
       dotId: "12",
@@ -367,21 +367,21 @@ var common = {
       title: "和甸营",
       status:'下行',
       dotType:'common',
-      dot: ["36.2%", "51%"]
+      dot: ["36.2%", "51.3%"]
     },
     {
       dotId: "13",
       title: "和甸营-麻苴",
       status:'下行',
       dotType:'middle',
-      dot: ["38.5%", "55%"]
+      dot: ["38.5%", "54%"]
     },
     {
       dotId: "14",
       title: "麻苴",
       status:'下行',
       dotType:'common',
-      dot: ["40%", "58%"]
+      dot: ["40.3%", "58.6%"]
     },
     {
       dotId: "14",
@@ -402,196 +402,196 @@ var common = {
       title: "牛街庄-朱家村",
       status:'下行',
       dotType:'middle',
-      dot: ["46%", "58.5%"]
+      dot: ["46%", "58%"]
     },
     {
       dotId: "16",
       title: "朱家村",
       status:'下行',
       dotType:'common',
-      dot: ["48.8%", "59.5%"]
+      dot: ["49.3%", "59.5%"]
     },
     {
       dotId: "16",
       title: "朱家村-玉缘路",
       status:'下行',
       dotType:'middle',
-      dot: ["50.8%", "59.8%"]
+      dot: ["51.4%", "59.6%"]
     },
     {
       dotId: "17",
       title: "玉缘路",
       status:'下行',
       dotType:'common',
-      dot: ["52.8%", "58.8%"]
+      dot: ["53.7%", "59.2%"]
     },
     {
       dotId: "17",
       title: "玉缘路-广卫",
       status:'下行',
       dotType:'middle',
-      dot: ["55.8%", "57.8%"]
+      dot: ["56.2%", "57.6%"]
     },
     {
       dotId: "18",
       title: "广卫",
       status:'下行',
       dotType:'common',
-      dot: ["59.8%", "58.3%"]
+      dot: ["59.7%", "58.4%"]
     },
     {
       dotId: "18",
       title: "广卫-塔密",
       status:'下行',
       dotType:'middle',
-      dot: ["61.4%", "59.8%"]
+      dot: ["61.4%", "59.2%"]
     },
     {
       dotId: "19",
       title: "塔密",
       status:'下行',
       dotType:'common',
-      dot: ["63.4%", "59.3%"]
+      dot: ["64%", "59.3%"]
     },
     {
       dotId: "19",
       title: "塔密-斗南",
       status:'下行',
       dotType:'middle',
-      dot: ["68.4%", "60.8%"]
+      dot: ["69.4%", "60.5%"]
     },
     {
       dotId: "20",
       title: "斗南",
       status:'下行',
       dotType:'common',
-      dot: ["74.4%", "60.8%"]
+      dot: ["75.2%", "60.8%"]
     },
     {
       dotId: "20",
       title: "斗南-金桂街",
       status:'下行',
       dotType:'middle',
-      dot: ["75.8%", "61.8%"]
+      dot: ["76.4%", "60.9%"]
     },
     {
       dotId: "21",
       title: "金桂街",
       status:'下行',
       dotType:'common',
-      dot: ["75.8%", "59.8%"]
+      dot: ["77%", "60.1%"]
     },
     {
       dotId: "21",
       title: "金桂街-梅子村",
       status:'下行',
       dotType:'middle',
-      dot: ["78.3%", "59.2%"]
+      dot: ["79%", "59%"]
     },
     {
       dotId: "22",
       title: "梅子村",
       status:'下行',
       dotType:'common',
-      dot: ["81.2%", "59.6%"]
+      dot: ["81.4%", "59.8%"]
     },
     {
       dotId: "22",
       title: "梅子村-古城",
       status:'下行',
       dotType:'middle',
-      dot: ["82.6%", "61%"]
+      dot: ["82.9%", "61%"]
     },
     {
       dotId: "23",
       title: "古城",
       status:'下行',
       dotType:'common',
-      dot: ["84%", "61.5%"]
+      dot: ["84.8%", "61.9%"]
     },
     {
       dotId: "23",
       title: "古城-可乐村",
       status:'下行',
       dotType:'middle',
-      dot: ["85.6%", "63%"]
+      dot: ["86.2%", "62.8%"]
     },
     {
       dotId: "24",
       title: "可乐村",
       status:'下行',
       dotType:'common',
-      dot: ["87.6%", "63%"]
+      dot: ["88.2%", "63.2%"]
     },
     {
       dotId: "24",
       title: "可乐村-祥丰街",
       status:'下行',
       dotType:'middle',
-      dot: ["90%", "64.4%"]
+      dot: ["91%", "63.9%"]
     },
     {
       dotId: "25",
       title: "祥丰街",
       status:'下行',
       dotType:'common',
-      dot: ["93.4%", "64.3%"]
+      dot: ["94%", "64.8%"]
     },
     {
       dotId: "25",
       title: "祥丰街-牛头山",
       status:'下行',
       dotType:'middle',
-      dot: ["95%", "68.3%"]
+      dot: ["96%", "69%"]
     },
     {
       dotId: "26",
       title: "牛头山",
       status:'下行',
       dotType:'common',
-      dot: ["95%", "72%"]
+      dot: ["95.6%", "71.8%"]
     },
     {
       dotId: "26",
       title: "牛头山-联大街",
       status:'下行',
       dotType:'middle',
-      dot: ["94.2%", "75%"]
+      dot: ["94.8%", "74.6%"]
     },
     {
       dotId: "27",
       title: "联大街",
       status:'下行',
       dotType:'common',
-      dot: ["93.8%", "77.4%"]
+      dot: ["94%", "77%"]
     },
     {
       dotId: "27",
       title: "联大街-吴家营",
       status:'下行',
       dotType:'middle',
-      dot: ["92%", "80%"]
+      dot: ["93%", "79.6%"]
     },
     {
       dotId: "28",
       title: "吴家营",
       status:'下行',
       dotType:'common',
-      dot: ["91.6%", "82.6%"]
+      dot: ["91.8%", "81.9%"]
     },
     {
       dotId: "28",
       title: "吴家营-昆明南",
       status:'下行',
       dotType:'middle',
-      dot: ["89.2%", "84.6%"]
+      dot: ["91%", "84%"]
     },
     {
       dotId: "29",
       title: "昆明南",
       status:'下行',
       dotType:'common',
-      dot: ["89.6%", "87.6%"]
+      dot: ["89.6%", "86%"]
     },
     
 
@@ -603,105 +603,105 @@ var common = {
       title: "金川路站",
       status:'上行',
       dotType:'common',
-      dot: ["2%", "16%"]
+      dot: ["4.5%", "16%"]
     },
     {
       dotId: "2",
       title: "大河埂-金川路",
       status:'上行',
       dotType:'middle',
-      dot: ["6.2%", "16.5%"]
+      dot: ["6%", "15.7%"]
     },
     {
       dotId: "2",
       title: "大河埂站",
       status:'上行',
       dotType:'common',
-      dot: ["8%", "16.5%"]
+      dot: ["7.5%", "15.5%"]
     },
     {
       dotId: "3",
       title: "海屯路站-大河埂",
       status:'上行',
       dotType:'middle',
-      dot: ["10%", "15.5%"]
+      dot: ["10%", "14.5%"]
     },
     {
       dotId: "3",
       title: "海屯路",
       status:'上行',
       dotType:'common',
-      dot: ["11%", "18.5%"]
+      dot: ["11.2%", "17.2%"]
     },
     {
       dotId: "4",
       title: "小屯-海屯路",
       status:'上行',
       dotType:'middle',
-      dot: ["13%", "20%"]
+      dot: ["12.5%", "19.4%"]
     },
     {
       dotId: "4",
       title: "小屯",
       status:'上行',
       dotType:'common',
-      dot: ["13%", "22.5%"]
+      dot: ["13.6%", "21.5%"]
     },
     {
       dotId: "5",
       title: "金鼎山北路-小屯",
       status:'上行',
       dotType:'middle',
-      dot: ["15%", "23.8%"]
+      dot: ["14.6%", "23.4%"]
     },
     {
       dotId: "5",
       title: "金鼎山北路",
       status:'上行',
       dotType:'common',
-      dot: ["15.5%", "25.5%"]
+      dot: ["16%", "24.8%"]
     },
     {
       dotId: "6",
       title: "苏家塘-金鼎山北路",
       status:'上行',
       dotType:'middle',
-      dot: ["16.4%", "26.8%"]
+      dot: ["16.2%", "26.2%"]
     },
     {
       dotId: "6",
       title: "苏家塘站",
       status:'上行',
       dotType:'common',
-      dot: ["16%", "28.3%"]
+      dot: ["16.2%", "27.6%"]
     },
     {
       dotId: "7",
       title: "小菜园-苏家塘",
       status:'上行',
       dotType:'middle',
-      dot: ["16.5%", "31%"]
+      dot: ["16.7%", "30.5%"]
     },
     {
       dotId: "7",
       title: "小菜园",
       status:'上行',
       dotType:'common',
-      dot: ["17%", "34%"]
+      dot: ["17.4%", "33.3%"]
     },
     {
       dotId: "8",
       title: "火车北-小菜园",
       status:'上行',
       dotType:'middle',
-      dot: ["18.6%", "36%"]
+      dot: ["18.4%", "35.6%"]
     },
     {
       dotId: "8",
       title: "火车北",
       status:'上行',
       dotType:'common',
-      dot: ["19%", "38.2%"]
+      dot: ["19%", "37.5%"]
     },
     {
       dotId: "9",
@@ -715,77 +715,77 @@ var common = {
       title: "白龙路",
       status:'上行',
       dotType:'common',
-      dot: ["21.8%", "43.8%"]
+      dot: ["21.8%", "43%"]
     },
     {
       dotId: "10",
       title: "大树营-白龙路",
       status:'上行',
       dotType:'middle',
-      dot: ["24.4%", "44.5%"]
+      dot: ["24.4%", "44.1%"]
     },
     {
       dotId: "10",
       title: "大树营",
       status:'上行',
       dotType:'common',
-      dot: ["26.6%", "45.5%"]
+      dot: ["26.9%", "44.9%"]
     },
     {
       dotId: "11",
       title: "菊花村-大树营",
       status:'上行',
       dotType:'middle',
-      dot: ["28%", "46%"]
+      dot: ["28.3%", "45.4%"]
     },
     {
       dotId: "11",
       title: "菊花村",
       status:'上行',
       dotType:'common',
-      dot: ["28.8%", "47%"]
+      dot: ["29.2%", "46%"]
     },
     {
       dotId: "12",
       title: "菊华-菊花村",
       status:'上行',
       dotType:'middle',
-      dot: ["30%", "47.5%"]
+      dot: ["30.4%", "46.8%"]
     },
     {
       dotId: "12",
       title: "菊华",
       status:'上行',
       dotType:'common',
-      dot: ["31%", "48.5%"]
+      dot: ["31%", "47.8%"]
     },
     {
       dotId: "13",
       title: "和甸营-菊华",
       status:'上行',
       dotType:'middle',
-      dot: ["33%", "50%"]
+      dot: ["33.6%", "50%"]
     },
     {
       dotId: "13",
       title: "和甸营",
       status:'上行',
       dotType:'common',
-      dot: ["33.4%", "53%"]
+      dot: ["34%", "52%"]
     },
     {
       dotId: "14",
       title: "麻苴-和甸营",
       status:'上行',
       dotType:'middle',
-      dot: ["36.5%", "55%"]
+      dot: ["36.8%", "55%"]
     },
     {
       dotId: "14",
       title: "麻苴",
       status:'上行',
       dotType:'common',
-      dot: ["38%", "60%"]
+      dot: ["38.5%", "59.5%"]
     },
     {
       dotId: "15",
@@ -799,203 +799,203 @@ var common = {
       title: "牛街庄",
       status:'上行',
       dotType:'common',
-      dot: ["43.2%", "61%"]
+      dot: ["43.4%", "60.2%"]
     },
     {
       dotId: "16",
       title: "朱家村-牛街庄",
       status:'上行',
       dotType:'middle',
-      dot: ["46%", "60.5%"]
+      dot: ["46%", "60.2%"]
     },
     {
       dotId: "16",
       title: "朱家村",
       status:'上行',
       dotType:'common',
-      dot: ["49%", "62.5%"]
+      dot: ["49.2%", "61.5%"]
     },
     {
       dotId: "17",
       title: "玉缘路-朱家村",
       status:'上行',
       dotType:'middle',
-      dot: ["51.6%", "61.8%"]
+      dot: ["51.6%", "61.6%"]
     },
     {
       dotId: "17",
       title: "玉缘路",
       status:'上行',
       dotType:'common',
-      dot: ["54%", "62.4%"]
+      dot: ["54.3%", "61.4%"]
     },
     {
       dotId: "18",
       title: "广卫-玉缘路",
       status:'上行',
       dotType:'middle',
-      dot: ["55.8%", "59.8%"]
+      dot: ["56.4%", "59.8%"]
     },
     {
       dotId: "18",
       title: "广卫",
       status:'上行',
       dotType:'common',
-      dot: ["58.2%", "61.3%"]
+      dot: ["58.8%", "60.6%"]
     },
     {
       dotId: "19",
       title: "塔密-广卫",
       status:'上行',
       dotType:'middle',
-      dot: ["61.4%", "61.8%"]
+      dot: ["61.4%", "61.4%"]
     },
     {
       dotId: "19",
       title: "塔密",
       status:'上行',
       dotType:'common',
-      dot: ["64%", "62.3%"]
+      dot: ["64.6%", "61.6%"]
     },
     {
       dotId: "20",
       title: "斗南-塔密",
       status:'上行',
       dotType:'middle',
-      dot: ["68.4%", "62.8%"]
+      dot: ["69.4%", "62.5%"]
     },
     {
       dotId: "20",
       title: "斗南",
       status:'上行',
       dotType:'common',
-      dot: ["74.8%", "63.8%"]
+      dot: ["75.3%", "63.2%"]
     },
     {
       dotId: "21",
       title: "金桂街-斗南",
       status:'上行',
       dotType:'middle',
-      dot: ["76.6%", "63%"]
+      dot: ["77%", "63%"]
     },
     {
       dotId: "21",
       title: "金桂街",
       status:'上行',
       dotType:'common',
-      dot: ["78.1%", "61.8%"]
+      dot: ["78.6%", "61%"]
     },
     {
       dotId: "21",
       title: "梅子村-金桂街",
       status:'上行',
       dotType:'middle',
-      dot: ["79.3%", "61.2%"]
+      dot: ["79.5%", "61%"]
     },
     {
       dotId: "22",
       title: "梅子村",
       status:'上行',
       dotType:'common',
-      dot: ["80%", "62.6%"]
+      dot: ["80.4%", "61.6%"]
     },
     {
       dotId: "23",
       title: "古城-梅子村",
       status:'上行',
       dotType:'middle',
-      dot: ["81.6%", "63%"]
+      dot: ["82.4%", "62.8%"]
     },
     {
       dotId: "23",
       title: "古城",
       status:'上行',
       dotType:'common',
-      dot: ["82.8%", "65%"]
+      dot: ["83.9%", "63.8%"]
     },
     {
       dotId: "24",
       title: "可乐村-古城",
       status:'上行',
       dotType:'middle',
-      dot: ["85.2%", "65.5%"]
+      dot: ["86%", "64.6%"]
     },
     {
       dotId: "24",
       title: "可乐村",
       status:'上行',
       dotType:'common',
-      dot: ["87%", "66.3%"]
+      dot: ["87.8%", "65.5%"]
     },
     {
       dotId: "25",
       title: "祥丰街-可乐村",
       status:'上行',
       dotType:'middle',
-      dot: ["90%", "64.4%"]
+      dot: ["90.6%", "66%"]
     },
     {
       dotId: "25",
       title: "祥丰街",
       status:'上行',
       dotType:'common',
-      dot: ["92.6%", "67.4%"]
+      dot: ["93.2%", "67%"]
     },
     {
       dotId: "26",
       title: "牛头山-祥丰街",
       status:'上行',
       dotType:'middle',
-      dot: ["93.5%", "69.3%"]
+      dot: ["94%", "68.8%"]
     },
     {
       dotId: "26",
       title: "牛头山",
       status:'上行',
       dotType:'common',
-      dot: ["92.2%", "71.2%"]
+      dot: ["93.7%", "71.4%"]
     },
     {
       dotId: "27",
       title: "联大街-牛头山",
       status:'上行',
       dotType:'middle',
-      dot: ["92.2%", "74%"]
+      dot: ["93%", "74%"]
     },
     {
       dotId: "27",
       title: "联大街",
       status:'上行',
       dotType:'common',
-      dot: ["90.8%", "76.4%"]
+      dot: ["91.8%", "76.4%"]
     },
     {
       dotId: "28",
       title: "吴家营-联大街",
       status:'上行',
       dotType:'middle',
-      dot: ["90%", "79%"]
+      dot: ["91%", "79%"]
     },
     {
       dotId: "28",
       title: "吴家营",
       status:'上行',
       dotType:'common',
-      dot: ["88.6%", "81.2%"]
+      dot: ["89.7%", "81.2%"]
     },
     {
       dotId: "29",
       title: "昆明南-吴家营",
       status:'上行',
       dotType:'middle',
-      dot: ["88.2%", "83.6%"]
+      dot: ["88.9%", "83.2%"]
     },
     {
       dotId: "29",
       title: "昆明南",
       status:'上行',
       dotType:'common',
-      dot: ["86.6%", "86%"]
+      dot: ["88%", "85.2%"]
     }
   ],
 };

@@ -4,7 +4,7 @@
   <div>
     <div class="main">
       <div class="borde">{{mcTitle}}</div>
-      <div class="timeStamp">展示时间：{{timeStamp}}</div>
+      <!-- <div class="timeStamp">展示时间：{{timeStamp}}</div> -->
       <div :id="mcId" class="main-id"></div>
     </div>
   </div>
@@ -64,14 +64,12 @@ export default {
     chartInfo: function(callback, type) {
       let self = this;
       let param = {};
-      this.$http.get(self.$api.energystructure, param).then(res => {
+      this.$http.get(self.$api.passengerEntryExitTopTen, param).then(res => {
         //调取数据成功
         if (res.data) {
           if (res.data.code === "0") {
-            let arr = [];
-            arr = res.data.data.dataList;
-            arr.unshift(res.data.data.timeList);
-            callback(arr, type);
+            let arr = []; 
+            callback(res.data.data, type);
           } else {
             this.$message.error(res.data.msg);
           }
@@ -102,6 +100,7 @@ export default {
                 color: "white"
               },
             right:"5%",
+            top:'5%'
           },
           grid: {
             left: "3%",
@@ -154,6 +153,10 @@ export default {
             }
           ]
         }; 
+        // console.log(paramData)
+        option.yAxis.data = paramData.station;
+        option.series[0].data = paramData.entryNumPeople;
+        option.series[1].data = paramData.exitNumPeople;
         self.structure.setOption(option);
       } else {
         //更新刷新记录信息

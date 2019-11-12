@@ -28,8 +28,8 @@ export default {
       // timeStamp: this.$common.timestampToTime(new Date()),
       mcList: "",
       mcId: "",
-      ontimerate:19943223,  //正点率
-      fullfillment:76514242,  //兑现率
+      ontimerate:0,  //正点率
+      fullfillment:0,  //兑现率
       dataRef:"",   //定点刷新
       timeStamp:'2019年11月25日 05:00-20:15'
     };
@@ -63,23 +63,18 @@ export default {
   },
   created() {},
   methods: {
-    //小数转百分数
-    changeData(point){
-      var str=Number(point*100).toFixed(2);
-        str+="%";
-        return str;
-    },
     //获取数据
     getData(){
       let self = this;
         let param={
           };
-      self.$http.get(self.$api.getOntimeAndFullfillment, param).then(res =>{
+      self.$http.get(self.$api.passengerflowaccumulated, param).then(res =>{
           //调取数据成功
           if(res.data){
             if (res.data.code === "0") {
-              // self.ontimerate = self.changeData(res.data.data.ontimerate)
-              // self.fullfillment = self.changeData(res.data.data.fullfillment)
+              self.timeStamp = res.data.data.daytime
+              self.ontimerate = res.data.data.flows_in_total
+              self.fullfillment = res.data.data.flows_out_total
             }else{
               self.$message.error(res.data.msg);
             }

@@ -63,19 +63,17 @@ export default {
     chartInfo: function(callback, type) {
       let self = this;
       let param = {};
-      this.$http.get(self.$api.energystructure, param).then(res => {
-        //调取数据成功
-        if (res.data) {
-          if (res.data.code === "0") {
-            let arr = [];
-            arr = res.data.data.dataList;
-            arr.unshift(res.data.data.timeList);
-            callback(arr, type);
-          } else {
-            this.$message.error(res.data.msg);
-          }
-        }
-      });
+      callback("", type);
+      // this.$http.get(self.$api.energyVehicleTimes, param).then(res => {
+      //   //调取数据成功
+      //   if (res.data) {
+      //     if (res.data.code === "0") {
+      //       callback(res.data.data, type);
+      //     } else {
+      //       this.$message.error(res.data.msg);
+      //     }
+      //   }
+      // });
     },
     chartInfoList: function(data, type) {
       this.drawLine(data, type);
@@ -207,6 +205,10 @@ export default {
             }
           ]
         };
+        console.log(paramData)
+        // option.yAxis.data = paramData.station;
+        // option.series[0].data = paramData.entryNumPeople;
+        // option.series[1].data = paramData.exitNumPeople;
         self.structure.setOption(option);
       } else {
         //更新刷新记录信息

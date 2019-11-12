@@ -44,11 +44,5 @@ export default {
   color: #ffffff;
   padding: 10px;
 }
-.borde {
-  font-weight: 700;
-  color: #3467c5;
-  border-left: #3467c5 solid 4px;
-  padding-left: 10px;
-  margin: 0px 0px 0px 30px;
-}
+
 </style>

@@ -1,7 +1,7 @@
 <template>
 <!--    模版一-->
   <div class="mb-main">
-    <div class="mb-left">
+    <div class="mb02-left">
         <a-modal
             :title="title"
             :visible="visible"
@@ -32,144 +32,93 @@
           </div>
         </div>
       </a-modal>
-      <!-- <div class="left">
-        <div class="left-sub">
-          <img src="../../../assets/img/sub-border-l.png" alt="" class="sub-bg">
-          <div class="hide-sub-left" v-show="setFlag">
-            <div class="sub-btn">
-                <div class="sub-btn-item" v-for="(item,index) in btnList" :key="index" :class="(index===0 || index===2)?'marginLeft':''">
-                  <a-button size="small" class="item-btn" @click="mcChangeItem(0,index)" v-show="(index===0 && !visualList.mb.mk[0].mc.contentNum) || (index===1 && visualList.mb.mk[0].mc.contentNum) || (index===2 && visualList.mb.mk[0].mc.contentNum)">
-                  {{item.title}}</a-button>
-                </div>
-            </div>
-          </div>
-          <div class="sub-content">
-             <component :is="visualList.mb.mk[0].mc.contentNum" :mcTitle="visualList.mb.mk[0].mc.contentName"  :mcStatus="0" :mcId="visualList.mb.mk[0].mc.contentNum" class="mc-content"></component>
-
-          </div>
-        </div>
-      </div> -->
-      <!-- <div class="left">
-         <div class="left-sub">
-          <img src="../../../assets/img/sub-border-l.png" alt="" class="sub-bg">
-          <div class="hide-sub-left" v-show="setFlag">
-              <div class="sub-btn">
-                  <div class="sub-btn-item" v-for="(item,index) in btnList" :key="index" :class="(index===0 || index===2)?'marginLeft':''">
-                  <a-button size="small" class="item-btn" @click="mcChangeItem(1,index)" v-show="(index===0 && !visualList.mb.mk[1].mc.contentNum) || (index===1 && visualList.mb.mk[1].mc.contentNum) || (index===2 && visualList.mb.mk[1].mc.contentNum)">
-                  {{item.title}}</a-button>
-                </div>
-              </div>
-            </div>
-      
-            <div class="sub-content">
-             <component :is="visualList.mb.mk[1].mc.contentNum" :mcTitle="visualList.mb.mk[1].mc.contentName" :mcStatus="1"  :mcId="visualList.mb.mk[1].mc.contentNum" class="mc-content"></component>
-          </div>
-        </div>
-      </div> -->
-
-      <!-- <div class="left">
-         <div class="left-sub">
-          <img src="../../../assets/img/sub-border-l.png" alt="" class="sub-bg">
-          <div class="hide-sub-left" v-show="setFlag">
-              <div class="sub-btn">
-                <div class="sub-btn-item" v-for="(item,index) in btnList" :key="index" :class="(index===0 || index===2)?'marginLeft':''">
-                  <a-button size="small" class="item-btn" @click="mcChangeItem(2,index)" v-show="(index===0 && !visualList.mb.mk[2].mc.contentNum) || (index===1 && visualList.mb.mk[2].mc.contentNum) || (index===2 && visualList.mb.mk[2].mc.contentNum)">
-                  {{item.title}}</a-button>
-                </div>
-              </div>
-            </div>
-          <div class="sub-content">
-             <component :is="visualList.mb.mk[2].mc.contentNum" :mcTitle="visualList.mb.mk[2].mc.contentName" :mcStatus="2"  :mcId="visualList.mb.mk[2].mc.contentNum" class="mc-content"></component>
-
-          </div>
-        </div>
-      </div>
-    </div>
-   <div class="keyTemp">
-      <div class="keyMain-top">
+      <div class="mb-keyMain">
         <img src="../../../assets/img/main-border.png" alt="" class="main-bg">
         <div class="hide-sub-key" v-show="setFlag">
             <div class="sub-btn">
-                <div class="sub-btn-item" v-for="(item,index) in btnList" :key="index" :class="(index===0 || index===2)?'marginLeft':''">
-                 <a-button size="small" class="item-btn" @click="mcChangeItem(3,index)" v-show="(index===0 && !visualList.mb.mk[3].mc.contentNum) || (index===1 && visualList.mb.mk[3].mc.contentNum) || (index===2 && visualList.mb.mk[3].mc.contentNum)">
+              <div class="sub-btn-item" v-for="(item,index) in btnList" :key="index" :class="(index===0 || index===2)?'marginLeft':''">
+                <a-button size="small" class="item-btn" @click="mcChangeItem(0,index)" v-show="(index===0 && !visualList.mb.mk[0].mc.contentNum) || (index===1 && visualList.mb.mk[0].mc.contentNum) || (index===2 && visualList.mb.mk[0].mc.contentNum)">
                   {{item.title}}</a-button>
-                </div>
-            </div>
-          </div>
-        <div class="sub-content">
-             <component :is="visualList.mb.mk[3].mc.contentNum"  :mcTitle="visualList.mb.mk[3].mc.contentName"  :mcStatus="3"  :mcId="visualList.mb.mk[3].mc.contentNum" class="mc-content"></component>
-
-          </div>
-      </div> -->
-
-      <!-- <div class="keyMain-bottom">
-        <img src="../../../assets/img/main-border-b.png" alt="" class="main-bg">
-        <div class="hide-sub-key-b" v-show="setFlag">
-            <div class="sub-btn">
-                 <div class="sub-btn-item" v-for="(item,index) in btnList" :key="index" :class="(index===0 || index===2)?'marginLeft':''">
-                  <a-button size="small" class="item-btn" @click="mcChangeItem(4,index)" v-show="(index===0 && !visualList.mb.mk[4].mc.contentNum) || (index===1 && visualList.mb.mk[4].mc.contentNum) || (index===2 && visualList.mb.mk[4].mc.contentNum)">
-                  {{item.title}}</a-button>
-                </div>
-            </div>
-          </div>
-        <div class="sub-content">
-             <component :is="visualList.mb.mk[4].mc.contentNum" :mcTitle="visualList.mb.mk[4].mc.contentName"  :mcStatus="4"  :mcId="visualList.mb.mk[4].mc.contentNum" class="mc-content"></component>
-
-          </div>
-      </div> -->
-
-    <!-- </div> -->
-   <!-- <div class="mb-right">
-      <div class="right">
-         <div class="right-sub">
-          <img src="../../../assets/img/sub-border-r.png" alt="" class="sub-bg">
-          <div class="hide-sub-right" v-show="setFlag">
-              <div class="sub-btn">
-                <div class="sub-btn-item" v-for="(item,index) in btnList" :key="index" :class="(index===0 || index===2)?'marginLeft':''">
-                  <a-button size="small" class="item-btn" @click="mcChangeItem(5,index)" v-show="(index===0 && !visualList.mb.mk[5].mc.contentNum) || (index===1 && visualList.mb.mk[5].mc.contentNum) || (index===2 && visualList.mb.mk[5].mc.contentNum)">
-                  {{item.title}}</a-button>
-                </div>
               </div>
             </div>
+          </div>
           <div class="sub-content">
-             <component :is="visualList.mb.mk[5].mc.contentNum" :mcTitle="visualList.mb.mk[5].mc.contentName"  :mcStatus="5"  :mcId="visualList.mb.mk[5].mc.contentNum" class="mc-content"></component>
-
+            <component :is="visualList.mb.mk[0].mc.contentNum"  :mcTitle="visualList.mb.mk[0].mc.contentName"  :mcStatus="0"  :mcId="visualList.mb.mk[0].mc.contentNum" class="mc-content"></component>
+          </div>
+      </div>
+     
+    </div>
+    <div class="mb02-right">
+      <div class="key-top">
+        <div class="key-top-sub">
+          <img src="../../../assets/img/main-border-b.png" alt="" class="top-sub-bg">
+          <div class="hide-key-top" v-show="setFlag">
+            <div class="key-btn">
+                <div class="key-btn-item" v-for="(item,index) in btnList" :key="index" :class="(index===0 || index===2)?'marginLeft':''">
+                  <a-button size="small" class="key-item-btn" @click="mcChangeItem(1,index)" v-show="(index===0 && !visualList.mb.mk[1].mc.contentNum) || (index===1 && visualList.mb.mk[1].mc.contentNum) || (index===2 && visualList.mb.mk[1].mc.contentNum)">
+                  {{item.title}}</a-button>
+                </div>
+            </div>
+          </div>
+          <div class="key-content">
+             <component :is="visualList.mb.mk[1].mc.contentNum" :mcTitle="visualList.mb.mk[1].mc.contentName"  :mcStatus="1" :mcId="visualList.mb.mk[1].mc.contentNum" class="mc-key-content"></component>
           </div>
         </div>
       </div>
-       <div class="right">
-         <div class="right-sub">
-          <img src="../../../assets/img/sub-border-r.png" alt="" class="sub-bg">
-          <div class="hide-sub-right" v-show="setFlag">
-              <div class="sub-btn">
-                <div class="sub-btn-item" v-for="(item,index) in btnList" :key="index" :class="(index===0 || index===2)?'marginLeft':''">
-                  <a-button size="small" class="item-btn" @click="mcChangeItem(6,index)" v-show="(index===0 && !visualList.mb.mk[6].mc.contentNum) || (index===1 && visualList.mb.mk[6].mc.contentNum) || (index===2 && visualList.mb.mk[6].mc.contentNum)">
-                  {{item.title}}</a-button>
-                </div>
+      <div class="key-bottom">
+        <div class="key-bottom-left">
+          <div class="key-left">
+          <div class="key-left-sub">
+            <img src="../../../assets/img/main-border-b.png" alt="" class="left-sub-bg">
+            <div class="hide-key-left" v-show="setFlag">
+              <div class="key-btn">
+                  <div class="key-btn-item" v-for="(item,index) in btnList" :key="index" :class="(index===0 || index===2)?'marginLeft':''">
+                    <a-button size="small" class="key-item-btn" @click="mcChangeItem(2,index)" v-show="(index===0 && !visualList.mb.mk[2].mc.contentNum) || (index===1 && visualList.mb.mk[2].mc.contentNum) || (index===2 && visualList.mb.mk[2].mc.contentNum)">
+                    {{item.title}}</a-button>
+                  </div>
               </div>
             </div>
-          <div class="sub-content">
-             <component :is="visualList.mb.mk[6].mc.contentNum"  :mcTitle="visualList.mb.mk[6].mc.contentName" :mcStatus="6"  :mcId="visualList.mb.mk[6].mc.contentNum" class="mc-content"></component>
-
+            <div class="key-content">
+              <component :is="visualList.mb.mk[2].mc.contentNum" :mcTitle="visualList.mb.mk[2].mc.contentName"  :mcStatus="2" :mcId="visualList.mb.mk[2].mc.contentNum" class="mc-key-content"></component>
+            </div>
+          </div>
+        </div>
+        </div>
+        <div class="key-bottom-right">
+          <div class="key-left">
+            <div class="key-left-sub">
+              <img src="../../../assets/img/main-border-b.png" alt="" class="left-sub-bg">
+              <div class="hide-key-left" v-show="setFlag">
+                <div class="key-btn">
+                    <div class="key-btn-item" v-for="(item,index) in btnList" :key="index" :class="(index===0 || index===2)?'marginLeft':''">
+                      <a-button size="small" class="key-item-btn" @click="mcChangeItem(3,index)" v-show="(index===0 && !visualList.mb.mk[3].mc.contentNum) || (index===1 && visualList.mb.mk[3].mc.contentNum) || (index===2 && visualList.mb.mk[3].mc.contentNum)">
+                      {{item.title}}</a-button>
+                    </div>
+                </div>
+              </div>
+              <div class="key-content">
+                <component :is="visualList.mb.mk[3].mc.contentNum" :mcTitle="visualList.mb.mk[3].mc.contentName"  :mcStatus="0" :mcId="visualList.mb.mk[3].mc.contentNum" class="mc-key-content"></component>
+              </div>
+            </div>
+          </div>
+          <div class="key-left">
+            <div class="key-left-sub">
+              <img src="../../../assets/img/main-border-b.png" alt="" class="left-sub-bg">
+              <div class="hide-key-left" v-show="setFlag">
+                <div class="key-btn">
+                    <div class="key-btn-item" v-for="(item,index) in btnList" :key="index" :class="(index===0 || index===2)?'marginLeft':''">
+                      <a-button size="small" class="key-item-btn" @click="mcChangeItem(4,index)" v-show="(index===0 && !visualList.mb.mk[4].mc.contentNum) || (index===1 && visualList.mb.mk[4].mc.contentNum) || (index===2 && visualList.mb.mk[4].mc.contentNum)">
+                      {{item.title}}</a-button>
+                    </div>
+                </div>
+              </div>
+              <div class="key-content">
+                <component :is="visualList.mb.mk[4].mc.contentNum" :mcTitle="visualList.mb.mk[3].mc.contentName"  :mcStatus="4" :mcId="visualList.mb.mk[4].mc.contentNum" class="mc-key-content"></component>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <div class="right">
-         <div class="right-sub">
-          <img src="../../../assets/img/sub-border-r.png" alt="" class="sub-bg">
-          <div class="hide-sub-right" v-show="setFlag">
-              <div class="sub-btn">
-                <div class="sub-btn-item" v-for="(item,index) in btnList" :key="index" :class="(index===0 || index===2)?'marginLeft':''">
-                  <a-button size="small" class="item-btn" @click="mcChangeItem(7,index)" v-show="(index===0 && !visualList.mb.mk[7].mc.contentNum) || (index===1 && visualList.mb.mk[7].mc.contentNum) || (index===2 && visualList.mb.mk[7].mc.contentNum)">
-                  {{item.title}}</a-button>
-                </div>
-              </div>
-            </div>
-          <div class="sub-content">
-             <component :is="visualList.mb.mk[7].mc.contentNum"  :mcTitle="visualList.mb.mk[7].mc.contentName" :mcStatus="7"  :mcId="visualList.mb.mk[7].mc.contentNum" class="mc-content"></component>
-          </div>
-        </div>
-      </div> -->
     </div>
   </div>
 </template>
@@ -229,24 +178,6 @@
                     mc:"",
 
                   },
-                  //  {
-                  //   moduleNum:"MK06",
-                  //   moduleName:"模块六",
-                  //   mc:"",
-
-                  // },
-                  //  {
-                  //   moduleNum:"MK07",
-                  //   moduleName:"模块七",
-                  //   mc:"",
-
-                  // },
-                  //  {
-                  //   moduleNum:"MK08",
-                  //   moduleName:"模块八",
-                  //   mc:"",
-
-                  // },
                 ]
               }
             },
@@ -477,8 +408,89 @@
 </script>
 
 <style scoped>
-  .mc-content{
+  .key-content,.mc-key-content{
     width: 100%;
     height: 100%;
+  }
+  .mb02-left{
+    width: 46%;
+    height: auto;
+    margin-right: 0.5%;
+    position: relative;
+  }
+   .mb02-right{
+    width: 54%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    flex-flow: column;
+    margin-left: 0.5%;
+  }
+  .key-left,.key-top{
+      width: 100%;
+      min-height: 32.6%;
+      margin: 1.5% 0;
+      display:inline-block;
+  }
+  .key-left-sub,.key-top-sub{
+      height: 100%;
+      width: 100%;
+      position: relative;
+  }
+  .hide-key-left,.hide-key-top{
+      border: dashed 2px;
+      border-radius: 10px;
+      border-color: #ffffff;
+      background: rgba(0, 0, 0, 0.5);
+      width: 95%;
+      height: 95%;
+      position: absolute;
+      left: 51%;
+      top: 50%;
+      transform: translate(-50%,-50%);
+      z-index: 199;
+  }
+  .left-sub-bg,.top-sub-bg{
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+  }
+  .key-btn-item{
+    color: #ffffff;
+    font-size: 1.3rem;
+  }
+  .key-item-btn{
+    width: 100%;
+    background: transparent;
+    color: #fff;
+    border: solid 1px #fff;
+    border-radius: 4px;
+  }
+  .key-btn{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    display: flex;
+    align-items: center;
+  }
+  .mb-keyTemp{
+    width: 46%;
+    height:auto;
+    border-radius: 10px;
+    margin: 0 1%;
+    position: relative;
+  }
+  .mb-keyMain{
+    width: 100%;
+    height: 100%;
+  }
+  .key-bottom{
+    width: 100%;
+    min-height: 61.4%;
+    margin: 1.5% 0 0 0;
+    display: flex;
   }
 </style>

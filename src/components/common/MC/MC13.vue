@@ -44,4 +44,11 @@ export default {
   width: 100%;
   height: 100%;
 }
+ .mb02-left{
+      width: 27%;
+      height: auto;
+      display: flex;
+      align-items: center;
+      flex-flow: column;
+    }
 </style>

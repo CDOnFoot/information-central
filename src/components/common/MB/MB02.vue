@@ -69,17 +69,17 @@
         <div class="key-bottom-left">
           <div class="key-left">
           <div class="key-left-sub">
-            <img src="../../../assets/img/main-border-b.png" alt="" class="left-sub-bg">
+            <img src="../../../assets/img/sub-border-l.png" alt="" class="left-sub-bg">
             <div class="hide-key-left" v-show="setFlag">
               <div class="key-btn">
                   <div class="key-btn-item" v-for="(item,index) in btnList" :key="index" :class="(index===0 || index===2)?'marginLeft':''">
-                    <a-button size="small" class="key-item-btn" @click="mcChangeItem(2,index)" v-show="(index===0 && !visualList.mb.mk[2].mc.contentNum) || (index===1 && visualList.mb.mk[2].mc.contentNum) || (index===2 && visualList.mb.mk[2].mc.contentNum)">
+                    <a-button size="small" class="key-item-btn" @click="mcChangeItem(4,index)" v-show="(index===0 && !visualList.mb.mk[4].mc.contentNum) || (index===1 && visualList.mb.mk[4].mc.contentNum) || (index===2 && visualList.mb.mk[4].mc.contentNum)">
                     {{item.title}}</a-button>
                   </div>
               </div>
             </div>
             <div class="key-content">
-              <component :is="visualList.mb.mk[2].mc.contentNum" :mcTitle="visualList.mb.mk[2].mc.contentName"  :mcStatus="2" :mcId="visualList.mb.mk[2].mc.contentNum" class="mc-key-content"></component>
+              <component :is="visualList.mb.mk[4].mc.contentNum" :mcTitle="visualList.mb.mk[4].mc.contentName"  :mcStatus="4" :mcId="visualList.mb.mk[4].mc.contentNum" class="mc-key-content"></component>
             </div>
           </div>
         </div>
@@ -87,7 +87,7 @@
         <div class="key-bottom-right">
           <div class="key-left">
             <div class="key-left-sub">
-              <img src="../../../assets/img/main-border-b.png" alt="" class="left-sub-bg">
+              <img src="../../../assets/img/sub-border-r.png" alt="" class="left-sub-bg">
               <div class="hide-key-left" v-show="setFlag">
                 <div class="key-btn">
                     <div class="key-btn-item" v-for="(item,index) in btnList" :key="index" :class="(index===0 || index===2)?'marginLeft':''">
@@ -103,17 +103,17 @@
           </div>
           <div class="key-left">
             <div class="key-left-sub">
-              <img src="../../../assets/img/main-border-b.png" alt="" class="left-sub-bg">
+              <img src="../../../assets/img/sub-border-r.png" alt="" class="left-sub-bg">
               <div class="hide-key-left" v-show="setFlag">
                 <div class="key-btn">
                     <div class="key-btn-item" v-for="(item,index) in btnList" :key="index" :class="(index===0 || index===2)?'marginLeft':''">
-                      <a-button size="small" class="key-item-btn" @click="mcChangeItem(4,index)" v-show="(index===0 && !visualList.mb.mk[4].mc.contentNum) || (index===1 && visualList.mb.mk[4].mc.contentNum) || (index===2 && visualList.mb.mk[4].mc.contentNum)">
+                      <a-button size="small" class="key-item-btn" @click="mcChangeItem(2,index)" v-show="(index===0 && !visualList.mb.mk[2].mc.contentNum) || (index===1 && visualList.mb.mk[2].mc.contentNum) || (index===2 && visualList.mb.mk[2].mc.contentNum)">
                       {{item.title}}</a-button>
                     </div>
                 </div>
               </div>
               <div class="key-content">
-                <component :is="visualList.mb.mk[4].mc.contentNum" :mcTitle="visualList.mb.mk[3].mc.contentName"  :mcStatus="4" :mcId="visualList.mb.mk[4].mc.contentNum" class="mc-key-content"></component>
+                <component :is="visualList.mb.mk[2].mc.contentNum" :mcTitle="visualList.mb.mk[2].mc.contentName"  :mcStatus="2" :mcId="visualList.mb.mk[2].mc.contentNum" class="mc-key-content"></component>
               </div>
             </div>
           </div>
@@ -426,10 +426,16 @@
     flex-flow: column;
     margin-left: 0.5%;
   }
-  .key-left,.key-top{
+  .key-left{
       width: 100%;
       min-height: 32.6%;
       margin: 1.5% 0;
+      display:inline-block;
+  }
+  .key-top{
+      width: 100%;
+      min-height: 32.6%;
+      margin: 1.5% 0 0.5% 0;
       display:inline-block;
   }
   .key-left-sub,.key-top-sub{
@@ -490,7 +496,13 @@
   .key-bottom{
     width: 100%;
     min-height: 61.4%;
-    margin: 1.5% 0 0 0;
+    margin: 1% 0 0 0;
     display: flex;
+  }
+  .key-bottom-left{
+    margin-right: 1%;
+  }
+  .key-bottom-right{
+    margin-left:1%;
   }
 </style>

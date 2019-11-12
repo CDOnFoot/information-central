@@ -2,6 +2,10 @@
 <template>
   <!--    模块内容一-->
   <div>
+    <div class="main">
+      MC13
+      <div class="borde">{{mcTitle}}</div>
+    </div>
       MC14
   </div>
 </template>

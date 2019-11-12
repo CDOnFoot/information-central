@@ -12,6 +12,7 @@ export default {
     name:'MB03',
      data(){
         return{
+            menuList:'',
             visualList:{
                 mb:{
                     templateName:"模版三",
@@ -28,6 +29,19 @@ export default {
 
         }
       
+    },
+      props: ['menuTempId','visualTempList','setFlag'],
+    watch: {
+        menuTempId: function (val) {
+        this.menuList = val;
+        this.menuTempId = val;
+    },
+        visualTempList:function(val){
+        this.visualList = JSON.parse(JSON.stringify(val));
+    },
+        setFlag:function(val){
+        this.setFlag = val;
+    }
     },
     components:{
         MC13,

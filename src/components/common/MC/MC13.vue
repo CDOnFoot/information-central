@@ -2,7 +2,10 @@
 <template>
   <!--    模块内容一-->
   <div>
+    <div class="main">
       MC13
+      <div class="borde">{{mcTitle}}</div>
+    </div>
   </div>
 </template>
 <script>
@@ -33,5 +36,11 @@ export default {
 </script>
 
 <style scoped>
-
+.main {
+  color: #ffffff;
+  padding: 1%;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
 </style>

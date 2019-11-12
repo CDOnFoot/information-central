@@ -198,8 +198,8 @@ export default {
   width: 99%;
   position: absolute;
   border-radius: 10px;
-  left: 49%;
-  top: 49.8%;
+  left: 48.8%;
+  top: 50.4%;
   background: url("../../../assets/img/map4.png") no-repeat;
   background-size: cover;
   transform: translate(-50%,-50%);
@@ -216,9 +216,9 @@ export default {
 }
 .runway-item{
   padding: 0;
-  height: 20px;
+  height: 10px;
   border-radius: 100%;
-  width: 20px;
+  width: 10px;
   margin-left: -31%;
   background: #ff00009c;
   margin-top: -31%;

@@ -189,9 +189,11 @@ export default {
               }
               if(unitIndex== "-100"){
                 self.noticeList.push(trainInfor)
+                console.log(self.noticeList)
                 return false;
               }else{
                 self.$set(self.noticeList,unitIndex,trainInfor)
+                console.log(self.noticeList)
                 return false;
               }
               // self.noticeList.push(trainInfor)
@@ -209,9 +211,11 @@ export default {
               }
                if(unitIndex== "-100"){
                 self.noticeList.push(trainInfor)
+                console.log(self.noticeList)
                 return false;
               }else{
                 self.$set(self.noticeList,unitIndex,trainInfor)
+                console.log(self.noticeList)
                 return false;
               }
               // self.noticeList.push(trainInfor)

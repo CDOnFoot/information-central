@@ -4,7 +4,7 @@
   <div>
     <div class="main">
       <div class="borde">{{mcTitle}}</div>
-      <div class="timeStamp">展示时间：{{timeStamp}}</div>
+      <!-- <div class="timeStamp">展示时间：{{timeStamp}}</div> -->
       <div :id="mcId" class="main-id"></div>
     </div>
   </div>
@@ -100,6 +100,7 @@ export default {
                 color: "white"
               },
             right:"5%",
+            top:'5%'
           },
           grid: {
             left: "3%",
@@ -152,7 +153,7 @@ export default {
             }
           ]
         }; 
-        console.log(paramData)
+        // console.log(paramData)
         option.yAxis.data = paramData.station;
         option.series[0].data = paramData.entryNumPeople;
         option.series[1].data = paramData.exitNumPeople;

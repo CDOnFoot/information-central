@@ -3,7 +3,6 @@
   <!--    模块内容一-->
   <div>
     <div class="main">
-      MC13
       <div class="borde">{{mcTitle}}</div>
     </div>
   </div>
@@ -13,6 +12,7 @@ export default {
   name: "MC13",
   data() {
     return {
+
     };
   },
   props: ["mcStatus", "mcTitle", "mcId"],
@@ -21,6 +21,7 @@ export default {
       this.mcStatus = val;
     },
     mcTitle: function(val) {
+      console.log(this.mcTitle);
       this.mcTitle = val;
     },
     mcId: function(val) {

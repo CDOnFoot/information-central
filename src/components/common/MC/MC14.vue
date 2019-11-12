@@ -3,10 +3,8 @@
   <!--    模块内容一-->
   <div>
     <div class="main">
-      MC13
       <div class="borde">{{mcTitle}}</div>
     </div>
-      MC14
   </div>
 </template>
 <script>
@@ -14,6 +12,7 @@ export default {
   name: "MC14",
   data() {
     return {
+
     };
   },
   props: ["mcStatus", "mcTitle", "mcId"],
@@ -22,6 +21,7 @@ export default {
       this.mcStatus = val;
     },
     mcTitle: function(val) {
+      console.log(this.mcTitle);
       this.mcTitle = val;
     },
     mcId: function(val) {
@@ -37,5 +37,11 @@ export default {
 </script>
 
 <style scoped>
-
+.main {
+  color: #ffffff;
+  padding: 1%;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
 </style>

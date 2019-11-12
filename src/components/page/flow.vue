@@ -20,17 +20,18 @@
               visualHomeTempList:'',
             }
         },
-      props: ['setFlag','mbId','menuId','visualHomeList'],
+        props: ['setFlag','mbId','menuId','visualHomeList'],
         components:{
             MB01,
             MB02,
             MB03
         },
-          watch: {
+        watch: {
          setFlag: function (val) {
           this.setFlag = val;
         },
         mbId: function (val) {
+          console.log(val);
           this.currentMB = val;
         },
         menuId:function(val){
@@ -51,7 +52,6 @@
           this.currentMB = this.visualTempList.mb.templateNum;
         }
         this.menuTempId = this.menuId;
-
       },
       methods:{
           // 获取从子组件MB传值 模版可视化内容信息

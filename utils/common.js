@@ -191,41 +191,41 @@ var common = {
   ],
   // 行车路线运行图 各点定位位置
   wayList: [
-    // 下行数据
+    // 下行数据 运行图左侧
     {
       dotId: "1",
       title: "金川路",
       status:'下行',
       dotType:'common',
-      dot: ["3%", "14%"]
+      dot: ["1.6%", "13%"]
     },
     {
       dotId: "1",
       title: "金川路-大河埂",
       status:'下行',
       dotType:'middle',
-      dot: ["5.5%", "14.5%"]
+      dot: ["4.7%", "14%"]
     },
     {
       dotId: "2",
       title: "大河埂",
       status:'下行',
       dotType:'common',
-      dot: ["7%", "13.5%"]
+      dot: ["6.6%", "13.2%"]
     },
     {
       dotId: "2",
       title: "大河埂-海屯路",
       status:'下行',
       dotType:'middle',
-      dot: ["10%", "13.5%"]
+      dot: ["10%", "12.6%"]
     },
     {
       dotId: "3",
       title: "海屯路",
       status:'下行',
       dotType:'common',
-      dot: ["13.5%", "16.5%"]
+      dot: ["13%", "16%"]
     },
     {
       dotId: "3",

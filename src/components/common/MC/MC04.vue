@@ -59,7 +59,7 @@ export default {
     }
   },
   mounted() {
-    console.log(this.wayList)
+    // console.log(this.wayList)
     var self = this;
     this.mcList = this.$common.mcList;
     // this.showData();
@@ -86,18 +86,16 @@ export default {
     // 消息推送
     pushDataInfo:function(){
       this.noticeList = [
-        {
-          id:"18",
-            stationId: "6498",
-            dotId: "CZ012",
-            stationName: "菊花",
-            subwayStatus:"到达",
-            dot: ["18.5%", "30.5%"]
-          }
+          {
+            subwayNum:999,
+          dotId: "10",
+          dotType: "middle",
+          status: "上行",
+          title: "大树营-白龙路",
+          dotType:'common',
+          dot: ["24.4%", "44.5%"]
+          },
       ];
-      
-      // this.noticeCarFunc();
-      // this.showData();
       console.log(this.noticeList);
     },
 
@@ -139,7 +137,7 @@ export default {
       console.log("WebSocket连接数据接收中:");
       const redata = JSON.parse(e.data);
       // console.log(redata)
-      console.log(redata.data)
+      // console.log(redata.data)
       this.showData(redata.data)
       
 
@@ -155,25 +153,74 @@ export default {
 
     },
     showData(redata){
-      // let stationMessage = {"code":"0","data":{"id":"4175","stationId":"20","stationName":"大树营","subwayNum":"264","subwayStatus":"离开","type":"固定","upDownStatus":"上行","dot": ["29%", "43.5%"]},"msg":"成功","success":true}
-      // this.tempNoticeList = stationMessage.data;
-      // console.log()
-      // this.noticeList.push(stationMessage.data)
-      // this.noticeCarFunc();
       console.log(redata)
       let self = this;
+      let hasTrain = self.noticeList.some((it,unitIndex)=>{
+          return redata.subwayNum===it.subwayNum;
+        })
+     new Promise((reslove,reject)=>{
+       if(self.noticeList.length>0){
+        if(hasTrain){
+           self.noticeList.forEach((unit,unitIndex)=>{
+           if(redata.subwayNum===unit.subwayNum){
+              reslove(unitIndex);
+            }
+          })
+        }else{
+          reslove(-100);
+        }
+       }else{
+         reslove(-100);
+       }
+       
+     }).then((unitIndex)=>{
+       console.log(unitIndex)
       this.wayList.some((item,index)=>{
-        if(item.dotId === redata.stationId){
+        if(item.dotId === redata.stationId && item.status==redata.upDownStatus){
             if(redata.subwayStatus==='离开'){
               redata.dot = this.wayList[index+1].dot;
-              self.noticeList.push(item)
+              let trainInfor={
+                subwayNum:redata.subwayNum,  //车次
+                dotId: redata.stationId,    //车站ID
+                title: redata.stationName,  //车站名称
+                status:redata.upDownStatus, //车辆的行驶方向，上行或者下行
+                dotType:item.dotType,       //common 或者 middle
+                dot: redata.dot             //运动点的位置信息
+              }
+              if(unitIndex== "-100"){
+                self.noticeList.push(trainInfor)
+                return false;
+              }else{
+                self.$set(self.noticeList,unitIndex,trainInfor)
+                return false;
+              }
+              // self.noticeList.push(trainInfor)
+              console.log(self.noticeList)
               return false;
             }else if(redata.subwayStatus==='到达')
               redata.dot = item.dot;
-              self.noticeList.push(item)
+              let trainInfor={
+                subwayNum:redata.subwayNum,  //车次
+                dotId: redata.stationId,    //车站ID
+                title: redata.stationName,  //车站名称
+                status:redata.upDownStatus, //车辆的行驶方向，上行或者下行
+                dotType:item.dotType,       //common 或者 middle
+                dot: redata.dot             //运动点的位置信息
+              }
+               if(unitIndex== "-100"){
+                self.noticeList.push(trainInfor)
+                return false;
+              }else{
+                self.$set(self.noticeList,unitIndex,trainInfor)
+                return false;
+              }
+              // self.noticeList.push(trainInfor)
+              console.log(self.noticeList)
               return false;
         }
+        
       });
+      })
     }
   }
 };

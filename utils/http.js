@@ -44,20 +44,23 @@
             userId: Cookies.get("dvptId"),
             custom_token: Cookies.get("dvptToken"),
             'content-Type': "application/x-www-form-urlencoded;charset=utf-8;",
-            // "Access-Control-Allow-Origin":"*",
+            "Access-Control-Allow-Origin":"*",
             // "Access-Control-Allow-Headers" : "Content-Type"
             
           };
         }
-        
       }
-      
       return config;
     }, error => {
       return Promise.reject(error)
     });
     // **路由响应拦截**
     axios.interceptors.response.use(response => {
+      if(response.data.code==='40001'||response.data.code==='40002' ||response.data.code==='60002' || response.data.code==='60001' ||response.data.code==='60005'){
+         router.push({
+          path: '/login' // 到登录页重新获取token
+        });
+      }
       return response;
     }, err => {
     
@@ -130,9 +133,9 @@
       if (res.status === -404) {
         // console.log(res.msg);
         message.error("连接服务器失败，请重新登录");
-        router.push({
-          path: '/login' // 到登录页重新获取token
-        });
+        // router.push({
+        //   path: '/login' // 到登录页重新获取token
+        // });
       }
       // if (!res.data && (res.data.msg != "success" || res.data.msg != "SUCCESS")) {
       //    console.log(res.data.msg)

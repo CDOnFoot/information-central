@@ -172,9 +172,9 @@ export default {
   width: 99%;
   position: absolute;
   border-radius: 10px;
-  left: 48.8%;
-  top: 50.4%;
-  background: url("../../../assets/img/subway-bg.png") no-repeat;
+  left: 49%;
+  top: 49.8%;
+  background: url("../../../assets/img/map4.png") no-repeat;
   background-size: cover;
   transform: translate(-50%,-50%);
 }

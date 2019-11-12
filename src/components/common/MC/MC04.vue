@@ -76,7 +76,10 @@ export default {
     // }, 1000 * 30);
   },
   destroyed: function() {
-    //页面销毁时关闭长连接
+   
+  },
+  beforeDestroy () {
+     //页面销毁时关闭长连接
     this.websocketclose();
   },
   methods: {

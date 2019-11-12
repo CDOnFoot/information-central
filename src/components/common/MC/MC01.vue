@@ -50,6 +50,11 @@ export default {
       this.mcId = val;
     }
   },
+  beforeDestroy () {
+    if(this.mc){
+      this.mc.clear();
+    }
+  },
   mounted() {
     window.clearInterval(this.dataRef)
     var self = this;
@@ -109,8 +114,11 @@ export default {
       let self = this;
       let option= null;
       // 基于准备好的dom，初始化echarts实例
+      let obj = document.getElementById(self.mcId);
       if(type==='init'){
-      this.mc = this.$echarts.init(document.getElementById(self.mcId));
+        if(obj){
+          this.mc = this.$echarts.init(obj);
+        }
       //初始化option
         option={
           tooltip: {
@@ -195,10 +203,12 @@ export default {
           ]
         };
       // 动态放置数据
-        option.series[0].data = paramData.energy;
-        option.yAxis.data = paramData.station;
-        self.mc.setOption(option,true)
-
+       
+        if(obj){
+          option.series[0].data = paramData.energy;
+          option.yAxis.data = paramData.station;
+          self.mc.setOption(option,true)
+        }
       }else{
         //更新刷新记录信息
         self.refreshData(paramData);

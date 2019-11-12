@@ -57,6 +57,11 @@ export default {
   created() {
     
   },
+  beforeDestroy () {
+    if(this.mc){
+      this.mc.clear();
+    }
+  },
   methods: {
       // 查看可视化界面内容数据信息
     initChart:function(type){
@@ -88,9 +93,13 @@ export default {
     drawLine(paramData,type) {
       let self = this;
       let option=null;
+      let obj = document.getElementById(self.mcId);
+
       if(type==='init'){
         // 基于准备好的dom，初始化echarts实例
-      this.mc= this.$echarts.init(document.getElementById(self.mcId));
+        if(obj){
+          this.mc= this.$echarts.init(obj);
+        }
       // 绘制图表
       option= {
         color: ["#c23531", "#61a0a8"],
@@ -203,14 +212,17 @@ export default {
           }
         ]
       };
-      // 动态放置数据
-      option.xAxis[0].data = paramData.timeList;
-      option.series[0].data = paramData.realTimeList;
-      option.series[1].data = paramData.forecastList;
-      self.timeStamp = paramData.queryTime;
-      // console.info(self.mc);
-      self.mc.setOption(option,true)
+     
 
+      if(obj){
+         // 动态放置数据
+        option.xAxis[0].data = paramData.timeList;
+        option.series[0].data = paramData.realTimeList;
+        option.series[1].data = paramData.forecastList;
+        self.timeStamp = paramData.queryTime;
+        // console.info(self.mc);
+        self.mc.setOption(option,true)
+      }
       }else{
         //更新刷新记录信息
         self.refreshData(paramData);

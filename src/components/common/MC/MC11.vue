@@ -111,7 +111,7 @@ export default {
   width:50%;
   height:200px;
   margin-top:20px;
-  background: url("../../../assets/img/进站人数.png") no-repeat;
+  background: url("../../../assets/img/enterPel.png") no-repeat;
   font-size: 26px;
   background-size:contain;
   background-position: center;
@@ -121,7 +121,7 @@ export default {
   width:50%;
   height:200px;
   margin-top:20px;
-  background: url("../../../assets/img/出站.png") no-repeat;
+  background: url("../../../assets/img/outPel.png") no-repeat;
   font-size: 26px;
   background-size:contain;
   background-position: center;

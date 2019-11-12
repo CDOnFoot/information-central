@@ -132,7 +132,6 @@
     created(){
       var routerVal = this.$router.currentRoute.path;
       this.getCurrentRoute(routerVal);
-
     },
     // beforeRouteUpdate (to, from, next) {
     //   console.log(to.matched[1].path);
@@ -142,15 +141,15 @@
     //         this.$message.warning('功能暂未开启');
     //   }
     // },
+    activated(){
+
+    },
     mounted() {
       let self = this;
-      
       // 查看菜单栏数据信息
       this.getMenuInfo();
-
       // 查看模版内容数据信息
       this.getTemplateInfo();
-
 
       document.ondragstart = function() {
         return false;
@@ -158,7 +157,7 @@
       clearInterval(this.timeInterval)
         this.timeInterval = setInterval(function(){
           self.timeStamp = self.$common.timestampToTime(new Date());
-        },1000)
+        },1000);
      },
 
     methods:{
@@ -194,7 +193,6 @@
         this.visualHomeList = JSON.parse(JSON.stringify(data.menuList));
         this.visualParamList = JSON.parse(JSON.stringify(data.menuList));
         this.mbId = this.visualList.mb.templateNum;
-
       },
 
       // 用户登出注销后 清除session信息 ，并返回登录页
@@ -235,7 +233,6 @@
         let param={
         };
         this.$http.post(self.$api.getMenuInfo, param).then(res =>{
-          // if(res.status===200){
             //调取数据成功
             if(res.data){
               if (res.data.code === "0") {
@@ -244,29 +241,22 @@
                 this.$message.error(res.data.msg);
               }
             }
-          // }else if(res.status ===-404){
-          //   self.$info({
-          //     title: '提示',
-          //     content: '连接到服务器失败，请重试.',
-          //     onOk() {
-          //       self.$router.push('/login');
-          //     },
-          //   });
-          // }
         })
       },
       // 处理菜单栏信息接口
       menuInfo:function(data){
         let self = this;
-        
-        this.menuList.push(data.records[0]);
-        let menuIndex = this.$common.getCookie("menuIndex");
+        // this.menuList.push(data.records[0]);
+        let menuIndex = Number(self.$common.getCookie("menuIndex"));
+        this.menuList = data.records;
         if(menuIndex && menuIndex!='' && menuIndex!=null){
-         this.menuId = data.records[menuIndex].menuNum;
+          this.menuId = data.records[menuIndex].menuNum;
+          this.menuIndex = menuIndex;
         }else{
           this.menuId = data.records[0].menuNum;
+          this.menuIndex = 0;
+
         }
-        console.log(this.menuId);
         this.menuList.map((item,index)=>{
           self.$common.menuList.map((items,indexs)=>{
             if(items.id === item.menuNum){
@@ -372,7 +362,6 @@
       },
       saveSetMsg:function(){
         let self = this;
-
         console.log(JSON.stringify(this.visualParamList) == JSON.stringify(this.visualList));
         if(JSON.stringify(this.visualParamList) == JSON.stringify(this.visualList)){
           this.$info({
@@ -574,8 +563,5 @@
     }
   }
 </script>
-
 <style scoped>
-
-
 </style>

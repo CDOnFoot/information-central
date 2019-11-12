@@ -12,6 +12,8 @@ export default {
     name:'MB03',
      data(){
         return{
+            btnList:'',
+            menuList:'',
             visualList:{
                 mb:{
                     templateName:"模版三",
@@ -29,13 +31,37 @@ export default {
         }
       
     },
+    props: ['menuTempId','visualTempList','setFlag'],
+    watch: {
+        menuTempId: function (val) {
+        this.menuList = val;
+        this.menuTempId = val;
+    },
+        visualTempList:function(val){
+            this.visualList = JSON.parse(JSON.stringify(val));
+            console.log(val);
+        },
+        setFlag:function(val){
+            this.setFlag = val;
+        }
+    },
     components:{
         MC13,
         MC14,
-    } 
+    },
+    mounted(){
+        // 接收监听值
+          this.visualList = JSON.parse(JSON.stringify(this.visualTempList));
+          console.log(this.visualList);
+          this.btnList = this.$common.btnList;
+    },
+
 }
 </script>
 
 <style scoped>
-
+  .mc-content{
+    width: 100%;
+    height: 100%;
+  }
 </style>

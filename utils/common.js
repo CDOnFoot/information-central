@@ -76,48 +76,68 @@ var common = {
   ],
   menuList:[
     {
-      title:'首页',
-      key:'index',
-      id:'CD01'
+      title:"首页",
+      key:"index",
+      id:"CD01"
     },
     {
-      title:'客流分析',
-      key:'passenger',
-      id:'CD02'
+      title:"客流分析",
+      key:"passenger",
+      id:"CD02"
     },
     {
-      title:'能耗分析',
-      key:'energy',
-      id:'CD03',
+      title:"智能客流",
+      key:"flow",
+      id:"CD03",
     },
     {
-      title:'线路概况',
-      key:'rail',
-      id:'CD04',
+      title:"安全防范",
+      key:"safe",
+      id:"CD04",
+    },
+    {
+      title:"能耗分析",
+      key:"energy",
+      id:"CD05",
+    },
+    {
+      title:"线路概况",
+      key:"rail",
+      id:"CD06",
     }
   ],
  
   //菜单list
   cdList:[
     {
-      title:'首页',
-      key:'index',
-      id:'CD01',
+      title:"首页",
+      key:"index",
+      id:"CD01"
     },
     {
-      title:'客流分析',
-      key:'passenger',
-      id:'CD02',
+      title:"客流分析",
+      key:"passenger",
+      id:"CD02"
     },
     {
-      title:'能耗分析',
-      key:'energy',
-      id:'CD03',
+      title:"智能客流",
+      key:"flow",
+      id:"CD03",
     },
     {
-      title:'线路概况',
-      key:'rail',
-      id:'CD04',
+      title:"安全防范",
+      key:"safe",
+      id:"CD04",
+    },
+    {
+      title:"能耗分析",
+      key:"energy",
+      id:"CD05",
+    },
+    {
+      title:"线路概况",
+      key:"rail",
+      id:"CD06",
     }
 
   ],
@@ -137,27 +157,37 @@ var common = {
   ],
   visualList:[{
       mb:{
-      templateName:'模版一',
-      templateNum:'MB01',
-      mk:[{mc:'',moduleName:'模块一',moduleNum:'MK01'},{mc:'',moduleName:'模块二',moduleNum:'MK02'},{mc:'',moduleName:'模块三',moduleNum:'MK03'},
-      {mc:'',moduleName:'模块四',moduleNum:'MK04'},{mc:'',moduleName:'模块五',moduleNum:'MK05'},{mc:'',moduleName:'模块六',moduleNum:'MK06'},
-      {mc:'',moduleName:'模块七',moduleNum:'MK07'}]}
+      templateName:"模版一",
+      templateNum:"MB01",
+      mk:[{mc:"",moduleName:"模块一",moduleNum:"MK01"},{mc:"",moduleName:"模块二",moduleNum:"MK02"},{mc:"",moduleName:"模块三",moduleNum:"MK03"},
+      {mc:"",moduleName:"模块四",moduleNum:"MK04"},{mc:"",moduleName:"模块五",moduleNum:"MK05"},{mc:"",moduleName:"模块六",moduleNum:"MK06"},
+      {mc:"",moduleName:"模块七",moduleNum:"MK07"}]}
     },
     {
       mb:{
-      templateName:'模版二',
-      templateNum:'MB02',
-      mk:[{mc:'',moduleName:'模块一',moduleNum:'MK01'},{mc:'',moduleName:'模块二',moduleNum:'MK02'},{mc:'',moduleName:'模块三',moduleNum:'MK03'},
-      {mc:'',moduleName:'模块四',moduleNum:'MK04'},{mc:'',moduleName:'模块五',moduleNum:'MK05'},{mc:'',moduleName:'模块六',moduleNum:'MK06'},
-      {mc:'',moduleName:'模块七',moduleNum:'MK07'},{mc:'',moduleName:'模块八',moduleNum:'MK08'}]}
+        templateName:"模版二",
+        templateNum:"MB02",
+        mk:[{mc:"",moduleName:"模块一",moduleNum:"MK01"},{mc:"",moduleName:"模块二",moduleNum:"MK02"},{mc:"",moduleName:"模块三",moduleNum:"MK03"},
+        {mc:"",moduleName:"模块四",moduleNum:"MK04"},{mc:"",moduleName:"模块五",moduleNum:"MK05"},{mc:"",moduleName:"模块六",moduleNum:"MK06"},
+        {mc:"",moduleName:"模块七",moduleNum:"MK07"},{mc:"",moduleName:"模块八",moduleNum:"MK08"}]}
     },
-  
+    {
+      mb:{
+      templateName:"模版三",
+      templateNum:"MB03",
+      mk:[{mc:"",moduleName:"模块一",moduleNum:"MK01"}]}
+    },
+    {
+      mb:{
+      templateName:"模版四",
+      templateNum:"MB04",
+      mk:[{mc:"",moduleName:"模块一",moduleNum:"MK01"}]}
+    },
   ],
   // 关键指标配置信息
   keyVisualList:[
     {templateNum:'MB01',templateName:'模版一',keyTemp:'MK04',keyIndex:'3'},
     {templateNum:'MB02',templateName:'模版二',keyTemp:'MK04',keyIndex:'3'},
-
   ],
   // 行车路线运行图 各点定位位置
   wayList: [
@@ -970,176 +1000,4 @@ var common = {
   ],
 };
 export default common;
- // menuList:[
-  //   {
-  //     title:'首页',
-  //     key:'index',
-  //     id:'CD01',
-  //     mb:{
-  //       id:'MB01',
-  //       title:'模版一',
-  //       mk:[
-  //         {
-  //           id:'MK01',
-  //           title:'模块一',
-  //           mc:{
-  //             id:'MC01',
-  //             title:'能耗排行',
-  //             type:'sub'
-  //           }
-  //         },
-  //         {
-  //           id:'MK02',
-  //           title:'模块二',
-  //           mc:{
-  //             id:'MC02',
-  //             title:'能耗结构',
-  //             type:'sub'
-  //           }
-  //         },
-  //         {
-  //           id:'MK03',
-  //           title:'模块三',
-  //           mc:{
-  //             id:'MC03',
-  //             title:'客流走势/预测',
-  //             type:'sub'
-  //           }
-  //         },{
-  //           id:'MK04',
-  //           title:'模块四',
-  //           mc:{
-  //             id:'MC04',
-  //             title:'列车实时运行图',
-  //              tyle:'main',
-  //           }
-  //         },{
-  //           id:'MK05',
-  //           title:'模块五',
-  //           mc:{
-  //             id:'MC05',
-  //             title:'车站聚类',
-  //             type:'sub'
-  //           }
-  //         },{
-  //           id:'MK06',
-  //           title:'模块六',
-  //           mc:{
-  //             id:'MC06',
-  //             title:'昨日OD排行top10',
-  //             type:'sub'
 
-  //           }
-  //         },{
-  //           id:'MK07',
-  //           title:'模块七',
-  //           mc:{
-  //             id:'MC07',
-  //             title:'兑现率/正点率',
-  //             type:'sub'
-
-  //           }
-  //         },
-  //       ]
-  //     }
-  //   },
-  //   {
-  //     title:'客流分析',
-  //     key:'passenger',
-  //     id:'CD02',
-  //     mb:{
-  //       id:'MB02',
-  //       title:'模版二',
-  //       mk:[
-  //         {
-  //           id:'MK01',
-  //           title:'模块八',
-  //         },{
-  //           id:'MK02',
-  //           title:'模块九',
-  //         },{
-  //           id:'MK03',
-  //           title:'模块十'
-  //         },{
-  //           id:'MK04',
-  //           title:'模块十一'
-  //         },{
-  //           id:'MK05',
-  //           title:'模块十二'
-  //         },{
-  //           id:'MK06',
-  //           title:'模块十三'
-  //         },{
-  //           id:'MK07',
-  //           title:'模块十四'
-  //         },{
-  //           id:'MK08',
-  //           title:'模块十五'
-  //         },
-  //       ]
-  //     }
-  //   },
-  //   {
-  //     title:'能耗分析',
-  //     key:'energy',
-  //     id:'CD03',
-  //   },
-  //   {
-  //     title:'线路概况',
-  //     key:'rail',
-  //     id:'CD04',
-  //   }
-  // ],
-
-  // mbList:[
-  //   {
-  //     id:'MB01',
-  //     title:'模版一'
-  //   },
-  //   {
-  //     id:'MB02',
-  //     title:'模版二'
-  //   },
-  // ],
-  // mcList:[
-  //   {
-  //     id:'MC01',
-  //     title:'能耗排行',
-  //     type:'sub'
-  //   },
-  //   {
-  //     id:'MC02',
-  //     title:'能耗结构',
-  //     type:'sub'
-
-  //   },
-  //   {
-  //     id:'MC03',
-  //     title:'客流走势/预测',
-  //     type:'sub'
-  //   },
-  //   {
-  //     id:'MC04',
-  //     title:'列车实时运行图',
-  //      type:'main',
-  //   },
-  //   {
-  //     id:'MC05',
-  //     title:'车站聚类',
-  //     type:'sub'
-
-  //   },
-  //   {
-  //     id:'MC06',
-  //     title:'昨日OD排行top10',
-  //     type:'sub'
-
-  //   },
-
-  //   {
-  //     id:'MC07',
-  //     title:'兑现率/正点率',
-  //     type:'sub'
-  //   },
-    
-  // ],

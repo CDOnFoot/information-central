@@ -2,12 +2,12 @@
 <template>
   <!--    模块内容一-->
   <div>
-      MC13
+      MC14
   </div>
 </template>
 <script>
 export default {
-  name: "MC13",
+  name: "MC14",
   data() {
     return {
     };

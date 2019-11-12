@@ -1,17 +1,35 @@
 
 <template>
     <div class="mb-main">
-        <component :is="MC13"></component>
+        <component :is="visualList.mb.mk[0].mc.contentNum" :mcTitle="visualList.mb.mk[0].mc.contentName"  :mcStatus="0" :mcId="visualList.mb.mk[0].mc.contentNum" class="mc-content"></component>
     </div>
 </template>
-
 <script>
 import MC13 from '../../../components/common/MC/MC13';
 export default {
     name:'MB03',
-     components:{
-          MC13,
-     }
+     data(){
+        return{
+            visualList:{
+                mb:{
+                    templateName:"模版三",
+                    templateNum:"MB03",
+                    mk:[{
+                        moduleNum:"MK01",
+                        moduleName:"模块一",
+                        mc:"",
+
+                    }]
+                }
+            },
+       
+
+        }
+      
+    },
+    components:{
+        MC13,
+    } 
 }
 </script>
 

@@ -20,7 +20,7 @@ export default {
       mcList: "",
       structure: "",
       dataRef: "",
-      timeStamp: "2019/11/1-2019/11/7"
+      timeStamp: ""
     };
   },
   props: ["mcStatus", "mcTitle", "mcId"],
@@ -102,8 +102,8 @@ export default {
                 //图例文字的样式
                 color: "white"
               },
-            left:"center",
-            top:'5%'
+            right:"10%",
+            // top:'5%'
           },
 
           calculable: true,
@@ -127,7 +127,7 @@ export default {
               axisLabel: {
                 show: true,
                 interval: 0,
-                rotate: -45
+                rotate: -35
               }
             }
           ],
@@ -241,7 +241,7 @@ canvas {
 .main-id {
   width: 1000px;
   height: 300px;
-  margin: 1% 0 0 0;
+  /* margin: 1% 0 0 0; */
 }
 .timeStamp {
   position: absolute;

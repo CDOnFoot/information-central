@@ -107,7 +107,7 @@ export default {
   height:200px;
   margin-top:20px;
   background: url("../../../assets/img/enterPel2.png") no-repeat;
-  font-size: 26px;
+  font-size: 20px;
   background-size:contain;
   background-position: center;
 }
@@ -117,7 +117,7 @@ export default {
   height:200px;
   margin-top:20px;
   background: url("../../../assets/img/outPel.png") no-repeat;
-  font-size: 26px;
+  font-size: 20px;
   background-size:contain;
   background-position: center;
 }

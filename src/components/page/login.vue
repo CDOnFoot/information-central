@@ -125,7 +125,7 @@ import sha256 from "js-sha256";
       open:function(){
           this.$info({
             title: '提示',
-            content: '果茹：xxx-xxxx-xxxx，请联系管理员',
+            content: '果茹：156-1497-6002，请联系管理员',
         });
       }
     }

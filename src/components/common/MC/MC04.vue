@@ -68,7 +68,7 @@ export default {
   created() {
     //页面刚进入时开启长连接
     this.initWebSocket();
-    this.pushDataInfo();
+    // this.pushDataInfo();
     // let self = this;
     // clearInterval(this.timeInterval);
     // this.timeInterval = setInterval(function() {
@@ -84,20 +84,20 @@ export default {
   },
   methods: {
     // 消息推送
-    pushDataInfo:function(){
-      this.noticeList = [
-          {
-            subwayNum:999,
-          dotId: "10",
-          dotType: "middle",
-          status: "上行",
-          title: "大树营-白龙路",
-          dotType:'common',
-          dot: ["24.4%", "44.5%"]
-          },
-      ];
-      console.log(this.noticeList);
-    },
+    // pushDataInfo:function(){
+    //   this.noticeList = [
+    //       {
+    //         subwayNum:999,
+    //       dotId: "10",
+    //       dotType: "middle",
+    //       status: "上行",
+    //       title: "大树营-白龙路",
+    //       dotType:'common',
+    //       dot: ["24.4%", "44.5%"]
+    //       },
+    //   ];
+    //   console.log(this.noticeList);
+    // },
 
 
     // 初始化列车运行图信息
@@ -267,7 +267,7 @@ export default {
 .subway-item{
   width: 0.8%;
   height: 0.8%;
-  background: #ffffff;
+  /* background: #ffffff; */
   border-radius: 100%;
 }
 .runway-item{

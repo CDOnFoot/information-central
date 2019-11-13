@@ -430,6 +430,7 @@
   .mb02-right-top{
     flex: 1;
     width: 100%;
+    min-height: 32.6%;
     margin-bottom: 1%;
   }
   .mb02-right-bottom{
@@ -437,6 +438,8 @@
     margin-top: 0.5%;
     width: 100%;
     display: inline-flex;
+    min-height: 65.2%;
+
   }
   .right-bottom-left{
      width: 100%;

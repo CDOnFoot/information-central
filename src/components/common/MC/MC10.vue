@@ -159,7 +159,7 @@ export default {
        
 
         if(obj){
-           // console.log(paramData)
+          //  console.log(paramData)
           option.yAxis.data = paramData.station.reverse();
           option.series[0].data = paramData.entryNumPeople.reverse();
           option.series[1].data = paramData.exitNumPeople.reverse();

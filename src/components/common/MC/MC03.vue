@@ -102,7 +102,7 @@ export default {
         }
       // 绘制图表
       option= {
-        color: ["#fdbb5b", "#278fad"],
+        // color: ["#fdbb5b", "#278fad"],
         tooltip: {
           trigger: "axis",
           axisPointer: {
@@ -188,18 +188,18 @@ export default {
               null,
               null
             ],
-            itemStyle: {
-                             normal: {
-                               color: new echarts.graphic.LinearGradient(0, 0, 0, 1,[{
-                            offset: 0, color: '#81befd' // 0% 处的颜色
+            itemStyle: {  
+               normal: { //颜色渐变函数 前四个参数分别表示四个位置依次为左、下、右、上
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1,[{
+                            offset: 0, color: '#fdb751' // 0% 处的颜色
                         }, {
-                            offset: 0.4, color: '#e4f2ff' // 100% 处的颜色
+                            offset: 0.4, color: '#fdb751' 
                         }, {
-                            offset: 1, color: '#fff' // 100% 处的颜色
-                        }])
-                              //  color: new echarts.graphic.LinearGradient(0, 0, 1, 1, [{offset: 0,color: '#207d98'}, {offset: 1,color: '#40e6ec'}]),
-                             }
-                          },
+                            offset: 1, color: '#141e3f' // 100% 处的颜色
+                        }]
+                    ),    
+                },   
+            },
           },
           {
             name: "预测",
@@ -220,7 +220,19 @@ export default {
               330,
               320,
               332
-            ]
+            ],
+             itemStyle: {  
+                normal: { //颜色渐变函数 前四个参数分别表示四个位置依次为左、下、右、上
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1,[{
+                            offset: 0, color: '#40e6ec' // 0% 处的颜色
+                        }, {
+                            offset: 0.4, color: '#34b6bb' 
+                        }, {
+                            offset: 1, color: '#141e3f' // 100% 处的颜色
+                        }]
+                    ),    
+                },   
+            },
           }
         ]
       };

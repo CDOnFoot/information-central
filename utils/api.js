@@ -42,4 +42,6 @@ export default {
 
   passengerflowaccumulated:'/passenger/passengerflowaccumulated',  //当日累计进出站人数
 
+  getpassengerflowrealtime:'/passenger/getpassengerflowrealtime',   //   各站实时客流
+
 }

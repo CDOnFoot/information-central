@@ -154,6 +154,8 @@ export default {
     },
     showData(redata){
       console.log(redata)
+      let daotType = redata.subwayStatus==='到达'?'common':'middle'
+      // console.log(daotType)
       let self = this;
       let hasTrain = self.noticeList.some((it,unitIndex)=>{
           return redata.subwayNum===it.subwayNum;
@@ -175,17 +177,16 @@ export default {
        
      }).then((unitIndex)=>{
        console.log(unitIndex)
+      //  console.log(daotType)
       this.wayList.some((item,index)=>{
-        if(item.dotId === redata.stationId && item.status==redata.upDownStatus){
-            if(redata.subwayStatus==='离开'){
-              redata.dot = this.wayList[index+1].dot;
-              let trainInfor={
+        if(item.dotId === redata.stationId && item.status==redata.upDownStatus && item.dotType==daotType){
+            let trainInfor={
                 subwayNum:redata.subwayNum,  //车次
                 dotId: redata.stationId,    //车站ID
                 title: redata.stationName,  //车站名称
                 status:redata.upDownStatus, //车辆的行驶方向，上行或者下行
                 dotType:item.dotType,       //common 或者 middle
-                dot: redata.dot             //运动点的位置信息
+                dot: this.wayList[index+1].dot             //运动点的位置信息
               }
               if(unitIndex== "-100"){
                 self.noticeList.push(trainInfor)
@@ -196,20 +197,16 @@ export default {
                 console.log(self.noticeList)
                 return false;
               }
-              // self.noticeList.push(trainInfor)
-              console.log(self.noticeList)
-              return false;
-            }else if(redata.subwayStatus==='到达')
-              redata.dot = item.dot;
+        }else if(item.dotId === redata.stationId && item.status==redata.upDownStatus && item.dotType==daotType){
               let trainInfor={
                 subwayNum:redata.subwayNum,  //车次
                 dotId: redata.stationId,    //车站ID
                 title: redata.stationName,  //车站名称
                 status:redata.upDownStatus, //车辆的行驶方向，上行或者下行
                 dotType:item.dotType,       //common 或者 middle
-                dot: redata.dot             //运动点的位置信息
+                dot: item.dot             //运动点的位置信息
               }
-               if(unitIndex== "-100"){
+              if(unitIndex== "-100"){
                 self.noticeList.push(trainInfor)
                 console.log(self.noticeList)
                 return false;
@@ -218,11 +215,8 @@ export default {
                 console.log(self.noticeList)
                 return false;
               }
-              // self.noticeList.push(trainInfor)
-              console.log(self.noticeList)
-              return false;
         }
-        
+
       });
       })
     }

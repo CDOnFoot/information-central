@@ -198,7 +198,29 @@ export default {
                 82354,
                 92341,
                 101231
-              ]
+              ],
+               itemStyle: {
+                             normal: {
+                                barBorderRadius:[0, 10, 10, 0],
+                               //每根柱子颜色设置
+                              //  color: function(params) {
+                              //      let colorList = [
+                              //          "#c23531",
+                              //          "#2f4554",
+                              //          "#61a0a8",
+                              //          "#d48265",
+                              //          "#91c7ae",
+                              //          "#749f83",
+                              //          "#ca8622",
+                              //          "#bda29a",
+                              //          "#6e7074",
+                              //          "#546570",
+                              //      ];
+                              //      return colorList[params.dataIndex];
+                              //  }
+                               color: new echarts.graphic.LinearGradient(0, 0, 1, 1, [{offset: 0,color: '#207d98'}, {offset: 1,color: '#40e6ec'}]),
+                             }
+                          },
             }
           ]
         };

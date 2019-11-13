@@ -102,7 +102,7 @@ export default {
         }
       // 绘制图表
       option= {
-        color: ["#c23531", "#61a0a8"],
+        color: ["#fdbb5b", "#278fad"],
         tooltip: {
           trigger: "axis",
           axisPointer: {
@@ -187,7 +187,19 @@ export default {
               null,
               null,
               null
-            ]
+            ],
+            itemStyle: {
+                             normal: {
+                               color: new echarts.graphic.LinearGradient(0, 0, 0, 1,[{
+                            offset: 0, color: '#81befd' // 0% 处的颜色
+                        }, {
+                            offset: 0.4, color: '#e4f2ff' // 100% 处的颜色
+                        }, {
+                            offset: 1, color: '#fff' // 100% 处的颜色
+                        }])
+                              //  color: new echarts.graphic.LinearGradient(0, 0, 1, 1, [{offset: 0,color: '#207d98'}, {offset: 1,color: '#40e6ec'}]),
+                             }
+                          },
           },
           {
             name: "预测",

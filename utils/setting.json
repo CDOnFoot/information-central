@@ -118,7 +118,7 @@
                             "mc":{
                                 "contentIndex":"2",
                                 "contentNum":"MC06",
-                                "contentName":"昨日OD排行top10"
+                                "contentName":"昨日OD排行Top7"
                             },
                             "moduleName":"模块六"
                         },{
@@ -161,8 +161,8 @@
                        "moduleNum": "MK03",
                        "mc": {
                         "contentIndex": "2",
-                        "contentNum": "MC10",
-                        "contentName": "昨日客流进出站排行"
+                        "contentNum": "MC15",
+                        "contentName": "昨日客流OD展示"
                        },
                        "moduleName": "模块三"
                       },
@@ -298,6 +298,11 @@
                 "contentIndex": "2",
                 "contentName": "安全防范",
                 "contentNum": "MC14"
+            },
+            {
+                "contentIndex": "2",
+                "contentName": "昨日客流OD排行展示",
+                "contentNum": "MC15"
             }
         ]
     }

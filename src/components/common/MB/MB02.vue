@@ -49,78 +49,62 @@
      
     </div>
     <div class="mb02-right">
-      <div class="key-top">
-        <div class="key-top-sub">
-          <img src="../../../assets/img/main-border-b.png" alt="" class="top-sub-bg">
-          <div class="hide-key-top" v-show="setFlag">
-            <div class="key-btn">
-                <div class="key-btn-item" v-for="(item,index) in btnList" :key="index" :class="(index===0 || index===2)?'marginLeft':''">
-                  <a-button size="small" class="key-item-btn" @click="mcChangeItem(1,index)" v-show="(index===0 && !visualList.mb.mk[1].mc.contentNum) || (index===1 && visualList.mb.mk[1].mc.contentNum) || (index===2 && visualList.mb.mk[1].mc.contentNum)">
-                  {{item.title}}</a-button>
+      <div class="mb02-right-top">
+        <div class="right">
+          <div class="right-sub">
+            <img src="../../../assets/img/main-border-b.png" alt="" class="sub-bg">
+            <div class="hide-sub-right" v-show="setFlag">
+                <div class="sub-btn">
+                  <div class="sub-btn-item" v-for="(item,index) in btnList" :key="index" :class="(index===0 || index===2)?'marginLeft':''">
+                    <a-button size="small" class="item-btn" @click="mcChangeItem(1,index)" v-show="(index===1 && !visualList.mb.mk[1].mc.contentNum) || (index===1 && visualList.mb.mk[1].mc.contentNum) || (index===2 && visualList.mb.mk[1].mc.contentNum)">
+                    {{item.title}}</a-button>
+                  </div>
                 </div>
+              </div>
+            <div class="sub-content">
+              <component :is="visualList.mb.mk[1].mc.contentNum" :mcTitle="visualList.mb.mk[1].mc.contentName"  :mcStatus="1"  :mcId="visualList.mb.mk[1].mc.contentNum" class="mc-content"></component>
             </div>
-          </div>
-          <div class="key-content">
-             <component :is="visualList.mb.mk[1].mc.contentNum" :mcTitle="visualList.mb.mk[1].mc.contentName"  :mcStatus="1" :mcId="visualList.mb.mk[1].mc.contentNum" class="mc-key-content"></component>
           </div>
         </div>
       </div>
-      <div class="key-bottom">
-        <div class="key-bottom-left">
-          <div class="key-left">
-          <div class="key-left-sub">
-            <img src="../../../assets/img/sub-border-l.png" alt="" class="left-sub-bg">
-            <div class="hide-key-left" v-show="setFlag">
-              <div class="key-btn">
-                  <div class="key-btn-item" v-for="(item,index) in btnList" :key="index" :class="(index===0 || index===2)?'marginLeft':''">
-                    <a-button size="small" class="key-item-btn" @click="mcChangeItem(4,index)" v-show="(index===0 && !visualList.mb.mk[4].mc.contentNum) || (index===1 && visualList.mb.mk[4].mc.contentNum) || (index===2 && visualList.mb.mk[4].mc.contentNum)">
+      <div class="mb02-right-bottom">
+
+        
+        <div class="right">
+          <div class="right-sub">
+            <img src="../../../assets/img/sub-border-r.png" alt="" class="sub-bg">
+            <div class="hide-sub-right" v-show="setFlag">
+                <div class="sub-btn">
+                  <div class="sub-btn-item" v-for="(item,index) in btnList" :key="index" :class="(index===0 || index===2)?'marginLeft':''">
+                      <a-button size="small" class="item-btn" @click="mcChangeItem(2,index)" v-show="(index===0 && !visualList.mb.mk[2].mc.contentNum) || (index===1 && visualList.mb.mk[2].mc.contentNum) || (index===2 && visualList.mb.mk[2].mc.contentNum)">
                     {{item.title}}</a-button>
                   </div>
+                </div>
               </div>
-            </div>
-            <div class="key-content">
-              <component :is="visualList.mb.mk[4].mc.contentNum" :mcTitle="visualList.mb.mk[4].mc.contentName"  :mcStatus="4" :mcId="visualList.mb.mk[4].mc.contentNum" class="mc-key-content"></component>
+            <div class="sub-content">
+              <component :is="visualList.mb.mk[2].mc.contentNum" :mcTitle="visualList.mb.mk[2].mc.contentName"  :mcStatus="2"  :mcId="visualList.mb.mk[2].mc.contentNum" class="mc-content"></component>
             </div>
           </div>
         </div>
-        </div>
-        <div class="key-bottom-right">
-          <div class="key-left">
-            <div class="key-left-sub">
-              <img src="../../../assets/img/sub-border-r.png" alt="" class="left-sub-bg">
-              <div class="hide-key-left" v-show="setFlag">
-                <div class="key-btn">
-                    <div class="key-btn-item" v-for="(item,index) in btnList" :key="index" :class="(index===0 || index===2)?'marginLeft':''">
-                      <a-button size="small" class="key-item-btn" @click="mcChangeItem(3,index)" v-show="(index===0 && !visualList.mb.mk[3].mc.contentNum) || (index===1 && visualList.mb.mk[3].mc.contentNum) || (index===2 && visualList.mb.mk[3].mc.contentNum)">
-                      {{item.title}}</a-button>
-                    </div>
+        <div class="right">
+          <div class="right-sub">
+            <img src="../../../assets/img/sub-border-r.png" alt="" class="sub-bg">
+            <div class="hide-sub-right" v-show="setFlag">
+              <div class="sub-btn">
+                <div class="sub-btn-item" v-for="(item,index) in btnList" :key="index" :class="(index===0 || index===2)?'marginLeft':''">
+                    <a-button size="small" class="item-btn" @click="mcChangeItem(3,index)" v-show="(index===0 && !visualList.mb.mk[3].mc.contentNum) || (index===1 && visualList.mb.mk[3].mc.contentNum) || (index===2 && visualList.mb.mk[3].mc.contentNum)">
+                  {{item.title}}</a-button>
                 </div>
               </div>
-              <div class="key-content">
-                <component :is="visualList.mb.mk[3].mc.contentNum" :mcTitle="visualList.mb.mk[3].mc.contentName"  :mcStatus="0" :mcId="visualList.mb.mk[3].mc.contentNum" class="mc-key-content"></component>
-              </div>
             </div>
-          </div>
-          <div class="key-left">
-            <div class="key-left-sub">
-              <img src="../../../assets/img/sub-border-r.png" alt="" class="left-sub-bg">
-              <div class="hide-key-left" v-show="setFlag">
-                <div class="key-btn">
-                    <div class="key-btn-item" v-for="(item,index) in btnList" :key="index" :class="(index===0 || index===2)?'marginLeft':''">
-                      <a-button size="small" class="key-item-btn" @click="mcChangeItem(2,index)" v-show="(index===0 && !visualList.mb.mk[2].mc.contentNum) || (index===1 && visualList.mb.mk[2].mc.contentNum) || (index===2 && visualList.mb.mk[2].mc.contentNum)">
-                      {{item.title}}</a-button>
-                    </div>
-                </div>
-              </div>
-              <div class="key-content">
-                <component :is="visualList.mb.mk[2].mc.contentNum" :mcTitle="visualList.mb.mk[2].mc.contentName"  :mcStatus="2" :mcId="visualList.mb.mk[2].mc.contentNum" class="mc-key-content"></component>
-              </div>
+            <div class="sub-content">
+              <component :is="visualList.mb.mk[3].mc.contentNum"  :mcTitle="visualList.mb.mk[3].mc.contentName" :mcStatus="3"  :mcId="visualList.mb.mk[3].mc.contentNum" class="mc-content"></component>
             </div>
-          </div>
+          </div> 
+        </div> 
         </div>
       </div>
     </div>
-  </div>
 </template>
 <script>
     import MC01 from '../../../components/common/MC/MC01';
@@ -137,6 +121,7 @@
     import MC12 from '../../../components/common/MC/MC12';
     import MC13 from '../../../components/common/MC/MC13';
     import MC14 from '../../../components/common/MC/MC14';
+    import MC15 from '../../../components/common/MC/MC15';
 
     export default {
         name: "MB02",
@@ -403,6 +388,8 @@
             MC12,
             MC13,
             MC14,
+            MC15,
+
         },
     }
 </script>
@@ -426,11 +413,14 @@
     flex-flow: column;
     margin-left: 0.5%;
   }
-  .key-left{
+  /* .key-left{
       width: 100%;
       min-height: 32.6%;
-      margin: 1.5% 0;
+      margin: 1.5% 0 0 0;
       display:inline-block;
+  }
+  .key-bottom-right .key-left:first-child{
+      margin: 1.5% 0;
   }
   .key-top{
       width: 100%;
@@ -496,13 +486,18 @@
   .key-bottom{
     width: 100%;
     min-height: 61.4%;
-    margin: 1% 0 0 0;
+    margin: 0.5% 0 0 0;
     display: flex;
   }
   .key-bottom-left{
+    width: 100%;
     margin-right: 1%;
+    position: relative;
   }
   .key-bottom-right{
-    margin-left:1%;
-  }
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+    margin-left: 1%;
+  } */
 </style>

@@ -92,7 +92,6 @@ export default {
     clickDot:function(paramIndex){
       this.runwayIndex = paramIndex;
       console.log(paramIndex);
-      // $("#runwayContent"+paramIndex).addClass()
     },
     // 初始化列车运行图信息
     noticeCarFunc:function(){
@@ -278,6 +277,7 @@ export default {
   background: #ff0000b0;
   border: solid 1px #ffffff;
   margin-top: -31%;
+  cursor: pointer;
 }
 
 a-popover{
@@ -318,5 +318,6 @@ a-popover{
 }
 .runwayActive{
   z-index: 99;
+  box-shadow: 0px 0px 4px 1px;
 }
 </style>

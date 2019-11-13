@@ -106,7 +106,7 @@ export default {
   width:50%;
   height:200px;
   margin-top:20px;
-  background: url("../../../assets/img/enterPel.png") no-repeat;
+  background: url("../../../assets/img/enterPel2.png") no-repeat;
   font-size: 26px;
   background-size:contain;
   background-position: center;

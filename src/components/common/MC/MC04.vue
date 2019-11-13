@@ -266,7 +266,8 @@ export default {
   border-radius: 100%;
   width: 10px;
   margin-left: -31%;
-  background: #ff0000;
+  background: #ff0000b0;
+  border: solid 1px #ffffff;
   margin-top: -31%;
 }
 a-popover{

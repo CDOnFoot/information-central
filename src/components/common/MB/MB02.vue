@@ -50,7 +50,6 @@
     </div>
     <div class="mb02-right">
       <div class="mb02-right-top">
-        <div class="right">
           <div class="right-sub">
             <img src="../../../assets/img/main-border-b.png" alt="" class="sub-bg">
             <div class="hide-sub-right" v-show="setFlag">
@@ -64,15 +63,12 @@
             <div class="sub-content">
               <component :is="visualList.mb.mk[1].mc.contentNum" :mcTitle="visualList.mb.mk[1].mc.contentName"  :mcStatus="1"  :mcId="visualList.mb.mk[1].mc.contentNum" class="mc-content"></component>
             </div>
-          </div>
         </div>
       </div>
       <div class="mb02-right-bottom">
-
-        
-        <div class="right">
+        <div class="right-bottom-left">
           <div class="right-sub">
-            <img src="../../../assets/img/sub-border-r.png" alt="" class="sub-bg">
+            <img src="../../../assets/img/sub-border-b.png" alt="" class="sub-bg">
             <div class="hide-sub-right" v-show="setFlag">
                 <div class="sub-btn">
                   <div class="sub-btn-item" v-for="(item,index) in btnList" :key="index" :class="(index===0 || index===2)?'marginLeft':''">
@@ -84,10 +80,10 @@
             <div class="sub-content">
               <component :is="visualList.mb.mk[2].mc.contentNum" :mcTitle="visualList.mb.mk[2].mc.contentName"  :mcStatus="2"  :mcId="visualList.mb.mk[2].mc.contentNum" class="mc-content"></component>
             </div>
-          </div>
         </div>
-        <div class="right">
-          <div class="right-sub">
+        </div>
+         <div class="right-bottom-right">
+          <div class="right-sub" style="height:49%;">
             <img src="../../../assets/img/sub-border-r.png" alt="" class="sub-bg">
             <div class="hide-sub-right" v-show="setFlag">
               <div class="sub-btn">
@@ -101,7 +97,21 @@
               <component :is="visualList.mb.mk[3].mc.contentNum"  :mcTitle="visualList.mb.mk[3].mc.contentName" :mcStatus="3"  :mcId="visualList.mb.mk[3].mc.contentNum" class="mc-content"></component>
             </div>
           </div> 
-        </div> 
+          <div class="right-sub" style="height:49%;">
+            <img src="../../../assets/img/sub-border-r.png" alt="" class="sub-bg">
+            <div class="hide-sub-right" v-show="setFlag">
+              <div class="sub-btn">
+                <div class="sub-btn-item" v-for="(item,index) in btnList" :key="index" :class="(index===0 || index===2)?'marginLeft':''">
+                    <a-button size="small" class="item-btn" @click="mcChangeItem(4,index)" v-show="(index===0 && !visualList.mb.mk[4].mc.contentNum) || (index===1 && visualList.mb.mk[4].mc.contentNum) || (index===2 && visualList.mb.mk[4].mc.contentNum)">
+                  {{item.title}}</a-button>
+                </div>
+              </div>
+            </div>
+            <div class="sub-content">
+              <component :is="visualList.mb.mk[4].mc.contentNum"  :mcTitle="visualList.mb.mk[4].mc.contentName" :mcStatus="4"  :mcId="visualList.mb.mk[4].mc.contentNum" class="mc-content"></component>
+            </div>
+          </div> 
+        </div>
         </div>
       </div>
     </div>
@@ -413,91 +423,29 @@
     flex-flow: column;
     margin-left: 0.5%;
   }
-  /* .key-left{
-      width: 100%;
-      min-height: 32.6%;
-      margin: 1.5% 0 0 0;
-      display:inline-block;
-  }
-  .key-bottom-right .key-left:first-child{
-      margin: 1.5% 0;
-  }
-  .key-top{
-      width: 100%;
-      min-height: 32.6%;
-      margin: 1.5% 0 0.5% 0;
-      display:inline-block;
-  }
-  .key-left-sub,.key-top-sub{
-      height: 100%;
-      width: 100%;
-      position: relative;
-  }
-  .hide-key-left,.hide-key-top{
-      border: dashed 2px;
-      border-radius: 10px;
-      border-color: #ffffff;
-      background: rgba(0, 0, 0, 0.5);
-      width: 95%;
-      height: 95%;
-      position: absolute;
-      left: 51%;
-      top: 50%;
-      transform: translate(-50%,-50%);
-      z-index: 199;
-  }
-  .left-sub-bg,.top-sub-bg{
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%,-50%);
-  }
-  .key-btn-item{
-    color: #ffffff;
-    font-size: 1.3rem;
-  }
-  .key-item-btn{
+  .mb02-right-top{
+    flex: 1;
     width: 100%;
-    background: transparent;
-    color: #fff;
-    border: solid 1px #fff;
-    border-radius: 4px;
+    margin-bottom: 1%;
   }
-  .key-btn{
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    display: flex;
-    align-items: center;
-  }
-  .mb-keyTemp{
-    width: 46%;
-    height:auto;
-    border-radius: 10px;
-    margin: 0 1%;
-    position: relative;
-  }
-  .mb-keyMain{
+  .mb02-right-bottom{
+    flex: 2;
+    margin-top: 0.5%;
     width: 100%;
-    height: 100%;
+    display: inline-flex;
   }
-  .key-bottom{
-    width: 100%;
-    min-height: 61.4%;
-    margin: 0.5% 0 0 0;
-    display: flex;
-  }
-  .key-bottom-left{
-    width: 100%;
+  .right-bottom-left{
+     width: 100%;
+    height: auto;
     margin-right: 1%;
-    position: relative;
+
   }
-  .key-bottom-right{
+  .right-bottom-right{
+    width: 100%;
+    height: auto;
     display: flex;
     flex-flow: column;
-    width: 100%;
     margin-left: 1%;
-  } */
+    justify-content: space-between;
+  }
 </style>

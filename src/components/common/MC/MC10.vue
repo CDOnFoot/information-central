@@ -154,9 +154,10 @@ export default {
           ]
         }; 
         // console.log(paramData)
-        option.yAxis.data = paramData.station;
-        option.series[0].data = paramData.entryNumPeople;
-        option.series[1].data = paramData.exitNumPeople;
+        option.yAxis.data = paramData.station.reverse();
+        option.series[0].data = paramData.entryNumPeople.reverse();
+        option.series[1].data = paramData.exitNumPeople.reverse();
+        // console.log(option)
         self.structure.setOption(option);
       } else {
         //更新刷新记录信息

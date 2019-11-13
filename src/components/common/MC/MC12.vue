@@ -63,35 +63,33 @@ export default {
     chartInfo: function(callback, type) {
       let self = this;
       let param = {};
-      callback("", type);
-      // this.$http.get(self.$api.energyVehicleTimes, param).then(res => {
-      //   //调取数据成功
-      //   if (res.data) {
-      //     if (res.data.code === "0") {
-      //       callback(res.data.data, type);
-      //     } else {
-      //       this.$message.error(res.data.msg);
-      //     }
-      //   }
-      // });
+      this.$http.get(self.$api.energyVehicleTimes, param).then(res => {
+        //调取数据成功
+        if (res.data) {
+          if (res.data.code === "0") {
+            callback(res.data.data);
+          } else {
+            this.$message.error(res.data.msg);
+          }
+        }
+      });
     },
-    chartInfoList: function(data, type) {
-      this.drawLine(data, type);
+    chartInfoList: function(data) {
+      this.drawLine(data);
     },
-    drawLine(paramData, type) {
+    drawLine(paramData) {
       let self = this;
       let option = null;
-      if (type === "init") {
-        // 基于准备好的dom，初始化echarts实例
         self.structure = self.$echarts.init(document.getElementById(self.mcId));
         option = {
            legend: {
-             data: ["蒸发量", "降水量", "平均温度"],
+             data: ["全线单日总能耗", "全线单日发车车辆次"],
               textStyle: {
                 //图例文字的样式
                 color: "white"
               },
-              top: "top" 
+              top: "top",
+              right:"10%"
             },
           tooltip: {
             trigger: 'axis',
@@ -133,12 +131,16 @@ export default {
             {
               type: "value",
               name: "能耗(kwh)",
-              min: 0,
-              max: 250,
-              interval: 50,
+              // min: 0,
+              // max: max,
+              // interval: Math.ceil(max / 5),
+              splitNumber:5,
               axisLabel: {
                 formatter: "{value}"
               },
+              splitLine:{
+                show:false    //去掉网格线
+                },
               axisLine: {
                 lineStyle: {
                   color: "white"
@@ -148,9 +150,10 @@ export default {
             {
               type: "value",
               name: "车辆次(车次)",
-              min: 0,
-              max: 25,
-              interval: 5,
+              // min: 0,
+              // max: 25,
+              // interval: 5,
+              splitNumber:5,
               axisLabel: {
                 formatter: "{value}"
               },
@@ -158,7 +161,10 @@ export default {
                 lineStyle: {
                   color: "white"
                 }
-              }
+              },
+              splitLine:{
+                show:false    //去掉网格线
+                },
             }
           ],
           series: [
@@ -205,35 +211,12 @@ export default {
             }
           ]
         };
-        console.log(paramData)
-        // option.yAxis.data = paramData.station;
-        // option.series[0].data = paramData.entryNumPeople;
-        // option.series[1].data = paramData.exitNumPeople;
+        option.xAxis[0].data = paramData.date;
+        option.series[0].data = paramData.oneDayTotalEnergy;
+        option.series[1].data = paramData.oneDayVehicleTimes;
         self.structure.setOption(option);
-      } else {
-        //更新刷新记录信息
-        self.refreshData(paramData);
-      }
+      
     },
-    //更新数据方法
-    refreshData(paramData) {
-      let self = this;
-      let option = self.structure.getOption();
-      console.log(paramData);
-      console.log(option.series);
-      var serLast = option.series[option.series.length - 1];
-      option.series = [serLast];
-      option.dataset[0].source = paramData;
-      for (var i = 1; i < paramData.length; i++) {
-        option.series.unshift({
-          type: "line",
-          smooth: true,
-          seriesLayoutBy: "row"
-        });
-      }
-      console.log(option.series);
-      self.structure.setOption(option);
-    }
   }
 };
 </script>
@@ -255,6 +238,6 @@ canvas {
 .main-id {
   width: 470px;
   height: 300px;
-  margin: 1% 0 0 2%;
+  margin: 4% 0 0 2%;
 }
 </style>

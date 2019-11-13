@@ -11,16 +11,18 @@
           <div class="runway">
             <div :key="index" v-for="(item,index) in noticeList" 
             :style="{position:'absolute',top:item.dot[0],left:item.dot[1]}">
-              <a-popover placement="topLeft" arrowPointAtCenter class="popover-item">
+            <div class="runway-content">
+              车次号：{{item.subwayNum}}
+            </div>
+            <div class="runway-item" :class="item.type==='图定'?'dot-red':item.type==='临客'?'dot-add':item.type==='救援'?'dot-heaven':item.type==='调试'?'dot-blue':item.type==='专用'?'dot-green':item.type==='跳停'?'dot-purpuse':'dot-white'"></div>
+              <!-- <a-popover placement="topLeft" arrowPointAtCenter class="popover-item">
               <template slot="content">
-                <!-- <p>{{'2019-10-29 19:00:00'}}</p> -->
                 <p>当前车次：{{item.subwayNum}}</p>
                 <p>车次类型：{{item.type}}</p>
-                <!-- <p>前方到站：{{'xxxx站'}}</p> -->
               </template>
               <span slot="title">{{item.dotName}}</span>
               <a-button class="runway-item"></a-button>
-            </a-popover>
+            </a-popover> -->
           </div>
           </div>
       </div>
@@ -83,23 +85,6 @@ export default {
     this.websocketclose();
   },
   methods: {
-    // 消息推送
-    // pushDataInfo:function(){
-    //   this.noticeList = [
-    //       {
-    //         subwayNum:999,
-    //       dotId: "10",
-    //       dotType: "middle",
-    //       status: "上行",
-    //       title: "大树营-白龙路",
-    //       dotType:'common',
-    //       dot: ["24.4%", "44.5%"]
-    //       },
-    //   ];
-    //   console.log(this.noticeList);
-    // },
-
-
     // 初始化列车运行图信息
     noticeCarFunc:function(){
       let self = this;
@@ -153,75 +138,80 @@ export default {
 
     },
     showData(redata){
-      console.log(redata)
-      let daotType = redata.subwayStatus==='到达'?'common':'middle'
-      // console.log(daotType)
+      let daotType = null;
+      let hasTrain = null;
       let self = this;
-      let hasTrain = self.noticeList.some((it,unitIndex)=>{
-          return redata.subwayNum===it.subwayNum;
-        })
-     new Promise((reslove,reject)=>{
-       if(self.noticeList.length>0){
-        if(hasTrain){
-           self.noticeList.forEach((unit,unitIndex)=>{
-           if(redata.subwayNum===unit.subwayNum){
-              reslove(unitIndex);
-            }
+        new Promise((reslove,reject)=>{
+        console.log(redata)
+        daotType = redata.subwayStatus==='到达'?'common':'middle'
+        // console.log(daotType)
+        hasTrain = self.noticeList.some((it,unitIndex)=>{
+            return redata.subwayNum===it.subwayNum;
           })
-        }else{
-          reslove(-100);
-        }
-       }else{
-         reslove(-100);
-       }
-       
-     }).then((unitIndex)=>{
-       console.log(unitIndex)
-      //  console.log(daotType)
-      this.wayList.some((item,index)=>{
-        if(item.dotId === redata.stationId && item.status==redata.upDownStatus && item.dotType==daotType){
-            let trainInfor={
-                subwayNum:redata.subwayNum,  //车次
-                dotId: redata.stationId,    //车站ID
-                title: redata.stationName,  //车站名称
-                status:redata.upDownStatus, //车辆的行驶方向，上行或者下行
-                dotType:item.dotType,       //common 或者 middle
-                dot: this.wayList[index+1].dot             //运动点的位置信息
-              }
-              if(unitIndex== "-100"){
-                self.noticeList.push(trainInfor)
-                console.log(self.noticeList)
-                return false;
-              }else{
-                self.$set(self.noticeList,unitIndex,trainInfor)
-                console.log(self.noticeList)
-                return false;
-              }
-        }else if(item.dotId === redata.stationId && item.status==redata.upDownStatus && item.dotType==daotType){
-              let trainInfor={
-                subwayNum:redata.subwayNum,  //车次
-                dotId: redata.stationId,    //车站ID
-                title: redata.stationName,  //车站名称
-                status:redata.upDownStatus, //车辆的行驶方向，上行或者下行
-                dotType:item.dotType,       //common 或者 middle
-                dot: item.dot             //运动点的位置信息
-              }
-              if(unitIndex== "-100"){
-                self.noticeList.push(trainInfor)
-                console.log(self.noticeList)
-                return false;
-              }else{
-                self.$set(self.noticeList,unitIndex,trainInfor)
-                console.log(self.noticeList)
-                return false;
-              }
-        }
 
-      });
-      })
+          if(self.noticeList.length>0){
+          if(hasTrain){
+              self.noticeList.forEach((unit,unitIndex)=>{
+              if(redata.subwayNum===unit.subwayNum){
+                reslove(unitIndex);
+              }
+            })
+          }else{
+            reslove(-100);
+          }
+          }else{
+            reslove(-100);
+          }
+          
+        }).then((unitIndex)=>{
+          console.log(unitIndex)
+        //  console.log(daotType)
+        this.wayList.some((item,index)=>{
+          if(item.dotId === redata.stationId && item.status==redata.upDownStatus && item.dotType==daotType){
+              let trainInfor={
+                  subwayNum:redata.subwayNum,  //车次
+                  dotId: redata.stationId,    //车站ID
+                  title: redata.stationName,  //车站名称
+                  status:redata.upDownStatus, //车辆的行驶方向，上行或者下行
+                  dotType:item.dotType,       //common 或者 middle
+                  // dot: this.wayList[index+1].dot    
+                    dot: item.dot          //运动点的位置信息
+                }
+                if(unitIndex== "-100"){
+                  self.noticeList.push(trainInfor)
+                  console.log(self.noticeList)
+                  return false;
+                }else{
+                  self.$set(self.noticeList,unitIndex,trainInfor)
+                  console.log(self.noticeList)
+                  return false;
+                }
+          }
+          // else if(item.dotId === redata.stationId && item.status==redata.upDownStatus && item.dotType==daotType){
+          //       let trainInfor={
+          //         subwayNum:redata.subwayNum,  //车次
+          //         dotId: redata.stationId,    //车站ID
+          //         title: redata.stationName,  //车站名称
+          //         status:redata.upDownStatus, //车辆的行驶方向，上行或者下行
+          //         dotType:item.dotType,       //common 或者 middle
+          //         dot: item.dot             //运动点的位置信息
+          //       }
+          //       if(unitIndex== "-100"){
+          //         self.noticeList.push(trainInfor)
+          //         console.log(self.noticeList)
+          //         return false;
+          //       }else{
+          //         self.$set(self.noticeList,unitIndex,trainInfor)
+          //         console.log(self.noticeList)
+          //         return false;
+          //       }
+          // }
+
+        });
+        })
+      }
     }
-  }
-};
+    };
 </script>
 
 <style scoped>
@@ -276,11 +266,22 @@ export default {
   border-radius: 100%;
   width: 10px;
   margin-left: -31%;
-  background: #ff00009c;
+  background: #ff0000;
   margin-top: -31%;
 }
 a-popover{
   background: #3467c5;
+}
+.runway-content{
+    background: #3467c5;
+    color: #ffffff;
+    width: 90px;
+    height: 25px;
+    text-align: center;
+    padding: 4px;
+    border-radius: 2px;
+    position: absolute;
+    left: -112px;
 }
 
 </style>

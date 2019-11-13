@@ -486,3 +486,24 @@
   padding-left: 3%;
   width: 60%;
 }
+.dot-red{
+  background: #ff0100;
+}
+.dot-yellow{
+  background: #fcff00;
+}
+.dot-purpuse{
+  background: #ff00ff;
+}
+.dot-blue{
+  background: #02fffe;
+}
+.dot-green{
+  background: #00ff02;
+}
+.dot-white{
+  background: #ffffff;
+}
+.dot-heaven{
+  background: #0507ff;
+}

@@ -2,8 +2,13 @@
 <template>
   <!--   昨日客流OD显示 模块内容一-->
   <div>
-    <div class="main">
+   <div class="main">
       <div class="borde">{{mcTitle}}</div>
+      <div :id="mcId" class="main-id">
+        <div class="none-data">
+          暂无信息
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -38,14 +43,20 @@ export default {
 
 <style scoped>
 .main {
-    font-weight: 700;
-    color: #ffffff;
-    border-left: #3467c5 solid 4px;
-    position: absolute;
-    top: 4%;
-    left: 6%;
-    font-size: 16px;
-    padding-left: 3%;
-    width: 60%;
+  color: #ffffff;
+  padding: 1%;
+  position: relative;
+  width: 102.3%;
+  height: 100.7%;
+}
+.main-id{
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.none-data{
+  font-size: 14px;
+  text-align: center;
+  padding: 50% 0;
 }
 </style>

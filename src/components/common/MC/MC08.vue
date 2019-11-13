@@ -117,7 +117,7 @@ export default {
 .subway-item{
   width: 0.8%;
   height: 0.8%;
-  background: #ffffff;
+  /* background: #ffffff; */
   border-radius: 100%;
 }
 .runway-item{

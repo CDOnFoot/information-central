@@ -85,7 +85,7 @@
         </div>
       </div>
       <div class="layout-btn">
-        <a-button size="large" class="btn-item" @click="layoutSetting">布局配置</a-button>
+        <a-button size="large" class="btn-item" @click="layoutSetting" v-show="menuIndex<=1">布局配置</a-button>
         <a-button size="large" class="btn-item" v-show="setFlag" @click="saveSetMsg">保存</a-button>
         <a-button size="large" class="btn-item" v-show="setFlag" @click="cancelSetMsg">取消</a-button>
       </div>

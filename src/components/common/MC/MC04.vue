@@ -2,7 +2,7 @@
   <!--  列车实时运行图  模块内容一-->
   <div>
     <div class="main">
-      <div class="borde">{{mcTitle}}</div>
+      <div class="borde-main">{{mcTitle}}</div>
       <div :id="mcId" class="main-id">
         <div class="subway"></div>
           <div class="subway-item" :key="index" v-for="(item,index) in wayList" :title="item.title" 
@@ -31,7 +31,7 @@
 import echarts from "echarts";
 import Cookies from 'js-cookie';
 export default {
-  name: "MC04",
+  name: "MC08",
   data() {
     return {
       mcList: "",
@@ -225,6 +225,17 @@ export default {
 </script>
 
 <style scoped>
+.borde-main{
+  font-weight: 700;
+  color: #ffffff;
+  border-left: #3467c5 solid 4px;
+  position: absolute;
+  top: 4%;
+  right: 6%;
+  font-size: 16px;
+  padding-left: 3%;
+  z-index: 99;
+}
 .main {
   color: #ffffff;
   padding: 1%;

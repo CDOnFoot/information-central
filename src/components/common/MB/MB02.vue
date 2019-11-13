@@ -405,6 +405,10 @@
 </script>
 
 <style scoped>
+  .mb-keyMain{
+   width: 100%;
+    height: 100%;
+  }
   .key-content,.mc-key-content{
     width: 100%;
     height: 100%;
@@ -445,7 +449,7 @@
     height: auto;
     display: flex;
     flex-flow: column;
-    margin-left: 1%;
+    /* margin-left: 0.5%; */
     justify-content: space-between;
   }
 </style>

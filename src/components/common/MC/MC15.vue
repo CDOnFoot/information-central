@@ -38,10 +38,14 @@ export default {
 
 <style scoped>
 .main {
-  color: #ffffff;
-  padding: 1%;
-  position: relative;
-  width: 100%;
-  height: 100%;
+    font-weight: 700;
+    color: #ffffff;
+    border-left: #3467c5 solid 4px;
+    position: absolute;
+    top: 4%;
+    left: 6%;
+    font-size: 16px;
+    padding-left: 3%;
+    width: 60%;
 }
 </style>

@@ -167,6 +167,7 @@
     import MC12 from '../../../components/common/MC/MC12';
     import MC13 from '../../../components/common/MC/MC13';
     import MC14 from '../../../components/common/MC/MC14';
+    import MC15 from '../../../components/common/MC/MC15';
 
     export default {
         name: "MB01",
@@ -443,6 +444,7 @@
           MC12,
           MC13,
           MC14,
+          MC15,
 
       },
     }

@@ -18,7 +18,7 @@ export default {
   data() {
     return {
       mcList: "",
-      structure: "",
+      mc: "",
       dataRef: "",
       timeStamp:"2019/11/1-2019/11/7"
     };
@@ -82,9 +82,12 @@ export default {
     drawLine(paramData, type) {
       let self = this;
       let option = null;
+      let obj = document.getElementById(self.mcId);
       if (type === "init") {
         // 基于准备好的dom，初始化echarts实例
-        self.structure = self.$echarts.init(document.getElementById(self.mcId));
+         if(obj){
+          self.mc = self.$echarts.init(obj);
+         }
         option = {
           tooltip: {
             trigger: "axis",
@@ -153,12 +156,18 @@ export default {
             }
           ]
         }; 
-        // console.log(paramData)
-        option.yAxis.data = paramData.station.reverse();
-        option.series[0].data = paramData.entryNumPeople.reverse();
-        option.series[1].data = paramData.exitNumPeople.reverse();
-        // console.log(option)
-        self.structure.setOption(option);
+       
+
+        if(obj){
+           // console.log(paramData)
+          option.yAxis.data = paramData.station.reverse();
+          option.series[0].data = paramData.entryNumPeople.reverse();
+          option.series[1].data = paramData.exitNumPeople.reverse();
+          // console.log(option)
+
+          self.mc.setOption(option);
+          
+        }
       } else {
         //更新刷新记录信息
         self.refreshData(paramData);
@@ -167,7 +176,7 @@ export default {
     //更新数据方法
     refreshData(paramData) {
       let self = this;
-      let option = self.structure.getOption();
+      let option = self.mc.getOption();
       console.log(paramData);
       console.log(option.series);
       var serLast = option.series[option.series.length - 1];
@@ -181,7 +190,7 @@ export default {
         });
       }
       console.log(option.series);
-      self.structure.setOption(option);
+      self.mc.setOption(option);
     }
   }
 };

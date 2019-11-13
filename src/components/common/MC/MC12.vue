@@ -4,7 +4,6 @@
   <div>
     <div class="main">
       <div class="borde">{{mcTitle}}</div>
-      <!-- <div id="structure" ></div> -->
       <div :id="mcId" class="main-id"></div>
     </div>
   </div>
@@ -18,7 +17,7 @@ export default {
   data() {
     return {
       mcList: "",
-      structure: "",
+      mc: "",
       dataRef: ""
     };
   },
@@ -80,7 +79,10 @@ export default {
     drawLine(paramData) {
       let self = this;
       let option = null;
-        self.structure = self.$echarts.init(document.getElementById(self.mcId));
+      let obj = document.getElementById(self.mcId);
+      if(obj){
+        self.mc = self.$echarts.init(obj);
+      }
         option = {
            legend: {
              data: ["全线单日总能耗", "全线单日发车车辆次"],
@@ -211,10 +213,13 @@ export default {
             }
           ]
         };
+      if(obj){
         option.xAxis[0].data = paramData.date;
         option.series[0].data = paramData.oneDayTotalEnergy;
         option.series[1].data = paramData.oneDayVehicleTimes;
-        self.structure.setOption(option);
+        self.mc.setOption(option);
+      }
+       
       
     },
   }

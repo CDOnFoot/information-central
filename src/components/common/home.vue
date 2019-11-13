@@ -510,10 +510,8 @@
         let self = this;
         if(this.menuIndex!=param){
           this.menuIndex = param;
-          self.$common.setCookie('menuIndex',this.menuIndex);
+          self.$common.setCookie('menuIndex',this.menuIndex,24 * 60 * 30);
           this.menuId = this.menuList[param].menuNum;
-
-          // self.$common.setCookie('menuId',this.menuId);
 
           // if(param!=2){
           //   this.$message.warning('功能暂未开启');
@@ -538,7 +536,7 @@
               });
             }).then(()=>{
               this.setFlag = false;
-              console.log('/home/'+self.menuList[param].key);
+              // console.log('/home/'+self.menuList[param].key);
               this.$router.push('/home/'+self.menuList[param].key);
             })
 

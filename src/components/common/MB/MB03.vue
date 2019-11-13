@@ -39,7 +39,7 @@ export default {
     },
         visualTempList:function(val){
             this.visualList = JSON.parse(JSON.stringify(val));
-            console.log(val);
+            // console.log(val);
         },
         setFlag:function(val){
             this.setFlag = val;
@@ -52,7 +52,7 @@ export default {
     mounted(){
         // 接收监听值
           this.visualList = JSON.parse(JSON.stringify(this.visualTempList));
-          console.log(this.visualList);
+        //   console.log(this.visualList);
           this.btnList = this.$common.btnList;
     },
 

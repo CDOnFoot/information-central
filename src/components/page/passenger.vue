@@ -30,20 +30,20 @@
       },
       watch: {
          setFlag: function (val) {
-           console.log(val);
+          //  console.log(val);
           this.setFlag = val;
         },
         mbId: function (val) {
-          console.log(val);
+          // console.log(val);
           this.currentMB = val;
         },
         menuId:function(val){
-          console.log(val);
+          // console.log(val);
           this.menuId = val;
           this.menuTempId = val;
         },
         visualHomeList:function(val){
-          console.log(val);
+          // console.log(val);
           this.visualHomeTempList = val;
           this.visualTempList = JSON.parse(JSON.stringify(val));
           this.currentMB = this.visualTempList.mb.templateNum;
@@ -60,7 +60,7 @@
       },
       mounted() {
         this.currentMB = this.mbId;
-        console.log(this.currentMB);
+        // console.log(this.currentMB);
       },
       methods:{
         // 获取从子组件MB传值 模版可视化内容信息

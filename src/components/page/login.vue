@@ -97,10 +97,10 @@ import sha256 from "js-sha256";
               if(res.data){
                 if (res.data.code === "0") {
                   self.userInfo = res.data.data;
-                  self.$common.setCookie('dvptToken',self.userInfo.custom_token,60 * 6);
-                  self.$common.setCookie('dvptId',self.userInfo.userId,60 * 6);
-                  self.$common.setCookie('dvptName',self.userName,60 * 6);
-                  self.$common.setCookie('menuIndex','0',60*6);
+                  self.$common.setCookie('dvptToken',self.userInfo.custom_token,24 * 60 * 30);
+                  self.$common.setCookie('dvptId',self.userInfo.userId,24 * 60 * 30);
+                  self.$common.setCookie('dvptName',self.userName,24 * 60 * 30);
+                  self.$common.setCookie('menuIndex','0',24 * 60 * 30);
 
                   self.loadFlag = false;
                   self.$router.push('/home/index');

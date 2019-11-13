@@ -11,10 +11,8 @@
           <div class="runway">
             <div :key="index" v-for="(item,index) in noticeList" 
             :style="{position:'absolute',top:item.dot[0],left:item.dot[1]}">
-            <div class="runway-content">
-              车次号：{{item.subwayNum}}
-            </div>
-            <div class="runway-item" :class="item.type==='图定'?'dot-red':item.type==='临客'?'dot-add':item.type==='救援'?'dot-heaven':item.type==='调试'?'dot-blue':item.type==='专用'?'dot-green':item.type==='跳停'?'dot-purpuse':'dot-white'"></div>
+            
+            <div :id="'runwayItem'+index" class="runway-item" :class="item.type==='图定列车'?'dot-red':item.type==='临客列车'?'dot-yellow':item.type==='救援车'?'dot-heaven':item.type==='调试车'?'dot-blue':item.type==='专用车'?'dot-green':item.type==='跳停车'?'dot-purpuse':'dot-white'" @click="clickDot(index)"></div>
               <!-- <a-popover placement="topLeft" arrowPointAtCenter class="popover-item">
               <template slot="content">
                 <p>当前车次：{{item.subwayNum}}</p>
@@ -22,7 +20,10 @@
               </template>
               <span slot="title">{{item.dotName}}</span>
               <a-button class="runway-item"></a-button>
-            </a-popover> -->
+            </a-popover>-->
+            <div class="runway-content" :id="'runwayContent'+index" :class="runwayIndex===index?'runwayActive':''">
+              车次号：{{item.subwayNum}}
+            </div>
           </div>
           </div>
       </div>
@@ -45,7 +46,7 @@ export default {
       timeInterval:'',
       userId:Cookies.get("dvptId"),
       customToken:Cookies.get("dvptToken"),
-
+      runwayIndex:'',
     };
   },
   props: ["mcStatus", "mcTitle",'mcId'],
@@ -64,6 +65,7 @@ export default {
     // console.log(this.wayList)
     var self = this;
     this.mcList = this.$common.mcList;
+
     // this.showData();
     // this.pushDataInfo();
   },
@@ -85,6 +87,13 @@ export default {
     this.websocketclose();
   },
   methods: {
+
+    // 点击车点信息显示
+    clickDot:function(paramIndex){
+      this.runwayIndex = paramIndex;
+      console.log(paramIndex);
+      // $("#runwayContent"+paramIndex).addClass()
+    },
     // 初始化列车运行图信息
     noticeCarFunc:function(){
       let self = this;
@@ -101,7 +110,7 @@ export default {
     },
 // 初始化websocket连接数据
     initWebSocket:function(){
-      console.log(this.userId);
+      // console.log(this.userId);
       const wsuri = "ws://10.66.1.160:28070/subway/info/ws/{"+this.userId+"}/{"+this.customToken+"}";//ws地址
       this.websocket = new WebSocket(wsuri);
       this.websocket.onopen = this.websocketonopen;
@@ -121,8 +130,7 @@ export default {
     websocketonmessage(e){ //数据接收
       console.log("WebSocket连接数据接收中:");
       const redata = JSON.parse(e.data);
-      // console.log(redata)
-      // console.log(redata.data)
+      console.log(redata.data)
       this.showData(redata.data)
       
 
@@ -142,7 +150,7 @@ export default {
       let hasTrain = null;
       let self = this;
         new Promise((reslove,reject)=>{
-        console.log(redata)
+        // console.log(redata)
         daotType = redata.subwayStatus==='到达'?'common':'middle'
         // console.log(daotType)
         hasTrain = self.noticeList.some((it,unitIndex)=>{
@@ -164,12 +172,13 @@ export default {
           }
           
         }).then((unitIndex)=>{
-          console.log(unitIndex)
+          // console.log(unitIndex)
         //  console.log(daotType)
         this.wayList.some((item,index)=>{
           if(item.dotId === redata.stationId && item.status==redata.upDownStatus && item.dotType==daotType){
               let trainInfor={
                   subwayNum:redata.subwayNum,  //车次
+                  type:redata.type.trim(),  //车次
                   dotId: redata.stationId,    //车站ID
                   title: redata.stationName,  //车站名称
                   status:redata.upDownStatus, //车辆的行驶方向，上行或者下行
@@ -270,19 +279,44 @@ export default {
   border: solid 1px #ffffff;
   margin-top: -31%;
 }
+
 a-popover{
   background: #3467c5;
 }
 .runway-content{
-    background: #3467c5;
-    color: #ffffff;
-    width: 90px;
-    height: 25px;
-    text-align: center;
-    padding: 4px;
-    border-radius: 2px;
-    position: absolute;
-    left: -112px;
+  background: #3467c5;
+  color: #ffffff;
+  width: 90px;
+  height: 25px;
+  text-align: center;
+  padding: 4px;
+  border-radius: 2px;
+  position: absolute;
+  left: -112px;
+  z-index: 9;
 }
-
+.dot-red{
+  background: #ff0100b0 !important;
+}
+.dot-yellow{
+  background: #fcff00b0 !important;
+}
+.dot-purpuse{
+  background: #ff00ffb0 !important;
+}
+.dot-blue{
+  background: #02fffeb0 !important;
+}
+.dot-green{
+  background: #00ff02b0 !important;
+}
+.dot-white{
+  background: #ffffffb0 !important;
+}
+.dot-heaven{
+  background: #0507ffb0 !important;
+}
+.runwayActive{
+  z-index: 99;
+}
 </style>

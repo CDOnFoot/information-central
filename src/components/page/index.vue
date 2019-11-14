@@ -49,15 +49,20 @@
 
         if(this.visualTempList){
           this.currentMB = this.visualTempList.mb.templateNum;
+          console.log(this.currentMB);
         }
         this.menuTempId = this.menuId;
 
       },
       mounted() {
+        console.log(this.currentMB);
+        var routerVal = this.$router.currentRoute.path;
+        console.log(routerVal)
+        this.$router.push('/home/index');
 
       },
       activated(){
-        console.log(this.menuId);
+        console.log(this.currentMB);
       },
       methods:{
         // 获取从子组件MB传值 模版可视化内容信息

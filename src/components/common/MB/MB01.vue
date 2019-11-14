@@ -248,6 +248,9 @@
           this.setFlag = val;
         }
       },
+      // activated(){
+      //   console.log(this.menuTempId);
+      // },
       mounted(){
         // 接收监听值
           this.visualList = JSON.parse(JSON.stringify(this.visualTempList));
@@ -255,10 +258,10 @@
           // 初始化模版内容
           this.getContentInfo();
           this.btnList = this.$common.btnList;
-        },
+      },
 
-        created(){
-        },
+      created(){
+      },
         methods:{
             // 查看可视化界面内容数据信息
           getUserVisualization:function(){

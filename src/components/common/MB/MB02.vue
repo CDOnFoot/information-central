@@ -203,6 +203,9 @@
           this.setFlag = val;
         }
       },
+      // activated(){
+      //   console.log(this.menuTempId);
+      // },
       mounted(){
        // 接收监听值
           this.visualList = JSON.parse(JSON.stringify(this.visualTempList));
@@ -437,7 +440,7 @@
     position: relative;
   }
    .mb02-right{
-    width: 54%;
+    width: 53%;
     height: auto;
     display: flex;
     align-items: center;

@@ -135,16 +135,15 @@
       this.getCurrentRoute(routerVal);
     },
     // beforeRouteUpdate (to, from, next) {
-    //   console.log(to.matched[1].path);
     //   if(to.matched[1].path=='/home/index'){
     //       next();
     //   }else{
     //         this.$message.warning('功能暂未开启');
     //   }
     // },
-    activated(){
-      console.log(this.menuId);
-    },
+    // activated(){
+    //   console.log(this.menuId);
+    // },
     mounted() {
       let self = this;
       // 查看菜单栏数据信息
@@ -533,6 +532,7 @@
           //   this.$message.warning('功能暂未开启');
           // }else{
 
+            console.log(this.menuId);
             new Promise((resolve,reject)=>{
               let paramList={
                 userNum: self.$common.getCookie('dvptId'),

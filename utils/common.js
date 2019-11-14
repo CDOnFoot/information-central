@@ -190,7 +190,7 @@ var common = {
     {templateNum:'MB02',templateName:'模版二',keyTemp:'MK01',keyIndex:'0'},
   ],
   // 行车路线运行图 各点定位位置
-  wayList: [
+  wayList: [        
     // 下行数据 运行图左侧
     {
       dotId: "1",
@@ -998,6 +998,368 @@ var common = {
       dot: ["88%", "85.2%"]
     }
   ],
+
+
+  // 行车负载情况
+  hardList: [        
+    {
+      dotId: "1",
+      title: "金川路",
+      status:'下行',
+      dotType:'common',
+      dot: ["4.3%", "14%"]
+    },
+    {
+      dotId: "2",
+      title: "大河埂",
+      status:'下行',
+      dotType:'common',
+      dot: ["7%", "13.2%"]
+    },
+    {
+      dotId: "3",
+      title: "海屯路",
+      status:'下行',
+      dotType:'common',
+      dot: ["13%", "16.2%"]
+    },
+    {
+      dotId: "4",
+      title: "小屯",
+      status:'下行',
+      dotType:'common',
+      dot: ["15.6%", "20.4%"]
+    },
+    {
+      dotId: "4",
+      title: "小屯-金鼎山北路",
+      status:'下行',
+      dotType:'middle',
+      dot: ["16.6%", "22.4%"]
+    },
+    
+    {
+      dotId: "5",
+      title: "金鼎山北路",
+      status:'下行',
+      dotType:'common',
+      dot: ["17.7%", "24%"]
+    },
+    {
+      dotId: "5",
+      title: "金鼎山北路-苏家塘",
+      status:'下行',
+      dotType:'middle',
+      dot: ["18%", "25.7%"]
+    },
+    {
+      dotId: "6",
+      title: "苏家塘",
+      status:'下行',
+      dotType:'common',
+      dot: ["18.2%", "27.2%"]
+    },
+    {
+      dotId: "6",
+      title: "苏家塘-小菜园",
+      status:'下行',
+      dotType:'middle',
+      dot: ["18.5%", "30%"]
+    },
+    {
+      dotId: "7",
+      title: "小菜园",
+      status:'下行',
+      dotType:'common',
+      dot: ["19.3%", "32.6%"]
+    },
+    {
+      dotId: "7",
+      title: "小菜园-火车北",
+      status:'下行',
+      dotType:'middle',
+      dot: ["20.3%", "34.8%"]
+    },
+    {
+      dotId: "8",
+      title: "火车北",
+      status:'下行',
+      dotType:'common',
+      dot: ["21%", "36.6%"]
+    },
+    {
+      dotId: "8",
+      title: "火车北-白龙路",
+      status:'下行',
+      dotType:'middle',
+      dot: ["22%", "39.5%"]
+    },
+    {
+      dotId: "9",
+      title: "白龙路",
+      status:'下行',
+      dotType:'common',
+      dot: ["23.6%", "41.2%"]
+    },
+    {
+      dotId: "9",
+      title: "白龙路-大村营",
+      status:'下行',
+      dotType:'middle',
+      dot: ["25.4%", "42.3%"]
+    },
+    {
+      dotId: "10",
+      title: "大树营",
+      status:'下行',
+      dotType:'common',
+      dot: ["27.5%", "42.7%"]
+    },
+    {
+      dotId: "10",
+      title: "大树营站-菊花村",
+      status:'下行',
+      dotType:'middle',
+      dot: ["28.7%", "43.5%"]
+    },
+    {
+      dotId: "11",
+      title: "菊花村",
+      status:'下行',
+      dotType:'common',
+      dot: ["30.1%", "44%"]
+    },
+    {
+      dotId: "11",
+      itle: "菊花村-菊华",
+      status:'下行',
+      dotType:'middle',
+      dot: ["31.5%", "45.2%"]
+    },
+    {
+      dotId: "12",
+      title: "菊华",
+      status:'下行',
+      dotType:'common',
+      dot: ["32.7%", "46.5%"]
+    },
+    {
+      dotId: "12",
+      title: "菊华-和甸营",
+      status:'下行',
+      dotType:'middle',
+      dot: ["35%", "48.5%"]
+    },
+    {
+      dotId: "13",
+      title: "和甸营",
+      status:'下行',
+      dotType:'common',
+      dot: ["36.2%", "51.3%"]
+    },
+    {
+      dotId: "13",
+      title: "和甸营-麻苴",
+      status:'下行',
+      dotType:'middle',
+      dot: ["38.5%", "54%"]
+    },
+    {
+      dotId: "14",
+      title: "麻苴",
+      status:'下行',
+      dotType:'common',
+      dot: ["40.3%", "58.6%"]
+    },
+    {
+      dotId: "14",
+      title: "麻苴-牛街庄",
+      status:'下行',
+      dotType:'middle',
+      dot: ["41.6%", "59%"]
+    },
+    {
+      dotId: "15",
+      title: "牛街庄",
+      status:'下行',
+      dotType:'common',
+      dot: ["43%", "58%"]
+    },
+    {
+      dotId: "15",
+      title: "牛街庄-朱家村",
+      status:'下行',
+      dotType:'middle',
+      dot: ["46%", "58%"]
+    },
+    {
+      dotId: "16",
+      title: "朱家村",
+      status:'下行',
+      dotType:'common',
+      dot: ["49.3%", "59.5%"]
+    },
+    {
+      dotId: "16",
+      title: "朱家村-玉缘路",
+      status:'下行',
+      dotType:'middle',
+      dot: ["51.4%", "59.6%"]
+    },
+    {
+      dotId: "17",
+      title: "玉缘路",
+      status:'下行',
+      dotType:'common',
+      dot: ["53.7%", "59.2%"]
+    },
+    {
+      dotId: "17",
+      title: "玉缘路-广卫",
+      status:'下行',
+      dotType:'middle',
+      dot: ["56.2%", "57.6%"]
+    },
+    {
+      dotId: "18",
+      title: "广卫",
+      status:'下行',
+      dotType:'common',
+      dot: ["59.7%", "58.4%"]
+    },
+    {
+      dotId: "18",
+      title: "广卫-塔密",
+      status:'下行',
+      dotType:'middle',
+      dot: ["61.4%", "59.2%"]
+    },
+    {
+      dotId: "19",
+      title: "塔密",
+      status:'下行',
+      dotType:'common',
+      dot: ["64%", "59.3%"]
+    },
+    {
+      dotId: "19",
+      title: "塔密-斗南",
+      status:'下行',
+      dotType:'middle',
+      dot: ["69.4%", "60.5%"]
+    },
+    {
+      dotId: "20",
+      title: "斗南",
+      status:'下行',
+      dotType:'common',
+      dot: ["75.2%", "60.8%"]
+    },
+    {
+      dotId: "20",
+      title: "斗南-金桂街",
+      status:'下行',
+      dotType:'middle',
+      dot: ["76.4%", "60.9%"]
+    },
+    {
+      dotId: "21",
+      title: "金桂街",
+      status:'下行',
+      dotType:'common',
+      dot: ["77%", "60.1%"]
+    },
+    {
+      dotId: "21",
+      title: "金桂街-梅子村",
+      status:'下行',
+      dotType:'middle',
+      dot: ["79%", "59%"]
+    },
+    {
+      dotId: "22",
+      title: "梅子村",
+      status:'下行',
+      dotType:'common',
+      dot: ["81.4%", "59.8%"]
+    },
+    {
+      dotId: "22",
+      title: "梅子村-古城",
+      status:'下行',
+      dotType:'middle',
+      dot: ["82.9%", "61%"]
+    },
+    {
+      dotId: "23",
+      title: "古城",
+      status:'下行',
+      dotType:'common',
+      dot: ["84.8%", "61.9%"]
+    },
+    {
+      dotId: "23",
+      title: "古城-可乐村",
+      status:'下行',
+      dotType:'middle',
+      dot: ["86.2%", "62.8%"]
+    },
+    {
+      dotId: "24",
+      title: "可乐村",
+      status:'下行',
+      dotType:'common',
+      dot: ["88.2%", "63.2%"]
+    },
+    {
+      dotId: "24",
+      title: "可乐村-祥丰街",
+      status:'下行',
+      dotType:'middle',
+      dot: ["91%", "63.9%"]
+    },
+    {
+      dotId: "25",
+      title: "祥丰街",
+      status:'下行',
+      dotType:'common',
+      dot: ["94%", "64.8%"]
+    },
+    {
+      dotId: "25",
+      title: "祥丰街-牛头山",
+      status:'下行',
+      dotType:'middle',
+      dot: ["96%", "69%"]
+    },
+    {
+      dotId: "26",
+      title: "牛头山",
+      status:'下行',
+      dotType:'common',
+      dot: ["95.6%", "71.8%"]
+    },
+    {
+      dotId: "27",
+      title: "联大街",
+      status:'下行',
+      dotType:'common',
+      dot: ["94%", "77%"]
+    },
+    {
+      dotId: "28",
+      title: "吴家营",
+      status:'下行',
+      dotType:'common',
+      dot: ["91.8%", "81.9%"]
+    },
+    {
+      dotId: "29",
+      title: "昆明南",
+      status:'下行',
+      dotType:'common',
+      dot: ["89.6%", "86%"]
+    }],
 };
 export default common;
 

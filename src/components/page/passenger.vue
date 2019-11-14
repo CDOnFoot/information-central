@@ -53,15 +53,21 @@
 
         if(this.visualTempList){
           this.currentMB = this.visualTempList.mb.templateNum;
+          console.log(this.currentMB);
+
         }
         this.menuTempId = this.menuId;
       },
-      activated(){
-        console.log(this.menuId);
-      },
+      // activated(){
+      //   console.log(this.menuId);
+      // },
       mounted() {
-        this.currentMB = this.mbId;
-        // console.log(this.currentMB);
+        // this.currentMB = this.mbId;
+        console.log(this.currentMB);
+        var routerVal = this.$router.currentRoute.path;
+        console.log(routerVal)
+        this.$router.push('/home/passenger');
+        
       },
       methods:{
         // 获取从子组件MB传值 模版可视化内容信息

@@ -16,12 +16,14 @@
 
     //配置信息
     var useStaging = false;
-    // var host = useStaging ? 'http://10.66.1.102:28070':'http://10.66.1.192:28070';
-
-    // var host = useStaging ? 'http://10.66.1.102:28070':'http://10.28.3.81:28070';
     var host = useStaging ? 'http://10.66.1.102:28070':'http://10.66.1.160:28070';
-    // var host = useStaging ? 'http://10.66.1.102:28070':'http://10.66.1.102:28070';
 
+    // websocket配置信息/url+user/id+token
+    var websocketHost = useStaging ? 'ws://10.66.1.160:28070/subway/info/ws/':'ws://10.66.1.160:28070/subway/info/ws/';
+
+    // var host = useStaging ? 'http://10.66.1.102:28070':'http://10.66.1.192:28070';
+    // var host = useStaging ? 'http://10.66.1.102:28070':'http://10.28.3.81:28070';
+    // var host = useStaging ? 'http://10.66.1.102:28070':'http://10.66.1.102:28070';
     // var host = useStaging ? 'http://10.66.1.102:28070':'http://10.66.11.144:28070';
 
     var self = this;
@@ -45,8 +47,6 @@
             custom_token: Cookies.get("dvptToken"),
             'content-Type': "application/x-www-form-urlencoded;charset=utf-8;",
             "Access-Control-Allow-Origin":"*",
-            // "Access-Control-Allow-Headers" : "Content-Type"
-            
           };
         }
       }
@@ -110,7 +110,7 @@
       } else {
         err.message = "连接到服务器失败";
       }
-      message.error(err.message,3);
+      // message.error(err.message,3);
       // 错误提示,记得引入message
       return Promise.resolve(err.response);
     });
@@ -132,10 +132,10 @@
       // 如果code异常(这里已经包括网络错误，服务器错误，后端抛出的错误)，可以弹出一个错误提示，告诉用户
       if (res.status === -404) {
         // console.log(res.msg);
-        message.error("连接服务器失败，请重新登录");
-        // router.push({
-        //   path: '/login' // 到登录页重新获取token
-        // });
+        // message.error("连接服务器失败，请重新登录");
+        router.push({
+          path: '/login' // 到登录页重新获取token
+        });
       }
       // if (!res.data && (res.data.msg != "success" || res.data.msg != "SUCCESS")) {
       //    console.log(res.data.msg)
@@ -174,6 +174,8 @@
     };
 
     export default {
+      // websocket配置信息
+      websocketHost,
       //  post
       post (url, params) {
         return axios({

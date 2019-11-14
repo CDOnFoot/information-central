@@ -25,7 +25,7 @@
               车次号：{{item.subwayNum}}
             </div>
           </div>
-          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -34,7 +34,7 @@
 import echarts from "echarts";
 import Cookies from 'js-cookie';
 export default {
-  name: "MC08",
+  name: "MC04",
   data() {
     return {
       mcList: "",
@@ -65,7 +65,6 @@ export default {
     // console.log(this.wayList)
     var self = this;
     this.mcList = this.$common.mcList;
-
     // this.showData();
     // this.pushDataInfo();
   },
@@ -80,7 +79,8 @@ export default {
     // }, 1000 * 30);
   },
   destroyed: function() {
-   
+    //页面销毁时关闭长连接
+    this.websocketclose();
   },
   beforeDestroy () {
      //页面销毁时关闭长连接
@@ -110,7 +110,8 @@ export default {
 // 初始化websocket连接数据
     initWebSocket:function(){
       // console.log(this.userId);
-      const wsuri = "ws://10.66.1.160:28070/subway/info/ws/{"+this.userId+"}/{"+this.customToken+"}";//ws地址
+      const wsuri = this.$http.websocketHost+this.userId+"/"+this.customToken;//ws地址
+      console.log(wsuri);
       this.websocket = new WebSocket(wsuri);
       this.websocket.onopen = this.websocketonopen;
       this.websocket.onerror = this.websocketonerror;
@@ -136,12 +137,13 @@ export default {
     },
     websocketsend(agentData){
       //数据发送
-      console.log("WebSocket数据发送消息中:");
+      // console.log("WebSocket数据发送消息中:");
       this.websocket.send(agentData);
     },
     websocketclose(e){  
       //关闭
       this.websocket.close();
+      console.log("关闭websocket.")
 
     },
     showData(redata){
@@ -265,7 +267,6 @@ export default {
 .subway-item{
   width: 0.8%;
   height: 0.8%;
-  /* background: #ffffff; */
   border-radius: 100%;
 }
 .runway-item{
@@ -277,9 +278,10 @@ export default {
   background: #ff0000b0;
   border: solid 1px #ffffff;
   margin-top: -31%;
+  z-index: 299;
   cursor: pointer;
+  position: relative;
 }
-
 a-popover{
   background: #3467c5;
 }

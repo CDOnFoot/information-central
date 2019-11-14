@@ -76,7 +76,8 @@ export default {
               self.ontimerate = res.data.data.flows_in_total
               self.fullfillment = res.data.data.flows_out_total
             }else{
-              self.$message.error(res.data.msg);
+                // this.$message.error(res.data.msg);
+              console.log(res.data.msg);
             }
           }
         });

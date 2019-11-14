@@ -73,7 +73,8 @@ export default {
             self.timeStamp = res.data.data.date;
             callback(res.data.data, type);
           } else {
-            this.$message.error(res.data.msg);
+             // this.$message.error(res.data.msg);
+              console.log(res.data.msg);
           }
         }
       });

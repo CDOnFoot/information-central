@@ -53,19 +53,11 @@
 
         if(this.visualTempList){
           this.currentMB = this.visualTempList.mb.templateNum;
-          console.log(this.currentMB);
-
         }
         this.menuTempId = this.menuId;
       },
-      // activated(){
-      //   console.log(this.menuId);
-      // },
       mounted() {
         // this.currentMB = this.mbId;
-        console.log(this.currentMB);
-        var routerVal = this.$router.currentRoute.path;
-        console.log(routerVal)
         this.$router.push('/home/passenger');
         
       },

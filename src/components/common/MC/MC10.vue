@@ -71,7 +71,8 @@ export default {
             let arr = []; 
             callback(res.data.data, type);
           } else {
-            this.$message.error(res.data.msg);
+              // this.$message.error(res.data.msg);
+              console.log(res.data.msg);
           }
         }
       });

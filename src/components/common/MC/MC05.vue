@@ -34,23 +34,20 @@ export default {
     var self = this;
     this.mcList = this.$common.mcList;
 
-   self.initChart('init');
-  //  clearInterval(this.timeTimeOut);
-  //   self.timeTimeOut = setTimeout(function() {
-  //     self.initChart('update');
-  //   }, 20);
+    self.initChart('init');
+    window.clearInterval(this.dataRef)
 
-  var timeStamp=1572980400000;  //11月6日凌晨3点的毫秒数
+    var timeStamp=1573066800000;  //11月7日凌晨3点的毫秒数
     var dayMins = 86400000;   //每天的毫秒数
-    var setIntervalMins = 1000*60  //定时器刷新的时间间隔
-    setInterval(()=>{
+    var setIntervalMins = 1000*30  //定时器刷新的时间间隔
+    self.dataRef = setInterval(()=>{
       let currwntTime = Date.now();
       let minsMore = (currwntTime-timeStamp)%dayMins
       if(minsMore>0 && minsMore<=setIntervalMins){  //(当前时间-固定时间)对每日毫秒数 取余
-        console.log("凌晨三点定时刷新数据")
         self.initChart('update');
       }
     },setIntervalMins)
+
 
   },
   created() {
@@ -79,7 +76,8 @@ export default {
           if (res.data.code === "0") {
             callback(res.data.data,type)
           }else{
-            this.$message.error(res.data.msg);
+             // this.$message.error(res.data.msg);
+              console.log(res.data.msg);
           }
         }
       });

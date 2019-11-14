@@ -87,7 +87,6 @@ import sha256 from "js-sha256";
           if (!err) {
             self.userName = values.userName;
             self.userPassword = values.password;
-          
             param={
               loginname:self.userName,
               password:sha256(self.userPassword)
@@ -111,6 +110,8 @@ import sha256 from "js-sha256";
                   self.$message.error(res.data.msg);
                   self.loadFlag = false;
                 }
+              }else{
+                  self.loadFlag = false;
               }
             });
         }else{

@@ -11,16 +11,20 @@
           <div class="runway">
             <div :key="index" v-for="(item,index) in noticeList" 
             :style="{position:'absolute',top:item.dot[0],left:item.dot[1]}">
-              <a-popover placement="topLeft" arrowPointAtCenter class="popover-item">
+             <div :id="'runwayItem'+index" class="runway-item" :class="item.loaddegree===0?'dot-purpuse':item.loaddegree===1?'dot-green':item.loaddegree===2?'dot-yellow':item.loaddegree===3?'dot-red':'dot-white'" ></div>
+              <input type="hidden" :value="item.loaddegree">
+             <!-- @click="clickDot(index)" -->
+              <!-- <a-popover placement="topLeft" arrowPointAtCenter class="popover-item">
               <template slot="content">
-                <!-- <p>{{'2019-10-29 19:00:00'}}</p> -->
                 <p>当前车次：{{item.subwayNum}}</p>
                 <p>车次类型：{{item.type}}</p>
-                <!-- <p>前方到站：{{'xxxx站'}}</p> -->
               </template>
               <span slot="title">{{item.dotName}}</span>
               <a-button class="runway-item"></a-button>
-            </a-popover>
+            </a-popover>-->
+            <!-- <div class="runway-content" :id="'runwayContent'+index" :class="runwayIndex===index?'runwayActive':''">
+              车次号：{{item.subwayNum}}
+            </div> -->
           </div>
           </div>
       </div>
@@ -61,6 +65,14 @@ export default {
   mounted() {
     var self = this;
     this.mcList = this.$common.mcList;
+    this.noticeList = JSON.parse(JSON.stringify(self.$common.hardList));
+
+    this.initPassengerLoad();
+
+    clearInterval(this.timeTimeOut);
+    self.timeTimeOut = setTimeout(function() {
+      self.initPassengerLoad();
+    }, 5 * 1000 * 60);
   },
   created() {
   },
@@ -70,6 +82,40 @@ export default {
   },
   methods: {
 
+    // 初始化列车负载图信息
+    initPassengerLoad:function(){
+      let self = this;
+      this.initPassenger(function(data){
+        self.passengerLoad(data);
+      })
+    },
+    initPassenger:function(callback){
+      let self = this;
+      let param={
+        userId:this.userId,
+        custom_token:this.customToken
+        };
+      this.$http.get(self.$api.passengerLoadHotspots, param).then(res =>{
+        //调取数据成功
+        if(res){
+          // console.log(res);
+          if (res.data.code === "0") {
+            callback(res.data.data)
+          }else{
+             // this.$message.error(res.data.msg);
+              console.log(res.data.msg);
+          }
+        }
+      });
+    },
+    passengerLoad:function(data){
+      // console.log(data);
+      
+      let self = this;
+       data.map((item,index)=>{
+         self.$set(self.noticeList[index],'loaddegree',item.loaddegree);
+       });
+    }
   }
 };
 </script>
@@ -117,23 +163,59 @@ export default {
 .subway-item{
   width: 0.8%;
   height: 0.8%;
-  background: #ffffff;
+  /* background: #ffffff; */
   border-radius: 100%;
 }
 .runway-item{
   padding: 0;
-  height: 10px;
+  height: 20px;
   border-radius: 100%;
-  width: 10px;
+  width: 20px;
   margin-left: -31%;
-  background: #ff00009c;
+  background: #ff0000b0;
+  border: solid 1px #ffffff;
   margin-top: -31%;
+  z-index: 299;
+  cursor: pointer;
+  position: relative;
 }
 a-popover{
   background: #3467c5;
 }
- .mc-content{
-    width: 100%;
-    height: 100%;
-  }
+.mc-content{
+  width: 100%;
+  height: 100%;
+}
+.dot-red{
+  background: #ff0100 !important;
+  box-shadow: #ff0100b0 0 0 20px 12px;
+}
+.dot-yellow{
+  background: #fcff00 !important;
+  box-shadow: #fcff00b0 0 0 20px 12px;
+}
+.dot-purpuse{
+  background: #ff00ff !important;
+  box-shadow: #ff00ffb0 0 0 20px 12px;
+
+}
+.dot-blue{
+  background: #02fffe !important;
+  box-shadow: #02fffeb0 0 0 20px 12px;
+
+}
+.dot-green{
+  background: #00ff02 !important;
+  box-shadow: #00ff02b0 0 0 20px 12px;
+}
+.dot-white{
+  background: #ffffff !important;
+  box-shadow: #ffffffb0 0 0 20px 12px;
+
+}
+.dot-heaven{
+  background: #0507ff !important;
+  box-shadow: #0507ffb0 0 0 20px 12px;
+
+}
 </style>

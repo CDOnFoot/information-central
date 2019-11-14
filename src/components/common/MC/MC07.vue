@@ -79,7 +79,8 @@ export default {
               self.ontimerate = self.changeData(res.data.data.ontimerate)
               self.fullfillment = self.changeData(res.data.data.fullfillment)
             }else{
-              self.$message.error(res.data.msg);
+              // this.$message.error(res.data.msg);
+              console.log(res.data.msg);
             }
           }
         });

@@ -49,7 +49,7 @@ export default {
       let minsMore = (currwntTime-timeStamp)%dayMins
       if(minsMore>0 && minsMore<=setIntervalMins){  //(当前时间-固定时间)对每日毫秒数 取余
         // console.log("15分钟定点刷新")
-        self.initChart("init");
+        self.initChart("update");
       }
     },setIntervalMins)
 
@@ -207,19 +207,9 @@ export default {
     refreshData(paramData) {
       let self = this;
       let option = self.mc.getOption();
-      console.log(paramData);
-      console.log(option.series);
-      var serLast = option.series[option.series.length - 1];
-      option.series = [serLast];
-      option.dataset[0].source = paramData;
-      for (var i = 1; i < paramData.length; i++) {
-        option.series.unshift({
-          type: "line",
-          smooth: true,
-          seriesLayoutBy: "row"
-        });
-      }
-      console.log(option.series);
+      option.xAxis[0].data = paramData.stationName;
+      option.series[0].data = paramData.flowsin;
+      option.series[1].data = paramData.flowsout;
       self.mc.setOption(option);
     }
   }

@@ -61,6 +61,8 @@ export default {
    var self = this;
     this.mcList = this.$common.mcList;
     this.initSeniority();
+    window.clearInterval(this.dataRef)
+
     var timeStamp=1573066800000;  //11月7日凌晨3点的毫秒数
     var dayMins = 86400000;   //每天的毫秒数
     var setIntervalMins = 1000*30  //定时器刷新的时间间隔

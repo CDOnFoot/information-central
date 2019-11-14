@@ -11,7 +11,7 @@
           <div class="runway">
             <div :key="index" v-for="(item,index) in noticeList" 
             :style="{position:'absolute',top:item.dot[0],left:item.dot[1]}">
-             <div :id="'runwayItem'+index" class="runway-item" :class="item.loaddegree===0?'dot-purpuse':item.loaddegree===1?'dot-green':item.loaddegree===2?'dot-yellow':item.loaddegree===3?'dot-red':'dot-white'" ></div>
+             <div v-show="item.loaddegree!=-100" :id="'runwayItem'+index" class="runway-item" :class="item.loaddegree===0?'dot-purpuse':item.loaddegree===1?'dot-green':item.loaddegree===2?'dot-yellow':item.loaddegree===3?'dot-red':'dot-white'" ></div>
               <input type="hidden" :value="item.loaddegree">
              <!-- @click="clickDot(index)" -->
               <!-- <a-popover placement="topLeft" arrowPointAtCenter class="popover-item">
@@ -70,9 +70,9 @@ export default {
     this.initPassengerLoad();
 
     clearInterval(this.timeTimeOut);
-    self.timeTimeOut = setTimeout(function() {
+    self.timeTimeOut = setInterval(() => {
       self.initPassengerLoad();
-    }, 5 * 1000 * 60);
+    },5 * 1000 * 60);
   },
   created() {
   },
@@ -109,7 +109,7 @@ export default {
       });
     },
     passengerLoad:function(data){
-      // console.log(data);
+      console.log(data);
       
       let self = this;
        data.map((item,index)=>{

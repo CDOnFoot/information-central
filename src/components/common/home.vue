@@ -559,11 +559,6 @@
           this.menuIndex = param;
           self.$common.setCookie('menuIndex',this.menuIndex,24 * 60 * 30);
           this.menuId = this.menuList[param].menuNum;
-          // if(param!=2){
-          //   this.$message.warning('功能暂未开启');
-          // }else{
-
-            console.log(this.menuId);
             new Promise((resolve,reject)=>{
               let paramList={
                 userNum: self.$common.getCookie('dvptId'),
@@ -587,16 +582,12 @@
               });
             }).then(()=>{
               self.setFlag = false;
-              // console.log('/home/'+self.menuList[param].key);
               setTimeout(()=>{
                 self.loadFlag = false;
               },1000);
               self.$router.push('/home/'+self.menuList[param].key);
           
             })
-
-          // this.$router.push({path: '/home/'+this.menuList[param].key, query: {flag: false}});
-          // }
         }
       },
       getCurrentRoute:function(routerVal){

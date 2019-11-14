@@ -31,7 +31,6 @@
           this.setFlag = val;
         },
         mbId: function (val) {
-          console.log(val);
           this.currentMB = val;
         },
         menuId:function(val){

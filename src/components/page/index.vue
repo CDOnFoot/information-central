@@ -55,9 +55,6 @@
 
       },
       mounted() {
-        console.log(this.currentMB);
-        var routerVal = this.$router.currentRoute.path;
-        console.log(routerVal)
         this.$router.push('/home/index');
 
       },

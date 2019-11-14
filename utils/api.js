@@ -44,4 +44,6 @@ export default {
 
   getpassengerflowrealtime:'/passenger/getpassengerflowrealtime',   //   各站实时客流
 
+  passengerLoadHotspots:'/passenger/passengerLoadHotspots',   //   列车负载信息
+
 }

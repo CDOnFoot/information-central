@@ -68,7 +68,8 @@ export default {
           if (res.data.code === "0") {
             callback(res.data.data);
           } else {
-            this.$message.error(res.data.msg);
+              // this.$message.error(res.data.msg);
+              console.log(res.data.msg);
           }
         }
       });

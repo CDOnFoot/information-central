@@ -39,13 +39,13 @@ export default {
     this.initChart('init')
     var timeStamp=1573066800000;  //11月7日凌晨3点的毫秒数
     var dayMins = 86400000;   //每天的毫秒数
-    var setIntervalMins = 1000*30  //定时器刷新的时间间隔
-    window.clearInterval(this.dataRef)
+    var setIntervalMins = 1000*30;  //定时器刷新的时间间隔
+    window.clearInterval(this.dataRef);
     self.dataRef = setInterval(()=>{
       let currwntTime = Date.now();
-      let minsMore = (currwntTime-timeStamp)%dayMins
+      let minsMore = (currwntTime-timeStamp)%dayMins;
       if(minsMore>0 && minsMore<=setIntervalMins){  //(当前时间-固定时间)对每日毫秒数 取余
-        self.initChart('init')
+        self.initChart('init');
       }
     },setIntervalMins)
   },
@@ -78,7 +78,9 @@ export default {
                 arr.unshift(res.data.data.timeList)
               callback(arr,type)
             }else{
-              this.$message.error(res.data.msg);
+              // this.$message.error(res.data.msg);
+              console.log(res.data.msg);
+
             }
           }
         });

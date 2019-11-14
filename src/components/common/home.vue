@@ -134,13 +134,44 @@
       var routerVal = this.$router.currentRoute.path;
       this.getCurrentRoute(routerVal);
     },
-    // beforeRouteUpdate (to, from, next) {
+    beforeRouteUpdate (to, from, next) {
+      let self = this;
+      var routerVal = to.matched[1].path;
+      new Promise((resolve,reject)=>{
+        self.menuList.some((item,index)=>{
+          if('/home/'+item.key === routerVal){
+            self.menuId = item.menuNum;
+            self.menuIndex = Number((item.id)-1);
+            // console.log(self.menuId);
+            next();
+            return false;
+          }
+        });
+        let paramList={
+          userNum: self.$common.getCookie('dvptId'),
+          menuNum: self.menuId
+          };
+        self.$http.post(self.$api.getUserVisualization, paramList).then(res =>{
+          //调取数据成功
+          if(res.data){
+            if (res.data.code === "0") {
+              self.visualList = JSON.parse(JSON.stringify(res.data.data.menuList));
+              self.visualHomeList = JSON.parse(JSON.stringify(res.data.data.menuList));
+              self.visualParamList = JSON.parse(JSON.stringify(res.data.data.menuList));
+              self.mbId = this.visualList.mb.templateNum;
+              resolve();
+            }
+          }
+        });
+      }).then(()=>{
+        self.setFlag = false;
+      })
     //   if(to.matched[1].path=='/home/index'){
     //       next();
     //   }else{
     //         this.$message.warning('功能暂未开启');
     //   }
-    // },
+    },
     // activated(){
     //   console.log(this.menuId);
     // },
@@ -219,7 +250,7 @@
       },
       // 由子界面子路由传值结果
       uploadSaveSetMsg:function(msgList){
-        console.log('由子界面子路由传值结果 msg：',msgList);
+        // console.log('由子界面子路由传值结果 msg：',msgList);
         this.visualParamList = msgList;
       },
       // 查看菜单栏数据信息
@@ -377,7 +408,7 @@
       },
       saveSetMsg:function(){
         let self = this;
-        console.log(JSON.stringify(this.visualParamList) == JSON.stringify(this.visualList));
+        // console.log(JSON.stringify(this.visualParamList) == JSON.stringify(this.visualList));
         if(JSON.stringify(this.visualParamList) == JSON.stringify(this.visualList)){
           this.$info({
             title: '提醒',
@@ -393,11 +424,11 @@
             okType: 'danger',
             cancelText: '取消',
             onOk() {
-              console.log('保存可视化布局信息');
+              // console.log('保存可视化布局信息');
               self.updateUserContentInfo();
             },
             onCancel() {
-              console.log('确定取消保存');
+              // console.log('确定取消保存');
             },
           });
         }

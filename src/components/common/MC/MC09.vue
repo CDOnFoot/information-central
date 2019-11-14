@@ -234,6 +234,9 @@ canvas {
   width: 1000px;
   height: 300px;
   /* margin: 1% 0 0 0; */
+
+  /* width: 85rem; */
+  /* height:25rem; */
 }
 .timeStamp {
   position: absolute;

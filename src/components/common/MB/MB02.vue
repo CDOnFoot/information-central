@@ -259,9 +259,9 @@
             let self = this;
             this.confirmLoading = true;
             let flag = false;
-            if(this.mcTempIndex!='' && this.mcTempIndex!=undefined && this.mcTempIndex!=null){
+           if(!(this.mcTempIndex==='') && this.mcTempIndex!=undefined && this.mcTempIndex!=null){
                 if(self.mcList[self.mcTempIndex].contentIndex === 1){
-                  if(this.visibleIndex !=3){
+                  if(this.visibleIndex !=0){
                       self.$info({
                           title: '提示',
                           content: '所选模块内容为主要指标，不可保存至次要指标区域内，请重新选择',
@@ -272,7 +272,7 @@
                     this.saveHandleOk();
                   }
                 }else{
-                  if(this.visibleIndex ===3){
+                  if(this.visibleIndex ===0){
                       self.$info({
                           title: '提示',
                           content: '所选模块内容为次要指标，不可保存至主要指标区域内，请重新选择',

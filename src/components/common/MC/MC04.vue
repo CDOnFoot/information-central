@@ -257,7 +257,8 @@ export default {
   left: 48.8%;
   top: 50.4%;
   background: url("../../../assets/img/map4.png") no-repeat;
-  background-size: cover;
+  /* background-size: cover; */
+  background-size: 100% 100%;
   transform: translate(-50%,-50%);
 }
 .subway-item:hover{

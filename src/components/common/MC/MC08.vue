@@ -153,7 +153,7 @@ export default {
   left: 48.8%;
   top: 50.4%;
   background: url("../../../assets/img/subway-bg.png") no-repeat;
-  background-size: cover;
+  background-size: 100% 100%;
   transform: translate(-50%,-50%);
 }
 .subway-item:hover{

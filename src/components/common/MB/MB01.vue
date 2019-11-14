@@ -305,8 +305,7 @@
             let self = this;
             this.confirmLoading = true;
             let flag = false;
-            console.log(self.mcTempIndex);
-            if(this.mcTempIndex!='' && this.mcTempIndex!=undefined && this.mcTempIndex!=null){
+            if(!(this.mcTempIndex==='') && this.mcTempIndex!=undefined && this.mcTempIndex!=null){
               if(self.mcList[self.mcTempIndex].contentIndex === 1){
                 if(this.visibleIndex !=3){
                     self.$info({

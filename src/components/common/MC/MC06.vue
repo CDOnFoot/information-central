@@ -124,16 +124,26 @@ export default {
 }
 
 .table-content{
-  position: relative;
+  /* position: relative;
   min-width: 470px;
   min-height: 290px;
-  overflow: hidden;
+  overflow: hidden; */
+
+    position: relative;
+    min-width: 19rem;
+    min-height: 24rem;
+    overflow: hidden;
 }
 .table-bg{
-  position: absolute;
+  /* position: absolute;
   left: 0%;
   top: 4%;
-  width: 100%;
+  width: 100%; */
+
+    position: absolute;
+    left: 7%;
+    top: 23%;
+    width: 79%;
 
 }
 .timeStamp {
@@ -145,9 +155,16 @@ export default {
   text-align: right;
 }
 .table-main{
-  position: absolute;
+  /* position: absolute;
   width: 100%;
-  top: 20%;
+  top: 23%;
+  left: 7%; */
+
+
+  position: absolute;
+  width: 79%;
+  top: 23%;
+  height: auto;
   left: 7%;
 }
 

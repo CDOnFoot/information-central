@@ -281,8 +281,8 @@ canvas {
   left: -6px !important;
 }
 .main-id {
-  width: 470px;
-  height: 270px;
+  width: 40rem;
+  height: 22rem;
 }
 .timeStamp{
   position: absolute;

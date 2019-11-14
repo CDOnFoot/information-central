@@ -131,11 +131,11 @@
     function checkCode (res) {
       // 如果code异常(这里已经包括网络错误，服务器错误，后端抛出的错误)，可以弹出一个错误提示，告诉用户
       if (res.status === -404) {
-        // console.log(res.msg);
+        console.log(res.msg);
         // message.error("连接服务器失败，请重新登录");
-        router.push({
-          path: '/login' // 到登录页重新获取token
-        });
+        // router.push({
+        //   path: '/login' // 到登录页重新获取token
+        // });
       }
       // if (!res.data && (res.data.msg != "success" || res.data.msg != "SUCCESS")) {
       //    console.log(res.data.msg)

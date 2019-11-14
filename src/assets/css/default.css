@@ -91,6 +91,7 @@
     color: #FFFFFF;
     transform: translateX(-50%);
     border-radius: 10px;
+    z-index: 199;
   }
   .bg-main{
     position: absolute;
@@ -348,6 +349,7 @@
     }
     .ant-table-small > .ant-table-content > .ant-table-body > table > .ant-table-tbody > tr > td{
       padding: 4px 8px !important;
+      text-align: center;
     }
     .ant-table-tbody > tr > td {
       border-bottom: none !important;     
@@ -389,7 +391,7 @@
     line-height: 24px;
     top: 9%;
     color: #ffffff;
-    font-size: 16px;
+    font-size: 1.2rem;
   }
   .load-content{
     position: absolute;
@@ -413,11 +415,15 @@
     outline: none;
   }
   .register-name {
-    font-size: 16px;
+    font-size: 1.2rem;
     color: #ffffff;
     margin-right: 10px;
-    line-height: 30px;
+    line-height: 2rem;
 }
+  svg.icon{
+    width: 2rem;
+    height: 2rem;
+  }
   .user-register{
     display: flex;
     align-items: center;
@@ -485,8 +491,11 @@
     height: 100%;
   }
   .ant-spin-nested-loading > div > .ant-spin .ant-spin-dot {
-    top: 33% !important;
-    left: 44% !important;
+    /* top: 33% !important;
+    left: 44% !important; */
+
+    top: 45% !important;
+    left: 50% !important;
 }
 .borde{
   font-weight: 700;
@@ -498,4 +507,10 @@
   font-size: 16px;
   padding-left: 12px;
   width: 60%;
+}
+.ant-table{
+  font-size: 1rem;
+}
+.ant-spin-nested-loading > div > .ant-spin {
+  height: 16rem;
 }

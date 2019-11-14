@@ -109,9 +109,10 @@ export default {
   height: 80%;
   width: 40%;
   background: url("../../../assets/img/dot-bg.png") no-repeat;
-  font-size: 26px;
+  font-size: 2rem;
   padding: 12% 10%;
   text-align: center;
+  background-size: contain;
 }
 
 .timeStamp {

@@ -5,7 +5,7 @@
       <div class="borde-main">{{mcTitle}}</div>
       <div :id="mcId" class="main-id">
         <div class="subway"></div>
-          <div class="subway-item" :key="index" v-for="(item,index) in wayList" :title="item.title" 
+          <div class="subway-item" :key="index" v-for="(item,index) in hardList" :title="item.title" 
           :style="{position:'absolute',top:item.dot[0],left:item.dot[1]}">
           </div>
           <div class="runway">
@@ -36,7 +36,7 @@ export default {
     return {
       mcList: "",
       n: 0,
-      wayList: this.$common.wayList,
+      hardList: this.$common.hardList,
       runList: this.$common.runList,
       noticeList: [],  //页面所有车的点图集合
       tempNoticeList:{}, // 最新消息的数据
@@ -117,7 +117,7 @@ export default {
 .subway-item{
   width: 0.8%;
   height: 0.8%;
-  /* background: #ffffff; */
+  background: #ffffff;
   border-radius: 100%;
 }
 .runway-item{

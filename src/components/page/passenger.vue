@@ -1,8 +1,6 @@
 <!--客流分析信息-->
 <template>
-    <keep-alive>
-        <component :is="currentMB" :setFlag="setFlag" :menuTempId= "menuTempId" @saveSetMessage="saveSetMsg" :visualTempList="visualTempList" class="mb-content"></component>
-    </keep-alive>
+    <component :is="currentMB" :setFlag="setFlag" :menuTempId= "menuTempId" @saveSetMessage="saveSetMsg" :visualTempList="visualTempList" class="mb-content"></component>
 </template>
 <script>
     import MB01 from '../../components/common/MB/MB01';
@@ -57,6 +55,9 @@
           this.currentMB = this.visualTempList.mb.templateNum;
         }
         this.menuTempId = this.menuId;
+      },
+      activated(){
+        console.log(this.menuId);
       },
       mounted() {
         this.currentMB = this.mbId;

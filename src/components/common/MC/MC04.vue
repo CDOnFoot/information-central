@@ -228,10 +228,10 @@ export default {
   color: #ffffff;
   border-left: #3467c5 solid 4px;
   position: absolute;
-  top: 4%;
-  right: 6%;
+  top: 25px;
+  right: 45px;
   font-size: 16px;
-  padding-left: 3%;
+  padding-left: 12px;
   z-index: 99;
 }
 .main {

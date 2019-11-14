@@ -1,8 +1,6 @@
 <!--首页信息-->
 <template>
-    <!-- <keep-alive> -->
-        <component :is="currentMB" :setFlag="setFlag" :menuTempId= "menuTempId" @saveSetMessage="saveSetMsg" :visualTempList="visualTempList" class="mb-content"></component>
-    <!-- </keep-alive> -->
+    <component :is="currentMB" :setFlag="setFlag" :menuTempId= "menuTempId" @saveSetMessage="saveSetMsg" :visualTempList="visualTempList" class="mb-content"></component>
 </template>
 <script>
     import MB01 from '../../components/common/MB/MB01';
@@ -57,6 +55,9 @@
       },
       mounted() {
 
+      },
+      activated(){
+        console.log(this.menuId);
       },
       methods:{
         // 获取从子组件MB传值 模版可视化内容信息

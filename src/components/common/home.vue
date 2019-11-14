@@ -143,7 +143,7 @@
     //   }
     // },
     activated(){
-
+      console.log(this.menuId);
     },
     mounted() {
       let self = this;

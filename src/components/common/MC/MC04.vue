@@ -299,25 +299,25 @@ a-popover{
   z-index: 9;
 }
 .dot-red{
-  background: #ff0100b0 !important;
+  background: #ff3e4db0 !important;
 }
 .dot-yellow{
-  background: #fcff00b0 !important;
+  background: #fff672b0 !important;
 }
 .dot-purpuse{
-  background: #ff00ffb0 !important;
+  background: #ff58a3b0 !important;
 }
 .dot-blue{
-  background: #02fffeb0 !important;
+  background: #75feffb0 !important;
 }
 .dot-green{
-  background: #00ff02b0 !important;
+  background: #9bff79b0 !important;
 }
 .dot-white{
   background: #ffffffb0 !important;
 }
 .dot-heaven{
-  background: #0507ffb0 !important;
+  background: #7274ffb0 !important;
 }
 .runwayActive{
   z-index: 99;

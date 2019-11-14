@@ -187,26 +187,26 @@ a-popover{
   height: 100%;
 }
 .dot-red{
-  background: #ff0100 !important;
-  box-shadow: #ff0100b0 0 0 20px 12px;
+  background: #ff3e4d !important;
+  box-shadow: #ff3e4db0 0 0 20px 12px;
 }
 .dot-yellow{
-  background: #fcff00 !important;
-  box-shadow: #fcff00b0 0 0 20px 12px;
+  background: #fff672 !important;
+  box-shadow: #fff672b0 0 0 20px 12px;
 }
 .dot-purpuse{
-  background: #ff00ff !important;
-  box-shadow: #ff00ffb0 0 0 20px 12px;
+  background: #ff58a3 !important;
+  box-shadow: #ff58a3b0 0 0 20px 12px;
 
 }
 .dot-blue{
-  background: #02fffe !important;
-  box-shadow: #02fffeb0 0 0 20px 12px;
+  background: #75feff !important;
+  box-shadow: #75feffb0 0 0 20px 12px;
 
 }
 .dot-green{
-  background: #00ff02 !important;
-  box-shadow: #00ff02b0 0 0 20px 12px;
+  background: #9bff79 !important;
+  box-shadow: #9bff79b0 0 0 20px 12px;
 }
 .dot-white{
   background: #ffffff !important;
@@ -214,8 +214,8 @@ a-popover{
 
 }
 .dot-heaven{
-  background: #0507ff !important;
-  box-shadow: #0507ffb0 0 0 20px 12px;
+  background: #7274ff !important;
+  box-shadow: #7274ffb0 0 0 20px 12px;
 
 }
 </style>

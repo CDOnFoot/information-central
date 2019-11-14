@@ -927,14 +927,14 @@ var common = {
       title: "可乐村站",
       status: '上行',
       dotType: 'common',
-      dot: ["87.8%", "65.5%"]
+      dot: ["87.8%", "65%"]
     },
     {
       dotId: "25",
       title: "祥丰街站-可乐村站",
       status: '上行',
       dotType: 'middle',
-      dot: ["90.6%", "66%"]
+      dot: ["90.6%", "65%"]
     },
     {
       dotId: "25",

@@ -52,7 +52,7 @@
       <div class="mb02-right-top">
           <div class="right-sub">
             <img src="../../../assets/img/main-border-b.png" alt="" class="sub-bg">
-            <div class="hide-sub-right" v-show="setFlag">
+            <div class="hide-sub-right-t" v-show="setFlag">
                 <div class="sub-btn">
                   <div class="sub-btn-item" v-for="(item,index) in btnList" :key="index" :class="(index===0 || index===2)?'marginLeft':''">
                     <a-button size="small" class="item-btn" @click="mcChangeItem(1,index)" v-show="(index===1 && !visualList.mb.mk[1].mc.contentNum) || (index===1 && visualList.mb.mk[1].mc.contentNum) || (index===2 && visualList.mb.mk[1].mc.contentNum)">
@@ -69,7 +69,7 @@
         <div class="right-bottom-left">
           <div class="right-sub">
             <img src="../../../assets/img/sub-border-b.png" alt="" class="sub-bg">
-            <div class="hide-sub-right" v-show="setFlag">
+            <div class="hide-sub-right-bl" v-show="setFlag">
                 <div class="sub-btn">
                   <div class="sub-btn-item" v-for="(item,index) in btnList" :key="index" :class="(index===0 || index===2)?'marginLeft':''">
                       <a-button size="small" class="item-btn" @click="mcChangeItem(2,index)" v-show="(index===0 && !visualList.mb.mk[2].mc.contentNum) || (index===1 && visualList.mb.mk[2].mc.contentNum) || (index===2 && visualList.mb.mk[2].mc.contentNum)">
@@ -181,7 +181,7 @@
             title:'选择模块内容',
             visible: false,
             confirmLoading: false,
-            mcList:'',
+            mcList:[],
             mcIndex:0,
             mcTempIndex:'',
             visibleIndex:0,
@@ -256,29 +256,40 @@
             let self = this;
             this.confirmLoading = true;
             let flag = false;
-            if(self.mcList[self.mcTempIndex].contentIndex === 1){
-              if(this.visibleIndex !=3){
-                  self.$info({
-                      title: '提示',
-                      content: '所选模块内容为主要指标，不可保存至次要指标区域内，请重新选择',
-                      onOk() {},
-                    });
-                    self.confirmLoading = false;
-              }else{
-                this.saveHandleOk();
-              }
+            if(this.mcTempIndex!='' && this.mcTempIndex!=undefined && this.mcTempIndex!=null){
+                if(self.mcList[self.mcTempIndex].contentIndex === 1){
+                  if(this.visibleIndex !=3){
+                      self.$info({
+                          title: '提示',
+                          content: '所选模块内容为主要指标，不可保存至次要指标区域内，请重新选择',
+                          onOk() {},
+                        });
+                        self.confirmLoading = false;
+                  }else{
+                    this.saveHandleOk();
+                  }
+                }else{
+                  if(this.visibleIndex ===3){
+                      self.$info({
+                          title: '提示',
+                          content: '所选模块内容为次要指标，不可保存至主要指标区域内，请重新选择',
+                          onOk() {},
+                        });
+                        self.confirmLoading = false;
+                  }else{
+                    this.saveHandleOk();
+                  }
+                }
             }else{
-              if(this.visibleIndex ===3){
-                  self.$info({
-                      title: '提示',
-                      content: '所选模块内容为次要指标，不可保存至主要指标区域内，请重新选择',
-                      onOk() {},
-                    });
-                    self.confirmLoading = false;
-              }else{
-                this.saveHandleOk();
-              }
+              self.$info({
+                title: '提示',
+                content: '请先对模块内容进行选择',
+                onOk() {},
+              });
+              self.confirmLoading = false;
+
             }
+       
           },
           // 保存至选择项内操作信息
         saveHandleOk:function(){
@@ -380,9 +391,15 @@
           });
         },
         contentInfo:function(data){
-          this.mcList = data.records;
+          let self = this;
+          self.mcList= [];
+           data.records.map((item,index)=>{
+              if(item.contentIndex!=3){
+                self.mcList.push(item);
+              }
+          });
         },
-        },
+      },
         components:{
             MC01,
             MC02,

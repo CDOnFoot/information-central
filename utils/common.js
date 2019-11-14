@@ -187,7 +187,7 @@ var common = {
   // 关键指标配置信息
   keyVisualList:[
     {templateNum:'MB01',templateName:'模版一',keyTemp:'MK04',keyIndex:'3'},
-    {templateNum:'MB02',templateName:'模版二',keyTemp:'MK04',keyIndex:'3'},
+    {templateNum:'MB02',templateName:'模版二',keyTemp:'MK01',keyIndex:'0'},
   ],
   // 行车路线运行图 各点定位位置
   wayList: [

@@ -178,7 +178,7 @@
             title:'选择模块内容',
             visible: false,
             confirmLoading: false,
-            mcList:'',
+            mcList:[],
             mcIndex:'',
             mcTempIndex:'',
             visibleIndex:'',
@@ -302,29 +302,40 @@
             let self = this;
             this.confirmLoading = true;
             let flag = false;
-            if(self.mcList[self.mcTempIndex].contentIndex === 1){
-              if(this.visibleIndex !=3){
-                  self.$info({
-                      title: '提示',
-                      content: '所选模块内容为主要指标，不可保存至次要指标区域内，请重新选择',
-                      onOk() {},
-                    });
-                    self.confirmLoading = false;
+            console.log(self.mcTempIndex);
+            if(this.mcTempIndex!='' && this.mcTempIndex!=undefined && this.mcTempIndex!=null){
+              if(self.mcList[self.mcTempIndex].contentIndex === 1){
+                if(this.visibleIndex !=3){
+                    self.$info({
+                        title: '提示',
+                        content: '所选模块内容为主要指标，不可保存至次要指标区域内，请重新选择',
+                        onOk() {},
+                      });
+                      self.confirmLoading = false;
+                }else{
+                  this.saveHandleOk();
+                }
               }else{
-                this.saveHandleOk();
+                if(this.visibleIndex ===3){
+                    self.$info({
+                        title: '提示',
+                        content: '所选模块内容为次要指标，不可保存至主要指标区域内，请重新选择',
+                        onOk() {},
+                      });
+                      self.confirmLoading = false;
+                }else{
+                  this.saveHandleOk();
+                }
               }
             }else{
-              if(this.visibleIndex ===3){
-                  self.$info({
-                      title: '提示',
-                      content: '所选模块内容为次要指标，不可保存至主要指标区域内，请重新选择',
-                      onOk() {},
-                    });
-                    self.confirmLoading = false;
-              }else{
-                this.saveHandleOk();
-              }
+              self.$info({
+                title: '提示',
+                content: '请先对模块内容进行选择',
+                onOk() {},
+              });
+              self.confirmLoading = false;
             }
+         
           },
           // 保存至选择项内操作信息
         saveHandleOk:function(){
@@ -426,7 +437,13 @@
           });
         },
         contentInfo:function(data){
-          this.mcList = data.records;
+          let self = this;
+          self.mcList= [];
+           data.records.map((item,index)=>{
+              if(item.contentIndex!=3){
+                self.mcList.push(item);
+              }
+          });
         },
       },
       components:{

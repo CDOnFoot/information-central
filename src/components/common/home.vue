@@ -1,5 +1,8 @@
 <template>
   <a-layout id="components-layout" class="layout">
+    <div class="load-content" v-show="loadFlag">
+        <a-spin class="load-img" size="large" />
+    </div>
     <div>
       <a-modal
         :title="title"
@@ -45,9 +48,7 @@
       </div>
     </a-layout-header>
     <a-layout-content style="padding: 0 1%;height:100%;min-height: calc(100vh - 8.3%);">
-      <div class="load-content" v-show="loadFlag">
-        <a-spin class="load-img" size="large" />
-      </div>
+     
       <router-view :menuIndex="menuIndex" :setFlag="setFlag" :menuId="menuId" :mbId="mbId" @uploadSetMsg="uploadSaveSetMsg" :visualHomeList="visualHomeList"></router-view>
     </a-layout-content>
     <a-layout-footer style="text-align: center">
@@ -188,7 +189,9 @@
         });
       },
       visualizationInfo:function(data){
-        this.loadFlag= false;
+        setTimeout(()=>{
+          this.loadFlag= false;
+        },1000);
         this.visualList = JSON.parse(JSON.stringify(data.menuList));
         this.visualHomeList = JSON.parse(JSON.stringify(data.menuList));
         this.visualParamList = JSON.parse(JSON.stringify(data.menuList));
@@ -268,9 +271,9 @@
          //查看界面可视化布局信息 
         this.getUserVisualization();
 
-        setTimeout(()=>{
-          self.loadFlag = false;
-        },300);
+        // setTimeout(()=>{
+        //   self.loadFlag = false;
+        // },300);
 
         // 用户登录过期验证
         // if(!this.$common.getCookie('userNum')){
@@ -324,7 +327,9 @@
           this.visualParamList = JSON.parse(JSON.stringify(this.visualList));
         }
         this.confirmLoading = true;
-        if(param.mb.templateNum === this.mbList.records[self.mbTempIndex].templateNum){
+        // console.log(this.mbTempIndex);
+        if(this.mbTempIndex!='' && this.mbTempIndex!=undefined && this.mbTempIndex!=null){
+          if(param.mb.templateNum === this.mbList.records[self.mbTempIndex].templateNum){
             self.$info({
               title: '提示',
               content: '所选模版内容即为当前界面模版，请重新选择',
@@ -333,14 +338,25 @@
             self.confirmLoading = false;
             self.mbTempIndex = '';
             return false;
+          }else{
+            setTimeout(() => {
+              self.visible = false;
+              self.mcTempIndex = 0;
+              self.confirmLoading = false;
+            }, 1000);
+            this.saveMBFunction();
+          }
         }else{
-          setTimeout(() => {
-            self.visible = false;
-            self.mcTempIndex = 0;
+            self.$info({
+              title: '提示',
+              content: '请先对模版内容进行选择',
+              onOk() {},
+            });
             self.confirmLoading = false;
-          }, 1000);
-          this.saveMBFunction();
+            self.mbTempIndex = '';
+            return false;
         }
+     
 
       },
       // 保存模版信息
@@ -443,7 +459,7 @@
             if (res.data.code === "0") {
               self.$message.success("更新布局设置信息成功.");
               setTimeout(()=>{
-                self.loadFlag = false;
+                // self.loadFlag = false;
                 self.formListFlag = false;
                 self.setFlag = false;
                 self.updateFlag = true;
@@ -497,7 +513,7 @@
         this.visualHomeList = JSON.parse(JSON.stringify(self.visualParamList));
 
         setTimeout(()=>{
-          self.loadFlag = false;
+          // self.loadFlag = false;
           self.formListFlag = false;
           self.setFlag = false;
           self.updateFlag = true;
@@ -508,11 +524,11 @@
 
       selectMenu:function(param){
         let self = this;
+        self.loadFlag = true;
         if(this.menuIndex!=param){
           this.menuIndex = param;
           self.$common.setCookie('menuIndex',this.menuIndex,24 * 60 * 30);
           this.menuId = this.menuList[param].menuNum;
-
           // if(param!=2){
           //   this.$message.warning('功能暂未开启');
           // }else{
@@ -531,13 +547,21 @@
                     this.visualParamList = JSON.parse(JSON.stringify(res.data.data.menuList));
                     this.mbId = this.visualList.mb.templateNum;
                     resolve();
+                  }else{
+                    self.loadFlag = false;
                   }
+                }else{
+                    self.loadFlag = false;
                 }
               });
             }).then(()=>{
-              this.setFlag = false;
+              self.setFlag = false;
               // console.log('/home/'+self.menuList[param].key);
-              this.$router.push('/home/'+self.menuList[param].key);
+              setTimeout(()=>{
+                self.loadFlag = false;
+              },1000);
+              self.$router.push('/home/'+self.menuList[param].key);
+          
             })
 
           // this.$router.push({path: '/home/'+this.menuList[param].key, query: {flag: false}});

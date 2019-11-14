@@ -140,7 +140,13 @@ export default {
                   position: "insideRight"
                 }
               },
-              data: [320, 302, 301, 334, 390, 330, 320,320,320,320]
+              data: [320, 302, 301, 334, 390, 330, 320,320,320,320],
+              itemStyle: {
+                normal: {
+                      barBorderRadius:[0, 10, 10, 0],
+                     color: new echarts.graphic.LinearGradient(0, 0, 1, 1, [{offset: 0,color: '#207d98'}, {offset: 1,color: '#40e6ec'}]),
+                   }
+              },
             },
             {
               name: "各站出站人数",
@@ -152,7 +158,14 @@ export default {
                   position: "insideRight"
                 }
               },
-              data: [120, 132, 101, 134, 90, 230, 210,210,210,210]
+              data: [120, 132, 101, 134, 90, 230, 210,210,210,210],
+              itemStyle: {
+                normal: {
+                      barBorderRadius:[10, 10, 10, 10],
+                     color: new echarts.graphic.LinearGradient(0, 0, 1, 1, [{offset: 0,color: '#ff9b0a'}, {offset: 1,color: '#fffb83'}]),
+                     lable:{textStyle:{color: '#fff'}},
+                   }
+              },
             }
           ]
         }; 

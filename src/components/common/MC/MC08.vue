@@ -106,7 +106,7 @@ export default {
   border-radius: 10px;
   left: 48.8%;
   top: 50.4%;
-  background: url("../../../assets/img/map4.png") no-repeat;
+  background: url("../../../assets/img/subway-bg.png") no-repeat;
   background-size: cover;
   transform: translate(-50%,-50%);
 }

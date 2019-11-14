@@ -286,7 +286,7 @@ a-popover{
 .runway-content{
   background: #3467c5;
   color: #ffffff;
-  width: 90px;
+  width: 106px;
   height: 25px;
   text-align: center;
   padding: 4px;

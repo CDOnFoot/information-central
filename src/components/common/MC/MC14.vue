@@ -3,7 +3,8 @@
   <!--    模块内容一-->
   <div>
     <div class="main">
-      <div class="borde">{{mcTitle}}</div>
+      <!-- <div class="borde">{{mcTitle}}</div> -->
+      暂无信息
     </div>
   </div>
 </template>

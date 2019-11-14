@@ -57,6 +57,6 @@ export default {
 .none-data{
   font-size: 14px;
   text-align: center;
-  padding: 50% 0;
+  padding-top: 20px;
 }
 </style>

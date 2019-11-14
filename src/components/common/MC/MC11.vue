@@ -3,7 +3,7 @@
   <div>
     <div class="main">
       <div class="borde">{{mcTitle}}</div>
-      <div class="timeStamp">展示时间：{{timeStamp}}</div>
+      <div class="timeStamp">{{timeStamp}}</div>
       <div class="dot-main">
         <div class="dot-numIn">
           <div class="peopleNum">{{ontimerate}}</div>
@@ -28,10 +28,10 @@ export default {
       // timeStamp: this.$common.timestampToTime(new Date()),
       mcList: "",
       mcId: "",
-      ontimerate:0,  //正点率
-      fullfillment:0,  //兑现率
+      ontimerate:"",  //正点率
+      fullfillment:"",  //兑现率
       dataRef:"",   //定点刷新
-      timeStamp:'2019年11月25日 05:00-20:15'
+      timeStamp:''
     };
   },
   props: ["mcStatus", "mcTitle"],
@@ -72,7 +72,7 @@ export default {
           //调取数据成功
           if(res.data){
             if (res.data.code === "0") {
-              self.timeStamp = res.data.data.daytime
+              self.timeStamp = `展示时间：${res.data.data.daytime}`
               self.ontimerate = res.data.data.flows_in_total
               self.fullfillment = res.data.data.flows_out_total
             }else{

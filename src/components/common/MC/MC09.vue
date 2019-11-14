@@ -4,7 +4,7 @@
   <div>
     <div class="main">
       <div class="borde">{{mcTitle}}</div>
-      <div class="timeStamp">展示时间：{{timeStamp}}</div>
+      <div class="timeStamp">{{timeStamp}}</div>
       <div :id="mcId" class="main-id"></div>
     </div>
   </div>
@@ -70,7 +70,7 @@ export default {
         //调取数据成功
         if (res.data) {
           if (res.data.code === "0") {
-            self.timeStamp = res.data.data.date;
+            self.timeStamp = `展示时间：${res.data.data.date}`;
             callback(res.data.data, type);
           } else {
             this.$message.error(res.data.msg);

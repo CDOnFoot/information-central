@@ -4,7 +4,7 @@
   <div>
     <div class="main">
       <div class="borde">{{mcTitle}}</div>
-      <div class="timeStamp">展示时间：{{timeStamp}}</div>
+      <div class="timeStamp">{{timeStamp}}</div>
       <div :id="mcId" class="main-id"></div>
     </div>
   </div>
@@ -86,7 +86,7 @@ export default {
       });
     },
     chartInfoList:function(data,type){
-      this.timeStamp = data.time;
+      this.timeStamp = `展示时间：${data.time}`;
       this.drawLine(data,type);
     },
 

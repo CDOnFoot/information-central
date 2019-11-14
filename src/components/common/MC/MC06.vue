@@ -2,7 +2,7 @@
   <!--    模块内容一-->
   <div class="main" :style="{width: '100%', height: '100%'}">
     <div class="borde">{{mcTitle}}</div>
-    <div class="timeStamp">展示日期：{{timeStamp}}</div>
+    <div class="timeStamp">{{timeStamp}}</div>
     <div class="table-content">
       <img src="../../../assets/img/table-bg.png" alt="" class="table-bg">
       <a-table
@@ -96,7 +96,7 @@ export default {
         });
       },
       seniorityInfoList:function(data){
-        this.timeStamp = data.daytime;
+        this.timeStamp = `展示日期：${data.daytime}`;
         this.dataList = [];
         data.result.map((item,index)=>{
           if(index<=6){

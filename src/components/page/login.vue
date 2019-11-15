@@ -61,7 +61,7 @@ import sha256 from "js-sha256";
         userName: '',
         userPassword: '',
         loadFlag:false,
-        userInfo:''
+        userInfo:'',
       }
     },
     beforeCreate() {

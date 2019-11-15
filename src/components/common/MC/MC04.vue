@@ -171,8 +171,6 @@ export default {
           }
           
         }).then((unitIndex)=>{
-          // console.log(unitIndex)
-        //  console.log(daotType)
         this.wayList.some((item,index)=>{
           if(item.dotId === redata.stationId && item.status==redata.upDownStatus && item.dotType==daotType){
               let trainInfor={
@@ -195,26 +193,6 @@ export default {
                   return false;
                 }
           }
-          // else if(item.dotId === redata.stationId && item.status==redata.upDownStatus && item.dotType==daotType){
-          //       let trainInfor={
-          //         subwayNum:redata.subwayNum,  //车次
-          //         dotId: redata.stationId,    //车站ID
-          //         title: redata.stationName,  //车站名称
-          //         status:redata.upDownStatus, //车辆的行驶方向，上行或者下行
-          //         dotType:item.dotType,       //common 或者 middle
-          //         dot: item.dot             //运动点的位置信息
-          //       }
-          //       if(unitIndex== "-100"){
-          //         self.noticeList.push(trainInfor)
-          //         console.log(self.noticeList)
-          //         return false;
-          //       }else{
-          //         self.$set(self.noticeList,unitIndex,trainInfor)
-          //         console.log(self.noticeList)
-          //         return false;
-          //       }
-          // }
-
         });
         })
       }

@@ -46,4 +46,15 @@ export default {
 
   passengerLoadHotspots:'/passenger/passengerLoadHotspots',   //   列车负载信息
 
+  // 设备信息
+  getAgServerDate:"/equipment/getAgServerDate",//Ag服务状态统计
+
+  getAgServerDateTotal:"/equipment/getAgServerDateTotal",//Ag服务状态统计总数
+
+  getTvmServerDate:"/equipment/getTvmServerDate",//tvm服务状态统计
+
+  getTvmServerDateTotal:"/equipment/getTvmServerDateTotal",//tvm服务状态统计总数
+
+  // getServerRateDate:"/equipment/getServerRateDate",//设备信息占比
+  getServerRateDate:'/equipment/getServerRateDate?type=',  //设备信息占比 仪表盘数据  type=1（1为AG，2为TVM）
 }

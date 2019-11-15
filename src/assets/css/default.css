@@ -348,8 +348,8 @@
       z-index: 199;
     }
     .ant-table-small > .ant-table-content > .ant-table-body > table > .ant-table-tbody > tr > td{
-      padding: 4px 8px !important;
-      text-align: center;
+      padding: 4px 12px !important;
+      text-align: left;
     }
     .ant-table-tbody > tr > td {
       border-bottom: none !important;     

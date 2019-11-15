@@ -7,6 +7,7 @@
 <script>
 import MC13 from '../../../components/common/MC/MC13';
 import MC14 from '../../../components/common/MC/MC14';
+import MC16 from '../../../components/common/MC/MC16';
 
 export default {
     name:'MB03',
@@ -48,6 +49,8 @@ export default {
     components:{
         MC13,
         MC14,
+        MC16,
+
     },
     mounted(){
         // 接收监听值

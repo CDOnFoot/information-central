@@ -12,6 +12,7 @@ import index from '../components/page/index';
 import rail from '../components/page/rail';
 import safe from '../components/page/safe';
 import flow from '../components/page/flow';
+import service from '../components/page/service';
 
 import common from '../../utils/common.js'
 // 模版
@@ -35,6 +36,7 @@ import MC12 from '../components/common/MC/MC12';
 import MC13 from '../components/common/MC/MC13';
 import MC14 from '../components/common/MC/MC14';
 import MC15 from '../components/common/MC/MC15';
+import MC16 from '../components/common/MC/MC16';
 
 
 Vue.use(Router);
@@ -126,6 +128,15 @@ const router =  new Router({
             keepAlive:false,
             needLogin: true
 
+          },
+        },
+        {
+          path:'service',
+          component: service,
+          meta:{
+            title:'服务分析',
+            keepAlive:false,
+            needLogin: true
           },
         },
         ]

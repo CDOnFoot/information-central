@@ -554,8 +554,8 @@
 
       selectMenu:function(param){
         let self = this;
-        self.loadFlag = true;
         if(this.menuIndex!=param){
+          self.loadFlag = true;
           this.menuIndex = param;
           self.$common.setCookie('menuIndex',this.menuIndex,24 * 60 * 30);
           this.menuId = this.menuList[param].menuNum;

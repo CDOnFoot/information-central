@@ -1,6 +1,6 @@
 
 <template>
-  <!--   昨日客流OD显示 模块内容一-->
+  <!--   设备分析 模块内容一-->
   <div>
    <div class="main">
       <div class="borde">{{mcTitle}}</div>

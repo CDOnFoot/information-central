@@ -94,14 +94,19 @@ var common = {
       id: "CD04",
     },
     {
+      title: "设备信息",
+      key: "service",
+      id: "CD05",
+    },
+    {
       title: "能耗分析",
       key: "energy",
-      id: "CD05",
+      id: "CD06",
     },
     {
       title: "线路概况",
       key: "rail",
-      id: "CD06",
+      id: "CD07",
     }
   ],
 
@@ -128,14 +133,19 @@ var common = {
       id: "CD04",
     },
     {
+      title: "设备信息",
+      key: "service",
+      id: "CD05",
+    },
+    {
       title: "能耗分析",
       key: "energy",
-      id: "CD05",
+      id: "CD06",
     },
     {
       title: "线路概况",
       key: "rail",
-      id: "CD06",
+      id: "CD07",
     }
 
   ],

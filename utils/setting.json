@@ -21,15 +21,20 @@
       "id":"CD04"
     },
     {
-      "title":"能耗分析",
-      "key":"energy",
-      "id":"CD05"
-    },
-    {
-      "title":"线路概况",
-      "key":"rail",
-      "id":"CD06"
-    }
+        "title": "服务分析",
+        "key": "service",
+        "id": "CD05",
+      },
+      {
+        "title": "能耗分析",
+        "key": "energy",
+        "id": "CD06",
+      },
+      {
+        "title": "线路概况",
+        "key": "rail",
+        "id": "CD07"
+      }
   ],
   "模版信息":
   [
@@ -189,7 +194,25 @@
                    }
             },
             {
-                "menuNum":"CD03", "menuName":"智能客流",
+                "menuNum":"CD03", "menuName":"设备信息",
+                "mbList":{
+                    "mb": {
+                     "templateName": "模版三",
+                     "templateNum": "MB03",
+                     "mk": [{
+                       "moduleNum": "MK01",
+                       "mc": {
+                        "contentIndex": "1",
+                        "contentNum": "MC16",
+                        "contentName": "设备信息"
+                       },
+                       "moduleName": "模块一"
+                      }]
+                    }
+                }
+            },
+            {
+                "menuNum":"CD04", "menuName":"智能客流",
                 "mbList":{
                     "mb": {
                      "templateName": "模版三",
@@ -207,23 +230,24 @@
                 }
             },
             {
-                "menuNum":"CD04", "menuName":"安全防范",
+                "menuNum":"CD05", "menuName":"安全防范",
                 "mbList":{
                     "mb": {
                      "templateName": "模版三",
-                     "templateNum": "MB14",
+                     "templateNum": "MB03",
                      "mk": [{
                        "moduleNum": "MK01",
                        "mc": {
                         "contentIndex": "1",
-                        "contentNum": "MC13",
+                        "contentNum": "MC14",
                         "contentName": "安全防范"
                        },
                        "moduleName": "模块一"
                       }]
                     }
                 }
-            }
+            },
+         
         
     ],
     "模块内容信息":
@@ -290,12 +314,12 @@
                 "contentNum": "MC12"
             },
             {
-                "contentIndex": "2",
+                "contentIndex": "3",
                 "contentName": "智能客流",
                 "contentNum": "MC13"
             },
             {
-                "contentIndex": "2",
+                "contentIndex": "3",
                 "contentName": "安全防范",
                 "contentNum": "MC14"
             },
@@ -303,6 +327,11 @@
                 "contentIndex": "2",
                 "contentName": "昨日客流OD排行展示",
                 "contentNum": "MC15"
+            },
+            {
+                "contentIndex": "3",
+                "contentName": "设备信息",
+                "contentNum": "MC16"
             }
         ]
     }

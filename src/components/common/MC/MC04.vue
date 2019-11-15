@@ -257,8 +257,8 @@ export default {
   left: 48.8%;
   top: 50.4%;
   background: url("../../../assets/img/map4.png") no-repeat;
-  /* background-size: cover; */
-  background-size: 100% 100%;
+  background-size: cover;
+  /* background-size: 100% 100%; */
   transform: translate(-50%,-50%);
 }
 .subway-item:hover{
@@ -277,7 +277,7 @@ export default {
   width: 10px;
   margin-left: -31%;
   background: #ff0000b0;
-  border: solid 1px #ffffff;
+  border: solid 1px #ffffffb0;
   margin-top: -31%;
   z-index: 299;
   cursor: pointer;
@@ -293,34 +293,50 @@ a-popover{
   height: 25px;
   text-align: center;
   padding: 4px;
-  border-radius: 2px;
+  border-radius: 4px;
   position: absolute;
   left: -112px;
   z-index: 9;
+  line-height: 17px;
+  border: solid 1px #ffffff4d;
+  
 }
 .dot-red{
   background: #ff3e4db0 !important;
+  box-shadow: #ff3e4d4d 0 0 8px 6px;
 }
 .dot-yellow{
   background: #fff672b0 !important;
+  box-shadow: #fff6724d 0 0 8px 6px;
+
 }
 .dot-purpuse{
   background: #ff58a3b0 !important;
+  box-shadow: #ff58a34d 0 0 8px 6px;
+
 }
 .dot-blue{
   background: #75feffb0 !important;
+  box-shadow: #75feff4d 0 0 8px 6px;
+
 }
 .dot-green{
   background: #9bff79b0 !important;
+  box-shadow: #9bff794d 0 0 8px 6px;
+
 }
 .dot-white{
-  background: #ffffffb0 !important;
+  background: #000000b0 !important;
+  box-shadow: #0000004d 0 0 8px 6px;
+
 }
 .dot-heaven{
   background: #7274ffb0 !important;
+  box-shadow: #7274ff4d 0 0 8px 6px;
+
 }
 .runwayActive{
   z-index: 99;
-  box-shadow: 0px 0px 4px 1px;
+  box-shadow: #c5d9ff 0px 0px 4px 1px;
 }
 </style>

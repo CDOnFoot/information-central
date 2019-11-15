@@ -91,29 +91,36 @@ import sha256 from "js-sha256";
               loginname:self.userName,
               password:sha256(self.userPassword)
             };
-            this.$http.post(self.$api.loginIn, param).then(res =>{
-            //调取数据成功
-              if(res.data){
-                if (res.data.code === "0") {
-                  self.userInfo = res.data.data;
-                  self.$common.setCookie('dvptToken',self.userInfo.custom_token,24 * 60 * 30);
-                  self.$common.setCookie('dvptId',self.userInfo.userId,24 * 60 * 30);
-                  self.$common.setCookie('dvptName',self.userName,24 * 60 * 30);
-                  self.$common.setCookie('menuIndex','0',24 * 60 * 30);
+              self.$common.setCookie('dvptToken','1',24 * 60 * 30);
+            self.$common.setCookie('dvptId','1',24 * 60 * 30);
+            self.$common.setCookie('dvptName','test',24 * 60 * 30);
+            self.$common.setCookie('menuIndex','0',24 * 60 * 30);
 
-                  self.loadFlag = false;
-                  self.$router.push('/home/index');
-                  // self.changeLogin({ token: self.userInfo.custom_token });
-                  // setTimeout(()=>{
-                  // },200);
-                }else{
-                  self.$message.error(res.data.msg);
-                  self.loadFlag = false;
-                }
-              }else{
-                  self.loadFlag = false;
-              }
-            });
+            self.loadFlag = false;
+            self.$router.push('/home/index');
+            // this.$http.post(self.$api.loginIn, param).then(res =>{
+            // //调取数据成功
+            //   if(res.data){
+            //     if (res.data.code === "0") {
+            //       self.userInfo = res.data.data;
+            //       self.$common.setCookie('dvptToken',self.userInfo.custom_token,24 * 60 * 30);
+            //       self.$common.setCookie('dvptId',self.userInfo.userId,24 * 60 * 30);
+            //       self.$common.setCookie('dvptName',self.userName,24 * 60 * 30);
+            //       self.$common.setCookie('menuIndex','0',24 * 60 * 30);
+
+            //       self.loadFlag = false;
+            //       self.$router.push('/home/index');
+            //       // self.changeLogin({ token: self.userInfo.custom_token });
+            //       // setTimeout(()=>{
+            //       // },200);
+            //     }else{
+            //       self.$message.error(res.data.msg);
+            //       self.loadFlag = false;
+            //     }
+            //   }else{
+            //       self.loadFlag = false;
+            //   }
+            // });
         }else{
           this.loadFlag = false;
         }

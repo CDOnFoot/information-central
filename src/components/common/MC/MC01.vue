@@ -264,8 +264,11 @@ canvas {
   left: -6px !important;
 }
 .main-id {
-  width: 40rem;
-  height: 22rem;
+  /* width: 40rem;
+  height: 22rem; */
+  width: 470px;
+  height: 258px;
+
   margin: 0 auto;
 }
 .ant-radio-wrapper{

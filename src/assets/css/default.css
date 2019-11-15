@@ -391,7 +391,8 @@
     line-height: 24px;
     top: 9%;
     color: #ffffff;
-    font-size: 1.2rem;
+    /* font-size: 1.2rem; */
+    font-size: 16px;
   }
   .load-content{
     position: absolute;
@@ -415,14 +416,17 @@
     outline: none;
   }
   .register-name {
-    font-size: 1.2rem;
+    /* font-size: 1.2rem; */
+    font-size: 16px;
     color: #ffffff;
     margin-right: 10px;
     line-height: 2rem;
 }
   svg.icon{
-    width: 2rem;
-    height: 2rem;
+    /* width: 2rem; */
+    /* height: 2rem; */
+     width:28px;
+    height:28px;
   }
   .user-register{
     display: flex;
@@ -491,11 +495,11 @@
     height: 100%;
   }
   .ant-spin-nested-loading > div > .ant-spin .ant-spin-dot {
-    /* top: 33% !important;
-    left: 44% !important; */
+    top: 53% !important;
+    left: 44% !important;
 
-    top: 45% !important;
-    left: 50% !important;
+    /* top: 45% !important; */
+    /* left: 50% !important; */
 }
 .borde{
   font-weight: 700;
@@ -508,9 +512,6 @@
   padding-left: 12px;
   width: 60%;
 }
-.ant-table{
-  font-size: 1rem;
-}
 .ant-spin-nested-loading > div > .ant-spin {
-  height: 16rem;
+  height: 150px;
 }

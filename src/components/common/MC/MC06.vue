@@ -124,15 +124,15 @@ export default {
 }
 
 .table-content{
-  /* position: relative;
+  position: relative;
   min-width: 470px;
   min-height: 290px;
-  overflow: hidden; */
+  overflow: hidden;
 
-    position: relative;
+    /* position: relative;
     min-width: 19rem;
     min-height: 24rem;
-    overflow: hidden;
+    overflow: hidden; */
 }
 .table-bg{
   /* position: absolute;
@@ -140,10 +140,10 @@ export default {
   top: 4%;
   width: 100%; */
 
-    position: absolute;
-    left: 7%;
-    top: 23%;
-    width: 79%;
+  position: absolute;
+  left: 7%;
+  top: 20%;
+  width: 88%;
 
 }
 .timeStamp {
@@ -162,8 +162,8 @@ export default {
 
 
   position: absolute;
-  width: 79%;
-  top: 23%;
+  width: 100%;
+  top: 20%;
   height: auto;
   left: 7%;
 }

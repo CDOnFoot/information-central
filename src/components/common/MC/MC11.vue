@@ -98,31 +98,41 @@ export default {
 .dot-main {
     /* min-width: 20rem;
     min-height: 15rem; */
-    width: 30rem;
+    /* width: 30rem;
     height: 24rem;
-    margin: 1rem auto 0 auto;
+    margin: 1rem auto 0 auto; */
+    min-width: 470px;
+    min-height: 270px;
+
     display: flex;
     align-items: center;
     justify-content: center;
 }
 .dot-numIn{
   position: relative;
-  width: 50%;
-  height: 14rem;
+  /* width: 50%;
+  height: 14rem; */
+   width:50%;
+  height:200px;
+  margin-top:20px;
+
   background: url("../../../assets/img/enterPel2.png") no-repeat;
-  /* font-size: 20px; */
-  font-size: 1.5rem;
+  font-size: 20px;
+  /* font-size: 1.5rem; */
   background-size:contain;
   background-position: center;
   
 }
 .dot-numOut{
   position: relative;
-  width: 50%;
-  height: 14rem;
+  /* width: 50%;
+  height: 14rem; */
+   width:50%;
+  height:200px;
+  margin-top:20px;
   background: url("../../../assets/img/outPel.png") no-repeat;
-  /* font-size: 20px; */
-  font-size: 1.5rem;
+  font-size: 20px;
+  /* font-size: 1.5rem; */
   background-size:contain;
   background-position: center;
 }

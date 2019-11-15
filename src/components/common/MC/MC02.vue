@@ -224,8 +224,12 @@ canvas{
   left: -6px !important;
 }
 .main-id{
-  width: 40rem;
+  width: 470px;
+  height: 300px;
+  margin: 1% 0 0 2%;
+  /* width: 40rem;
   height: 23rem;
-  margin: 2rem 0 0 2rem;
+  margin: 2rem 0 0 2rem; */
+
 }
 </style>

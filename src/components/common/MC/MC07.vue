@@ -109,7 +109,8 @@ export default {
   height: 80%;
   width: 40%;
   background: url("../../../assets/img/dot-bg.png") no-repeat;
-  font-size: 2rem;
+  /* font-size: 2rem; */
+   font-size: 26px;
   padding: 12% 10%;
   text-align: center;
   background-size: contain;

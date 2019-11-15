@@ -20,6 +20,7 @@
 
     // websocket配置信息/url+user/id+token
     var websocketHost = useStaging ? 'ws://10.66.1.160:28070/subway/info/ws/':'ws://10.66.1.160:28070/subway/info/ws/';
+    // var websocketHost = useStaging ? 'ws://10.28.3.81:28070/subway/info/ws/':'ws://10.28.3.81:28070/subway/info/ws/';
 
     // var host = useStaging ? 'http://10.66.1.102:28070':'http://10.66.1.192:28070';
     // var host = useStaging ? 'http://10.66.1.102:28070':'http://10.28.3.81:28070';

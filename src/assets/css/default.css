@@ -512,3 +512,23 @@
 .ant-spin-nested-loading > div > .ant-spin {
   height: 150px;
 }
+/* MC16 */
+.ant-table-thead  > tr > th{
+  color: #fff;
+}
+.AG .ant-table-tbody > tr{
+  background: #0080ff;
+  box-shadow: 0px 0px 2px 5px #0259ad inset;
+  border: #193a4e 2px solid;
+}
+.TVM .ant-table-tbody > tr{
+background: #0080ff;
+box-shadow: 0px 2px 3px 2px #0259ad inset;
+border: #193a4e 2px solid;
+}
+
+.TVM .ant-table-thead > tr{
+background: #006dda;
+  box-shadow: 0px 2px 3px 2px #0259ad inset;
+  border: #193a4e 2px solid;
+}

@@ -451,567 +451,611 @@ export default {
      },
     drawLineGauge(){
       let self = this;
-      let optionLeft = null;
-      let optionRight = null;
-      let objLeft = document.getElementById('gaugeLeft');
-      let objRight = document.getElementById('gaugeRight');
-      self.leftGau = self.$echarts.init(objLeft);
-      self.RightGau = self.$echarts.init(objRight);
-      optionLeft = {
-          tooltip: {
-            formatter: "{a} <br/>{c} {b}"
-          },
-          series: [{
-              name: "开机率",
-              type: "gauge",
-              z: 3,
-              min: 0,
-              max: 100,
-              splitNumber: 10,
-              center: ["55%", "50%"], // 默认全局居中
-              radius: "75%",
-              axisLine: {
-                // 坐标轴线
-                lineStyle: {
-                  // 属性lineStyle控制线条样式
-                  width: 10
-                }
-              },
-              axisTick: {
-                // 坐标轴小标记
-                length: 15, // 属性length控制线长
-                lineStyle: {
-                  // 属性lineStyle控制线条样式
-                  color: "auto"
-                }
-              },
-              splitLine: {
-                // 分隔线
-                length: 20, // 属性length控制线长
-                lineStyle: {
-                  // 属性lineStyle（详见lineStyle）控制线条样式
-                  color: "auto"
-                }
-              },
-              pointer:{
-                length:'50%',
-                width: 5,
-              },
-              axisLabel: {
-                backgroundColor: "auto",
-                borderRadius: 2,
-                color: "#eee",
-                padding: 3,
-                textShadowBlur: 2,
-                textShadowOffsetX: 1,
-                textShadowOffsetY: 1,
-                textShadowColor: "#222"
-              },
-              title: {
-                // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                fontWeight: "bolder",
-                fontSize: 20,
-                color: "#fff",
-                offsetCenter: [0, "20px"]
-                // fontStyle: 'italic'
-              },
-              detail: {
-                // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                formatter: function(value) {
-                  value = `${value}%`;
-                  return value;
-                },
-                fontWeight: "bolder",
-                fontSize:'30px',
-                borderRadius: 3,
-                backgroundColor: "#444",
-                borderColor: "#aaa",
-                shadowBlur: 5,
-                shadowColor: "#333",
-                shadowOffsetX: 0,
-                shadowOffsetY: 3,
-                borderWidth: 2,
-                textBorderColor: "#000",
-                textBorderWidth: 2,
-                textShadowBlur: 2,
-                textShadowColor: "#fff",
-                textShadowOffsetX: 0,
-                textShadowOffsetY: 0,
-               
-                color: "#eee",
-                rich: {},
-                offsetCenter: [0, "100px"]
-              },
-              data: [{ value: 40, name: "开机率" }]
-            },
-            {
-              name: "完好率",
-              type: "gauge",
-              center: ["18%", "55%"], // 默认全局居中
-              radius: "60%",
-              min: 0,
-              max: 100,
-              endAngle: 18,
-              splitNumber: 4,
-              axisLine: {// 坐标轴线
-                lineStyle: {// 属性lineStyle控制线条样式
-                  width: 8
-                }
-              },
-              axisTick: {// 坐标轴小标记
-                length: 12, // 属性length控制线长
-                lineStyle: {// 属性lineStyle控制线条样式
-                  color: "auto"
-                }
-              },
-              splitLine: {// 分隔线
-                length: 20, // 属性length控制线长
-                lineStyle: {// 属性lineStyle（详见lineStyle）控制线条样式
-                  color: "auto"
-                }
-              },
-              pointer: {
-                width: 5
-              },
-              title: {
-                fontWeight: "bolder",
-                fontSize: 20,
-                color: "#fff",
-                offsetCenter: [0, "-30%"] // x, y，单位px
-              },
-              pointer:{
-                length:'50%',
-                width: 5,
-              },
-              detail: {// 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                fontWeight: "bolder",
-                // fontSize:'40px',
-                offsetCenter:[0,'60px'],// 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                formatter: function(value) {
-                  value = `${value}%`;
-                  return value;
-                }
-              },
-              data: [{ value: 1.5, name: "完好率" }]
-            },
-            {
-              name: "连接状态",
-              type: "gauge",
-              center: ["85%", "50%"], // 默认全局居中
-              radius: "60%",
-              min: 0,
-              max: 100,
-              startAngle: 135,
-              endAngle: 45,
-              splitNumber: 4,
-              axisLine: {// 坐标轴线
-                lineStyle: { // 属性lineStyle控制线条样式
-                  width: 8
-                }
-              },
-              axisTick: {// 坐标轴小标记
-                splitNumber: 5,
-                length: 10, // 属性length控制线长
-                lineStyle: {// 属性lineStyle控制线条样式
-                  color: "auto"
-                }
-              },
-              axisLabel: {
-                formatter: function(v) {
-                  switch (v + "") {
-                    case "0":
-                      return "E";
-                    case "1":
-                      return "Gas";
-                    case "2":
-                      return "F";
-                  }
-                }
-              },
-              splitLine: {// 分隔线
-                length: 15, // 属性length控制线长
-                lineStyle: {// 属性lineStyle（详见lineStyle）控制线条样式
-                  color: "auto"
-                }
-              },
-              pointer: {
-                width: 2,
-                length:'74%'
-              },
-              title: {
-                fontWeight: "bolder",
-                fontSize: 16,
-                color: "red",
-                offsetCenter: [0, "-50px"]
-              },
-              detail: {// 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                fontWeight: "bolder",
-                fontSize: "12px",
-                color: "#fff",
-                offsetCenter: [0, "-30px"],
-                // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                formatter: function(value) {
-                  value = `${value}%`;
-                  return value;
-                }
-              },
-              data: [{ value: 100, name: "连接状态" }]
-            },
-            {
-              name: "时钟正常",
-              type: "gauge",
-              center: ["85%", "50%"], // 默认全局居中
-              radius: "60%",
-              min: 0,
-              max: 100,
-              startAngle: 315,
-              endAngle: 225,
-              splitNumber: 4,
-              axisLine: {
-                // 坐标轴线
-                lineStyle: {
-                  // 属性lineStyle控制线条样式
-                  width: 8
-                }
-              },
-              axisTick: {
-                // 坐标轴小标记
-                show: false
-              },
-              axisLabel: {
-                formatter: function(v) {
-                  switch (v + "") {
-                    case "0":
-                      return "H";
-                    case "1":
-                      return "Water";
-                    case "2":
-                      return "C";
-                  }
-                }
-              },
-              splitLine: {
-                // 分隔线
-                length: 15, // 属性length控制线长
-                lineStyle: {
-                  // 属性lineStyle（详见lineStyle）控制线条样式
-                  color: "auto"
-                }
-              },
-              pointer: {
-                width: 2
-              },
-              title: {
-                fontWeight: "bolder",
-                fontSize: 16,
-                color: "red",
-                offsetCenter: [0, "55px"]
-              },
-              detail: {
-                // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                fontWeight: "bolder",
-                fontSize: "12px",
-                color: "#fff",
-                offsetCenter: [0, "35px"],
-                // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                formatter: function(value) {
-                  value = `${value}%`;
-                  return value;
-                }
-              },
-              data: [{ value: 100, name: "时钟正常" }]
-            }
-          ]
-        };
-      
-      optionRight = {
-          tooltip: {
-            formatter: "{a} <br/>{c} {b}"
-          },
-          
-          series: [
-            {
-              name: "开机率",
-              type: "gauge",
-              z: 3,
-              min: 0,
-              max: 100,
-              splitNumber: 10,
-              center: ["55%", "50%"], // 默认全局居中
-              radius: "75%",
-              axisLine: {
-                // 坐标轴线
-                lineStyle: {
-                  // 属性lineStyle控制线条样式
-                  width: 10
-                }
-              },
-              axisTick: {
-                // 坐标轴小标记
-                length: 15, // 属性length控制线长
-                lineStyle: {
-                  // 属性lineStyle控制线条样式
-                  color: "auto"
-                }
-              },
-              splitLine: {
-                // 分隔线
-                length: 20, // 属性length控制线长
-                lineStyle: {
-                  // 属性lineStyle（详见lineStyle）控制线条样式
-                  color: "auto"
-                }
-              },
-              pointer:{
-                length:'50%',
-                width: 5,
-              },
-              axisLabel: {
-                backgroundColor: "auto",
-                borderRadius: 2,
-                color: "#eee",
-                padding: 3,
-                textShadowBlur: 2,
-                textShadowOffsetX: 1,
-                textShadowOffsetY: 1,
-                textShadowColor: "#222"
-              },
-              title: {
-                // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                fontWeight: "bolder",
-                fontSize: 20,
-                color: "#fff",
-                offsetCenter: [0, "20px"]
-                // fontStyle: 'italic'
-              },
-              detail: {
-                // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                formatter: function(value) {
-                  value = `${value}%`;
-                  return value;
-                },
-                fontWeight: "bolder",
-                fontSize:'30px',
-                borderRadius: 3,
-                backgroundColor: "#444",
-                borderColor: "#aaa",
-                shadowBlur: 5,
-                shadowColor: "#333",
-                shadowOffsetX: 0,
-                shadowOffsetY: 3,
-                borderWidth: 2,
-                textBorderColor: "#000",
-                textBorderWidth: 2,
-                textShadowBlur: 2,
-                textShadowColor: "#fff",
-                textShadowOffsetX: 0,
-                textShadowOffsetY: 0,
-               
-                color: "#eee",
-                rich: {},
-                offsetCenter: [0, "100px"]
+          let optionLeft = null;
+          let optionRight = null;
+          let objLeft = document.getElementById('gaugeLeft');
+          let objRight = document.getElementById('gaugeRight');
+          self.leftGau = self.$echarts.init(objLeft);
+          self.RightGau = self.$echarts.init(objRight);
+          optionLeft = {
+              tooltip: {
+                formatter: "{a} <br/>{c} {b}"
               },
               
-              data: [{ value: 40, name: "开机率" }]
-            },
-            {
-              name: "完好率",
-              type: "gauge",
-              center: ["18%", "55%"], // 默认全局居中
-              radius: "60%",
-              min: 0,
-              max: 100,
-              endAngle: 18,
-              splitNumber: 4,
-              axisLine: {
-                // 坐标轴线
-                lineStyle: {
-                  // 属性lineStyle控制线条样式
-                  width: 8
+              series: [
+                {
+                  name: "开机率",
+                  type: "gauge",
+                  z: 3,
+                  min: 0,
+                  max: 100,
+                  splitNumber: 10,
+                  center: ["45%", "55%"], // 默认全局居中
+                  radius: "75%",
+                  axisLine: {
+                    // 坐标轴线
+                    lineStyle: {
+                      // 属性lineStyle控制线条样式
+                      width: 10
+                    }
+                  },
+                  axisTick: {
+                    // 坐标轴小标记
+                    length: 15, // 属性length控制线长
+                    lineStyle: {
+                      // 属性lineStyle控制线条样式
+                      color: "auto"
+                    }
+                  },
+                  splitLine: {
+                    // 分隔线
+                    length: 20, // 属性length控制线长
+                    lineStyle: {
+                      // 属性lineStyle（详见lineStyle）控制线条样式
+                      color: "auto"
+                    }
+                  },
+                  pointer:{
+                    length:'50%',
+                    width: 5,
+                  },
+                  axisLabel: {
+                    backgroundColor: "auto",
+                    borderRadius: 2,
+                    color: "#eee",
+                    padding: 3,
+                    textShadowBlur: 2,
+                    textShadowOffsetX: 1,
+                    textShadowOffsetY: 1,
+                    textShadowColor: "#222"
+                  },
+                  title: {
+                    // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                    fontWeight: "bolder",
+                    fontSize: 20,
+                    color: "#fff",
+                    offsetCenter: [0, "20px"]
+                    // fontStyle: 'italic'
+                  },
+                  detail: {
+                    // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                    formatter: function(value) {
+                      if(Number(value)==100){
+                        return `${Number(value)}%`;
+                      }else{
+                        return `${Number(value).toFixed(1)}%`;
+                      }
+                    },
+                    fontWeight: "bolder",
+                    fontSize:'30px',
+                    borderRadius: 3,
+                    backgroundColor: "#444",
+                    borderColor: "#aaa",
+                    shadowBlur: 5,
+                    shadowColor: "#333",
+                    shadowOffsetX: 0,
+                    shadowOffsetY: 3,
+                    borderWidth: 2,
+                    textBorderColor: "#000",
+                    textBorderWidth: 2,
+                    textShadowBlur: 2,
+                    textShadowColor: "#fff",
+                    textShadowOffsetX: 0,
+                    textShadowOffsetY: 0,
+                  
+                    color: "#eee",
+                    rich: {},
+                    offsetCenter: [0, "100px"]
+                  },
+                  
+                  data: [{ value: 40, name: "开机率" }]
+                },
+                {
+                  name: "完好率",
+                  type: "gauge",
+                  center: ["22%", "55%"], // 默认全局居中
+                  radius: "65%",
+                  min: 0,
+                  max: 100,
+                  startAngle:245,
+                  endAngle: 65,
+                  splitNumber: 4,
+                  axisLine: {
+                    // 坐标轴线
+                    lineStyle: {
+                      // 属性lineStyle控制线条样式
+                      width: 8
+                    }
+                  },
+                  axisTick: {
+                    // 坐标轴小标记
+                    length: 12, // 属性length控制线长
+                    lineStyle: {
+                      // 属性lineStyle控制线条样式
+                      color: "auto"
+                    }
+                  },
+                  splitLine: {
+                    // 分隔线
+                    length: 20, // 属性length控制线长
+                    lineStyle: {
+                      // 属性lineStyle（详见lineStyle）控制线条样式
+                      color: "auto"
+                    }
+                  },
+                  pointer: {
+                    width: 5
+                  },
+                  title: {
+                    fontWeight: "bolder",
+                    fontSize: 20,
+                    color: "#fff",
+                    offsetCenter: ['-20%', "-30%"] // x, y，单位px
+                  },
+                  pointer:{
+                    length:'50%',
+                    width: 5,
+                  },
+                  detail: {
+                    // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                    fontWeight: "bolder",
+                    fontSize:'20px',
+                    offsetCenter:[0,'80px'],
+                    // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                    formatter: function(value) {
+                      if(Number(value)==100){
+                        return `${Number(value)}%`;
+                      }else{
+                        return `${Number(value).toFixed(1)}%`;
+                      }
+                    }
+                  },
+                  data: [{ value: 1.5, name: "完好率" }]
+                },
+                {
+                  name: "连接状态",
+                  type: "gauge",
+                  center: ["75%", "55%"], // 默认全局居中
+                  radius: "60%",
+                  min: 0,
+                  max: 100,
+                  startAngle: 135,
+                  endAngle: 45,
+                  splitNumber: 4,
+                  axisLine: {
+                    // 坐标轴线
+                    lineStyle: {
+                      // 属性lineStyle控制线条样式
+                      width: 8
+                    }
+                  },
+                  axisTick: {
+                    // 坐标轴小标记
+                    splitNumber: 5,
+                    length: 10, // 属性length控制线长
+                    lineStyle: {
+                      // 属性lineStyle控制线条样式
+                      color: "auto"
+                    }
+                  },
+                  axisLabel: {
+                    formatter: function(v) {
+                      switch (v + "") {
+                        case "0":
+                          return "E";
+                        case "1":
+                          return "Gas";
+                        case "2":
+                          return "F";
+                      }
+                    }
+                  },
+                  splitLine: {
+                    // 分隔线
+                    length: 15, // 属性length控制线长
+                    lineStyle: {
+                      // 属性lineStyle（详见lineStyle）控制线条样式
+                      color: "auto"
+                    }
+                  },
+                  pointer: {
+                    width: 2,
+                    length:'74%'
+                  },
+                  title: {
+                    fontWeight: "bolder",
+                    fontSize: 16,
+                    color: "red",
+                    offsetCenter: [0, "-50px"]
+                  },
+                  detail: {
+                    // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                    fontWeight: "bolder",
+                    fontSize: "12px",
+                    color: "#fff",
+                    offsetCenter: [0, "-30px"],
+                    // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                    formatter: function(value) {
+                      if(Number(value)==100){
+                        return `${Number(value)}%`;
+                      }else{
+                        return `${Number(value).toFixed(1)}%`;
+                      }
+                    }
+                  },
+                  data: [{ value: 100, name: "连接状态" }]
+                },
+                {
+                  name: "时钟正常",
+                  type: "gauge",
+                  center: ["75%", "55%"], // 默认全局居中
+                  radius: "60%",
+                  min: 0,
+                  max: 100,
+                  startAngle: 315,
+                  endAngle: 225,
+                  splitNumber: 4,
+                  axisLine: {
+                    // 坐标轴线
+                    lineStyle: {
+                      // 属性lineStyle控制线条样式
+                      width: 8
+                    }
+                  },
+                  axisTick: {
+                    // 坐标轴小标记
+                    show: false
+                  },
+                  axisLabel: {
+                    formatter: function(v) {
+                      switch (v + "") {
+                        case "0":
+                          return "H";
+                        case "1":
+                          return "Water";
+                        case "2":
+                          return "C";
+                      }
+                    }
+                  },
+                  splitLine: {
+                    // 分隔线
+                    length: 15, // 属性length控制线长
+                    lineStyle: {
+                      // 属性lineStyle（详见lineStyle）控制线条样式
+                      color: "auto"
+                    }
+                  },
+                  pointer: {
+                    width: 2
+                  },
+                  title: {
+                    fontWeight: "bolder",
+                    fontSize: 16,
+                    color: "red",
+                    offsetCenter: [0, "55px"]
+                  },
+                  detail: {
+                    // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                    fontWeight: "bolder",
+                    fontSize: "12px",
+                    color: "#fff",
+                    offsetCenter: [0, "35px"],
+                    // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                    formatter: function(value) {
+                      if(Number(value)==100){
+                        return `${Number(value)}%`;
+                      }else{
+                        return `${Number(value).toFixed(1)}%`;
+                      }
+                    }
+                  },
+                  data: [{ value: 100, name: "时钟正常" }]
                 }
+              ]
+            };
+          
+          optionRight = {
+              tooltip: {
+                formatter: "{a} <br/>{c} {b}"
               },
-              axisTick: {
-                // 坐标轴小标记
-                length: 12, // 属性length控制线长
-                lineStyle: {
-                  // 属性lineStyle控制线条样式
-                  color: "auto"
+              
+              series: [
+                {
+                  name: "开机率",
+                  type: "gauge",
+                  z: 3,
+                  min: 0,
+                  max: 100,
+                  splitNumber: 10,
+                  center: ["45%", "55%"], // 默认全局居中
+                  radius: "75%",
+                  axisLine: {
+                    // 坐标轴线
+                    lineStyle: {
+                      // 属性lineStyle控制线条样式
+                      width: 10
+                    }
+                  },
+                  axisTick: {
+                    // 坐标轴小标记
+                    length: 15, // 属性length控制线长
+                    lineStyle: {
+                      // 属性lineStyle控制线条样式
+                      color: "auto"
+                    }
+                  },
+                  splitLine: {
+                    // 分隔线
+                    length: 20, // 属性length控制线长
+                    lineStyle: {
+                      // 属性lineStyle（详见lineStyle）控制线条样式
+                      color: "auto"
+                    }
+                  },
+                  pointer:{
+                    length:'50%',
+                    width: 5,
+                  },
+                  axisLabel: {
+                    backgroundColor: "auto",
+                    borderRadius: 2,
+                    color: "#eee",
+                    padding: 3,
+                    textShadowBlur: 2,
+                    textShadowOffsetX: 1,
+                    textShadowOffsetY: 1,
+                    textShadowColor: "#222"
+                  },
+                  title: {
+                    // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                    fontWeight: "bolder",
+                    fontSize: 20,
+                    color: "#fff",
+                    offsetCenter: [0, "20px"]
+                    // fontStyle: 'italic'
+                  },
+                  detail: {
+                    // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                    formatter: function(value) {
+                      if(Number(value)==100){
+                        return `${Number(value)}%`;
+                      }else{
+                        return `${Number(value).toFixed(1)}%`;
+                      }
+                    },
+                    fontWeight: "bolder",
+                    fontSize:'30px',
+                    borderRadius: 3,
+                    backgroundColor: "#444",
+                    borderColor: "#aaa",
+                    shadowBlur: 5,
+                    shadowColor: "#333",
+                    shadowOffsetX: 0,
+                    shadowOffsetY: 3,
+                    borderWidth: 2,
+                    textBorderColor: "#000",
+                    textBorderWidth: 2,
+                    textShadowBlur: 2,
+                    textShadowColor: "#fff",
+                    textShadowOffsetX: 0,
+                    textShadowOffsetY: 0,
+                  
+                    color: "#eee",
+                    rich: {},
+                    offsetCenter: [0, "100px"]
+                  },
+                  
+                  data: [{ value: 40, name: "开机率" }]
+                },
+                {
+                  name: "完好率",
+                  type: "gauge",
+                  center: ["22%", "55%"], // 默认全局居中
+                  radius: "65%",
+                  min: 0,
+                  max: 100,
+                  startAngle:245,
+                  endAngle: 65,
+                  splitNumber: 4,
+                  axisLine: {
+                    // 坐标轴线
+                    lineStyle: {
+                      // 属性lineStyle控制线条样式
+                      width: 8
+                    }
+                  },
+                  axisTick: {
+                    // 坐标轴小标记
+                    length: 12, // 属性length控制线长
+                    lineStyle: {
+                      // 属性lineStyle控制线条样式
+                      color: "auto"
+                    }
+                  },
+                  splitLine: {
+                    // 分隔线
+                    length: 20, // 属性length控制线长
+                    lineStyle: {
+                      // 属性lineStyle（详见lineStyle）控制线条样式
+                      color: "auto"
+                    }
+                  },
+                  pointer: {
+                    width: 5
+                  },
+                  title: {
+                    fontWeight: "bolder",
+                    fontSize: 20,
+                    color: "#fff",
+                    offsetCenter: ['-20%', "-30%"] // x, y，单位px
+                  },
+                  pointer:{
+                    length:'50%',
+                    width: 5,
+                  },
+                  detail: {
+                    // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                    fontWeight: "bolder",
+                    fontSize:'20px',
+                    offsetCenter:[0,'80px'],
+                    // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                    formatter: function(value) {
+                      if(Number(value)==100){
+                        return `${Number(value)}%`;
+                      }else{
+                        return `${Number(value).toFixed(1)}%`;
+                      }
+                    }
+                  },
+                  data: [{ value: 1.5, name: "完好率" }]
+                },
+                {
+                  name: "智慧通",
+                  type: "gauge",
+                  center: ["75%", "55%"], // 默认全局居中
+                  radius: "60%",
+                  min: 0,
+                  max: 100,
+                  startAngle: 135,
+                  endAngle: 45,
+                  splitNumber: 4,
+                  axisLine: {
+                    // 坐标轴线
+                    lineStyle: {
+                      // 属性lineStyle控制线条样式
+                      width: 8
+                    }
+                  },
+                  axisTick: {
+                    // 坐标轴小标记
+                    splitNumber: 5,
+                    length: 10, // 属性length控制线长
+                    lineStyle: {
+                      // 属性lineStyle控制线条样式
+                      color: "auto"
+                    }
+                  },
+                  axisLabel: {
+                    formatter: function(v) {
+                      switch (v + "") {
+                        case "0":
+                          return "E";
+                        case "1":
+                          return "Gas";
+                        case "2":
+                          return "F";
+                      }
+                    }
+                  },
+                  splitLine: {
+                    // 分隔线
+                    length: 15, // 属性length控制线长
+                    lineStyle: {
+                      // 属性lineStyle（详见lineStyle）控制线条样式
+                      color: "auto"
+                    }
+                  },
+                  pointer: {
+                    width: 2,
+                    length:'74%'
+                  },
+                  title: {
+                    fontWeight: "bolder",
+                    fontSize: 16,
+                    color: "red",
+                    offsetCenter: [0, "-50px"]
+                  },
+                  detail: {
+                    // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                    fontWeight: "bolder",
+                    fontSize: "12px",
+                    color: "#fff",
+                    offsetCenter: [0, "-30px"],
+                    // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                    formatter: function(value) {
+                    if(Number(value)==100){
+                        return `${Number(value)}%`;
+                      }else{
+                        return `${Number(value).toFixed(1)}%`;
+                      }
+                    }
+                  },
+                  data: [{ value: 100, name: "智慧通" }]
+                },
+                {
+                  name: "一卡通",
+                  type: "gauge",
+                  center: ["75%", "55%"], // 默认全局居中
+                  radius: "60%",
+                  min: 0,
+                  max: 100,
+                  startAngle: 315,
+                  endAngle: 225,
+                  splitNumber: 4,
+                  axisLine: {
+                    // 坐标轴线
+                    lineStyle: {
+                      // 属性lineStyle控制线条样式
+                      width: 8
+                    }
+                  },
+                  axisTick: {
+                    // 坐标轴小标记
+                    show: false
+                  },
+                  axisLabel: {
+                    formatter: function(v) {
+                      switch (v + "") {
+                        case "0":
+                          return "H";
+                        case "1":
+                          return "Water";
+                        case "2":
+                          return "C";
+                      }
+                    }
+                  },
+                  splitLine: {
+                    // 分隔线
+                    length: 15, // 属性length控制线长
+                    lineStyle: {
+                      // 属性lineStyle（详见lineStyle）控制线条样式
+                      color: "auto"
+                    }
+                  },
+                  pointer: {
+                    width: 2
+                  },
+                  title: {
+                    fontWeight: "bolder",
+                    fontSize: 16,
+                    color: "red",
+                    offsetCenter: [0, "55px"]
+                  },
+                  detail: {
+                    // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                    fontWeight: "bolder",
+                    fontSize: "12px",
+                    color: "#fff",
+                    offsetCenter: [0, "35px"],
+                    // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                    formatter: function(value) {
+                      if(Number(value)==100){
+                        return `${Number(value)}%`;
+                      }else{
+                        return `${Number(value).toFixed(1)}%`;
+                      }
+                    }
+                  },
+                  data: [{ value: 100, name: "一卡通" }]
                 }
-              },
-              splitLine: {
-                // 分隔线
-                length: 20, // 属性length控制线长
-                lineStyle: {
-                  // 属性lineStyle（详见lineStyle）控制线条样式
-                  color: "auto"
-                }
-              },
-              pointer: {
-                width: 5
-              },
-              title: {
-                fontWeight: "bolder",
-                fontSize: 20,
-                color: "#fff",
-                offsetCenter: [0, "-30%"] // x, y，单位px
-              },
-              pointer:{
-                length:'50%',
-                width: 5,
-              },
-              detail: {
-                // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                fontWeight: "bolder",
-                // fontSize:'40px',
-                offsetCenter:[0,'60px'],
-                // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                formatter: function(value) {
-                  value = `${value}%`;
-                  return value;
-                }
-              },
-              data: [{ value: 1.5, name: "完好率" }]
-            },
-            {
-              name: "一票通",
-              type: "gauge",
-              center: ["85%", "50%"], // 默认全局居中
-              radius: "60%",
-              min: 0,
-              max: 100,
-              startAngle: 135,
-              endAngle: 45,
-              splitNumber: 4,
-              axisLine: {
-                // 坐标轴线
-                lineStyle: {
-                  // 属性lineStyle控制线条样式
-                  width: 8
-                }
-              },
-              axisTick: {
-                // 坐标轴小标记
-                splitNumber: 5,
-                length: 10, // 属性length控制线长
-                lineStyle: {
-                  // 属性lineStyle控制线条样式
-                  color: "auto"
-                }
-              },
-              axisLabel: {
-                formatter: function(v) {
-                  switch (v + "") {
-                    case "0":
-                      return "E";
-                    case "1":
-                      return "Gas";
-                    case "2":
-                      return "F";
-                  }
-                }
-              },
-              splitLine: {
-                // 分隔线
-                length: 15, // 属性length控制线长
-                lineStyle: {
-                  // 属性lineStyle（详见lineStyle）控制线条样式
-                  color: "auto"
-                }
-              },
-              pointer: {
-                width: 2,
-                length:'74%'
-              },
-              title: {
-                fontWeight: "bolder",
-                fontSize: 16,
-                color: "red",
-                offsetCenter: [0, "-50px"]
-              },
-              detail: {
-                // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                fontWeight: "bolder",
-                fontSize: "12px",
-                color: "#fff",
-                offsetCenter: [0, "-30px"],
-                // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                formatter: function(value) {
-                  value = `${value}%`;
-                  return value;
-                }
-              },
-              data: [{ value: 100, name: "一票通" }]
-            },
-            {
-              name: "一卡通",
-              type: "gauge",
-              center: ["85%", "50%"], // 默认全局居中
-              radius: "60%",
-              min: 0,
-              max: 100,
-              startAngle: 315,
-              endAngle: 225,
-              splitNumber: 4,
-              axisLine: {
-                // 坐标轴线
-                lineStyle: {
-                  // 属性lineStyle控制线条样式
-                  width: 8
-                }
-              },
-              axisTick: {
-                // 坐标轴小标记
-                show: false
-              },
-              axisLabel: {
-                formatter: function(v) {
-                  switch (v + "") {
-                    case "0":
-                      return "H";
-                    case "1":
-                      return "Water";
-                    case "2":
-                      return "C";
-                  }
-                }
-              },
-              splitLine: {
-                // 分隔线
-                length: 15, // 属性length控制线长
-                lineStyle: {
-                  // 属性lineStyle（详见lineStyle）控制线条样式
-                  color: "auto"
-                }
-              },
-              pointer: {
-                width: 2
-              },
-              title: {
-                fontWeight: "bolder",
-                fontSize: 16,
-                color: "red",
-                offsetCenter: [0, "55px"]
-              },
-              detail: {
-                // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                fontWeight: "bolder",
-                fontSize: "12px",
-                color: "#fff",
-                offsetCenter: [0, "35px"],
-                // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                formatter: function(value) {
-                  value = `${value}%`;
-                  return value;
-                }
-              },
-              data: [{ value: 100, name: "一卡通" }]
+              ]
             }
-          ]
-        };
-      
-      self.leftGau.setOption(optionLeft,true);
-      self.RightGau.setOption(optionRight,true);
-    }
+          
+          self.leftGau.setOption(optionLeft,true);
+          self.RightGau.setOption(optionRight,true);
+        }
   }
 };
 </script>

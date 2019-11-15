@@ -84,18 +84,18 @@ var common = {
       id: "CD02"
     },
     {
+      title: "设备信息",
+      key: "service",
+      id: "CD03",
+    },
+    {
       title: "智能客流",
       key: "flow",
-      id: "CD03",
+      id: "CD04",
     },
     {
       title: "安全防范",
       key: "safe",
-      id: "CD04",
-    },
-    {
-      title: "设备信息",
-      key: "service",
       id: "CD05",
     },
     {
@@ -123,20 +123,21 @@ var common = {
       id: "CD02"
     },
     {
+      title: "设备信息",
+      key: "service",
+      id: "CD03",
+    },
+    {
       title: "智能客流",
       key: "flow",
-      id: "CD03",
+      id: "CD04",
     },
     {
       title: "安全防范",
       key: "safe",
-      id: "CD04",
-    },
-    {
-      title: "设备信息",
-      key: "service",
       id: "CD05",
     },
+    
     {
       title: "能耗分析",
       key: "energy",

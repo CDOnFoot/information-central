@@ -8,7 +8,7 @@
     import MB03 from '../../components/common/MB/MB03';
 
     export default {
-        name: "passenger",
+        name: "service",
         data(){
             return{
               currentMB:'',
@@ -58,7 +58,7 @@
       },
       mounted() {
         // this.currentMB = this.mbId;
-        this.$router.push('/home/passenger');
+        this.$router.push('/home/service');
         
       },
       methods:{

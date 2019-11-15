@@ -137,6 +137,7 @@
     beforeRouteUpdate (to, from, next) {
       let self = this;
       var routerVal = to.matched[1].path;
+      console.log(routerVal);
       new Promise((resolve,reject)=>{
         self.menuList.some((item,index)=>{
           if('/home/'+item.key === routerVal){

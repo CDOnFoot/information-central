@@ -134,7 +134,7 @@ const router =  new Router({
           path:'service',
           component: service,
           meta:{
-            title:'服务分析',
+            title:'设备信息',
             keepAlive:false,
             needLogin: true
           },

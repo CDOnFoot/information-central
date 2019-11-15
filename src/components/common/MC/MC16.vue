@@ -5,9 +5,7 @@
    <div class="main">
       <div class="borde">{{mcTitle}}</div>
       <div :id="mcId" class="main-id">
-        <div class="none-data">
-          暂无信息
-        </div>
+        
       </div>
     </div>
   </div>
@@ -54,9 +52,5 @@ export default {
   height: 100%;
   position: relative;
 }
-.none-data{
-  font-size: 14px;
-  text-align: center;
-  padding-top: 20px;
-}
+
 </style>

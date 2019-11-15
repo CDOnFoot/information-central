@@ -34,10 +34,11 @@
                 <img src="../../../assets/img/idea-bg.png" alt="" class="idea-img">
                 <div class='gaugeDateTitle'>AG</div>
                 <div class='gaugeDateLeft'>
-                  <div class='gaugeDateLabel'>总数：<span class='gaugeDateNum'>1623</span></div>
-                  <div class='gaugeDateLabel'>故障数量：<span class='gaugeDateNum'>1553</span></div>
-                  <div class='gaugeDateLabel'>正常数量：<span class='gaugeDateNum'>0</span></div>
-                  <div class='gaugeDateLabel'>失效数量：<span class='gaugeDateNum'>70</span></div>
+                  <div class='gaugeDateLabel'>总数：<span class='gaugeDateNum'>{{AGequipmenttotal}}</span></div>
+                  <div class='gaugeDateLabel'>降级服务：<span class='gaugeDateNum'>{{AGdowngradeserver}}</span></div>
+                  <div class='gaugeDateLabel'>正常服务：<span class='gaugeDateNum'>{{AGnormalsever}}</span></div>
+                  <div class='gaugeDateLabel'>失效服务：<span class='gaugeDateNum'>{{AGinvalidsever}}</span></div>
+
                 </div>
               </div>
               <div class="top-middle-picture">
@@ -49,10 +50,10 @@
                 <img src="../../../assets/img/idea-bg.png" alt="" class="idea-img">
                 <div class='gaugeDateTitle'>TVM</div>
                 <div class='gaugeDateLeft'>
-                  <div class='gaugeDateLabel'>总数：<span class='gaugeDateNum'>1623</span></div>
-                  <div class='gaugeDateLabel'>故障数量：<span class='gaugeDateNum'>1553</span></div>
-                  <div class='gaugeDateLabel'>正常数量：<span class='gaugeDateNum'>0</span></div>
-                  <div class='gaugeDateLabel'>失效数量：<span class='gaugeDateNum'>70</span></div>
+                  <div class='gaugeDateLabel'>总数：<span class='gaugeDateNum'>{{TVMequipmenttotal}}</span></div>
+                  <div class='gaugeDateLabel'>降级服务：<span class='gaugeDateNum'>{{TVMdowngradeserver}}</span></div>
+                  <div class='gaugeDateLabel'>正常服务：<span class='gaugeDateNum'>{{TVMnormalsever}}</span></div>
+                  <div class='gaugeDateLabel'>失效服务：<span class='gaugeDateNum'>{{TVMinvalidsever}}</span></div>
                 </div>
               </div>
               <div class="top-middle-picture">
@@ -88,7 +89,7 @@
                 <div class="borde">AG服务状态统计</div>
                 <!--  AG-->
                 <div class="AG">
-                   <a-table :columns="columnsAg" :dataSource="dataAg" size="small" :pagination="false"/>
+                   <a-table :columns="columnsAg" :dataSource="dataAg.slice((currentPageAg-1)*pagesizeAg,currentPageAg*pagesizeAg)" size="small" :pagination="false"/>
                 </div>
               </div>
             </div>
@@ -100,7 +101,7 @@
                 <div class="borde">TVM服务状态统计</div>
                 <!-- Tvm -->
                 <div class="TVM">
-                  <a-table :columns="columnsTvm" :dataSource="dataTvm" size="small" :pagination="false" />
+                  <a-table :columns="columnsTvm" :dataSource="dataTvm.slice((currentPageTvm-1)*pagesizeTvm,currentPageTvm*pagesizeTvm)" size="small" :pagination="false" />
               </div>
               </div>
             </div>
@@ -113,6 +114,8 @@
 <script>
 import echarts from "echarts";
 import $ from 'jquery';
+import Cookies from 'js-cookie';
+
 // import func from '../../../../vue-temp/vue-editor-bridge';
   const columnsAg = [
     {
@@ -121,7 +124,7 @@ import $ from 'jquery';
     },
     {
       title: '设备总数',
-      dataIndex: 'age',
+      dataIndex: 'total',
     },
     {
       title: '正常服务',
@@ -143,14 +146,14 @@ import $ from 'jquery';
     },
     {
       title: '设备总数',
-      dataIndex: 'age',
+      dataIndex: 'total',
     },
     {
-      title: '正常服务(单模式)',
+      title: '正常服务/单模式',
       dataIndex: 'sub',
     },
      {
-      title: '正常服务(双模式)',
+      title: '正常服务/双模式',
       dataIndex: 'double',
     },
     {
@@ -162,11 +165,11 @@ import $ from 'jquery';
       dataIndex: 'dismiss',
     },
      {
-      title: '认证失败(智慧通)',
+      title: '认证失败/智慧通',
       dataIndex: 'ie',
     },
   {
-      title: '认证失败(一票通)',
+      title: '认证失败/一票通',
       dataIndex: 'once',
     },
   ];
@@ -174,167 +177,37 @@ export default {
   name: "MC16",
   data() {
     return {
-      agList:[
-        {data:'测试数据1：2019年09月20日07:02:37可乐村站A口02售票机故障'},
-        {data:'测试数据2：2019年09月20日07:02:37可乐村站A口02售票机故障'},
-        {data:'测试数据3：2019年09月20日07:02:37可乐村站A口02售票机故障'},
-        {data:'测试数据4：2019年09月20日07:02:37可乐村站A口02售票机故障'},
-        {data:'测试数据5：2019年09月20日07:02:37可乐村站A口02售票机故障'},
-        {data:'测试数据6：2019年09月20日07:02:37可乐村站A口02售票机故障'},
-        {data:'测试数据7：2019年09月20日07:02:37可乐村站A口02售票机故障'},
-        {data:'测试数据8：2019年09月20日07:02:37可乐村站A口02售票机故障'},
-        {data:'测试数据9：2019年09月20日07:02:37可乐村站A口02售票机故障'},
-        {data:'测试数据10：2019年09月20日07:02:37可乐村站A口02售票机故障'},
-        {data:'测试数据11：2019年09月20日07:02:37可乐村站A口02售票机故障'},
-        {data:'测试数据12：2019年09月20日07:02:37可乐村站A口02售票机故障'},
-        {data:'测试数据13：2019年09月20日07:02:37可乐村站A口02售票机故障'},
-      ],
-      tvmList:[
-        {data:'测试数据1：2019年09月20日07:02:37可乐村站A口02售票机故障'},
-        {data:'测试数据2：2019年09月20日07:02:37可乐村站A口02售票机故障'},
-        {data:'测试数据3：2019年09月20日07:02:37可乐村站A口02售票机故障'},
-        {data:'测试数据4：2019年09月20日07:02:37可乐村站A口02售票机故障'},
-        {data:'测试数据5：2019年09月20日07:02:37可乐村站A口02售票机故障'},
-        {data:'测试数据6：2019年09月20日07:02:37可乐村站A口02售票机故障'},
-        {data:'测试数据7：2019年09月20日07:02:37可乐村站A口02售票机故障'},
-        {data:'测试数据8：2019年09月20日07:02:37可乐村站A口02售票机故障'},
-        {data:'测试数据9：2019年09月20日07:02:37可乐村站A口02售票机故障'},
-        {data:'测试数据10：2019年09月20日07:02:37可乐村站A口02售票机故障'},
-        {data:'测试数据11：2019年09月20日07:02:37可乐村站A口02售票机故障'},
-        {data:'测试数据12：2019年09月20日07:02:37可乐村站A口02售票机故障'},
-        {data:'测试数据13：2019年09月20日07:02:37可乐村站A口02售票机故障'},
-      ],
+      agList:[],
+      tvmList:[],
       dataRef:'',
       timerTvm:'',
       timerAg:'',
 
       leftGau:'',
       RightGau:'',
-      dataAg:[{
-        key: '1',
-        name: '1',
-        age: '大树营站 - 东华站',
-        address: '87282',
-      },
-      {
-        key: '2',
-        name: '2',
-        age: '可乐村站 - 东华站',
-        address: '82999',
-      },
-      {
-        key: '3',
-        name: '3',
-        age: '大树营站 - 昆明南站',
-        address: '73299',
-      },
-          {
-        key: '4',
-        name: '4',
-        age: '可乐村站 - 昆明南站',
-        address: '73022',
-      },
-          {
-        key: '5',
-        name: '5',
-        age: '大树营站 - 斗南站',
-        address: '69364',
-      },
-          {
-        key: '6',
-        name: '6',
-        age: '古城站 - 东华站',
-        address: '67299',
-      },
-      {
-        key: '7',
-        name: '7',
-        age: '大树营站 - 吴家营站',
-        address: '60938',
-      },
-        {
-        key: '8',
-        name: '8',
-        age: '大树营站 - 吴家营站',
-        address: '60938',
-      },
-        {
-        key: '9',
-        name: '9',
-        age: '大树营站 - 吴家营站',
-        address: '60938',
-      },
-        {
-        key: '10',
-        name: '10',
-        age: '大树营站 - 吴家营站',
-        address: '60938',
-      },
-      ],
-      dataTvm:[{
-        key: '1',
-        name: '1',
-        age: '大树营站 - 东华站',
-        address: '87282',
-      },
-      {
-        key: '2',
-        name: '2',
-        age: '可乐村站 - 东华站',
-        address: '82999',
-      },
-      {
-        key: '3',
-        name: '3',
-        age: '大树营站 - 昆明南站',
-        address: '73299',
-      },
-          {
-        key: '4',
-        name: '4',
-        age: '可乐村站 - 昆明南站',
-        address: '73022',
-      },
-          {
-        key: '5',
-        name: '5',
-        age: '大树营站 - 斗南站',
-        address: '69364',
-      },
-          {
-        key: '6',
-        name: '6',
-        age: '古城站 - 东华站',
-        address: '67299',
-      },
-      {
-        key: '7',
-        name: '7',
-        age: '大树营站 - 吴家营站',
-        address: '60938',
-      },
-        {
-        key: '8',
-        name: '8',
-        age: '大树营站 - 吴家营站',
-        address: '60938',
-      },
-        {
-        key: '9',
-        name: '9',
-        age: '大树营站 - 吴家营站',
-        address: '60938',
-      },
-        {
-        key: '10',
-        name: '10',
-        age: '大树营站 - 吴家营站',
-        address: '60938',
-      },
-      ],
+      dataAg:[],
+      dataTvm:[],
+
       columnsTvm,
       columnsAg,
+      AGequipmenttotal:'', //AG总数
+      AGinvalidsever:'',  //AG失效服务
+      AGnormalsever:'',   //AG正常服务
+      AGdowngradeserver:'', //AG降级服务
+      TVMequipmenttotal:'', //AG总数
+      TVMinvalidsever:'',  //AG失效服务
+      TVMnormalsever:'',   //AG正常服务
+      TVMdowngradeserver:'', //AG降级服务
 
+      currentPageAg:1,
+      pagesizeAg:10,
+
+      currentPageTvm:1,
+      pagesizeTvm:10,
+      dataRef:'',
+
+      userId:Cookies.get("dvptId"),
+      customToken:Cookies.get("dvptToken"),
     };
   },
   props: ["mcStatus", "mcTitle", "mcId"],
@@ -349,65 +222,201 @@ export default {
       this.mcId = val;
     }
   },
+   destroyed: function() {
+    //页面销毁时关闭
+    window.clearInterval(this.dataRef);
+
+    this.websocketclose();
+  },
   mounted() {
     let self = this;
     // 初始化障碍信息
     this.initGetActionInfo();
-
     // 初始化仪表盘
-    this.drawLineGauge();
+    this.getGau();
+    // 指标统计
+    this.getTotal();
+    // 初始化统计表格AG
+    this.initTableDisplayAg();
+    // 初始化统计表格TVM
+    this.initTableDisplayTvm();
 
-    // 初始化统计表格
-    this.initTableDisplay();
+    window.clearInterval(this.dataRef)
 
-    // 初始化设备指标信息
-    this.initServiceInfo();
+    var timeStamp=1573056120000;  //11月6日凌晨d点02分的毫秒数
+    var dayMins = 900000;   //15分钟
+    var setIntervalMins = 1000*30  //30秒
+    self.dataRef = setInterval(()=>{
+      // console.log(new Date())
+      let currwntTime = Date.now();
+      let minsMore = (currwntTime-timeStamp)%dayMins
+      if(minsMore>0 && minsMore<=setIntervalMins){  //(当前时间-固定时间)对每日毫秒数 取余
+        // console.log("15分钟定点刷新")
+
+        // 初始化仪表盘
+        self.getGau();
+        // 指标统计
+        self.getTotal();
+        // 初始化统计表格AG
+        self.initTableDisplayAg();
+        // 初始化统计表格TVM
+        self.initTableDisplayTvm();
+
+      }
+    },setIntervalMins)
+
+
+   //页面刚进入时开启长连接
+    if ('WebSocket' in window) {
+      this.initWebSocket();
+    } else {
+       this.$info({
+          title: '提示',
+          content: '当前界面不支持websocket的使用',
+        });
+    }
   },
   created() {
   },
   methods: {
-    // 初始化设备指标信息
-    initServiceInfo:function(){
-      let self = this;
-      self.initService(function(data){
-        self.serviceInfo(data);
-      })
+// 初始化websocket连接数据
+    initWebSocket:function(){
+      const wsuri = this.$http.websocketService+this.userId+"/"+this.customToken;//ws地址
+      console.log(wsuri);
+      this.websocket = new WebSocket(wsuri);
+      this.websocket.onopen = this.websocketonopen;
+      this.websocket.onerror = this.websocketonerror;
+      this.websocket.onmessage = this.websocketonmessage;
+      this.websocket.onclose = this.websocketclose;
     },
-    initService:function(callback){
+    websocketonopen() {
+      console.log("WebSocket连接成功");
+    },
+    websocketonerror(e) { 
+      //错误
+      console.log("WebSocket连接发生错误:");
+      console.log(e);
 
     },
-    serviceInfo:function(data){
-
+    websocketonmessage(e){ //数据接收
+      console.log("WebSocket连接数据接收中:");
+      if(e.data){
+        // 捕捉异常
+        try{
+          const redata = JSON.parse(e.data);
+          this.showData(redata.data)
+        }catch(e){
+          console.log(e);
+        }
+      }
+    },
+    websocketsend(agentData){
+      //数据发送
+      // console.log("WebSocket数据发送消息中:");
+      this.websocket.send(agentData);
+    },
+    websocketclose(e){  
+      //关闭
+      this.websocket.close();
+    },
+    showData(redata){
+        let self = this;
+        console.log(redata);
+        if(redata.type==="1" && redata.name==="AG"){
+          this.tvmList.push({
+            data:redata.msg
+          });
+        }else if(redata.type==="2" && redata.name==='TVM'){
+          this.agList.push({
+            data:redata.msg
+          }); 
+        }
     },
     // 初始化障碍信息
     initGetActionInfo:function(){
-      let self = this;
-      self.getActionInfo(function(data){
-        self.actionInfo(data);
-      })
-    },
-    getActionInfo:function(callback){
-      callback();
-    },
-    actionInfo:function(data){
-  // 启动故障信息滚动
       this.actionInfoTvm();//Tvm
       this.actionInfoAg();///ag
     },
-    // 初始化统计表格
-    initTableDisplay:function(){
+    // 初始化统计表格Ag
+    initTableDisplayAg:function(){
       let self = this;
-      self.initTable(function(data){
-        self.tableDisplay(data);
+      self.initTableAg(function(data){
+        self.tableDisplayAg(data);
       })
     },
 
-    initTable:function(callback){
-
+    initTableAg:function(callback){
+        let self = this;
+        let param={
+          };
+        this.$http.get(self.$api.getAgServerDate, param).then(res =>{
+          //调取数据成功
+          if(res.data){
+            if (res.data.code === "0") {
+              callback(res.data.data)
+            }else{
+              console.log(res.data.msg);
+            }
+          }
+        });
       
     },
-    tableDisplay:function(data){
+    tableDisplayAg:function(data){
+      let arr = JSON.parse(JSON.stringify(data));
+      let self = this;
+      self.dataAg =[];
+      arr.map((item,index)=>{
+        self.dataAg.push({
+          key: (index).toString(),
+          name:item.stationName,
+          total:item.equipmentTotal,
+          formal:item.normalSever,
+          down:item.downgradeServer,
+          dismiss:item.invalidSever,           
+        });
+      });
+    },
+  // 初始化统计表格Tvm
+    initTableDisplayTvm:function(){
+      let self = this;
+      self.initTableTvm(function(data){
+        self.tableDisplayTvm(data);
+      })
+    },
+    initTableTvm:function(callback){
+      let self = this;
+      let param={
+        };
+      this.$http.get(self.$api.getTvmServerDate, param).then(res =>{
+        //调取数据成功
+        if(res.data){
+          if (res.data.code === "0") {
+            callback(res.data.data)
+          }else{
+            console.log(res.data.msg);
+          }
+        }
+      });
+      
+    },
+    tableDisplayTvm:function(data){
+      let arr = JSON.parse(JSON.stringify(data));
+      let self = this;
+      self.dataTvm =[];
+      arr.map((item,index)=>{
+        self.dataTvm.push({
+          key: (index).toString(),
+          name:item.stationName,
+          total:item.equipmentTotal,
+          down:item.normalSeverSingle,
+          sub:item.normalSeverSingle,
+          double:item.downgradeServer,
+          dismiss:item.invalidSever,           
+          ie:item.authInvalidIntelligent,     
+          once:item.authInvalidTicket,           
 
+        });
+      });
     },
     // // 故障信息滚动效果
     scrollListTvm:function(obj) {
@@ -449,613 +458,686 @@ export default {
       }).trigger("mouseleave"); //自动触发触摸事件
       
      },
-    drawLineGauge(){
+     getTotal(){
       let self = this;
-          let optionLeft = null;
-          let optionRight = null;
-          let objLeft = document.getElementById('gaugeLeft');
-          let objRight = document.getElementById('gaugeRight');
-          self.leftGau = self.$echarts.init(objLeft);
-          self.RightGau = self.$echarts.init(objRight);
-          optionLeft = {
-              tooltip: {
-                formatter: "{a} <br/>{c} {b}"
-              },
-              
-              series: [
-                {
-                  name: "开机率",
-                  type: "gauge",
-                  z: 3,
-                  min: 0,
-                  max: 100,
-                  splitNumber: 10,
-                  center: ["45%", "55%"], // 默认全局居中
-                  radius: "75%",
-                  axisLine: {
-                    // 坐标轴线
-                    lineStyle: {
-                      // 属性lineStyle控制线条样式
-                      width: 10
-                    }
-                  },
-                  axisTick: {
-                    // 坐标轴小标记
-                    length: 15, // 属性length控制线长
-                    lineStyle: {
-                      // 属性lineStyle控制线条样式
-                      color: "auto"
-                    }
-                  },
-                  splitLine: {
-                    // 分隔线
-                    length: 20, // 属性length控制线长
-                    lineStyle: {
-                      // 属性lineStyle（详见lineStyle）控制线条样式
-                      color: "auto"
-                    }
-                  },
-                  pointer:{
-                    length:'50%',
-                    width: 5,
-                  },
-                  axisLabel: {
-                    backgroundColor: "auto",
-                    borderRadius: 2,
-                    color: "#eee",
-                    padding: 3,
-                    textShadowBlur: 2,
-                    textShadowOffsetX: 1,
-                    textShadowOffsetY: 1,
-                    textShadowColor: "#222"
-                  },
-                  title: {
-                    // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                    fontWeight: "bolder",
-                    fontSize: 20,
-                    color: "#fff",
-                    offsetCenter: [0, "20px"]
-                    // fontStyle: 'italic'
-                  },
-                  detail: {
-                    // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                    formatter: function(value) {
-                      if(Number(value)==100){
-                        return `${Number(value)}%`;
-                      }else{
-                        return `${Number(value).toFixed(1)}%`;
-                      }
-                    },
-                    fontWeight: "bolder",
-                    fontSize:'30px',
-                    borderRadius: 3,
-                    backgroundColor: "#444",
-                    borderColor: "#aaa",
-                    shadowBlur: 5,
-                    shadowColor: "#333",
-                    shadowOffsetX: 0,
-                    shadowOffsetY: 3,
-                    borderWidth: 2,
-                    textBorderColor: "#000",
-                    textBorderWidth: 2,
-                    textShadowBlur: 2,
-                    textShadowColor: "#fff",
-                    textShadowOffsetX: 0,
-                    textShadowOffsetY: 0,
-                  
-                    color: "#eee",
-                    rich: {},
-                    offsetCenter: [0, "100px"]
-                  },
-                  
-                  data: [{ value: 40, name: "开机率" }]
-                },
-                {
-                  name: "完好率",
-                  type: "gauge",
-                  center: ["22%", "55%"], // 默认全局居中
-                  radius: "65%",
-                  min: 0,
-                  max: 100,
-                  startAngle:245,
-                  endAngle: 65,
-                  splitNumber: 4,
-                  axisLine: {
-                    // 坐标轴线
-                    lineStyle: {
-                      // 属性lineStyle控制线条样式
-                      width: 8
-                    }
-                  },
-                  axisTick: {
-                    // 坐标轴小标记
-                    length: 12, // 属性length控制线长
-                    lineStyle: {
-                      // 属性lineStyle控制线条样式
-                      color: "auto"
-                    }
-                  },
-                  splitLine: {
-                    // 分隔线
-                    length: 20, // 属性length控制线长
-                    lineStyle: {
-                      // 属性lineStyle（详见lineStyle）控制线条样式
-                      color: "auto"
-                    }
-                  },
-                  pointer: {
-                    width: 5
-                  },
-                  title: {
-                    fontWeight: "bolder",
-                    fontSize: 20,
-                    color: "#fff",
-                    offsetCenter: ['-20%', "-30%"] // x, y，单位px
-                  },
-                  pointer:{
-                    length:'50%',
-                    width: 5,
-                  },
-                  detail: {
-                    // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                    fontWeight: "bolder",
-                    fontSize:'20px',
-                    offsetCenter:[0,'80px'],
-                    // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                    formatter: function(value) {
-                      if(Number(value)==100){
-                        return `${Number(value)}%`;
-                      }else{
-                        return `${Number(value).toFixed(1)}%`;
-                      }
-                    }
-                  },
-                  data: [{ value: 1.5, name: "完好率" }]
-                },
-                {
-                  name: "连接状态",
-                  type: "gauge",
-                  center: ["75%", "55%"], // 默认全局居中
-                  radius: "60%",
-                  min: 0,
-                  max: 100,
-                  startAngle: 135,
-                  endAngle: 45,
-                  splitNumber: 4,
-                  axisLine: {
-                    // 坐标轴线
-                    lineStyle: {
-                      // 属性lineStyle控制线条样式
-                      width: 8
-                    }
-                  },
-                  axisTick: {
-                    // 坐标轴小标记
-                    splitNumber: 5,
-                    length: 10, // 属性length控制线长
-                    lineStyle: {
-                      // 属性lineStyle控制线条样式
-                      color: "auto"
-                    }
-                  },
-                  axisLabel: {
-                    formatter: function(v) {
-                      switch (v + "") {
-                        case "0":
-                          return "E";
-                        case "1":
-                          return "Gas";
-                        case "2":
-                          return "F";
-                      }
-                    }
-                  },
-                  splitLine: {
-                    // 分隔线
-                    length: 15, // 属性length控制线长
-                    lineStyle: {
-                      // 属性lineStyle（详见lineStyle）控制线条样式
-                      color: "auto"
-                    }
-                  },
-                  pointer: {
-                    width: 2,
-                    length:'74%'
-                  },
-                  title: {
-                    fontWeight: "bolder",
-                    fontSize: 16,
-                    color: "red",
-                    offsetCenter: [0, "-50px"]
-                  },
-                  detail: {
-                    // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                    fontWeight: "bolder",
-                    fontSize: "12px",
-                    color: "#fff",
-                    offsetCenter: [0, "-30px"],
-                    // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                    formatter: function(value) {
-                      if(Number(value)==100){
-                        return `${Number(value)}%`;
-                      }else{
-                        return `${Number(value).toFixed(1)}%`;
-                      }
-                    }
-                  },
-                  data: [{ value: 100, name: "连接状态" }]
-                },
-                {
-                  name: "时钟正常",
-                  type: "gauge",
-                  center: ["75%", "55%"], // 默认全局居中
-                  radius: "60%",
-                  min: 0,
-                  max: 100,
-                  startAngle: 315,
-                  endAngle: 225,
-                  splitNumber: 4,
-                  axisLine: {
-                    // 坐标轴线
-                    lineStyle: {
-                      // 属性lineStyle控制线条样式
-                      width: 8
-                    }
-                  },
-                  axisTick: {
-                    // 坐标轴小标记
-                    show: false
-                  },
-                  axisLabel: {
-                    formatter: function(v) {
-                      switch (v + "") {
-                        case "0":
-                          return "H";
-                        case "1":
-                          return "Water";
-                        case "2":
-                          return "C";
-                      }
-                    }
-                  },
-                  splitLine: {
-                    // 分隔线
-                    length: 15, // 属性length控制线长
-                    lineStyle: {
-                      // 属性lineStyle（详见lineStyle）控制线条样式
-                      color: "auto"
-                    }
-                  },
-                  pointer: {
-                    width: 2
-                  },
-                  title: {
-                    fontWeight: "bolder",
-                    fontSize: 16,
-                    color: "red",
-                    offsetCenter: [0, "55px"]
-                  },
-                  detail: {
-                    // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                    fontWeight: "bolder",
-                    fontSize: "12px",
-                    color: "#fff",
-                    offsetCenter: [0, "35px"],
-                    // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                    formatter: function(value) {
-                      if(Number(value)==100){
-                        return `${Number(value)}%`;
-                      }else{
-                        return `${Number(value).toFixed(1)}%`;
-                      }
-                    }
-                  },
-                  data: [{ value: 100, name: "时钟正常" }]
-                }
-              ]
-            };
-          
-          optionRight = {
-              tooltip: {
-                formatter: "{a} <br/>{c} {b}"
-              },
-              
-              series: [
-                {
-                  name: "开机率",
-                  type: "gauge",
-                  z: 3,
-                  min: 0,
-                  max: 100,
-                  splitNumber: 10,
-                  center: ["45%", "55%"], // 默认全局居中
-                  radius: "75%",
-                  axisLine: {
-                    // 坐标轴线
-                    lineStyle: {
-                      // 属性lineStyle控制线条样式
-                      width: 10
-                    }
-                  },
-                  axisTick: {
-                    // 坐标轴小标记
-                    length: 15, // 属性length控制线长
-                    lineStyle: {
-                      // 属性lineStyle控制线条样式
-                      color: "auto"
-                    }
-                  },
-                  splitLine: {
-                    // 分隔线
-                    length: 20, // 属性length控制线长
-                    lineStyle: {
-                      // 属性lineStyle（详见lineStyle）控制线条样式
-                      color: "auto"
-                    }
-                  },
-                  pointer:{
-                    length:'50%',
-                    width: 5,
-                  },
-                  axisLabel: {
-                    backgroundColor: "auto",
-                    borderRadius: 2,
-                    color: "#eee",
-                    padding: 3,
-                    textShadowBlur: 2,
-                    textShadowOffsetX: 1,
-                    textShadowOffsetY: 1,
-                    textShadowColor: "#222"
-                  },
-                  title: {
-                    // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                    fontWeight: "bolder",
-                    fontSize: 20,
-                    color: "#fff",
-                    offsetCenter: [0, "20px"]
-                    // fontStyle: 'italic'
-                  },
-                  detail: {
-                    // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                    formatter: function(value) {
-                      if(Number(value)==100){
-                        return `${Number(value)}%`;
-                      }else{
-                        return `${Number(value).toFixed(1)}%`;
-                      }
-                    },
-                    fontWeight: "bolder",
-                    fontSize:'30px',
-                    borderRadius: 3,
-                    backgroundColor: "#444",
-                    borderColor: "#aaa",
-                    shadowBlur: 5,
-                    shadowColor: "#333",
-                    shadowOffsetX: 0,
-                    shadowOffsetY: 3,
-                    borderWidth: 2,
-                    textBorderColor: "#000",
-                    textBorderWidth: 2,
-                    textShadowBlur: 2,
-                    textShadowColor: "#fff",
-                    textShadowOffsetX: 0,
-                    textShadowOffsetY: 0,
-                  
-                    color: "#eee",
-                    rich: {},
-                    offsetCenter: [0, "100px"]
-                  },
-                  
-                  data: [{ value: 40, name: "开机率" }]
-                },
-                {
-                  name: "完好率",
-                  type: "gauge",
-                  center: ["22%", "55%"], // 默认全局居中
-                  radius: "65%",
-                  min: 0,
-                  max: 100,
-                  startAngle:245,
-                  endAngle: 65,
-                  splitNumber: 4,
-                  axisLine: {
-                    // 坐标轴线
-                    lineStyle: {
-                      // 属性lineStyle控制线条样式
-                      width: 8
-                    }
-                  },
-                  axisTick: {
-                    // 坐标轴小标记
-                    length: 12, // 属性length控制线长
-                    lineStyle: {
-                      // 属性lineStyle控制线条样式
-                      color: "auto"
-                    }
-                  },
-                  splitLine: {
-                    // 分隔线
-                    length: 20, // 属性length控制线长
-                    lineStyle: {
-                      // 属性lineStyle（详见lineStyle）控制线条样式
-                      color: "auto"
-                    }
-                  },
-                  pointer: {
-                    width: 5
-                  },
-                  title: {
-                    fontWeight: "bolder",
-                    fontSize: 20,
-                    color: "#fff",
-                    offsetCenter: ['-20%', "-30%"] // x, y，单位px
-                  },
-                  pointer:{
-                    length:'50%',
-                    width: 5,
-                  },
-                  detail: {
-                    // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                    fontWeight: "bolder",
-                    fontSize:'20px',
-                    offsetCenter:[0,'80px'],
-                    // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                    formatter: function(value) {
-                      if(Number(value)==100){
-                        return `${Number(value)}%`;
-                      }else{
-                        return `${Number(value).toFixed(1)}%`;
-                      }
-                    }
-                  },
-                  data: [{ value: 1.5, name: "完好率" }]
-                },
-                {
-                  name: "智慧通",
-                  type: "gauge",
-                  center: ["75%", "55%"], // 默认全局居中
-                  radius: "60%",
-                  min: 0,
-                  max: 100,
-                  startAngle: 135,
-                  endAngle: 45,
-                  splitNumber: 4,
-                  axisLine: {
-                    // 坐标轴线
-                    lineStyle: {
-                      // 属性lineStyle控制线条样式
-                      width: 8
-                    }
-                  },
-                  axisTick: {
-                    // 坐标轴小标记
-                    splitNumber: 5,
-                    length: 10, // 属性length控制线长
-                    lineStyle: {
-                      // 属性lineStyle控制线条样式
-                      color: "auto"
-                    }
-                  },
-                  axisLabel: {
-                    formatter: function(v) {
-                      switch (v + "") {
-                        case "0":
-                          return "E";
-                        case "1":
-                          return "Gas";
-                        case "2":
-                          return "F";
-                      }
-                    }
-                  },
-                  splitLine: {
-                    // 分隔线
-                    length: 15, // 属性length控制线长
-                    lineStyle: {
-                      // 属性lineStyle（详见lineStyle）控制线条样式
-                      color: "auto"
-                    }
-                  },
-                  pointer: {
-                    width: 2,
-                    length:'74%'
-                  },
-                  title: {
-                    fontWeight: "bolder",
-                    fontSize: 16,
-                    color: "red",
-                    offsetCenter: [0, "-50px"]
-                  },
-                  detail: {
-                    // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                    fontWeight: "bolder",
-                    fontSize: "12px",
-                    color: "#fff",
-                    offsetCenter: [0, "-30px"],
-                    // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                    formatter: function(value) {
-                    if(Number(value)==100){
-                        return `${Number(value)}%`;
-                      }else{
-                        return `${Number(value).toFixed(1)}%`;
-                      }
-                    }
-                  },
-                  data: [{ value: 100, name: "智慧通" }]
-                },
-                {
-                  name: "一卡通",
-                  type: "gauge",
-                  center: ["75%", "55%"], // 默认全局居中
-                  radius: "60%",
-                  min: 0,
-                  max: 100,
-                  startAngle: 315,
-                  endAngle: 225,
-                  splitNumber: 4,
-                  axisLine: {
-                    // 坐标轴线
-                    lineStyle: {
-                      // 属性lineStyle控制线条样式
-                      width: 8
-                    }
-                  },
-                  axisTick: {
-                    // 坐标轴小标记
-                    show: false
-                  },
-                  axisLabel: {
-                    formatter: function(v) {
-                      switch (v + "") {
-                        case "0":
-                          return "H";
-                        case "1":
-                          return "Water";
-                        case "2":
-                          return "C";
-                      }
-                    }
-                  },
-                  splitLine: {
-                    // 分隔线
-                    length: 15, // 属性length控制线长
-                    lineStyle: {
-                      // 属性lineStyle（详见lineStyle）控制线条样式
-                      color: "auto"
-                    }
-                  },
-                  pointer: {
-                    width: 2
-                  },
-                  title: {
-                    fontWeight: "bolder",
-                    fontSize: 16,
-                    color: "red",
-                    offsetCenter: [0, "55px"]
-                  },
-                  detail: {
-                    // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                    fontWeight: "bolder",
-                    fontSize: "12px",
-                    color: "#fff",
-                    offsetCenter: [0, "35px"],
-                    // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                    formatter: function(value) {
-                      if(Number(value)==100){
-                        return `${Number(value)}%`;
-                      }else{
-                        return `${Number(value).toFixed(1)}%`;
-                      }
-                    }
-                  },
-                  data: [{ value: 100, name: "一卡通" }]
-                }
-              ]
+        let param={};
+        //AG服务数
+      self.$http.get(self.$api.getAgServerDateTotal, param).then(res =>{
+          if(res.data){
+            if (res.data.code === "0") {
+              self.AGequipmenttotal = res.data.data[0].equipmenttotal;
+              self.AGdowngradeserver = res.data.data[0].downgradeserver;
+              self.AGnormalsever = res.data.data[0].normalsever;
+              self.AGinvalidsever = res.data.data[0].invalidsever;
+            }else{
+              this.$message.error(res.data.msg);
             }
+          }
+        });
+        //TVM服务数
+      self.$http.get(self.$api.getTvmServerDateTotal, param).then(res =>{
+          if(res.data){
+            if (res.data.code === "0") {
+              self.TVMequipmenttotal = res.data.data[0].equipmenttotal;
+              self.TVMdowngradeserver = res.data.data[0].downgradeserver;
+              self.TVMnormalsever = res.data.data[0].normalsever;
+              self.TVMinvalidsever = res.data.data[0].invalidsever;
+            }else{
+              this.$message.error(res.data.msg);
+            }
+          }
+        });
+    },
+   getGau(){
+       let self = this;
+       //AG仪表盘
+      self.$http.get(`${self.$api.getServerRateDate}1`).then(res =>{
+          if(res.data){
+            if (res.data.code === "0") {
+              // console.log(res.data.data)
+              self.drawLineGaugeAG(res.data.data)
+            }else{
+              this.$message.error(res.data.msg);
+            }
+          }
+        });
+        //TVM仪表盘
+      self.$http.get(`${self.$api.getServerRateDate}2`).then(res =>{
+          if(res.data){
+            if (res.data.code === "0") {
+              // console.log(res.data.data)
+              self.drawLineGaugeTVM(res.data.data)
+            }else{
+              this.$message.error(res.data.msg);
+            }
+          }
+        });
+     },
+    drawLineGaugeAG(params){
+      let self = this;
+      let optionLeft = null;
+      
+      let objLeft = document.getElementById('gaugeLeft');
+      
+      self.leftGau = self.$echarts.init(objLeft);
+      
+      optionLeft = {
+          tooltip: {
+            formatter: "{a} <br/>{c} {b}"
+          },
           
-          self.leftGau.setOption(optionLeft,true);
-          self.RightGau.setOption(optionRight,true);
-        }
+          series: [
+            {
+              name: "开机率",
+              type: "gauge",
+              z: 3,
+              min: 0,
+              max: 100,
+              splitNumber: 10,
+              center: ["45%", "55%"], // 默认全局居中
+              radius: "75%",
+              axisLine: {
+                // 坐标轴线
+                lineStyle: {
+                  // 属性lineStyle控制线条样式
+                  width: 10
+                }
+              },
+              axisTick: {
+                // 坐标轴小标记
+                length: 15, // 属性length控制线长
+                lineStyle: {
+                  // 属性lineStyle控制线条样式
+                  color: "auto"
+                }
+              },
+              splitLine: {
+                // 分隔线
+                length: 20, // 属性length控制线长
+                lineStyle: {
+                  // 属性lineStyle（详见lineStyle）控制线条样式
+                  color: "auto"
+                }
+              },
+              pointer:{
+                length:'50%',
+                width: 5,
+              },
+              axisLabel: {
+                backgroundColor: "auto",
+                borderRadius: 2,
+                color: "#eee",
+                padding: 3,
+                textShadowBlur: 2,
+                textShadowOffsetX: 1,
+                textShadowOffsetY: 1,
+                textShadowColor: "#222"
+              },
+              title: {
+                // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                fontWeight: "bolder",
+                fontSize: 20,
+                color: "#fff",
+                offsetCenter: [0, "20px"]
+                // fontStyle: 'italic'
+              },
+              detail: {
+                // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                formatter: function(value) {
+                  if(Number(value)==100){
+                    return `${Number(value)}%`;
+                  }else{
+                    return `${Number(value).toFixed(1)}%`;
+                  }
+                },
+                fontWeight: "bolder",
+                fontSize:'30px',
+                borderRadius: 3,
+                backgroundColor: "#444",
+                borderColor: "#aaa",
+                shadowBlur: 5,
+                shadowColor: "#333",
+                shadowOffsetX: 0,
+                shadowOffsetY: 3,
+                borderWidth: 2,
+                textBorderColor: "#000",
+                textBorderWidth: 2,
+                textShadowBlur: 2,
+                textShadowColor: "#fff",
+                textShadowOffsetX: 0,
+                textShadowOffsetY: 0,
+               
+                color: "#eee",
+                rich: {},
+                offsetCenter: [0, "100px"]
+              },
+              
+              data: [{ value: 40, name: "开机率" }]
+            },
+            {
+              name: "完好率",
+              type: "gauge",
+              center: ["22%", "55%"], // 默认全局居中
+              radius: "65%",
+              min: 0,
+              max: 100,
+              startAngle:245,
+              endAngle: 65,
+              splitNumber: 4,
+              axisLine: {
+                // 坐标轴线
+                lineStyle: {
+                  // 属性lineStyle控制线条样式
+                  width: 8
+                }
+              },
+              axisTick: {
+                // 坐标轴小标记
+                length: 12, // 属性length控制线长
+                lineStyle: {
+                  // 属性lineStyle控制线条样式
+                  color: "auto"
+                }
+              },
+              splitLine: {
+                // 分隔线
+                length: 20, // 属性length控制线长
+                lineStyle: {
+                  // 属性lineStyle（详见lineStyle）控制线条样式
+                  color: "auto"
+                }
+              },
+              pointer: {
+                width: 5
+              },
+              title: {
+                fontWeight: "bolder",
+                fontSize: 20,
+                color: "#fff",
+                offsetCenter: ['-20%', "-30%"] // x, y，单位px
+              },
+              pointer:{
+                length:'50%',
+                width: 5,
+              },
+              detail: {
+                // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                fontWeight: "bolder",
+                fontSize:'20px',
+                offsetCenter:[0,'80px'],
+                // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                formatter: function(value) {
+                  if(Number(value)==100){
+                    return `${Number(value)}%`;
+                  }else{
+                    return `${Number(value).toFixed(1)}%`;
+                  }
+                }
+              },
+              data: [{ value: 1.5, name: "完好率" }]
+            },
+            {
+              name: "连接状态",
+              type: "gauge",
+              center: ["75%", "55%"], // 默认全局居中
+              radius: "60%",
+              min: 0,
+              max: 100,
+              startAngle: 135,
+              endAngle: 45,
+              splitNumber: 4,
+              axisLine: {
+                // 坐标轴线
+                lineStyle: {
+                  // 属性lineStyle控制线条样式
+                  width: 8
+                }
+              },
+              axisTick: {
+                // 坐标轴小标记
+                splitNumber: 5,
+                length: 10, // 属性length控制线长
+                lineStyle: {
+                  // 属性lineStyle控制线条样式
+                  color: "auto"
+                }
+              },
+              axisLabel: {
+                formatter: function(v) {
+                  switch (v + "") {
+                    case "0":
+                      return "E";
+                    case "1":
+                      return "Gas";
+                    case "2":
+                      return "F";
+                  }
+                }
+              },
+              splitLine: {
+                // 分隔线
+                length: 15, // 属性length控制线长
+                lineStyle: {
+                  // 属性lineStyle（详见lineStyle）控制线条样式
+                  color: "auto"
+                }
+              },
+              pointer: {
+                width: 2,
+                length:'74%'
+              },
+              title: {
+                fontWeight: "bolder",
+                fontSize: 16,
+                color: "red",
+                offsetCenter: [0, "-50px"]
+              },
+              detail: {
+                // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                fontWeight: "bolder",
+                fontSize: "12px",
+                color: "#fff",
+                offsetCenter: [0, "-30px"],
+                // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                formatter: function(value) {
+                  if(Number(value)==100){
+                    return `${Number(value)}%`;
+                  }else{
+                    return `${Number(value).toFixed(1)}%`;
+                  }
+                }
+              },
+              data: [{ value: 100, name: "连接状态" }]
+            },
+            {
+              name: "时钟正常",
+              type: "gauge",
+              center: ["75%", "55%"], // 默认全局居中
+              radius: "60%",
+              min: 0,
+              max: 100,
+              startAngle: 315,
+              endAngle: 225,
+              splitNumber: 4,
+              axisLine: {
+                // 坐标轴线
+                lineStyle: {
+                  // 属性lineStyle控制线条样式
+                  width: 8
+                }
+              },
+              axisTick: {
+                // 坐标轴小标记
+                show: false
+              },
+              axisLabel: {
+                formatter: function(v) {
+                  switch (v + "") {
+                    case "0":
+                      return "H";
+                    case "1":
+                      return "Water";
+                    case "2":
+                      return "C";
+                  }
+                }
+              },
+              splitLine: {
+                // 分隔线
+                length: 15, // 属性length控制线长
+                lineStyle: {
+                  // 属性lineStyle（详见lineStyle）控制线条样式
+                  color: "auto"
+                }
+              },
+              pointer: {
+                width: 2
+              },
+              title: {
+                fontWeight: "bolder",
+                fontSize: 16,
+                color: "red",
+                offsetCenter: [0, "55px"]
+              },
+              detail: {
+                // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                fontWeight: "bolder",
+                fontSize: "12px",
+                color: "#fff",
+                offsetCenter: [0, "35px"],
+                // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                formatter: function(value) {
+                  if(Number(value)==100){
+                    return `${Number(value)}%`;
+                  }else{
+                    return `${Number(value).toFixed(1)}%`;
+                  }
+                }
+              },
+              data: [{ value: 100, name: "时钟正常" }]
+            }
+          ]
+        };
+      
+      
+      // console.log(params)
+      optionLeft.series[0].data[0].value=params.powerOnRate;
+      optionLeft.series[1].data[0].value=params.intactRate;
+      optionLeft.series[2].data[0].value=params.linkStatus;
+      optionLeft.series[3].data[0].value=params.ntpStatus;
+
+      self.leftGau.setOption(optionLeft,true);
+      
+      
+    },
+    drawLineGaugeTVM(params){
+      let self = this;
+      let optionRight = null;
+      let objRight = document.getElementById('gaugeRight');
+      self.RightGau = self.$echarts.init(objRight);
+      optionRight = {
+          tooltip: {
+            formatter: "{a} <br/>{c} {b}"
+          },
+          
+          series: [
+            {
+              name: "开机率",
+              type: "gauge",
+              z: 3,
+              min: 0,
+              max: 100,
+              splitNumber: 10,
+              center: ["45%", "55%"], // 默认全局居中
+              radius: "75%",
+              axisLine: {
+                // 坐标轴线
+                lineStyle: {
+                  // 属性lineStyle控制线条样式
+                  width: 10
+                }
+              },
+              axisTick: {
+                // 坐标轴小标记
+                length: 15, // 属性length控制线长
+                lineStyle: {
+                  // 属性lineStyle控制线条样式
+                  color: "auto"
+                }
+              },
+              splitLine: {
+                // 分隔线
+                length: 20, // 属性length控制线长
+                lineStyle: {
+                  // 属性lineStyle（详见lineStyle）控制线条样式
+                  color: "auto"
+                }
+              },
+              pointer:{
+                length:'50%',
+                width: 5,
+              },
+              axisLabel: {
+                backgroundColor: "auto",
+                borderRadius: 2,
+                color: "#eee",
+                padding: 3,
+                textShadowBlur: 2,
+                textShadowOffsetX: 1,
+                textShadowOffsetY: 1,
+                textShadowColor: "#222"
+              },
+              title: {
+                // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                fontWeight: "bolder",
+                fontSize: 20,
+                color: "#fff",
+                offsetCenter: [0, "20px"]
+                // fontStyle: 'italic'
+              },
+              detail: {
+                // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                formatter: function(value) {
+                  if(Number(value)==100){
+                    return `${Number(value)}%`;
+                  }else{
+                    return `${Number(value).toFixed(1)}%`;
+                  }
+                },
+                fontWeight: "bolder",
+                fontSize:'30px',
+                borderRadius: 3,
+                backgroundColor: "#444",
+                borderColor: "#aaa",
+                shadowBlur: 5,
+                shadowColor: "#333",
+                shadowOffsetX: 0,
+                shadowOffsetY: 3,
+                borderWidth: 2,
+                textBorderColor: "#000",
+                textBorderWidth: 2,
+                textShadowBlur: 2,
+                textShadowColor: "#fff",
+                textShadowOffsetX: 0,
+                textShadowOffsetY: 0,
+               
+                color: "#eee",
+                rich: {},
+                offsetCenter: [0, "100px"]
+              },
+              
+              data: [{ value: 40, name: "开机率" }]
+            },
+            {
+              name: "完好率",
+              type: "gauge",
+              center: ["22%", "55%"], // 默认全局居中
+              radius: "65%",
+              min: 0,
+              max: 100,
+              startAngle:245,
+              endAngle: 65,
+              splitNumber: 4,
+              axisLine: {
+                // 坐标轴线
+                lineStyle: {
+                  // 属性lineStyle控制线条样式
+                  width: 8
+                }
+              },
+              axisTick: {
+                // 坐标轴小标记
+                length: 12, // 属性length控制线长
+                lineStyle: {
+                  // 属性lineStyle控制线条样式
+                  color: "auto"
+                }
+              },
+              splitLine: {
+                // 分隔线
+                length: 20, // 属性length控制线长
+                lineStyle: {
+                  // 属性lineStyle（详见lineStyle）控制线条样式
+                  color: "auto"
+                }
+              },
+              pointer: {
+                width: 5
+              },
+              title: {
+                fontWeight: "bolder",
+                fontSize: 20,
+                color: "#fff",
+                offsetCenter: ['-20%', "-30%"] // x, y，单位px
+              },
+              pointer:{
+                length:'50%',
+                width: 5,
+              },
+              detail: {
+                // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                fontWeight: "bolder",
+                fontSize:'20px',
+                offsetCenter:[0,'80px'],
+                // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                formatter: function(value) {
+                  if(Number(value)==100){
+                    return `${Number(value)}%`;
+                  }else{
+                    return `${Number(value).toFixed(1)}%`;
+                  }
+                }
+              },
+              data: [{ value: 1.5, name: "完好率" }]
+            },
+            {
+              name: "智慧通",
+              type: "gauge",
+              center: ["75%", "55%"], // 默认全局居中
+              radius: "60%",
+              min: 0,
+              max: 100,
+              startAngle: 135,
+              endAngle: 45,
+              splitNumber: 4,
+              axisLine: {
+                // 坐标轴线
+                lineStyle: {
+                  // 属性lineStyle控制线条样式
+                  width: 8
+                }
+              },
+              axisTick: {
+                // 坐标轴小标记
+                splitNumber: 5,
+                length: 10, // 属性length控制线长
+                lineStyle: {
+                  // 属性lineStyle控制线条样式
+                  color: "auto"
+                }
+              },
+              axisLabel: {
+                formatter: function(v) {
+                  switch (v + "") {
+                    case "0":
+                      return "E";
+                    case "1":
+                      return "Gas";
+                    case "2":
+                      return "F";
+                  }
+                }
+              },
+              splitLine: {
+                // 分隔线
+                length: 15, // 属性length控制线长
+                lineStyle: {
+                  // 属性lineStyle（详见lineStyle）控制线条样式
+                  color: "auto"
+                }
+              },
+              pointer: {
+                width: 2,
+                length:'74%'
+              },
+              title: {
+                fontWeight: "bolder",
+                fontSize: 16,
+                color: "red",
+                offsetCenter: [0, "-50px"]
+              },
+              detail: {
+                // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                fontWeight: "bolder",
+                fontSize: "12px",
+                color: "#fff",
+                offsetCenter: [0, "-30px"],
+                // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                formatter: function(value) {
+                 if(Number(value)==100){
+                    return `${Number(value)}%`;
+                  }else{
+                    return `${Number(value).toFixed(1)}%`;
+                  }
+                }
+              },
+              data: [{ value: 100, name: "智慧通" }]
+            },
+            {
+              name: "一卡通",
+              type: "gauge",
+              center: ["75%", "55%"], // 默认全局居中
+              radius: "60%",
+              min: 0,
+              max: 100,
+              startAngle: 315,
+              endAngle: 225,
+              splitNumber: 4,
+              axisLine: {
+                // 坐标轴线
+                lineStyle: {
+                  // 属性lineStyle控制线条样式
+                  width: 8
+                }
+              },
+              axisTick: {
+                // 坐标轴小标记
+                show: false
+              },
+              axisLabel: {
+                formatter: function(v) {
+                  switch (v + "") {
+                    case "0":
+                      return "H";
+                    case "1":
+                      return "Water";
+                    case "2":
+                      return "C";
+                  }
+                }
+              },
+              splitLine: {
+                // 分隔线
+                length: 15, // 属性length控制线长
+                lineStyle: {
+                  // 属性lineStyle（详见lineStyle）控制线条样式
+                  color: "auto"
+                }
+              },
+              pointer: {
+                width: 2
+              },
+              title: {
+                fontWeight: "bolder",
+                fontSize: 16,
+                color: "red",
+                offsetCenter: [0, "55px"]
+              },
+              detail: {
+                // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                fontWeight: "bolder",
+                fontSize: "12px",
+                color: "#fff",
+                offsetCenter: [0, "35px"],
+                // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                formatter: function(value) {
+                  if(Number(value)==100){
+                    return `${Number(value)}%`;
+                  }else{
+                    return `${Number(value).toFixed(1)}%`;
+                  }
+                }
+              },
+              data: [{ value: 100, name: "一卡通" }]
+            }
+          ]
+        };
+      optionRight.series[0].data[0].value=params.powerOnRate;
+      optionRight.series[1].data[0].value=params.intactRate;
+      optionRight.series[2].data[0].value=params.intelligentPass;
+      optionRight.series[3].data[0].value=params.ticketPass;
+      self.RightGau.setOption(optionRight,true);
+    }, 
   }
 };
 </script>
@@ -1195,7 +1277,8 @@ export default {
   
   position: absolute;
   top:25%;
-  left:21%;
+  left:23%;
+  font-size: 14px;
   display: flex;
   flex-wrap: wrap;
   margin-top:10px;

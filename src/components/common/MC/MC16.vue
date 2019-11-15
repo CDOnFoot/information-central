@@ -15,21 +15,14 @@
               <div class="sub-content">
                 <!--  AG图表故障分析-->
                 <div class="borde">AG图表故障分析</div>
-                  <!-- <div class="idea-ag" id="ag-main" >
-                    <div class="ag" v-for="(item,index) in agList" :key="index">
-                      <div class="ag-item">
-                        {{item.data}}
-                      </div>
-                    </div>
-                  </div> -->
-                  <div class="contain-ag">
-                   <div class="idea-ag" id="ag-main">
-                    <div class="ag" v-for="(item,index) in agList" :key="index">
-                      <div class="ag-item">
-                        {{item.data}}
-                      </div>
+                <div class="contain-ag">
+                  <div class="idea-ag" id="ag-main">
+                  <div class="ag" v-for="(item,index) in agList" :key="index">
+                    <div class="ag-item">
+                      {{item.data}}
                     </div>
                   </div>
+                </div>
                 </div>
               </div>
             </div>
@@ -92,11 +85,10 @@
             <div class="left-sub">
               <img src="../../../assets/img/idea-border-bl.png" alt="" class="sub-bg">
               <div class="sub-content">
-                  <div class="borde">AG服务状态统计</div>
-
+                <div class="borde">AG服务状态统计</div>
                 <!--  AG-->
                 <div class="AG">
-                   <a-table :columns="columns" :dataSource="data" size="small" :pagination="false"/>
+                   <a-table :columns="columnsAg" :dataSource="dataAg" size="small" :pagination="false"/>
                 </div>
               </div>
             </div>
@@ -105,12 +97,11 @@
             <div class="left-sub">
               <img src="../../../assets/img/idea-border-br.png" alt="" class="sub-bg">
               <div class="sub-content">
-                    <div class="borde">TVM服务状态统计</div>
-
+                <div class="borde">TVM服务状态统计</div>
                 <!-- Tvm -->
-                  <div class="TVM">
-                    <a-table :columns="columns" :dataSource="data" size="small" :pagination="false" />
-                </div>
+                <div class="TVM">
+                  <a-table :columns="columnsTvm" :dataSource="dataTvm" size="small" :pagination="false" />
+              </div>
               </div>
             </div>
           </div>
@@ -120,10 +111,10 @@
   </div>
 </template>
 <script>
-// import func from '../../../../vue-temp/vue-editor-bridge';
 import echarts from "echarts";
-import $ from 'jquery'
-const columns = [
+import $ from 'jquery';
+// import func from '../../../../vue-temp/vue-editor-bridge';
+  const columnsAg = [
     {
       title: '车站名称',
       dataIndex: 'name',
@@ -136,7 +127,33 @@ const columns = [
       title: '正常服务',
       dataIndex: 'formal',
     },
-            {
+    {
+      title: '降级服务',
+      dataIndex: 'down',
+    },
+    {
+      title: '失效服务',
+      dataIndex: 'dismiss',
+    },
+  ];
+  const columnsTvm = [
+    {
+      title: '车站名称',
+      dataIndex: 'name',
+    },
+    {
+      title: '设备总数',
+      dataIndex: 'age',
+    },
+    {
+      title: '正常服务(单模式)',
+      dataIndex: 'sub',
+    },
+     {
+      title: '正常服务(双模式)',
+      dataIndex: 'double',
+    },
+    {
       title: '降级服务',
       dataIndex: 'down',
     },
@@ -145,74 +162,14 @@ const columns = [
       dataIndex: 'dismiss',
     },
      {
-      title: '认证失败',
-      dataIndex: 'confirm',
+      title: '认证失败(智慧通)',
+      dataIndex: 'ie',
     },
-
-  ];
-  const data = [
-    {
-      key: '1',
-      name: '1',
-      age: '大树营站 - 东华站',
-      address: '87282',
-    },
-    {
-      key: '2',
-      name: '2',
-      age: '可乐村站 - 东华站',
-      address: '82999',
-    },
-    {
-      key: '3',
-      name: '3',
-      age: '大树营站 - 昆明南站',
-      address: '73299',
-    },
-        {
-      key: '4',
-      name: '4',
-      age: '可乐村站 - 昆明南站',
-      address: '73022',
-    },
-        {
-      key: '5',
-      name: '5',
-      age: '大树营站 - 斗南站',
-      address: '69364',
-    },
-        {
-      key: '6',
-      name: '6',
-      age: '古城站 - 东华站',
-      address: '67299',
-    },
-    {
-      key: '7',
-      name: '7',
-      age: '大树营站 - 吴家营站',
-      address: '60938',
-    },
-       {
-      key: '8',
-      name: '8',
-      age: '大树营站 - 吴家营站',
-      address: '60938',
-    },
-       {
-      key: '9',
-      name: '9',
-      age: '大树营站 - 吴家营站',
-      address: '60938',
-    },
-       {
-      key: '10',
-      name: '10',
-      age: '大树营站 - 吴家营站',
-      address: '60938',
+  {
+      title: '认证失败(一票通)',
+      dataIndex: 'once',
     },
   ];
-
 export default {
   name: "MC16",
   data() {
@@ -253,8 +210,131 @@ export default {
 
       leftGau:'',
       RightGau:'',
-       data,
-      columns,
+      dataAg:[{
+        key: '1',
+        name: '1',
+        age: '大树营站 - 东华站',
+        address: '87282',
+      },
+      {
+        key: '2',
+        name: '2',
+        age: '可乐村站 - 东华站',
+        address: '82999',
+      },
+      {
+        key: '3',
+        name: '3',
+        age: '大树营站 - 昆明南站',
+        address: '73299',
+      },
+          {
+        key: '4',
+        name: '4',
+        age: '可乐村站 - 昆明南站',
+        address: '73022',
+      },
+          {
+        key: '5',
+        name: '5',
+        age: '大树营站 - 斗南站',
+        address: '69364',
+      },
+          {
+        key: '6',
+        name: '6',
+        age: '古城站 - 东华站',
+        address: '67299',
+      },
+      {
+        key: '7',
+        name: '7',
+        age: '大树营站 - 吴家营站',
+        address: '60938',
+      },
+        {
+        key: '8',
+        name: '8',
+        age: '大树营站 - 吴家营站',
+        address: '60938',
+      },
+        {
+        key: '9',
+        name: '9',
+        age: '大树营站 - 吴家营站',
+        address: '60938',
+      },
+        {
+        key: '10',
+        name: '10',
+        age: '大树营站 - 吴家营站',
+        address: '60938',
+      },
+      ],
+      dataTvm:[{
+        key: '1',
+        name: '1',
+        age: '大树营站 - 东华站',
+        address: '87282',
+      },
+      {
+        key: '2',
+        name: '2',
+        age: '可乐村站 - 东华站',
+        address: '82999',
+      },
+      {
+        key: '3',
+        name: '3',
+        age: '大树营站 - 昆明南站',
+        address: '73299',
+      },
+          {
+        key: '4',
+        name: '4',
+        age: '可乐村站 - 昆明南站',
+        address: '73022',
+      },
+          {
+        key: '5',
+        name: '5',
+        age: '大树营站 - 斗南站',
+        address: '69364',
+      },
+          {
+        key: '6',
+        name: '6',
+        age: '古城站 - 东华站',
+        address: '67299',
+      },
+      {
+        key: '7',
+        name: '7',
+        age: '大树营站 - 吴家营站',
+        address: '60938',
+      },
+        {
+        key: '8',
+        name: '8',
+        age: '大树营站 - 吴家营站',
+        address: '60938',
+      },
+        {
+        key: '9',
+        name: '9',
+        age: '大树营站 - 吴家营站',
+        address: '60938',
+      },
+        {
+        key: '10',
+        name: '10',
+        age: '大树营站 - 吴家营站',
+        address: '60938',
+      },
+      ],
+      columnsTvm,
+      columnsAg,
+
     };
   },
   props: ["mcStatus", "mcTitle", "mcId"],
@@ -263,7 +343,6 @@ export default {
       this.mcStatus = val;
     },
     mcTitle: function(val) {
-      console.log(this.mcTitle);
       this.mcTitle = val;
     },
     mcId: function(val) {
@@ -272,30 +351,64 @@ export default {
   },
   mounted() {
     let self = this;
-    // clearInterval(this.dataRef);
-    // this.dataRef = setInterval(()=>{
-    //   self.agList.push(
-    //     {
-    //       data:'测试数据*：2019年09月20日07:02:37可乐村站A口02售票机故障'
-    //       },
-    //   );
-    //    self.tvmList.push(
-    //     {
-    //       data:'测试数据*：2019年09月20日07:02:37可乐村站A口02售票机故障'
-    //       },
-    //   );
-    // },1000 * 10);
+    // 初始化障碍信息
+    this.initGetActionInfo();
 
-// 启动故障信息滚动
-    this.actionInfoTvm();
-    this.actionInfoAg();
-
+    // 初始化仪表盘
     this.drawLineGauge();
+
+    // 初始化统计表格
+    this.initTableDisplay();
+
+    // 初始化设备指标信息
+    this.initServiceInfo();
   },
   created() {
-
   },
   methods: {
+    // 初始化设备指标信息
+    initServiceInfo:function(){
+      let self = this;
+      self.initService(function(data){
+        self.serviceInfo(data);
+      })
+    },
+    initService:function(callback){
+
+    },
+    serviceInfo:function(data){
+
+    },
+    // 初始化障碍信息
+    initGetActionInfo:function(){
+      let self = this;
+      self.getActionInfo(function(data){
+        self.actionInfo(data);
+      })
+    },
+    getActionInfo:function(callback){
+
+    },
+    actionInfo:function(data){
+  // 启动故障信息滚动
+      this.actionInfoTvm();//Tvm
+      this.actionInfoAg();///ag
+    },
+    // 初始化统计表格
+    initTableDisplay:function(){
+      let self = this;
+      self.initTable(function(data){
+        self.tableDisplay(data);
+      })
+    },
+
+    initTable:function(callback){
+
+      
+    },
+    tableDisplay:function(data){
+
+    },
     // // 故障信息滚动效果
     scrollListTvm:function(obj) {
       var scrollHeight = $(".idea-tvm .tvm:first").height();
@@ -348,9 +461,7 @@ export default {
           tooltip: {
             formatter: "{a} <br/>{c} {b}"
           },
-          
-          series: [
-            {
+          series: [{
               name: "开机率",
               type: "gauge",
               z: 3,
@@ -431,7 +542,6 @@ export default {
                 rich: {},
                 offsetCenter: [0, "100px"]
               },
-              
               data: [{ value: 40, name: "开机率" }]
             },
             {
@@ -443,26 +553,20 @@ export default {
               max: 100,
               endAngle: 18,
               splitNumber: 4,
-              axisLine: {
-                // 坐标轴线
-                lineStyle: {
-                  // 属性lineStyle控制线条样式
+              axisLine: {// 坐标轴线
+                lineStyle: {// 属性lineStyle控制线条样式
                   width: 8
                 }
               },
-              axisTick: {
-                // 坐标轴小标记
+              axisTick: {// 坐标轴小标记
                 length: 12, // 属性length控制线长
-                lineStyle: {
-                  // 属性lineStyle控制线条样式
+                lineStyle: {// 属性lineStyle控制线条样式
                   color: "auto"
                 }
               },
-              splitLine: {
-                // 分隔线
+              splitLine: {// 分隔线
                 length: 20, // 属性length控制线长
-                lineStyle: {
-                  // 属性lineStyle（详见lineStyle）控制线条样式
+                lineStyle: {// 属性lineStyle（详见lineStyle）控制线条样式
                   color: "auto"
                 }
               },
@@ -479,12 +583,10 @@ export default {
                 length:'50%',
                 width: 5,
               },
-              detail: {
-                // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+              detail: {// 其余属性默认使用全局文本样式，详见TEXTSTYLE
                 fontWeight: "bolder",
                 // fontSize:'40px',
-                offsetCenter:[0,'60px'],
-                // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                offsetCenter:[0,'60px'],// 其余属性默认使用全局文本样式，详见TEXTSTYLE
                 formatter: function(value) {
                   value = `${value}%`;
                   return value;
@@ -502,19 +604,15 @@ export default {
               startAngle: 135,
               endAngle: 45,
               splitNumber: 4,
-              axisLine: {
-                // 坐标轴线
-                lineStyle: {
-                  // 属性lineStyle控制线条样式
+              axisLine: {// 坐标轴线
+                lineStyle: { // 属性lineStyle控制线条样式
                   width: 8
                 }
               },
-              axisTick: {
-                // 坐标轴小标记
+              axisTick: {// 坐标轴小标记
                 splitNumber: 5,
                 length: 10, // 属性length控制线长
-                lineStyle: {
-                  // 属性lineStyle控制线条样式
+                lineStyle: {// 属性lineStyle控制线条样式
                   color: "auto"
                 }
               },
@@ -530,11 +628,9 @@ export default {
                   }
                 }
               },
-              splitLine: {
-                // 分隔线
+              splitLine: {// 分隔线
                 length: 15, // 属性length控制线长
-                lineStyle: {
-                  // 属性lineStyle（详见lineStyle）控制线条样式
+                lineStyle: {// 属性lineStyle（详见lineStyle）控制线条样式
                   color: "auto"
                 }
               },
@@ -548,8 +644,7 @@ export default {
                 color: "red",
                 offsetCenter: [0, "-50px"]
               },
-              detail: {
-                // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+              detail: {// 其余属性默认使用全局文本样式，详见TEXTSTYLE
                 fontWeight: "bolder",
                 fontSize: "12px",
                 color: "#fff",
@@ -1021,7 +1116,6 @@ export default {
   height: 90%;
   padding: 0 6% 0 10%;
 }
-
 .idea-tvm{
   width: 100%;
   height: 90%;

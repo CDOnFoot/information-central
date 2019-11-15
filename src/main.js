@@ -9,7 +9,8 @@ import  Vuex from 'vuex'
 import store from './store'
 // import '../static/css/iconfont.css';
 import 'ant-design-vue/dist/antd.css';  // or 'ant-design-vue/dist/antd.less'
-import '../static/css/animate.css';
+// import '../static/css/animate.css';
+// import '../src/assets/css/animate.css';
 import './assets/css/default.css';
 
 import Antd from 'ant-design-vue'

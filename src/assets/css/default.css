@@ -497,9 +497,6 @@
   .ant-spin-nested-loading > div > .ant-spin .ant-spin-dot {
     top: 53% !important;
     left: 44% !important;
-
-    /* top: 45% !important; */
-    /* left: 50% !important; */
 }
 .borde{
   font-weight: 700;

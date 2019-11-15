@@ -123,11 +123,16 @@ export default {
     },
     websocketonmessage(e){ //数据接收
       console.log("WebSocket连接数据接收中:");
-      const redata = JSON.parse(e.data);
-      // console.log(redata.data)
-      this.showData(redata.data)
-      
-
+      if(e.data){
+        // 捕捉异常
+        try{
+          const redata = JSON.parse(e.data);
+          console.log(redata.data)
+          this.showData(redata.data)
+        }catch(e){
+          console.log(e);
+        }
+      }
     },
     websocketsend(agentData){
       //数据发送

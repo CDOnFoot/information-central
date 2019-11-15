@@ -53,7 +53,7 @@ export default {
       let minsMore = (currwntTime - timeStamp) % dayMins;
       if (minsMore > 0 && minsMore <= setIntervalMins) {
         //(当前时间-固定时间)对每日毫秒数 取余
-        self.initChart("init");
+        self.initChart("update");
       }
     }, setIntervalMins);
   },
@@ -88,148 +88,166 @@ export default {
       let self = this;
       let option = null;
       let obj = document.getElementById(self.mcId);
-      if(obj){
-        self.mc = self.$echarts.init(obj);
-      }
-        option = {
-           legend: {
-             data: ["全线单日总能耗", "全线单日发车车辆次"],
-              textStyle: {
-                //图例文字的样式
-                color: "white"
-              },
-              top: "top",
-              right:"10%"
-            },
-          tooltip: {
-            trigger: 'axis',
-            axisPointer: {
-                type: 'axis',
-                crossStyle: {
-                    color: '#999',
-                }
-            }
-        },
-          xAxis: [
-            {
-              type: "category",
-              axisLine: {
-                lineStyle: {
-                  color: "white"
-                }
-              },
-              data: [
-                "1月",
-                "2月",
-                "3月",
-                "4月",
-                "5月",
-                "6月",
-                "7月",
-                "8月",
-                "9月",
-                "10月",
-                "11月",
-                "12月"
-              ],
-              axisPointer: {
-                type: "shadow"
-              }
-            }
-          ],
-          yAxis: [
-            {
-              type: "value",
-              name: "能耗(kwh)",
-              // min: 0,
-              // max: max,
-              // interval: Math.ceil(max / 5),
-              splitNumber:5,
-              axisLabel: {
-                formatter: "{value}"
-              },
-              splitLine:{
-                show:false    //去掉网格线
-                },
-              axisLine: {
-                lineStyle: {
-                  color: "white"
-                }
-              }
-            },
-            {
-              type: "value",
-              name: "车辆次(车次)",
-              // min: 0,
-              // max: 25,
-              // interval: 5,
-              splitNumber:5,
-              axisLabel: {
-                formatter: "{value}"
-              },
-              axisLine: {
-                lineStyle: {
-                  color: "white"
-                }
-              },
-              splitLine:{
-                show:false    //去掉网格线
-                },
-            }
-          ],
-          series: [
-            {
-              name: "全线单日总能耗",
-              type: "bar",
-              data: [
-                2.0,
-                4.9,
-                7.0,
-                23.2,
-                25.6,
-                76.7,
-                135.6,
-                162.2,
-                32.6,
-                20.0,
-                6.4,
-                3.3
-              ]
-            },
+      if (type === "init") {
 
-            {
-              name: "全线单日发车车辆次",
-              type: "line",
-              lineStyle:{
-                color: "white"
+        if(obj){
+          self.mc = self.$echarts.init(obj);
+        }
+          option = {
+            legend: {
+              data: ["全线单日总能耗", "全线单日发车车辆次"],
+                textStyle: {
+                  //图例文字的样式
+                  color: "white"
+                },
+                top: "top",
+                right:"10%"
               },
-              yAxisIndex: 1,
-              data: [
-                2.0,
-                2.2,
-                3.3,
-                4.5,
-                6.3,
-                10.2,
-                20.3,
-                23.4,
-                23.0,
-                16.5,
-                12.0,
-                6.2
-              ]
-            }
-          ]
-        };
+            tooltip: {
+              trigger: 'axis',
+              axisPointer: {
+                  type: 'axis',
+                  crossStyle: {
+                      color: '#999',
+                  }
+              }
+          },
+            xAxis: [
+              {
+                type: "category",
+                axisLine: {
+                  lineStyle: {
+                    color: "white"
+                  }
+                },
+                data: [
+                  "1月",
+                  "2月",
+                  "3月",
+                  "4月",
+                  "5月",
+                  "6月",
+                  "7月",
+                  "8月",
+                  "9月",
+                  "10月",
+                  "11月",
+                  "12月"
+                ],
+                axisPointer: {
+                  type: "shadow"
+                }
+              }
+            ],
+            yAxis: [
+              {
+                type: "value",
+                name: "能耗(kwh)",
+                // min: 0,
+                // max: max,
+                // interval: Math.ceil(max / 5),
+                splitNumber:5,
+                axisLabel: {
+                  formatter: "{value}"
+                },
+                splitLine:{
+                  show:false    //去掉网格线
+                  },
+                axisLine: {
+                  lineStyle: {
+                    color: "white"
+                  }
+                }
+              },
+              {
+                type: "value",
+                name: "车辆次(车次)",
+                // min: 0,
+                // max: 25,
+                // interval: 5,
+                splitNumber:5,
+                axisLabel: {
+                  formatter: "{value}"
+                },
+                axisLine: {
+                  lineStyle: {
+                    color: "white"
+                  }
+                },
+                splitLine:{
+                  show:false    //去掉网格线
+                  },
+              }
+            ],
+            series: [
+              {
+                name: "全线单日总能耗",
+                type: "bar",
+                data: [
+                  2.0,
+                  4.9,
+                  7.0,
+                  23.2,
+                  25.6,
+                  76.7,
+                  135.6,
+                  162.2,
+                  32.6,
+                  20.0,
+                  6.4,
+                  3.3
+                ]
+              },
+
+              {
+                name: "全线单日发车车辆次",
+                type: "line",
+                lineStyle:{
+                  color: "white"
+                },
+                yAxisIndex: 1,
+                data: [
+                  2.0,
+                  2.2,
+                  3.3,
+                  4.5,
+                  6.3,
+                  10.2,
+                  20.3,
+                  23.4,
+                  23.0,
+                  16.5,
+                  12.0,
+                  6.2
+                ]
+              }
+            ]
+          };
+        if(obj){
+          option.xAxis[0].data = paramData.date;
+          option.series[0].data = paramData.oneDayTotalEnergy;
+          option.series[1].data = paramData.oneDayVehicleTimes;
+          self.mc.setOption(option);
+        }
+      }else{
+          //更新刷新记录信息
+        self.refreshData(paramData);
+      }
+      
+    },
+     //更新数据方法
+    refreshData(paramData) {
+      let self = this;
+      let option = null;
+      let obj = document.getElementById(self.mcId);
       if(obj){
+        option = (self.mc).getOption();
         option.xAxis[0].data = paramData.date;
         option.series[0].data = paramData.oneDayTotalEnergy;
         option.series[1].data = paramData.oneDayVehicleTimes;
         self.mc.setOption(option);
       }
-       
-      
-    },
+    }
   }
 };
 </script>

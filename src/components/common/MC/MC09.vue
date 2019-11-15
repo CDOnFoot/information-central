@@ -213,11 +213,15 @@ export default {
     //更新数据方法
     refreshData(paramData) {
       let self = this;
-      let option = self.mc.getOption();
-      option.xAxis[0].data = paramData.stationName;
-      option.series[0].data = paramData.flowsin;
-      option.series[1].data = paramData.flowsout;
-      self.mc.setOption(option);
+      let option = null;
+      let obj = document.getElementById(self.mcId);
+      if(obj){
+        option = (self.mc).getOption();
+          option.xAxis[0].data = paramData.stationName;
+          option.series[0].data = paramData.flowsin;
+          option.series[1].data = paramData.flowsout;
+          self.mc.setOption(option);
+      }
     }
   }
 };

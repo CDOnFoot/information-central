@@ -62,28 +62,23 @@ export default {
     }
   },
   mounted() {
-    // console.log(this.wayList)
     var self = this;
     this.mcList = this.$common.mcList;
-    // this.showData();
-    // this.pushDataInfo();
+    //页面刚进入时开启长连接
+    
+    if ('WebSocket' in window) {
+      this.initWebSocket();
+    } else {
+       this.$info({
+          title: '提示',
+          content: '当前界面不支持websocket的使用',
+        });
+    }
   },
   created() {
-    //页面刚进入时开启长连接
-    this.initWebSocket();
-    // this.pushDataInfo();
-    // let self = this;
-    // clearInterval(this.timeInterval);
-    // this.timeInterval = setInterval(function() {
-    //   self.pushDataInfo();
-    // }, 1000 * 30);
   },
   destroyed: function() {
     //页面销毁时关闭长连接
-    this.websocketclose();
-  },
-  beforeDestroy () {
-     //页面销毁时关闭长连接
     this.websocketclose();
   },
   methods: {
@@ -109,7 +104,6 @@ export default {
     },
 // 初始化websocket连接数据
     initWebSocket:function(){
-      // console.log(this.userId);
       const wsuri = this.$http.websocketHost+this.userId+"/"+this.customToken;//ws地址
       console.log(wsuri);
       this.websocket = new WebSocket(wsuri);
@@ -130,7 +124,7 @@ export default {
     websocketonmessage(e){ //数据接收
       console.log("WebSocket连接数据接收中:");
       const redata = JSON.parse(e.data);
-      console.log(redata.data)
+      // console.log(redata.data)
       this.showData(redata.data)
       
 
@@ -143,7 +137,6 @@ export default {
     websocketclose(e){  
       //关闭
       this.websocket.close();
-      console.log("关闭websocket.")
 
     },
     showData(redata){

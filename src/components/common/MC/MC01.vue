@@ -70,7 +70,7 @@ export default {
       let currwntTime = Date.now();
       let minsMore = (currwntTime-timeStamp)%dayMins
       if(minsMore>0 && minsMore<=setIntervalMins){  //(当前时间-固定时间)对每日毫秒数 取余
-        self.initChart(self.valueTime,'init');
+        self.initChart(self.valueTime,'update');
       }
     },setIntervalMins)
   },
@@ -247,10 +247,15 @@ export default {
       // 数据刷新
     refreshData:function(paramData){
       let self = this;
-      let option = (self.mc).getOption();
-      option.series[0].data = paramData.energy;
-      option.yAxis.data = paramData.station;
-      self.mc.setOption(option);    
+      let option = null;
+      let obj = document.getElementById(self.mcId);
+      if(obj){
+        option = (self.mc).getOption();
+        option.series[0].data = paramData.energy;
+        option.yAxis.data = paramData.station;
+        self.mc.setOption(option);  
+      }
+    
     },
   }
 };

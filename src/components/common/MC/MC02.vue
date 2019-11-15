@@ -45,7 +45,7 @@ export default {
       let currwntTime = Date.now();
       let minsMore = (currwntTime-timeStamp)%dayMins;
       if(minsMore>0 && minsMore<=setIntervalMins){  //(当前时间-固定时间)对每日毫秒数 取余
-        self.initChart('init');
+        self.initChart('update');
       }
     },setIntervalMins)
   },
@@ -183,7 +183,7 @@ export default {
               });
             }
           });
-           option.dataset[0].source = paramData;
+          option.dataset[0].source = paramData;
           self.mc.setOption(option);
           }
         }else{
@@ -194,19 +194,31 @@ export default {
       //更新数据方法
       refreshData(paramData){
         let self = this;
-        let option = (self.mc).getOption();
-
-        var serLast = option.series[option.series.length-1];
-
-        option.series=[serLast];
-        option.dataset[0].source = paramData;
-        for(var i=1;i<paramData.length;i++){
-          option.series.unshift({ type: "line", smooth: true, seriesLayoutBy: "row" });
-        }
-
+        let option = null;
+        let obj = document.getElementById(self.mcId);
         if(obj){
-          self.mc.setOption(option);     
-        }
+          option = (self.mc).getOption();
+          self.mc.on("updateAxisPointer", function(event) {
+          var xAxisInfo = event.axesInfo[0];
+          if (xAxisInfo) {
+            var dimension = xAxisInfo.value + 1;
+            self.mc.setOption({
+              series: {
+                id: "pie",
+                label: {
+                  formatter: "{b}: {@[" + dimension + "]}kWh ({d}%)"
+                },
+                encode: {
+                  value: dimension,
+                  tooltip: dimension
+                }
+              }
+            });
+          }
+        });
+        option.dataset[0].source = paramData;
+        self.mc.setOption(option);
+      }
     },
   }
 };

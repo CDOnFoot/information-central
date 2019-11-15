@@ -50,7 +50,7 @@ export default {
       let minsMore = (currwntTime-timeStamp)%dayMins
       if(minsMore>0 && minsMore<=setIntervalMins){  //(当前时间-固定时间)对每日毫秒数 取余
         // console.log("15分钟定点刷新")
-        self.initChart('init');
+        self.initChart('update');
       }
     },setIntervalMins)
   },
@@ -258,12 +258,17 @@ export default {
     // 数据刷新
     refreshData:function(paramData){
       let self = this;
-      let option = (self.mc).getOption();
-      option.xAxis[0].data = paramData.time;
-      option.series[0].data = paramData.realTimeList;
-      option.series[1].data = paramData.forecastList;
-      self.timeStamp = paramData.queryTime;
-      self.mc.setOption(option);    
+      let option = null;
+      let obj = document.getElementById(self.mcId);
+      if(obj){
+        option = (self.mc).getOption();
+         // 动态放置数据
+        option.xAxis[0].data = paramData.timeList;
+        option.series[0].data = paramData.realTimeList;
+        option.series[1].data = paramData.forecastList;
+        self.timeStamp = paramData.queryTime;
+        self.mc.setOption(option,true)
+      }
     },
   }
 };

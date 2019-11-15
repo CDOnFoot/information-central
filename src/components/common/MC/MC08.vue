@@ -109,8 +109,6 @@ export default {
       });
     },
     passengerLoad:function(data){
-      console.log(data);
-      
       let self = this;
        data.map((item,index)=>{
          self.$set(self.noticeList[index],'loaddegree',item.loaddegree);

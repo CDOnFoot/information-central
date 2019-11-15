@@ -39,7 +39,7 @@
             <div class="top-middle-l">
                <div class="top-middle-key">
                 <img src="../../../assets/img/idea-bg.png" alt="" class="idea-img">
-                <div class='gaugeDateTitle'>BOM</div>
+                <div class='gaugeDateTitle'>AG</div>
                 <div class='gaugeDateLeft'>
                   <div class='gaugeDateLabel'>总数：<span class='gaugeDateNum'>1623</span></div>
                   <div class='gaugeDateLabel'>故障数量：<span class='gaugeDateNum'>1553</span></div>
@@ -54,7 +54,7 @@
              <div class="top-middle-r">
                <div class="top-middle-key">
                 <img src="../../../assets/img/idea-bg.png" alt="" class="idea-img">
-                <div class='gaugeDateTitle'>FAM</div>
+                <div class='gaugeDateTitle'>TVM</div>
                 <div class='gaugeDateLeft'>
                   <div class='gaugeDateLabel'>总数：<span class='gaugeDateNum'>1623</span></div>
                   <div class='gaugeDateLabel'>故障数量：<span class='gaugeDateNum'>1553</span></div>
@@ -92,6 +92,8 @@
             <div class="left-sub">
               <img src="../../../assets/img/idea-border-bl.png" alt="" class="sub-bg">
               <div class="sub-content">
+                  <div class="borde">AG服务状态统计</div>
+
                 <!--  AG-->
                 <div class="AG">
                    <a-table :columns="columns" :dataSource="data" size="small" :pagination="false"/>
@@ -103,6 +105,8 @@
             <div class="left-sub">
               <img src="../../../assets/img/idea-border-br.png" alt="" class="sub-bg">
               <div class="sub-content">
+                    <div class="borde">TVM服务状态统计</div>
+
                 <!-- Tvm -->
                   <div class="TVM">
                     <a-table :columns="columns" :dataSource="data" size="small" :pagination="false" />
@@ -1078,5 +1082,15 @@ export default {
   font-weight: 900;
   font-size: 30px;
   padding-top: 35px;
+}
+.AG{
+  margin-top: 50px;
+  width: 97%;
+  margin-left: 18px;
+}
+.TVM{
+   margin-top: 50px;
+  width: 97%;
+    margin-left: 8px;
 }
 </style>

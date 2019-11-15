@@ -98,7 +98,7 @@
             <div class="left-sub">
               <img src="../../../assets/img/idea-border-br.png" alt="" class="sub-bg">
               <div class="sub-content">
-                <div class="borde">TVM服务状态统计</div>
+                <div class="borde flipInX">TVM服务状态统计</div>
                 <!-- Tvm -->
                 <div class="TVM">
                   <a-table :columns="columnsTvm" :dataSource="dataTvm.slice((currentPageTvm-1)*pagesizeTvm,currentPageTvm*pagesizeTvm)" size="small" :pagination="false" />
@@ -179,6 +179,7 @@ export default {
     return {
       agList:[],
       tvmList:[],
+
       dataRef:'',
       timerTvm:'',
       timerAg:'',
@@ -242,6 +243,9 @@ export default {
     this.initTableDisplayTvm();
 
     window.clearInterval(this.dataRef)
+
+    $(".idea-ag").stop();
+    $(".idea-tvm").stop();
 
     var timeStamp=1573056120000;  //11月6日凌晨d点02分的毫秒数
     var dayMins = 900000;   //15分钟
@@ -420,16 +424,23 @@ export default {
     },
     // // 故障信息滚动效果
     scrollListTvm:function(obj) {
+
       var scrollHeight = $(".idea-tvm .tvm:first").height();
-      $(".idea-tvm").stop().animate({marginTop:-scrollHeight},600,function () {
-       $(".idea-tvm").css({marginTop:0}).find(".tvm:first").appendTo($(".idea-tvm"));
-      });
+      if(this.tvmList.length>6){
+         $(".idea-tvm").stop().animate({marginTop:-scrollHeight},600,function () {
+        $(".idea-tvm").css({marginTop:0}).find(".tvm:first").appendTo($(".idea-tvm"));
+        });
+      }
+     
     },
    scrollListAg:function(obj) {
       var scrollHeight = $(".idea-ag .ag:first").height();
-      $(".idea-ag").stop().animate({marginTop:-scrollHeight},600,function () {
-       $(".idea-ag").css({marginTop:0}).find(".ag:first").appendTo($(".idea-ag"));
-      });
+      if(this.agList.length>6){
+          $(".idea-ag").stop().animate({marginTop:-scrollHeight},600,function () {
+          $(".idea-ag").css({marginTop:0}).find(".ag:first").appendTo($(".idea-ag"));
+          });
+      }
+   
     },
     // 启动故障信息滚动
     actionInfoTvm:function(){
@@ -534,13 +545,18 @@ export default {
               min: 0,
               max: 100,
               splitNumber: 10,
-              center: ["45%", "55%"], // 默认全局居中
+              center: ["55%", "50%"], // 默认全局居中
               radius: "75%",
               axisLine: {
                 // 坐标轴线
                 lineStyle: {
                   // 属性lineStyle控制线条样式
-                  width: 10
+                  color: [ [0.29, '#5dff5d'],//表盘最大值的20%部分刻度显示的颜色 
+                  [0.86, '#1e90ff'],//表盘最大值的20%到80%部分刻度显示的颜色 
+                  [1, '#ff4500'],//表盘最大值的80%到100%部分刻度显示的颜色 
+                  ], 
+                  width: 8, shadowColor: '#fff', shadowBlur: 6
+
                 }
               },
               axisTick: {
@@ -548,22 +564,36 @@ export default {
                 length: 15, // 属性length控制线长
                 lineStyle: {
                   // 属性lineStyle控制线条样式
-                  color: "auto"
+                  color: "auto",
+                  shadowColor: '#fff', //默认透明
+                            shadowBlur: 6
                 }
               },
-              splitLine: {
+             splitLine: {
                 // 分隔线
                 length: 20, // 属性length控制线长
                 lineStyle: {
                   // 属性lineStyle（详见lineStyle）控制线条样式
-                  color: "auto"
+                  width: 3, color: '#fff', 
+                  shadowColor: '#fff', //默认透明 
+                  shadowBlur: 6
                 }
               },
               pointer:{
+                shadowColor: '#fff', //默认透明
+                        shadowBlur: 15,
                 length:'50%',
                 width: 5,
               },
-              axisLabel: {
+               axisLabel: {
+
+                textStyle: { //控制刻度文本样式
+                            fontWeight: 'bolder',//刻度加粗
+                            color: '#fff',//刻度颜色
+                            shadowColor: '#fff', //默认透明
+                            shadowBlur: 6
+                        },
+
                 backgroundColor: "auto",
                 borderRadius: 2,
                 color: "#eee",
@@ -578,8 +608,13 @@ export default {
                 fontWeight: "bolder",
                 fontSize: 20,
                 color: "#fff",
-                offsetCenter: [0, "20px"]
+                offsetCenter: [0, "20px"],
                 // fontStyle: 'italic'
+
+                textStyle: { fontWeight: 'bolder', fontSize: 20, fontStyle: 'italic', color: '#fff', shadowColor: '#fff', //默认透明 
+                shadowBlur: 6 }
+
+
               },
               detail: {
                 // 其余属性默认使用全局文本样式，详见TEXTSTYLE
@@ -590,13 +625,14 @@ export default {
                     return `${Number(value).toFixed(1)}%`;
                   }
                 },
+                backgroundColor: 'rgba(30,144,255,0.8)', 
+                borderColor: '#fff', 
+                shadowColor: '#fff', //默认透明 
+                textStyle: { fontWeight: 'bolder', color: '#fff', fontSize:24 },
                 fontWeight: "bolder",
                 fontSize:'30px',
                 borderRadius: 3,
-                backgroundColor: "#444",
-                borderColor: "#aaa",
                 shadowBlur: 5,
-                shadowColor: "#333",
                 shadowOffsetX: 0,
                 shadowOffsetY: 3,
                 borderWidth: 2,
@@ -617,26 +653,30 @@ export default {
             {
               name: "完好率",
               type: "gauge",
-              center: ["22%", "55%"], // 默认全局居中
-              radius: "65%",
+              center: ["18%", "55%"], // 默认全局居中
+              radius: "60%",
               min: 0,
               max: 100,
-              startAngle:245,
-              endAngle: 65,
+              endAngle: 18,
               splitNumber: 4,
               axisLine: {
                 // 坐标轴线
                 lineStyle: {
                   // 属性lineStyle控制线条样式
-                  width: 8
+                  color: [ [0.29, '#5dff5d'],//表盘最大值的20%部分刻度显示的颜色 
+                  [0.86, '#1e90ff'],//表盘最大值的20%到80%部分刻度显示的颜色 
+                  [1, '#ff4500'],//表盘最大值的80%到100%部分刻度显示的颜色 
+                  ], 
+                  width: 3, shadowColor: '#fff', shadowBlur: 2
+
                 }
               },
-              axisTick: {
-                // 坐标轴小标记
+              axisTick: {// 坐标轴小标记
                 length: 12, // 属性length控制线长
-                lineStyle: {
-                  // 属性lineStyle控制线条样式
-                  color: "auto"
+                lineStyle: {// 属性lineStyle控制线条样式
+                  color: "auto",
+                  shadowColor: '#fff', //默认透明
+                            shadowBlur: 2
                 }
               },
               splitLine: {
@@ -644,27 +684,56 @@ export default {
                 length: 20, // 属性length控制线长
                 lineStyle: {
                   // 属性lineStyle（详见lineStyle）控制线条样式
-                  color: "auto"
+                  width: 3, color: '#fff', 
+                  shadowColor: '#fff', //默认透明 
+                  shadowBlur: 2
                 }
               },
-              pointer: {
-                width: 5
+              pointer:{
+                shadowColor: '#fff', //默认透明
+                        shadowBlur: 2,
+                length:'50%',
+                width: 5,
               },
-              title: {
+                 title: {
                 fontWeight: "bolder",
                 fontSize: 20,
                 color: "#fff",
-                offsetCenter: ['-20%', "-30%"] // x, y，单位px
+                offsetCenter: [0, "20px"],
+                // fontStyle: 'italic'
+
+                textStyle: { fontWeight: 'bolder', fontSize: 20, fontStyle: 'italic', color: '#fff', shadowColor: '#fff', //默认透明 
+                shadowBlur: 2 }
+
+
               },
               pointer:{
                 length:'50%',
                 width: 5,
               },
               detail: {
-                // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+
+              backgroundColor: 'rgba(30,144,255,0.8)', 
+                borderColor: '#fff', 
+                shadowColor: '#fff', //默认透明 
+                textStyle: { fontWeight: 'bolder', color: '#fff', fontSize:24 },
                 fontWeight: "bolder",
-                fontSize:'20px',
-                offsetCenter:[0,'80px'],
+                fontSize:'30px',
+                borderRadius: 3,
+                shadowBlur: 3,
+                shadowOffsetX: 0,
+                shadowOffsetY: 3,
+                borderWidth: 2,
+                textBorderColor: "#000",
+                textBorderWidth: 2,
+                textShadowBlur: 2,
+                textShadowColor: "#fff",
+                textShadowOffsetX: 0,
+                textShadowOffsetY: 0,
+               
+                color: "#eee",
+                rich: {},
+                offsetCenter: [0, "100px"],
                 // 其余属性默认使用全局文本样式，详见TEXTSTYLE
                 formatter: function(value) {
                   if(Number(value)==100){
@@ -678,31 +747,28 @@ export default {
             },
             {
               name: "连接状态",
-              type: "gauge",
-              center: ["75%", "55%"], // 默认全局居中
+             type: "gauge",
+              center: ["85%", "50%"], // 默认全局居中
               radius: "60%",
               min: 0,
               max: 100,
               startAngle: 135,
               endAngle: 45,
               splitNumber: 4,
-              axisLine: {
-                // 坐标轴线
-                lineStyle: {
-                  // 属性lineStyle控制线条样式
-                  width: 8
-                }
+              axisLine: {// 坐标轴线
+                lineStyle: { color: [ [0.2, 'lime'], [0.8, '#1e90ff'], [1, '#ff4500'] ], width: 2, shadowColor: '#fff', shadowBlur: 2 }
+
               },
-              axisTick: {
-                // 坐标轴小标记
+              axisTick: {// 坐标轴小标记
                 splitNumber: 5,
                 length: 10, // 属性length控制线长
-                lineStyle: {
-                  // 属性lineStyle控制线条样式
+                lineStyle: {// 属性lineStyle控制线条样式
                   color: "auto"
                 }
               },
               axisLabel: {
+                textStyle: { fontWeight: 'bolder', color: '#fff', shadowColor: '#fff', shadowBlur: 2 },
+
                 formatter: function(v) {
                   switch (v + "") {
                     case "0":
@@ -714,31 +780,29 @@ export default {
                   }
                 }
               },
-              splitLine: {
-                // 分隔线
+              splitLine: {// 分隔线
                 length: 15, // 属性length控制线长
-                lineStyle: {
-                  // 属性lineStyle（详见lineStyle）控制线条样式
-                  color: "auto"
+                lineStyle: {// 属性lineStyle（详见lineStyle）控制线条样式
+                  width: 3, color: '#fff', shadowColor: '#fff', shadowBlur: 2
                 }
               },
-              pointer: {
+               pointer: {
                 width: 2,
-                length:'74%'
+                length:'74%',
+                shadowColor: '#fff', 
+                        shadowBlur: 2
               },
               title: {
                 fontWeight: "bolder",
                 fontSize: 16,
-                color: "red",
+                color: "#fff",
                 offsetCenter: [0, "-50px"]
               },
               detail: {
-                // 其余属性默认使用全局文本样式，详见TEXTSTYLE
                 fontWeight: "bolder",
                 fontSize: "12px",
                 color: "#fff",
                 offsetCenter: [0, "-30px"],
-                // 其余属性默认使用全局文本样式，详见TEXTSTYLE
                 formatter: function(value) {
                   if(Number(value)==100){
                     return `${Number(value)}%`;
@@ -752,7 +816,7 @@ export default {
             {
               name: "时钟正常",
               type: "gauge",
-              center: ["75%", "55%"], // 默认全局居中
+              center: ["85%", "50%"], // 默认全局居中
               radius: "60%",
               min: 0,
               max: 100,
@@ -762,15 +826,16 @@ export default {
               axisLine: {
                 // 坐标轴线
                 lineStyle: {
-                  // 属性lineStyle控制线条样式
-                  width: 8
+                  color: [ [0.2, 'lime'], [0.8, '#1e90ff'], [1, '#ff4500'] ], width: 2, shadowColor: '#fff', shadowBlur: 2
                 }
               },
-              axisTick: {
+                axisTick: {
                 // 坐标轴小标记
                 show: false
               },
               axisLabel: {
+                textStyle: { fontWeight: 'bolder', color: '#fff', shadowColor: '#fff', shadowBlur: 2 },
+
                 formatter: function(v) {
                   switch (v + "") {
                     case "0":
@@ -782,25 +847,27 @@ export default {
                   }
                 }
               },
-              splitLine: {
+               splitLine: {
                 // 分隔线
                 length: 15, // 属性length控制线长
-                lineStyle: {
-                  // 属性lineStyle（详见lineStyle）控制线条样式
-                  color: "auto"
-                }
+               lineStyle: { width: 3, 
+               color: '#fff', 
+               shadowColor: '#fff', 
+               shadowBlur: 2 }
               },
               pointer: {
-                width: 2
+                width: 2,
+                shadowColor: '#fff', 
+                shadowBlur: 2
               },
               title: {
                 fontWeight: "bolder",
                 fontSize: 16,
-                color: "red",
+                color: "#fff",
                 offsetCenter: [0, "55px"]
               },
               detail: {
-                // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+               // 其余属性默认使用全局文本样式，详见TEXTSTYLE
                 fontWeight: "bolder",
                 fontSize: "12px",
                 color: "#fff",
@@ -839,8 +906,7 @@ export default {
           tooltip: {
             formatter: "{a} <br/>{c} {b}"
           },
-          
-          series: [
+           series: [
             {
               name: "开机率",
               type: "gauge",
@@ -848,13 +914,18 @@ export default {
               min: 0,
               max: 100,
               splitNumber: 10,
-              center: ["45%", "55%"], // 默认全局居中
+              center: ["55%", "50%"], // 默认全局居中
               radius: "75%",
               axisLine: {
                 // 坐标轴线
                 lineStyle: {
                   // 属性lineStyle控制线条样式
-                  width: 10
+                  color: [ [0.29, '#5dff5d'],//表盘最大值的20%部分刻度显示的颜色 
+                  [0.86, '#1e90ff'],//表盘最大值的20%到80%部分刻度显示的颜色 
+                  [1, '#ff4500'],//表盘最大值的80%到100%部分刻度显示的颜色 
+                  ], 
+                  width: 8, shadowColor: '#fff', shadowBlur: 6
+
                 }
               },
               axisTick: {
@@ -862,22 +933,36 @@ export default {
                 length: 15, // 属性length控制线长
                 lineStyle: {
                   // 属性lineStyle控制线条样式
-                  color: "auto"
+                  color: "auto",
+                  shadowColor: '#fff', //默认透明
+                            shadowBlur: 6
                 }
               },
-              splitLine: {
+             splitLine: {
                 // 分隔线
                 length: 20, // 属性length控制线长
                 lineStyle: {
                   // 属性lineStyle（详见lineStyle）控制线条样式
-                  color: "auto"
+                  width: 3, color: '#fff', 
+                  shadowColor: '#fff', //默认透明 
+                  shadowBlur: 6
                 }
               },
               pointer:{
+                shadowColor: '#fff', //默认透明
+                        shadowBlur: 15,
                 length:'50%',
                 width: 5,
               },
-              axisLabel: {
+               axisLabel: {
+
+                textStyle: { //控制刻度文本样式
+                            fontWeight: 'bolder',//刻度加粗
+                            color: '#fff',//刻度颜色
+                            shadowColor: '#fff', //默认透明
+                            shadowBlur: 6
+                        },
+
                 backgroundColor: "auto",
                 borderRadius: 2,
                 color: "#eee",
@@ -892,8 +977,13 @@ export default {
                 fontWeight: "bolder",
                 fontSize: 20,
                 color: "#fff",
-                offsetCenter: [0, "20px"]
+                offsetCenter: [0, "20px"],
                 // fontStyle: 'italic'
+
+                textStyle: { fontWeight: 'bolder', fontSize: 20, fontStyle: 'italic', color: '#fff', shadowColor: '#fff', //默认透明 
+                shadowBlur: 6 }
+
+
               },
               detail: {
                 // 其余属性默认使用全局文本样式，详见TEXTSTYLE
@@ -904,13 +994,14 @@ export default {
                     return `${Number(value).toFixed(1)}%`;
                   }
                 },
+                backgroundColor: 'rgba(30,144,255,0.8)', 
+                borderColor: '#fff', 
+                shadowColor: '#fff', //默认透明 
+                textStyle: { fontWeight: 'bolder', color: '#fff', fontSize:24 },
                 fontWeight: "bolder",
                 fontSize:'30px',
                 borderRadius: 3,
-                backgroundColor: "#444",
-                borderColor: "#aaa",
                 shadowBlur: 5,
-                shadowColor: "#333",
                 shadowOffsetX: 0,
                 shadowOffsetY: 3,
                 borderWidth: 2,
@@ -931,26 +1022,30 @@ export default {
             {
               name: "完好率",
               type: "gauge",
-              center: ["22%", "55%"], // 默认全局居中
-              radius: "65%",
+              center: ["18%", "55%"], // 默认全局居中
+              radius: "60%",
               min: 0,
               max: 100,
-              startAngle:245,
-              endAngle: 65,
+              endAngle: 18,
               splitNumber: 4,
               axisLine: {
                 // 坐标轴线
                 lineStyle: {
                   // 属性lineStyle控制线条样式
-                  width: 8
+                  color: [ [0.29, '#5dff5d'],//表盘最大值的20%部分刻度显示的颜色 
+                  [0.86, '#1e90ff'],//表盘最大值的20%到80%部分刻度显示的颜色 
+                  [1, '#ff4500'],//表盘最大值的80%到100%部分刻度显示的颜色 
+                  ], 
+                  width: 3, shadowColor: '#fff', shadowBlur: 2
+
                 }
               },
-              axisTick: {
-                // 坐标轴小标记
+              axisTick: {// 坐标轴小标记
                 length: 12, // 属性length控制线长
-                lineStyle: {
-                  // 属性lineStyle控制线条样式
-                  color: "auto"
+                lineStyle: {// 属性lineStyle控制线条样式
+                  color: "auto",
+                  shadowColor: '#fff', //默认透明
+                            shadowBlur: 2
                 }
               },
               splitLine: {
@@ -958,27 +1053,56 @@ export default {
                 length: 20, // 属性length控制线长
                 lineStyle: {
                   // 属性lineStyle（详见lineStyle）控制线条样式
-                  color: "auto"
+                  width: 3, color: '#fff', 
+                  shadowColor: '#fff', //默认透明 
+                  shadowBlur: 2
                 }
               },
-              pointer: {
-                width: 5
+              pointer:{
+                shadowColor: '#fff', //默认透明
+                        shadowBlur: 2,
+                length:'50%',
+                width: 5,
               },
-              title: {
+                 title: {
                 fontWeight: "bolder",
                 fontSize: 20,
                 color: "#fff",
-                offsetCenter: ['-20%', "-30%"] // x, y，单位px
+                offsetCenter: [0, "20px"],
+                // fontStyle: 'italic'
+
+                textStyle: { fontWeight: 'bolder', fontSize: 20, fontStyle: 'italic', color: '#fff', shadowColor: '#fff', //默认透明 
+                shadowBlur: 2 }
+
+
               },
               pointer:{
                 length:'50%',
                 width: 5,
               },
               detail: {
-                // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+
+              backgroundColor: 'rgba(30,144,255,0.8)', 
+                borderColor: '#fff', 
+                shadowColor: '#fff', //默认透明 
+                textStyle: { fontWeight: 'bolder', color: '#fff', fontSize:24 },
                 fontWeight: "bolder",
-                fontSize:'20px',
-                offsetCenter:[0,'80px'],
+                fontSize:'30px',
+                borderRadius: 3,
+                shadowBlur: 3,
+                shadowOffsetX: 0,
+                shadowOffsetY: 3,
+                borderWidth: 2,
+                textBorderColor: "#000",
+                textBorderWidth: 2,
+                textShadowBlur: 2,
+                textShadowColor: "#fff",
+                textShadowOffsetX: 0,
+                textShadowOffsetY: 0,
+               
+                color: "#eee",
+                rich: {},
+                offsetCenter: [0, "100px"],
                 // 其余属性默认使用全局文本样式，详见TEXTSTYLE
                 formatter: function(value) {
                   if(Number(value)==100){
@@ -991,32 +1115,29 @@ export default {
               data: [{ value: 1.5, name: "完好率" }]
             },
             {
-              name: "智慧通",
-              type: "gauge",
-              center: ["75%", "55%"], // 默认全局居中
+              name: "连接状态",
+             type: "gauge",
+              center: ["85%", "50%"], // 默认全局居中
               radius: "60%",
               min: 0,
               max: 100,
               startAngle: 135,
               endAngle: 45,
               splitNumber: 4,
-              axisLine: {
-                // 坐标轴线
-                lineStyle: {
-                  // 属性lineStyle控制线条样式
-                  width: 8
-                }
+              axisLine: {// 坐标轴线
+                lineStyle: { color: [ [0.2, 'lime'], [0.8, '#1e90ff'], [1, '#ff4500'] ], width: 2, shadowColor: '#fff', shadowBlur: 2 }
+
               },
-              axisTick: {
-                // 坐标轴小标记
+              axisTick: {// 坐标轴小标记
                 splitNumber: 5,
                 length: 10, // 属性length控制线长
-                lineStyle: {
-                  // 属性lineStyle控制线条样式
+                lineStyle: {// 属性lineStyle控制线条样式
                   color: "auto"
                 }
               },
               axisLabel: {
+                textStyle: { fontWeight: 'bolder', color: '#fff', shadowColor: '#fff', shadowBlur: 2 },
+
                 formatter: function(v) {
                   switch (v + "") {
                     case "0":
@@ -1028,33 +1149,31 @@ export default {
                   }
                 }
               },
-              splitLine: {
-                // 分隔线
+              splitLine: {// 分隔线
                 length: 15, // 属性length控制线长
-                lineStyle: {
-                  // 属性lineStyle（详见lineStyle）控制线条样式
-                  color: "auto"
+                lineStyle: {// 属性lineStyle（详见lineStyle）控制线条样式
+                  width: 3, color: '#fff', shadowColor: '#fff', shadowBlur: 2
                 }
               },
-              pointer: {
+               pointer: {
                 width: 2,
-                length:'74%'
+                length:'74%',
+                shadowColor: '#fff', 
+                        shadowBlur: 2
               },
               title: {
                 fontWeight: "bolder",
                 fontSize: 16,
-                color: "red",
+                color: "#fff",
                 offsetCenter: [0, "-50px"]
               },
               detail: {
-                // 其余属性默认使用全局文本样式，详见TEXTSTYLE
                 fontWeight: "bolder",
                 fontSize: "12px",
                 color: "#fff",
                 offsetCenter: [0, "-30px"],
-                // 其余属性默认使用全局文本样式，详见TEXTSTYLE
                 formatter: function(value) {
-                 if(Number(value)==100){
+                  if(Number(value)==100){
                     return `${Number(value)}%`;
                   }else{
                     return `${Number(value).toFixed(1)}%`;
@@ -1064,9 +1183,9 @@ export default {
               data: [{ value: 100, name: "智慧通" }]
             },
             {
-              name: "一卡通",
+              name: "时钟正常",
               type: "gauge",
-              center: ["75%", "55%"], // 默认全局居中
+              center: ["85%", "50%"], // 默认全局居中
               radius: "60%",
               min: 0,
               max: 100,
@@ -1076,15 +1195,16 @@ export default {
               axisLine: {
                 // 坐标轴线
                 lineStyle: {
-                  // 属性lineStyle控制线条样式
-                  width: 8
+                  color: [ [0.2, 'lime'], [0.8, '#1e90ff'], [1, '#ff4500'] ], width: 2, shadowColor: '#fff', shadowBlur: 2
                 }
               },
-              axisTick: {
+                axisTick: {
                 // 坐标轴小标记
                 show: false
               },
               axisLabel: {
+                textStyle: { fontWeight: 'bolder', color: '#fff', shadowColor: '#fff', shadowBlur: 2 },
+
                 formatter: function(v) {
                   switch (v + "") {
                     case "0":
@@ -1096,25 +1216,27 @@ export default {
                   }
                 }
               },
-              splitLine: {
+               splitLine: {
                 // 分隔线
                 length: 15, // 属性length控制线长
-                lineStyle: {
-                  // 属性lineStyle（详见lineStyle）控制线条样式
-                  color: "auto"
-                }
+               lineStyle: { width: 3, 
+               color: '#fff', 
+               shadowColor: '#fff', 
+               shadowBlur: 2 }
               },
               pointer: {
-                width: 2
+                width: 2,
+                shadowColor: '#fff', 
+                shadowBlur: 2
               },
               title: {
                 fontWeight: "bolder",
                 fontSize: 16,
-                color: "red",
+                color: "#fff",
                 offsetCenter: [0, "55px"]
               },
               detail: {
-                // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+               // 其余属性默认使用全局文本样式，详见TEXTSTYLE
                 fontWeight: "bolder",
                 fontSize: "12px",
                 color: "#fff",
@@ -1128,10 +1250,11 @@ export default {
                   }
                 }
               },
-              data: [{ value: 100, name: "一卡通" }]
+              data: [{ value: 100, name: "一票通" }]
             }
           ]
         };
+          
       optionRight.series[0].data[0].value=params.powerOnRate;
       optionRight.series[1].data[0].value=params.intactRate;
       optionRight.series[2].data[0].value=params.intelligentPass;
@@ -1305,7 +1428,8 @@ export default {
   padding-top: 35px;
 }
 .tvm,.ag{
-   margin-bottom: 12px;
+  height: 50px;
+   /* margin-bottom: 12px; */
 }
 .AG{
   margin-top: 50px;
@@ -1317,4 +1441,34 @@ export default {
   width: 97%;
     margin-left: 8px;
 }
+  @keyframes flipInX {
+    from {
+      transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+      animation-timing-function: ease-in;
+      opacity: 0;
+    }
+  
+    40% {
+      transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
+      animation-timing-function: ease-in;
+    }
+  
+    60% {
+      transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
+      opacity: 1;
+    }
+  
+    80% {
+      transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
+    }
+  
+    to {
+      transform: perspective(400px);
+    }
+  }
+  
+  .flipInX {
+    backface-visibility: visible !important;
+    animation-name: flipInX;
+  }
 </style>

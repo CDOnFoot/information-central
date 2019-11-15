@@ -33,6 +33,13 @@ export default {
       this.mcId = val;
     }
   },
+  destroyed: function() {
+    //页面销毁时关闭
+    window.clearInterval(this.dataRef);
+    if(this.mc){
+      this.mc.clear();
+    }
+  },
   mounted() {
     var self = this;
     this.mcList = this.$common.mcList;

@@ -41,6 +41,10 @@ export default {
       this.mcTitle = val;
     }
   },
+  destroyed: function() {
+    //页面销毁时关闭
+    window.clearInterval(this.dataRef);
+  },
   mounted() {
     window.clearInterval(this.dataRef)
     var self = this;

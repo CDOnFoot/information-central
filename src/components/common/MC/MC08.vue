@@ -44,7 +44,7 @@ export default {
       runList: this.$common.runList,
       noticeList: [],  //页面所有车的点图集合
       tempNoticeList:{}, // 最新消息的数据
-      timeInterval:'',
+      dataRef:'',
       userId:Cookies.get("dvptId"),
       customToken:Cookies.get("dvptToken"),
 
@@ -66,22 +66,22 @@ export default {
     var self = this;
     this.mcList = this.$common.mcList;
     this.noticeList = JSON.parse(JSON.stringify(self.$common.hardList));
-
+//  加载列车负载信息
     this.initPassengerLoad();
 
-    clearInterval(this.timeTimeOut);
-    self.timeTimeOut = setInterval(() => {
+    clearInterval(this.dataRef);
+    
+    self.dataRef = setInterval(() => {
       self.initPassengerLoad();
     },5 * 1000 * 60);
   },
   created() {
   },
   destroyed: function() {
+    window.clearInterval(this.dataRef);
   },
-  beforeDestroy () {
-  },
+ 
   methods: {
-
     // 初始化列车负载图信息
     initPassengerLoad:function(){
       let self = this;

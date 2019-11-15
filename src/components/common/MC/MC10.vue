@@ -20,7 +20,7 @@ export default {
       mcList: "",
       mc: "",
       dataRef: "",
-      timeStamp:"2019/11/1-2019/11/7"
+      timeStamp:""
     };
   },
   props: ["mcStatus", "mcTitle", "mcId"],
@@ -35,20 +35,31 @@ export default {
       this.mcId = val;
     }
   },
+  destroyed: function() {
+    //页面销毁时关闭
+    window.clearInterval(this.dataRef);
+    if(this.mc){
+      this.mc.clear();
+    }
+  },
   mounted() {
     var self = this;
     this.mcList = this.$common.mcList;
+
     this.initChart("init");
+
     var timeStamp = 1573066800000; //11月7日凌晨3点的毫秒数
     var dayMins = 86400000; //每天的毫秒数
     var setIntervalMins = 1000 * 30; //定时器刷新的时间间隔
+
     window.clearInterval(this.dataRef);
+
     self.dataRef = setInterval(() => {
       let currwntTime = Date.now();
       let minsMore = (currwntTime - timeStamp) % dayMins;
       if (minsMore > 0 && minsMore <= setIntervalMins) {
         //(当前时间-固定时间)对每日毫秒数 取余
-        self.initChart("init");
+        self.initChart("update");
       }
     }, setIntervalMins);
   },
@@ -173,12 +184,9 @@ export default {
        
 
         if(obj){
-          //  console.log(paramData)
           option.yAxis.data = paramData.station.reverse();
           option.series[0].data = paramData.entryNumPeople.reverse();
           option.series[1].data = paramData.exitNumPeople.reverse();
-          // console.log(option)
-
           self.mc.setOption(option);
           
         }
@@ -191,20 +199,14 @@ export default {
     refreshData(paramData) {
       let self = this;
       let option = self.mc.getOption();
-      console.log(paramData);
-      console.log(option.series);
-      var serLast = option.series[option.series.length - 1];
-      option.series = [serLast];
-      option.dataset[0].source = paramData;
-      for (var i = 1; i < paramData.length; i++) {
-        option.series.unshift({
-          type: "line",
-          smooth: true,
-          seriesLayoutBy: "row"
-        });
+
+      if(obj){
+        option.yAxis.data = paramData.station.reverse();
+        option.series[0].data = paramData.entryNumPeople.reverse();
+        option.series[1].data = paramData.exitNumPeople.reverse();
+        self.mc.setOption(option);
+        
       }
-      console.log(option.series);
-      self.mc.setOption(option);
     }
   }
 };

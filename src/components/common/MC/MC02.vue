@@ -52,11 +52,14 @@ export default {
   created() {
     
   },
-  beforeDestroy () {
+   destroyed: function() {
+    //页面销毁时关闭
+    window.clearInterval(this.dataRef);
     if(this.mc){
       this.mc.clear();
     }
   },
+  
     methods: {
       // 查看可视化界面内容数据信息
       initChart:function(type){

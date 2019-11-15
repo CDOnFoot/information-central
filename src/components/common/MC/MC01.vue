@@ -77,6 +77,13 @@ export default {
   created() {
 
   },
+   destroyed: function() {
+    //页面销毁时关闭
+    window.clearInterval(this.dataRef);
+    if(this.mc){
+      this.mc.clear();
+    }
+  },
   methods: {
      handleMenuClick(e) {
         // console.log('click', e.key);

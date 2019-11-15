@@ -387,7 +387,7 @@ export default {
       })
     },
     getActionInfo:function(callback){
-
+      callback();
     },
     actionInfo:function(data){
   // 启动故障信息滚动
@@ -1220,6 +1220,9 @@ export default {
   font-weight: 900;
   font-size: 30px;
   padding-top: 35px;
+}
+.tvm,.ag{
+   margin-bottom: 12px;
 }
 .AG{
   margin-top: 50px;

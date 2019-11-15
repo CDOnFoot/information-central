@@ -1146,7 +1146,7 @@ export default {
   margin-top: 16%;
 }
 .gaugeDateLeft{
-  width:50%;
+  width:70%;
   height:70%;
   
   position: absolute;
@@ -1156,6 +1156,7 @@ export default {
   flex-wrap: wrap;
   margin-top:10px;
   font-weight: 900;
+  margin-left: 36px;
 }
 .gaugeDateLabel{
   width:50%;

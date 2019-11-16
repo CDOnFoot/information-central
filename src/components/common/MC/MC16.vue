@@ -545,7 +545,7 @@ export default {
               min: 0,
               max: 100,
               splitNumber: 10,
-              center: ["55%", "50%"], // 默认全局居中
+              center: ["50%", "50.8%"], // 默认全局居中
               radius: "75%",
               axisLine: {
                 // 坐标轴线
@@ -653,11 +653,12 @@ export default {
             {
               name: "完好率",
               type: "gauge",
-              center: ["18%", "55%"], // 默认全局居中
+              center: ["20%", "51%"], // 默认全局居中
               radius: "60%",
               min: 0,
               max: 100,
-              endAngle: 18,
+              startAngle: 235,
+              endAngle: 45,
               splitNumber: 4,
               axisLine: {
                 // 坐标轴线
@@ -748,7 +749,7 @@ export default {
             {
               name: "连接状态",
              type: "gauge",
-              center: ["85%", "50%"], // 默认全局居中
+              center: ["80%", "50%"], // 默认全局居中
               radius: "60%",
               min: 0,
               max: 100,
@@ -816,7 +817,7 @@ export default {
             {
               name: "时钟正常",
               type: "gauge",
-              center: ["85%", "50%"], // 默认全局居中
+              center: ["80%", "50%"], // 默认全局居中
               radius: "60%",
               min: 0,
               max: 100,
@@ -914,7 +915,7 @@ export default {
               min: 0,
               max: 100,
               splitNumber: 10,
-              center: ["55%", "50%"], // 默认全局居中
+              center: ["50%", "50.8%"], // 默认全局居中
               radius: "75%",
               axisLine: {
                 // 坐标轴线
@@ -1022,11 +1023,12 @@ export default {
             {
               name: "完好率",
               type: "gauge",
-              center: ["18%", "55%"], // 默认全局居中
+              center: ["20%", "51%"], // 默认全局居中
               radius: "60%",
               min: 0,
               max: 100,
-              endAngle: 18,
+              startAngle: 235,
+              endAngle: 45,
               splitNumber: 4,
               axisLine: {
                 // 坐标轴线
@@ -1117,7 +1119,7 @@ export default {
             {
               name: "连接状态",
              type: "gauge",
-              center: ["85%", "50%"], // 默认全局居中
+              center: ["80%", "50%"], // 默认全局居中
               radius: "60%",
               min: 0,
               max: 100,
@@ -1185,7 +1187,7 @@ export default {
             {
               name: "时钟正常",
               type: "gauge",
-              center: ["85%", "50%"], // 默认全局居中
+              center: ["80%", "50%"], // 默认全局居中
               radius: "60%",
               min: 0,
               max: 100,
@@ -1411,6 +1413,7 @@ export default {
 .gaugeDateLabel{
   width:50%;
   height:50%;
+  font-size: 18px;
   
 }
 .gaugeDateNum{

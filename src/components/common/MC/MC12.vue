@@ -18,7 +18,8 @@ export default {
     return {
       mcList: "",
       mc: "",
-      dataRef: ""
+      dataRef: "",
+      type: "",
     };
   },
   props: ["mcStatus", "mcTitle", "mcId"],
@@ -84,7 +85,7 @@ export default {
     chartInfoList: function(data) {
       this.drawLine(data);
     },
-    drawLine(paramData) {
+    drawLine(paramData,type) {
       let self = this;
       let option = null;
       let obj = document.getElementById(self.mcId);
@@ -268,7 +269,9 @@ canvas {
 }
 .main-id {
   width: 470px;
-  height: 300px;
-  margin: 4% 0 0 2%;
+    height: 258px;
+  margin: 0 auto;
+  /* height: 300px;
+  margin: 4% 0 0 2%; */
 }
 </style>

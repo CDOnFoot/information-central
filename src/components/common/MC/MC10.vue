@@ -120,7 +120,7 @@ export default {
           grid: {
             left: "3%",
             right: "12%",
-            bottom: "9%",
+            bottom: "0%",
             containLabel: true
           },
           xAxis: {
@@ -228,8 +228,8 @@ canvas {
 }
 .main-id {
   width: 470px;
-  height: 300px;
-  margin: 1% 0 0 2%;
+  height: 258px;
+  margin: 0 auto;
 }
 .timeStamp{
   position: absolute;

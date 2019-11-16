@@ -166,7 +166,7 @@ export default {
 
 
   position: absolute;
-  width: 100%;
+  width: 120%;
   top: 20%;
   height: auto;
   left: 7%;

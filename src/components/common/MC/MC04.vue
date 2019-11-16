@@ -21,6 +21,7 @@
               <span slot="title">{{item.dotName}}</span>
               <a-button class="runway-item"></a-button>
             </a-popover>-->
+            <div class="lineStyle"></div>
             <div class="runway-content" :id="'runwayContent'+index" :class="runwayIndex===index?'runwayActive':''">
               车次号：{{item.subwayNum}}
             </div>
@@ -276,6 +277,28 @@ a-popover{
   line-height: 17px;
   border: solid 1px #ffffff4d;
   
+}
+.lineStyle{
+  /* 直线 */
+    background: rgb(255, 255, 255);
+    width: 3px;
+    height: 30px;
+    float: left;
+    transform: rotate(45deg);
+    margin-top: -6px;
+    margin-left: -13px;
+
+/* 曲线 */
+    /* background: rgba(255, 255, 255, 0);
+    width: 38px;
+    height: 12px;
+    float: left;
+    margin-top: -7px;
+    margin-left: -38px;
+    border-left: 2px solid #ffffff;
+    border-top: 2px solid #fff;
+    border-radius: 6px; */
+
 }
 .dot-red{
   background: #ff3e4db0 !important;

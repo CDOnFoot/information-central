@@ -74,7 +74,7 @@ export default {
         //调取数据成功
         if (res.data) {
           if (res.data.code === "0") {
-            callback(res.data.data);
+            callback(res.data.data,type);
           } else {
               // this.$message.error(res.data.msg);
               console.log(res.data.msg);
@@ -82,8 +82,8 @@ export default {
         }
       });
     },
-    chartInfoList: function(data) {
-      this.drawLine(data);
+    chartInfoList: function(data,type) {
+      this.drawLine(data,type);
     },
     drawLine(paramData,type) {
       let self = this;

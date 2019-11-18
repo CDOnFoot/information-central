@@ -32,7 +32,7 @@
         <img src="../../assets/img/logo.png" alt="">
       </div>
       <div class="header-canvas">
-        <div class="title">大数据分析决策平台</div>
+        <div class="title">信息中心</div>
         <div class="time-interval">{{timeStamp}}</div>
         <!-- <div class="weather">
           <iframe width="66%" scrolling="no" height="24" frameborder="0" allowtransparency="false" src="//i.tianqi.com/index.php?c=code&id=1&color=%23FFFFFF&icon=1&py=beijing&wind=0&num=1&site=12" style="float:right;"></iframe>
@@ -90,11 +90,11 @@
         <a-button size="large" class="btn-item" v-show="setFlag" @click="saveSetMsg">保存</a-button>
         <a-button size="large" class="btn-item" v-show="setFlag" @click="cancelSetMsg">取消</a-button>
       </div>
-      <div class="layout-selectBtn">
+      <!-- <div class="layout-selectBtn">
         <a-button size="large" class="btn-item" @click="layoutSelect" v-show="setFlag">选择模版</a-button>
         <a-button size="large" class="btn-item" @click="layoutAuto" v-show="setFlag">恢复默认</a-button>
 
-      </div>
+      </div> -->
     </a-layout-footer>
   </a-layout>
 </template>
@@ -246,6 +246,7 @@
             });
           },
           onCancel() {
+            console.log('this is choose to cancel login out.')
           },
         });
       },
@@ -585,7 +586,7 @@
               self.setFlag = false;
               setTimeout(()=>{
                 self.loadFlag = false;
-              },1000);
+              }, 1000);
               self.$router.push('/home/'+self.menuList[param].key);
           
             })
@@ -600,7 +601,7 @@
         }
       },
 
-      //选择模版操作
+      // 选择模版操作
       layoutSelect:function(){
         this.visible = true;
         this.title = "选择模版内容";

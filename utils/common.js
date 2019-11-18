@@ -189,13 +189,6 @@ var common = {
       mk: [{ mc: "", moduleName: "模块一", moduleNum: "MK01" }]
     }
   },
-  {
-    mb: {
-      templateName: "模版四",
-      templateNum: "MB04",
-      mk: [{ mc: "", moduleName: "模块一", moduleNum: "MK01" }]
-    }
-  },
   ],
   // 关键指标配置信息
   keyVisualList: [

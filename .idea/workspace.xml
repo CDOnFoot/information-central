@@ -1,34 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="27288b33-2484-4513-8825-3379b02b1405" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/img/back/menu-bg.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/img/back/module-bg.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/img/back/刷卡记录日志管理.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/img/back/历史报警.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/img/back/实时监控.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/img/back/实时视频.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/img/back/当前报警.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/img/back/抓拍浏览.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/img/back/用户管理.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/img/back/设置.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/img/back/门禁卡管理.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/img/back/门禁用户管理.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/img/back/首页.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/common/usual/menuModule.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/page/menu-module/current-alarm.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/page/menu-module/user-manage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/common/home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/home.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/page/login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/login.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/page/mainMenu.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/mainMenu.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/index.js" afterDir="false" />
-    </list>
+    <list default="true" id="27288b33-2484-4513-8825-3379b02b1405" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -42,7 +15,7 @@
     <session id="1856200917">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="6" />
+          <entry key="project.closed" value="7" />
           <entry key="project.open.time.1" value="2" />
           <entry key="project.open.time.6" value="1" />
           <entry key="project.open.time.7" value="2" />
@@ -53,7 +26,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="css" value="4" />
+          <entry key="css" value="5" />
           <entry key="html" value="2" />
           <entry key="js" value="22" />
           <entry key="json" value="4" />
@@ -64,7 +37,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="CSS" value="4" />
+          <entry key="CSS" value="5" />
           <entry key="HTML" value="2" />
           <entry key="Image" value="1" />
           <entry key="JSON" value="4" />
@@ -173,8 +146,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/page/menu-module/card-manage.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="322">
-              <caret line="301" column="35" lean-forward="true" selection-start-line="301" selection-start-column="35" selection-end-line="301" selection-end-column="35" />
+            <state relative-caret-position="-115">
+              <caret line="291" column="35" lean-forward="true" selection-start-line="291" selection-start-column="35" selection-end-line="291" selection-end-column="35" />
               <folding>
                 <element signature="e#2828#3015#0" />
                 <element signature="e#3633#3741#0" />
@@ -429,16 +402,15 @@
       <workItem from="1574060437771" duration="9758000" />
       <workItem from="1574125349470" duration="25171000" />
       <workItem from="1574211896528" duration="23032000" />
-      <workItem from="1574239996318" duration="3759000" />
+      <workItem from="1574239996318" duration="4584000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="82952000" />
+    <option name="totallyTimeSpent" value="83777000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2494043" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -492,9 +464,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-71" />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/css/animate.css">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/utils/AppSetup.js">
       <provider selected="true" editor-type-id="text-editor" />
@@ -801,10 +770,15 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/static/css/animate.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2967" />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/page/menu-module/card-manage.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="301" column="35" lean-forward="true" selection-start-line="301" selection-start-column="35" selection-end-line="301" selection-end-column="35" />
+        <state relative-caret-position="-115">
+          <caret line="291" column="35" lean-forward="true" selection-start-line="291" selection-start-column="35" selection-end-line="291" selection-end-column="35" />
           <folding>
             <element signature="e#2828#3015#0" />
             <element signature="e#3633#3741#0" />

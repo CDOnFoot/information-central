@@ -109,7 +109,9 @@ import sha256 from "js-sha256";
                   self.$common.setCookie('menuIndex','0',24 * 60 * 30);
 
                   self.loadFlag = false;
-                  self.$router.push('/home/index');
+
+                  // self.$router.push('/home/index');
+                  self.$router.push('/home/mainMenu');
                   // self.changeLogin({ token: self.userInfo.custom_token });
                   // setTimeout(()=>{
                   // },200);

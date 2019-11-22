@@ -111,7 +111,7 @@
               this.$router.push('/home/userManage');
               break
             case '实时监控':
-              // this.$router.push('/home/index');
+              this.$router.push('/home/forthwithMonitor');
               break
             case '当前报警':
               this.$router.push('/home/currentAlarm');

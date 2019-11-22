@@ -4,7 +4,12 @@ export default {
 
   // 自定义布局信息
   
-  loginIn: '/login',   //login登录
+  // loginIn: '/login',   //login登录
+  /**
+   * @variation new API
+   */
+  loginIn: '/Authorization/api/Authentication/LoginForWeb',
+  getUsers: '/config/Users',
 
   loginOut: '/logout',   //login登出
 

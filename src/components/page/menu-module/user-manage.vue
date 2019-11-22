@@ -1,12 +1,12 @@
 <template>
   <div>
     <div class="search-condition">
-      <a-form layout="inline" :form="searchName" @submit="searchFor">
+      <a-form layout="inline" :form="form" @submit="searchFor">
         <a-form-item label="姓名：">
-          <a-input placeholder="姓名"></a-input>
+          <a-input placeholder="姓名" v-model="searchName"></a-input>
         </a-form-item>
         <a-form-item>
-          <a-button type="primary" icon="search" @click="searchInUser" html-type="submit">搜索</a-button>
+          <a-button type="primary" icon="search" html-type="submit">搜索</a-button>
         </a-form-item>
         <a-form-item>
           <a-button type="primary" icon="plus" @click="addUser">添加</a-button>
@@ -66,6 +66,7 @@
                :pagination="pagination"
                :dataSource="tableList"
                :defaultExpandAllRows="expandAllRows"
+               @change="pageChange(page, pageSize)"
                size="small">
         <template slot="operation" slot-scope="text, record">
           <a-button type="primary" @click="checkUser(record)">查看</a-button>
@@ -83,51 +84,51 @@
   const column = [
     {
       title: '姓 名',
-      dataIndex: 'name',
+      dataIndex: 'Name',
       align: 'center',
       sorter: true,
-      width: 30,
+      width: 25,
       // scopedSlots: { customRender: 'name' }
     },
     {
       title: '工 号',
       dataIndex: 'number',
       align: 'center',
-      width: 40
+      width: 30
     },
     {
       title: '固 话',
       dataIndex: 'tel',
       align: 'center',
-      width: 40
+      width: 30
     },
     {
       title: '手机号',
       dataIndex: 'phone',
       align: 'center',
-      width: 40
+      width: 30
     },
     {
       title: '创建时间',
-      dataIndex: 'createTime',
+      dataIndex: 'Created',
       align: 'center',
-      width: 40
+      width: 30
     },
     {
       title: '更新时间',
-      dataIndex: 'updateTime',
+      dataIndex: 'Updated',
       align: 'center',
-      width: 40
+      width: 30
     },
     {
       title: '过期时间',
-      dataIndex: 'overTime',
+      dataIndex: 'Expired',
       align: 'center',
-      width: 40
+      width: 30
     },
     {
       title: '状 态',
-      dataIndex: 'status',
+      dataIndex: 'Status',
       align: 'center',
       width: 40
     },
@@ -135,7 +136,7 @@
       title: '操 作',
       // dataIndex: 'tel',
       align: 'center',
-      width: 40,
+      width: '15%',
       scopedSlots: { customRender: 'operation' }
     }
   ];
@@ -146,7 +147,8 @@
       data () {
           return{
             modal: '', // 使用 a-modal target 不能动态地改变标题，模拟一个状态使用 API 来 update 对话框，已解决，因此用来做删除的对话框
-            searchName: this.$form.createForm(this, { name: 'advanced_search' }), // 搜索条件 - 姓名
+            // searchName: this.$form.createForm(this, { name: 'advanced_search' }), // 搜索条件 - 姓名
+            searchName: '', // 查询条件 - 姓名
             okButton: '保存',
             isShowModal: false,
             confirmLoading: false,
@@ -156,13 +158,16 @@
             pagination: {
               current: 1,
               defaultCurrent: 1,
-              defaultPageSize: 20
+              defaultPageSize: 17,
+              total: 0,
+              showQuickJumper: true
             },
             modalTitle: '',
             loading: false,
 
             modalForm: {},
-            tableList: [
+            tableList: []
+            /*tableList: [
               {
                 // key: 1,
                 name: 'Apple',
@@ -339,13 +344,18 @@
                 overTime: '9019-10-10 10:10',
                 status: '启用'
               }
-            ]
+            ]*/
           }
+      },
+
+      beforeCreate () {
+        this.form = this.$form.createForm(this, { name: 'advanced_search' });
       },
 
       // 状态创建前窗口会出现一次闪烁
       created () {
         // this.modal = this.Modal.confirm();
+        // this.form = this.$form.createForm(this, { name: 'advanced_search' });
       },
 
       beforeMount () {
@@ -355,8 +365,58 @@
       mounted () {},
 
       methods: {
-        searchFor () {
+        searchFor (e) {
+          const that = this;
           // 附带 searchName 为参数发起 HTTP 请求
+          e.preventDefault();
+          // console.log('start to searching.');
+          this.loading = true;
+          // 使用当前绑定状态进行校验
+          this.form.validateFields((err, values) => {
+            if (!err) {
+              // console.log(' --- the input form:');
+              // console.log(values);
+              /*const param = {
+                token: that.$common.getCookie('dvptToken'),
+                station: 1
+              }*/
+              this.$http.get(that.$api.getUsers, {}).then(res => {
+                // console.log('response data:')
+                // console.log(res)
+                // 直接填充
+                this.tableList = res.data.value;
+                this.pagination.total = this.tableList.length;
+                /**
+                 * @description 时间格式需要处理
+                 * @exception 需要确定创建时间、更新时间、过期时间的数据类型
+                 */
+                let tableContainer = [];
+                const table = res.data.value;
+                for (let i=0;i<=table.length;) {
+                  tableContainer.push(table[i]);
+                  // console.log(tableContainer);
+                  // console.log('the type of Created:' + typeof tableContainer[0].Created);
+                  for (let j=0;j<=table.length;) {
+                    // tableContainer[i].Created = tableContainer[i].Created.toLocaleDateString();
+                    // tableContainer[i].Updated = tableContainer[i].Updated.toLocaleDateString();
+                    // tableContainer[i].Expired = tableContainer[i].Expired.toLocaleDateString();
+                    j++;
+                  }
+                  i++;
+                }
+                // console.log('after dealing,the table is:');
+                // console.log(tableContainer);
+                that.loading = false;
+              })
+            }
+          })
+        },
+
+        /**
+         * @function 当前页码改变的回调
+         */
+        pageChange (page, pageSize) {
+          this.pagination.current = page;
         },
 
         checkUser (row) {
@@ -448,6 +508,10 @@
           this.isShowModal = true;
         },
 
+        /**
+         * @function 必须使用 @submit 绑定的方法，该方法不再使用
+         * @param e
+         */
         searchInUser (e) {
           // console.log('the param "e":')
           // console.log(e);
@@ -455,7 +519,7 @@
           // 使用当前绑定状态进行校验
           this.searchName.validateFields((err, values) => {
             if (!err) {
-              console.log('the input form:')
+              console.log('the input form:');
               console.log(values)
             }
           })

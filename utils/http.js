@@ -16,8 +16,15 @@
 
     //配置信息
     var useStaging = false;
-    var host = useStaging ? 'http://10.66.1.102:28070':'http://10.66.1.160:28070';
+    // var host = useStaging ? 'http://10.66.1.102:28070':'http://10.66.1.160:28070';
     // var host = useStaging ? 'http://10.66.1.102:28070':'http://10.28.3.81:28070';
+
+/**
+ * @variation 新的登录 API
+ * @type {string}
+ */
+var host = 'http://10.28.3.149:81';
+var hostGet = 'http://10.28.3.149';
 
     // websocket配置信息/url+user/id+token
     var websocketHost = useStaging ? 'ws://10.66.1.160:28070/subway/info/ws/':'ws://10.66.1.160:28070/subway/info/ws/';
@@ -32,10 +39,11 @@
     var self = this;
     // **路由请求拦截**
     // http request 拦截器
+axios.defaults.headers.token = common.getCookie('dvptToken')
     axios.interceptors.request.use(config => {
       let token = Cookies.get('dvptToken');
       // 拦截器在请求头中加token/userId
-      if(config.url!='/login'){
+      if(config.url!='/Authorization/api/Authentication/LoginForWeb'){
         if (token === 'null' || token === '' || token==="undefined") {
           self.$info({
             title: '提示',
@@ -47,8 +55,10 @@
         } else{
           config.headers={
             userId: Cookies.get("dvptId"),
-            custom_token: Cookies.get("dvptToken"),
-            'content-Type': "application/x-www-form-urlencoded;charset=utf-8;",
+            // custom_token: Cookies.get("dvptToken"),
+            token: Cookies.get("dvptToken"),
+            // 'content-Type': "application/x-www-form-urlencoded;charset=utf-8;",
+            'content-Type': "application/json",
             "Access-Control-Allow-Origin":"*",
           };
         }
@@ -66,9 +76,10 @@
       }
       return response;
     }, err => {
-    
+
       // 请求的错误判断,根据不同的错误码不同消息提醒
       if (err && err.response) {
+        // console.log('request failed.');
         switch (err.response.status) {
           case 400:
             err.message = '错误请求';
@@ -111,6 +122,9 @@
             err.message = `连接错误${err.response.status}`;
         }
       } else {
+        /*console.log('request failed....');
+        console.log('failed message:');
+        console.log(err)*/
         err.message = "连接到服务器失败";
       }
       // message.error(err.message,3);
@@ -185,7 +199,9 @@
         return axios({
           method: 'post',
           baseURL: host, url,
-          data: qs.stringify(params),
+          // data: qs.stringify(params),
+          // data: JSON.stringify(params),
+          data: params,
           timeout: 20000,
         }).then(
           (response) => {
@@ -204,10 +220,14 @@
         }else {
           param = formateParm(params);
         }
+
+        // const token = Cookies.get('dvptToken');
+        // console.log('current token:' + token);
         var urlencode = urlEncode(host + url,param);
         return axios({
           method: 'get',
-          url:urlencode,
+          url: hostGet + url,
+          // param,
           timeout: 20000,
           }).then(
           (response) => {

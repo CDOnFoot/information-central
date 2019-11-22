@@ -67,6 +67,21 @@ var common = {
     var s = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds();
     return Y + M + D + h + m + s;
   },
+
+  /**
+   * @function 格式化日期
+   */
+  formatTheDate (data) {
+    const newDate = new Date(data);
+    // console.log('after formatted date:' + newDate);
+    const year = newDate.getFullYear() + '年';
+    const month = newDate.getMonth() + 1 + '月';
+    const day = newDate.getDate() + '日';
+    const hours = (newDate.getHours() < 10 ? '0' + newDate.getHours() : newDate.getHours()) + ':';
+    const minutes = (newDate.getMinutes() < 10 ? '0' + newDate.getMinutes() : newDate.getMinutes()) + ':';
+    const seconds = (newDate.getSeconds() < 10 ? '0' + newDate.getSeconds() : newDate.getSeconds());
+    return year + month + day + hours + minutes + seconds;
+  },
   btnList: [
     { title: '添加' },
     { title: '替换' },
@@ -164,7 +179,8 @@ var common = {
       dot: ["43%", "58%"]
     },
   ],
-  visualList: [{
+  visualList: [
+    {
     mb: {
       templateName: "模版一",
       templateNum: "MB01",

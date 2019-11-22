@@ -64,12 +64,21 @@
             <img src="../../assets/img/title-sub-bg.png" alt="" class="menu-sub-img">
           </div>
         </div>
+
+        <!-- 菜单 -->
+        <div class="menu-item" @click="returnMenu">
+          <div class="item-info">
+            <img :src="require('../../assets/img/titleBg.png')" alt="" class="menu-img">
+            <div class="item-title">菜单</div>
+          </div>
+        </div>
+
         <div v-for="(item,index) in menuList" class="menu-item" :class="menuIndex==index?'font-active':''" :key="index"
              @click="selectMenu(index)">
           <div class="item-info">
             <img :src="menuIndex === index?require('../../assets/img/titleBg-active.png'):require('../../assets/img/titleBg.png')" alt="" class="menu-img">
             <div class="item-title">
-              {{item.menuName}}
+              {{ item.menuName }}
             </div>
           </div>
         </div>
@@ -86,7 +95,7 @@
         </div>
       </div>
       <div class="layout-btn">
-        <a-button size="large" class="btn-item" @click="layoutSetting" v-show="menuIndex<=1">布局配置</a-button>
+        <a-button size="large" class="btn-item" @click="layoutSetting" v-show="menuIndex<=0">布局配置</a-button>
         <a-button size="large" class="btn-item" v-show="setFlag" @click="saveSetMsg">保存</a-button>
         <a-button size="large" class="btn-item" v-show="setFlag" @click="cancelSetMsg">取消</a-button>
       </div>
@@ -134,10 +143,18 @@
       var routerVal = this.$router.currentRoute.path;
       this.getCurrentRoute(routerVal);
     },
+    /**
+     * @description ‘信息中心’ 项目暂不使用从服务获取的菜单列表，直接写一个假的数据列表以供选择
+     * @param to
+     * @param from
+     * @param next
+     */
     beforeRouteUpdate (to, from, next) {
       let self = this;
       var routerVal = to.matched[1].path;
-      console.log(routerVal);
+      // 增加一个新的跳转，用于 debug
+      next();
+      console.log('current router to: ' + routerVal);
       new Promise((resolve,reject)=>{
         self.menuList.some((item,index)=>{
           if('/home/'+item.key === routerVal){
@@ -146,6 +163,8 @@
             // console.log(self.menuId);
             next();
             return false;
+          } else {
+            next();
           }
         });
         let paramList={
@@ -210,6 +229,8 @@
         this.$http.post(self.$api.getUserVisualization, param).then(res =>{
           //调取数据成功
           if(res.data){
+            console.log('the first request data:');
+            console.log(res);
             if (res.data.code === "0") {
               callback(res.data.data)
             }else{
@@ -269,6 +290,8 @@
         };
         this.$http.post(self.$api.getMenuInfo, param).then(res =>{
             //调取数据成功
+          console.log('the data of menu:');
+          console.log(res);
             if(res.data){
               if (res.data.code === "0") {
                 callback(res.data.data);
@@ -606,6 +629,13 @@
         this.visible = true;
         this.title = "选择模版内容";
       },
+
+      /**
+       * @function return to main menu
+       */
+      returnMenu () {
+        this.$router.push('/home/mainMenu');
+      }
     }
   }
 </script>

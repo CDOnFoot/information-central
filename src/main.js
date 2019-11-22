@@ -18,13 +18,24 @@ import api from '../utils/api'
 import http from '../utils/http'
 import VueWechatTitle from 'vue-wechat-title'
 
+// element-ui
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
+
+// antd single module import
+import { Button } from 'ant-design-vue'
+import { Modal } from 'ant-design-vue'
+
 Vue.use(VueWechatTitle)
 Vue.config.productionTip = false
 Vue.use(Antd);
+Vue.use(Button);
+Vue.use(ElementUI)
 Vue.use(Vuex)
 
 import echarts from '../node_modules/echarts'
 Vue.prototype.$echarts = echarts
+Vue.prototype.Modal =  Modal
 
 // 支持IE浏览器兼容问题（Promise）
 import 'es6-promise/auto'

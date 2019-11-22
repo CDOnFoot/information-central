@@ -75,7 +75,53 @@ const router =  new Router({
         title:'首页',
         keepAlive:false
       },
-      children:[{
+      children:[
+
+        // create new router besides "home"
+        {
+          path: 'mainMenu',
+          component: resolve => require(['@/components/page/mainMenu'], resolve),
+          meta: {
+            title: '菜单',
+            needLogin: true
+          }
+        },
+        {
+          path: 'userManage',
+          component: resolve => require(['@/components/page/menu-module/user-manage'], resolve),
+          meta: {
+            title: '用户管理'
+          }
+        },
+        {
+          path: 'currentAlarm',
+          component: resolve => require(['@/components/page/menu-module/current-alarm'], resolve),
+          meta: {
+            title: '当前报警'
+          }
+        },
+        {
+          path: 'alarmHistory',
+          component: resolve => require(['@/components/page/menu-module/alarm-history'], resolve),
+          meta: {
+            title: '历史报警'
+          }
+        },
+        {
+          path: 'defineAlarm',
+          component: resolve => require(['@/components/page/menu-module/defineAlarm'], resolve),
+          meta: {
+            title: '自定义报警'
+          }
+        },
+        {
+          path: 'cardManage',
+          component: resolve => require(['@/components/page/menu-module/card-manage'], resolve),
+          meta: {
+            title: '门禁卡管理'
+          }
+        },
+        {
           path:'index',
           component: index,
           meta:{

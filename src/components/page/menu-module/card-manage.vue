@@ -313,6 +313,8 @@
             onOk: function (e) {
               // the callback of ok
               that.modal.destroy();
+              // 异步 http 请求
+              // this.$http.post('', {}).then()
             },
 
             onCancel: function (e) {

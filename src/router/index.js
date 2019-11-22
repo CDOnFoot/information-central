@@ -94,6 +94,17 @@ const router =  new Router({
           }
         },
         {
+          path: 'forthwithMonitor',
+          component: resolve => require(['@/components/page/menu-module/forthwith-monitor'], resolve),
+          meta: {
+            title: '实时监控'
+          },
+          children: [
+            { path: 'generalView', component: resolve => require(['@/components/page/menu-module/monitor-module/general-view'], resolve) },
+            { path: 'generalView', component: resolve => require(['@/components/page/menu-module/monitor-module/general-view'], resolve) },
+          ]
+        },
+        {
           path: 'currentAlarm',
           component: resolve => require(['@/components/page/menu-module/current-alarm'], resolve),
           meta: {

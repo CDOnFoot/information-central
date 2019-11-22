@@ -1,12 +1,12 @@
 <template>
   <div>
     <div class="search-condition">
-      <a-form layout="inline" :form="searchName" @submit="searchFor">
+      <a-form layout="inline" :form="form" @submit="searchFor">
         <a-form-item label="姓名：">
-          <a-input placeholder="姓名"></a-input>
+          <a-input placeholder="姓名" v-model="searchName"></a-input>
         </a-form-item>
         <a-form-item>
-          <a-button type="primary" icon="search" @click="searchInUser" html-type="submit">搜索</a-button>
+          <a-button type="primary" icon="search" html-type="submit">搜索</a-button>
         </a-form-item>
         <a-form-item>
           <a-button type="primary" icon="plus" @click="addUser">添加</a-button>
@@ -28,30 +28,30 @@
             <div class="modal-form">
               <div class="modal-form-one">
                 <a-form-item label="姓名" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }">
-                  <a-input v-model="modalForm.name"></a-input>
+                  <a-input v-model="modalForm.Name"></a-input>
                 </a-form-item>
                 <a-form-item label="工号" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }">
-                  <a-input v-model="modalForm.number"></a-input>
+                  <a-input v-model="modalForm.EntityId"></a-input>
                 </a-form-item>
                 <a-form-item label="状态" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }">
-                  <a-input v-model="modalForm.status"></a-input>
+                  <a-input v-model="modalForm.Status"></a-input>
                 </a-form-item>
                 <a-form-item label="创建时间" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }">
-                  <a-input v-model="modalForm.createTime"></a-input>
+                  <a-input v-model="modalForm.Created"></a-input>
                 </a-form-item>
               </div>
               <div class="modal-form-two">
                 <a-form-item label="固话" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }">
-                  <a-input v-model="modalForm.tel"></a-input>
+                  <a-input v-model="modalForm.Tel"></a-input>
                 </a-form-item>
                 <a-form-item label="手机号" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }">
-                  <a-input v-model="modalForm.phone"></a-input>
+                  <a-input v-model="modalForm.PhoneNumber"></a-input>
                 </a-form-item>
                 <a-form-item label="过期时间" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }">
-                  <a-input v-model="modalForm.overTime"></a-input>
+                  <a-input v-model="modalForm.Expired"></a-input>
                 </a-form-item>
                 <a-form-item label="更新时间" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }">
-                  <a-input v-model="modalForm.updateTime"></a-input>
+                  <a-input v-model="modalForm.Updated"></a-input>
                 </a-form-item>
               </div>
             </div>
@@ -63,8 +63,8 @@
     <div class="table">
       <a-table :columns="column"
                :loading="loading"
-               :pagination="pagination"
                :dataSource="tableList"
+               :pagination="pagination"
                :defaultExpandAllRows="expandAllRows"
                size="small">
         <template slot="operation" slot-scope="text, record">
@@ -73,6 +73,11 @@
           <a-button type="primary" @click="deleteUser(record)">删除</a-button>
         </template>
       </a-table>
+
+      <!--<a-pagination :current="pagination.current"-->
+                    <!--:defaultPageSize="pagination.defaultPageSize"-->
+                    <!--:showQuickJumper="pagination.showQuickJumper"-->
+                    <!--@change="pageChange(page, pageSize)" />-->
     </div>
   </div>
 </template>
@@ -83,51 +88,51 @@
   const column = [
     {
       title: '姓 名',
-      dataIndex: 'name',
+      dataIndex: 'Name',
       align: 'center',
       sorter: true,
-      width: 30,
+      width: '10%',
       // scopedSlots: { customRender: 'name' }
     },
     {
       title: '工 号',
-      dataIndex: 'number',
+      dataIndex: 'EntityId',
       align: 'center',
-      width: 40
+      width: 30
     },
     {
       title: '固 话',
-      dataIndex: 'tel',
+      dataIndex: 'Tel',
       align: 'center',
-      width: 40
+      width: '10%'
     },
     {
       title: '手机号',
-      dataIndex: 'phone',
+      dataIndex: 'PhoneNumber',
       align: 'center',
-      width: 40
+      width: '12%'
     },
     {
       title: '创建时间',
-      dataIndex: 'createTime',
+      dataIndex: 'Created',
       align: 'center',
-      width: 40
+      width: '12%'
     },
     {
       title: '更新时间',
-      dataIndex: 'updateTime',
+      dataIndex: 'Updated',
       align: 'center',
-      width: 40
+      width: '12%'
     },
     {
       title: '过期时间',
-      dataIndex: 'overTime',
+      dataIndex: 'Expired',
       align: 'center',
-      width: 40
+      width: '12%'
     },
     {
       title: '状 态',
-      dataIndex: 'status',
+      dataIndex: 'Status',
       align: 'center',
       width: 40
     },
@@ -135,7 +140,7 @@
       title: '操 作',
       // dataIndex: 'tel',
       align: 'center',
-      width: 40,
+      width: '15%',
       scopedSlots: { customRender: 'operation' }
     }
   ];
@@ -146,7 +151,8 @@
       data () {
           return{
             modal: '', // 使用 a-modal target 不能动态地改变标题，模拟一个状态使用 API 来 update 对话框，已解决，因此用来做删除的对话框
-            searchName: this.$form.createForm(this, { name: 'advanced_search' }), // 搜索条件 - 姓名
+            // searchName: this.$form.createForm(this, { name: 'advanced_search' }), // 搜索条件 - 姓名
+            searchName: '', // 查询条件 - 姓名
             okButton: '保存',
             isShowModal: false,
             confirmLoading: false,
@@ -154,15 +160,18 @@
             expandAllRows: true,
             // 分页信息
             pagination: {
-              current: 1,
-              defaultCurrent: 1,
-              defaultPageSize: 20
+              // current: 0,
+              // defaultCurrent: 1,
+              defaultPageSize: 17,
+              // total: 0,
+              // showQuickJumper: true
             },
             modalTitle: '',
             loading: false,
 
             modalForm: {},
-            tableList: [
+            tableList: []
+            /*tableList: [
               {
                 // key: 1,
                 name: 'Apple',
@@ -339,13 +348,18 @@
                 overTime: '9019-10-10 10:10',
                 status: '启用'
               }
-            ]
+            ]*/
           }
+      },
+
+      beforeCreate () {
+        this.form = this.$form.createForm(this, { name: 'advanced_search' });
       },
 
       // 状态创建前窗口会出现一次闪烁
       created () {
         // this.modal = this.Modal.confirm();
+        // this.form = this.$form.createForm(this, { name: 'advanced_search' });
       },
 
       beforeMount () {
@@ -355,8 +369,133 @@
       mounted () {},
 
       methods: {
-        searchFor () {
+        searchFor (e) {
+          const that = this;
           // 附带 searchName 为参数发起 HTTP 请求
+          // e.preventDefault();
+          // console.log('start to searching.');
+          this.loading = true;
+          // 使用当前绑定状态进行校验
+          this.form.validateFields((err, values) => {
+            if (!err) {
+              // console.log(' --- the input form:');
+              // console.log(values);
+              /*const param = {
+                token: that.$common.getCookie('dvptToken'),
+                station: 1
+              }*/
+              this.$http.get(that.$api.getUsers, {}).then(res => {
+                // console.log('response data:')
+                // console.log(res)
+                // 直接填充
+                // this.tableList = res.data.value;
+                // this.pagination.total = this.tableList.length;
+
+                let tableContainer = [];
+                that.pagination.total = res.data.value.length;
+                const table = res.data.value;
+                table.forEach((value, index) => {
+                  value.Created = this.$common.timestampToTime(value.Created);
+                  value.Updated = this.$common.timestampToTime(value.Updated);
+                  value.Expired = this.$common.timestampToTime(value.Expired);
+                  value.Status = value.Status === 'Enable' ? '启用' : '停用';
+                  // that.tableList = table;
+                  // this.handleTableList(table)
+                  that.tableList.push(value);
+                });
+
+                /*for (let i=0;i<=table.length;) {
+                  tableContainer.push(table[i]);
+                  // console.log(tableContainer);
+                  // console.log('the type of Created:' + typeof tableContainer[0].Created);
+                  for (let j=0;j<=table.length;) {
+                    // tableContainer[i].Created = tableContainer[i].Created.toLocaleDateString();
+                    // tableContainer[i].Updated = tableContainer[i].Updated.toLocaleDateString();
+                    // tableContainer[i].Expired = tableContainer[i].Expired.toLocaleDateString();
+                    j++;
+                  }
+                  i++;
+                }*/
+                // console.log('after dealing,the table is:');
+                // console.log(tableContainer);
+                that.loading = false;
+              })
+            }
+          })
+        },
+
+        handleTableList (table) {
+          const that = this;
+          let _searchName = this.searchName;
+          table.some((value) => {
+            if (_searchName !== '' || _searchName !== undefined || _searchName !== null) {
+              if (value.Name === _searchName) {
+                that.tableList.push(value)
+              }
+              that.tableList = value;
+            }
+          })
+          /*return function (table) {
+            table.some((value) => {
+              if (_searchName === value.name) {
+                return value
+              }
+              this.tableList.push(value);
+              this.searchName = ''
+            })
+          }*/
+        },
+
+        /**
+         * @function 当前页码改变的回调
+         */
+        pageChange (page, pageSize) {
+          // this.pagination.current = page;
+          console.log('current page:' + page);
+          // 每当页码改变时需要重新渲染列表数据
+          this.handleTableChange(page);
+        },
+
+        handleTableChange (page) {
+          const that = this;
+          this.loading = true;
+          this.pagination.current = page;
+          this.$http.get(that.$api.getUsers)
+            .then((response) => {
+              // console.log('getting table list:')
+              // console.log(table)
+              // console.log('pick the data of table:');
+              // console.log(table[57]);
+              try {
+                let index;
+                let tableContainer = [];
+                const table = response.data.value;
+                for (let i=0;i<17;i++) {
+                  // 以当前页码设置渲染列表数据的索引
+                  index = (page - 1) * 17 + i;
+                  table[index].Created = that.$common.timestampToTime(table[index].Created);
+                  table[index].Updated = that.$common.timestampToTime(table[index].Updated);
+                  table[index].Expired = that.$common.timestampToTime(table[index].Expired);
+                  table[index].Status = table[index].Status === 'Enable' ? '启用' : '未启用';
+                  tableContainer.push(table[index]);
+                }
+                that.tableList = tableContainer;
+              }catch (e) {
+                console.log('there are some data have "null":' + e);
+              }
+
+              /*that.pagination.defaultCurrent = parseInt(page);
+              const length = table.length;
+              for (let i=0;i<17;i++) {
+                let index = i + (page - 1) * parseInt(that.pagination.defaultPageSize);
+                that.tableList.push(table[index]);
+                that.tableList[index].Created = that.$common.timestampToTime(that.tableList[index].Created);
+                that.tableList[index].Updated = that.$common.timestampToTime(that.tableList[index].Updated);
+                that.tableList[index].Expired = that.$common.timestampToTime(that.tableList[index].Expired);
+                that.tableList[index].Status = that.tableList[index].Status === 'Enable' ? '启用' : '未启用';
+              }*/
+              that.loading = false;
+            })
         },
 
         checkUser (row) {
@@ -448,6 +587,10 @@
           this.isShowModal = true;
         },
 
+        /**
+         * @function 必须使用 @submit 绑定的方法，该方法不再使用
+         * @param e
+         */
         searchInUser (e) {
           // console.log('the param "e":')
           // console.log(e);
@@ -455,7 +598,7 @@
           // 使用当前绑定状态进行校验
           this.searchName.validateFields((err, values) => {
             if (!err) {
-              console.log('the input form:')
+              console.log('the input form:');
               console.log(values)
             }
           })

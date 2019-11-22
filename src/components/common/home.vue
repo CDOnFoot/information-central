@@ -253,18 +253,26 @@
       // 用户登出注销后 清除session信息 ，并返回登录页
       loginOut:function(){
         let self = this;
-        this.$confirm({
+        // 引入了 Modal 模块，使用这种方式创建简洁的对话框
+        let modal = this.Modal.confirm({
           title: '提醒',
           content: '是否退出登录?',
+          centered: true,
           okText: '确定',
           okType: 'danger',
           cancelText: '取消',
           onOk() {
-            self.$http.get(self.$api.loginOut).then(res =>{
+            /**
+             * @description 不再发起 http 请求
+             */
+            self.$common.delCookie('token');
+            self.$message.info("注销成功.");
+            self.$router.push('/login');
+            /*self.$http.get(self.$api.loginOut).then(res =>{
               self.$common.delCookie('token');
               self.$message.info("注销成功.");
               self.$router.push('/login'); 
-            });
+            });*/
           },
           onCancel() {
             console.log('this is choose to cancel login out.')

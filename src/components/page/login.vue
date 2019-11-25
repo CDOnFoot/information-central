@@ -85,6 +85,8 @@ import sha256 from "js-sha256";
 
         this.form.validateFields((err, values) => {
           if (!err) {
+            /*console.log('values:');
+            console.log(values);*/
             self.userName = values.userName;
             self.userPassword = values.password;
             param={

@@ -43,39 +43,39 @@ Vue.use(Router);
 
 const routerPush = Router.prototype.push
 Router.prototype.push = function push(location) {
-  return routerPush.call(this, location).catch(error=> error)
+  return routerPush.call(this, location).catch(error => error)
 }
 
 // export default new Router({
 
-const router =  new Router({
-  routes:[
+const router = new Router({
+  routes: [
     {
-      path:'/',
-      redirect:'/login',
-      meta:{
-        title:'登录',
-        keepAlive:false,
+      path: '/',
+      redirect: '/login',
+      meta: {
+        title: '登录',
+        keepAlive: false,
         needLogin: false
       }
     },
     {
-      path:'/login',
+      path: '/login',
       component: login,
-      meta:{
-        title:'登录',
-        keepAlive:false,
+      meta: {
+        title: '登录',
+        keepAlive: false,
         needLogin: false
       }
     },
     {
-      path:'/home',
+      path: '/home',
       component: home,
-      meta:{
-        title:'首页',
-        keepAlive:false
+      meta: {
+        title: '首页',
+        keepAlive: false
       },
-      children:[
+      children: [
 
         // create new router besides "home"
         {
@@ -100,8 +100,14 @@ const router =  new Router({
             title: '实时监控'
           },
           children: [
-            { path: 'generalView', component: resolve => require(['@/components/page/menu-module/monitor-module/general-view'], resolve) },
-            { path: 'generalView', component: resolve => require(['@/components/page/menu-module/monitor-module/general-view'], resolve) },
+            {
+              path: 'generalView',
+              component: resolve => require(['@/components/page/menu-module/monitor-module/general-view'], resolve)
+            },
+            {
+              path: 'generalView',
+              component: resolve => require(['@/components/page/menu-module/monitor-module/general-view'], resolve)
+            },
           ]
         },
         {
@@ -133,70 +139,84 @@ const router =  new Router({
           }
         },
         {
-          path:'index',
+          path: 'cardUserManage',
+          component: resolve => require(['@/components/page/menu-module/card-user-manage'], resolve),
+          meta: {
+            title: '门禁用户管理'
+          }
+        },
+        {
+          path: 'cardLogManage',
+          component: resolve => require(['@/components/page/menu-module/card-log-manage'], resolve),
+          meta: {
+            title: '刷卡记录日志管理'
+          }
+        },
+        {
+          path: 'index',
           component: index,
-          meta:{
-            title:'首页',
-            keepAlive:false,
+          meta: {
+            title: '首页',
+            keepAlive: false,
             needLogin: true
           }
         },
         {
-          path:'energy',
+          path: 'energy',
           component: energy,
-          meta:{
-            title:'能耗分析',
-            keepAlive:false,
+          meta: {
+            title: '能耗分析',
+            keepAlive: false,
             needLogin: true
           }
         },
         {
-          path:'passenger',
+          path: 'passenger',
           component: passenger,
-          meta:{
-            title:'客流分析',
-            keepAlive:false,
+          meta: {
+            title: '客流分析',
+            keepAlive: false,
             needLogin: true
           },
         },
         {
-          path:'flow',
+          path: 'flow',
           component: flow,
-          meta:{
-            title:'智能客流',
-            keepAlive:false,
+          meta: {
+            title: '智能客流',
+            keepAlive: false,
             needLogin: true
           },
         },
         {
-          path:'safe',
+          path: 'safe',
           component: safe,
-          meta:{
-            title:'安全防范',
-            keepAlive:false,
+          meta: {
+            title: '安全防范',
+            keepAlive: false,
             needLogin: true
           },
         },
         {
-          path:'rail',
+          path: 'rail',
           component: rail,
-          meta:{
-            title:'线路概况',
-            keepAlive:false,
+          meta: {
+            title: '线路概况',
+            keepAlive: false,
             needLogin: true
 
           },
         },
         {
-          path:'service',
+          path: 'service',
           component: service,
-          meta:{
-            title:'设备信息',
-            keepAlive:false,
+          meta: {
+            title: '设备信息',
+            keepAlive: false,
             needLogin: true
           },
         },
-        ]
+      ]
     },
 
   ]
@@ -210,7 +230,7 @@ router.beforeEach((to, from, next) => {
     next();
   } else {
     let token = Cookies.get('dvptToken');
-    if (token === 'null' || token === '' || token ===undefined || token===null) {
+    if (token === 'null' || token === '' || token === undefined || token === null) {
       next('/login');
     } else {
       next();

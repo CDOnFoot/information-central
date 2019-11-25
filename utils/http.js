@@ -41,7 +41,7 @@ var hostGet = 'http://10.28.3.149';
     // **路由请求拦截**
     // http request 拦截器
 axios.defaults.headers.token = common.getCookie('dvptToken')
-axios.defaults.headers.station = 1;
+// axios.defaults.headers.station = 1;
     axios.interceptors.request.use(config => {
       let token = Cookies.get('dvptToken');
       // 拦截器在请求头中加token/userId
@@ -56,6 +56,7 @@ axios.defaults.headers.station = 1;
           });
         } else{
           config.headers={
+            station: 1,
             userId: Cookies.get("dvptId"),
             // custom_token: Cookies.get("dvptToken"),
             token: Cookies.get("dvptToken"),

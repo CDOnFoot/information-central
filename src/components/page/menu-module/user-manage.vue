@@ -176,17 +176,17 @@
             modalTitle: '',
             loading: false,
 
-            modalForm: {},
-            /*modalForm: {
+            // modalForm: {},
+            modalForm: {
               Name: '',
               EntityId: '',
-              Status: '',
-              Created: '',
+              Status: '', // 不填写服务默认启动
+              Created: '', // 服务创建
               Tel: '',
-              phoneNumber: '',
-              Expired: '',
-              Updated: ''
-            },*/
+              PhoneNumber: '',
+              Expired: '', // 过期时间 - 如果不填写服务会创建
+              Updated: '' // 服务创建
+            },
             tableList: []
             // 模拟数据
             /*tableList: [
@@ -505,6 +505,8 @@
                   table[index].Expired = that.$common.timestampToTime(table[index].Expired);
                   table[index].Status = table[index].Status === 'Enable' ? '启用' : '未启用';
                   tableContainer.push(table[index]);
+                  console.log('current users data:');
+                  console.log(table[index]);
                 }
                 that.tableList = tableContainer;
               }catch (e) {
@@ -575,16 +577,21 @@
           // 异步请求提交修改 data
           // this.$http.post()
           const titleStatus = this.modalTitle;
+          /**
+           * @description http request 没问题，请求参数需要确定
+           */
           if (titleStatus === '添加用户信息') {
             param = {
-              EntityId: "1",
-              Name: "test112510",
-              DisplayName: "hello",
-              station: "1"
+              EntityId: that.modalForm.EntityId,
+              Name: that.modalForm.Name,
+              DisplayName: "hello", // 登录名称暂时固定
+              Tel: that.modalForm.Tel,
+              PhoneNumber: that.modalForm.PhoneNumber,
             };
             // 调用添加的 API
             this.$http.post(that.$api.addUsers, param).then(res => {
               console.log(res);
+              if (res.data === "success") {}
               that.confirmLoading = false;
             })
           } else if (titleStatus === '查看用户信息') {
@@ -592,11 +599,6 @@
           } else if (titleStatus === '编辑用户信息') {
             // 调用编辑的 API
           }
-
-          /*setTimeout(() => {
-            this.isShowModal = false;
-            this.confirmLoading = false;
-          }, 2000)*/
         },
 
         closeModal (e) {

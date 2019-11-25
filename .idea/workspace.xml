@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="27288b33-2484-4513-8825-3379b02b1405" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/page/login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/login.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/page/menu-module/user-manage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/menu-module/user-manage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/utils/api.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utils/http.js" beforeDir="false" afterPath="$PROJECT_DIR$/utils/http.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -57,15 +53,15 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="html" value="4" />
-          <entry key="js" value="2637" />
-          <entry key="vue" value="19431" />
+          <entry key="js" value="2649" />
+          <entry key="vue" value="19716" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="HTML" value="4" />
-          <entry key="JavaScript" value="2637" />
-          <entry key="Vue.js" value="19431" />
+          <entry key="JavaScript" value="2649" />
+          <entry key="Vue.js" value="19716" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.js.language.service.starts">
@@ -122,11 +118,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils/http.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="161">
-              <caret line="43" column="35" lean-forward="true" selection-start-line="43" selection-start-column="35" selection-end-line="43" selection-end-column="35" />
+            <state relative-caret-position="-3763">
+              <caret line="61" column="44" lean-forward="true" selection-start-line="61" selection-start-column="44" selection-end-line="61" selection-end-column="44" />
               <folding>
                 <element signature="e#18#40#0" expanded="true" />
                 <element signature="e#226#245#0" expanded="true" />
@@ -174,21 +170,22 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/page/menu-module/user-manage.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="207">
-              <caret line="587" column="31" lean-forward="true" selection-start-line="587" selection-start-column="31" selection-end-line="587" selection-end-column="31" />
+            <state relative-caret-position="248">
+              <caret line="594" column="16" selection-start-line="594" selection-start-column="16" selection-end-line="594" selection-end-column="16" />
               <folding>
                 <element signature="e#3663#4705#0" />
                 <element signature="e#5611#11464#0" />
-                <element signature="e#11991#12073#0" />
                 <element signature="e#12106#14703#0" />
                 <element signature="e#13946#14608#0" />
                 <element signature="e#14884#15540#0" />
                 <element signature="e#15634#15808#0" />
                 <element signature="e#15844#17875#0" />
                 <element signature="e#17093#17814#0" />
+                <element signature="e#17902#18923#0" />
+                <element signature="e#18948#19115#0" />
                 <element signature="e#19143#19706#0" />
                 <element signature="e#20103#20190#0" />
                 <element signature="e#20267#20399#0" />
@@ -267,8 +264,8 @@
         <option value="$PROJECT_DIR$/src/store/index.js" />
         <option value="$PROJECT_DIR$/utils/api.js" />
         <option value="$PROJECT_DIR$/src/components/page/login.vue" />
-        <option value="$PROJECT_DIR$/src/components/page/menu-module/user-manage.vue" />
         <option value="$PROJECT_DIR$/utils/http.js" />
+        <option value="$PROJECT_DIR$/src/components/page/menu-module/user-manage.vue" />
       </list>
     </option>
   </component>
@@ -456,12 +453,12 @@
       <workItem from="1574298737074" duration="24417000" />
       <workItem from="1574384546335" duration="22429000" />
       <workItem from="1574415160615" duration="586000" />
-      <workItem from="1574644033093" duration="18633000" />
+      <workItem from="1574644033093" duration="22461000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="150013000" />
+    <option name="totallyTimeSpent" value="153841000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
@@ -758,20 +755,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="23">
-          <caret line="2" column="7" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
-          <folding>
-            <element signature="e#140#161#0" expanded="true" />
-            <element signature="e#534#568#0" expanded="true" />
-            <element signature="e#729#763#0" expanded="true" />
-            <element signature="e#840#879#0" expanded="true" />
-            <element signature="e#1224#1265#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/ant-design-vue/es/form/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="162">
@@ -839,35 +822,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/page/menu-module/user-manage.vue">
+    <entry file="file://$PROJECT_DIR$/src/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="587" column="31" lean-forward="true" selection-start-line="587" selection-start-column="31" selection-end-line="587" selection-end-column="31" />
+        <state relative-caret-position="23">
+          <caret line="2" column="7" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
           <folding>
-            <element signature="e#3663#4705#0" />
-            <element signature="e#5611#11464#0" />
-            <element signature="e#11991#12073#0" />
-            <element signature="e#12106#14703#0" />
-            <element signature="e#13946#14608#0" />
-            <element signature="e#14884#15540#0" />
-            <element signature="e#15634#15808#0" />
-            <element signature="e#15844#17875#0" />
-            <element signature="e#17093#17814#0" />
-            <element signature="e#19143#19706#0" />
-            <element signature="e#20103#20190#0" />
-            <element signature="e#20267#20399#0" />
-            <element signature="e#20519#20849#0" />
+            <element signature="e#140#161#0" expanded="true" />
+            <element signature="e#534#568#0" expanded="true" />
+            <element signature="e#729#763#0" expanded="true" />
+            <element signature="e#840#879#0" expanded="true" />
+            <element signature="e#1224#1265#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/utils/http.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="43" column="35" lean-forward="true" selection-start-line="43" selection-start-column="35" selection-end-line="43" selection-end-column="35" />
+        <state relative-caret-position="-3763">
+          <caret line="61" column="44" lean-forward="true" selection-start-line="61" selection-start-column="44" selection-end-line="61" selection-end-column="44" />
           <folding>
             <element signature="e#18#40#0" expanded="true" />
             <element signature="e#226#245#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/page/menu-module/user-manage.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="248">
+          <caret line="594" column="16" selection-start-line="594" selection-start-column="16" selection-end-line="594" selection-end-column="16" />
+          <folding>
+            <element signature="e#3663#4705#0" />
+            <element signature="e#5611#11464#0" />
+            <element signature="e#12106#14703#0" />
+            <element signature="e#13946#14608#0" />
+            <element signature="e#14884#15540#0" />
+            <element signature="e#15634#15808#0" />
+            <element signature="e#15844#17875#0" />
+            <element signature="e#17093#17814#0" />
+            <element signature="e#17902#18923#0" />
+            <element signature="e#18948#19115#0" />
+            <element signature="e#19143#19706#0" />
+            <element signature="e#20103#20190#0" />
+            <element signature="e#20267#20399#0" />
+            <element signature="e#20519#20849#0" />
           </folding>
         </state>
       </provider>

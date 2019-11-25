@@ -19,7 +19,8 @@
                            module-icon-width="200"
                            module-name-width="200"
                            @checkTheRouter="changeRouter"></menu-module>
-            </div></td>
+            </div>
+          </td>
           <td>
             <div>
               <menu-module :module-name="name_0"
@@ -46,7 +47,8 @@
                            module-icon-width="200"
                            module-name-width="200"
                            @checkTheRouter="changeRouter"></menu-module>
-            </div></td>
+            </div>
+          </td>
         </tr>
 
         <tr class="the-second-row">
@@ -59,7 +61,8 @@
                            module-icon-width="200"
                            module-name-width="200"
                            @checkTheRouter="changeRouter"></menu-module>
-            </div></td>
+            </div>
+          </td>
         </tr>
       </div>
     </div>
@@ -67,101 +70,102 @@
 </template>
 
 <script>
-    import MenuModule from "../common/usual/menuModule";
-    export default {
-        name: "mainMenu",
-      components: {MenuModule},
-      data () {
-          return {
-            name_0: '视频回放',
-            icon_0: 'caret-right',
+  import MenuModule from "../common/usual/menuModule";
 
-            firstModuleList: [
-              { name: '首页', icon: 'home' },
-              { name: '当前报警', icon: 'alert' },
-              { name: '门禁卡管理', icon: 'credit-card' },
-              { name: '设置', icon: 'setting' }
-            ],
+  export default {
+    name: "mainMenu",
+    components: {MenuModule},
+    data() {
+      return {
+        name_0: '视频回放',
+        icon_0: 'caret-right',
 
-            secondModuleList: [
-              { name: '用户管理', icon: 'user'},
-              { name: '历史报警', icon: 'phone' },
-              { name: '门禁用户管理', icon: 'team' },
-              { name: '实时视频', icon: 'thunderbolt'}
-            ],
+        firstModuleList: [
+          {name: '首页', icon: 'home'},
+          {name: '当前报警', icon: 'alert'},
+          {name: '门禁卡管理', icon: 'credit-card'},
+          {name: '设置', icon: 'setting'}
+        ],
 
-            thirdModuleList: [
-              { name: '实时监控', icon: 'bar-chart'},
-              { name: '自定义报警', icon: 'setting' },
-              { name: '刷卡记录日志管理', icon: 'book' },
-              { name: '抓拍浏览', icon: 'camera'}
-            ]
-          }
-      },
+        secondModuleList: [
+          {name: '用户管理', icon: 'user'},
+          {name: '历史报警', icon: 'phone'},
+          {name: '门禁用户管理', icon: 'team'},
+          {name: '实时视频', icon: 'thunderbolt'}
+        ],
 
-      methods: {
-        changeRouter (param) {
-          const routerParam = param;
-          switch (param) {
-            case '首页':
-              this.$router.push('/home/index');
-              break
-            case '用户管理':
-              // console.log('it is click.')
-              this.$router.push('/home/userManage');
-              break
-            case '实时监控':
-              this.$router.push('/home/forthwithMonitor');
-              break
-            case '当前报警':
-              this.$router.push('/home/currentAlarm');
-              break
-            case '历史报警':
-              this.$router.push('/home/alarmHistory');
-              break
-            case '自定义报警':
-              this.$router.push('/home/defineAlarm');
-              break
-            case '门禁卡管理':
-              this.$router.push('/home/cardManage');
-              break
-            case '门禁用户管理':
-              // this.$router.push('/home/index');
-              break
-            case '刷卡记录日志管理':
-              // this.$router.push('/home/index');
-              break
-            case '设置':
-              // this.$router.push('/home/index');
-              break
-            case '实时视频':
-              // this.$router.push('/home/index');
-              break
-            case '抓拍浏览':
-              // this.$router.push('/home/index');
-              break
-            case '视频回放':
-              // this.$router.push('/home/index');
-              break
-            default:
-              return true;
-          }
+        thirdModuleList: [
+          {name: '实时监控', icon: 'bar-chart'},
+          {name: '自定义报警', icon: 'setting'},
+          {name: '刷卡记录日志管理', icon: 'book'},
+          {name: '抓拍浏览', icon: 'camera'}
+        ]
+      }
+    },
+
+    methods: {
+      changeRouter(param) {
+        const routerParam = param;
+        switch (param) {
+          case '首页':
+            this.$router.push('/home/index');
+            break
+          case '用户管理':
+            // console.log('it is click.')
+            this.$router.push('/home/userManage');
+            break
+          case '实时监控':
+            this.$router.push('/home/forthwithMonitor');
+            break
+          case '当前报警':
+            this.$router.push('/home/currentAlarm');
+            break
+          case '历史报警':
+            this.$router.push('/home/alarmHistory');
+            break
+          case '自定义报警':
+            this.$router.push('/home/defineAlarm');
+            break
+          case '门禁卡管理':
+            this.$router.push('/home/cardManage');
+            break
+          case '门禁用户管理':
+            this.$router.push('/home/cardUserManage');
+            break
+          case '刷卡记录日志管理':
+            this.$router.push('/home/cardLogManage');
+            break
+          case '设置':
+            // this.$router.push('/home/index');
+            break
+          case '实时视频':
+            // this.$router.push('/home/index');
+            break
+          case '抓拍浏览':
+            // this.$router.push('/home/index');
+            break
+          case '视频回放':
+            // this.$router.push('/home/index');
+            break
+          default:
+            return true;
         }
       }
     }
+  }
 </script>
 
 <style scoped>
-.main-menu {
-  color: #fff;
-  border-radius: 18px;
-  /*font-size: 30px;*/
-  display: flex;
-  /*text-align: center;*/
-  /*padding-top: 10px;*/
-  /*margin-bottom: 16px;*/
-  /*box-shadow: 0 2px 10px rgba(0,0,0,0.46), 0 0 6px rgba(0,0,0,0.54)*/
-}
+  .main-menu {
+    color: #fff;
+    border-radius: 18px;
+    /*font-size: 30px;*/
+    display: flex;
+    /*text-align: center;*/
+    /*padding-top: 10px;*/
+    /*margin-bottom: 16px;*/
+    /*box-shadow: 0 2px 10px rgba(0,0,0,0.46), 0 0 6px rgba(0,0,0,0.54)*/
+  }
 
   .main-menu-background {
     width: 90%;

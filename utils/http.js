@@ -23,7 +23,8 @@
  * @variation 新的登录 API
  * @type {string}
  */
-var host = 'http://10.28.3.149:81';
+// var host = 'http://10.28.3.149:81';
+var host = 'http://10.28.3.149';
 var hostGet = 'http://10.28.3.149';
 
     // websocket配置信息/url+user/id+token
@@ -40,6 +41,7 @@ var hostGet = 'http://10.28.3.149';
     // **路由请求拦截**
     // http request 拦截器
 axios.defaults.headers.token = common.getCookie('dvptToken')
+axios.defaults.headers.station = 1;
     axios.interceptors.request.use(config => {
       let token = Cookies.get('dvptToken');
       // 拦截器在请求头中加token/userId
@@ -58,7 +60,7 @@ axios.defaults.headers.token = common.getCookie('dvptToken')
             // custom_token: Cookies.get("dvptToken"),
             token: Cookies.get("dvptToken"),
             // 'content-Type': "application/x-www-form-urlencoded;charset=utf-8;",
-            'content-Type': "application/json",
+            'content-Type': "application/json;charset=UTF-8",
             "Access-Control-Allow-Origin":"*",
           };
         }
@@ -85,6 +87,7 @@ axios.defaults.headers.token = common.getCookie('dvptToken')
             err.message = '错误请求';
             break;
           case 401:
+            this.$router.push("/login");
             err.message = '未授权，请重新登录';
             break;
           case 403:
@@ -198,7 +201,7 @@ axios.defaults.headers.token = common.getCookie('dvptToken')
       post (url, params) {
         return axios({
           method: 'post',
-          baseURL: host, url,
+          baseURL: host + url,
           // data: qs.stringify(params),
           // data: JSON.stringify(params),
           data: params,
@@ -226,7 +229,7 @@ axios.defaults.headers.token = common.getCookie('dvptToken')
         var urlencode = urlEncode(host + url,param);
         return axios({
           method: 'get',
-          url: hostGet + url,
+          url: host + url,
           // param,
           timeout: 20000,
           }).then(

@@ -8,8 +8,10 @@ export default {
   /**
    * @variation new API
    */
-  loginIn: '/Authorization/api/Authentication/LoginForWeb',
+  loginIn: ':81/Authorization/api/Authentication/LoginForWeb',
   getUsers: '/config/Users',
+  addUsers: '/config/Users/UpdateUser',
+  updateUsers: '/config/Users/UpdateUser',
 
   loginOut: '/logout',   //login登出
 

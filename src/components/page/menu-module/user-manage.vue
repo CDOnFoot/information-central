@@ -170,7 +170,7 @@
               // 默认页容量
               defaultPageSize: 17,
               // total: 0,
-              // showQuickJumper: true
+              showQuickJumper: true,
               onChange: (current) => this.changePage(current)
             },
             modalTitle: '',
@@ -487,6 +487,7 @@
         },
 
         handleTableChange (page) {
+          // 请求前需要将 tableList 清空
           const that = this;
           const pageSize = this.pagination.defaultPageSize;
           this.loading = true;
@@ -591,7 +592,23 @@
             // 调用添加的 API
             this.$http.post(that.$api.addUsers, param).then(res => {
               console.log(res);
-              if (res.data === "success") {}
+              if (res.data === "success") {
+                that.$info({
+                  title: '提示',
+                  content: '添加成功！',
+                  onOk() {
+                    that.isShowModal = false;
+                  },
+                });
+              } else {
+                that.$info({
+                  title: '错误',
+                  content: '发生了一些错误：' + res.data.Message,
+                  onOk() {
+                    that.isShowModal = false;
+                  },
+                });
+              }
               that.confirmLoading = false;
             })
           } else if (titleStatus === '查看用户信息') {

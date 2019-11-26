@@ -12,6 +12,7 @@ export default {
   getUsers: '/config/Users',
   addUsers: '/config/Users/UpdateUser',
   updateUsers: '/config/Users/UpdateUser',
+  deleteUser: '/config/Users/DeleteUser',
 
   loginOut: '/logout',   //login登出
 

@@ -179,6 +179,7 @@
             // modalForm: {},
             modalForm: {
               Name: '',
+              DisplayName: '', // 登录名，必需字段
               EntityId: '',
               Status: '', // 不填写服务默认启动
               Created: '', // 服务创建
@@ -506,8 +507,8 @@
                   table[index].Expired = that.$common.timestampToTime(table[index].Expired);
                   table[index].Status = table[index].Status === 'Enable' ? '启用' : '未启用';
                   tableContainer.push(table[index]);
-                  console.log('current users data:');
-                  console.log(table[index]);
+                  // console.log('current users data:');
+                  // console.log(table[index]);
                 }
                 that.tableList = tableContainer;
               }catch (e) {
@@ -531,6 +532,8 @@
         checkUser (row) {
           const formContainer = Object.assign({}, row)
           this.modalForm = Object.assign({}, formContainer)
+          // console.log('current container:')
+          // console.log(this.modalForm)
           this.modalForm.Status = this.modalForm.Status === '启用' ? 'Enable' : 'Disable';
           this.okButton = '确定';
           // 简介对话框
@@ -551,6 +554,8 @@
 
         deleteUser (row) {
           const that = this;
+          // 获取当前行用户数据
+          this.modalForm = Object.assign({}, row);
           let currentUser;
           this.modal = this.Modal.confirm({
             title: '删除用户信息',
@@ -560,8 +565,28 @@
             content: '此操作将在列表删除此条数据，是否继续？',
             okType: 'warning',
             onOk: function (e) {
+              const param = {
+                EntityId: that.modalForm.EntityId
+              };
+              that.$http.post(that.$api.deleteUser, param)
+                .then(res => {
+                  // console.log(res)
+                  if (res.status === 200) {
+                    if (res.data === "success") {
+                      that.$info({
+                        title: '完成',
+                        content: '已删除当前用户！',
+                        onOk() {
+                          that.modal.destroy();
+                        },
+                      });
+                    }
+                  } else {
+                    return false;
+                  }
+                  that.modal.destroy();
+                });
               // the callback of ok
-              that.modal.destroy();
             },
 
             onCancel: function (e) {
@@ -591,7 +616,7 @@
             };
             // 调用添加的 API
             this.$http.post(that.$api.addUsers, param).then(res => {
-              console.log(res);
+              // console.log(res);
               if (res.data === "success") {
                 that.$info({
                   title: '提示',
@@ -613,13 +638,46 @@
             })
           } else if (titleStatus === '查看用户信息') {
             // no handle
+            this.isShowModal = false;
+            that.confirmLoading = false;
           } else if (titleStatus === '编辑用户信息') {
             // 调用编辑的 API
+            param = {
+              EntityId: that.modalForm.EntityId,
+              Name: that.modalForm.Name, // 不能更改
+              DisplayName: that.modalForm.DisplayName, // 登录名可以更改
+              Tel: that.modalForm.Tel,
+              GroupId: [],
+              RoleIds: [2028, 2019]
+            };
+
+            this.$http.post(that.$api.updateUsers, param).then(res => {
+              // console.log(res);
+              if (res.data === "success") {
+                that.$info({
+                  title: '提示',
+                  content: '修改成功！',
+                  onOk() {
+                    that.isShowModal = false;
+                  },
+                });
+              } else {
+                that.$info({
+                  title: '错误',
+                  content: '发生了一些错误：' + res.data.Message,
+                  onOk() {
+                    that.isShowModal = false;
+                  },
+                });
+              }
+              that.confirmLoading = false;
+            })
           }
         },
 
         closeModal (e) {
           // console.log('param:' + e);
+          this.confirmLoading = false;
           this.isShowModal = false;
         },
 

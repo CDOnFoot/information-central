@@ -56,7 +56,7 @@ axios.defaults.headers.token = common.getCookie('dvptToken')
           });
         } else{
           config.headers={
-            station: 1,
+            station: 2,
             userId: Cookies.get("dvptId"),
             // custom_token: Cookies.get("dvptToken"),
             token: Cookies.get("dvptToken"),

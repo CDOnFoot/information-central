@@ -28,6 +28,8 @@ export default {
 
   layoutRestoreDefaults: '/visualizationLayout/layoutRestoreDefaults',   //恢复默认自动化布局信息
 
+  getCardLog: '/ACS/Transactions',
+
 
   // 指标信息
   getEnergytopten: '/energy/topten',   //获取能耗排行数据信息

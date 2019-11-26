@@ -1,7 +1,7 @@
 <template>
   <div class="current-alarm">
     <div class="search-condition">
-      <a-form layout="inline" :form="searchAlarm" @submit="searchForAlarm">
+      <a-form layout="inline" :form="form" @submit="searchForAlarm()">
         <a-form-item label="报警名称：">
           <a-input placeholder="报警名称"></a-input>
         </a-form-item>
@@ -9,7 +9,7 @@
           <a-input placeholder="报警级别"></a-input>
         </a-form-item>
         <a-form-item>
-          <a-button type="primary" icon="search" @click="searchInAlarm" html-type="submit">搜索</a-button>
+          <a-button type="primary" icon="search" html-type="submit">搜索</a-button>
         </a-form-item>
         <a-form-item>
           <a-button type="primary" icon="form" @click="exportAlarm">导出</a-button>
@@ -124,13 +124,16 @@
           return {
             alarmTime: '9019-10-09 09:09',
             noticeContent: '注意防范',
-            searchAlarm: {},
+            searchAlarm: {}, // 不使用了
             loading: false,
             isShowDrawer: false,
             pagination: {
               current: 1,
               defaultCurrent: 1,
-              defaultPageSize: 20
+              defaultPageSize: 20,
+              total: 0,
+              // 页码改变时的回调
+              onChange: (current) => this.changePage(current)
             },
             // 抽屉详情
             drawerForm: {},
@@ -139,7 +142,7 @@
             column: [
               {
                 title: '报警名称',
-                dataIndex: 'alarmName',
+                dataIndex: 'AlarmName',
                 align: 'center',
                 // sorter: true,
                 width: 30,
@@ -147,43 +150,43 @@
               },
               {
                 title: '报警级别',
-                dataIndex: 'alarmLevel',
+                dataIndex: 'AlarmLevel',
                 align: 'center',
                 width: 40
               },
               {
                 title: '报警类型',
-                dataIndex: 'alarmType',
+                dataIndex: 'AlarmType',
                 align: 'center',
                 width: 40
               },
               {
                 title: '报警详情',
-                dataIndex: 'alarmDetail',
+                dataIndex: 'AlarmDescription',
                 align: 'center',
                 width: 40
               },
               {
                 title: '报警时间',
-                dataIndex: 'alarmTime',
+                dataIndex: 'AlarmDateTime',
                 align: 'center',
                 width: 40
               },
               {
-                title: '设备名称',
-                dataIndex: 'device',
+                title: '设备标识',
+                dataIndex: 'EquipmentId',
                 align: 'center',
                 width: 40
               },
               {
-                title: '设备点',
-                dataIndex: 'deviceDot',
+                title: '报警点标识',
+                dataIndex: 'PointId',
                 align: 'center',
                 width: 40
               },
               {
                 title: '报警状态',
-                dataIndex: 'alarmStatus',
+                dataIndex: 'AlarmAckStatus',
                 align: 'center',
                 width: 40
               },
@@ -195,8 +198,9 @@
                 scopedSlots: { customRender: 'operation' }
               }
             ],
+            tableList: [],
             // the data of table, used by current data
-            tableList: [
+            /*tableList: [
               {
                 alarmName: '烟雾报警',
                 alarmLevel: '一级',
@@ -347,14 +351,56 @@
                 deviceDot: 'YW-288-01',
                 alarmStatus: '处理中'
               }
-            ]
+            ]*/
           }
       },
 
-      methods: {
-        searchForAlarm () {},
+      beforeCreate () {
+        // 可不使用
+        this.form = this.$form.createForm(this, { name: 'advanced_search' });
+      },
 
-        searchInAlarm () {},
+      methods: {
+        searchForAlarm () {
+          const that = this;
+          this.tableList = [];
+          this.pagination.current = 1;
+          this.loading = true;
+          // 使用当前绑定状态进行校验
+          this.form.validateFields((err, values) => {
+            if (!err) {
+              this.$http.get('/alarm/alarmRealTimeInfos').then(res => {
+                // 直接填充测试
+                this.tableList = res.data.value;
+                that.pagination.total = that.tableList.length;
+
+                let tableContainer = [];
+                // that.pagination.total = res.data.value.length;
+                const table = res.data.value;
+                table.forEach((value, index) => {
+                  value.Created = this.$common.timestampToTime(value.Created);
+                  value.Updated = this.$common.timestampToTime(value.Updated);
+                  value.Expired = this.$common.timestampToTime(value.Expired);
+                  value.Status = value.Status === 'Enable' ? '启用' : '停用';
+                  if (that.searchName !== '') {
+                    if (value.Name === that.searchName) {
+                      // that.tableList.push(value);
+                      tableContainer.splice(0, 1, value);
+                      that.tableList = tableContainer;
+                    }
+                  } else {
+                    that.tableList.push(value);
+                  }
+                  // that.tableList = table;
+                  // this.handleTableList(table)
+                });
+                // 不清除搜索条件用以比对搜索结果是否正确
+                // that.searchName = '';
+                that.loading = false;
+              })
+            }
+          })
+        },
 
         exportAlarm () {},
 
@@ -374,8 +420,7 @@
         submitRemarks (callback) {
           const remarks = this.remarks;
           console.log('current input remarks:' + remarks);
-          let remarkForm = new FormData();
-          remarkForm.append('', remarks);
+
           /*this.$http.post('', {}).then(() => {
             this.isShowDrawer = false;
           })*/

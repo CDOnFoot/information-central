@@ -3,10 +3,10 @@
     <div class="search-condition">
       <a-form layout="inline" :form="form" @submit="searchForAlarm()">
         <a-form-item label="报警名称：">
-          <a-input placeholder="报警名称"></a-input>
+          <a-input placeholder="报警名称" v-model="condition.alarmName"></a-input>
         </a-form-item>
         <a-form-item label="报警">
-          <a-input placeholder="报警级别"></a-input>
+          <a-input placeholder="报警级别" v-model="condition.alarmLevel"></a-input>
         </a-form-item>
         <a-form-item>
           <a-button type="primary" icon="search" html-type="submit">搜索</a-button>
@@ -130,7 +130,7 @@
             pagination: {
               current: 1,
               defaultCurrent: 1,
-              defaultPageSize: 20,
+              defaultPageSize: 18,
               total: 0,
               // 页码改变时的回调
               onChange: (current) => this.changePage(current)
@@ -145,7 +145,7 @@
                 dataIndex: 'AlarmName',
                 align: 'center',
                 // sorter: true,
-                width: 30,
+                width: '8%',
                 // scopedSlots: { customRender: 'name' }
               },
               {
@@ -164,13 +164,13 @@
                 title: '报警详情',
                 dataIndex: 'AlarmDescription',
                 align: 'center',
-                width: 40
+                width: '15%'
               },
               {
                 title: '报警时间',
                 dataIndex: 'AlarmDateTime',
                 align: 'center',
-                width: 40
+                width: '15%'
               },
               {
                 title: '设备标识',
@@ -188,17 +188,23 @@
                 title: '报警状态',
                 dataIndex: 'AlarmAckStatus',
                 align: 'center',
-                width: 40
+                width: '10%'
               },
               {
                 title: '操 作',
                 // dataIndex: 'tel',
                 align: 'center',
-                width: 40,
+                width: '15%',
                 scopedSlots: { customRender: 'operation' }
               }
             ],
             tableList: [],
+            // 存在数据量比较大的情况，所以使用一个容器来缓存请求获取的列表，每次改变页码等其他操作均使用此容器
+            tableListContainer: [],
+            condition: {
+              alarmName: '',
+              alarmLevel: ''
+            },
             // the data of table, used by current data
             /*tableList: [
               {
@@ -367,39 +373,83 @@
           this.pagination.current = 1;
           this.loading = true;
           // 使用当前绑定状态进行校验
-          this.form.validateFields((err, values) => {
-            if (!err) {
-              this.$http.get('/alarm/alarmRealTimeInfos').then(res => {
-                // 直接填充测试
-                this.tableList = res.data.value;
-                that.pagination.total = that.tableList.length;
-
-                let tableContainer = [];
-                // that.pagination.total = res.data.value.length;
-                const table = res.data.value;
-                table.forEach((value, index) => {
-                  value.Created = this.$common.timestampToTime(value.Created);
-                  value.Updated = this.$common.timestampToTime(value.Updated);
-                  value.Expired = this.$common.timestampToTime(value.Expired);
-                  value.Status = value.Status === 'Enable' ? '启用' : '停用';
-                  if (that.searchName !== '') {
-                    if (value.Name === that.searchName) {
-                      // that.tableList.push(value);
-                      tableContainer.splice(0, 1, value);
-                      that.tableList = tableContainer;
-                    }
-                  } else {
-                    that.tableList.push(value);
+          this.$http.get(that.$api.getAlarm).then(res => {
+            // console.log('response data:')
+            // console.log(res)
+            if (res.status === 200) {
+              let index = {};
+              let table = [];
+              let tableContainer = res.data.value;
+              const length = that.pagination.defaultPageSize;
+              that.pagination.total = tableContainer.length;
+              /*for (let i=0;i<=length;i++) {
+                tableContainer[i].AlarmDateTime = that.$common.timestampToTime(tableContainer[i].AlarmDateTime);
+                that.tableList.push(tableContainer[i]);
+              }*/
+              tableContainer.forEach((value, index) => {
+                value.AlarmDateTime = that.$common.timestampToTime(value.AlarmDateTime);
+                if (that.condition.alarmName !== '' || that.condition.alarmLevel !== '') {
+                  if (value.AlarmName === that.condition.alarmName || value.AlarmDescription === that.condition.alarmLevel) {
+                    // that.tableList.push(value);
+                    table.splice(0, 1, value);
+                    that.tableList = table;
                   }
-                  // that.tableList = table;
-                  // this.handleTableList(table)
-                });
-                // 不清除搜索条件用以比对搜索结果是否正确
-                // that.searchName = '';
-                that.loading = false;
+                } else {
+                  that.tableList.push(value);
+                }
               })
+            } else {
+              that.$info({
+                title: '错误',
+                content: '发生了一些问题：' + res,
+                onOk() {
+                  that.loading = false;
+                },
+              });
             }
+            this.loading = false;
           })
+        },
+
+
+        // 页码改变时的回调
+        changePage (page) {
+          this.loading = true;
+          this.callbackPageChange();
+        },
+        callbackPageChange (page) {
+          const that = this;
+          const pageSize = this.pagination.defaultPageSize;
+          const length = this.tableList.length;
+          if (length > 0) {
+            for (let i=0;i<=length;i++) {
+              this.tableList.pop();
+            }
+          }
+          this.pagination.current = page;
+          this.$http.get(that.$api.getAlarm)
+            .then(res => {
+              if (res.status === 200) {
+                let index;
+                const tableContainer = res.data.value;
+                // const length = that.pagination.defaultPageSize;
+                that.pagination.total = tableContainer.length;
+                for (let i=0;i<=length;i++) {
+                  let index = i + ((page - 1) * pageSize);
+                  tableContainer[index].AlarmDateTime = that.$common.timestampToTime(tableContainer[index].AlarmDateTime);
+                  that.tableList.push(tableContainer[index]);
+                }
+              } else {
+                that.$info({
+                  title: '错误',
+                  content: '发生了一些问题：' + res.status,
+                  onOk() {
+                    that.loading = false;
+                  },
+                });
+              }
+              this.loading = false;
+            })
         },
 
         exportAlarm () {},

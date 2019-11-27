@@ -232,7 +232,7 @@ axios.defaults.headers.token = common.getCookie('dvptToken')
           method: 'get',
           url: host + url,
           // param,
-          timeout: 20000,
+          timeout: 150000,
           }).then(
           (response) => {
             return checkStatus(response)

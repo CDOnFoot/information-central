@@ -9,10 +9,20 @@ export default {
    * @variation new API
    */
   loginIn: ':81/Authorization/api/Authentication/LoginForWeb',
+
   getUsers: '/config/Users',
+
   addUsers: '/config/Users/UpdateUser',
+
   updateUsers: '/config/Users/UpdateUser',
+
   deleteUser: '/config/Users/DeleteUser',
+
+  getAlarm: '/alarm/alarmRealTimeInfos',
+
+  /**
+   * @variation old API
+   */
 
   loginOut: '/logout',   //login登出
 

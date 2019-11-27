@@ -3,16 +3,16 @@
     <div class="search-condition">
       <a-form layout="inline" :form="form" @submit="searchFor">
         <a-form-item label="门禁卡编号">
-          <a-input placeholder="门禁卡编号" v-model="searchCardNum"></a-input>
+          <a-input placeholder="门禁卡编号" v-model="badgeCode"></a-input>
         </a-form-item>
         <a-form-item label="设备">
-          <a-input placeholder="设备" v-model="searchDevName"></a-input>
+          <a-input placeholder="设备"></a-input>
         </a-form-item>
         <a-form-item label="开始时间">
-          <a-time-picker use12Hours format="h:mm:ss A" @change="starttime"/>
+          <a-time-picker use12Hours format="h:mm:ss A" @change="searchStarttime"/>
         </a-form-item>
         <a-form-item label="结束时间">
-          <a-time-picker use12Hours format="h:mm:ss A" @change="endtime"/>
+          <a-time-picker use12Hours format="h:mm:ss A" @change="searchEndtime"/>
         </a-form-item>
         <a-form-item>
           <a-button type="primary" icon="search" html-type="submit">搜索</a-button>
@@ -23,17 +23,12 @@
       </a-form>
     </div>
     <div class="table">
-      <a-table :columns="column"
+      <a-table :columns="columns"
                :dataSource="tableList"
                :pagination="pagination"
                :loading="loading"
                :defaultExpandAllRows="expandAllRows"
                size="small">
-        <!--<template slot="operation" slot-scope="text, record">-->
-        <!--<a-button type="primary" @click="checkCard(record)">查看</a-button>-->
-        <!--<a-button type="primary" @click="editCard(record)">编辑</a-button>-->
-        <!--<a-button type="primary" @click="deleteCard(record)">删除</a-button>-->
-        <!--</template>-->
       </a-table>
     </div>
   </div>
@@ -42,54 +37,54 @@
 <script>
   import AFormItem from "ant-design-vue/es/form/FormItem";
 
-  const column = [
+  const columns = [
     {
       title: '刷卡时间',
-      dataIndex: 'cardTime',
+      dataIndex: 'Time',
       align: 'center',
       width: 40,
     },
     {
       title: '卡号',
-      dataIndex: 'cardNumber',
+      dataIndex: 'BadgeCode',
       align: 'center',
-      width: 20
+      width: 40
     },
     {
       title: '卡类型',
-      dataIndex: 'cardType',
+      dataIndex: 'Type',
       align: 'center',
-      width: 20
+      width: 40
     },
     {
       title: '持卡人',
-      dataIndex: 'cardUser',
+      dataIndex: '',
       align: 'center',
-      width: 20
+      width: 40
     },
     {
       title: '控制器编号',
-      dataIndex: 'controllerNumber',
+      dataIndex: '',
       align: 'center',
-      width: 30
+      width: 40
     },
     {
       title: '设备名称（门）',
-      dataIndex: 'devName',
+      dataIndex: 'Channel',
       align: 'center',
-      width: 30
+      width: 40
     },
     {
       title: '安全级别',
-      dataIndex: 'security',
+      dataIndex: '',
       align: 'center',
-      width: 30,
+      width: 40,
     },
     {
       title: '结果',
-      dataIndex: 'result',
+      dataIndex: 'Result',
       align: 'center',
-      width: 30,
+      width: 40,
     }
   ];
 
@@ -98,11 +93,10 @@
     components: {AFormItem},
     data() {
       return {
-        searchCardNum: '',
-        searchDevName: '',
-        searchStarttime: '',
-        searchEndtime: '',
-        column,
+        badgeCode: '',
+        starttime: '',
+        endtime: '',
+        columns,
         expandAllRows: true,
         pagination: {
           current: 0,
@@ -126,11 +120,11 @@
     },
 
     beforeMount() {
-
+git
     },
 
     mounted() {
-      // this.searchFor();
+
     },
 
     methods: {
@@ -138,52 +132,33 @@
       searchFor(e) {
         const that = this;
         this.tableList = [];
-        // 附带 searchName 为参数发起 HTTP 请求
         e.preventDefault();
         this.pagination.current = 1;
         this.loading = true;
-        // 使用当前绑定状态进行校验
         this.form.validateFields((err, values) => {
           if (!err) {
             this.$http.get(that.$api.getCardLog).then(res => {
               console.log(res);
-              let tableContainer = [];
-              // this.tableList = res.data.value;
-              // this.pagination.total = this.tableList.length;
-
-              // let tableContainer = [];
-              // that.pagination.total = res.data.value.length;
-              // const table = res.data.value;
-              // table.forEach((value, index) => {
-              //   value.Created = this.$common.timestampToTime(value.Created);
-              //   value.Updated = this.$common.timestampToTime(value.Updated);
-              //   value.Expired = this.$common.timestampToTime(value.Expired);
-              //   value.Status = value.Status === 'Enable' ? '启用' : '停用';
-              //   if (that.searchName !== '') {
-              //     if (value.Name === that.searchName) {
-              //       // that.tableList.push(value);
-              //       tableContainer.splice(0, 1, value);
-              //       that.tableList = tableContainer;
-              //     }
-              //   } else {
-              //     that.tableList.push(value);
-              //   }
-              //   // that.tableList = table;
-              //   // this.handleTableList(table)
-              // });
-              //
-              // that.loading = false;
+              that.pagination.total = res.data.value.length;
+              let table = res.data.value;
+              table.forEach((value, index) => {
+                value.Time = this.$common.timestampToTime(value.Time);
+                that.tableList.push(value);
+              });
+              if (that.badgeCode !== '') {
+                that.tableList = that.tableList.filter((item, index, arr) => item.BadgeCode == that.badgeCode);
+              }
+              that.loading = false;
             })
           }
-
         })
       },
 
-      starttime(time, timeString) {
-        console.log(time, timeString);
+      searchStarttime(time, timeString) {
+        console.log(time._d, timeString);
       },
 
-      endtime(time, timeString) {
+      searchEndtime(time, timeString) {
         console.log(time, timeString);
       },
 
@@ -196,7 +171,7 @@
         const pageSize = this.pagination.defaultPageSize;
         this.loading = true;
         this.pagination.current = page;
-        this.$http.get(that.$api.getUsers)
+        this.$http.get(that.$api.getCardLog)
           .then((response) => {
             try {
               let index;
@@ -205,31 +180,16 @@
               for (let i = 0; i < parseInt(pageSize); i++) {
                 // 以当前页码设置渲染列表数据的索引
                 index = (page - 1) * parseInt(pageSize) + i;
-                table[index].Created = that.$common.timestampToTime(table[index].Created);
-                table[index].Updated = that.$common.timestampToTime(table[index].Updated);
-                table[index].Expired = that.$common.timestampToTime(table[index].Expired);
-                table[index].Status = table[index].Status === 'Enable' ? '启用' : '未启用';
+                table[index].Time = that.$common.timestampToTime(table[index].Time);
                 tableContainer.push(table[index]);
               }
               that.tableList = tableContainer;
             } catch (e) {
               console.log('there are some data have "null":' + e);
             }
-
-            /*that.pagination.defaultCurrent = parseInt(page);
-            const length = table.length;
-            for (let i=0;i<17;i++) {
-              let index = i + (page - 1) * parseInt(that.pagination.defaultPageSize);
-              that.tableList.push(table[index]);
-              that.tableList[index].Created = that.$common.timestampToTime(that.tableList[index].Created);
-              that.tableList[index].Updated = that.$common.timestampToTime(that.tableList[index].Updated);
-              that.tableList[index].Expired = that.$common.timestampToTime(that.tableList[index].Expired);
-              that.tableList[index].Status = that.tableList[index].Status === 'Enable' ? '启用' : '未启用';
-            }*/
             that.loading = false;
           })
       },
-
 
     }
   }

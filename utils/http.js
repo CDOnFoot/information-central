@@ -88,11 +88,13 @@ axios.defaults.headers.token = common.getCookie('dvptToken')
             err.message = '错误请求';
             break;
           case 401:
-            this.$router.push("/login");
+            // this.$router.push("/login");
+            router.push("/login");
             err.message = '未授权，请重新登录';
             break;
           case 403:
-            this.$router.push("/login");
+            // this.$router.push("/login");
+            router.push("/login");
             err.message = '拒绝访问，请重新登录';
             break;
           case 404:
@@ -218,11 +220,16 @@ axios.defaults.headers.token = common.getCookie('dvptToken')
       //  get请求
       get (url, params) {
         var param;
+        let urlParam;
         //判断校验情况
         if (url === "/login") {
           param = params;
         }else {
           param = formateParm(params);
+        }
+        
+        if (url === '/alarm/alarmRealTimeInfos') {
+          urlParam = '?$expand=AlarmLevel&$filter=SubsystemId eq 4&$orderby=AlarmDateTime desc'
         }
 
         // const token = Cookies.get('dvptToken');
@@ -231,8 +238,8 @@ axios.defaults.headers.token = common.getCookie('dvptToken')
         return axios({
           method: 'get',
           url: host + url,
-          // param,
-          timeout: 150000,
+          param: params,
+          timeout: 600000,
           }).then(
           (response) => {
             return checkStatus(response)

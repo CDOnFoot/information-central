@@ -7,7 +7,7 @@
         </a-form-item>
         <a-form-item label="设备">
           <a-input placeholder="设备"></a-input>
-        </a-form-item>
+        </a-form-item>git
         <a-form-item label="开始时间">
           <a-time-picker use12Hours format="h:mm:ss A" @change="searchStarttime"/>
         </a-form-item>

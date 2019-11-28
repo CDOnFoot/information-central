@@ -106,8 +106,6 @@
                size="small">
         <template slot="operation" slot-scope="text, record">
           <a-button type="primary" @click="sureAlarm(record)">确认报警</a-button>
-          <!--<a-button type="primary" @click="editUser(record)">编辑</a-button>-->
-          <!--<a-button type="primary" @click="deleteUser(record)">删除</a-button>-->
         </template>
       </a-table>
     </div>
@@ -204,160 +202,7 @@
             condition: {
               alarmName: '',
               alarmLevel: ''
-            },
-            // the data of table, used by current data
-            /*tableList: [
-              {
-                alarmName: '烟雾报警',
-                alarmLevel: '一级',
-                alarmType: '设备报警/阈值报警',
-                alarmDetail: '烟雾浓度超标',
-                alarmTime: '9019-10-10 10:10',
-                device: '多功能传感器',
-                deviceDot: 'YW-288-01',
-                alarmStatus: '处理中'
-              },
-              {
-                alarmName: '烟雾报警',
-                alarmLevel: '一级',
-                alarmType: '设备报警/阈值报警',
-                alarmDetail: '烟雾浓度超标',
-                alarmTime: '9019-10-10 10:10',
-                device: '多功能传感器',
-                deviceDot: 'YW-288-01',
-                alarmStatus: '处理中'
-              },
-              {
-                alarmName: '烟雾报警',
-                alarmLevel: '一级',
-                alarmType: '设备报警/阈值报警',
-                alarmDetail: '烟雾浓度超标',
-                alarmTime: '9019-10-10 10:10',
-                device: '多功能传感器',
-                deviceDot: 'YW-288-01',
-                alarmStatus: '处理中'
-              },
-              {
-                alarmName: '烟雾报警',
-                alarmLevel: '一级',
-                alarmType: '设备报警/阈值报警',
-                alarmDetail: '烟雾浓度超标',
-                alarmTime: '9019-10-10 10:10',
-                device: '多功能传感器',
-                deviceDot: 'YW-288-01',
-                alarmStatus: '处理中'
-              },
-              {
-                alarmName: '烟雾报警',
-                alarmLevel: '一级',
-                alarmType: '设备报警/阈值报警',
-                alarmDetail: '烟雾浓度超标',
-                alarmTime: '9019-10-10 10:10',
-                device: '多功能传感器',
-                deviceDot: 'YW-288-01',
-                alarmStatus: '处理中'
-              },
-              {
-                alarmName: '烟雾报警',
-                alarmLevel: '一级',
-                alarmType: '设备报警/阈值报警',
-                alarmDetail: '烟雾浓度超标',
-                alarmTime: '9019-10-10 10:10',
-                device: '多功能传感器',
-                deviceDot: 'YW-288-01',
-                alarmStatus: '处理中'
-              },
-              {
-                alarmName: '烟雾报警',
-                alarmLevel: '一级',
-                alarmType: '设备报警/阈值报警',
-                alarmDetail: '烟雾浓度超标',
-                alarmTime: '9019-10-10 10:10',
-                device: '多功能传感器',
-                deviceDot: 'YW-288-01',
-                alarmStatus: '处理中'
-              },
-              {
-                alarmName: '烟雾报警',
-                alarmLevel: '一级',
-                alarmType: '设备报警/阈值报警',
-                alarmDetail: '烟雾浓度超标',
-                alarmTime: '9019-10-10 10:10',
-                device: '多功能传感器',
-                deviceDot: 'YW-288-01',
-                alarmStatus: '处理中'
-              },
-              {
-                alarmName: '烟雾报警',
-                alarmLevel: '一级',
-                alarmType: '设备报警/阈值报警',
-                alarmDetail: '烟雾浓度超标',
-                alarmTime: '9019-10-10 10:10',
-                device: '多功能传感器',
-                deviceDot: 'YW-288-01',
-                alarmStatus: '处理中'
-              },
-              {
-                alarmName: '烟雾报警',
-                alarmLevel: '一级',
-                alarmType: '设备报警/阈值报警',
-                alarmDetail: '烟雾浓度超标',
-                alarmTime: '9019-10-10 10:10',
-                device: '多功能传感器',
-                deviceDot: 'YW-288-01',
-                alarmStatus: '处理中'
-              },
-              {
-                alarmName: '烟雾报警',
-                alarmLevel: '一级',
-                alarmType: '设备报警/阈值报警',
-                alarmDetail: '烟雾浓度超标',
-                alarmTime: '9019-10-10 10:10',
-                device: '多功能传感器',
-                deviceDot: 'YW-288-01',
-                alarmStatus: '处理中'
-              },
-              {
-                alarmName: '烟雾报警',
-                alarmLevel: '一级',
-                alarmType: '设备报警/阈值报警',
-                alarmDetail: '烟雾浓度超标',
-                alarmTime: '9019-10-10 10:10',
-                device: '多功能传感器',
-                deviceDot: 'YW-288-01',
-                alarmStatus: '处理中'
-              },
-              {
-                alarmName: '烟雾报警',
-                alarmLevel: '一级',
-                alarmType: '设备报警/阈值报警',
-                alarmDetail: '烟雾浓度超标',
-                alarmTime: '9019-10-10 10:10',
-                device: '多功能传感器',
-                deviceDot: 'YW-288-01',
-                alarmStatus: '处理中'
-              },
-              {
-                alarmName: '烟雾报警',
-                alarmLevel: '一级',
-                alarmType: '设备报警/阈值报警',
-                alarmDetail: '烟雾浓度超标',
-                alarmTime: '9019-10-10 10:10',
-                device: '多功能传感器',
-                deviceDot: 'YW-288-01',
-                alarmStatus: '处理中'
-              },
-              {
-                alarmName: '烟雾报警',
-                alarmLevel: '一级',
-                alarmType: '设备报警/阈值报警',
-                alarmDetail: '烟雾浓度超标',
-                alarmTime: '9019-10-10 10:10',
-                device: '多功能传感器',
-                deviceDot: 'YW-288-01',
-                alarmStatus: '处理中'
-              }
-            ]*/
+            }
           }
       },
 
@@ -376,30 +221,16 @@
           // 初始请求页码默认为 1
           this.pagination.current = 1;
           this.loading = true;
-          /*const param = {
-            // 分页参数直接附加在 API 后
-            // $top: this.pagination.defaultPageSize,
-            // $skip: this.pagination.current,
-            $expand: 'AlarmLevel',
-            $filter: 'SubsystemId eq 4',
-            $orderby: 'AlarmDateTime desc'
-          };*/
           // 使用当前绑定状态进行校验
           this.form.validateFields((err, values) => {
             if (!err) {
               // 初始列表时查询所有数据，以显示全部的页码
               that.$http.get(that.$api.getAlarmForPagination).then(res => {
-                /*console.log('current table data:');
-                console.log(res);*/
                 if (res.status === 200) {
                   let table = [];
                   let tableContainer = res.data.value;
                   const length = that.pagination.defaultPageSize;
                   that.pagination.total = tableContainer.length;
-                  /*for (let i=0;i<=length;i++) {
-                    tableContainer[i].AlarmDateTime = that.$common.timestampToTime(tableContainer[i].AlarmDateTime);
-                    that.tableList.push(tableContainer[i]);
-                  }*/
                   tableContainer.forEach((value, index) => {
                     value.AlarmDateTime = that.$common.timestampToTime(value.AlarmDateTime);
                     value.AlarmStatus = value.AlarmStatus === '"Unprocessed"' ? '处理中' : '未处理';
@@ -434,33 +265,16 @@
         searchForAlarm () {
           const that = this;
           this.tableList = [];
-          /**
-           * @exception server 增加一个分页参数，客户端需加上
-           */
           this.pagination.current = 1;
           this.loading = true;
-          /*const param = {
-            // 查询时依然不带 页容量 $top,页码 $skip 俩参数
-            // $top: this.pagination.defaultPageSize,
-            // $skip: this.pagination.current,
-            $expand: 'AlarmLevel',
-            $filter: 'SubsystemId eq 4',
-            $orderby: 'AlarmDateTime desc'
-          };*/
           // 使用当前绑定状态进行校验
           this.$http.get(that.$api.getAlarmForPagination).then(res => {
-            /*console.log('response data:');
-            console.log(res);*/
             if (res.status === 200) {
               let index = {};
               let table = [];
               let tableContainer = res.data.value;
               const length = that.pagination.defaultPageSize;
               // that.pagination.total = tableContainer.length;
-              /*for (let i=0;i<=length;i++) {
-                tableContainer[i].AlarmDateTime = that.$common.timestampToTime(tableContainer[i].AlarmDateTime);
-                that.tableList.push(tableContainer[i]);
-              }*/
               tableContainer.forEach((value, index) => {
                 value.AlarmDateTime = that.$common.timestampToTime(value.AlarmDateTime);
                 value.AlarmStatus = value.AlarmStatus === 'Unprocessed' ? '未处理' : '处理中';
@@ -504,14 +318,6 @@
               this.tableList.pop();
             }
           }
-          // 分页参数
-          /*const param = {
-            $top: pageSize,
-            $skip: page,
-            $expand: 'AlarmLevel',
-            $filter: 'SubsystemId eq 4',
-            $orderby: 'AlarmDateTime desc'
-          };*/
           this.$http.get(that.$api.getAlarm)
             .then(res => {
               if (res.status === 200) {
@@ -547,8 +353,6 @@
 
         sureAlarm (row) {
           // deep copy the current data.
-          console.log('current row')
-          console.log(row)
           this.drawerForm = Object.assign({}, row);
           this.isShowDrawer = true;
         },

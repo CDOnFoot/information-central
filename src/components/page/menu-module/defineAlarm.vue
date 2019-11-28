@@ -1,15 +1,15 @@
 <template>
   <div class="define-alarm">
     <div class="search-condition">
-      <a-form layout="inline" :form="searchAlarm" @submit="searchForAlarmDefine">
+      <a-form layout="inline" :form="form" @submit="searchForAlarmDefine">
         <a-form-item label="报警名称：">
-          <a-input placeholder="报警名称"></a-input>
+          <a-input placeholder="报警名称" v-model="condition.alarmName"></a-input>
         </a-form-item>
         <a-form-item label="报警">
-          <a-input placeholder="报警级别"></a-input>
+          <a-input placeholder="报警级别" v-model="condition.alarmLevel"></a-input>
         </a-form-item>
         <a-form-item>
-          <a-button type="primary" icon="search" @click="searchInAlarmDefine" html-type="submit">搜索</a-button>
+          <a-button type="primary" icon="search" html-type="submit">搜索</a-button>
         </a-form-item>
         <a-form-item>
           <a-button type="primary" icon="plus" @click="exportAlarmDefine">添加</a-button>
@@ -31,36 +31,36 @@
             <div class="modal-form">
               <div class="modal-form-one">
                 <a-form-item label="报警名称" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }">
-                  <a-input v-model="modalForm.alarmName"></a-input>
+                  <a-input v-model="modalForm.AlarmName"></a-input>
                 </a-form-item>
                 <a-form-item label="报警类型" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }">
-                  <a-input v-model="modalForm.alarmType"></a-input>
+                  <a-input v-model="modalForm.AlarmType"></a-input>
                 </a-form-item>
-                <a-form-item label="设备点" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }">
-                  <a-input v-model="modalForm.deviceDot"></a-input>
+                <a-form-item label="报警级别" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }">
+                  <a-input v-model="modalForm.AlarmLevel"></a-input>
                 </a-form-item>
-                <a-form-item label="上限值" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }">
-                  <a-input v-model="modalForm.upLimit"></a-input>
+                <a-form-item label="站ID" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }">
+                  <a-input v-model="modalForm.StationId"></a-input>
                 </a-form-item>
-                <a-form-item label="反馈点" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }">
-                  <a-input v-model="modalForm.fadeBack"></a-input>
+                <a-form-item label="系统ID" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }">
+                  <a-input v-model="modalForm.SubsystemId"></a-input>
                 </a-form-item>
               </div>
               <div class="modal-form-two">
-                <a-form-item label="报警级别" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }">
-                  <a-input v-model="modalForm.alarmLevel"></a-input>
-                </a-form-item>
-                <a-form-item label="设备名称" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }">
-                  <a-input v-model="modalForm.device"></a-input>
+                <!--<a-form-item label="报警级别" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }">
+                  <a-input v-model="modalForm.AlarmLevel"></a-input>
+                </a-form-item>-->
+                <a-form-item label="设备ID" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }">
+                  <a-input v-model="modalForm.EquipmentId"></a-input>
                 </a-form-item>
                 <a-form-item label="描述" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }">
-                  <a-input v-model="modalForm.alarmDetail"></a-input>
+                  <a-input v-model="modalForm.AlarmDescription"></a-input>
                 </a-form-item>
-                <a-form-item label="下限值" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }">
-                  <a-input v-model="modalForm.lowerLimit"></a-input>
+                <a-form-item label="报警根源" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }">
+                  <a-input v-model="modalForm.AlarmRootCause"></a-input>
                 </a-form-item>
                 <a-form-item label="状态" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }">
-                  <a-input v-model="modalForm.alarmStatus"></a-input>
+                  <a-input v-model="modalForm.AlarmStatus"></a-input>
                 </a-form-item>
               </div>
             </div>
@@ -99,16 +99,24 @@
             isShowModal: false,
             okButton: '保存',
             modalTitle: '',
+            condition: {
+              alarmName: '',
+              alarmLevel: ''
+            },
+            loading: false,
             confirmLoading: false,
             pagination: {
               current: 1,
               defaultCurrent: 1,
-              defaultPageSize: 20
+              defaultPageSize: 18,
+              total: 0
             },
+
+            form: this.$form.createForm(this, { name: 'advanced_search' }),
 
             // 同理
             modalForm: {
-              alarmName: '',
+              /*alarmName: '',
               alarmLevel: '',
               alarmType: '',
               device: '',
@@ -117,34 +125,34 @@
               upLimit: '',
               lowerLimit: '',
               fadeBack: '',
-              alarmStats: ''
+              alarmStats: ''*/
             },
             column: [
               {
                 title: '报警名称',
-                dataIndex: 'alarmName',
+                dataIndex: 'AlarmName',
                 align: 'center',
                 // sorter: true,
-                width: 30,
+                width: '9%',
                 // scopedSlots: { customRender: 'name' }
               },
               {
                 title: '报警级别',
-                dataIndex: 'alarmLevel',
+                dataIndex: 'AlarmLevel',
                 align: 'center',
-                width: 40
+                width: '8%'
               },
               {
                 title: '报警类型',
-                dataIndex: 'alarmType',
+                dataIndex: 'AlarmType',
                 align: 'center',
-                width: 70
+                width: '9%'
               },
               {
                 title: '描述',
-                dataIndex: 'alarmDetail',
+                dataIndex: 'AlarmDescription',
                 align: 'center',
-                width: 70
+                width: '15%'
               },
               /*{
                 title: '报警时间',
@@ -153,50 +161,51 @@
                 width: 40
               },*/
               {
-                title: '设备名称',
-                dataIndex: 'device',
+                title: '设备ID',
+                dataIndex: 'EquipmentId',
                 align: 'center',
-                width: 60
+                width: '9%'
               },
-              {
+              /*{
                 title: '设备点',
-                dataIndex: 'deviceDot',
+                dataIndex: 'PointId',
                 align: 'center',
-                width: 40
+                width: '9%'
+              },*/
+              {
+                title: '警报根源',
+                dataIndex: 'AlarmRootCause',
+                align: 'center',
+                width: '9%'
               },
               {
-                title: '上限值',
-                dataIndex: 'upLimit',
+                title: '站ID',
+                dataIndex: 'StationId',
                 align: 'center',
-                width: 40
+                width: '9%'
               },
               {
-                title: '下限值',
-                dataIndex: 'lowerLimit',
+                title: '系统ID',
+                dataIndex: 'SubsystemId',
                 align: 'center',
-                width: 40
-              },
-              {
-                title: '反馈点',
-                dataIndex: 'fadeBack',
-                align: 'center',
-                width: 40
+                width: '8%'
               },
               {
                 title: '状态',
-                dataIndex: 'alarmStatus',
+                dataIndex: 'AlarmStatus',
                 align: 'center',
-                width: 40
+                width: '9%'
               },
               {
                 title: '操 作',
                 // dataIndex: 'tel',
                 align: 'center',
-                width: 40,
+                // width: 40,
                 scopedSlots: { customRender: 'operation' }
               }
             ],
-            tableList: [
+            tableList: [],
+            /*tableList: [
               {
                 alarmName: '烟雾报警',
                 alarmLevel: '一级',
@@ -392,13 +401,59 @@
                 lowerLimit: 11,
                 fadeBack: 'ats_902'
               }
-            ]
+            ]*/
           }
       },
       
       methods: {
-        searchForAlarmDefine() {},
+        searchForAlarmDefine() {
+          const that = this;
+          this.tableList = [];
+          this.pagination.current = 1;
+          this.loading = true;
+          // 使用当前绑定状态进行校验
+          this.form.validateFields((err, values) => {
+            if (!err) {
+              this.$http.get(that.$api.getAlarmForPagination).then(res => {
+                if (res.status === 200) {
+                  let index = {};
+                  let table = [];
+                  let tableContainer = res.data.value;
+                  // const length = that.pagination.defaultPageSize;
+                  that.pagination.total = tableContainer.length;
+                  tableContainer.forEach((value, index) => {
+                    value.AlarmDateTime = that.$common.timestampToTime(value.AlarmDateTime);
+                    value.AlarmStatus = value.AlarmStatus === 'Unprocessed' ? '未处理' : '处理中';
+                    // 只获取一个 Name 字段
+                    value.AlarmLevel = value.AlarmLevel.Name;
+                    if (that.condition.alarmName !== '' || that.condition.alarmLevel !== '') {
+                      if (value.AlarmName === that.condition.alarmName || value.AlarmLevel.Name === that.condition.alarmLevel) {
+                        // that.tableList.push(value);
+                        // 清空上次的条件查询的就结果
+                        table.splice(0, 1, value);
+                        that.tableList = table;
+                      }
+                    } else {
+                      that.tableList.push(value);
+                    }
+                  })
+                } else {
+                  that.$info({
+                    title: '错误',
+                    content: '发生了一些问题：' + res.data,
+                    onOk() {
+                      // that.loading = false;
+                    },
+                  });
+                }
+                that.loading = false;
+              })
+            }
+          })
+        },
+
         searchInAlarmDefine() {},
+
         exportAlarmDefine() {
           this.isShowModal = true;
           this.modalTitle = '添加报警';
@@ -433,13 +488,12 @@
 
         handleOk () {
           this.isShowModal = false;
-          const formData = this.modalForm;
-          let newAlarmForm = new FormData();
-          for (let i = 0;i <= Object.keys(formData).length;i++) {
-            newAlarmForm.append(Object.keys(formData)[i], Object.values(formData)[i]);
+          if (this.modalTitle === '添加报警') {
+            // 请求增加报警的 API
+            // this.$http.post('', {}).then(res => {})
+          } else if (this.modalTitle === '编辑报警') {
+            // this.$http.post('', {}).then(res => {})
           }
-          // http 请求
-          // this.$http.post('', {}).then()
         },
         closeModal () {
           this.isShowModal = false;

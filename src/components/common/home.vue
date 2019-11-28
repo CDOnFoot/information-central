@@ -3,6 +3,7 @@
     <div class="load-content" v-show="loadFlag">
         <a-spin class="load-img" size="large" />
     </div>
+
     <div>
       <a-modal
         :title="title"
@@ -26,6 +27,7 @@
         </div>
       </a-modal>
     </div>
+
     <a-layout-header>
       <img src="../../assets/img/title-bg.png" alt="" class="header-bg">
       <div class="logo">
@@ -47,10 +49,12 @@
         </div>
       </div>
     </a-layout-header>
+
     <a-layout-content style="padding: 0 1%;height:100%;min-height: calc(100vh - 8.3%);">
      
       <router-view :menuIndex="menuIndex" :setFlag="setFlag" :menuId="menuId" :mbId="mbId" @uploadSetMsg="uploadSaveSetMsg" :visualHomeList="visualHomeList"></router-view>
     </a-layout-content>
+
     <a-layout-footer style="text-align: center">
       <div class="menu-list">
         <div class="menu-sub">
@@ -97,7 +101,7 @@
       <div class="layout-btn">
         <!--<a-button size="large" class="btn-item" @click="layoutSetting" v-show="menuIndex<=0">布局配置</a-button>-->
         <!-- 暂时隐藏布局配置选项按钮 -->
-        <a-button size="large" class="btn-item" @click="layoutSetting" v-show="menuIndex<0">布局配置</a-button>
+        <a-button size="large" class="btn-item" @click="layoutSetting" v-show="this.$router.currentRoute.path === '/home/index'">布局配置</a-button>
         <a-button size="large" class="btn-item" v-show="setFlag" @click="saveSetMsg">保存</a-button>
         <a-button size="large" class="btn-item" v-show="setFlag" @click="cancelSetMsg">取消</a-button>
       </div>
@@ -132,19 +136,21 @@
         mbId:'',
         // setTempFlag:false,
         loadFlag:false,
-        visualParamList:'',//参数可视化布局信息
-        formListFlag:false,//取消布局重置信息
+        visualParamList:'', //参数可视化布局信息
+        formListFlag:false, //取消布局重置信息
         userName:this.$common.getCookie('dvptName'),
-        visualList:'',//接口查询布局信息
-        visualHomeList:'',//传值布局信息
+        visualList:'', //接口查询布局信息
+        visualHomeList:'', //传值布局信息
       }
     },
     computed:{
     },
+
     created(){
       var routerVal = this.$router.currentRoute.path;
       this.getCurrentRoute(routerVal);
     },
+
     /**
      * @description ‘信息中心’ 项目暂不使用从服务获取的菜单列表，直接写一个假的数据列表以供选择
      * @param to
@@ -173,7 +179,9 @@
           userNum: self.$common.getCookie('dvptId'),
           menuNum: self.menuId
           };
-        self.$http.post(self.$api.getUserVisualization, paramList).then(res =>{
+        self.$http.postList(self.$api.getUserVisualization, paramList).then(res =>{
+          console.log('automated layout data:');
+          console.log(res);
           //调取数据成功
           if(res.data){
             if (res.data.code === "0") {
@@ -200,7 +208,11 @@
     mounted() {
       let self = this;
       // 查看菜单栏数据信息
-      this.getMenuInfo();
+      // this.getMenuInfo();
+      /**
+       * @desc not use menu information but module list data
+       */
+      this.getUserVisualization();
       // 查看模版内容数据信息
       this.getTemplateInfo();
 
@@ -210,7 +222,7 @@
       clearInterval(this.timeInterval)
         this.timeInterval = setInterval(function(){
           self.timeStamp = self.$common.timestampToTime(new Date());
-        },1000);
+        }, 1000);
      },
 
     methods:{
@@ -228,7 +240,7 @@
           userNum: self.$common.getCookie('dvptId'),
           menuNum: self.menuId
           };
-        this.$http.post(self.$api.getUserVisualization, param).then(res =>{
+        this.$http.postList(self.$api.getUserVisualization, param).then(res =>{
           //调取数据成功
           if(res.data){
             console.log('the first request data:');
@@ -293,12 +305,13 @@
           self.menuInfo(data);
         })
       },
+
       // 查看菜单栏数据信息接口
       menuInfoList:function(callback){
         let self = this;
         let param={
         };
-        this.$http.post(self.$api.getMenuInfo, param).then(res =>{
+        this.$http.postList(self.$api.getMenuInfo, param).then(res =>{
             //调取数据成功
           // console.log('the data of menu:');
           // console.log(res);
@@ -351,6 +364,10 @@
         //   });
         // }
       },
+
+      /**
+       * @function 获取主页模板 list
+       */
       getTemplateInfo:function(){
         let self = this;
         this.templateInfoList(function(data){
@@ -361,7 +378,9 @@
         let self = this;
         let param={
           };
-        this.$http.post(self.$api.getTemplateInfo, param).then(res =>{
+        this.$http.postList(self.$api.getTemplateInfo, param).then(res =>{
+          console.log('getting home list data:')
+          console.log(res)
           //调取数据成功
           if(res.data){
             if (res.data.code === "0") {
@@ -518,7 +537,7 @@
           userNum: self.$common.getCookie('dvptId'),
           menuNum: self.menuId,
         };
-        this.$http.post(self.$api.layoutRestoreDefaults, param).then(res =>{
+        this.$http.postList(self.$api.layoutRestoreDefaults, param).then(res =>{
           //调取数据成功
           if(res.data){
             if (res.data.code === "0") {
@@ -557,7 +576,7 @@
           templateNum: self.visualParamList.mb.templateNum,
           moduleAndContent: JSON.stringify(self.visualParamList),
         };
-        this.$http.post(self.$api.updateUserContentInfo, param).then(res =>{
+        this.$http.postList(self.$api.updateUserContentInfo, param).then(res =>{
           //调取数据成功
           if(res.data){
             if (res.data.code === "0") {
@@ -599,7 +618,7 @@
                 userNum: self.$common.getCookie('dvptId'),
                 menuNum: self.menuId
                 };
-              this.$http.post(self.$api.getUserVisualization, paramList).then(res =>{
+              this.$http.postList(self.$api.getUserVisualization, paramList).then(res =>{
                 //调取数据成功
                 if(res.data){
                   if (res.data.code === "0") {

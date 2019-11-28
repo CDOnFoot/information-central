@@ -2,6 +2,8 @@
 <!--    模版一-->
   <div class="mb-main">
     <div class="mb-left">
+
+      <!-- module choose modal -->
         <a-modal
             :title="title"
             :visible="visible"
@@ -33,6 +35,8 @@
           </div>
         </div>
       </a-modal>
+
+      <!-- left modules - 0 -->
       <div class="left">
         <div class="left-sub">
           <img src="../../../assets/img/sub-border-l.png" alt="" class="sub-bg">
@@ -45,11 +49,14 @@
             </div>
           </div>
 
+          <!-- chosen module -->
           <div class="sub-content">
              <component :is="visualList.mb.mk[0].mc.contentNum" :mcTitle="visualList.mb.mk[0].mc.contentName"  :mcStatus="0" :mcId="visualList.mb.mk[0].mc.contentNum" class="mc-content"></component>
           </div>
         </div>
       </div>
+
+      <!-- left module - 1 -->
       <div class="left">
          <div class="left-sub">
           <img src="../../../assets/img/sub-border-l.png" alt="" class="sub-bg">
@@ -67,6 +74,8 @@
           </div>
         </div>
       </div>
+
+      <!-- left module - 2 -->
       <div class="left">
          <div class="left-sub">
           <img src="../../../assets/img/sub-border-l.png" alt="" class="sub-bg">
@@ -84,6 +93,8 @@
         </div>
       </div>
     </div>
+
+    <!-- middle module -->
     <div class="keyTemp">
       <div class="keyMain">
         <img src="../../../assets/img/main-border.png" alt="" class="main-bg">
@@ -100,7 +111,11 @@
           </div>
       </div>
     </div>
+
+    <!-- right module -->
     <div class="mb-right">
+
+      <!-- right module - 0 -->
       <div class="right">
          <div class="right-sub">
           <img src="../../../assets/img/sub-border-r.png" alt="" class="sub-bg">
@@ -117,6 +132,8 @@
           </div>
         </div>
       </div>
+
+      <!-- right module - 1 -->
        <div class="right">
          <div class="right-sub">
           <img src="../../../assets/img/sub-border-r.png" alt="" class="sub-bg">
@@ -133,6 +150,8 @@
           </div>
         </div>
       </div>
+
+      <!-- right module - 2 -->
       <div class="right">
         <div class="right-sub">
           <img src="../../../assets/img/sub-border-r.png" alt="" class="sub-bg">
@@ -179,7 +198,7 @@
             title:'选择模块内容',
             visible: false,
             confirmLoading: false,
-            mcList:[],
+            mcList:[], // 当前可配置的所有模块的 list
             mcIndex:'',
             mcTempIndex:'',
             visibleIndex:'',
@@ -277,7 +296,7 @@
               userNum: self.$common.getCookie('dvptId'),
               menuNum: self.menuTempId
               };
-            this.$http.post(self.$api.getUserVisualization, param).then(res =>{
+            this.$http.postList(self.$api.getUserVisualization, param).then(res =>{
               //调取数据成功
               if(res.data){
                 if (res.data.code === "0") {
@@ -428,7 +447,8 @@
           if(params){
             param['contentIndex'] = params;
           }
-          this.$http.post(self.$api.getContentInfo, param).then(res =>{
+          this.$http.postList(self.$api.getContentInfo, param).then(res =>{
+            console.log('module MB01 init success,start the first http request.');
             //调取数据成功
             if(res.data){
               if (res.data.code === "0") {

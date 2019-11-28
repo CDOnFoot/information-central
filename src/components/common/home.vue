@@ -95,7 +95,9 @@
         </div>
       </div>
       <div class="layout-btn">
-        <a-button size="large" class="btn-item" @click="layoutSetting" v-show="menuIndex<=0">布局配置</a-button>
+        <!--<a-button size="large" class="btn-item" @click="layoutSetting" v-show="menuIndex<=0">布局配置</a-button>-->
+        <!-- 暂时隐藏布局配置选项按钮 -->
+        <a-button size="large" class="btn-item" @click="layoutSetting" v-show="menuIndex<0">布局配置</a-button>
         <a-button size="large" class="btn-item" v-show="setFlag" @click="saveSetMsg">保存</a-button>
         <a-button size="large" class="btn-item" v-show="setFlag" @click="cancelSetMsg">取消</a-button>
       </div>
@@ -298,8 +300,8 @@
         };
         this.$http.post(self.$api.getMenuInfo, param).then(res =>{
             //调取数据成功
-          console.log('the data of menu:');
-          console.log(res);
+          // console.log('the data of menu:');
+          // console.log(res);
             if(res.data){
               if (res.data.code === "0") {
                 callback(res.data.data);

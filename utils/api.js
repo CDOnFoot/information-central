@@ -20,6 +20,8 @@ export default {
 
   getAlarm: '/alarm/alarmRealTimeInfos',
 
+  getAlarmForPagination: '/alarm/alarmRealTimeInfos?$expand=AlarmLevel&$filter=SubsystemId eq 4&$orderby=AlarmDateTime desc',
+
   /**
    * @variation old API
    */

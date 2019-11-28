@@ -174,10 +174,6 @@
     components: {AFormItem},
     data() {
       return {
-        equipments: Equipments,
-        badgeCode: '',
-        starttime: '',
-        endtime: '',
         columns,
         expandAllRows: true,
         pagination: {
@@ -190,6 +186,10 @@
         },
         loading: false,
         tableList: [],
+        equipments: '',
+        badgeCode: '',
+        starttime: '',
+        endtime: '',
       }
     },
 
@@ -208,8 +208,7 @@
     mounted() {
       this.$http.get(this.$api.getEquipments).then(res => {
         // console.log(res.data.value );
-
-
+        this.equipments = Equipments;
       })
     },
 

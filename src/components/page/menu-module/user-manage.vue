@@ -169,8 +169,9 @@
               defaultCurrent: 1,
               // 默认页容量
               defaultPageSize: 17,
-              // total: 0,
+              total: 0,
               showQuickJumper: true,
+              // 使用一个箭头函数来指向当前 Vue 实例
               onChange: (current) => this.changePage(current)
             },
             modalTitle: '',
@@ -387,9 +388,40 @@
         // this.modal.destroy();
       },
 
-      mounted () {},
+      mounted () {
+          this.initTable();
+      },
 
       methods: {
+          /**
+           * @function 初始化 table
+           */
+          initTable () {
+            const that = this;
+            const len = this.tableList.length;
+            for (let i=0;i<=len;i++) {
+              this.tableList.pop();
+            }
+            this.loading = true;
+            this.form.validateFields((err, values) => {
+              if (!err) {
+                this.$http.get(that.$api.getUsers).then(res => {
+                  let tableContainer = [];
+                  that.pagination.total = res.data.value.length;
+                  const table = res.data.value;
+                  const length = that.pagination.defaultPageSize;
+                  for (let i=0;i<=length;i++) {
+                    table[i].Created = that.$common.timestampToTime(table[i].Created);
+                    table[i].Updated = that.$common.timestampToTime(table[i].Updated);
+                    table[i].Expired = that.$common.timestampToTime(table[i].Expired);
+                    table[i].Status = table[i].Status === 'Enable' ? '启用' : '未启用';
+                    that.tableList.push(table[i]);
+                  }
+                  that.loading = false;
+                })
+              }
+            })
+          },
         /**
          * @function 当页码改变时的 callback
          * @param page
@@ -409,17 +441,13 @@
           // 使用当前绑定状态进行校验
           this.form.validateFields((err, values) => {
             if (!err) {
-              /*const param = {
-                token: that.$common.getCookie('dvptToken'),
-                station: 1
-              }*/
               this.$http.get(that.$api.getUsers).then(res => {
                 // 直接填充测试
                 // this.tableList = res.data.value;
                 // this.pagination.total = this.tableList.length;
 
                 let tableContainer = [];
-                that.pagination.total = res.data.value.length;
+                // that.pagination.total = res.data.value.length;
                 const table = res.data.value;
                 table.forEach((value, index) => {
                   value.Created = this.$common.timestampToTime(value.Created);
@@ -438,19 +466,6 @@
                   // that.tableList = table;
                   // this.handleTableList(table)
                 });
-
-                /*for (let i=0;i<=table.length;) {
-                  tableContainer.push(table[i]);
-                  // console.log(tableContainer);
-                  // console.log('the type of Created:' + typeof tableContainer[0].Created);
-                  for (let j=0;j<=table.length;) {
-                    // tableContainer[i].Created = tableContainer[i].Created.toLocaleDateString();
-                    // tableContainer[i].Updated = tableContainer[i].Updated.toLocaleDateString();
-                    // tableContainer[i].Expired = tableContainer[i].Expired.toLocaleDateString();
-                    j++;
-                  }
-                  i++;
-                }*/
                 // 不清除搜索条件用以比对搜索结果是否正确
                 // that.searchName = '';
                 that.loading = false;
@@ -703,8 +718,8 @@
           // 使用当前绑定状态进行校验
           this.searchName.validateFields((err, values) => {
             if (!err) {
-              console.log('the input form:');
-              console.log(values)
+              // console.log('the input form:');
+              // console.log(values)
             }
           })
         }

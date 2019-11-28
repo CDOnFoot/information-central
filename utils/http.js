@@ -25,8 +25,8 @@
  */
 // var host = 'http://10.28.3.149:81';
 var host = 'http://10.28.3.149';
-var hostGet = 'http://10.28.3.149';
-
+// var homeHost = 'http://10.66.1.160:28070';
+var homeHost = useStaging ? 'http://10.66.1.102:28070':'http://10.66.1.160:28070';
     // websocket配置信息/url+user/id+token
     var websocketHost = useStaging ? 'ws://10.66.1.160:28070/subway/info/ws/':'ws://10.66.1.160:28070/subway/info/ws/';
     var websocketService = useStaging ? 'ws://10.66.1.160:28070/subway/info/ws/':'ws://10.66.1.160:28070/equipment/info/ws/';
@@ -217,6 +217,24 @@ axios.defaults.headers.token = common.getCookie('dvptToken')
             return checkCode(res)
           })
       },
+
+      postList (url, params) {
+        return axios({
+          method: 'post',
+          baseURL: homeHost + url,
+          // data: qs.stringify(params),
+          // data: JSON.stringify(params),
+          data: params,
+          timeout: 20000,
+        }).then(
+          (response) => {
+            return checkStatus(response)
+          }).then(
+          (res) => {
+            return checkCode(res)
+          })
+      },
+
       //  get请求
       get (url, params) {
         var param;

@@ -49,6 +49,17 @@
                            @checkTheRouter="changeRouter"></menu-module>
             </div>
           </td>
+          <td>
+            <div>
+              <menu-module module-name="moduleTest"
+                           module-icon="setting"
+                           module-width="260px"
+                           module-height="170px"
+                           module-icon-width="200"
+                           module-name-width="200"
+                           @checkTheRouter="moduleTest"></menu-module>
+            </div>
+          </td>
         </tr>
 
         <tr class="the-second-row">
@@ -104,6 +115,12 @@
     },
 
     methods: {
+      /**
+       * @module 临时模块
+       */
+      moduleTest () {
+        this.$router.push('/home/index');
+      },
       changeRouter(param) {
         const routerParam = param;
         switch (param) {

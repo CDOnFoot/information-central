@@ -101,12 +101,16 @@ const router = new Router({
           },
           children: [
             {
-              path: 'generalView',
-              component: resolve => require(['@/components/page/menu-module/monitor-module/general-view'], resolve)
+              path: 'topology',
+              component: resolve => require(['@/components/page/menu-module/monitor-module/topology'], resolve)
             },
             {
               path: 'generalView',
               component: resolve => require(['@/components/page/menu-module/monitor-module/general-view'], resolve)
+            },
+            {
+              path: 'config',
+              component: resolve => require(['@/components/page/menu-module/monitor-module/config'], resolve)
             },
           ]
         },

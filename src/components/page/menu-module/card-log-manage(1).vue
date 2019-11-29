@@ -1,13 +1,13 @@
 <template>
   <div>
     <div class="search-condition">
-      <a-form layout="inline" :form="form" @submit="searchFor">
+      <a-form layout="inline" :form="form">
         <a-form-item label="门禁卡编号">
           <a-input placeholder="门禁卡编号" v-model="badgeCode"></a-input>
         </a-form-item>
         <a-form-item label="设备">
           <div>
-            <a-select :defaultValue="equipments[0].DisplayName" style="width: 120px" @change="">
+            <a-select :defaultValue="equipments[0].DisplayName" style="width: 120px" @change="getEquipments()">
               <a-select-option v-for="equipment in equipments" :key="equipment.EntityId">
                 {{equipment.DisplayName}}
               </a-select-option>
@@ -15,13 +15,13 @@
           </div>
         </a-form-item>
         <a-form-item label="开始时间">
-          <a-time-picker use12Hours format="h:mm:ss A" @change="searchStarttime"/>
+          <a-time-picker use12Hours format="h:mm:ss A" @change="getStarttime"/>
         </a-form-item>
         <a-form-item label="结束时间">
-          <a-time-picker use12Hours format="h:mm:ss A" @change="searchEndtime"/>
+          <a-time-picker use12Hours format="h:mm:ss A" @change="getEndtime"/>
         </a-form-item>
         <a-form-item>
-          <a-button type="primary" icon="search" html-type="submit">搜索</a-button>
+          <a-button type="primary" icon="search" @click="searchFor">搜索</a-button>
         </a-form-item>
         <a-form-item>
           <a-button type="primary" icon="file" @click="">导出</a-button>
@@ -42,6 +42,7 @@
 
 <script>
   import AFormItem from "ant-design-vue/es/form/FormItem";
+  import axios from 'axios'
 
   const columns = [
     {
@@ -174,10 +175,16 @@
     components: {AFormItem},
     data() {
       return {
+        // search
+        equipments: '',
+        badgeCode: '',
+        starttime: '',
+        endtime: '',
+        // table
         columns,
         expandAllRows: true,
         pagination: {
-          current: 0,
+          current: 1,
           defaultCurrent: 1,
           defaultPageSize: 20,
           // total: 0,
@@ -185,11 +192,10 @@
           onChange: (current) => this.changePage(current)
         },
         loading: false,
+
+        tableData: [],
         tableList: [],
-        equipments: '',
-        badgeCode: '',
-        starttime: '',
-        endtime: '',
+
       }
     },
 
@@ -198,7 +204,7 @@
     },
 
     created() {
-      this.searchFor();
+
     },
 
     beforeMount() {
@@ -207,97 +213,167 @@
 
     mounted() {
       this.$http.get(this.$api.getEquipments).then(res => {
-        // console.log(res.data.value );
+        console.log(res.data.value);
+        // this.equipments = res.data.value;
         this.equipments = Equipments;
-      })
+        this.initData();
+      });
     },
 
     methods: {
-      searchFor(e) {
+      initData() {
         const that = this;
-        this.tableList = [];
-        // e.preventDefault();
-        this.pagination.current = 1;
-        this.loading = true;
-        this.form.validateFields((err, values) => {
+        let temp = [];
+        that.$http.get(that.$api.getTransactions).then(response => {
+          that.pagination.total = response.data.value.length;
+          that.tableData = response.data.value;
+          that.tableData.forEach((value, index) => {
+            value.Time = this.$common.timestampToTime(value.Time);
+            temp.push(value);
+          });
+          that.tableData = temp;
+          console.log(that.tableData);
+
+          that.initTable();
+
+        });
+      },
+
+
+      initTable() {
+        const that = this;
+        that.loading = true;
+        that.tableList = [];
+        that.form.validateFields((err, values) => {
           if (!err) {
-            this.$http.get(that.$api.getTransactions).then(res => {
-              console.log(res);
-              that.pagination.total = res.data.value.length;
-              let table = res.data.value;
-              table.forEach((value, index) => {
+            that.$http.get(that.$api.getTransactions).then(response => {
+              that.pagination.total = response.data.value.length;
+
+              that.tableData = response.data.value;
+
+              that.tableData.forEach((value, index) => {
                 value.Time = this.$common.timestampToTime(value.Time);
                 that.tableList.push(value);
               });
-              if (that.badgeCode !== '') {
-                that.tableList = that.tableList.filter((item, index, arr) => item.BadgeCode == that.badgeCode);
+
+              let temp = that.tableData.slice(0, that.pagination.defaultPageSize);
+
+              let BadgeCodeArray = [];
+              temp.forEach((value, index) => {
+                if (value.BadgeCode) {
+                  if (BadgeCodeArray.indexOf(value.BadgeCode) == -1) {
+                    BadgeCodeArray.push(value.BadgeCode);
+                  }
+                }
+              });
+              console.log(BadgeCodeArray);
+
+              if (BadgeCodeArray.length) {
+                Promise.all([BadgeCodeArray.map(item => that.getCardholder(item))]).then(result1 => {
+                  Promise.all(result1[0]).then(result2 => {
+                    result2.map(function (item, index) {
+                      console.log(item);
+                      temp.forEach((value, _index) => {
+                        if (value.BadgeCode && value.BadgeCode == BadgeCodeArray[index]) {
+                          that.tableList[_index].cardholder = 'cardholder';
+                        }
+                      });
+                    });
+                    that.loading = false;
+                  });
+                });
+              } else {
+                that.loading = false;
               }
+
+            });
+          }
+        });
+      },
+
+      handleTableChange(page) {
+        let that = this;
+        that.loading = true;
+        that.pagination.current = page;
+        that.tableList = [];
+        that.$http.get(that.$api.getTransactions).then((response) => {
+          try {
+            let index;
+            let data = response.data.value;
+            for (let i = 0; i < parseInt(this.pagination.defaultPageSize); i++) {
+              index = (page - 1) * parseInt(this.pagination.defaultPageSize) + i;
+              if (data[index].Time != null) {
+                data[index].Time = that.$common.timestampToTime(data[index].Time);
+              }
+              that.tableList.push(data[index]);
+            }
+
+            let temp = that.tableList;
+
+            let BadgeCodeArray = [];
+            temp.forEach((value, index) => {
+              if (value.BadgeCode) {
+                if (BadgeCodeArray.indexOf(value.BadgeCode) == -1) {
+                  BadgeCodeArray.push(value.BadgeCode);
+                }
+              }
+            });
+            console.log(BadgeCodeArray);
+
+            if (BadgeCodeArray.length) {
+              Promise.all([BadgeCodeArray.map(item => that.getCardholder(item))]).then(result1 => {
+                Promise.all(result1[0]).then(result2 => {
+                  result2.map(function (item, index) {
+                    console.log(item);
+                    temp.forEach((value, _index) => {
+                      if (value.BadgeCode && value.BadgeCode == BadgeCodeArray[index]) {
+                        that.tableList[_index].cardholder = 'cardholder';
+                      }
+                    });
+                  });
+                  that.loading = false;
+                });
+              });
+            } else {
               that.loading = false;
-            })
+            }
+
+          } catch (e) {
+            console.log(e);
           }
         })
-      },
-
-      getCardholder(badgeCode) {
-        const that = this;
-        let promise = new Promise(function (resolve, reject) {
-          that.$http.get(that.$api.getCardholder + '\'' + badgeCode + '\'').then(res => {
-            resolve(res)
-            // table[index].cardholder = res[0].Cardholder.LastName;
-            // table[index].cardholder = 1111111111111;
-            // tableContainer.push(table[index]);
-          });
-        });
-        return promise;
-      },
-
-      searchStarttime(time, timeString) {
-        console.log(time._d, timeString);
-      },
-
-      searchEndtime(time, timeString) {
-        console.log(time, timeString);
       },
 
       changePage(page) {
         this.handleTableChange(page);
       },
 
-      handleTableChange(page) {
+      getCardholder(badgeCode) {
         const that = this;
-        const pageSize = this.pagination.defaultPageSize;
-        this.loading = true;
-        this.pagination.current = page;
-        this.$http.get(that.$api.getTransactions)
-          .then((response) => {
-            try {
-              let index;
-              let tableContainer = [];
-              const table = response.data.value;
-              for (let i = 0; i < parseInt(pageSize); i++) {
-                index = (page - 1) * parseInt(pageSize) + i;
-                table[index].Time = that.$common.timestampToTime(table[index].Time);
-                tableContainer.push(table[index]);
-              }
-              console.log(tableContainer);
-              tableContainer['cardholder'] = '';
+        let promise = new Promise(function (resolve, reject) {
+          that.$http.get(that.$api.getCardholder + '\'' + badgeCode + '\'').then(res => {
+            resolve(res);
+          });
+        });
+        return promise;
+      },
 
-              Promise.all([tableContainer.map(item => that.getCardholder(item.BadgeCode))]).then(result1 => {
-                Promise.all(result1[0]).then(result2 => {
-                  result2.map(function (item, i) {
-                    console.log(item.data.value);
-                    tableContainer[i].cardholder = 1111111111111;
-                  });
-                  that.tableList = tableContainer;
-                });
-              });
+      searchFor() {
+        if (this.badgeCode !== '') {
+          this.tableList = this.tableList.filter((item, index, arr) => item.BadgeCode == this.badgeCode);
+        }
+      },
 
-              // that.tableList = tableContainer;
-            } catch (e) {
-              console.log('there are some data have "null":' + e);
-            }
-            that.loading = false;
-          })
+      getEquipments(value) {
+        console.log(`selected ${value}`);
+      },
+
+      getStarttime(time, timeString) {
+        console.log(time._d, timeString);
+      },
+
+      getEndtime(time, timeString) {
+        console.log(time, timeString);
       },
 
     }

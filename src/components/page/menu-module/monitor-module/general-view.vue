@@ -5,11 +5,10 @@
 </template>
 
 <script>
-    export default {
-        name: "general-view"
-    }
+export default {
+  name: "general-view"
+};
 </script>
 
 <style scoped>
-
 </style>

@@ -119,7 +119,7 @@
        * @module 临时模块
        */
       moduleTest () {
-        this.$router.push('/home/index');
+        this.$router.push('/home/threeModule');
       },
       changeRouter(param) {
         const routerParam = param;

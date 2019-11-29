@@ -87,6 +87,14 @@ const router = new Router({
           }
         },
         {
+          path: 'threeModule',
+          component: resolve => require(['@/components/common/usual/threeModule'], resolve),
+          meta: {
+            title: '测试模块',
+            needLogin: true
+          }
+        },
+        {
           path: 'userManage',
           component: resolve => require(['@/components/page/menu-module/user-manage'], resolve),
           meta: {

@@ -25,6 +25,7 @@
  */
 // var host = 'http://10.28.3.149:81';
 var host = 'http://10.28.3.149';
+var hostList = 'http://10.28.3.145:8080';
 // var homeHost = 'http://10.66.1.160:28070';
 var homeHost = useStaging ? 'http://10.66.1.102:28070':'http://10.66.1.160:28070';
     // websocket配置信息/url+user/id+token
@@ -51,7 +52,8 @@ axios.defaults.headers.token = common.getCookie('dvptToken')
             title: '提示',
             content: '当前登录状态已过期！',
             onOk() {
-              self.$router.push('/login');
+              // self.$router.push('/login');
+              router.push('/login');
             },
           });
         } else{
@@ -221,7 +223,7 @@ axios.defaults.headers.token = common.getCookie('dvptToken')
       postList (url, params) {
         return axios({
           method: 'post',
-          baseURL: homeHost + url,
+          baseURL: hostList + url,
           // data: qs.stringify(params),
           // data: JSON.stringify(params),
           data: params,

@@ -210,7 +210,7 @@
       // 查看菜单栏数据信息
       // this.getMenuInfo();
       /**
-       * @desc not use menu information but module list data
+       * @desc not use menu information list but module list data
        */
       this.getUserVisualization();
       // 查看模版内容数据信息
@@ -219,6 +219,7 @@
       document.ondragstart = function() {
         return false;
       };
+      // 清除缓存的时间
       clearInterval(this.timeInterval)
         this.timeInterval = setInterval(function(){
           self.timeStamp = self.$common.timestampToTime(new Date());
@@ -243,10 +244,11 @@
         this.$http.postList(self.$api.getUserVisualization, param).then(res =>{
           //调取数据成功
           if(res.data){
-            console.log('the first request data:');
-            console.log(res);
+            /*console.log('the first request data:');
+            console.log(res);*/
             if (res.data.code === "0") {
-              callback(res.data.data)
+              // callback(res.data.data)
+              callback(res.data.data.records);
             }else{
                 self.loadFlag= false;
                self.$message.error(res.data.msg);
@@ -255,12 +257,17 @@
         });
       },
       visualizationInfo:function(data){
+        console.log(' -------- current getting data:')
+        console.log(data)
         setTimeout(()=>{
           this.loadFlag= false;
         },1000);
-        this.visualList = JSON.parse(JSON.stringify(data.menuList));
+        /*this.visualList = JSON.parse(JSON.stringify(data.menuList));
         this.visualHomeList = JSON.parse(JSON.stringify(data.menuList));
-        this.visualParamList = JSON.parse(JSON.stringify(data.menuList));
+        this.visualParamList = JSON.parse(JSON.stringify(data.menuList));*/
+        this.visualList = JSON.parse(JSON.stringify(data));
+        this.visualHomeList = JSON.parse(JSON.stringify(data));
+        this.visualParamList = JSON.parse(JSON.stringify(data));
         this.mbId = this.visualList.mb.templateNum;
       },
 
@@ -379,8 +386,8 @@
         let param={
           };
         this.$http.postList(self.$api.getTemplateInfo, param).then(res =>{
-          console.log('getting home list data:')
-          console.log(res)
+          console.log('getting home list data:');
+          console.log(res);
           //调取数据成功
           if(res.data){
             if (res.data.code === "0") {

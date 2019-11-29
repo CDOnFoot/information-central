@@ -529,17 +529,6 @@
               }catch (e) {
                 console.log('there are some data have "null":' + e);
               }
-
-              /*that.pagination.defaultCurrent = parseInt(page);
-              const length = table.length;
-              for (let i=0;i<17;i++) {
-                let index = i + (page - 1) * parseInt(that.pagination.defaultPageSize);
-                that.tableList.push(table[index]);
-                that.tableList[index].Created = that.$common.timestampToTime(that.tableList[index].Created);
-                that.tableList[index].Updated = that.$common.timestampToTime(that.tableList[index].Updated);
-                that.tableList[index].Expired = that.$common.timestampToTime(that.tableList[index].Expired);
-                that.tableList[index].Status = that.tableList[index].Status === 'Enable' ? '启用' : '未启用';
-              }*/
               that.loading = false;
             })
         },

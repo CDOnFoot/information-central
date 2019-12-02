@@ -77,7 +77,7 @@
           </div>
         </div>
 
-        <div v-for="(item,index) in menuList" class="menu-item" :class="menuIndex==index?'font-active':''" :key="index"
+        <!--<div v-for="(item,index) in menuList" class="menu-item" :class="menuIndex==index?'font-active':''" :key="index"
              @click="selectMenu(index)">
           <div class="item-info">
             <img :src="menuIndex === index?require('../../assets/img/titleBg-active.png'):require('../../assets/img/titleBg.png')" alt="" class="menu-img">
@@ -85,7 +85,8 @@
               {{ item.menuName }}
             </div>
           </div>
-        </div>
+        </div>-->
+
         <div class="menu-sub">
           <div class="menu-sub-item">
             <img src="../../assets/img/title-sub-bg.png" alt="" class="menu-sub-img">
@@ -175,10 +176,13 @@
             next();
           }
         });
-        let paramList={
+        /*let paramList={
           userNum: self.$common.getCookie('dvptId'),
           menuNum: self.menuId
-          };
+          };*/
+        let paramList = new FormData();
+        paramList.append('userNum', '18324');
+        paramList.append('userNum', 'CD01');
         self.$http.postList(self.$api.getUserVisualization, paramList).then(res =>{
           console.log('automated layout data:');
           console.log(res);
@@ -208,11 +212,11 @@
     mounted() {
       let self = this;
       // 查看菜单栏数据信息
-      // this.getMenuInfo();
+      this.getMenuInfo();
       /**
        * @desc not use menu information list but module list data
        */
-      this.getUserVisualization();
+      // this.getUserVisualization();
       // 查看模版内容数据信息
       this.getTemplateInfo();
 
@@ -237,18 +241,24 @@
       },
       userVisualizationList:function(callback){
         let self = this;
-        let param={
+        /*let param={
           userNum: self.$common.getCookie('dvptId'),
           menuNum: self.menuId
-          };
+          };*/
+        /**
+         * @exception 该 API 需要使用 'x-www-form-urlencoded' 的请求格式
+         */
+        let param = new FormData();
+        param.append('userNum', '18324');
+        param.append('menuNum', 'CD01');
         this.$http.postList(self.$api.getUserVisualization, param).then(res =>{
+          console.log('布局模块列表：');
+          console.log(res);
           //调取数据成功
           if(res.data){
-            /*console.log('the first request data:');
-            console.log(res);*/
             if (res.data.code === "0") {
-              // callback(res.data.data)
-              callback(res.data.data.records);
+              callback(res.data.data)
+              // callback(res.data.data.records);
             }else{
                 self.loadFlag= false;
                self.$message.error(res.data.msg);
@@ -262,12 +272,12 @@
         setTimeout(()=>{
           this.loadFlag= false;
         },1000);
-        /*this.visualList = JSON.parse(JSON.stringify(data.menuList));
+        this.visualList = JSON.parse(JSON.stringify(data.menuList));
         this.visualHomeList = JSON.parse(JSON.stringify(data.menuList));
-        this.visualParamList = JSON.parse(JSON.stringify(data.menuList));*/
-        this.visualList = JSON.parse(JSON.stringify(data));
+        this.visualParamList = JSON.parse(JSON.stringify(data.menuList));
+        /*this.visualList = JSON.parse(JSON.stringify(data));
         this.visualHomeList = JSON.parse(JSON.stringify(data));
-        this.visualParamList = JSON.parse(JSON.stringify(data));
+        this.visualParamList = JSON.parse(JSON.stringify(data));*/
         this.mbId = this.visualList.mb.templateNum;
       },
 
@@ -386,7 +396,7 @@
         let param={
           };
         this.$http.postList(self.$api.getTemplateInfo, param).then(res =>{
-          console.log('getting home list data:');
+          console.log('模板内的模块内容：');
           console.log(res);
           //调取数据成功
           if(res.data){
@@ -670,7 +680,7 @@
        * @function return to main menu
        */
       returnMenu () {
-        this.$router.push('/home/mainMenu');
+        this.$router.push('/home');
       }
     }
   }

@@ -79,7 +79,7 @@ const router = new Router({
 
         // create new router besides "home"
         {
-          path: 'mainMenu',
+          path: '/',
           component: resolve => require(['@/components/page/mainMenu'], resolve),
           meta: {
             title: '菜单',

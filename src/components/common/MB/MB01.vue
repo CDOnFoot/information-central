@@ -449,6 +449,7 @@
           }
           this.$http.postList(self.$api.getContentInfo, param).then(res =>{
             console.log('module MB01 init success,start the first http request.');
+            console.log(res);
             //调取数据成功
             if(res.data){
               if (res.data.code === "0") {

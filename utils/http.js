@@ -96,8 +96,8 @@ axios.defaults.headers.token = common.getCookie('dvptToken')
             break;
           case 403:
             // this.$router.push("/login");
-            router.push("/login");
             err.message = '拒绝访问，请重新登录';
+            router.push("/login");
             break;
           case 404:
             err.message = '请求错误,未找到该资源';
@@ -248,9 +248,9 @@ axios.defaults.headers.token = common.getCookie('dvptToken')
           param = formateParm(params);
         }
         
-        if (url === '/alarm/alarmRealTimeInfos') {
+        /*if (url === '/alarm/alarmRealTimeInfos') {
           urlParam = '?$expand=AlarmLevel&$filter=SubsystemId eq 4&$orderby=AlarmDateTime desc'
-        }
+        }*/
 
         // const token = Cookies.get('dvptToken');
         // console.log('current token:' + token);

@@ -127,7 +127,9 @@ import sha256 from "js-sha256";
                   console.log('get token is:' + self.$common.getCookie('dvptToken'));
 
                   // self.$router.push('/home/index');
-                  self.$router.push('/home/mainMenu');
+                  // self.$router.push('/home/mainMenu');
+                  // 由路由直接渲染默认路由，调用 home 组件中的生命周期钩子
+                  self.$router.push('/home');
                   // self.changeLogin({ token: self.userInfo.custom_token });
                   // setTimeout(()=>{
                   // },200);

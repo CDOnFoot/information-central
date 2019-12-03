@@ -8,7 +8,19 @@ const store = new Vuex.Store({
   state: {
     // 存储token
     // Authorization: localStorage.getItem('Authorization') ? localStorage.getItem('Authorization') : ''
-    Authorization: common.getCookie('Authorization') ? common.getCookie('Authorization') : ''
+    Authorization: common.getCookie('Authorization') ? common.getCookie('Authorization') : '',
+    screenWidth: '',
+    screenHeight: ''
+  },
+
+  getters: {
+    getScreenWidth () {
+      return state.screenWidth;
+    },
+
+    getScreenHeight () {
+      return state.screenHeight;
+    }
   },
  
   mutations: {

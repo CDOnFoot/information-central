@@ -3,8 +3,8 @@
          @click="throwTheRouter"
          :style="{ width: moduleWidth, height: moduleHeight }">
       <div class="menu-module-content">
-        <tr class="empty-header">
-          <th width="40" height="35"></th>
+        <tr class="empty-header" :height="emptyHeight">
+          <th :width="emptyWidth"></th>
           <th></th>
           <th></th>
         </tr>
@@ -82,7 +82,9 @@
       mounted () {},
 
       // 父组件传递的参数
-      props: [ "moduleWidth", "moduleHeight", "moduleName", "moduleIcon", "moduleNameWidth", "moduleIconWidth"],
+      props: [ "moduleWidth", "moduleHeight", "moduleName",
+        "moduleIcon", "moduleNameWidth", "moduleIconWidth",
+        "emptyWidth", "emptyHeight" ],
 
       methods: {
         throwTheRouter () {
@@ -97,6 +99,7 @@
 .menu-module {
   background: url("../../../assets/img/back/module-bg.png") no-repeat;
   background-size: 100% 100%;
+  cursor: pointer;
 }
 
   .menu-module-name {

@@ -1,23 +1,26 @@
 <template>
   <div class="main-menu">
     <div class="main-menu-background">
-      <div class="main-menu-content">
-        <tr class="table-header">
-          <th class="table-header-title" width="320" height="70"></th>
-          <th width="300">报警管理</th>
-          <th width="300">门禁管理</th>
-          <th width="300">视频监控管理</th>
-          <th width="100"></th>
+      <div class="main-menu-content" :style="{ 'font-size': fontSize, margin: '10px 0 0 60px' }">
+        <tr class="table-header"
+            :style="{}">
+          <th class="table-header-title" :width="tableHeaderWidth" :height="tableHeaderHeight"></th>
+          <th :width="tableHeaderWidth">报警管理</th>
+          <th :width="tableHeaderWidth">门禁管理</th>
+          <th :width="tableHeaderWidth">视频监控管理</th>
+          <th :width="tableHeaderWidth"></th>
         </tr>
         <tr class="the-first-row">
-          <td v-for="(item, index) in firstModuleList" :key="" height="230">
+          <td v-for="(item, index) in firstModuleList" :key="index" :height="menuHeight">
             <div>
               <menu-module :module-name="item.name"
                            :module-icon="item.icon"
-                           module-width="260px"
-                           module-height="170px"
-                           module-icon-width="200"
-                           module-name-width="200"
+                           :module-width="moduleWidth"
+                           :module-height="moduleHeight"
+                           :empty-width="emptyWidth"
+                           :empty-height="emptyHeight"
+                           :module-icon-width="iconWidth"
+                           :module-name-width="nameWidth"
                            @checkTheRouter="changeRouter"></menu-module>
             </div>
           </td>
@@ -25,10 +28,12 @@
             <div>
               <menu-module :module-name="name_0"
                            :module-icon="icon_0"
-                           module-width="260px"
-                           module-height="170px"
-                           module-icon-width="200"
-                           module-name-width="200"
+                           :module-width="moduleWidth"
+                           :module-height="moduleHeight"
+                           :empty-width="emptyWidth"
+                           :empty-height="emptyHeight"
+                           :module-icon-width="iconWidth"
+                           :module-name-width="nameWidth"
                            @checkTheRouter="changeRouter"></menu-module>
             </div>
           </td>
@@ -38,14 +43,16 @@
         </tr>
 
         <tr class="the-second-row">
-          <td v-for="(item, index) in secondModuleList" :key="" height="230">
+          <td v-for="(item, index) in secondModuleList" :key="" :height="menuHeight">
             <div>
               <menu-module :module-name="item.name"
                            :module-icon="item.icon"
-                           module-width="260px"
-                           module-height="170px"
-                           module-icon-width="200"
-                           module-name-width="200"
+                           :module-width="moduleWidth"
+                           :module-height="moduleHeight"
+                           :empty-width="emptyWidth"
+                           :empty-height="emptyHeight"
+                           :module-icon-width="iconWidth"
+                           :module-name-width="nameWidth"
                            @checkTheRouter="changeRouter"></menu-module>
             </div>
           </td>
@@ -53,10 +60,12 @@
             <div>
               <menu-module module-name="moduleTest"
                            module-icon="setting"
-                           module-width="260px"
-                           module-height="170px"
-                           module-icon-width="200"
-                           module-name-width="200"
+                           :module-width="moduleWidth"
+                           :module-height="moduleHeight"
+                           :empty-width="emptyWidth"
+                           :empty-height="emptyHeight"
+                           :module-icon-width="iconWidth"
+                           :module-name-width="nameWidth"
                            @checkTheRouter="moduleTest"></menu-module>
             </div>
           </td>
@@ -67,10 +76,12 @@
             <div>
               <menu-module :module-name="item.name"
                            :module-icon="item.icon"
-                           module-width="260px"
-                           module-height="170px"
-                           module-icon-width="200"
-                           module-name-width="200"
+                           :module-width="moduleWidth"
+                           :module-height="moduleHeight"
+                           :empty-width="emptyWidth"
+                           :empty-height="emptyHeight"
+                           :module-icon-width="iconWidth"
+                           :module-name-width="nameWidth"
                            @checkTheRouter="changeRouter"></menu-module>
             </div>
           </td>
@@ -88,6 +99,19 @@
     components: {MenuModule},
     data() {
       return {
+        // 表格头部
+        // table_header: {},
+        fontSize: '',
+        tableHeaderWidth: '',
+        tableHeaderHeight: '',
+        menuHeight: '',
+        moduleWidth: '',
+        moduleHeight: '',
+        emptyWidth: '',
+        emptyHeight: '',
+        iconWidth: '',
+        nameWidth: '',
+
         name_0: '视频回放',
         icon_0: 'caret-right',
 
@@ -112,6 +136,23 @@
           {name: '抓拍浏览', icon: 'camera'}
         ]
       }
+    },
+
+    mounted () {
+      const width = window.screen.width;
+      const height = window.screen.height;
+      // console.log('current width:' + width,'current height:' + height);
+      this.fontSize = width/73 + 'px';
+      this.tableHeaderWidth = parseInt(width/6).toString();
+      this.tableHeaderHeight = parseInt(height/11).toString();
+      this.menuHeight = parseInt(height/5) + 'px';
+      this.moduleWidth = width/7 + 'px';
+      this.moduleHeight = width/12 + 'px';
+      const that = this;
+      this.emptyWidth = parseInt(parseInt(that.moduleWidth)/5) + 'px';
+      this.emptyHeight = parseInt(parseInt(that.moduleHeight)/5) + 'px';
+      this.iconWidth = width/110;
+      this.nameWidth = width/16;
     },
 
     methods: {
@@ -197,13 +238,13 @@
     background-size: 100% 100%;
   }
 
-  .main-menu-content {
+  /*.main-menu-content {
     margin: 10px 0 0 60px;
     font-size: 30px;
-  }
+  }*/
 
   .table-header {
-    font-size: 22px;
+    /*font-size: 22px;*/
   }
 
   .table-header-title {

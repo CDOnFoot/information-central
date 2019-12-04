@@ -1,7 +1,7 @@
 <template>
   <div class="current-alarm">
     <div class="search-condition">
-      <a-form layout="inline" :form="form" @submit="searchForAlarm()">
+      <a-form layout="inline" :form="form" @submit="searchForAlarm">
         <a-form-item label="报警名称：">
           <a-input placeholder="报警名称" v-model="condition.alarmName"></a-input>
         </a-form-item>
@@ -198,6 +198,7 @@
             ],
             tableList: [],
             // 存在数据量比较大的情况，所以使用一个容器来缓存请求获取的列表，每次改变页码等其他操作均使用此容器
+            // 存在有很多条相同报警名称的数据，使用该状态来缓存获取到条件查询的 list ，在翻页时调用不同的方法
             tableListContainer: [],
             condition: {
               alarmName: '',
@@ -218,7 +219,6 @@
       methods: {
         initTable () {
           const that = this;
-          // 初始请求页码默认为 1
           this.pagination.current = 1;
           this.loading = true;
           // 使用当前绑定状态进行校验
@@ -226,28 +226,26 @@
             if (!err) {
               // 初始列表时查询所有数据，以显示全部的页码
               that.$http.get(that.$api.getAlarmForPagination).then(res => {
+                // console.log(res);
                 if (res.status === 200) {
-                  let table = [];
+                  // let table = [];
                   let tableContainer = res.data.value;
                   const length = that.pagination.defaultPageSize;
                   that.pagination.total = tableContainer.length;
-                  tableContainer.forEach((value, index) => {
+                  /*tableContainer.forEach((value, index) => {
                     value.AlarmDateTime = that.$common.timestampToTime(value.AlarmDateTime);
                     value.AlarmStatus = value.AlarmStatus === '"Unprocessed"' ? '处理中' : '未处理';
-                    // 只获取一个 Name 字段
-                    // value.AlarmLevel = value.AlarmDescription.split('-')[0];
+                    // 只获取一个 Name 字段属性
                     value.AlarmLevel = value.AlarmLevel.Name;
-                    if (that.condition.alarmName !== '' || that.condition.alarmLevel !== '') {
-                      if (value.AlarmName === that.condition.alarmName || value.AlarmDescription === that.condition.alarmLevel) {
-                        // that.tableList.push(value);
-                        table.splice(0, 1, value);
-                        that.tableList = table;
-                      }
-                    } else {
-                      that.tableList.push(value);
-                    }
-                  })
-                } else {
+                    that.tableList.push(value);
+                  })*/
+                  for (let i=0;i<length;i++) {
+                    tableContainer[i].AlarmDateTime = that.$common.timestampToTime(tableContainer[i].AlarmDateTime);
+                    tableContainer[i].AlarmStatus = tableContainer[i].AlarmStatus === '"Unprocessed"' ? '处理中' : '未处理';
+                    tableContainer[i].AlarmLevel = tableContainer[i].AlarmLevel.Name;
+                    that.tableList.push(tableContainer[i]);
+                  }
+                } /*else {
                   that.$info({
                     title: '错误',
                     content: '发生了一些问题：' + res,
@@ -255,25 +253,28 @@
                       that.loading = false;
                     },
                   });
-                }
+                }*/
                 this.loading = false;
               })
             }
           })
         },
 
-        searchForAlarm () {
+        searchForAlarm (e) {
           const that = this;
+          // e.preventDefault();
           this.tableList = [];
+          this.tableListContainer = [];
+          // 每次查询回到第一页
           this.pagination.current = 1;
           this.loading = true;
           // 使用当前绑定状态进行校验
           this.$http.get(that.$api.getAlarmForPagination).then(res => {
             if (res.status === 200) {
-              let index = {};
+              // let index = {};
               let table = [];
               let tableContainer = res.data.value;
-              const length = that.pagination.defaultPageSize;
+              // const length = that.pagination.defaultPageSize;
               // that.pagination.total = tableContainer.length;
               tableContainer.forEach((value, index) => {
                 value.AlarmDateTime = that.$common.timestampToTime(value.AlarmDateTime);
@@ -282,15 +283,18 @@
                 value.AlarmLevel = value.AlarmLevel.Name;
                 if (that.condition.alarmName !== '' || that.condition.alarmLevel !== '') {
                   if (value.AlarmName === that.condition.alarmName || value.AlarmLevel.Name === that.condition.alarmLevel) {
-                    // that.tableList.push(value);
-                    table.splice(0, 1, value);
-                    that.tableList = table;
+                    that.tableList.push(value);
+                    // table.splice(0, 1, value);
+                    table.push(value);
+                    // 额外的缓存
+                    that.tableListContainer = table;
                   }
                 } else {
                   that.tableList.push(value);
                 }
-              })
-            } else {
+              });
+              that.pagination.total = that.tableList.length;
+            } /*else {
               that.$info({
                 title: '错误',
                 content: '发生了一些问题：' + res,
@@ -298,41 +302,54 @@
                   that.loading = false;
                 },
               });
-            }
+            }*/
             this.loading = false;
           })
         },
 
         // 页码改变时的回调
         changePage (page) {
+          const that = this;
           this.loading = true;
+          if (that.condition.alarmName !== '' || that.condition.alarmLevel !== '') {
+            this.handlePageForCondition(page);
+          }
           this.callbackPageChange(page);
         },
         callbackPageChange (page) {
           const that = this;
+          this.tableList = [];
           this.pagination.current = page;
           const pageSize = this.pagination.defaultPageSize;
           const length = this.tableList.length;
-          if (length > 0) {
+          /*if (length > 0) {
             for (let i=0;i<=length;i++) {
               this.tableList.pop();
             }
-          }
-          this.$http.get(that.$api.getAlarm)
+          }*/
+          this.$http.get(that.$api.getAlarmForPagination + '&$top=' + that.pagination.defaultPageSize + '&$skip=' + (page - 1) * that.pagination.defaultPageSize)
             .then(res => {
               if (res.status === 200) {
-                let index;
+                // let index;
+                let table = [];
                 const tableContainer = res.data.value;
                 // const length = that.pagination.defaultPageSize;
                 // that.pagination.total = tableContainer.length;
                 that.tableList = res.data.value;
-                for (let i=0;i<=length;i++) {
+                /*for (let i=0;i<=length;i++) {
                   let index = i + ((page - 1) * pageSize);
                   tableContainer[index].AlarmDateTime = that.$common.timestampToTime(tableContainer[index].AlarmDateTime);
                   tableContainer[index].AlarmStatus = tableContainer[index].AlarmStatus === "Unprocessed" ? '未处理' : '处理中'
                   that.tableList.push(tableContainer[index]);
-                }
-              } else {
+                }*/
+                tableContainer.forEach((value, index) => {
+                  value.AlarmDateTime = that.$common.timestampToTime(value.AlarmDateTime);
+                  value.AlarmStatus = value.AlarmStatus === "Unprocessed" ? '未处理' : '处理中';
+                  value.AlarmLevel = value.AlarmLevel.Name;
+                  table.push(value);
+                });
+                that.tableList = table;
+              } /*else {
                 that.$info({
                   title: '错误',
                   content: '发生了一些问题：' + res.status,
@@ -340,9 +357,40 @@
                     that.loading = false;
                   },
                 });
-              }
+              }*/
               this.loading = false;
             })
+        },
+
+        /**
+         * @description 存在条件查询有超出一页数据的情况
+         */
+        handlePageForCondition (page) {
+          // 指向当前 Vue component
+          const that = this;
+          // this.tableList = [];
+          let index_page = (page - 1) * that.pagination.defaultPageSize;
+          this.$http.get(that.$api.getAlarmForPagination).then(res => {
+            if (res.status === 200) {
+              let table = [], table_0 = [];
+              let tableContainer = res.data.value;
+              // const length = that.pagination.defaultPageSize;
+              // that.pagination.total = tableContainer.length;
+              tableContainer.forEach((value, index) => {
+                value.AlarmDateTime = that.$common.timestampToTime(value.AlarmDateTime);
+                value.AlarmStatus = value.AlarmStatus === 'Unprocessed' ? '未处理' : '处理中';
+                // 只获取一个 Name 字段
+                value.AlarmLevel = value.AlarmLevel.Name;
+                if (value.AlarmName === that.condition.alarmName || value.AlarmLevel.Name === that.condition.alarmLevel) {
+                  // that.tableList.push(value);
+                  table.push(value);
+                }
+              });
+
+              that.tableList = table;
+            }
+          });
+          this.loading = false;
         },
 
         exportAlarm () {},
@@ -352,7 +400,6 @@
         },
 
         sureAlarm (row) {
-          // deep copy the current data.
           this.drawerForm = Object.assign({}, row);
           this.isShowDrawer = true;
         },
@@ -363,7 +410,6 @@
         submitRemarks (callback) {
           const remarks = this.remarks;
           console.log('current input remarks:' + remarks);
-
           /*this.$http.post('', {}).then(() => {
             this.isShowDrawer = false;
           })*/

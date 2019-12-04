@@ -458,10 +458,14 @@
                     if (value.Name === that.searchName) {
                       // that.tableList.push(value);
                       tableContainer.splice(0, 1, value);
+                      // 改变当前页码总数，以防误点调用了页码改变的 callback
+                      that.pagination.total = tableContainer.length;
                       that.tableList = tableContainer;
                     }
                   } else {
                     that.tableList.push(value);
+                    // 多次查询改变数据总数
+                    that.pagination.total = that.tableList.length;
                   }
                   // that.tableList = table;
                   // this.handleTableList(table)
@@ -496,35 +500,49 @@
           }*/
         },
 
-        pageChange (page, pageSize) {
+        /*pageChange (page, pageSize) {
           // this.pagination.current = page;
           // 每当页码改变时需要重新渲染列表数据
           this.handleTableChange(page);
-        },
+        },*/
 
         handleTableChange (page) {
           // 请求前需要将 tableList 清空
           const that = this;
           const pageSize = this.pagination.defaultPageSize;
+          const length = this.tableList.length;
+          for (let i=0;i<=length;i++) {
+            that.tableList.pop();
+          }
           this.loading = true;
           this.pagination.current = page;
-          this.$http.get(that.$api.getUsers)
+          /*this.$http.get(that.$api.getUsers + '?$skip=' + page * that.pagination.defaultPageSize + '&$top=' + that.pagination.defaultPageSize).then(res => {
+            console.log(res)
+          })*/
+          this.$http.get(that.$api.getUsers + '?$skip=' + (page - 1) * that.pagination.defaultPageSize + '&$top=' + that.pagination.defaultPageSize)
             .then((response) => {
               try {
                 let index;
                 let tableContainer = [];
                 const table = response.data.value;
-                for (let i=0;i<parseInt(pageSize);i++) {
+                /*for (let i=0;i<parseInt(pageSize);i++) {
                   // 以当前页码设置渲染列表数据的索引
-                  index = (page - 1) * parseInt(pageSize) + i;
-                  table[index].Created = that.$common.timestampToTime(table[index].Created);
-                  table[index].Updated = that.$common.timestampToTime(table[index].Updated);
-                  table[index].Expired = that.$common.timestampToTime(table[index].Expired);
-                  table[index].Status = table[index].Status === 'Enable' ? '启用' : '未启用';
-                  tableContainer.push(table[index]);
+                  // index = (page - 1) * parseInt(pageSize) + i;
+                  table[i].Created = that.$common.timestampToTime(table[i].Created);
+                  table[i].Updated = that.$common.timestampToTime(table[i].Updated);
+                  table[i].Expired = that.$common.timestampToTime(table[i].Expired);
+                  table[i].Status = table[i].Status === 'Enable' ? '启用' : '未启用';
+                  tableContainer.push(table[i]);
                   // console.log('current users data:');
                   // console.log(table[index]);
-                }
+                }*/
+                table.forEach((value, index) => {
+                  value.Created = that.$common.timestampToTime(value.Created);
+                  value.Updated = that.$common.timestampToTime(value.Updated);
+                  value.Expired = that.$common.timestampToTime(value.Expired);
+                  value.Status = value.Status === 'Enable' ? '启用' : '未启用';
+                  tableContainer.push(value);
+                });
                 that.tableList = tableContainer;
               }catch (e) {
                 console.log('there are some data have "null":' + e);
@@ -619,7 +637,8 @@
               PhoneNumber: that.modalForm.PhoneNumber,
             };
             // 调用添加的 API
-            this.$http.post(that.$api.addUsers, param).then(res => {
+            this.$http.post(that.$api.addUsers, param)
+              .then(res => {
               // console.log(res);
               if (res.data === "success") {
                 that.$info({
@@ -665,7 +684,7 @@
                     that.isShowModal = false;
                   },
                 });
-              } else {
+              } /*else {
                 that.$info({
                   title: '错误',
                   content: '发生了一些错误：' + res.data.Message,
@@ -673,7 +692,7 @@
                     that.isShowModal = false;
                   },
                 });
-              }
+              }*/
               that.confirmLoading = false;
             })
           }

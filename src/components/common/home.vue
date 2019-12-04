@@ -127,7 +127,7 @@
         menuId:'',
         timeStamp: this.$common.timestampToTime(new Date()),
         timeInterval:'',
-        setFlag:false,
+        setFlag:false, // 是否显示确认编辑信息按钮
         title:'选择模版内容',
         visible: false,
         confirmLoading: false,
@@ -162,8 +162,8 @@
       let self = this;
       var routerVal = to.matched[1].path;
       // 增加一个新的跳转，用于 debug
-      next();
-      console.log('current router to: ' + routerVal);
+      // next();
+      // console.log('current router to: ' + routerVal);
       new Promise((resolve,reject)=>{
         self.menuList.some((item,index)=>{
           if('/home/'+item.key === routerVal){
@@ -183,9 +183,10 @@
         let paramList = new FormData();
         paramList.append('userNum', '18324');
         paramList.append('userNum', 'CD01');
+        // 获取模板 list 的请求使用 application/x-www-form-urlencoded 格式
         self.$http.postList(self.$api.getUserVisualization, paramList).then(res =>{
-          console.log('automated layout data:');
-          console.log(res);
+          // console.log('automated layout data:');
+          // console.log(res);
           //调取数据成功
           if(res.data){
             if (res.data.code === "0") {
@@ -249,11 +250,14 @@
          * @exception 该 API 需要使用 'x-www-form-urlencoded' 的请求格式
          */
         let param = new FormData();
+        // param - 0: 用户 ID
         param.append('userNum', '18324');
+        // param - 1: 选取的哪个菜单的 ID
         param.append('menuNum', 'CD01');
-        this.$http.postList(self.$api.getUserVisualization, param).then(res =>{
-          console.log('布局模块列表：');
-          console.log(res);
+        this.$http.postList(self.$api.getUserVisualization, param)
+          .then(res =>{
+          // console.log('布局模块列表：');
+          // console.log(res);
           //调取数据成功
           if(res.data){
             if (res.data.code === "0") {
@@ -267,8 +271,8 @@
         });
       },
       visualizationInfo:function(data){
-        console.log(' -------- current getting data:')
-        console.log(data)
+        // console.log(' -------- current getting data:')
+        // console.log(data)
         setTimeout(()=>{
           this.loadFlag= false;
         },1000);
@@ -294,7 +298,7 @@
           cancelText: '取消',
           onOk() {
             /**
-             * @description 不再发起 http 请求
+             * @description 不再发起 http 请求，只需要清除 token
              */
             self.$common.delCookie('token');
             self.$message.info("注销成功.");

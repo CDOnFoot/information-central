@@ -142,7 +142,8 @@
       const width = window.screen.width;
       const height = window.screen.height;
       // console.log('current width:' + width,'current height:' + height);
-      this.fontSize = width/73 + 'px';
+      // this.fontSize = width/73 + 'px';
+      this.fontSize = '2.6vh';
       this.tableHeaderWidth = parseInt(width/6).toString();
       this.tableHeaderHeight = parseInt(height/11).toString();
       this.menuHeight = parseInt(height/5) + 'px';
@@ -227,7 +228,7 @@
 
   .main-menu-background {
     width: 90%;
-    height: 860px;
+    min-height: 80vh;
     margin: 0 auto;
     padding: 35px 0 0 20px;
     /*justify-content: center;*/

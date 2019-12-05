@@ -46,12 +46,13 @@
             searchAlarmName: '',
             searchAlarmLevel: '',
             loading: false,
+            tableListContainer: [],
             pagination: {
               current: 1,
               defaultCurrent: 1,
               defaultPageSize: 20,
               total: 0,
-              onchange: (current) => {
+              onChange: (current) => {
                 this.handlePageChange(current);
               }
             },
@@ -61,15 +62,15 @@
                 dataIndex: 'AlarmName',
                 align: 'center',
                 // sorter: true,
-                width: '10%',
+                width: '16%',
                 // scopedSlots: { customRender: 'name' }
               },
-              {
+              /*{
                 title: '报警级别',
                 dataIndex: 'AlarmLevel',
                 align: 'center',
                 width: '10%'
-              },
+              },*/
               {
                 title: '报警类型',
                 dataIndex: 'AlarmType',
@@ -80,7 +81,7 @@
                 title: '报警详情',
                 dataIndex: 'AlarmDescription',
                 align: 'center',
-                width: '10%'
+                width: '18%'
               },
               {
                 title: '报警时间',
@@ -133,67 +134,126 @@
           initTableList () {
             const that = this;
             this.loading = true;
-            // 不需要再判断返回码了，全局配置已经配置了
-            this.$http.get(that.$api.getAlarmForPagination).then(res => {
-              let table = [];
-              let tableContainer = res.data.value;
-              // const length = that.pagination.defaultPageSize;
-              that.pagination.total = tableContainer.length;
-              tableContainer.forEach((value, index) => {
-                value.AlarmDateTime = that.$common.timestampToTime(value.AlarmDateTime);
-                value.AlarmStatus = value.AlarmStatus === '"Unprocessed"' ? '处理中' : '未处理';
-                value.AlarmLevel = value.AlarmLevel.Name;
-                table.push(value);
-              });
-              that.tableList = table;
+            this.pagination.current = 1;
+            try {
+              this.$http.get(that.$api.getAlarmHistory).then(res => {
+                let table = [];
+                let tableContainer = res.data.value;
+                // const length = that.pagination.defaultPageSize;
+                that.pagination.total = tableContainer.length;
+                tableContainer.forEach((value, index) => {
+                  value.AlarmDateTime = that.$common.timestampToTime(value.AlarmDateTime);
+                  value.AlarmStatus = value.AlarmStatus === '"Unprocessed"' ? '处理中' : '未处理';
+                  // value.AlarmLevel = value.AlarmLevel.Name;
+                  table.push(value);
+                });
+                that.tableList = table;
+                that.loading = false;
+              })
+            } catch (e) {
+              console.log(e);
               that.loading = false;
-            })
+            }
           },
 
         searchForAlarmHistory () {
           const that = this;
-          this.loading = true;
+          // e.preventDefault();
+          this.tableList = [];
+          this.tableListContainer = [];
+          // 每次查询回到第一页
           this.pagination.current = 1;
-          if (this.tableList.length !== 0) {
-            for (let i=0;i<=this.tableList.length;i++) {
-              this.tableList.pop();
-            }
-          }
-          // 不需要再判断返回码了，全局配置已经配置了
-          this.$http.get(that.$api.getAlarmForPagination).then(res => {
-            let table = [];
-            let tableContainer = res.data.value;
-            // const length = that.pagination.defaultPageSize;
-            // that.pagination.total = tableContainer.length;
-            tableContainer.forEach((value, index) => {
-              value.AlarmDateTime = that.$common.timestampToTime(value.AlarmDateTime);
-              value.AlarmStatus = value.AlarmStatus === '"Unprocessed"' ? '处理中' : '未处理';
-              value.AlarmLevel = value.AlarmLevel.Name;
-              if (that.searchAlarmName !== '' || that.searchAlarmLevel !== '') {
-                if (that.searchAlarmName === value.AlarmName || that.searchAlarmLevel === value.AlarmLevel) {
-                  table.push(value);
+          this.loading = true;
+          // 使用当前绑定状态进行校验
+          this.$http.get(that.$api.getAlarmHistory).then(res => {
+            if (res.status === 200) {
+              // let index = {};
+              let table = [];
+              let tableContainer = res.data.value;
+              // const length = that.pagination.defaultPageSize;
+              // that.pagination.total = tableContainer.length;
+              tableContainer.forEach((value, index) => {
+                value.AlarmDateTime = that.$common.timestampToTime(value.AlarmDateTime);
+                value.AlarmStatus = value.AlarmStatus === 'Unprocessed' ? '未处理' : '处理中';
+                // 历史接口暂时没有报警级别
+                // value.AlarmLevel = value.AlarmLevel.Name;
+                if (that.searchAlarmName !== '' || that.searchAlarmLevel !== '') {
+                  if (value.AlarmName === that.searchAlarmName/* || value.AlarmLevel.Name === that.searchAlarmLevel*/) {
+                    that.tableList.push(value);
+                    table.push(value);
+                    // 额外的缓存
+                    that.tableListContainer = table;
+                  }
+                } else {
+                  that.tableList.push(value);
                 }
-              }
-              table.push(value);
-            });
-            that.tableList = table;
-            that.pagination.total = that.tableList.length;
-            that.loading = false;
+              });
+              that.pagination.total = that.tableList.length;
+            }
+            this.loading = false;
           })
         },
 
         exportAlarmHistory () {},
 
         handlePageChange (page) {
-            // 页容量、数据总数不再改变
           const that = this;
           this.loading = true;
-          // 每次页码的改变必须改变当前页码的属性
+          if (that.searchAlarmLevel !== '' || that.searchAlarmName !== '') {
+            this.handlePageForCondition(page);
+          }
+          this.callbackPageChange(page);
+        },
+        handlePageForCondition (page) {
+          // 指向当前 Vue component
+          const that = this;
+          // this.tableList = [];
+          let index_page = (page - 1) * that.pagination.defaultPageSize;
+          this.$http.get(that.$api.getAlarmHistory).then(res => {
+            if (res.status === 200) {
+              let table = [], table_0 = [];
+              let tableContainer = res.data.value;
+              // const length = that.pagination.defaultPageSize;
+              // that.pagination.total = tableContainer.length;
+              tableContainer.forEach((value, index) => {
+                value.AlarmDateTime = that.$common.timestampToTime(value.AlarmDateTime);
+                value.AlarmStatus = value.AlarmStatus === 'Unprocessed' ? '未处理' : '处理中';
+                // 只获取一个 Name 字段
+                // value.AlarmLevel = value.AlarmLevel.Name;
+                if (value.AlarmName === that.searchAlarmName/* || value.AlarmLevel.Name === that.searchAlarmLevel*/) {
+                  // that.tableList.push(value);
+                  table.push(value);
+                }
+              });
+
+              that.tableList = table;
+            }
+          });
+          this.loading = false;
+        },
+        callbackPageChange (page) {
+          const that = this;
+          this.loading = true;
+          this.tableList = [];
           this.pagination.current = page;
-          this.$http.get(that.$api.getAlarm).then(res => {
-            // console.log('current data:')
-            // console.log(res)
-          })
+          const pageSize = this.pagination.defaultPageSize;
+          const length = this.tableList.length;
+          this.$http.get(that.$api.getAlarmHistory + '&$top=' + that.pagination.defaultPageSize + '&$skip=' + (page - 1) * that.pagination.defaultPageSize)
+            .then(res => {
+              if (res.status === 200) {
+                let table = [];
+                const tableContainer = res.data.value;
+                that.tableList = res.data.value;
+                tableContainer.forEach((value, index) => {
+                  value.AlarmDateTime = that.$common.timestampToTime(value.AlarmDateTime);
+                  value.AlarmStatus = value.AlarmStatus === "Unprocessed" ? '未处理' : '处理中';
+                  // value.AlarmLevel = value.AlarmLevel.Name;
+                  table.push(value);
+                });
+                that.tableList = table;
+              }
+              this.loading = false;
+            })
         }
       }
     }

@@ -226,7 +226,6 @@
             if (!err) {
               // 初始列表时查询所有数据，以显示全部的页码
               that.$http.get(that.$api.getAlarmForPagination).then(res => {
-                // console.log(res);
                 if (res.status === 200) {
                   // let table = [];
                   let tableContainer = res.data.value;
@@ -245,15 +244,7 @@
                     tableContainer[i].AlarmLevel = tableContainer[i].AlarmLevel.Name;
                     that.tableList.push(tableContainer[i]);
                   }
-                } /*else {
-                  that.$info({
-                    title: '错误',
-                    content: '发生了一些问题：' + res,
-                    onOk() {
-                      that.loading = false;
-                    },
-                  });
-                }*/
+                }
                 this.loading = false;
               })
             }
@@ -294,15 +285,7 @@
                 }
               });
               that.pagination.total = that.tableList.length;
-            } /*else {
-              that.$info({
-                title: '错误',
-                content: '发生了一些问题：' + res,
-                onOk() {
-                  that.loading = false;
-                },
-              });
-            }*/
+            }
             this.loading = false;
           })
         },
@@ -349,15 +332,7 @@
                   table.push(value);
                 });
                 that.tableList = table;
-              } /*else {
-                that.$info({
-                  title: '错误',
-                  content: '发生了一些问题：' + res.status,
-                  onOk() {
-                    that.loading = false;
-                  },
-                });
-              }*/
+              }
               this.loading = false;
             })
         },
@@ -367,6 +342,7 @@
          */
         handlePageForCondition (page) {
           // 指向当前 Vue component
+          this.loading = true;
           const that = this;
           // this.tableList = [];
           let index_page = (page - 1) * that.pagination.defaultPageSize;

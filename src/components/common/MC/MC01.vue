@@ -6,7 +6,7 @@
       <div class="borde">{{mcTitle}}</div>
       <div :id="mcId" class="main-id">
         <div class="none-data" id="chartDemo">
-          <!--暂无信息-->
+          <!-- 暂无信息 -->
         </div>
       </div>
     </div>

@@ -178,7 +178,11 @@
                 // 历史接口暂时没有报警级别
                 // value.AlarmLevel = value.AlarmLevel.Name;
                 if (that.searchAlarmName !== '' || that.searchAlarmLevel !== '') {
-                  if (value.AlarmName === that.searchAlarmName/* || value.AlarmLevel.Name === that.searchAlarmLevel*/) {
+                  if (
+                    /*value.AlarmName === that.searchAlarmName*/
+                  /* || value.AlarmLevel.Name === that.searchAlarmLevel*/
+                    value.AlarmName.includes(that.searchAlarmName) /*|| value.AlarmLevel.Name.includes(that.searchAlarmLevel)*/
+                  ) {
                     that.tableList.push(value);
                     table.push(value);
                     // 额外的缓存
@@ -220,7 +224,11 @@
                 value.AlarmStatus = value.AlarmStatus === 'Unprocessed' ? '未处理' : '处理中';
                 // 只获取一个 Name 字段
                 // value.AlarmLevel = value.AlarmLevel.Name;
-                if (value.AlarmName === that.searchAlarmName/* || value.AlarmLevel.Name === that.searchAlarmLevel*/) {
+                if (
+                  /*value.AlarmName === that.searchAlarmName*/
+                /* || value.AlarmLevel.Name === that.searchAlarmLevel*/
+                  value.AlarmName.includes(that.searchAlarmName) /*|| value.AlarmLevel.Name.includes(that.searchAlarmLevel)*/
+                ) {
                   // that.tableList.push(value);
                   table.push(value);
                 }

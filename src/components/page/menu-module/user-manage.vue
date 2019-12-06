@@ -41,7 +41,7 @@
                   </a-select>
                 </a-form-item>
                 <a-form-item label="创建时间" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }">
-                  <a-input v-model="modalForm.Created" :disabled="enableEdit"></a-input>
+                  <a-input v-model="modalForm.Created" :disabled="enableEditTime"></a-input>
                 </a-form-item>
               </div>
               <div class="modal-form-two">
@@ -55,7 +55,7 @@
                   <a-input v-model="modalForm.Expired" :disabled="enableEdit"></a-input>
                 </a-form-item>
                 <a-form-item label="更新时间" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }">
-                  <a-input v-model="modalForm.Updated" :disabled="enableEdit"></a-input>
+                  <a-input v-model="modalForm.Updated" :disabled="enableEditTime"></a-input>
                 </a-form-item>
               </div>
             </div>
@@ -163,6 +163,8 @@
             column,
             expandAllRows: true,
             enableEdit: false,
+            // 创建时间和更新时间永远不能更改
+            enableEditTime: true,
             // 分页信息
             pagination: {
               current: 0,
@@ -189,7 +191,8 @@
               Expired: '', // 过期时间 - 如果不填写服务会创建
               Updated: '' // 服务创建
             },
-            tableList: []
+            tableList: [],
+            tableContainer: [],
             // 模拟数据
             /*tableList: [
               {
@@ -428,7 +431,38 @@
          */
         changePage (page) {
           // 每当页码改变时需要重新渲染列表数据
+          if (this.searchName !== '') {
+            this.handleConditionSearch(page);
+          }
           this.handleTableChange(page);
+        },
+
+        handleConditionSearch (page) {
+          const that = this;
+          const length = this.tableList.length;
+          for (let i=0;i<=length;i++) {
+            this.tableList.pop();
+          }
+          // this.tableList = [];
+          this.loading = true;
+          // 使用当前绑定状态进行校验
+          this.$http.get(that.$api.getUsers).then(res => {
+            let tableContainer = [];
+            const table = res.data.value;
+            table.forEach((value, index) => {
+              value.Created = this.$common.timestampToTime(value.Created);
+              value.Updated = this.$common.timestampToTime(value.Updated);
+              value.Expired = this.$common.timestampToTime(value.Expired);
+              value.Status = value.Status === 'Enable' ? '启用' : '停用';
+              if (value.Name.includes(that.searchName)) {
+                tableContainer.push(value);
+              }
+            });
+            that.tableList = tableContainer;
+            // 不清除搜索条件用以比对搜索结果是否正确
+            // that.searchName = '';
+            that.loading = false;
+          })
         },
 
         searchFor (e) {
@@ -442,10 +476,6 @@
           this.form.validateFields((err, values) => {
             if (!err) {
               this.$http.get(that.$api.getUsers).then(res => {
-                // 直接填充测试
-                // this.tableList = res.data.value;
-                // this.pagination.total = this.tableList.length;
-
                 let tableContainer = [];
                 // that.pagination.total = res.data.value.length;
                 const table = res.data.value;
@@ -455,21 +485,20 @@
                   value.Expired = this.$common.timestampToTime(value.Expired);
                   value.Status = value.Status === 'Enable' ? '启用' : '停用';
                   if (that.searchName !== '') {
-                    if (value.Name === that.searchName) {
+                    if (value.Name.includes(that.searchName)) {
                       // that.tableList.push(value);
-                      tableContainer.splice(0, 1, value);
-                      // 改变当前页码总数，以防误点调用了页码改变的 callback
-                      that.pagination.total = tableContainer.length;
-                      that.tableList = tableContainer;
+                      // tableContainer.splice(0, 1, value);
+                      tableContainer.push(value);
                     }
                   } else {
                     that.tableList.push(value);
-                    // 多次查询改变数据总数
-                    that.pagination.total = that.tableList.length;
                   }
                   // that.tableList = table;
-                  // this.handleTableList(table)
                 });
+                that.tableList = tableContainer;
+                // 缓存数据，用于翻页
+                that.tableContainer = tableContainer;
+                that.pagination.total = that.tableList.length;
                 // 不清除搜索条件用以比对搜索结果是否正确
                 // that.searchName = '';
                 that.loading = false;
@@ -533,8 +562,6 @@
                   table[i].Expired = that.$common.timestampToTime(table[i].Expired);
                   table[i].Status = table[i].Status === 'Enable' ? '启用' : '未启用';
                   tableContainer.push(table[i]);
-                  // console.log('current users data:');
-                  // console.log(table[index]);
                 }*/
                 table.forEach((value, index) => {
                   value.Created = that.$common.timestampToTime(value.Created);

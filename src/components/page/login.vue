@@ -95,8 +95,8 @@ import sha256 from "js-sha256";
                * @description server 暂未处理 sha256 加密算法，直接使用 JSON 字符串
                * @type {string}
                */
-              // password:sha256(self.userPassword)
-              password: self.userPassword
+              password:sha256(self.userPassword)
+              // password: self.userPassword
             };
             // self.$common.setCookie('dvptToken','1',24 * 60 * 30);
             // self.$common.setCookie('dvptId','1',24 * 60 * 30);

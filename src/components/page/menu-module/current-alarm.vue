@@ -262,6 +262,7 @@
           // 使用当前绑定状态进行校验
           this.$http.get(that.$api.getAlarmForPagination).then(res => {
             if (res.status === 200) {
+              console.log(res)
               // let index = {};
               let table = [];
               let tableContainer = res.data.value;
@@ -273,7 +274,9 @@
                 // 只获取一个 Name 字段
                 value.AlarmLevel = value.AlarmLevel.Name;
                 if (that.condition.alarmName !== '' || that.condition.alarmLevel !== '') {
-                  if (value.AlarmName === that.condition.alarmName || value.AlarmLevel.Name === that.condition.alarmLevel) {
+                  if (/*value.AlarmName === that.condition.alarmName || value.AlarmLevel.Name === that.condition.alarmLevel*/
+                    value.AlarmName.includes(that.condition.alarmName) || value.AlarmLevel.Name.includes(that.condition.alarmLevel)
+                  ) {
                     that.tableList.push(value);
                     // table.splice(0, 1, value);
                     table.push(value);
@@ -357,7 +360,9 @@
                 value.AlarmStatus = value.AlarmStatus === 'Unprocessed' ? '未处理' : '处理中';
                 // 只获取一个 Name 字段
                 value.AlarmLevel = value.AlarmLevel.Name;
-                if (value.AlarmName === that.condition.alarmName || value.AlarmLevel.Name === that.condition.alarmLevel) {
+                if (/*value.AlarmName === that.condition.alarmName || value.AlarmLevel.Name === that.condition.alarmLevel*/
+                  value.AlarmName.includes(that.condition.alarmName) || value.AlarmLevel.Name.includes(that.condition.alarmLevel)
+                ) {
                   // that.tableList.push(value);
                   table.push(value);
                 }

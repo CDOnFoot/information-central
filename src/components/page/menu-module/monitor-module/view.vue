@@ -1,10 +1,12 @@
 <template>
-  <div class="card-user-manage"></div>
+  <div class="view">
+
+  </div>
 </template>
 
 <script>
   export default {
-    name: "card-user-manage"
+    name: "view"
   };
 
 </script>

@@ -40,6 +40,18 @@ export default {
 
   layoutRestoreDefaults: '/visualizationLayout/layoutRestoreDefaults',   //恢复默认自动化布局信息
 
+  monitorEquipments: '/config/Equipments',
+
+  getCards: '/ACS/Cardholders?$expand=role,department,badges($filter=Enable eq true)',
+
+  addCardholder: '/ACS/Cardholders?$expand=role,department,badges($filter=Enable eq true)',
+
+  addCard: '/ACS/badges',
+
+  updateCard: '/ACS/badges',
+
+  deleteCard: '',
+
   getTransactions: '/ACS/Transactions',
 
   getCardholder: '/ACS/Badges?$expand=Cardholder&$filter=encoded eq ',

@@ -44,7 +44,6 @@ export default {
 
   monitorEquipments: '/config/Equipments',
 
-
   getCards: '/ACS/Cardholders?$expand=role,department,badges($filter=Enable eq true)',
 
   addCardholder: '/ACS/Cardholders?$expand=role,department,badges($filter=Enable eq true)',

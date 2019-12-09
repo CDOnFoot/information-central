@@ -6,7 +6,7 @@
       <div class="borde">{{mcTitle}}</div>
       <div :id="mcId" class="main-id">
         <div class="none-data">
-          暂无信息
+          模块五
         </div>
       </div>
     </div>

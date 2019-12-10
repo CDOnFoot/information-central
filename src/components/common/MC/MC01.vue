@@ -49,6 +49,21 @@ export default {
       const gaugeColor = [[0.2, "rgba(255,0,0,0.8)"], [0.8, "rgba(0,255,255,0.8)"], [1, "rgba(0,255,0,0.8)"]];
 
       // 初始化配置
+      const colorTemplate = {
+        type: 'linear',
+        x: 0.5,
+        y: 0,
+        x2: 1,
+        y2: 1,
+        // r: 1,
+        colorStops: [{
+          offset: 0, color: '#1FAFD3' // 0% 处的颜色
+        }, {
+          offset: 1, color: '#38AF6D' // 100% 处的颜色
+        }],
+        global: false // 缺省为 false
+      };
+
       const option = {
         background: "#fff",
 
@@ -80,9 +95,9 @@ export default {
             axisLine: {				// 仪表盘轴线(轮廓线)相关配置。
               show: true,				// 是否显示仪表盘轴线(轮廓线),默认 true。
               lineStyle: {			// 仪表盘轴线样式。
-                color: [[1, "#fff"]], 	//仪表盘的轴线可以被分成不同颜色的多段。每段的  结束位置(范围是[0,1]) 和  颜色  可以通过一个数组来表示。默认取值：[[0.2, '#91c7ae'], [0.8, '#63869e'], [1, '#c23531']]
+                color: [[1, "#1FAFD3"]], 	//仪表盘的轴线可以被分成不同颜色的多段。每段的  结束位置(范围是[0,1]) 和  颜色  可以通过一个数组来表示。默认取值：[[0.2, '#91c7ae'], [0.8, '#63869e'], [1, '#c23531']]
                 opacity: 0.1,					//图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
-                width: 1,					//轴线宽度,默认 30。
+                width: 45,					//轴线宽度,默认 30。
                 shadowBlur: 10,				//(发光效果)图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
                 shadowColor: "#fff",		//阴影颜色。支持的格式同color。
               }
@@ -90,13 +105,14 @@ export default {
 
             splitLine: {			// 分隔线样式。
               show: true,				// 是否显示分隔线,默认 true。
-              length: 30,				// 分隔线线长。支持相对半径的百分比,默认 30。
+              length: 45,				// 分隔线线长。支持相对半径的百分比,默认 30。
               lineStyle: {			// 分隔线样式。
-                color: "#eee",				//线的颜色,默认 #eee。
+                // color: "#eee",				//线的颜色,默认 #eee。
+                color: colorTemplate,
                 opacity: 1,					//图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
-                width: 1,					//线度,默认 2。
+                width: 3,					//线度,默认 2。
                 type: "solid",				//线的类型,默认 solid。 此外还有 dashed,dotted
-                shadowBlur: 10,				//(发光效果)图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
+                shadowBlur: 7,				//(发光效果)图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
                 shadowColor: "#fff",		//阴影颜色。支持的格式同color。
               }
             },
@@ -106,21 +122,23 @@ export default {
               splitNumber: 5,			// 分隔线之间分割的刻度数,默认 5。
               length: 8,				// 刻度线长。支持相对半径的百分比,默认 8。
               lineStyle: {			// 刻度线样式。
-                color: "#eee",				//线的颜色,默认 #eee。
+                // color: "#eee",				//线的颜色,默认 #eee。
+                color: colorTemplate,
                 opacity: 1,					//图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
-                width: 1,					//线度,默认 1。
+                width: 3,					//线度,默认 1。
                 type: "solid",				//线的类型,默认 solid。 此外还有 dashed,dotted
-                shadowBlur: 10,				//(发光效果)图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
+                shadowBlur: 2,				//(发光效果)图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
                 shadowColor: "#fff",		//阴影颜色。支持的格式同color。
               },
             },
 
             axisLabel: {			// 刻度标签。
               show: true,				// 是否显示标签,默认 true。
-              distance: -50,			// 标签与刻度线的距离,默认 5。
-              color: "#fff",			// 文字的颜色,默认 #fff。
-              fontSize: 12,			// 文字的字体大小,默认 5。
-              formatter: "{value}",	// 刻度标签的内容格式器，支持字符串模板和回调函数两种形式。 示例:// 使用字符串模板，模板变量为刻度默认标签 {value},如:formatter: '{value} kg'; // 使用函数模板，函数参数分别为刻度数值,如formatter: function (value) {return value + 'km/h';}
+              distance: 14,			// 标签与刻度线的距离,默认 5。
+              color: "#25AFB8",			// 文字的颜色,默认 #fff。
+              fontSize: 15,			// 文字的字体大小,默认 5。
+              fontWeight: 'bold', // 文字粗细
+              formatter: "{value}%",	// 刻度标签的内容格式器，支持字符串模板和回调函数两种形式。 示例:// 使用字符串模板，模板变量为刻度默认标签 {value},如:formatter: '{value} kg'; // 使用函数模板，函数参数分别为刻度数值,如formatter: function (value) {return value + 'km/h';}
             },
 
             pointer: {				// 仪表盘指针。
@@ -146,23 +164,25 @@ export default {
             },
 
             title: {				// 仪表盘标题。
-              show: true,				// 是否显示标题,默认 true。
+              // show: true,				// 是否显示标题,默认 true。
+              show: false,
               offsetCenter: [0,"20%"],//相对于仪表盘中心的偏移位置，数组第一项是水平方向的偏移，第二项是垂直方向的偏移。可以是绝对的数值，也可以是相对于仪表盘半径的百分比。
               color: "#fff",			// 文字的颜色,默认 #333。
               fontSize: 12,			// 文字的字体大小,默认 15。
             },
 
             detail: {				// 仪表盘详情，用于显示数据。
-              show: true,				// 是否显示详情,默认 true。
+              // show: true,				// 是否显示详情,默认 true。
+              show: false,
               offsetCenter: [0,"50%"],// 相对于仪表盘中心的偏移位置，数组第一项是水平方向的偏移，第二项是垂直方向的偏移。可以是绝对的数值，也可以是相对于仪表盘半径的百分比。
               color: "auto",			// 文字的颜色,默认 auto。
-              fontSize: 15,			// 文字的字体大小,默认 15。
+              fontSize: 1,			// 文字的字体大小,默认 15。
               formatter: "{value}%",	// 格式化函数或者字符串
             },
 
             data: [
               {
-                // name: "安全度",
+                name: "Name",
                 value: 45
               }
             ]
@@ -192,8 +212,8 @@ export default {
 .none-data{
   font-size: 14px;
   text-align: center;
-  padding-top: 7vh;
+  padding-top: 3.3vh;
   width: 100%;
-  height: 100%;
+  height: 150%;
 }
 </style>

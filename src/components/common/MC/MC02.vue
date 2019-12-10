@@ -5,8 +5,8 @@
    <div class="main">
       <div class="borde">{{mcTitle}}</div>
       <div :id="mcId" class="main-id">
-        <div class="none-data">
-          暂无信息
+        <div class="none-data" id="chart-0">
+          <!--暂无信息-->模块二
         </div>
       </div>
     </div>
@@ -34,9 +34,15 @@ export default {
     }
   },
   mounted() {
+    this.initChart();
   },
+
   created() {},
+
   methods: {
+    initChart () {
+      let chartInit = this.$echarts.init(document.getElementById('chart-0'));
+    }
   }
 };
 </script>

@@ -23,6 +23,12 @@
     data() {
       return {};
     },
+    props: ['searchVal'],
+    watch: {
+      searchVal: function (val) {
+        console.log(val);
+      }
+    },
     mounted() {
 
     },

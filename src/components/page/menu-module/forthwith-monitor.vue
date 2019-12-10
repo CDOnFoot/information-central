@@ -126,7 +126,6 @@
     flex: 0 84%;
     height: 840px;
     margin-left: 60px;
-
   }
 
   .router-link {
@@ -143,6 +142,11 @@
     padding: 0 26px;
     background-color: #001529;
     color: #ffffff;
+    border-color: #0259ad;
+  }
+
+  /deep/ .ant-layout {
+    border-bottom-color: #0259ad !important;
   }
 
   /deep/ .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab-active {

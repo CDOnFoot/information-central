@@ -1,193 +1,75 @@
 <template>
-  <div class="info">
-    <div class="info-bg">
-
+  <div class="content">
+    <!--<img class="mk-bg" src="../../../../assets/img/form-bg.png" alt="">-->
+    <div class="mk">
+      <div class="mk-container">
+        <div class="mk-pic">
+        </div>
+      </div>
     </div>
-    <div class="info-pic"></div>
-    <div class="info-list">
-      <a-table :showHeader="false" :columns="columns" :dataSource="data" :pagination="false" :loading="loading"
-               :customRow="setRow">
-      </a-table>
+    <div class="mk">
+      <div class="mk-container">
+        <div class="mk-list">
+
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-  const columns = [
-    {
-      dataIndex: "name",
-      width: "20%",
-      align: "center"
-    },
-    {
-      dataIndex: "data",
-      width: "20%",
-      align: "center"
-    }
-  ];
-
-  const data = [{
-    name: "软件版本号",
-    data: "PUN-UU 091111"
-  },
-
-    {
-      name: "软件版本号",
-      data: "PUN-UU 091111"
-    },
-
-    {
-      name: "软件版本号",
-      data: "PUN-UU 091111"
-    },
-
-    {
-      name: "软件版本号",
-      data: "PUN-UU 091111"
-    },
-
-    {
-      name: "软件版本号",
-      data: "PUN-UU 091111"
-    },
-
-    {
-      name: "软件版本号",
-      data: "PUN-UU 091111"
-    },
-
-    {
-      name: "软件版本号",
-      data: "PUN-UU 091111"
-    },
-
-    {
-      name: "软件版本号",
-      data: "PUN-UU 091111"
-    },
-
-    {
-      name: "软件版本号",
-      data: "PUN-UU 091111"
-    },
-    {
-      name: "软件版本号",
-      data: "PUN-UU 091111"
-    },
-
-    {
-      name: "软件版本号",
-      data: "PUN-UU 091111"
-    },
-
-    {
-      name: "软件版本号",
-      data: "PUN-UU 091111"
-    },
-
-    {
-      name: "软件版本号",
-      data: "PUN-UU 091111"
-    },
-  ];
-
   export default {
     name: "info",
     data() {
-      return {
-        data: data,
-        pagination: {
-          current: 1,
-          defaultCurrent: 1,
-          defaultPageSize: 20,
-          total: 0,
-          showQuickJumper: true,
-          onChange: current => this.changePage(current)
-        },
-        loading: false,
-        columns,
-      };
+      return {};
     },
     mounted() {
-      // this.fetch();
-      this.init();
+
     },
-
-    methods: {
-      init() {
-
-      },
-      changePage(page) {
-        this.pagination.current = page;
-      },
-      setRow(record, index) {
-        return {
-          on: {
-            props: {},
-            click: () => {
-              console.log(record);
-              document.getElementsByClassName('ant-table-row')[index].style.backgroundColor = 'red';
-
-            }
-          }
-        };
-        if (index % 2 == 1) {
-          console.log(index);
-        } else {
-          // console.log(2)
-          document.getElementsByClassName('ant-table-row')[index].style.backgroundColor = 'red';
-
-        }
-      }
-    }
+    methods: {},
   };
 
 </script>
 
 <style scoped>
-  .info {
-    display: flex;
+  .content {
+    position: relative;
+    width: 100%;
     height: 100%;
+  }
+
+  .mk {
+    width: 50%;
+    height: 100%;
+    float: left;
     position: relative;
   }
 
-  .info-bg {
-    z-index: 0;
-    position: absolute;
-    display: flex;
-
+  .mk-bg {
     width: 100%;
     height: 100%;
-    background-color: #2250ca;
-    opacity: .2;
   }
 
-  .info-pic {
-    z-index: 10;
+  .mk-container {
+    width: 84%;
+    height: 84%;
+    position: absolute;
+    top: 8%;
+    left: 8%;
+  }
 
-    flex: 0 60%;
+  .mk-pic {
+    width: 100%;
     height: 100%;
-    padding: 20px;
-    background: url("../../../../assets/img/monitor/dev3.png") no-repeat center;
-    background-size: 42%;
+    background: url("../../../../assets/img/monitor/dev2.png") no-repeat center;
+    background-size: contain;
   }
 
-  .info-list {
-    z-index: 10;
-
-    flex: 0 40%;
+  .mk-list {
+    width: 100%;
     height: 100%;
-    padding: 0 60px 0 60px;
-
-
+    background: url("../../../../assets/img/table-bg.png") center;
+    background-repeat: repeat;
   }
 
-  /*/deep/ .ant-table-pagination.ant-pagination {*/
-  /*visibility: hidden;*/
-  /*}*/
-
-  /deep/ .ant-table-row {
-    /*background-color: #315c85;*/
-    /*margin-bottom: 10px !important;*/
-  }
 </style>

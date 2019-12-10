@@ -23,10 +23,7 @@
   export default {
     name: "view",
     data() {
-      return {
-
-
-      };
+      return {};
     },
 
     mounted() {
@@ -34,7 +31,7 @@
     },
 
     methods: {
-      initChart () {
+      initChart() {
         // 创建 chart 图标实例
         let chartInit = this.$echarts.init(document.getElementById('chart1'));
 
@@ -61,7 +58,7 @@
             {
               name: "单仪表盘示例",		// 系列名称,用于tooltip的显示，legend 的图例筛选，在 setOption 更新数据和配置项时用于指定对应的系列。
               type: "gauge",			// 系列类型
-              radius:	"100%",			// 参数:number, string。 仪表盘半径,默认 75% ，可以是相对于容器高宽中较小的一项的一半的百分比，也可以是绝对的数值。
+              radius: "100%",			// 参数:number, string。 仪表盘半径,默认 75% ，可以是相对于容器高宽中较小的一项的一半的百分比，也可以是绝对的数值。
               center: ["50%", "55%"],	// 仪表盘位置(圆心坐标)
               startAngle: 180,		// 仪表盘起始角度,默认 225。圆心 正右手侧为0度，正上方为90度，正左手侧为180度。
               endAngle: 0,			// 仪表盘结束角度,默认 -45
@@ -140,14 +137,14 @@
 
               title: {				// 仪表盘标题。
                 show: true,				// 是否显示标题,默认 true。
-                offsetCenter: [0,"20%"],//相对于仪表盘中心的偏移位置，数组第一项是水平方向的偏移，第二项是垂直方向的偏移。可以是绝对的数值，也可以是相对于仪表盘半径的百分比。
+                offsetCenter: [0, "20%"],//相对于仪表盘中心的偏移位置，数组第一项是水平方向的偏移，第二项是垂直方向的偏移。可以是绝对的数值，也可以是相对于仪表盘半径的百分比。
                 color: "#fff",			// 文字的颜色,默认 #333。
                 fontSize: 12,			// 文字的字体大小,默认 15。
               },
 
               detail: {				// 仪表盘详情，用于显示数据。
                 show: true,				// 是否显示详情,默认 true。
-                offsetCenter: [0,"50%"],// 相对于仪表盘中心的偏移位置，数组第一项是水平方向的偏移，第二项是垂直方向的偏移。可以是绝对的数值，也可以是相对于仪表盘半径的百分比。
+                offsetCenter: [0, "50%"],// 相对于仪表盘中心的偏移位置，数组第一项是水平方向的偏移，第二项是垂直方向的偏移。可以是绝对的数值，也可以是相对于仪表盘半径的百分比。
                 color: "auto",			// 文字的颜色,默认 auto。
                 fontSize: 15,			// 文字的字体大小,默认 15。
                 formatter: "{value}%",	// 格式化函数或者字符串
@@ -178,14 +175,15 @@
     width: 100%;
     height: 100%;
   }
-  .mk{
+
+  .mk {
     width: 50%;
     height: 50%;
     float: left;
     background: url("../../../../assets/img/sub-border-l.png") no-repeat center;
   }
 
-  .charts{
+  .charts {
 
   }
 </style>

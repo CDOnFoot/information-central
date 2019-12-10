@@ -454,9 +454,11 @@
   .ant-form-explain {
     text-align: left;
   }
+
   .input-login{
-    color: #000000;
+    color: #fff;
     height: 40px !important;
+    background: #40a9ff;
   }
   .has-error .ant-form-explain{
     color: #e5b989 !important;

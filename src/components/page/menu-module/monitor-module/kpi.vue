@@ -14,7 +14,7 @@
       <div class="mk-container">
         <div class="borde">供电状态</div>
         <div class="mk-electricity">
-          <img src="../../../../assets/img/计划开行.png" alt="">
+          <!--<img src="../../../../assets/img/计划开行.png" alt="">-->
           <div class="mk-electricity-status">正常</div>
         </div>
       </div>
@@ -69,7 +69,6 @@
     height: 50%;
     float: left;
     position: relative;
-    /*background: url("../../../../assets/img/sub-border-l.png") no-repeat center;*/
   }
 
   .mk-bg {
@@ -95,20 +94,14 @@
     left: 35%;
   }
 
-  .mk-energy img {
-    height: 90%;
-    position: absolute;
-    top: 5%;
-    left: 35%;
-  }
 
-  .mk-electricity {
-    position: relative;
-    text-align: center;
-  }
+  .mk-electricity{
+    width: 100%;
+    height:100%;
+    background: url("../../../../assets/img/计划开行.png") no-repeat center;
 
-  .mk-electricity img {
-    margin-top: 8%;
+    /*background: url("../../../../assets/img/sub-border-l.png") no-repeat center;*/
+
 
   }
 
@@ -118,7 +111,7 @@
     font-size: 24px;
     color: #ffffff;
     position: absolute;
-    top: 50%;
+    top: 40%;
   }
 
 
@@ -126,7 +119,7 @@
     width: 100%;
     height: 80%;
     position: absolute;
-    top: 16%;
+    top: 14%;
     background: url("../../../../assets/img/table-bg.png") center;
     background-repeat: repeat-x;
 

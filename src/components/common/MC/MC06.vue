@@ -3,7 +3,8 @@
   <!--   设备分析 模块内容一-->
   <div>
    <div class="main">
-      <div class="borde">{{mcTitle}}</div>
+      <!--<div class="borde">{{mcTitle}}</div>-->
+      <div class="borde">空间数据</div>
       <div :id="mcId" class="main-id">
         <div class="none-data" id="chart-id-2">
           <!--模块六-->

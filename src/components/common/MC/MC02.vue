@@ -3,7 +3,8 @@
   <!--   设备分析 模块内容一-->
   <div>
    <div class="main">
-      <div class="borde">{{mcTitle}}</div>
+      <!--<div class="borde">{{mcTitle}}</div>-->
+      <div class="borde">电量</div>
       <div :id="mcId" class="main-id">
         <div class="none-data" id="chart-0">
           <!--暂无信息-->模块二
@@ -63,35 +64,91 @@ export default {
             name: '当前电量',
             radius: ['65%', '80%'],
             startAngle: 270,
+            hoverAnimation: false,
 
             label: {
               show: true,
-              formatter: '{b}:{c}%',
+              formatter: '{b}',
+              color: '#ffffff'
             },
 
             itemStyle: {
-              color: '#f82',
-              borderColor: '#fff',
+              color: '#2852bc',
+              borderColor: '#132245',
               borderWidth: 10,
+              opacity: 0.7
             },
 
             center: ['50%', '50%'],
 
             data: [
               {
-                name: '当前电量',
-                value: 50
+                name: '0%',
+                value: 16
               },
               {
-                name: '',
-                value: 50
+                name: '20%',
+                value: 16
+              },
+              {
+                name: '40%',
+                value: 16
+              },
+              {
+                name: '60%',
+                value: 16
+              },
+              {
+                name: '80%',
+                value: 16
+              },
+              {
+                name: '100%',
+                value: 16
               }
             ]
           },
 
           // 内圈 - 基于仪表盘
           {
-            type: 'gauge'
+            type: 'gauge',
+            radius: '50%',
+            startAngle: 260,
+            endAngle: -80,
+
+            data: [
+              {
+                name: 'test',
+                value: 50
+              }
+            ],
+
+            axisLine: {
+              show: false
+            },
+
+            splitLine: {
+              show: false
+            },
+
+            axisTick: {
+              length: 12,
+              lineStyle: {
+                width: 3
+              }
+            },
+
+            pointer: {
+              width: 3
+            },
+
+            axisLabel: {
+              show: false
+            },
+
+            title: {
+              show: false
+            }
           }
         ]
       };

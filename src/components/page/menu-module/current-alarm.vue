@@ -383,6 +383,8 @@
         sureAlarm (row) {
           this.drawerForm = Object.assign({}, row);
           this.isShowDrawer = true;
+          console.log('current choose alarm detail:')
+          console.log(this.drawerForm)
         },
 
         /**
@@ -390,10 +392,12 @@
          */
         submitRemarks (callback) {
           const remarks = this.remarks;
-          console.log('current input remarks:' + remarks);
+          // console.log('current input remarks:' + remarks);
           /*this.$http.post('', {}).then(() => {
             this.isShowDrawer = false;
           })*/
+          console.log('current id:' + this.drawerForm.Id)
+          // 增加附带 ID 的 HTTP 请求，用于确认报警
         }
       }
     }

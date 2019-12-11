@@ -3,7 +3,7 @@
     <div class="search-condition">
       <a-form layout="inline" :form="form" @submit="searchFor">
         <a-form-item label="姓名：">
-          <a-input placeholder="姓名" v-model="searchName"></a-input>
+          <a-input placeholder="登录名" v-model="searchName"></a-input>
         </a-form-item>
         <a-form-item>
           <a-button type="primary" icon="search" html-type="submit">搜索</a-button>
@@ -27,22 +27,21 @@
           <a-form :form="modalForm">
             <div class="modal-form">
               <div class="modal-form-one">
-                <a-form-item label="姓名" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }">
+                <a-form-item label="登录名" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }" required>
                   <a-input v-model="modalForm.Name" :disabled="enableEdit"></a-input>
                 </a-form-item>
-                <a-form-item label="工号" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }">
-                  <a-input v-model="modalForm.EntityId" :disabled="enableEdit"></a-input>
+                <a-form-item label="姓名" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }">
+                  <a-input v-model="modalForm.DisplayName" :disabled="enableEdit"></a-input>
                 </a-form-item>
                 <a-form-item label="状态" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }">
-                  <!--<a-input v-model="modalForm.Status"></a-input>-->
                   <a-select :disabled="enableEdit" v-model="modalForm.Status">
                     <a-select-option value="Enable">启用</a-select-option>
                     <a-select-option value="Disable">未启用</a-select-option>
                   </a-select>
                 </a-form-item>
-                <a-form-item label="创建时间" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }">
-                  <a-input v-model="modalForm.Created" :disabled="enableEditTime"></a-input>
-                </a-form-item>
+                <!--<a-form-item label="创建时间" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }">-->
+                  <!--<a-input v-model="modalForm.Created" :disabled="enableEditTime"></a-input>-->
+                <!--</a-form-item>-->
               </div>
               <div class="modal-form-two">
                 <a-form-item label="固话" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }">
@@ -51,12 +50,12 @@
                 <a-form-item label="手机号" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }">
                   <a-input v-model="modalForm.PhoneNumber" :disabled="enableEdit"></a-input>
                 </a-form-item>
-                <a-form-item label="过期时间" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }">
-                  <a-input v-model="modalForm.Expired" :disabled="enableEdit"></a-input>
-                </a-form-item>
-                <a-form-item label="更新时间" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }">
-                  <a-input v-model="modalForm.Updated" :disabled="enableEditTime"></a-input>
-                </a-form-item>
+                <!--<a-form-item label="过期时间" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }">-->
+                  <!--<a-input v-model="modalForm.Expired" :disabled="enableEditTime"></a-input>-->
+                <!--</a-form-item>-->
+                <!--<a-form-item label="更新时间" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }">-->
+                  <!--<a-input v-model="modalForm.Updated" :disabled="enableEditTime"></a-input>-->
+                <!--</a-form-item>-->
               </div>
             </div>
           </a-form>
@@ -91,7 +90,7 @@
   import AFormItem from "ant-design-vue/es/form/FormItem";
   const column = [
     {
-      title: '姓 名',
+      title: '登录名',
       dataIndex: 'Name',
       align: 'center',
       sorter: true,
@@ -99,8 +98,8 @@
       // scopedSlots: { customRender: 'name' }
     },
     {
-      title: '工 号',
-      dataIndex: 'EntityId',
+      title: '姓 名',
+      dataIndex: 'DisplayName',
       align: 'center',
       width: 30
     },
@@ -181,8 +180,8 @@
 
             // modalForm: {},
             modalForm: {
-              Name: '',
-              DisplayName: '', // 登录名，必需字段
+              Name: '', // 登录名
+              DisplayName: '', // 展示姓名
               EntityId: '',
               Status: '', // 不填写服务默认启动
               Created: '', // 服务创建
@@ -491,7 +490,7 @@
                       tableContainer.push(value);
                     }
                   } else {
-                    that.tableList.push(value);
+                    tableContainer.push(value);
                   }
                   // that.tableList = table;
                 });
@@ -579,10 +578,11 @@
         },
 
         checkUser (row) {
-          const formContainer = Object.assign({}, row)
-          this.modalForm = Object.assign({}, formContainer)
+          const formContainer = Object.assign({}, row);
+          this.modalForm = Object.assign({}, formContainer);
           // console.log('current container:')
-          // console.log(this.modalForm)
+          // console.log(this.modalForm);
+          // console.log(' - current user status:' + this.modalForm.Status);
           this.modalForm.Status = this.modalForm.Status === '启用' ? 'Enable' : 'Disable';
           this.okButton = '确定';
           // 简介对话框
@@ -657,16 +657,16 @@
            */
           if (titleStatus === '添加用户信息') {
             param = {
-              EntityId: that.modalForm.EntityId,
+              EntityId: 0, // 主键固定
               Name: that.modalForm.Name,
-              DisplayName: "hello", // 登录名称暂时固定
-              Tel: that.modalForm.Tel,
-              PhoneNumber: that.modalForm.PhoneNumber,
+              DisplayName: that.modalForm.DisplayName,
+              // Tel: that.modalForm.Tel,
+              // PhoneNumber: that.modalForm.PhoneNumber,
             };
             // 调用添加的 API
             this.$http.post(that.$api.addUsers, param)
               .then(res => {
-              // console.log(res);
+              console.log(res);
               if (res.data === "success") {
                 that.$info({
                   title: '提示',
@@ -675,10 +675,18 @@
                     that.isShowModal = false;
                   },
                 });
+              } else if (res.data.Message === '登录名称重复') {
+                that.$info({
+                  title: '错误',
+                  content: '登录名已经存在，请重新输入',
+                  onOk() {
+                    // that.isShowModal = false;
+                  },
+                });
               } else {
                 that.$info({
                   title: '错误',
-                  content: '发生了一些错误：' + res.data.Message,
+                  content: '发生了一些错误：' + res.status + '，请检查您的输入信息',
                   onOk() {
                     that.isShowModal = false;
                   },
@@ -689,7 +697,7 @@
           } else if (titleStatus === '查看用户信息') {
             // no handle
             this.isShowModal = false;
-            that.confirmLoading = false;
+            this.confirmLoading = false;
           } else if (titleStatus === '编辑用户信息') {
             // 调用编辑的 API
             param = {
@@ -697,13 +705,34 @@
               Name: that.modalForm.Name, // 不能更改
               DisplayName: that.modalForm.DisplayName, // 登录名可以更改
               Tel: that.modalForm.Tel,
+              PhoneNumber: that.modalForm.PhoneNumber,
               GroupId: [],
               RoleIds: [2028, 2019]
             };
 
             this.$http.post(that.$api.updateUsers, param).then(res => {
-              // console.log(res);
+              // console.log('chosen status:' + that.modalForm.Status);
               if (res.data === "success") {
+                if (that.modalForm.Status === 'Enable') {
+                  that.$http.post(that.$api.restartUser, {
+                    EntityId: that.modalForm.EntityId
+                  }).then(response => {
+                    // console.log(response)
+                  }).catch(err => {
+                    console.log(err);
+                    that.$info({
+                      title: '提示',
+                      content: '出现了一些错误：' + err,
+                      onOk() {},
+                    });
+                  })
+                } else {
+                  that.$http.post(that.$api.lockUser, {
+                    EntityId: that.modalForm.EntityId
+                  }).then(response => {
+                    // console.log(response)
+                  })
+                }
                 that.$info({
                   title: '提示',
                   content: '修改成功！',
@@ -711,15 +740,7 @@
                     that.isShowModal = false;
                   },
                 });
-              } /*else {
-                that.$info({
-                  title: '错误',
-                  content: '发生了一些错误：' + res.data.Message,
-                  onOk() {
-                    that.isShowModal = false;
-                  },
-                });
-              }*/
+              }
               that.confirmLoading = false;
             })
           }
@@ -741,23 +762,6 @@
           this.enableEdit = false;
           this.isShowModal = true;
         },
-
-        /**
-         * @function 必须使用 @submit 绑定的方法，该方法不再使用
-         * @param e
-         */
-        searchInUser (e) {
-          // console.log('the param "e":')
-          // console.log(e);
-          e.preventDefault();
-          // 使用当前绑定状态进行校验
-          this.searchName.validateFields((err, values) => {
-            if (!err) {
-              // console.log('the input form:');
-              // console.log(values)
-            }
-          })
-        }
       }
     }
 </script>

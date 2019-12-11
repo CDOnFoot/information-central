@@ -18,11 +18,17 @@ export default {
 
   deleteUser: '/config/Users/DeleteUser',
 
+  lockUser: '/config/Users/LockUser',
+
+  restartUser: '/config/Users/ReStartUser',
+
   getAlarm: '/alarm/alarmRealTimeInfos',
 
   getAlarmForPagination: '/alarm/alarmRealTimeInfos?$expand=AlarmLevel&$filter=SubsystemId eq 4&$orderby=AlarmDateTime desc',
 
   getAlarmHistory: '/Alarm/AlarmHistoryInfos?$expand=AlarmLevel&$filter=SubsystemId eq 4&$orderby=AlarmDateTime desc',
+
+  confirmAlarm: '/alarm/api/AlarmStatus',
 
   /**
    * @variation old API

@@ -383,8 +383,8 @@
         sureAlarm (row) {
           this.drawerForm = Object.assign({}, row);
           this.isShowDrawer = true;
-          console.log('current choose alarm detail:')
-          console.log(this.drawerForm)
+          // console.log('current choose alarm detail:')
+          // console.log(this.drawerForm)
         },
 
         /**
@@ -392,12 +392,26 @@
          */
         submitRemarks (callback) {
           const remarks = this.remarks;
+          const that = this;
           // console.log('current input remarks:' + remarks);
-          /*this.$http.post('', {}).then(() => {
+          // console.log('current id:' + this.drawerForm.Id)
+          const paramId = this.drawerForm.Id;
+          this.$http.post(that.$api.confirmAlarm + '?key=' + paramId)
+            .then((res) => {
+            console.log(res);
+            if (res.status === 200) {
+              if (res.data === paramId) {
+                that.$info({
+                  title: '提示',
+                  content: '确认成功！',
+                  onOk() {
+                    // that.isShowModal = false;
+                  },
+                });
+              }
+            }
             this.isShowDrawer = false;
-          })*/
-          console.log('current id:' + this.drawerForm.Id)
-          // 增加附带 ID 的 HTTP 请求，用于确认报警
+          })
         }
       }
     }

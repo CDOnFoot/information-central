@@ -20,11 +20,16 @@
             <a-tab-pane tab="基本信息" key="1"></a-tab-pane>
             <a-tab-pane tab="关键指标" key="2"></a-tab-pane>
             <a-tab-pane tab="概况" key="3"></a-tab-pane>
+            <a-button slot="tabBarExtraContent">
+              <a-badge dot :count="10">
+                <a-icon type="notification" />
+              </a-badge>
+            </a-button>
           </a-tabs>
         </div>
         <div class="router-link">
           <div class="router-link-bg"></div>
-          <router-view :searchVal="searchVal"/>
+          <router-view :devType="devType"/>
         </div>
       </div>
     </div>
@@ -36,72 +41,50 @@
     name: "forthwith-monitor",
     data() {
       return {
-        searchVal: '',
+        menuList: '',
+        devType: '',
         collapsed: false,
-        menuList: [],
-        menuIndex: 0,
-        tabIndex: 0,
-
-      };
+      }
     },
-
-    beforeCreate() {
-    },
-
-    created() {
-      this.initMenu();
-
-    },
-
-    beforeMount() {
-    },
-
-    mounted() {
-    },
-
     watch: {
-      // menuIndex: function (val, oldVal) {
-      //   console.log('menuIndex - new:%s,old:%s', val, oldVal)
-      // },
-      // tabIndex: function (val, oldVal) {
-      //   console.log('tabIndex - new:%s,old:%s', val, oldVal)
-      // },
+      devType: function (val) {
+        // console.log(val);
+      },
     },
+    beforeCreate() {
 
+    },
+    created() {
+
+    },
+    beforeMount() {
+
+    },
+    mounted() {
+      this.initMenu();
+    },
     methods: {
       initMenu() {
-        let self = this;
-        self.$http.get(self.$api.monitorEquipments).then(res => {
+        this.$http.get(this.$api.monitorEquipments).then(res => {
           if (res.data.value) {
-            self.menuList = res.data.value;
-            // console.log(self.menuList);
-            self.menuIndex = self.menuList[0].EntityId;
-            self.changeTab(1);
+            this.menuList = res.data.value;
+            this.devType = res.data.value[0];
+            this.changeTab(1);
           }
         });
       },
-
       changeMenu(key) {
-        let self = this;
-        self.menuIndex = key.EntityId;
-        // console.log(key)
-        self.searchVal = key;
-
+        this.devType = key;
       },
-
       changeTab(key) {
-        let self = this;
-        self.tabIndex = key;
-
         if (key == 1) {
-          self.$router.replace("/home/forthwithMonitor/info");
+          this.$router.replace("/home/forthwithMonitor/info");
         } else if (key == 2) {
-          self.$router.replace("/home/forthwithMonitor/kpi");
+          this.$router.replace("/home/forthwithMonitor/kpi");
         } else {
-          self.$router.replace("/home/forthwithMonitor/view");
+          this.$router.replace("/home/forthwithMonitor/view");
         }
       },
-
       toggleCollapsed() {
         let self = this;
         self.collapsed = !self.collapsed;
@@ -158,13 +141,14 @@
     /* box-shadow: 0 0 40px rgba(0, 204, 255, 1) inset; */
   }
 
-
   /deep/ .ant-tabs-bar {
     border-bottom: 1px solid #0259ad;
   }
 
   /deep/ .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab {
+    width: 120px;
     padding: 0 26px;
+    text-align: center;
     background-color: #001529;
     color: #ffffff;
     border-color: #0259ad;
@@ -174,10 +158,21 @@
     border-bottom-color: #0259ad !important;
   }
 
+  /deep/ .ant-btn {
+    color: #ffffff;
+    height: 30px;
+    background-color: transparent;
+    border-radius: 200px;
+  }
+
+  /deep/ .ant-btn:hover, .ant-btn:focus {
+    color: #40a9ff;
+    border-color: #40a9ff;
+  }
+
   /deep/ .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab-active {
     background-image: linear-gradient(to right, blue, black);
   }
-
 
   /deep/ .ant-menu-dark.ant-menu-inline .ant-menu-item, .ant-menu-dark.ant-menu-inline .ant-menu-submenu-title {
     width: 110px;
@@ -227,6 +222,5 @@
     color: rgba(255, 255, 255, 0.65);
     background: transparent;
   }
-
 
 </style>

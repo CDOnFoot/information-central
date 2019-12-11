@@ -53,13 +53,21 @@
   export default {
     name: "view",
     data() {
-      return {};
+      return {
+        devtype: '',
+      };
+    },
+    props: ['devType'],
+    watch: {
+      devType: function (val) {
+        this.devtype = val;
+        // console.log(this.devtype);
+      }
     },
     mounted() {
       this.initPage();
     },
     methods: {
-
       initPage() {
         this.initChart1();
         this.initChart2();
@@ -67,14 +75,12 @@
         this.initChart4();
         this.initChart5();
       },
-
       initChart1() {
 
       },
       initChart2() {
 
       },
-
       initChart3() {
         let chartInit = this.$echarts.init(document.getElementById('chart3'));
 
@@ -222,10 +228,7 @@
 
         chartInit.setOption(option)
       },
-
     },
-
-
   };
 
 </script>
@@ -300,6 +303,6 @@
     text-align: center;
     font-size: 22px;
     position: absolute;
-    bottom: 0;
+    bottom: -10px;
   }
 </style>

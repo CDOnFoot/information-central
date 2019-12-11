@@ -24,6 +24,14 @@
       <div class="mk-container" style="width: 90%; left: 5%;">
         <div class="borde">电池后备时间</div>
         <div class="mk-battery">
+          <a-table
+            :showHeader="true"
+            :columns="columns"
+            :dataSource="data"
+            :pagination="false"
+            :loading="loading"
+          >
+          </a-table>
         </div>
       </div>
     </div>
@@ -31,28 +39,196 @@
 </template>
 
 <script>
+
+  const testdata = [
+
+    {
+      CheckPoint: false,
+      Code: "JKD",
+      ControlBoxSerial: "",
+      CustomProperties: null,
+      Description: "现场门禁智能控制单元-门JK-01-02",
+      DisplayName: "JK-01-02",
+      EntityId: 4,
+      JsonCustomColumn: null,
+      Location: "数据中心B1层门2",
+      Manufacturer: null,
+      Model: "门",
+      Name: "JK-01-02",
+      TPType: "Modbus",
+      TechnicalAddress: "10.28.3.199:4001",
+      TechnicalParameter: null,
+    },
+    {
+      CheckPoint: false,
+      Code: "JKD",
+      ControlBoxSerial: "",
+      CustomProperties: null,
+      Description: "现场门禁智能控制单元-门JK-01-02",
+      DisplayName: "JK-01-02",
+      EntityId: 4,
+      JsonCustomColumn: null,
+      Location: "数据中心B1层门2",
+      Manufacturer: null,
+      Model: "门",
+      Name: "JK-01-02",
+      TPType: "Modbus",
+      TechnicalAddress: "10.28.3.199:4001",
+      TechnicalParameter: null,
+    },
+    {
+      CheckPoint: false,
+      Code: "JKD",
+      ControlBoxSerial: "",
+      CustomProperties: null,
+      Description: "现场门禁智能控制单元-门JK-01-02",
+      DisplayName: "JK-01-02",
+      EntityId: 4,
+      JsonCustomColumn: null,
+      Location: "数据中心B1层门2",
+      Manufacturer: null,
+      Model: "门",
+      Name: "JK-01-02",
+      TPType: "Modbus",
+      TechnicalAddress: "10.28.3.199:4001",
+      TechnicalParameter: null,
+    },
+    {
+      CheckPoint: false,
+      Code: "JKD",
+      ControlBoxSerial: "",
+      CustomProperties: null,
+      Description: "现场门禁智能控制单元-门JK-01-02",
+      DisplayName: "JK-01-02",
+      EntityId: 4,
+      JsonCustomColumn: null,
+      Location: "数据中心B1层门2",
+      Manufacturer: null,
+      Model: "门",
+      Name: "JK-01-02",
+      TPType: "Modbus",
+      TechnicalAddress: "10.28.3.199:4001",
+      TechnicalParameter: null,
+    },
+    {
+      CheckPoint: false,
+      Code: "JKD",
+      ControlBoxSerial: "",
+      CustomProperties: null,
+      Description: "现场门禁智能控制单元-门JK-01-02",
+      DisplayName: "JK-01-02",
+      EntityId: 4,
+      JsonCustomColumn: null,
+      Location: "数据中心B1层门2",
+      Manufacturer: null,
+      Model: "门",
+      Name: "JK-01-02",
+      TPType: "Modbus",
+      TechnicalAddress: "10.28.3.199:4001",
+      TechnicalParameter: null,
+    },
+    {
+      CheckPoint: false,
+      Code: "JKD",
+      ControlBoxSerial: "",
+      CustomProperties: null,
+      Description: "现场门禁智能控制单元-门JK-01-02",
+      DisplayName: "JK-01-02",
+      EntityId: 4,
+      JsonCustomColumn: null,
+      Location: "数据中心B1层门2",
+      Manufacturer: null,
+      Model: "门",
+      Name: "JK-01-02",
+      TPType: "Modbus",
+      TechnicalAddress: "10.28.3.199:4001",
+      TechnicalParameter: null,
+    },
+    {
+      CheckPoint: false,
+      Code: "JKD",
+      ControlBoxSerial: "",
+      CustomProperties: null,
+      Description: "现场门禁智能控制单元-门JK-01-02",
+      DisplayName: "JK-01-02",
+      EntityId: 4,
+      JsonCustomColumn: null,
+      Location: "数据中心B1层门2",
+      Manufacturer: null,
+      Model: "门",
+      Name: "JK-01-02",
+      TPType: "Modbus",
+      TechnicalAddress: "10.28.3.199:4001",
+      TechnicalParameter: null,
+    },
+    {
+      CheckPoint: false,
+      Code: "JKD",
+      ControlBoxSerial: "",
+      CustomProperties: null,
+      Description: "现场门禁智能控制单元-门JK-01-02",
+      DisplayName: "JK-01-02",
+      EntityId: 4,
+      JsonCustomColumn: null,
+      Location: "数据中心B1层门2",
+      Manufacturer: null,
+      Model: "门",
+      Name: "JK-01-02",
+      TPType: "Modbus",
+      TechnicalAddress: "10.28.3.199:4001",
+      TechnicalParameter: null,
+    },
+
+  ];
+
+  const columns = [
+    {
+      title: 'DisplayName',
+      dataIndex: 'DisplayName',
+      align: 'center',
+      width: '25%'
+    },
+    {
+      title: 'TechnicalAddress',
+      dataIndex: 'TechnicalAddress',
+      align: 'center',
+      width: '25%'
+    },
+    {
+      title: 'Location',
+      dataIndex: 'Location',
+      align: 'center',
+      width: '25%'
+    },
+    {
+      title: 'TPType',
+      dataIndex: 'TPType',
+      align: 'center',
+      width: '50%'
+    },
+  ];
+
   export default {
     name: "kpi",
     data() {
-      return {};
+      return {
+        devtype: '',
+        data: testdata,
+        columns,
+        loading: false,
+      };
+    },
+    props: ['devType'],
+    watch: {
+      devType: function (val) {
+        this.devtype = val;
+        // console.log(this.devtype);
+      }
     },
     mounted() {
-      this.initPage();
-    },
-    methods: {
-
-      initPage() {
-
-      },
-
-      initChart1() {
-
-      },
-      initChart2() {
-
-      },
 
     },
+    methods: {},
   };
 
 </script>
@@ -94,15 +270,10 @@
     left: 35%;
   }
 
-
-  .mk-electricity{
+  .mk-electricity {
     width: 100%;
-    height:100%;
+    height: 100%;
     background: url("../../../../assets/img/计划开行.png") no-repeat center;
-
-    /*background: url("../../../../assets/img/sub-border-l.png") no-repeat center;*/
-
-
   }
 
   .mk-electricity-status {
@@ -111,19 +282,75 @@
     font-size: 24px;
     color: #ffffff;
     position: absolute;
-    top: 40%;
+    top: 42%;
   }
-
 
   .mk-battery {
     width: 100%;
     height: 80%;
     position: absolute;
-    top: 14%;
-    background: url("../../../../assets/img/table-bg.png") center;
-    background-repeat: repeat-x;
+    top: 18%;
+    overflow: auto;
+  }
+
+  /deep/ .ant-table-thead > tr {
+    background: #0b4A86;
+  }
+
+  /deep/ .ant-table-thead > tr > th {
+    padding: 4px;
+    background: transparent;
+    border-bottom: none;
 
   }
 
+  /deep/ .ant-table-row {
+    /*background: url("../../../../assets/img/table-bg.png");*/
+    /*background-repeat: repeat-x;*/
+  }
+
+  /deep/ .ant-table-row:nth-child(even) {
+    background: #0b4A86;
+  }
+
+  /deep/ .ant-table-row:nth-child(odd) {
+    background: #1875A6;
+  }
+
+  /deep/ .ant-table-row > td {
+    padding: 4px;
+  }
+
+  /* 滚动条 */
+  ::-webkit-scrollbar-thumb:horizontal { /*水平滚动条的样式*/
+    width: 4px;
+    background-color: #CCCCCC;
+    -webkit-border-radius: 6px;
+  }
+
+  ::-webkit-scrollbar-track-piece {
+    background-color: #fff; /*滚动条的背景颜色*/
+    -webkit-border-radius: 0; /*滚动条的圆角宽度*/
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px; /*滚动条的宽度*/
+    height: 8px; /*滚动条的高度*/
+  }
+
+  ::-webkit-scrollbar-thumb:vertical { /*垂直滚动条的样式*/
+    height: 50px;
+    background-color: #999;
+    -webkit-border-radius: 4px;
+    outline: 2px solid #fff;
+    outline-offset: -2px;
+    border: 2px solid #fff;
+  }
+
+  ::-webkit-scrollbar-thumb:hover { /*滚动条的hover样式*/
+    height: 50px;
+    background-color: #9f9f9f;
+    -webkit-border-radius: 4px;
+  }
 
 </style>

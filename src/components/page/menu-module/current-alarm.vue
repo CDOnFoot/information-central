@@ -130,6 +130,7 @@
               defaultCurrent: 1,
               defaultPageSize: 18,
               total: 0,
+              size: 'large',
               // 页码改变时的回调
               onChange: (current) => this.changePage(current)
             },

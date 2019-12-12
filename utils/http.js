@@ -93,7 +93,7 @@ axios.defaults.headers.token = common.getCookie('dvptToken')
             // this.$router.push("/login");
             err.message = '未授权，请重新登录';
             router.push("/login");
-            message('登录状态已过期，请重新登录');
+            // message('登录状态已过期，请重新登录');
             break;
           case 403:
             // this.$router.push("/login");

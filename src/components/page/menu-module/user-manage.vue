@@ -172,6 +172,7 @@
               defaultPageSize: 17,
               total: 0,
               showQuickJumper: true,
+              size: 'large',
               // 使用一个箭头函数来指向当前 Vue 实例
               onChange: (current) => this.changePage(current)
             },

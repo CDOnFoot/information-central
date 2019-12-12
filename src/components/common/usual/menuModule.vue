@@ -1,13 +1,18 @@
 <template>
     <div class="menu-module"
          @click="throwTheRouter"
-         :style="{ width: moduleWidth, height: moduleHeight }">
+         :style="{ width: '100%', height: moduleHeight }">
       <div class="menu-module-content">
         <tr class="empty-header" :height="emptyHeight">
           <th :width="emptyWidth"></th>
           <th></th>
           <th></th>
         </tr>
+        <!--<tr class="empty-header">
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>-->
         <tr class="menu-module-name">
           <td class="empty-element"></td>
           <td :width="moduleNameWidth">{{ moduleName }}</td>

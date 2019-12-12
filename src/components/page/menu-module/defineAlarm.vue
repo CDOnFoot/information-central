@@ -110,6 +110,7 @@
               defaultCurrent: 1,
               defaultPageSize: 18,
               total: 0,
+              size: 'large',
               onChange: (current) => this.changePage(current)
             },
 

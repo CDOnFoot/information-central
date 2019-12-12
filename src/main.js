@@ -8,7 +8,7 @@ import $ from 'jquery'
 import  Vuex from 'vuex'
 import store from './store'
 // import '../static/css/iconfont.css';
-import 'ant-design-vue/dist/antd.css';  // or 'ant-design-vue/dist/antd.less'
+import 'ant-design-vue/dist/antd.less';  // or 'ant-design-vue/dist/antd.less'
 // import '../static/css/animate.css';
 // import '../src/assets/css/animate.css';
 import './assets/css/default.css';
@@ -47,6 +47,8 @@ import '../src/assets/font/iconfont.js';
 Vue.prototype.$common= common;
 Vue.prototype.$api= api;
 Vue.prototype.$http= http;
+// jquery 继承原型链
+Vue.prototype.$ = $;
     //路由判断权限
 
 /* eslint-disable no-new */

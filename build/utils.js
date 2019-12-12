@@ -59,7 +59,17 @@ exports.cssLoaders = function (options) {
   return {
     css: generateLoaders(),
     postcss: generateLoaders(),
-    less: generateLoaders('less'),
+    // less: generateLoaders('less'),
+    /**
+     * @description 增加 antd less 变量的修改
+     * @author xyx
+     */
+    less: generateLoaders('less', {
+      modifyVars: {
+        'primary-color': '#2ac7e8'
+      },
+      javascriptEnabled: true
+    }),
     sass: generateLoaders('sass', { indentedSyntax: true }),
     scss: generateLoaders('sass'),
     stylus: generateLoaders('stylus'),

@@ -1,10 +1,11 @@
 <template>
   <div class="main-menu">
-    <div class="main-menu-background">
-      <div class="main-menu-content" :style="{ 'font-size': fontSize, margin: '10px 0 0 60px' }">
+    <div class="main-menu-background" style="">
+      <div ref="menuNode" class="main-menu-content" :style="{ width: '100%', 'font-size': fontSize, margin: '10px 15px 0 60px' }">
         <tr class="table-header"
+            :height="tableHeaderHeight"
             :style="{}">
-          <th class="table-header-title" :width="tableHeaderWidth" :height="tableHeaderHeight"></th>
+          <th class="table-header-title" :width="tableHeaderWidth"></th>
           <th :width="tableHeaderWidth">报警管理</th>
           <th :width="tableHeaderWidth">门禁管理</th>
           <th :width="tableHeaderWidth">视频监控管理</th>
@@ -56,7 +57,7 @@
                            @checkTheRouter="changeRouter"></menu-module>
             </div>
           </td>
-          <td>
+          <!--<td>
             <div>
               <menu-module module-name="moduleTest"
                            module-icon="setting"
@@ -68,7 +69,7 @@
                            :module-name-width="nameWidth"
                            @checkTheRouter="moduleTest"></menu-module>
             </div>
-          </td>
+          </td>-->
         </tr>
 
         <tr class="the-second-row">
@@ -139,21 +140,61 @@
     },
 
     mounted () {
-      const width = window.screen.width;
-      const height = window.screen.height;
-      // console.log('current width:' + width,'current height:' + height);
-      // this.fontSize = width/73 + 'px';
-      this.fontSize = '2.6vh';
-      this.tableHeaderWidth = parseInt(width/6).toString();
-      this.tableHeaderHeight = parseInt(height/11).toString();
-      this.menuHeight = parseInt(height/5) + 'px';
-      this.moduleWidth = width/7 + 'px';
-      this.moduleHeight = width/12 + 'px';
       const that = this;
-      this.emptyWidth = parseInt(parseInt(that.moduleWidth)/5) + 'px';
-      this.emptyHeight = parseInt(parseInt(that.moduleHeight)/5) + 'px';
-      this.iconWidth = width/110;
-      this.nameWidth = width/16;
+      this.$nextTick(() => {
+        const width = window.screen.width;
+        const height = window.screen.height;
+        // 获取节点
+        let menuNode = that.$refs.menuNode;
+        const oppositeWidth = menuNode.getBoundingClientRect().width;
+        // console.log(menuNode.getBoundingClientRect());
+        // const oppositeHeight = menuNode.getBoundingClientRect().height;
+        // 通过 jquery 设置整体背景高度
+        this.$('.main-menu-background').css('height', window.innerHeight * 0.83);
+        // 整体字体大小
+        this.fontSize = '2.6vh';
+        this.tableHeaderWidth = (oppositeWidth * 0.18).toString();
+        this.tableHeaderHeight = (window.innerHeight * 0.09).toString();
+
+        this.moduleHeight = window.innerHeight * 0.2 + 'px';
+        // 每一行的高度
+        this.menuHeight = window.innerHeight * 0.2 + 'px';
+
+        // 模块内的布局
+        this.emptyWidth = that.tableHeaderWidth * 0.16;
+        this.emptyHeight = oppositeWidth * 0.034;
+        this.iconWidth = that.tableHeaderWidth * 0.1;
+        this.nameWidth = that.tableHeaderWidth * 0.5;
+      });
+
+      // window.resize 监听窗口尺寸
+      window.onresize = () => {
+        return (() => {
+          // 通过 Vue API 将状态改变推入任务队列
+          that.$nextTick(() => {
+            // 获取节点
+            let menuNode = that.$refs.menuNode;
+            const oppositeWidth = menuNode.getBoundingClientRect().width;
+            // const oppositeHeight = menuNode.getBoundingClientRect().height;
+            // 通过 jquery 设置整体背景高度
+            this.$('.main-menu-background').css('height', window.innerHeight * 0.83);
+            // 整体字体大小
+            this.fontSize = '2.6vh';
+            this.tableHeaderWidth = (oppositeWidth * 0.18).toString();
+            this.tableHeaderHeight = (window.innerHeight * 0.09).toString();
+
+            this.moduleHeight = window.innerHeight * 0.2 + 'px';
+            // 每一行的高度
+            this.menuHeight = window.innerHeight * 0.2 + 'px';
+
+            // 模块内的布局
+            this.emptyWidth = that.tableHeaderWidth * 0.16;
+            this.emptyHeight = oppositeWidth * 0.034;
+            this.iconWidth = that.tableHeaderWidth * 0.1;
+            this.nameWidth = that.tableHeaderWidth * 0.5;
+          })
+        })()
+      }
     },
 
     methods: {
@@ -228,7 +269,7 @@
 
   .main-menu-background {
     width: 90%;
-    min-height: 80vh;
+    /*min-height: 80vh;*/
     margin: 0 auto;
     padding: 35px 0 0 20px;
     /*justify-content: center;*/

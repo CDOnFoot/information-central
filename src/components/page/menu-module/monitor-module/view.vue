@@ -6,7 +6,7 @@
         <div class="borde">旁路</div>
         <div id="chart1" class="mk-chart">
           <div class="number">
-            000V
+            {{voltage}}
           </div>
           <div class="title">
             相电压
@@ -14,7 +14,7 @@
         </div>
         <div id="chart2" class="mk-chart">
           <div class="number">
-            000V
+            {{frequency}}
           </div>
           <div class="title">
             频率
@@ -55,6 +55,8 @@
     data() {
       return {
         devtype: '',
+        voltage: '000V',
+        frequency: '000V',
       };
     },
     props: ['devType'],

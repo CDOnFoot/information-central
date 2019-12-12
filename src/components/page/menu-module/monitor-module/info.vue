@@ -4,7 +4,7 @@
     <div class="mk">
       <div class="mk-container">
         <div class="mk-pic">
-          <img src="../../../../assets/img/monitor/dev2.png" alt="">
+          <img :src="imgUrl" alt="">
         </div>
       </div>
     </div>
@@ -408,6 +408,7 @@
     data() {
       return {
         devtype: '',
+        imgUrl: require('../../../../assets/img/monitor/dev2.png'),
         data: testdata,
         columns,
         loading: false,
@@ -422,12 +423,21 @@
       }
     },
     mounted() {
+      this.getPoints()
 
     },
     methods: {
       initPage() {
         console.log(this.devtype);
+      },
+      getPoints() {
+        let url = '/Point/api/GetPoint/GetPointValue';
+        this.$http.post(url, {
+          id: this.devtype.EntityId
+        }).then(res => {
+          console.log(res);
 
+        });
       },
     },
   };
@@ -504,14 +514,17 @@
     background-color: #CCCCCC;
     -webkit-border-radius: 6px;
   }
+
   ::-webkit-scrollbar-track-piece {
     background-color: #fff; /*滚动条的背景颜色*/
     -webkit-border-radius: 0; /*滚动条的圆角宽度*/
   }
+
   ::-webkit-scrollbar {
     width: 10px; /*滚动条的宽度*/
     height: 8px; /*滚动条的高度*/
   }
+
   ::-webkit-scrollbar-thumb:vertical { /*垂直滚动条的样式*/
     height: 50px;
     background-color: #999;
@@ -520,6 +533,7 @@
     outline-offset: -2px;
     border: 2px solid #fff;
   }
+
   ::-webkit-scrollbar-thumb:hover { /*滚动条的hover样式*/
     height: 50px;
     background-color: #9f9f9f;

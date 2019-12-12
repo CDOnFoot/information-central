@@ -5,7 +5,7 @@
       <div class="mk-container">
         <div class="borde">能量流图</div>
         <div class="mk-energy">
-          <img src="../../../../assets/img/monitor/dev2.png" alt="">
+          <img :src="imgUrl" alt="">
         </div>
       </div>
     </div>
@@ -15,7 +15,7 @@
         <div class="borde">供电状态</div>
         <div class="mk-electricity">
           <!--<img src="../../../../assets/img/计划开行.png" alt="">-->
-          <div class="mk-electricity-status">正常</div>
+          <div class="mk-electricity-status">{{status}}</div>
         </div>
       </div>
     </div>
@@ -41,7 +41,6 @@
 <script>
 
   const testdata = [
-
     {
       CheckPoint: false,
       Code: "JKD",
@@ -213,6 +212,8 @@
     data() {
       return {
         devtype: '',
+        imgUrl: require('../../../../assets/img/monitor/dev2.png'),
+        status: '正常',
         data: testdata,
         columns,
         loading: false,

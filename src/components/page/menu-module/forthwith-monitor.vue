@@ -22,7 +22,7 @@
             <a-tab-pane tab="概况" key="3"></a-tab-pane>
             <a-button slot="tabBarExtraContent">
               <a-badge dot :count="10">
-                <a-icon type="notification" />
+                <a-icon type="notification"/>
               </a-badge>
             </a-button>
           </a-tabs>
@@ -68,6 +68,7 @@
         this.$http.get(this.$api.monitorEquipments).then(res => {
           if (res.data.value) {
             this.menuList = res.data.value;
+            console.log(this.menuList);
             this.devType = res.data.value[0];
             this.changeTab(1);
           }

@@ -590,9 +590,11 @@
       });
     },
 
-    created() {},
+    created() {
+    },
 
-    beforeMount() {},
+    beforeMount() {
+    },
 
     mounted() {
       this.initTable();
@@ -837,6 +839,38 @@
   .modal-form {
     display: flex;
     flex-direction: row;
+  }
+
+  /*/deep/ .ant-table-body {*/
+  /*font-size: .2em;*/
+  /*}*/
+
+  /deep/ .ant-form-item-label label {
+    color: #ffffff;
+  }
+
+  /*/deep/ .ant-pagination {*/
+  /*color: #ffffff;*/
+  /*}*/
+
+  /*/deep/ .ant-pagination-item a {*/
+  /*color: #ffffff;*/
+  /*}*/
+
+  /*/deep/ .ant-pagination-item-active a {*/
+  /*color: #000000;*/
+  /*}*/
+
+  /*/deep/ .ant-pagination-jump-prev, .ant-pagination-jump-next {*/
+  /*color: #ffffff;*/
+  /*}*/
+
+  /*/deep/ .ant-pagination-prev a, /deep/ .ant-pagination-next a {*/
+  /*color: #ffffff;*/
+  /*}*/
+
+  /deep/ .ant-pagination-jump-prev .ant-pagination-item-container .ant-pagination-item-ellipsis, /deep/ .ant-pagination-jump-next .ant-pagination-item-container .ant-pagination-item-ellipsis {
+    color: #ffffff;
   }
 
 </style>

@@ -5,14 +5,34 @@
         <!-- <a-button type="primary" @click="toggleCollapsed" style="margin-bottom: 16px">
           <a-icon :type="collapsed ? 'menu-unfold' : 'menu-fold'" />
         </a-button> -->
-        <a-menu :defaultSelectedKeys="[2]" mode="inline" theme="dark" :inlineCollapsed="collapsed">
+
+        <!--<a-menu :defaultSelectedKeys="[2]" mode="inline" theme="dark" :inlineCollapsed="collapsed">-->
+        <!--<template v-for="item in menu">-->
+        <!--<a-menu-item :key="item.Code" @click="changeMenu(item)">-->
+        <!--&lt;!&ndash;<a-icon type="inbox"/>&ndash;&gt;-->
+        <!--<span>{{item.DisplayName}}</span>-->
+        <!--</a-menu-item>-->
+        <!--</template>-->
+        <!--</a-menu>-->
+
+
+        <a-menu
+          :defaultSelectedKeys="[menu[0].Children[0].EntityId]"
+          :defaultOpenKeys="[menu[0].Code]"
+          mode="inline"
+          theme="dark"
+          :inlineCollapsed="collapsed"
+        >
           <template v-for="item in menu">
-            <a-menu-item :key="item.EntityId" @click="changeMenu(item)">
-              <!--<a-icon type="inbox"/>-->
-              <span>{{item.DisplayName}}</span>
-            </a-menu-item>
+            <a-sub-menu key="{item.Code}">
+              <span slot="title"><a-icon type="mail"/><span>{{item.DisplayName}}</span></span>
+              <a-menu-item v-for="item2 in item.Children" key="{item2.EntityId}">{{item2.DisplayName}}</a-menu-item>
+
+            </a-sub-menu>
           </template>
+
         </a-menu>
+
       </div>
       <div class="show-area">
         <div class="select-taps">
@@ -103,10 +123,10 @@
           if (res.data.value) {
             this.data = res.data.value;
             this.menu = this.unique(res.data.value);
-            console.log(this.menu)
+            console.log(this.menu);
 
-            // this.devType = res.data.value[0];
-            // this.changeTab(1);
+            this.devType = this.menu[0];
+            this.changeTab(1);
 
 
           }
@@ -213,53 +233,53 @@
     background-image: linear-gradient(to right, blue, black);
   }
 
-  /deep/ .ant-menu-dark.ant-menu-inline .ant-menu-item, .ant-menu-dark.ant-menu-inline .ant-menu-submenu-title {
-    width: 110px;
-    outline: 0;
-    padding: 2px 12px;
-    display: block;
-    color: #ffffff;
-    font-weight: bold;
-    text-shadow: 1px 1px #2250ca;
-    border: 1px solid #1c252b;
-    border-radius: 3px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    background: #232B30; /* old browsers */
-    background: -moz-linear-gradient(top, #3D4850 3%, #313d45 4%, #232B30 100%); /* firefox */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(3%, #3D4850), color-stop(4%, #313d45), color-stop(100%, #232B30)); /* webkit */
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3D4850', endColorstr='#232B30', GradientType=0); /* ie */
-    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2); /* CSS3 */
-    -moz-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2); /* Firefox */
-    -webkit-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2); /* Safari, Chrome */
-  }
+  /*/deep/ .ant-menu-dark.ant-menu-inline .ant-menu-item, .ant-menu-dark.ant-menu-inline .ant-menu-submenu-title {*/
+  /*width: 110px;*/
+  /*outline: 0;*/
+  /*padding: 2px 12px;*/
+  /*display: block;*/
+  /*color: #ffffff;*/
+  /*font-weight: bold;*/
+  /*text-shadow: 1px 1px #2250ca;*/
+  /*border: 1px solid #1c252b;*/
+  /*border-radius: 3px;*/
+  /*-moz-border-radius: 3px;*/
+  /*-webkit-border-radius: 3px;*/
+  /*background: #232B30; !* old browsers *!*/
+  /*background: -moz-linear-gradient(top, #3D4850 3%, #313d45 4%, #232B30 100%); !* firefox *!*/
+  /*background: -webkit-gradient(linear, left top, left bottom, color-stop(3%, #3D4850), color-stop(4%, #313d45), color-stop(100%, #232B30)); !* webkit *!*/
+  /*filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3D4850', endColorstr='#232B30', GradientType=0); !* ie *!*/
+  /*box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2); !* CSS3 *!*/
+  /*-moz-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2); !* Firefox *!*/
+  /*-webkit-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2); !* Safari, Chrome *!*/
+  /*}*/
 
-  /deep/ .ant-menu-item {
-    height: 40px;
-    line-height: 40px;
-    transition: .1s linear;
-  }
+  /*/deep/ .ant-menu-item {*/
+  /*height: 40px;*/
+  /*line-height: 40px;*/
+  /*transition: .1s linear;*/
+  /*}*/
 
-  /deep/ .ant-menu-vertical .ant-menu-item:not(:last-child), .ant-menu-vertical-left .ant-menu-item:not(:last-child), .ant-menu-vertical-right .ant-menu-item:not(:last-child), .ant-menu-inline .ant-menu-item:not(:last-child) {
-    margin-bottom: -3px;
-    border-radius: 5px;
-  }
+  /*/deep/ .ant-menu-vertical .ant-menu-item:not(:last-child), .ant-menu-vertical-left .ant-menu-item:not(:last-child), .ant-menu-vertical-right .ant-menu-item:not(:last-child), .ant-menu-inline .ant-menu-item:not(:last-child) {*/
+  /*margin-bottom: -3px;*/
+  /*border-radius: 5px;*/
+  /*}*/
 
-  /deep/ .ant-menu-dark.ant-menu-inline .ant-menu-item, .ant-menu-dark.ant-menu-inline .ant-menu-submenu-title {
-    margin-bottom: -3px;
-    border-radius: 5px;
-  }
+  /*/deep/ .ant-menu-dark.ant-menu-inline .ant-menu-item, .ant-menu-dark.ant-menu-inline .ant-menu-submenu-title {*/
+  /*margin-bottom: -3px;*/
+  /*border-radius: 5px;*/
+  /*}*/
 
-  /deep/ .ant-menu.ant-menu-dark .ant-menu-item-selected,
-  .ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected {
-    width: 125px;
-    height: 50px;
-    line-height: 50px;
-  }
+  /*/deep/ .ant-menu.ant-menu-dark .ant-menu-item-selected,*/
+  /*.ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected {*/
+  /*width: 125px;*/
+  /*height: 50px;*/
+  /*line-height: 50px;*/
+  /*}*/
 
-  /deep/ .ant-menu-dark, .ant-menu-dark .ant-menu-sub {
-    color: rgba(255, 255, 255, 0.65);
-    background: transparent;
-  }
+  /*/deep/ .ant-menu-dark, .ant-menu-dark .ant-menu-sub {*/
+  /*color: rgba(255, 255, 255, 0.65);*/
+  /*background: transparent;*/
+  /*}*/
 
 </style>

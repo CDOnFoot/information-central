@@ -400,8 +400,8 @@
         let param={
           };
         this.$http.postList(self.$api.getTemplateInfo, param).then(res =>{
-          console.log('模板内的模块内容：');
-          console.log(res);
+          // console.log('模板内的模块内容：');
+          // console.log(res);
           //调取数据成功
           if(res.data){
             if (res.data.code === "0") {
@@ -685,6 +685,7 @@
        */
       returnMenu () {
         this.$router.push('/home');
+        this.setFlag = false;
       }
     }
   }

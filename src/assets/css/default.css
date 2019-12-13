@@ -542,3 +542,11 @@ background: #2250ca;
     box-shadow: 0px 2px 3px 2px #0259ad inset;
     border: #193a4e 2px solid;
   }
+
+/*/deep/ .ant-form-item-label label {
+  color: #ffffff;
+}*/
+
+/deep/ .ant-pagination-jump-prev .ant-pagination-item-container .ant-pagination-item-ellipsis, /deep/ .ant-pagination-jump-next .ant-pagination-item-container .ant-pagination-item-ellipsis {
+  color: #ffffff;
+}

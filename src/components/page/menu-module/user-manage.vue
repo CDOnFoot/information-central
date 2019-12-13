@@ -137,13 +137,13 @@
       title: '状 态',
       dataIndex: 'Status',
       align: 'center',
-      width: 40
+      width: '5%'
     },
     {
       title: '操 作',
       // dataIndex: 'tel',
       align: 'center',
-      width: '15%',
+      width: '18%',
       scopedSlots: { customRender: 'operation' }
     }
   ];
@@ -689,7 +689,7 @@
                   title: '错误',
                   content: '发生了一些错误：' + res.status + '，请检查您的输入信息',
                   onOk() {
-                    that.isShowModal = false;
+                    // that.isShowModal = false;
                   },
                 });
               }

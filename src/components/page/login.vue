@@ -317,7 +317,7 @@ export default {
                 // setTimeout(()=>{
                 // },200);
               } else {
-                self.$message.error(res.data.msg);
+                self.$message.error(res.data.Message);
                 self.loadFlag = false;
               }
             } else {

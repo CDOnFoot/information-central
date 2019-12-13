@@ -572,6 +572,7 @@
           defaultCurrent: 1,
           defaultPageSize: 20,
           total: 0,
+          size: 'large',
           showQuickJumper: true,
           onChange: current => this.changePage(current)
         },

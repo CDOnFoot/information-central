@@ -6,7 +6,7 @@
           <a-icon :type="collapsed ? 'menu-unfold' : 'menu-fold'" />
         </a-button> -->
         <a-menu :defaultSelectedKeys="[2]" mode="inline" theme="dark" :inlineCollapsed="collapsed">
-          <template v-for="item in menuList">
+          <template v-for="item in menu">
             <a-menu-item :key="item.EntityId" @click="changeMenu(item)">
               <!--<a-icon type="inbox"/>-->
               <span>{{item.DisplayName}}</span>
@@ -41,7 +41,8 @@
     name: "forthwith-monitor",
     data() {
       return {
-        menuList: '',
+        data: '',
+        menu: '',
         devType: '',
         collapsed: false,
       }
@@ -64,13 +65,50 @@
       this.initMenu();
     },
     methods: {
+      unique(objArr) {
+        // let res = [];
+        // let obj = {};
+        // for (let i = 0; i < objArr.length; i++) {
+        //   if (!obj[objArr[i].Code]) {
+        //     res.push(objArr[i]);
+        //     obj[objArr[i].Code] = true;
+        //   }
+        // }
+        // return res;
+        let res = [];
+        let obj = {};
+        for (let i = 0; i < objArr.length; i++) {
+          if (!obj[objArr[i].Code]) {
+            let newObj = {
+              Code: objArr[i].Code,
+              DisplayName: objArr[i].Code,
+              Children: [],
+            };
+            newObj.Children.push(objArr[i]);
+            res.push(newObj);
+            obj[objArr[i].Code] = true;
+          } else {
+            res.forEach(function (item) {
+              if (item.Code == objArr[i].Code) {
+                item.Children.push(objArr[i]);
+              }
+            });
+          }
+        }
+        return res;
+
+      },
       initMenu() {
         this.$http.get(this.$api.monitorEquipments).then(res => {
           if (res.data.value) {
-            this.menuList = res.data.value;
-            console.log(this.menuList);
-            this.devType = res.data.value[0];
-            this.changeTab(1);
+            this.data = res.data.value;
+            this.menu = this.unique(res.data.value);
+            console.log(this.menu)
+
+            // this.devType = res.data.value[0];
+            // this.changeTab(1);
+
+
           }
         });
       },

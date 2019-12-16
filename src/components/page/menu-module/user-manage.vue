@@ -411,13 +411,25 @@
                 this.$http.get(that.$api.getUsers).then(res => {
                   let tableContainer = [];
                   that.pagination.total = res.data.value.length;
+                  // 用户 list
                   const table = res.data.value;
                   const length = that.pagination.defaultPageSize;
                   for (let i=0;i<=length;i++) {
                     table[i].Created = that.$common.timestampToTime(table[i].Created);
                     table[i].Updated = that.$common.timestampToTime(table[i].Updated);
                     table[i].Expired = that.$common.timestampToTime(table[i].Expired);
-                    table[i].Status = table[i].Status === 'Enable' ? '启用' : '未启用';
+                    // table[i].Status = table[i].Status === 'Enable' ? '启用' : '未启用';
+                    let statusFlag = table[i].Status;
+                    switch (statusFlag) {
+                      case 'Enable':
+                        table[i].Status = '启用';
+                        break;
+                      case 'Locked':
+                        table[i].Status = '锁定';
+                        break;
+                      case 'Disabled':
+                        table[i].Status = '删除';
+                    }
                     that.tableList.push(table[i]);
                   }
                   that.loading = false;
@@ -425,6 +437,7 @@
               }
             })
           },
+
         /**
          * @function 当页码改变时的 callback
          * @param page

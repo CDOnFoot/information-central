@@ -16,10 +16,10 @@
           <div class="content-main-mb">
             <div class="main-item-mb">
               <div class="item-mb" v-for="(item,index) in mbList.records" :key="index" @click="mbSelect(index)">
-                
+
                 <div class="item-mb-content" :class="index===mbTempIndex?'active':''">
                   <div class="mb-item-title">{{item.templateName}}</div>
-                  <img :src="require('../../assets/img/mbBg'+index+'.png') "  alt="" class="item-mb-img"> 
+                  <img :src="require('../../assets/img/mbBg'+index+'.png') "  alt="" class="item-mb-img">
                 </div>
               </div>
             </div>
@@ -51,7 +51,7 @@
     </a-layout-header>
 
     <a-layout-content style="padding: 0 1%;height:100%;min-height: calc(100vh - 8.3%);">
-     
+
       <router-view :menuIndex="menuIndex" :setFlag="setFlag" :menuId="menuId" :mbId="mbId" @uploadSetMsg="uploadSaveSetMsg" :visualHomeList="visualHomeList"></router-view>
     </a-layout-content>
 
@@ -119,7 +119,7 @@
 
   export default {
     name: "home",
-   
+
     data(){
       return{
         menuList:[],
@@ -367,7 +367,7 @@
           })
         })
 
-         //查看界面可视化布局信息 
+         //查看界面可视化布局信息
         this.getUserVisualization();
 
         // setTimeout(()=>{
@@ -461,7 +461,7 @@
             self.mbTempIndex = '';
             return false;
         }
-     
+
 
       },
       // 保存模版信息
@@ -661,7 +661,7 @@
                 self.loadFlag = false;
               }, 1000);
               self.$router.push('/home/'+self.menuList[param].key);
-          
+
             })
         }
       },

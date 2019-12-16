@@ -15,24 +15,27 @@
         <!--</template>-->
         <!--</a-menu>-->
 
-
         <a-menu
           :defaultSelectedKeys="[menu[0].Children[0].EntityId]"
           :defaultOpenKeys="[menu[0].Code]"
           mode="inline"
           theme="dark"
           :inlineCollapsed="collapsed"
+          :openKeys="openKeys"
+          @openChange="onOpenChange"
         >
           <template v-for="item in menu">
-            <a-sub-menu key="{item.Code}">
-              <span slot="title"><a-icon type="mail"/><span>{{item.DisplayName}}</span></span>
-              <a-menu-item v-for="item2 in item.Children" key="{item2.EntityId}">{{item2.DisplayName}}</a-menu-item>
-
+            <a-sub-menu :key="item.Code">
+              <span slot="title">
+                <a-icon type="mail"/>
+                <span>{{item.DisplayName}}</span>
+              </span>
+              <a-menu-item v-for="item2 in item.Children" :key="item2.EntityId">
+                {{item2.DisplayName}}
+              </a-menu-item>
             </a-sub-menu>
           </template>
-
         </a-menu>
-
       </div>
       <div class="show-area">
         <div class="select-taps">
@@ -65,6 +68,8 @@
         menu: '',
         devType: '',
         collapsed: false,
+        rootSubmenuKeys: [],
+        openKeys: [],
       }
     },
     watch: {
@@ -106,6 +111,9 @@
             };
             newObj.Children.push(objArr[i]);
             res.push(newObj);
+
+            this.rootSubmenuKeys.push(objArr[i].Code);
+
             obj[objArr[i].Code] = true;
           } else {
             res.forEach(function (item) {
@@ -115,8 +123,18 @@
             });
           }
         }
-        return res;
 
+        this.openKeys.push(this.rootSubmenuKeys[0]);
+
+        return res;
+      },
+      onOpenChange(openKeys) {
+        const latestOpenKey = openKeys.find(key => this.openKeys.indexOf(key) === -1);
+        if (this.rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
+          this.openKeys = openKeys;
+        } else {
+          this.openKeys = latestOpenKey ? [latestOpenKey] : [];
+        }
       },
       initMenu() {
         this.$http.get(this.$api.monitorEquipments).then(res => {

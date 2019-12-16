@@ -4,6 +4,9 @@
       <img class="mk-bg" src="../../../../assets/img/main-border-b.png" alt="">
       <div class="mk-container">
         <div class="borde">能量流图</div>
+        <div class="pointStatusTime">
+          {{pointStatus_ti}}
+        </div>
         <div class="mk-energy">
           <img :src="imgUrl" alt="">
         </div>
@@ -13,6 +16,9 @@
       <img class="mk-bg" src="../../../../assets/img/main-border-b.png" alt="">
       <div class="mk-container">
         <div class="borde">供电状态</div>
+        <div class="pointStatusTime">
+          {{pointStatus_ti}}
+        </div>
         <div class="mk-electricity">
           <!--<img src="../../../../assets/img/计划开行.png" alt="">-->
           <div class="mk-electricity-status">{{status}}</div>
@@ -23,6 +29,9 @@
       <img class="mk-bg" src="../../../../assets/img/main-border-b.png" alt="" style="width: 95%; left: 2.5%">
       <div class="mk-container" style="width: 90%; left: 5%;">
         <div class="borde">电池后备时间</div>
+        <div class="pointStatusTime">
+          {{pointStatus_ti}}
+        </div>
         <div class="mk-battery">
           <a-table
             :showHeader="true"
@@ -109,74 +118,74 @@
       TechnicalAddress: "10.28.3.199:4001",
       TechnicalParameter: null,
     },
-    {
-      CheckPoint: false,
-      Code: "JKD",
-      ControlBoxSerial: "",
-      CustomProperties: null,
-      Description: "现场门禁智能控制单元-门JK-01-02",
-      DisplayName: "JK-01-02",
-      EntityId: 4,
-      JsonCustomColumn: null,
-      Location: "数据中心B1层门2",
-      Manufacturer: null,
-      Model: "门",
-      Name: "JK-01-02",
-      TPType: "Modbus",
-      TechnicalAddress: "10.28.3.199:4001",
-      TechnicalParameter: null,
-    },
-    {
-      CheckPoint: false,
-      Code: "JKD",
-      ControlBoxSerial: "",
-      CustomProperties: null,
-      Description: "现场门禁智能控制单元-门JK-01-02",
-      DisplayName: "JK-01-02",
-      EntityId: 4,
-      JsonCustomColumn: null,
-      Location: "数据中心B1层门2",
-      Manufacturer: null,
-      Model: "门",
-      Name: "JK-01-02",
-      TPType: "Modbus",
-      TechnicalAddress: "10.28.3.199:4001",
-      TechnicalParameter: null,
-    },
-    {
-      CheckPoint: false,
-      Code: "JKD",
-      ControlBoxSerial: "",
-      CustomProperties: null,
-      Description: "现场门禁智能控制单元-门JK-01-02",
-      DisplayName: "JK-01-02",
-      EntityId: 4,
-      JsonCustomColumn: null,
-      Location: "数据中心B1层门2",
-      Manufacturer: null,
-      Model: "门",
-      Name: "JK-01-02",
-      TPType: "Modbus",
-      TechnicalAddress: "10.28.3.199:4001",
-      TechnicalParameter: null,
-    },
-    {
-      CheckPoint: false,
-      Code: "JKD",
-      ControlBoxSerial: "",
-      CustomProperties: null,
-      Description: "现场门禁智能控制单元-门JK-01-02",
-      DisplayName: "JK-01-02",
-      EntityId: 4,
-      JsonCustomColumn: null,
-      Location: "数据中心B1层门2",
-      Manufacturer: null,
-      Model: "门",
-      Name: "JK-01-02",
-      TPType: "Modbus",
-      TechnicalAddress: "10.28.3.199:4001",
-      TechnicalParameter: null,
-    },
+    // {
+    //   CheckPoint: false,
+    //   Code: "JKD",
+    //   ControlBoxSerial: "",
+    //   CustomProperties: null,
+    //   Description: "现场门禁智能控制单元-门JK-01-02",
+    //   DisplayName: "JK-01-02",
+    //   EntityId: 4,
+    //   JsonCustomColumn: null,
+    //   Location: "数据中心B1层门2",
+    //   Manufacturer: null,
+    //   Model: "门",
+    //   Name: "JK-01-02",
+    //   TPType: "Modbus",
+    //   TechnicalAddress: "10.28.3.199:4001",
+    //   TechnicalParameter: null,
+    // },
+    // {
+    //   CheckPoint: false,
+    //   Code: "JKD",
+    //   ControlBoxSerial: "",
+    //   CustomProperties: null,
+    //   Description: "现场门禁智能控制单元-门JK-01-02",
+    //   DisplayName: "JK-01-02",
+    //   EntityId: 4,
+    //   JsonCustomColumn: null,
+    //   Location: "数据中心B1层门2",
+    //   Manufacturer: null,
+    //   Model: "门",
+    //   Name: "JK-01-02",
+    //   TPType: "Modbus",
+    //   TechnicalAddress: "10.28.3.199:4001",
+    //   TechnicalParameter: null,
+    // },
+    // {
+    //   CheckPoint: false,
+    //   Code: "JKD",
+    //   ControlBoxSerial: "",
+    //   CustomProperties: null,
+    //   Description: "现场门禁智能控制单元-门JK-01-02",
+    //   DisplayName: "JK-01-02",
+    //   EntityId: 4,
+    //   JsonCustomColumn: null,
+    //   Location: "数据中心B1层门2",
+    //   Manufacturer: null,
+    //   Model: "门",
+    //   Name: "JK-01-02",
+    //   TPType: "Modbus",
+    //   TechnicalAddress: "10.28.3.199:4001",
+    //   TechnicalParameter: null,
+    // },
+    // {
+    //   CheckPoint: false,
+    //   Code: "JKD",
+    //   ControlBoxSerial: "",
+    //   CustomProperties: null,
+    //   Description: "现场门禁智能控制单元-门JK-01-02",
+    //   DisplayName: "JK-01-02",
+    //   EntityId: 4,
+    //   JsonCustomColumn: null,
+    //   Location: "数据中心B1层门2",
+    //   Manufacturer: null,
+    //   Model: "门",
+    //   Name: "JK-01-02",
+    //   TPType: "Modbus",
+    //   TechnicalAddress: "10.28.3.199:4001",
+    //   TechnicalParameter: null,
+    // },
 
   ];
 
@@ -211,7 +220,8 @@
     name: "kpi",
     data() {
       return {
-        devtype: '',
+        curequipment: this.curEquipment,
+        pointStatus_ti: this.pointStatus_Ti,
         imgUrl: require('../../../../assets/img/monitor/dev2.png'),
         status: '正常',
         data: testdata,
@@ -219,15 +229,20 @@
         loading: false,
       };
     },
-    props: ['devType'],
+    props: ['curEquipment', 'pointStatus_Ti'],
     watch: {
-      devType: function (val) {
-        this.devtype = val;
-        // console.log(this.devtype);
+      curEquipment: function (val) {
+        this.curequipment = val;
+        console.log(this.curequipment);
+      },
+      pointStatus_Ti: function (val) {
+        this.pointStatus_ti = val;
+        console.log(this.pointStatus_ti);
       }
     },
     mounted() {
-
+      console.log(this.curequipment);
+      console.log(this.pointStatus_ti);
     },
     methods: {},
   };
@@ -262,6 +277,15 @@
     position: absolute;
     top: 8%;
     left: 8%;
+  }
+
+  .pointStatusTime {
+    /*font-weight: 700;*/
+    color: #ffffff;
+    position: absolute;
+    top: 20px;
+    right: 15px;
+    font-size: 12px;
   }
 
   .mk-energy img {

@@ -93,7 +93,7 @@
       title: '登录名',
       dataIndex: 'Name',
       align: 'center',
-      sorter: true,
+      // sorter: true,
       width: '10%',
       // scopedSlots: { customRender: 'name' }
     },

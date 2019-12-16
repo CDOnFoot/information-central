@@ -158,7 +158,7 @@
      * @param from
      * @param next
      */
-    beforeRouteUpdate (to, from, next) {
+    /*beforeRouteUpdate (to, from, next) {
       let self = this;
       var routerVal = to.matched[1].path;
       // 增加一个新的跳转，用于 debug
@@ -176,10 +176,10 @@
             next();
           }
         });
-        /*let paramList={
+        /!*let paramList={
           userNum: self.$common.getCookie('dvptId'),
           menuNum: self.menuId
-          };*/
+          };*!/
         let paramList = new FormData();
         paramList.append('userNum', '18324');
         paramList.append('userNum', 'CD01');
@@ -206,7 +206,7 @@
     //   }else{
     //         this.$message.warning('功能暂未开启');
     //   }
-    },
+    },*/
     // activated(){
     //   console.log(this.menuId);
     // },

@@ -414,24 +414,14 @@
                   // 用户 list
                   const table = res.data.value;
                   const length = that.pagination.defaultPageSize;
-                  for (let i=0;i<=length;i++) {
-                    table[i].Created = that.$common.timestampToTime(table[i].Created);
-                    table[i].Updated = that.$common.timestampToTime(table[i].Updated);
-                    table[i].Expired = that.$common.timestampToTime(table[i].Expired);
-                    // table[i].Status = table[i].Status === 'Enable' ? '启用' : '未启用';
-                    let statusFlag = table[i].Status;
-                    switch (statusFlag) {
-                      case 'Enable':
-                        table[i].Status = '启用';
-                        break;
-                      case 'Locked':
-                        table[i].Status = '锁定';
-                        break;
-                      case 'Disabled':
-                        table[i].Status = '删除';
-                    }
-                    that.tableList.push(table[i]);
-                  }
+                  // 遍历处理数据
+                  table.forEach((value, index) => {
+                    value.Created = that.$common.timestampToTime(value.Created);
+                    value.Updated = that.$common.timestampToTime(value.Updated);
+                    value.Expired = that.$common.timestampToTime(value.Expired);
+                    value.Status = value.Status === 'Enable' ? '启用' : '未启用';
+                  });
+                  that.tableList = table;
                   that.loading = false;
                 })
               }
@@ -496,7 +486,7 @@
                   value.Created = this.$common.timestampToTime(value.Created);
                   value.Updated = this.$common.timestampToTime(value.Updated);
                   value.Expired = this.$common.timestampToTime(value.Expired);
-                  value.Status = value.Status === 'Enable' ? '启用' : '停用';
+                  value.Status = value.Status === 'Enable' ? '启用' : '未启用';
                   if (that.searchName !== '') {
                     if (value.Name.includes(that.searchName)) {
                       // that.tableList.push(value);
@@ -561,21 +551,13 @@
           /*this.$http.get(that.$api.getUsers + '?$skip=' + page * that.pagination.defaultPageSize + '&$top=' + that.pagination.defaultPageSize).then(res => {
             console.log(res)
           })*/
-          this.$http.get(that.$api.getUsers + '?$skip=' + (page - 1) * that.pagination.defaultPageSize + '&$top=' + that.pagination.defaultPageSize)
+          this.$http.get(that.$api.getUsers + '&$skip=' + (page - 1) * that.pagination.defaultPageSize + '&$top=' + that.pagination.defaultPageSize)
             .then((response) => {
+              // console.log(response)
               try {
                 let index;
                 let tableContainer = [];
                 const table = response.data.value;
-                /*for (let i=0;i<parseInt(pageSize);i++) {
-                  // 以当前页码设置渲染列表数据的索引
-                  // index = (page - 1) * parseInt(pageSize) + i;
-                  table[i].Created = that.$common.timestampToTime(table[i].Created);
-                  table[i].Updated = that.$common.timestampToTime(table[i].Updated);
-                  table[i].Expired = that.$common.timestampToTime(table[i].Expired);
-                  table[i].Status = table[i].Status === 'Enable' ? '启用' : '未启用';
-                  tableContainer.push(table[i]);
-                }*/
                 table.forEach((value, index) => {
                   value.Created = that.$common.timestampToTime(value.Created);
                   value.Updated = that.$common.timestampToTime(value.Updated);
@@ -583,7 +565,7 @@
                   value.Status = value.Status === 'Enable' ? '启用' : '未启用';
                   tableContainer.push(value);
                 });
-                that.tableList = tableContainer;
+                that.tableList = table;
               }catch (e) {
                 console.log('there are some data have "null":' + e);
               }
@@ -594,9 +576,6 @@
         checkUser (row) {
           const formContainer = Object.assign({}, row);
           this.modalForm = Object.assign({}, formContainer);
-          // console.log('current container:')
-          // console.log(this.modalForm);
-          // console.log(' - current user status:' + this.modalForm.Status);
           this.modalForm.Status = this.modalForm.Status === '启用' ? 'Enable' : 'Disable';
           this.okButton = '确定';
           // 简介对话框
@@ -663,7 +642,6 @@
           const that = this;
           let param = null;
           this.confirmLoading = true;
-          // 异步请求提交修改 data
           // this.$http.post()
           const titleStatus = this.modalTitle;
           /**
@@ -731,7 +709,7 @@
                   that.$http.post(that.$api.restartUser, {
                     EntityId: that.modalForm.EntityId
                   }).then(response => {
-                    // console.log(response)
+                    console.log(response)
                   }).catch(err => {
                     console.log(err);
                     that.$info({
@@ -741,6 +719,7 @@
                     });
                   })
                 } else {
+                  // 锁定用户
                   that.$http.post(that.$api.lockUser, {
                     EntityId: that.modalForm.EntityId
                   }).then(response => {
@@ -761,7 +740,6 @@
         },
 
         closeModal (e) {
-          // console.log('param:' + e);
           this.confirmLoading = false;
           this.isShowModal = false;
         },

@@ -12,8 +12,9 @@
           <th :width="tableHeaderWidth"></th>
         </tr>
         <tr class="the-first-row">
-          <td v-for="(item, index) in firstModuleList" :key="index" :height="menuHeight">
-            <div>
+          <td v-for="(item, index) in firstModuleList"
+              :key="index" :height="menuHeight">
+            <div ref="rowOne" :class="item.icon">
               <menu-module :module-name="item.name"
                            :module-icon="item.icon"
                            :module-width="moduleWidth"
@@ -21,7 +22,10 @@
                            :empty-width="emptyWidth"
                            :empty-height="emptyHeight"
                            :module-icon-width="iconWidth"
+                           :module-icon-height="iconHeight"
                            :module-name-width="nameWidth"
+                           @handleMouseOver="handleMouseOver($event)"
+                           @handleMouseOut="handleMouseOut($event)"
                            @checkTheRouter="changeRouter"></menu-module>
             </div>
           </td>
@@ -34,7 +38,10 @@
                            :empty-width="emptyWidth"
                            :empty-height="emptyHeight"
                            :module-icon-width="iconWidth"
+                           :module-icon-height="iconHeight"
                            :module-name-width="nameWidth"
+                           @handleMouseOver="handleMouseOver($event)"
+                           @handleMouseOut="handleMouseOut($event)"
                            @checkTheRouter="changeRouter"></menu-module>
             </div>
           </td>
@@ -53,7 +60,10 @@
                            :empty-width="emptyWidth"
                            :empty-height="emptyHeight"
                            :module-icon-width="iconWidth"
+                           :module-icon-height="iconHeight"
                            :module-name-width="nameWidth"
+                           @handleMouseOver="handleMouseOver($event)"
+                           @handleMouseOut="handleMouseOut($event)"
                            @checkTheRouter="changeRouter"></menu-module>
             </div>
           </td>
@@ -82,7 +92,10 @@
                            :empty-width="emptyWidth"
                            :empty-height="emptyHeight"
                            :module-icon-width="iconWidth"
+                           :module-icon-height="iconHeight"
                            :module-name-width="nameWidth"
+                           @handleMouseOver="handleMouseOver($event)"
+                           @handleMouseOut="handleMouseOut($event)"
                            @checkTheRouter="changeRouter"></menu-module>
             </div>
           </td>
@@ -111,60 +124,63 @@
         emptyWidth: '',
         emptyHeight: '',
         iconWidth: '',
+        iconHeight: '',
         nameWidth: '',
 
         name_0: '视频回放',
-        icon_0: 'caret-right',
+        icon_0: 'alarm-2',
 
         firstModuleList: [
-          {name: '首页', icon: 'home'},
-          {name: '当前报警', icon: 'alert'},
-          {name: '门禁卡管理', icon: 'credit-card'},
-          {name: '设置', icon: 'setting'}
+          {name: '首页', icon: 'main-page'},
+          {name: '当前报警', icon: 'alarm-1'},
+          {name: '门禁卡管理', icon: 'card-manage'},
+          {name: '设置', icon: 'alarm'}
         ],
 
         secondModuleList: [
-          {name: '用户管理', icon: 'user'},
-          {name: '历史报警', icon: 'phone'},
-          {name: '门禁用户管理', icon: 'team'},
-          {name: '实时视频', icon: 'thunderbolt'}
+          {name: '用户管理', icon: 'user-manage'},
+          {name: '历史报警', icon: 'alarm-1'},
+          {name: '门禁用户管理', icon: 'card-user'},
+          {name: '实时视频', icon: 'alarm-2'}
         ],
 
         thirdModuleList: [
-          {name: '实时监控', icon: 'bar-chart'},
-          {name: '自定义报警', icon: 'setting'},
-          {name: '刷卡记录日志管理', icon: 'book'},
-          {name: '抓拍浏览', icon: 'camera'}
+          {name: '实时监控', icon: 'control'},
+          {name: '自定义报警', icon: 'alarm'},
+          {name: '刷卡记录日志管理', icon: 'card-log'},
+          {name: '抓拍浏览', icon: 'alarm-2'}
         ]
       }
     },
 
     mounted () {
+      // console.log(this.$refs.rowOne);
       const that = this;
       this.$nextTick(() => {
-        const width = window.screen.width;
-        const height = window.screen.height;
         // 获取节点
         let menuNode = that.$refs.menuNode;
-        const oppositeWidth = menuNode.getBoundingClientRect().width;
-        // console.log(menuNode.getBoundingClientRect());
+        // const oppositeWidth = menuNode.getBoundingClientRect().width;
+        const widthParam = window.screen.width;
+        const heightParam = window.screen.height;
         // const oppositeHeight = menuNode.getBoundingClientRect().height;
-        // 通过 jquery 设置整体背景高度
+        // 调整背景高度
         this.$('.main-menu-background').css('height', window.innerHeight * 0.83);
         // 整体字体大小
-        this.fontSize = '2.6vh';
-        this.tableHeaderWidth = (oppositeWidth * 0.18).toString();
-        this.tableHeaderHeight = (window.innerHeight * 0.09).toString();
+        this.fontSize = '2.0vh';
+        this.tableHeaderWidth = (widthParam * 0.16).toString();
+        this.tableHeaderHeight = (heightParam * 0.09).toString();
 
+        this.moduleWidth = window.innerWidth * 0.161 + 'px';
         this.moduleHeight = window.innerHeight * 0.2 + 'px';
         // 每一行的高度
         this.menuHeight = window.innerHeight * 0.2 + 'px';
 
         // 模块内的布局
-        this.emptyWidth = that.tableHeaderWidth * 0.16;
-        this.emptyHeight = oppositeWidth * 0.034;
-        this.iconWidth = that.tableHeaderWidth * 0.1;
-        this.nameWidth = that.tableHeaderWidth * 0.5;
+        this.emptyWidth = that.tableHeaderWidth * 0.1;
+        this.emptyHeight = parseInt(that.tableHeaderHeight) * 0.22;
+        this.iconWidth = that.tableHeaderWidth * 0.4;
+        this.iconHeight = that.tableHeaderHeight * 1.4;
+        this.nameWidth = that.tableHeaderWidth * 0.4;
       });
 
       // window.resize 监听窗口尺寸
@@ -174,36 +190,55 @@
           that.$nextTick(() => {
             // 获取节点
             let menuNode = that.$refs.menuNode;
-            const oppositeWidth = menuNode.getBoundingClientRect().width;
+            // const oppositeWidth = menuNode.getBoundingClientRect().width;
+            const widthParam = window.screen.width;
+            const heightParam = window.screen.height;
             // const oppositeHeight = menuNode.getBoundingClientRect().height;
-            // 通过 jquery 设置整体背景高度
+            // 调整背景高度
             this.$('.main-menu-background').css('height', window.innerHeight * 0.83);
             // 整体字体大小
-            this.fontSize = '2.6vh';
-            this.tableHeaderWidth = (oppositeWidth * 0.18).toString();
-            this.tableHeaderHeight = (window.innerHeight * 0.09).toString();
+            this.fontSize = '2.0vh';
+            this.tableHeaderWidth = (widthParam * 0.16).toString();
+            this.tableHeaderHeight = (heightParam * 0.09).toString();
 
+            this.moduleWidth = window.innerWidth * 0.161 + 'px';
             this.moduleHeight = window.innerHeight * 0.2 + 'px';
             // 每一行的高度
             this.menuHeight = window.innerHeight * 0.2 + 'px';
 
             // 模块内的布局
-            this.emptyWidth = that.tableHeaderWidth * 0.16;
-            this.emptyHeight = oppositeWidth * 0.034;
-            this.iconWidth = that.tableHeaderWidth * 0.1;
-            this.nameWidth = that.tableHeaderWidth * 0.5;
+            this.emptyWidth = that.tableHeaderWidth * 0.1;
+            this.emptyHeight = parseInt(that.tableHeaderHeight) * 0.22;
+            this.iconWidth = that.tableHeaderWidth * 0.4;
+            this.iconHeight = that.tableHeaderHeight * 1.4;
+            this.nameWidth = that.tableHeaderWidth * 0.4;
           })
         })()
       }
     },
 
     methods: {
+      handleMouseOver ($event) {
+        // console.log($event);
+        this.$($event.target).animate({
+          opacity: '0.4'
+        }, 1000)
+      },
+
+      handleMouseOut ($event) {
+        // console.log($event);
+        this.$($event.target).animate({
+          opacity: '1'
+        }, 1000)
+      },
+
       /**
        * @module 临时模块
        */
       moduleTest () {
         this.$router.push('/home/threeModule');
       },
+
       changeRouter(param) {
         const routerParam = param;
         switch (param) {
@@ -291,5 +326,21 @@
 
   .table-header-title {
     /*width: 40px;*/
+  }
+
+  .choose-image {
+    animation: bounce 2s infinite;
+  }
+
+  @keyframes bounce {
+    0% {
+      transform: translate(0px, 0px);
+    }
+    50% {
+      transform: translate(0px, -9px);
+    }
+    100% {
+      transform: translate(0px, 0px);
+    }
   }
 </style>

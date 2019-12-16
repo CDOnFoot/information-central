@@ -10,7 +10,7 @@ export default {
    */
   loginIn: ':81/Authorization/api/Authentication/LoginForWeb',
 
-  getUsers: '/config/Users',
+  getUsers: "/config/Users?$filter=status ne 'Disable'",
 
   addUsers: '/config/Users/UpdateUser',
 

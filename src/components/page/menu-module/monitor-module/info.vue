@@ -10,6 +10,9 @@
     </div>
     <div class="mk">
       <div class="mk-container">
+        <div class="pointStatusTime">
+          {{pointStatus_ti}}
+        </div>
         <div class="mk-list">
           <a-table
             :showHeader="false"
@@ -249,142 +252,142 @@
       TechnicalAddress: "10.28.3.199:4001",
       TechnicalParameter: null,
     },
-    {
-      CheckPoint: false,
-      Code: "JKD",
-      ControlBoxSerial: "",
-      CustomProperties: null,
-      Description: "现场门禁智能控制单元-门JK-01-02",
-      DisplayName: "JK-01-02",
-      EntityId: 4,
-      JsonCustomColumn: null,
-      Location: "数据中心B1层门2",
-      Manufacturer: null,
-      Model: "门",
-      Name: "JK-01-02",
-      TPType: "Modbus",
-      TechnicalAddress: "10.28.3.199:4001",
-      TechnicalParameter: null,
-    },
-    {
-      CheckPoint: false,
-      Code: "JKD",
-      ControlBoxSerial: "",
-      CustomProperties: null,
-      Description: "现场门禁智能控制单元-门JK-01-02",
-      DisplayName: "JK-01-02",
-      EntityId: 4,
-      JsonCustomColumn: null,
-      Location: "数据中心B1层门2",
-      Manufacturer: null,
-      Model: "门",
-      Name: "JK-01-02",
-      TPType: "Modbus",
-      TechnicalAddress: "10.28.3.199:4001",
-      TechnicalParameter: null,
-    },
-    {
-      CheckPoint: false,
-      Code: "JKD",
-      ControlBoxSerial: "",
-      CustomProperties: null,
-      Description: "现场门禁智能控制单元-门JK-01-02",
-      DisplayName: "JK-01-02",
-      EntityId: 4,
-      JsonCustomColumn: null,
-      Location: "数据中心B1层门2",
-      Manufacturer: null,
-      Model: "门",
-      Name: "JK-01-02",
-      TPType: "Modbus",
-      TechnicalAddress: "10.28.3.199:4001",
-      TechnicalParameter: null,
-    },
-    {
-      CheckPoint: false,
-      Code: "JKD",
-      ControlBoxSerial: "",
-      CustomProperties: null,
-      Description: "现场门禁智能控制单元-门JK-01-02",
-      DisplayName: "JK-01-02",
-      EntityId: 4,
-      JsonCustomColumn: null,
-      Location: "数据中心B1层门2",
-      Manufacturer: null,
-      Model: "门",
-      Name: "JK-01-02",
-      TPType: "Modbus",
-      TechnicalAddress: "10.28.3.199:4001",
-      TechnicalParameter: null,
-    },
-    {
-      CheckPoint: false,
-      Code: "JKD",
-      ControlBoxSerial: "",
-      CustomProperties: null,
-      Description: "现场门禁智能控制单元-门JK-01-02",
-      DisplayName: "JK-01-02",
-      EntityId: 4,
-      JsonCustomColumn: null,
-      Location: "数据中心B1层门2",
-      Manufacturer: null,
-      Model: "门",
-      Name: "JK-01-02",
-      TPType: "Modbus",
-      TechnicalAddress: "10.28.3.199:4001",
-      TechnicalParameter: null,
-    },
-    {
-      CheckPoint: false,
-      Code: "JKD",
-      ControlBoxSerial: "",
-      CustomProperties: null,
-      Description: "现场门禁智能控制单元-门JK-01-02",
-      DisplayName: "JK-01-02",
-      EntityId: 4,
-      JsonCustomColumn: null,
-      Location: "数据中心B1层门2",
-      Manufacturer: null,
-      Model: "门",
-      Name: "JK-01-02",
-      TPType: "Modbus",
-      TechnicalAddress: "10.28.3.199:4001",
-      TechnicalParameter: null,
-    },
-    {
-      CheckPoint: false,
-      Code: "JKD",
-      ControlBoxSerial: "",
-      CustomProperties: null,
-      Description: "现场门禁智能控制单元-门JK-01-02",
-      DisplayName: "JK-01-02",
-      EntityId: 4,
-      JsonCustomColumn: null,
-      Location: "数据中心B1层门2",
-      Manufacturer: null,
-      Model: "门",
-      Name: "JK-01-02",
-      TPType: "Modbus",
-      TechnicalAddress: "10.28.3.199:4001",
-      TechnicalParameter: null,
-    },
-    {
-      CheckPoint: false,
-      Code: "JKD",
-      ControlBoxSerial: "",
-      CustomProperties: null,
-      Description: "现场门禁智能控制单元-门JK-01-02",
-      DisplayName: "JK-01-02",
-      EntityId: 4,
-      JsonCustomColumn: null,
-      Location: "数据中心B1层门2",
-      Manufacturer: null,
-      Model: "门",
-      Name: "JK-01-02",
-      TPType: "Modbus",
-      TechnicalAddress: "10.28.3.199:4001",
-      TechnicalParameter: null,
-    },
+    // {
+    //   CheckPoint: false,
+    //   Code: "JKD",
+    //   ControlBoxSerial: "",
+    //   CustomProperties: null,
+    //   Description: "现场门禁智能控制单元-门JK-01-02",
+    //   DisplayName: "JK-01-02",
+    //   EntityId: 4,
+    //   JsonCustomColumn: null,
+    //   Location: "数据中心B1层门2",
+    //   Manufacturer: null,
+    //   Model: "门",
+    //   Name: "JK-01-02",
+    //   TPType: "Modbus",
+    //   TechnicalAddress: "10.28.3.199:4001",
+    //   TechnicalParameter: null,
+    // },
+    // {
+    //   CheckPoint: false,
+    //   Code: "JKD",
+    //   ControlBoxSerial: "",
+    //   CustomProperties: null,
+    //   Description: "现场门禁智能控制单元-门JK-01-02",
+    //   DisplayName: "JK-01-02",
+    //   EntityId: 4,
+    //   JsonCustomColumn: null,
+    //   Location: "数据中心B1层门2",
+    //   Manufacturer: null,
+    //   Model: "门",
+    //   Name: "JK-01-02",
+    //   TPType: "Modbus",
+    //   TechnicalAddress: "10.28.3.199:4001",
+    //   TechnicalParameter: null,
+    // },
+    // {
+    //   CheckPoint: false,
+    //   Code: "JKD",
+    //   ControlBoxSerial: "",
+    //   CustomProperties: null,
+    //   Description: "现场门禁智能控制单元-门JK-01-02",
+    //   DisplayName: "JK-01-02",
+    //   EntityId: 4,
+    //   JsonCustomColumn: null,
+    //   Location: "数据中心B1层门2",
+    //   Manufacturer: null,
+    //   Model: "门",
+    //   Name: "JK-01-02",
+    //   TPType: "Modbus",
+    //   TechnicalAddress: "10.28.3.199:4001",
+    //   TechnicalParameter: null,
+    // },
+    // {
+    //   CheckPoint: false,
+    //   Code: "JKD",
+    //   ControlBoxSerial: "",
+    //   CustomProperties: null,
+    //   Description: "现场门禁智能控制单元-门JK-01-02",
+    //   DisplayName: "JK-01-02",
+    //   EntityId: 4,
+    //   JsonCustomColumn: null,
+    //   Location: "数据中心B1层门2",
+    //   Manufacturer: null,
+    //   Model: "门",
+    //   Name: "JK-01-02",
+    //   TPType: "Modbus",
+    //   TechnicalAddress: "10.28.3.199:4001",
+    //   TechnicalParameter: null,
+    // },
+    // {
+    //   CheckPoint: false,
+    //   Code: "JKD",
+    //   ControlBoxSerial: "",
+    //   CustomProperties: null,
+    //   Description: "现场门禁智能控制单元-门JK-01-02",
+    //   DisplayName: "JK-01-02",
+    //   EntityId: 4,
+    //   JsonCustomColumn: null,
+    //   Location: "数据中心B1层门2",
+    //   Manufacturer: null,
+    //   Model: "门",
+    //   Name: "JK-01-02",
+    //   TPType: "Modbus",
+    //   TechnicalAddress: "10.28.3.199:4001",
+    //   TechnicalParameter: null,
+    // },
+    // {
+    //   CheckPoint: false,
+    //   Code: "JKD",
+    //   ControlBoxSerial: "",
+    //   CustomProperties: null,
+    //   Description: "现场门禁智能控制单元-门JK-01-02",
+    //   DisplayName: "JK-01-02",
+    //   EntityId: 4,
+    //   JsonCustomColumn: null,
+    //   Location: "数据中心B1层门2",
+    //   Manufacturer: null,
+    //   Model: "门",
+    //   Name: "JK-01-02",
+    //   TPType: "Modbus",
+    //   TechnicalAddress: "10.28.3.199:4001",
+    //   TechnicalParameter: null,
+    // },
+    // {
+    //   CheckPoint: false,
+    //   Code: "JKD",
+    //   ControlBoxSerial: "",
+    //   CustomProperties: null,
+    //   Description: "现场门禁智能控制单元-门JK-01-02",
+    //   DisplayName: "JK-01-02",
+    //   EntityId: 4,
+    //   JsonCustomColumn: null,
+    //   Location: "数据中心B1层门2",
+    //   Manufacturer: null,
+    //   Model: "门",
+    //   Name: "JK-01-02",
+    //   TPType: "Modbus",
+    //   TechnicalAddress: "10.28.3.199:4001",
+    //   TechnicalParameter: null,
+    // },
+    // {
+    //   CheckPoint: false,
+    //   Code: "JKD",
+    //   ControlBoxSerial: "",
+    //   CustomProperties: null,
+    //   Description: "现场门禁智能控制单元-门JK-01-02",
+    //   DisplayName: "JK-01-02",
+    //   EntityId: 4,
+    //   JsonCustomColumn: null,
+    //   Location: "数据中心B1层门2",
+    //   Manufacturer: null,
+    //   Model: "门",
+    //   Name: "JK-01-02",
+    //   TPType: "Modbus",
+    //   TechnicalAddress: "10.28.3.199:4001",
+    //   TechnicalParameter: null,
+    // },
 
   ];
 
@@ -407,39 +410,30 @@
     name: "info",
     data() {
       return {
-        devtype: '',
+        curequipment: this.curEquipment,
+        pointStatus_ti: this.pointStatus_Ti,
         imgUrl: require('../../../../assets/img/monitor/dev2.png'),
         data: testdata,
         columns,
         loading: false,
       };
     },
-    props: ['devType'],
+    props: ['curEquipment', 'pointStatus_Ti'],
     watch: {
-      devType: function (val) {
-        this.devtype = val;
-        // console.log(this.devtype);
-        this.initPage();
+      curEquipment: function (val) {
+        this.curequipment = val;
+        console.log(this.curequipment);
+      },
+      pointStatus_Ti: function (val) {
+        this.pointStatus_ti = val;
+        console.log(this.pointStatus_ti);
       }
     },
     mounted() {
-      this.getPoints()
-
+      console.log(this.curequipment);
+      console.log(this.pointStatus_ti);
     },
-    methods: {
-      initPage() {
-        console.log(this.devtype);
-      },
-      getPoints() {
-        let url = '/Point/api/GetPoint/GetPointValue';
-        this.$http.post(url, {
-          id: this.devtype.EntityId
-        }).then(res => {
-          console.log(res);
-
-        });
-      },
-    },
+    methods: {},
   };
 
 </script>
@@ -469,7 +463,17 @@
     position: absolute;
     top: 8%;
     left: 8%;
-    overflow: auto;
+    /*overflow: auto;*/
+  }
+
+  .pointStatusTime {
+    /*font-weight: 700;*/
+    /*z-index: 999;*/
+    color: #ffffff;
+    position: absolute;
+    top: -10px;
+    right: 45px;
+    font-size: 12px;
   }
 
   .mk-pic {
@@ -485,8 +489,9 @@
   }
 
   .mk-list {
-    width: 100%;
-    height: 100%;
+    width: 90%;
+    height: 90%;
+    padding: 5%;
     /*background: url("../../../../assets/img/table-bg.png");*/
     /*background-repeat: repeat;*/
   }

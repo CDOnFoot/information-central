@@ -128,11 +128,11 @@
         nameWidth: '',
 
         name_0: '视频回放',
-        icon_0: 'alarm-2',
+        icon_0: 'back-video',
 
         firstModuleList: [
           {name: '首页', icon: 'main-page'},
-          {name: '当前报警', icon: 'alarm-1'},
+          {name: '当前报警', icon: 'alarm-2'},
           {name: '门禁卡管理', icon: 'card-manage'},
           {name: '设置', icon: 'setting'}
         ],
@@ -141,7 +141,7 @@
           {name: '用户管理', icon: 'user-manage'},
           {name: '历史报警', icon: 'alarm-1'},
           {name: '门禁用户管理', icon: 'card-user'},
-          {name: '实时视频', icon: 'alarm-2'}
+          {name: '实时视频', icon: 'current-video'}
         ],
 
         thirdModuleList: [

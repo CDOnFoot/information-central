@@ -661,8 +661,7 @@ svg.icon {
 }
 
 .ant-form-item-label label {
-  /*color: rgb(255, 255, 255);*/
-  color: #000;
+  color: rgb(255, 255, 255);
   font-weight: 700;
 }
 /* 上一页，下一页样式 */

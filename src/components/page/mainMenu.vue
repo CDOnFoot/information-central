@@ -219,17 +219,20 @@
 
     methods: {
       handleMouseOver ($event) {
-        // console.log($event);
+        this.$($event.target).css('position', 'relative');
         this.$($event.target).animate({
-          opacity: '0.4'
-        }, 1000)
+          // opacity: '0.4'
+          top: '-=20px'
+        }, 300);
+        this.$($event.target).animate({
+          top: '+=20px'
+        }, 300);
       },
 
       handleMouseOut ($event) {
-        // console.log($event);
-        this.$($event.target).animate({
-          opacity: '1'
-        }, 1000)
+        /*this.$($event.target).animate({
+          opacity: '1' }, 1000)*/
+        this.$($event).stop();
       },
 
       /**

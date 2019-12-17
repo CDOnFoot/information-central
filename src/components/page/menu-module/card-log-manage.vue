@@ -181,7 +181,7 @@
         pagination: {
           current: 1,
           defaultCurrent: 1,
-          defaultPageSize: 20,
+          defaultPageSize: 15,
           total: 0,
           size: 'large',
           // showQuickJumper: true,

@@ -27,15 +27,16 @@
           <template v-for="item in menu">
             <a-sub-menu :key="item.Code">
               <span slot="title">
-               <a-icon type="profile" />
+               <a-icon type="profile"/>
                 <span>{{item.DisplayName}}</span>
               </span>
-              <a-menu-item v-for="item2 in item.SubArr" :key="item2.EntityId" @click="changeEquipment(item2)">
+              <a-menu-item v-for="item2 in item.SubArr" :key="item2.EntityId" @click="changeMenu(item2)">
                 {{item2.DisplayName}}
               </a-menu-item>
             </a-sub-menu>
           </template>
         </a-menu>
+
       </div>
       <div class="show-area">
         <div class="select-taps">
@@ -44,7 +45,7 @@
             <a-tab-pane tab="关键指标" key="2"></a-tab-pane>
             <!--<a-tab-pane tab="概况" key="3"></a-tab-pane>-->
             <a-button slot="tabBarExtraContent">
-              <a-badge dot :count="pointStatus_Ia">
+              <a-badge dot :count="10">
                 <a-icon type="notification"/>
               </a-badge>
             </a-button>
@@ -53,10 +54,10 @@
         <div class="router-link">
           <div class="router-link-bg"></div>
           <router-view
-            :curEquipment="curEquipment"
-            :pointStatus_Ti="pointStatus_ti"
+            :Equipment="equipment"
+            :PointInfo="pointInfo"
+            :PointVal="pointVal"
           />
-          <!--v-show="pointStatus_Ib"-->
         </div>
       </div>
     </div>
@@ -65,79 +66,50 @@
 
 <script>
 
-  const pointValues = [
-    {"Id": 336},
-    {"Id": 337},
-    {"Id": 338},
-    {"Id": 339},
-    {"Id": 340},
-    {"Id": 341},
-    {"Id": 342},
-    {"Id": 343},
-    {"Id": 344},
-    {"Id": 345},
-    {"Id": 346},
-    {"Id": 347},
-    {"Id": 348},
-    {"Id": 349},
-    {"Id": 350},
-    {"Id": 351},
-    {"Id": 352},
-    {"Id": 353},
-    {"Id": 354},
-    {"Id": 355},
-    {"Id": 356}
-  ];
-
   export default {
     name: "forthwith-monitor",
     data() {
       return {
         data: '',
         menu: '',
-        curEquipment: '',
+        equipment: '',
+        pointInfo: '',
+        pointVal: '',
+        notification: '',
         collapsed: false,
         rootSubmenuKeys: [],
         openKeys: [],
-        pointStatus_Ia: '',
-        pointStatus_Ie: '',
-        pointStatus_Ib: '',
-        pointStatus_ti: '',
       }
     },
-    watch: {
-      curEquipment: function (newVal, oldVal) {
-        // console.log(oldVal);
-        // console.log(newVal);
-      },
-    },
-    created() {
-      this.initMenu();
-    },
     mounted() {
+      this.init();
     },
     methods: {
-      initMenu() {
-        this.$http.get(this.$api.monitorEquipments).then(res => {
-          if (res.data.value) {
-            this.data = res.data.value;
-            this.menu = this.unique(res.data.value);
-            this.curEquipment = this.menu[0].SubArr[0];
-            this.getPointValue();
-            this.changeTab(1);
-          }
+
+      init() {
+        this.getEquipments().then((res) => {
+          // console.log(res);
+          this.menu = this.unique(res);
+          this.equipment = this.menu[0].SubArr[0];
+          this.getPointInformations(this.equipment.Name).then((res) => {
+            // console.log(res);
+            let arr = [];
+            this.pointInfo = res;
+            this.pointInfo.forEach(function (item) {
+              arr.push({
+                "Id": item.EntityId
+              });
+            });
+            this.getPointValues(arr).then((res) => {
+              // console.log(res);
+              this.pointVal = res;
+              this.changeTab(1);
+            });
+          });
         });
       },
+
       unique(objArr) {
-        // let res = [];
-        // let obj = {};
-        // for (let i = 0; i < objArr.length; i++) {
-        //   if (!obj[objArr[i].Code]) {
-        //     res.push(objArr[i]);
-        //     obj[objArr[i].Code] = true;
-        //   }
-        // }
-        // return res;
         let res = [];
         let obj = {};
         for (let i = 0; i < objArr.length; i++) {
@@ -162,18 +134,25 @@
         this.openKeys.push(this.rootSubmenuKeys[0]);
         return res;
       },
-      onOpenChange(openKeys) {
-        const latestOpenKey = openKeys.find(key => this.openKeys.indexOf(key) === -1);
-        if (this.rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
-          this.openKeys = openKeys;
-        } else {
-          this.openKeys = latestOpenKey ? [latestOpenKey] : [];
-        }
+
+      changeMenu(key) {
+        this.equipment = key;
+        this.getPointInformations(this.equipment.Name).then((res) => {
+          // console.log(res);
+          let arr = [];
+          this.pointInfo = res;
+          this.pointInfo.forEach(function (item) {
+            arr.push({
+              "Id": item.EntityId
+            });
+          });
+          this.getPointValues(arr).then((res) => {
+            // console.log(res);
+            this.pointVal = res;
+          });
+        });
       },
-      changeEquipment(key) {
-        this.curEquipment = key;
-        this.getPointValue();
-      },
+
       changeTab(key) {
         if (key == 1) {
           this.$router.replace("/home/forthwithMonitor/info");
@@ -183,28 +162,55 @@
           this.$router.replace("/home/forthwithMonitor/view");
         }
       },
-      getPointValue() {
-        let url = '/Point/api/GetPoint/GetPointValue';
-        let pointId = pointValues[Math.floor((Math.random() * pointValues.length))];
-        this.$http.post(url, pointId).then(res => {
-          // console.log(res);
-          this.pointStatus_Ia = res.data.st.ia;
-          this.pointStatus_Ie = res.data.st.ie;
-          this.pointStatus_Ib = res.data.st.ib;
-          this.pointStatus_ti = res.data.ti;
-          // console.log(this.pointStatus_Ia);
-          // console.log(this.pointStatus_Ie);
-          // console.log(this.pointStatus_Ib);
-          // console.log(this.pointStatus_ti);
-          this.pointStatus_Ia = this.pointStatus_Ia == true ? 1 : 0;
-          this.pointStatus_ti = this.$common.timestampToTime(this.pointStatus_ti);
-          if (!this.pointStatus_Ib) this.$message.error('坏点');
+
+      toggleCollapsed() {
+        this.collapsed = !this.collapsed;
+      },
+
+      onOpenChange(openKeys) {
+        const latestOpenKey = openKeys.find(key => this.openKeys.indexOf(key) === -1);
+        if (this.rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
+          this.openKeys = openKeys;
+        } else {
+          this.openKeys = latestOpenKey ? [latestOpenKey] : [];
+        }
+      },
+
+      getEquipments() {
+        return this.$http.get(this.$api.monitorEquipments).then(res => {
+          if (res.data.value) {
+            return res.data.value;
+          }
         });
       },
-      toggleCollapsed() {
-        let self = this;
-        self.collapsed = !self.collapsed;
+
+      getPointInformations(param) {
+        let url = "/config/pointinformations?&$filter=indexof(Name,\'" + param + "\') ge 0";
+        return this.$http.get(url).then(res => {
+          if (res.data.value) {
+            return res.data.value;
+          }
+        });
       },
+
+      getPointValues(param) {
+        let url = '/point/api/getpoint/getpointvalues';
+        return this.$http.post(url, param).then(res => {
+          if (res.data) {
+            return res.data;
+          }
+        });
+      },
+
+      getPointValue(param) {
+        let url = '/point/api/getpoint/getpointvalue';
+        return this.$http.post(url, param).then(res => {
+          if (res.data) {
+            return res.data;
+          }
+        });
+      },
+
     }
   };
 

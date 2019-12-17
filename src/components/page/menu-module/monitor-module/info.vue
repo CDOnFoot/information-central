@@ -412,7 +412,7 @@
       return {
         curequipment: this.curEquipment,
         pointStatus_ti: this.pointStatus_Ti,
-        imgUrl: require('../../../../assets/img/monitor/dev2.png'),
+        imgUrl: require('../../../../assets/img/monitor/dev5.png'),
         data: testdata,
         columns,
         loading: false,

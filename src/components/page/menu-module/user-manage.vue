@@ -768,4 +768,6 @@
     display: flex;
     flex-direction: row;
   }
+  
+  .ant-form-item-label label {}
 </style>

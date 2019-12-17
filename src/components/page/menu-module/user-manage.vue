@@ -71,9 +71,9 @@
                :defaultExpandAllRows="expandAllRows"
                size="small">
         <template slot="operation" slot-scope="text, record">
-          <a-button type="primary" @click="checkUser(record)">查看</a-button>
-          <a-button type="primary" @click="editUser(record)">编辑</a-button>
-          <a-button type="primary" @click="deleteUser(record)">删除</a-button>
+          <a-button type="dashed" ghost @click="checkUser(record)">查看</a-button>
+          <a-button type="dashed" ghost @click="editUser(record)">编辑</a-button>
+          <a-button type="dashed" ghost @click="deleteUser(record)">删除</a-button>
         </template>
       </a-table>
 
@@ -169,7 +169,7 @@
           current: 0,
           defaultCurrent: 1,
           // 默认页容量
-          defaultPageSize: 17,
+          defaultPageSize: 18,
           total: 0,
           // showQuickJumper: true,
           size: 'large',

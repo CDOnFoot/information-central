@@ -57,7 +57,7 @@
 
     <a-layout-footer style="text-align: center">
       <div class="menu-list">
-        <div class="menu-sub">
+        <!-- <div class="menu-sub">
           <div class="menu-sub-item">
             <img src="../../assets/img/title-sub-bg.png" alt="" class="menu-sub-img">
           </div>
@@ -67,7 +67,7 @@
           <div class="menu-sub-item">
             <img src="../../assets/img/title-sub-bg.png" alt="" class="menu-sub-img">
           </div>
-        </div>
+        </div> -->
 
         <!-- 菜单 -->
         <div class="menu-item" @click="returnMenu">
@@ -87,7 +87,7 @@
           </div>
         </div>-->
 
-        <div class="menu-sub">
+        <!-- <div class="menu-sub">
           <div class="menu-sub-item">
             <img src="../../assets/img/title-sub-bg.png" alt="" class="menu-sub-img">
           </div>
@@ -97,7 +97,7 @@
           <div class="menu-sub-item">
             <img src="../../assets/img/title-sub-bg.png" alt="" class="menu-sub-img">
           </div>
-        </div>
+        </div> -->
       </div>
       <div class="layout-btn">
         <!--<a-button size="large" class="btn-item" @click="layoutSetting" v-show="menuIndex<=0">布局配置</a-button>-->

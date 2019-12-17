@@ -50,7 +50,7 @@
             pagination: {
               current: 1,
               defaultCurrent: 1,
-              defaultPageSize: 20,
+              defaultPageSize: 25,
               total: 0,
               size: 'large',
               onChange: (current) => {

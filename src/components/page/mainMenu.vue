@@ -134,7 +134,7 @@
           {name: '首页', icon: 'main-page'},
           {name: '当前报警', icon: 'alarm-1'},
           {name: '门禁卡管理', icon: 'card-manage'},
-          {name: '设置', icon: 'alarm'}
+          {name: '设置', icon: 'setting'}
         ],
 
         secondModuleList: [
@@ -148,7 +148,7 @@
           {name: '实时监控', icon: 'control'},
           {name: '自定义报警', icon: 'alarm'},
           {name: '刷卡记录日志管理', icon: 'card-log'},
-          {name: '抓拍浏览', icon: 'alarm-2'}
+          {name: '抓拍浏览', icon: 'browse'}
         ]
       }
     },

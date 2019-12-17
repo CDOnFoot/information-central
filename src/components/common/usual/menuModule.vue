@@ -1,7 +1,7 @@
 <template>
     <div class="menu-module"
          @click="throwTheRouter"
-         :style="{ width: '100%', height: moduleHeight }">
+         :style="{ width: moduleWidth, height: moduleHeight }">
       <div class="menu-module-content">
         <tr class="empty-header" :height="emptyHeight">
           <th :width="emptyWidth"></th>
@@ -15,12 +15,14 @@
         </tr>-->
         <tr class="menu-module-name">
           <td class="empty-element"></td>
-          <td :width="moduleNameWidth">{{ moduleName }}</td>
-          <td :width="moduleIconWidth">
-            <a-icon :type="moduleIcon" />
+          <td class="table-image" @mouseover="handleMouseOver($event)" @mouseout="handleMouseOut($event)">
+            <img :src="require('../../../assets/img/menu-icon/' + moduleIcon + '.png')"
+                 alt="" :width="moduleIconWidth" :height="moduleIconHeight">
+          </td>
+          <td :width="moduleNameWidth">
+            <!--<a-icon :type="moduleIcon" />-->{{ moduleName }}
           </td>
         </tr>
-        <!--<img src="../../../assets/img/back/首页.png" alt="">-->
       </div>
     </div>
 </template>
@@ -89,12 +91,24 @@
       // 父组件传递的参数
       props: [ "moduleWidth", "moduleHeight", "moduleName",
         "moduleIcon", "moduleNameWidth", "moduleIconWidth",
-        "emptyWidth", "emptyHeight" ],
+        "emptyWidth", "emptyHeight", "moduleIconHeight" ],
 
       methods: {
         throwTheRouter () {
           // console.log('there is a clicked');
           this.$emit('checkTheRouter', this.moduleName);
+        },
+
+        /**
+         * @function 鼠标移入移出都将节点传到父组件
+         * @param $event
+         */
+        handleMouseOver ($event) {
+          this.$emit('handleMouseOver', $event);
+        },
+
+        handleMouseOut ($event) {
+          this.$emit('handleMouseOut', $event);
         }
       }
     }
@@ -110,4 +124,20 @@
   .menu-module-name {
     text-align: center;
   }
+
+  /*.table-image img {
+    animation: bounce 2s infinite;
+  }
+  
+  @keyframes bounce {
+    0% {
+      transform: translate(0px, 0px);
+    }
+    50% {
+      transform: translate(0px, -9px);
+    }
+    100% {
+      transform: translate(0px, 0px);
+    }
+  }*/
 </style>

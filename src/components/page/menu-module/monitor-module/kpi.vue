@@ -5,7 +5,7 @@
       <div class="mk-container">
         <div class="borde">能量流图</div>
         <div class="pointStatusTime">
-          {{pointStatus_ti}}
+          <!--{{pointStatus_ti}}-->
         </div>
         <div class="mk-energy">
           <img :src="imgUrl" alt="">
@@ -17,7 +17,7 @@
       <div class="mk-container">
         <div class="borde">供电状态</div>
         <div class="pointStatusTime">
-          {{pointStatus_ti}}
+          <!--{{pointStatus_ti}}-->
         </div>
         <div class="mk-electricity">
           <!--<img src="../../../../assets/img/计划开行.png" alt="">-->
@@ -30,13 +30,13 @@
       <div class="mk-container" style="width: 90%; left: 5%;">
         <div class="borde">电池后备时间</div>
         <div class="pointStatusTime">
-          {{pointStatus_ti}}
+          <!--{{pointStatus_ti}}-->
         </div>
         <div class="mk-battery">
           <a-table
-            :showHeader="true"
             :columns="columns"
             :dataSource="data"
+            :showHeader="true"
             :pagination="false"
             :loading="loading"
           >
@@ -118,23 +118,23 @@
       TechnicalAddress: "10.28.3.199:4001",
       TechnicalParameter: null,
     },
-    // {
-    //   CheckPoint: false,
-    //   Code: "JKD",
-    //   ControlBoxSerial: "",
-    //   CustomProperties: null,
-    //   Description: "现场门禁智能控制单元-门JK-01-02",
-    //   DisplayName: "JK-01-02",
-    //   EntityId: 4,
-    //   JsonCustomColumn: null,
-    //   Location: "数据中心B1层门2",
-    //   Manufacturer: null,
-    //   Model: "门",
-    //   Name: "JK-01-02",
-    //   TPType: "Modbus",
-    //   TechnicalAddress: "10.28.3.199:4001",
-    //   TechnicalParameter: null,
-    // },
+    {
+      CheckPoint: false,
+      Code: "JKD",
+      ControlBoxSerial: "",
+      CustomProperties: null,
+      Description: "现场门禁智能控制单元-门JK-01-02",
+      DisplayName: "JK-01-02",
+      EntityId: 4,
+      JsonCustomColumn: null,
+      Location: "数据中心B1层门2",
+      Manufacturer: null,
+      Model: "门",
+      Name: "JK-01-02",
+      TPType: "Modbus",
+      TechnicalAddress: "10.28.3.199:4001",
+      TechnicalParameter: null,
+    },
     // {
     //   CheckPoint: false,
     //   Code: "JKD",
@@ -220,31 +220,41 @@
     name: "kpi",
     data() {
       return {
-        curequipment: this.curEquipment,
-        pointStatus_ti: this.pointStatus_Ti,
+        data: testdata,
+        equipment: this.Equipment,
+        pointInfo: this.PointInfo,
+        pointVal: this.PointVal,
         imgUrl: require('../../../../assets/img/monitor/dev2.png'),
         status: '正常',
-        data: testdata,
         columns,
         loading: false,
       };
     },
-    props: ['curEquipment', 'pointStatus_Ti'],
+    props: ['Equipment', 'PointInfo', 'PointVal'],
     watch: {
-      curEquipment: function (val) {
-        this.curequipment = val;
-        console.log(this.curequipment);
+      Equipment: function (val) {
+        this.equipment = val;
+        console.log(this.equipment)
       },
-      pointStatus_Ti: function (val) {
-        this.pointStatus_ti = val;
-        console.log(this.pointStatus_ti);
+      PointInfo: function (val) {
+        this.pointInfo = val;
+        console.log(this.pointInfo)
+      },
+      PointVal: function (val) {
+        this.pointVal = val;
+        console.log(this.pointVal)
       }
     },
     mounted() {
-      console.log(this.curequipment);
-      console.log(this.pointStatus_ti);
+      console.log(2)
+
+
     },
-    methods: {},
+    methods: {
+
+
+
+    },
   };
 
 </script>

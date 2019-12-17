@@ -11,13 +11,14 @@
     <div class="mk">
       <div class="mk-container">
         <div class="pointStatusTime">
-          {{pointStatus_ti}}
+
         </div>
         <div class="mk-list">
           <a-table
-            :showHeader="false"
+            rowKey="0"
             :columns="columns"
             :dataSource="data"
+            :showHeader="false"
             :pagination="false"
             :loading="loading"
           >
@@ -252,23 +253,23 @@
       TechnicalAddress: "10.28.3.199:4001",
       TechnicalParameter: null,
     },
-    // {
-    //   CheckPoint: false,
-    //   Code: "JKD",
-    //   ControlBoxSerial: "",
-    //   CustomProperties: null,
-    //   Description: "现场门禁智能控制单元-门JK-01-02",
-    //   DisplayName: "JK-01-02",
-    //   EntityId: 4,
-    //   JsonCustomColumn: null,
-    //   Location: "数据中心B1层门2",
-    //   Manufacturer: null,
-    //   Model: "门",
-    //   Name: "JK-01-02",
-    //   TPType: "Modbus",
-    //   TechnicalAddress: "10.28.3.199:4001",
-    //   TechnicalParameter: null,
-    // },
+    {
+      CheckPoint: false,
+      Code: "JKD",
+      ControlBoxSerial: "",
+      CustomProperties: null,
+      Description: "现场门禁智能控制单元-门JK-01-02",
+      DisplayName: "JK-01-02",
+      EntityId: 4,
+      JsonCustomColumn: null,
+      Location: "数据中心B1层门2",
+      Manufacturer: null,
+      Model: "门",
+      Name: "JK-01-02",
+      TPType: "Modbus",
+      TechnicalAddress: "10.28.3.199:4001",
+      TechnicalParameter: null,
+    },
     // {
     //   CheckPoint: false,
     //   Code: "JKD",
@@ -393,14 +394,14 @@
 
   const columns = [
     {
-      title: 'Location',
-      dataIndex: 'Location',
+      title: 'DisplayName',
+      dataIndex: 'DisplayName',
       align: 'center',
       width: '50%'
     },
     {
-      title: 'DisplayName',
-      dataIndex: 'DisplayName',
+      title: 'Desc',
+      dataIndex: 'Desc',
       align: 'center',
       width: '50%'
     },
@@ -410,30 +411,56 @@
     name: "info",
     data() {
       return {
-        curequipment: this.curEquipment,
-        pointStatus_ti: this.pointStatus_Ti,
+        data: [],
+        equipment: this.Equipment,
+        pointInfo: this.PointInfo,
+        pointVal: this.PointVal,
         imgUrl: require('../../../../assets/img/monitor/dev5.png'),
-        data: testdata,
         columns,
         loading: false,
       };
     },
-    props: ['curEquipment', 'pointStatus_Ti'],
+    props: ['Equipment', 'PointInfo', 'PointVal'],
     watch: {
-      curEquipment: function (val) {
-        this.curequipment = val;
-        console.log(this.curequipment);
+      Equipment: function (val) {
+        this.equipment = val;
+        console.log(this.equipment)
       },
-      pointStatus_Ti: function (val) {
-        this.pointStatus_ti = val;
-        console.log(this.pointStatus_ti);
+      PointInfo: function (val) {
+        this.pointInfo = val;
+        console.log(this.pointInfo)
+      },
+      PointVal: function (val) {
+        this.pointVal = val;
+        console.log(this.pointVal);
+        this.init()
       }
     },
     mounted() {
-      console.log(this.curequipment);
-      console.log(this.pointStatus_ti);
+      console.log(1)
     },
-    methods: {},
+    methods: {
+      init() {
+        let arr = [];
+        for (let i = 0; i < this.pointInfo.length; i++) {
+          let displayName = this.pointInfo[i].DisplayName;
+          if (displayName.indexOf('只读') == -1 && displayName.indexOf('读构建') == -1) {
+            let desc;
+            let t = this.pointVal[i].t;
+            if (t == "String") {
+              desc = this.pointVal[i].s;
+            } else if (t == "Long") {
+              desc = this.pointVal[i].l;
+            }
+            arr.push({
+              DisplayName: displayName,
+              Desc: desc,
+            });
+          }
+        }
+        this.data = arr;
+      },
+    },
   };
 
 </script>
@@ -489,9 +516,8 @@
   }
 
   .mk-list {
-    width: 90%;
-    height: 90%;
-    padding: 5%;
+    width: 100%;
+    height: 100%;
     /*background: url("../../../../assets/img/table-bg.png");*/
     /*background-repeat: repeat;*/
   }

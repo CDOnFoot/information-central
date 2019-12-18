@@ -153,6 +153,7 @@
   right: 1.8%;
   top: 50%;
   transform: translateY(-50%);
+  margin-right: -1471px;
 }
 
 .layout-selectBtn {
@@ -785,4 +786,7 @@ svg.icon {
 .ant-pagination-jump-prev .ant-pagination-item-container .ant-pagination-item-ellipsis,
 .ant-pagination-jump-next .ant-pagination-item-container .ant-pagination-item-ellipsis {
   color: #ffffff;
+}
+.ant-layout-footer .btnchange{
+  font-size: 1rem !important;
 }

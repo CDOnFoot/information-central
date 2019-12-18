@@ -30,6 +30,8 @@ export default {
 
   confirmAlarm: '/alarm/api/AlarmStatus',
 
+  alarmRules: '/Alarm/AlarmRules',
+
   /**
    * @variation old API
    */

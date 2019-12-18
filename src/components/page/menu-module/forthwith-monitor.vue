@@ -2,62 +2,165 @@
   <div class="forthwith-monitor">
     <div class="control-module">
       <div class="select-menu">
-        <!-- <a-button type="primary" @click="toggleCollapsed" style="margin-bottom: 16px">
-          <a-icon :type="collapsed ? 'menu-unfold' : 'menu-fold'" />
-        </a-button> -->
 
-        <!--<a-menu :defaultSelectedKeys="[2]" mode="inline" theme="dark" :inlineCollapsed="collapsed">-->
+        <!--<a-menu-->
+        <!--:defaultSelectedKeys="[menu[0].SubArr[0].EntityId]"-->
+        <!--:defaultOpenKeys="[menu[0].Code]"-->
+        <!--mode="inline"-->
+        <!--theme="dark"-->
+        <!--:inlineCollapsed="collapsed"-->
+        <!--:openKeys="openKeys"-->
+        <!--@openChange="onOpenChange"-->
+        <!--&gt;-->
         <!--<template v-for="item in menu">-->
-        <!--<a-menu-item :key="item.Code" @click="changeMenu(item)">-->
-        <!--&lt;!&ndash;<a-icon type="inbox"/>&ndash;&gt;-->
+        <!--<a-sub-menu :key="item.Code">-->
+        <!--<span slot="title">-->
+        <!--<a-icon type="profile"/>-->
         <!--<span>{{item.DisplayName}}</span>-->
+        <!--</span>-->
+        <!--<a-menu-item v-for="item2 in item.SubArr" :key="item2.EntityId" @click="changeMenu(item2)">-->
+        <!--{{item2.DisplayName}}-->
         <!--</a-menu-item>-->
+        <!--</a-sub-menu>-->
         <!--</template>-->
         <!--</a-menu>-->
 
         <a-menu
-          :defaultSelectedKeys="[menu[0].SubArr[0].EntityId]"
-          :defaultOpenKeys="[menu[0].Code]"
           mode="inline"
           theme="dark"
-          :inlineCollapsed="collapsed"
-          :openKeys="openKeys"
-          @openChange="onOpenChange"
+          :defaultSelectedKeys="[menu[0].Code]"
         >
           <template v-for="item in menu">
-            <a-sub-menu :key="item.Code">
-              <span slot="title">
-               <a-icon type="profile"/>
-                <span>{{item.DisplayName}}</span>
-              </span>
-              <a-menu-item v-for="item2 in item.SubArr" :key="item2.EntityId" @click="changeMenu(item2)">
-                {{item2.DisplayName}}
-              </a-menu-item>
-            </a-sub-menu>
+            <a-menu-item :key="item.Code" @click="changeMenu(item)">
+              <a-icon type="pie-chart"/>
+              <span>{{item.DisplayName}}</span>
+            </a-menu-item>
           </template>
         </a-menu>
 
       </div>
       <div class="show-area">
         <div class="select-taps">
-          <a-tabs @change="changeTab" type="card">
-            <a-tab-pane tab="基本信息" key="1"></a-tab-pane>
-            <a-tab-pane tab="关键指标" key="2"></a-tab-pane>
-            <!--<a-tab-pane tab="概况" key="3"></a-tab-pane>-->
-            <a-button slot="tabBarExtraContent">
-              <a-badge dot :count="10">
-                <a-icon type="notification"/>
-              </a-badge>
-            </a-button>
-          </a-tabs>
+
+          <!--<a-tabs @change="changeTab" type="card">-->
+          <!--<a-tab-pane tab="基本信息" key="1"></a-tab-pane>-->
+          <!--<a-tab-pane tab="关键指标" key="2"></a-tab-pane>-->
+          <!--<a-tab-pane tab="概况" key="3"></a-tab-pane>-->
+          <!--<a-button slot="tabBarExtraContent">-->
+          <!--<a-badge dot :count="10">-->
+          <!--<a-icon type="notification"/>-->
+          <!--</a-badge>-->
+          <!--</a-button>-->
+          <!--</a-tabs>-->
+
+          <template>
+            <a-tabs @change="changeTab">
+              <template v-for="item in eqType.Equipments">
+                <a-tab-pane :tab="item.Description" :key="item.Name"></a-tab-pane>
+              </template>
+              <a-button slot="tabBarExtraContent">
+                <a-badge dot :count="10">
+                  <a-icon type="notification"/>
+                </a-badge>
+              </a-button>
+            </a-tabs>
+          </template>
+
         </div>
-        <div class="router-link">
-          <div class="router-link-bg"></div>
-          <router-view
-            :Equipment="equipment"
-            :PointInfo="pointInfo"
-            :PointVal="pointVal"
-          />
+        <div class="select-container">
+          <a-carousel arrows>
+            <div
+              slot="prevArrow"
+              slot-scope="props"
+              class="custom-slick-arrow"
+              style="left: 10px; zIndex: 1"
+            >
+              <a-icon type="left-circle"/>
+            </div>
+            <div slot="nextArrow" slot-scope="props" class="custom-slick-arrow" style="right: 10px">
+              <a-icon type="right-circle"/>
+            </div>
+            <div>
+              <!--基本信息-->
+              <div class="select-container-bg"></div>
+              <div class="select-container-module" id="basicInfo">
+                <div class="boxes">
+                  <div class="equipment">
+                    <img :src="imgUrl" alt="">
+                  </div>
+                </div>
+                <div class="boxes">
+                  <div class="pointInfo">
+                    <a-table
+                      :columns="columns"
+                      :dataSource="dataSource"
+                      :showHeader="false"
+                      :pagination="false"
+                      :loading="loading"
+                    >
+                    </a-table>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <!--关键指标-->
+              <div class="select-container-bg"></div>
+              <div class="select-container-module" id="KPI">
+                <div class="boxes">
+                  <img class="boxes-bg" src="../../../assets/img/main-border-b.png" alt="">
+                  <div class="boxes-cont">
+                    <div class="borde">能量流图</div>
+                    <div class="pointStatus-ti">
+                      <!--{{pointStatus_ti}}-->
+                      11111111111111111111
+                    </div>
+                    <div class="energy">
+                      <img :src="imgUrl2" alt="">
+                    </div>
+                  </div>
+                </div>
+                <div class="boxes">
+                  <img class="boxes-bg" src="../../../assets/img/main-border-b.png" alt="">
+                  <div class="boxes-cont">
+                    <div class="borde">供电状态</div>
+                    <div class="pointStatus-ti">
+                      <!--{{pointStatus_ti}}-->
+                      11111111111111111111
+
+                    </div>
+                    <div class="electricity">
+                      <div class="status">
+                        {{electricityStatus}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="boxes" style="width: 100%;">
+                  <img class="boxes-bg" src="../../../assets/img/main-border-b.png" alt=""
+                       style="width: 95%; left: 2.5%">
+                  <div class="boxes-cont">
+                    <div class="borde">电池后备时间</div>
+                    <div class="pointStatus-ti">
+                      <!--{{pointStatus_ti}}-->
+                      11111111111111111111
+
+                    </div>
+                    <div class="battery">
+                      <a-table
+                        :columns="columns2"
+                        :dataSource="dataSource2"
+                        :showHeader="true"
+                        :pagination="false"
+                        :loading="loading"
+                      >
+                      </a-table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a-carousel>
         </div>
       </div>
     </div>
@@ -66,15 +169,70 @@
 
 <script>
 
+  const columns = [
+    {
+      title: 'DisplayName',
+      dataIndex: 'DisplayName',
+      align: 'center',
+      width: '50%'
+    },
+    {
+      title: 'Desc',
+      dataIndex: 'Desc',
+      align: 'center',
+      width: '50%'
+    },
+  ];
+
+  const columns2 = [
+    {
+      title: 'DisplayName',
+      dataIndex: 'DisplayName',
+      align: 'center',
+      width: '25%'
+    },
+    {
+      title: 'TechnicalAddress',
+      dataIndex: 'TechnicalAddress',
+      align: 'center',
+      width: '25%'
+    },
+    {
+      title: 'Location',
+      dataIndex: 'Location',
+      align: 'center',
+      width: '25%'
+    },
+    {
+      title: 'TPType',
+      dataIndex: 'TPType',
+      align: 'center',
+      width: '50%'
+    },
+  ];
+
   export default {
     name: "forthwith-monitor",
     data() {
       return {
-        data: '',
-        menu: '',
-        equipment: '',
-        pointInfo: '',
-        pointVal: '',
+        data: [],
+        menu: [],
+        eqType: '',
+        eqName: '',
+        pointInfo: [],
+        pointVal: [],
+
+        dataSource: [],
+        dataSource2: [],
+
+        imgUrl: require('../../../assets/img/monitor/dev5.png'),
+        imgUrl2: require('../../../assets/img/monitor/dev2.png'),
+        electricityStatus: 'normal',
+
+        columns,
+        columns2,
+        loading: false,
+
         notification: '',
         collapsed: false,
         rootSubmenuKeys: [],
@@ -88,24 +246,10 @@
 
       init() {
         this.getEquipments().then((res) => {
-          // console.log(res);
+          this.data = res;
           this.menu = this.unique(res);
-          this.equipment = this.menu[0].SubArr[0];
-          this.getPointInformations(this.equipment.Name).then((res) => {
-            // console.log(res);
-            let arr = [];
-            this.pointInfo = res;
-            this.pointInfo.forEach(function (item) {
-              arr.push({
-                "Id": item.EntityId
-              });
-            });
-            this.getPointValues(arr).then((res) => {
-              // console.log(res);
-              this.pointVal = res;
-              this.changeTab(1);
-            });
-          });
+          this.eqType = this.menu[0];
+          this.changeMenu(this.eqType);
         });
       },
 
@@ -117,16 +261,16 @@
             let newObj = {
               Code: objArr[i].Code,
               DisplayName: objArr[i].Code,
-              SubArr: [],
+              Equipments: [],
             };
-            newObj.SubArr.push(objArr[i]);
+            newObj.Equipments.push(objArr[i]);
             res.push(newObj);
             this.rootSubmenuKeys.push(objArr[i].Code);
             obj[objArr[i].Code] = true;
           } else {
             res.forEach(function (item) {
               if (item.Code == objArr[i].Code) {
-                item.SubArr.push(objArr[i]);
+                item.Equipments.push(objArr[i]);
               }
             });
           }
@@ -136,9 +280,24 @@
       },
 
       changeMenu(key) {
-        this.equipment = key;
-        this.getPointInformations(this.equipment.Name).then((res) => {
-          // console.log(res);
+        this.eqType = key;
+        this.eqName = this.eqType.Equipments[0].Name;
+        this.changeTab(this.eqName);
+      },
+
+      changeTab(key) {
+        this.eqName = key;
+        this.initPoint();
+      },
+
+      initPoint() {
+        this.getPointInformations(this.eqName).then((res) => {
+          console.log(res);
+
+          if (res.length == 0) {
+            this.$message.error('暂无数据 T T');
+          }
+
           let arr = [];
           this.pointInfo = res;
           this.pointInfo.forEach(function (item) {
@@ -147,20 +306,39 @@
             });
           });
           this.getPointValues(arr).then((res) => {
-            // console.log(res);
+            console.log(res);
             this.pointVal = res;
+
+            this.initPage();
+
           });
         });
       },
 
-      changeTab(key) {
-        if (key == 1) {
-          this.$router.replace("/home/forthwithMonitor/info");
-        } else if (key == 2) {
-          this.$router.replace("/home/forthwithMonitor/kpi");
-        } else if (key == 3) {
-          this.$router.replace("/home/forthwithMonitor/view");
+      initPage() {
+        let arr = [];
+        for (let i = 0; i < this.pointInfo.length; i++) {
+          if (this.pointInfo[i]) {
+            let displayName = this.pointInfo[i].DisplayName;
+            if (displayName.indexOf('只读') == -1 && displayName.indexOf('读构建') == -1) {
+              let desc = '';
+              if (this.pointVal[i]) {
+                let t = this.pointVal[i].t;
+                if (t == "String") {
+                  desc = this.pointVal[i].s;
+                } else if (t == "Long") {
+                  desc = this.pointVal[i].l;
+                }
+              }
+              arr.push({
+                DisplayName: displayName,
+                Desc: desc,
+              });
+            }
+          }
+
         }
+        this.dataSource = arr;
       },
 
       toggleCollapsed() {
@@ -217,6 +395,7 @@
 </script>
 
 <style scoped>
+
   .forthwith-monitor {
     width: 100%;
     height: 100%;
@@ -225,7 +404,6 @@
   }
 
   .control-module {
-    /*display: flex;*/
     width: 100%;
     height: 100%;
   }
@@ -233,49 +411,169 @@
   .select-menu {
     float: left;
     width: 10%;
-    /*height: 100%;*/
-    margin-top: 56px;
+    height: 80%;
+    padding-top: 60px;
   }
 
   .show-area {
     float: left;
     width: 88%;
-    height: 100%;
+    height: 80%;
     margin-left: 2%;
   }
 
-  .router-link {
+  .select-container {
     width: 100%;
-    height: 80%;
+    height: 100%;
     position: relative;
-    /* opacity:.1 */
-    /* box-shadow: 0 0 40px rgba(0, 204, 255, 1) inset; */
   }
 
-  .router-link-bg {
+  .select-container-module {
     width: 100%;
     height: 100%;
     position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  .select-container-bg {
+    width: 100%;
+    height: 100%;
     background-color: #001529;
     opacity: .4;
-    /* box-shadow: 0 0 40px rgba(0, 204, 255, 1) inset; */
+    position: absolute;
   }
+
+  .boxes {
+    float: left;
+    width: 50%;
+    height: 100%;
+    position: relative;
+  }
+
+  .equipment {
+    width: 100%;
+    height: 100%;
+    padding: 5% 10%;
+    text-align: center;
+  }
+
+  .equipment img {
+    height: 100%;
+  }
+
+  .pointInfo {
+    width: 100%;
+    height: 100%;
+    padding: 5% 10%;
+  }
+
+
+  #KPI .boxes {
+    height: 50%;
+  }
+
+  #KPI .boxes-bg {
+    width: 90%;
+    height: 90%;
+    position: absolute;
+    top: 5%;
+    left: 5%;
+  }
+
+  #KPI .boxes-cont {
+    width: 90%;
+    height: 90%;
+    position: absolute;
+    top: 5%;
+    left: 5%;
+  }
+
+  .borde {
+    text-align: left;
+    top: 25px;
+    left: 40px;
+  }
+
+  .pointStatus-ti {
+    color: #ffffff;
+    font-size: 12px;
+    position: absolute;
+    top: 25px;
+    right: 40px;
+  }
+
+  #KPI .energy {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  #KPI .energy img {
+    height: 90%;
+    position: absolute;
+    top: 5%;
+    left: 40%;
+
+  }
+
+  #KPI .electricity {
+    width: 100%;
+    height: 100%;
+    background: url("../../../assets/img/计划开行.png") no-repeat center;
+  }
+
+  #KPI .electricity .status {
+    width: 100%;
+    text-align: center;
+    font-size: 24px;
+    color: #ffffff;
+    position: absolute;
+    top: 42%;
+  }
+
+  #KPI .battery {
+    width: 100%;
+    height: 75%;
+    position: absolute;
+    top: 20%;
+    left: 0;
+  }
+
+
+  /*/deep/ .ant-menu-dark.ant-menu-inline .ant-menu-item, /deep/ .ant-menu-dark.ant-menu-inline .ant-menu-submenu-title {*/
+  /*height: 40px;*/
+  /*line-height: 28px;*/
+  /*}*/
+  /deep/ .ant-menu-dark, /deep/ .ant-menu-dark .ant-menu-sub {
+    color: rgba(255, 255, 255, 0.65);
+    background: transparent;
+  }
+
+  /deep/ .ant-menu.ant-menu-dark .ant-menu-item-selected,
+  .ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected {
+    /*background: #0b4A86;*/
+  }
+
+  /*/deep/ .ant-menu-dark, .ant-menu-dark .ant-menu-sub {*/
+  /*color: rgba(255, 255, 255, 0.65);*/
+  /*background: transparent;*/
+  /*}*/
+
+  /*/deep/ .ant-menu-dark .ant-menu-inline.ant-menu-sub {*/
+  /*background: transparent;*/
+  /*box-shadow: none;*/
+  /*}*/
+
 
   /deep/ .ant-tabs-bar {
-    border-bottom: 1px solid #0259ad;
-  }
-
-  /deep/ .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab {
-    width: 120px;
-    padding: 0 26px;
-    text-align: center;
-    background-color: #001529;
     color: #ffffff;
-    border-color: #0259ad;
-  }
-
-  /deep/ .ant-layout {
-    border-bottom-color: #0259ad !important;
+    /*border-bottom: 1px solid #0259ad;*/
+    border-bottom: none;
   }
 
   /deep/ .ant-btn {
@@ -290,60 +588,77 @@
     border-color: #40a9ff;
   }
 
-  /deep/ .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab-active {
-    background-image: linear-gradient(to right, blue, black);
+
+  .ant-carousel {
+    width: 100%;
+    height: 100%;
   }
 
-  /*/deep/ .ant-menu-dark.ant-menu-inline .ant-menu-item, .ant-menu-dark.ant-menu-inline .ant-menu-submenu-title {*/
-  /*width: 110px;*/
-  /*outline: 0;*/
-  /*padding: 2px 12px;*/
-  /*display: block;*/
-  /*color: #ffffff;*/
-  /*font-weight: bold;*/
-  /*text-shadow: 1px 1px #2250ca;*/
-  /*border: 1px solid #1c252b;*/
-  /*border-radius: 3px;*/
-  /*-moz-border-radius: 3px;*/
-  /*-webkit-border-radius: 3px;*/
-  /*background: #232B30; !* old browsers *!*/
-  /*background: -moz-linear-gradient(top, #3D4850 3%, #313d45 4%, #232B30 100%); !* firefox *!*/
-  /*background: -webkit-gradient(linear, left top, left bottom, color-stop(3%, #3D4850), color-stop(4%, #313d45), color-stop(100%, #232B30)); !* webkit *!*/
-  /*filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3D4850', endColorstr='#232B30', GradientType=0); !* ie *!*/
-  /*box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2); !* CSS3 *!*/
-  /*-moz-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2); !* Firefox *!*/
-  /*-webkit-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2); !* Safari, Chrome *!*/
-  /*}*/
-
-  /*/deep/ .ant-menu-item {*/
-  /*height: 40px;*/
-  /*line-height: 40px;*/
-  /*transition: .1s linear;*/
-  /*}*/
-
-  /*/deep/ .ant-menu-vertical .ant-menu-item:not(:last-child), .ant-menu-vertical-left .ant-menu-item:not(:last-child), .ant-menu-vertical-right .ant-menu-item:not(:last-child), .ant-menu-inline .ant-menu-item:not(:last-child) {*/
-  /*margin-bottom: -3px;*/
-  /*border-radius: 5px;*/
-  /*}*/
-
-  /deep/ .ant-menu-dark.ant-menu-inline .ant-menu-item, /deep/ .ant-menu-dark.ant-menu-inline .ant-menu-submenu-title {
-    height: 28px;
-    line-height: 28px;
+  /deep/ .ant-carousel .slick-slider {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: block;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-touch-callout: none;
+    -ms-touch-action: pan-y;
+    touch-action: pan-y;
+    -webkit-tap-highlight-color: transparent;
   }
 
-  /deep/ .ant-menu.ant-menu-dark .ant-menu-item-selected,
-  .ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected {
+  /deep/ .ant-carousel .slick-list {
+    width: 100%;
+    height: 100%;
+  }
+
+  /deep/ .ant-carousel .slick-track {
+    width: 100%;
+    height: 100%;
+  }
+
+  .ant-carousel >>> .slick-slide {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    /*background: #364d79;*/
+    overflow: hidden;
+    position: relative;
+  }
+
+  .ant-carousel >>> .custom-slick-arrow {
+    width: 25px;
+    height: 25px;
+    font-size: 25px;
+    color: #fff;
+    background-color: rgba(31, 45, 61, 0.11);
+    opacity: 0.3;
+  }
+
+  .ant-carousel >>> .custom-slick-arrow:before {
+    display: none;
+  }
+
+  .ant-carousel >>> .custom-slick-arrow:hover {
+    opacity: 0.5;
+  }
+
+  /deep/ .ant-carousel .slick-slide img {
+    display: inline-block;
+  }
+
+
+  /deep/ .ant-table-row:nth-child(even) {
     background: #0b4A86;
   }
 
-  /deep/ .ant-menu-dark, .ant-menu-dark .ant-menu-sub {
-    color: rgba(255, 255, 255, 0.65);
-    background: transparent;
+  /deep/ .ant-table-row:nth-child(odd) {
+    background: #1875A6;
   }
 
-  /deep/ .ant-menu-dark .ant-menu-inline.ant-menu-sub {
-    background: transparent;
-    box-shadow: none;
+  /deep/ .ant-table-row > td {
+    padding: 4px;
   }
+
 
 </style>

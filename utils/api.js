@@ -32,6 +32,10 @@ export default {
 
   alarmRules: '/Alarm/AlarmRules',
 
+  allEquipmentPoint: '/config/pointinformations',
+
+  allPointStatus: '/Point/api/GetPoint/GetPointValues',
+
   /**
    * @variation old API
    */

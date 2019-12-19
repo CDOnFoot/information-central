@@ -436,8 +436,9 @@
         // 每当页码改变时需要重新渲染列表数据
         if (this.searchName !== '') {
           this.handleConditionSearch(page);
+        } else {
+          this.handleTableChange(page);
         }
-        this.handleTableChange(page);
       },
 
       handleConditionSearch (page) {

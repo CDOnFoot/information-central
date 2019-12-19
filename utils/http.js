@@ -248,13 +248,6 @@ axios.defaults.headers.token = common.getCookie('dvptToken')
         }else {
           param = formateParm(params);
         }
-        
-        /*if (url === '/alarm/alarmRealTimeInfos') {
-          urlParam = '?$expand=AlarmLevel&$filter=SubsystemId eq 4&$orderby=AlarmDateTime desc'
-        }*/
-
-        // const token = Cookies.get('dvptToken');
-        // console.log('current token:' + token);
         var urlencode = urlEncode(host + url,param);
         return axios({
           method: 'get',
@@ -271,5 +264,39 @@ axios.defaults.headers.token = common.getCookie('dvptToken')
           }
         )
       },
+
+      put (url, params) {
+        return axios({
+          method: 'put',
+          baseURL: hostList + url,
+          // data: qs.stringify(params),
+          // data: JSON.stringify(params),
+          data: params,
+          timeout: 20000,
+        }).then(
+          (response) => {
+            return checkStatus(response)
+          }).then(
+          (res) => {
+            return checkCode(res)
+          })
+      },
+
+      delete (url, params) {
+        return axios({
+          method: 'delete',
+          baseURL: hostList + url,
+          // data: qs.stringify(params),
+          // data: JSON.stringify(params),
+          data: params,
+          timeout: 20000,
+        }).then(
+          (response) => {
+            return checkStatus(response)
+          }).then(
+          (res) => {
+            return checkCode(res)
+          })
+      }
       
     }

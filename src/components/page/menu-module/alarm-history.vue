@@ -3,11 +3,11 @@
     <div class="search-condition">
       <a-form layout="inline" :form="form" @submit="searchForAlarmHistory">
         <a-form-item label="报警名称：">
-          <a-input placeholder="报警名称" v-model="searchAlarmName"></a-input>
+          <a-input placeholder="报警名称" v-model="historyName"></a-input>
         </a-form-item>
-        <a-form-item label="报警">
+        <!--<a-form-item label="报警">
           <a-input placeholder="报警级别" v-model="searchAlarmLevel"></a-input>
-        </a-form-item>
+        </a-form-item>-->
         <a-form-item>
           <a-button type="primary" icon="search" html-type="submit">搜索</a-button>
         </a-form-item>
@@ -43,7 +43,7 @@
             /**
              * @description 这里不再使用 ant 官方 API 创建 form 校验，直接绑定两个 state 来判断是否有查询条件
              */
-            searchAlarmName: '',
+            historyName: '',
             searchAlarmLevel: '',
             loading: false,
             tableListContainer: [],
@@ -53,9 +53,7 @@
               defaultPageSize: 25,
               total: 0,
               size: 'large',
-              onChange: (current) => {
-                this.handlePageChange(current);
-              }
+              onChange: (current) => this.handlePageHistory(current)
             },
             column: [
               {
@@ -141,7 +139,6 @@
                 let table = [];
                 let tableContainer = res.data.value;
                 // const length = that.pagination.defaultPageSize;
-                that.pagination.total = tableContainer.length;
                 tableContainer.forEach((value, index) => {
                   value.AlarmDateTime = that.$common.timestampToTime(value.AlarmDateTime);
                   value.AlarmStatus = value.AlarmStatus === '"Unprocessed"' ? '处理中' : '未处理';
@@ -149,6 +146,7 @@
                   table.push(value);
                 });
                 that.tableList = table;
+                that.pagination.total = that.tableList.length;
                 that.loading = false;
               })
             } catch (e) {
@@ -178,16 +176,12 @@
                 value.AlarmStatus = value.AlarmStatus === 'Unprocessed' ? '未处理' : '处理中';
                 // 历史接口暂时没有报警级别
                 // value.AlarmLevel = value.AlarmLevel.Name;
-                if (that.searchAlarmName !== '' || that.searchAlarmLevel !== '') {
-                  if (
-                    /*value.AlarmName === that.searchAlarmName*/
-                  /* || value.AlarmLevel.Name === that.searchAlarmLevel*/
-                    value.AlarmName.includes(that.searchAlarmName) /*|| value.AlarmLevel.Name.includes(that.searchAlarmLevel)*/
-                  ) {
+                if (that.historyName !== '') {
+                  if (value.AlarmName.includes(that.historyName)) {
                     that.tableList.push(value);
                     table.push(value);
                     // 额外的缓存
-                    that.tableListContainer = table;
+                    // that.tableListContainer = table;
                   }
                 } else {
                   that.tableList.push(value);
@@ -201,22 +195,22 @@
 
         exportAlarmHistory () {},
 
-        handlePageChange (page) {
+        handlePageHistory (page) {
+            this.pagination.current = page;
+          const that = this;
+          /*if (that.searchAlarmLevel !== '') {
+            this.handlePageForHistory(page);
+          } else {
+            this.callbackPageHistory(page);
+          }*/
+        },
+        handlePageForHistory (page) {
           const that = this;
           this.loading = true;
-          if (that.searchAlarmLevel !== '' || that.searchAlarmName !== '') {
-            this.handlePageForCondition(page);
-          }
-          this.callbackPageChange(page);
-        },
-        handlePageForCondition (page) {
-          // 指向当前 Vue component
-          const that = this;
           // this.tableList = [];
-          let index_page = (page - 1) * that.pagination.defaultPageSize;
           this.$http.get(that.$api.getAlarmHistory).then(res => {
             if (res.status === 200) {
-              let table = [], table_0 = [];
+              let table = [];
               let tableContainer = res.data.value;
               // const length = that.pagination.defaultPageSize;
               // that.pagination.total = tableContainer.length;
@@ -228,19 +222,19 @@
                 if (
                   /*value.AlarmName === that.searchAlarmName*/
                 /* || value.AlarmLevel.Name === that.searchAlarmLevel*/
-                  value.AlarmName.includes(that.searchAlarmName) /*|| value.AlarmLevel.Name.includes(that.searchAlarmLevel)*/
+                  value.AlarmName.includes(that.historyName) /*|| value.AlarmLevel.Name.includes(that.searchAlarmLevel)*/
                 ) {
                   // that.tableList.push(value);
                   table.push(value);
                 }
               });
-
               that.tableList = table;
             }
           });
           this.loading = false;
         },
-        callbackPageChange (page) {
+
+        callbackPageHistory (page) {
           const that = this;
           this.loading = true;
           this.tableList = [];

@@ -3,11 +3,11 @@
     <div class="search-condition">
       <a-form layout="inline" :form="form" @submit="searchForAlarmDefine">
         <a-form-item label="报警名称：">
-          <a-input placeholder="报警名称" v-model="condition.alarmName"></a-input>
+          <a-input placeholder="报警名称" v-model="defineName"></a-input>
         </a-form-item>
-        <a-form-item label="报警">
+        <!--<a-form-item label="报警">
           <a-input placeholder="报警级别" v-model="condition.alarmLevel"></a-input>
-        </a-form-item>
+        </a-form-item>-->
         <a-form-item>
           <a-button type="primary" icon="search" html-type="submit">搜索</a-button>
         </a-form-item>
@@ -36,8 +36,8 @@
                 <a-form-item label="报警类型" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }">
                   <a-input v-model="modalForm.AlarmType"></a-input>
                 </a-form-item>
-                <a-form-item label="报警级别" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }">
-                  <a-input v-model="modalForm.AlarmLevel"></a-input>
+                <a-form-item label="报警描述" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }">
+                  <a-input v-model="modalForm.AlarmDescription"></a-input>
                 </a-form-item>
                 <a-form-item label="站ID" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }">
                   <a-input v-model="modalForm.StationId"></a-input>
@@ -53,14 +53,17 @@
                 <a-form-item label="设备ID" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }">
                   <a-input v-model="modalForm.EquipmentId"></a-input>
                 </a-form-item>
-                <a-form-item label="描述" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }">
-                  <a-input v-model="modalForm.AlarmDescription"></a-input>
+                <a-form-item label="设备点" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }">
+                  <a-input v-model="modalForm.PointId"></a-input>
                 </a-form-item>
-                <a-form-item label="报警根源" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }">
-                  <a-input v-model="modalForm.AlarmRootCause"></a-input>
+                <a-form-item label="上限点" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }">
+                  <a-input v-model="modalForm.HighLimit"></a-input>
+                </a-form-item>
+                <a-form-item label="下限点" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }">
+                  <a-input v-model="modalForm.LowLimit"></a-input>
                 </a-form-item>
                 <a-form-item label="状态" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }">
-                  <a-input v-model="modalForm.AlarmStatus"></a-input>
+                  <a-input v-model="modalForm.SyncStatus"></a-input>
                 </a-form-item>
               </div>
             </div>
@@ -99,9 +102,10 @@
             isShowModal: false,
             okButton: '保存',
             modalTitle: '',
+            defineName: '',
             condition: {
               alarmName: '',
-              alarmLevel: ''
+              // alarmLevel: ''
             },
             loading: false,
             confirmLoading: false,
@@ -134,69 +138,68 @@
                 title: '报警名称',
                 dataIndex: 'AlarmName',
                 align: 'center',
-                // sorter: true,
-                width: '9%',
+                width: '10%',
                 // scopedSlots: { customRender: 'name' }
-              },
-              {
-                title: '报警级别',
-                dataIndex: 'AlarmLevel',
-                align: 'center',
-                width: '8%'
               },
               {
                 title: '报警类型',
                 dataIndex: 'AlarmType',
                 align: 'center',
-                width: '9%'
+                width: '8%'
               },
               {
-                title: '描述',
+                title: '报警描述',
                 dataIndex: 'AlarmDescription',
                 align: 'center',
-                width: '15%'
+                width: '18%'
               },
-              /*{
-                title: '报警时间',
-                dataIndex: 'alarmTime',
+              {
+                title: '上限点',
+                dataIndex: 'HighLimit',
                 align: 'center',
-                width: 40
-              },*/
+                width: '5%'
+              },
+              {
+                title: '下限点',
+                dataIndex: 'LowLimit',
+                align: 'center',
+                width: '5%'
+              },
               {
                 title: '设备ID',
                 dataIndex: 'EquipmentId',
                 align: 'center',
-                width: '9%'
+                width: '6%'
               },
-              /*{
+              {
                 title: '设备点',
                 dataIndex: 'PointId',
                 align: 'center',
-                width: '9%'
-              },*/
-              {
-                title: '警报根源',
-                dataIndex: 'AlarmRootCause',
-                align: 'center',
-                width: '9%'
+                width: '6%'
               },
               {
                 title: '站ID',
                 dataIndex: 'StationId',
                 align: 'center',
-                width: '9%'
+                width: '5%'
               },
               {
                 title: '系统ID',
                 dataIndex: 'SubsystemId',
                 align: 'center',
-                width: '8%'
+                width: '5%'
               },
               {
                 title: '状态',
-                dataIndex: 'AlarmStatus',
+                dataIndex: 'SyncStatus',
                 align: 'center',
                 width: '9%'
+              },
+              {
+                title: '创建时间',
+                dataIndex: 'CreateDateTime',
+                align: 'center',
+                width: '13%'
               },
               {
                 title: '操 作',
@@ -413,6 +416,9 @@
       },
       
       methods: {
+        /**
+         * @function 初始化表格
+         */
         initTable () {
           const that = this;
           this.pagination.current = 1;
@@ -421,18 +427,16 @@
           this.form.validateFields((err, values) => {
             if (!err) {
               // 初始列表时查询所有数据，以显示全部的页码
-              that.$http.get(that.$api.getAlarmForPagination).then(res => {
+              that.$http.get(that.$api.alarmRules).then(res => {
                 if (res.status === 200) {
                   // let table = [];
                   let tableContainer = res.data.value;
-                  const length = that.pagination.defaultPageSize;
+                  // const length = that.pagination.defaultPageSize;
                   that.pagination.total = tableContainer.length;
-                  for (let i=0;i<length;i++) {
-                    tableContainer[i].AlarmDateTime = that.$common.timestampToTime(tableContainer[i].AlarmDateTime);
-                    tableContainer[i].AlarmStatus = tableContainer[i].AlarmStatus === '"Unprocessed"' ? '处理中' : '未处理';
-                    tableContainer[i].AlarmLevel = tableContainer[i].AlarmLevel.Name;
-                    that.tableList.push(tableContainer[i]);
-                  }
+                  tableContainer.forEach((value, index) => {
+                    value.CreateDateTime = that.$common.timestampToTime(value.CreateDateTime);
+                  });
+                  that.tableList = tableContainer;
                 }
                 this.loading = false;
               })
@@ -448,7 +452,7 @@
           this.pagination.current = 1;
           this.loading = true;
           // 使用当前绑定状态进行校验
-          this.$http.get(that.$api.getAlarmForPagination).then(res => {
+          this.$http.get(that.$api.alarmRules).then(res => {
             if (res.status === 200) {
               // let index = {};
               let table = [];
@@ -456,16 +460,10 @@
               // const length = that.pagination.defaultPageSize;
               // that.pagination.total = tableContainer.length;
               tableContainer.forEach((value, index) => {
-                value.AlarmDateTime = that.$common.timestampToTime(value.AlarmDateTime);
-                value.AlarmStatus = value.AlarmStatus === 'Unprocessed' ? '未处理' : '处理中';
-                // 只获取一个 Name 字段
-                value.AlarmLevel = value.AlarmLevel.Name;
-                if (that.condition.alarmName !== '' || that.condition.alarmLevel !== '') {
-                  if (/*value.AlarmName === that.condition.alarmName || value.AlarmLevel.Name === that.condition.alarmLevel*/
-                    value.AlarmName.includes(that.condition.alarmName) /*|| value.AlarmLevel.Name.includes(that.condition.alarmLevel)*/
-                  ) {
+                value.CreateDateTime = that.$common.timestampToTime(value.CreateDateTime);
+                if (that.defineName !== '') {
+                  if (value.AlarmName.includes(that.defineName)) {
                     that.tableList.push(value);
-                    // table.splice(0, 1, value);
                     table.push(value);
                     // 额外的缓存
                     that.tableListContainer = table;
@@ -483,11 +481,14 @@
         // 页码改变时的回调
         changePage (page) {
           const that = this;
+          this.pagination.current = page;
           this.loading = true;
-          if (that.condition.alarmName !== '' || that.condition.alarmLevel !== '') {
+          // 只保留一个查询条件
+          if (that.condition.alarmName !== '') {
             this.handlePageForCondition(page);
+          } else {
+            this.callbackPageChange(page);
           }
-          this.callbackPageChange(page);
         },
 
         handlePageForCondition (page) {
@@ -495,26 +496,21 @@
           this.loading = true;
           const that = this;
           // this.tableList = [];
+          this.tableList.splice(0);
           let index_page = (page - 1) * that.pagination.defaultPageSize;
-          this.$http.get(that.$api.getAlarmForPagination).then(res => {
+          this.$http.get(that.$api.alarmRules).then(res => {
             if (res.status === 200) {
               let table = [], table_0 = [];
               let tableContainer = res.data.value;
               // const length = that.pagination.defaultPageSize;
               // that.pagination.total = tableContainer.length;
               tableContainer.forEach((value, index) => {
-                value.AlarmDateTime = that.$common.timestampToTime(value.AlarmDateTime);
-                value.AlarmStatus = value.AlarmStatus === 'Unprocessed' ? '未处理' : '处理中';
-                // 只获取一个 Name 字段
-                value.AlarmLevel = value.AlarmLevel.Name;
-                if (/*value.AlarmName === that.condition.alarmName || value.AlarmLevel.Name === that.condition.alarmLevel*/
-                  value.AlarmName.includes(that.condition.alarmName) /*|| value.AlarmLevel.Name.includes(that.condition.alarmLevel)*/
-                ) {
+                value.CreateDateTime = that.$common.timestampToTime(value.CreateDateTime);
+                if (value.AlarmName.includes(that.defineName)) {
                   // that.tableList.push(value);
                   table.push(value);
                 }
               });
-
               that.tableList = table;
             }
           });
@@ -532,7 +528,7 @@
               this.tableList.pop();
             }
           }*/
-          this.$http.get(that.$api.getAlarmForPagination + '&$top=' + that.pagination.defaultPageSize + '&$skip=' + (page - 1) * that.pagination.defaultPageSize)
+          this.$http.get(that.$api.alarmRules + '?$top=' + that.pagination.defaultPageSize + '&$skip=' + (page - 1) * that.pagination.defaultPageSize)
             .then(res => {
               if (res.status === 200) {
                 // let index;
@@ -541,16 +537,8 @@
                 // const length = that.pagination.defaultPageSize;
                 // that.pagination.total = tableContainer.length;
                 that.tableList = res.data.value;
-                /*for (let i=0;i<=length;i++) {
-                  let index = i + ((page - 1) * pageSize);
-                  tableContainer[index].AlarmDateTime = that.$common.timestampToTime(tableContainer[index].AlarmDateTime);
-                  tableContainer[index].AlarmStatus = tableContainer[index].AlarmStatus === "Unprocessed" ? '未处理' : '处理中'
-                  that.tableList.push(tableContainer[index]);
-                }*/
                 tableContainer.forEach((value, index) => {
-                  value.AlarmDateTime = that.$common.timestampToTime(value.AlarmDateTime);
-                  value.AlarmStatus = value.AlarmStatus === "Unprocessed" ? '未处理' : '处理中';
-                  value.AlarmLevel = value.AlarmLevel.Name;
+                  value.CreateDateTime = that.$common.timestampToTime(value.CreateDateTime);
                   table.push(value);
                 });
                 that.tableList = table;

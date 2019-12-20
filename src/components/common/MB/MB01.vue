@@ -301,9 +301,10 @@
 
           equipmentListRequest (callback) {
             const that = this;
-            this.$http.get(that.$api.allEquipmentPoint).then(response => {
+            this.$http.get(that.$api.monitorEquipments).then(response => {
               // console.log(response);
               if (response.data) {
+                // 所有设备 list
                 callback(response.data.value);
               } else {
                 this.$message.error(response.data.Message);
@@ -313,37 +314,43 @@
 
           /**
            * @function 获取所有设备的所有点值
-           * @param data
+           * @param data {设备列表}
            */
           dealEquipmentList (data) {
-            console.log(data);
-            // 处理拿到的所有设备 EntityId
+            // param data 用于查询当前需要用到的设备
+            const allEquipment = data;
+            console.log('All equipments:');
+            console.log(allEquipment);
             const that = this;
+            this.$http.get(that.$api.allEquipmentPoint).then(res => {
+              // console.log(res);
+              if (res.data.value) {
+                // 全部设备的所有点
+                const allEquipmentPointValue = res.data.value;
+                console.log('All points:');
+                console.log(allEquipmentPointValue);
+                let paramIdList = [];
+                allEquipmentPointValue.forEach((value, index) => {
+                  paramIdList.splice(index, 1, {});
+                  this.$set(paramIdList[index], "Id", value.EntityId);
+                });
+                // 用从服务取到的 id list 去获取所有点值
+                that.$http.post(that.$api.allPointStatus, paramIdList).then(response => {
+                  console.log('All points values:');
+                  console.log(response.data);
+                  if (response.data) {
+                    // 开始比较
 
-            /**
-             * for cycle method
-             */
-            let obj = { Id: 0 }, paramIdList = [];
-            /*for (let i = 0; i < data.length; i++) {
-              obj.Id = data[i].EntityId;
-              // paramIdList.push(obj);
-              // 创建对象
-              paramIdList.splice(i, 1, {});
-              Object.assign(paramIdList[i], obj)
-            }*/
-
-            /**
-             * to do list.
-             */
-            data.forEach((value, index) => {
-              paramIdList.splice(index, 1, {});
-              this.$set(paramIdList[index], "Id", value.EntityId);
+                  }
+                })
+              }
             });
 
-            console.log(paramIdList);
-            this.$http.post(that.$api.allPointStatus, paramIdList).then(response => {
-              console.log(response)
-            })
+            // const meaning = data[18].MeaningOfValue;
+            // console.log('transferred object:');
+            // console.log(JSON.parse(meaning));
+            // 处理拿到的所有设备 EntityId
+
           },
 
             // 查看可视化界面内容数据信息

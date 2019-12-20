@@ -116,11 +116,20 @@
 
 <style scoped>
 .menu-module {
-  background: url("../../../assets/img/back/module-bg.png") no-repeat;
+  /* background: url("../../../assets/img/back/module-bg.png") no-repeat; */
   background-size: 100% 100%;
   cursor: pointer;
+  margin: 10px 10px;
+  background-color: #24347f7a;
+  border-radius: 4px;
+  box-shadow: 5px 6px #3e4e92, 0px 4px 5px rgba(0, 0, 0, 0.3);
+  position: relative;
+  padding: 0px 18px 0px 0px;
 }
-
+.menu-module:active{
+  top: 4px;
+  box-shadow: 0px 0px #3e4e92, 0px 4px 5px rgba(0, 0, 0, 0.3);
+}
   .menu-module-name {
     text-align: center;
   }

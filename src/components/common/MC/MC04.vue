@@ -43,11 +43,11 @@ export default {
     const height = window.screen.height;
     // console.log(parentNode);
     this.$('.device-content-0').css({
-      'height': height * 0.3 + 'px',
+      'height': height * 0.36 + 'px',
       'width': '98%'
     });
     this.$('.device-content-1').css({
-      'height': height * 0.3 + 'px',
+      'height': height * 0.36 + 'px',
       'width': '98%'
     })
   },

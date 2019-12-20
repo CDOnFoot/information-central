@@ -34,7 +34,12 @@
                   <a-input v-model="modalForm.AlarmName"></a-input>
                 </a-form-item>
                 <a-form-item label="报警类型" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }">
-                  <a-input v-model="modalForm.AlarmType"></a-input>
+                  <!--<a-input v-model="modalForm.AlarmType"></a-input>-->
+                  <a-select v-model="modalForm.AlarmType">
+                    <a-select-option value="OutOfRange">OutOfRange</a-select-option>
+                    <a-select-option value="StatusAlarm">StatusAlarm</a-select-option>
+                    <a-select-option value="Control">Control</a-select-option>
+                  </a-select>
                 </a-form-item>
                 <a-form-item label="报警描述" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }">
                   <a-input v-model="modalForm.AlarmDescription"></a-input>
@@ -63,7 +68,12 @@
                   <a-input v-model="modalForm.LowLimit"></a-input>
                 </a-form-item>
                 <a-form-item label="状态" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }">
-                  <a-input v-model="modalForm.SyncStatus"></a-input>
+                  <!--<a-input v-model="modalForm.SyncStatus"></a-input>-->
+                  <a-select v-model="modalForm.SyncStatus">
+                    <a-select-option value="AlarmRuleAckSuccess">AlarmRuleAckSuccess</a-select-option>
+                    <a-select-option value="AlarmRuleEditAcking">AlarmRuleEditAcking</a-select-option>
+                    <!--<a-select-option value="Control"></a-select-option>-->
+                  </a-select>
                 </a-form-item>
               </div>
             </div>

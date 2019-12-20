@@ -277,12 +277,75 @@
           // console.log(this.visualList);
           // 初始化模版内容
           this.getContentInfo();
+          // 获取设备列表
+        this.getEquipmentList();
           this.btnList = this.$common.btnList;
       },
 
       created(){
       },
         methods:{
+          /**
+           * @function 获取设备列表
+           * @description 先拿到所有设备列表，再根据设备 Name 属性获取该设备状态，最后由设备点的 EntityId 请求该点值
+           */
+          getEquipmentList () {
+            try {
+              this.equipmentListRequest((data) => {
+                this.dealEquipmentList(data);
+              })
+            } catch (e) {
+              console.log('There are some mistakes:' + e);
+            }
+          },
+
+          equipmentListRequest (callback) {
+            const that = this;
+            this.$http.get(that.$api.allEquipmentPoint).then(response => {
+              // console.log(response);
+              if (response.data) {
+                callback(response.data.value);
+              } else {
+                this.$message.error(response.data.Message);
+              }
+            })
+          },
+
+          /**
+           * @function 获取所有设备的所有点值
+           * @param data
+           */
+          dealEquipmentList (data) {
+            console.log(data);
+            // 处理拿到的所有设备 EntityId
+            const that = this;
+
+            /**
+             * for cycle method
+             */
+            let obj = { Id: 0 }, paramIdList = [];
+            /*for (let i = 0; i < data.length; i++) {
+              obj.Id = data[i].EntityId;
+              // paramIdList.push(obj);
+              // 创建对象
+              paramIdList.splice(i, 1, {});
+              Object.assign(paramIdList[i], obj)
+            }*/
+
+            /**
+             * to do list.
+             */
+            data.forEach((value, index) => {
+              paramIdList.splice(index, 1, {});
+              this.$set(paramIdList[index], "Id", value.EntityId);
+            });
+
+            console.log(paramIdList);
+            this.$http.post(that.$api.allPointStatus, paramIdList).then(response => {
+              console.log(response)
+            })
+          },
+
             // 查看可视化界面内容数据信息
           getUserVisualization:function(){
             let self = this;

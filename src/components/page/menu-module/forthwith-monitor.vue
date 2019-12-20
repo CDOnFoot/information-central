@@ -32,7 +32,7 @@
         >
           <template v-for="item in menu">
             <a-menu-item :key="item.Code" @click="changeMenu(item)">
-              <a-icon type="pie-chart"/>
+              <!--<a-icon type="pie-chart"/>-->
               <span>{{item.DisplayName}}</span>
             </a-menu-item>
           </template>
@@ -54,7 +54,7 @@
           <!--</a-tabs>-->
 
           <template>
-            <a-tabs @change="changeTab">
+            <a-tabs @change="changeTab" type="card">
               <template v-for="item in eqType.Equipments">
                 <a-tab-pane :tab="item.Description" :key="item.Name"></a-tab-pane>
               </template>
@@ -233,7 +233,6 @@
         columns2,
         loading: false,
 
-        notification: '',
         collapsed: false,
         rootSubmenuKeys: [],
         openKeys: [],
@@ -323,12 +322,30 @@
             if (displayName.indexOf('只读') == -1 && displayName.indexOf('读构建') == -1) {
               let desc = '';
               if (this.pointVal[i]) {
+
+                console.log(this.pointVal[i].ti);
+
                 let t = this.pointVal[i].t;
                 if (t == "String") {
                   desc = this.pointVal[i].s;
                 } else if (t == "Long") {
                   desc = this.pointVal[i].l;
                 }
+
+                if (this.pointInfo[i].MeaningOfValue != '') {
+                  let obj = JSON.parse(this.pointInfo[i].MeaningOfValue);
+                  // console.log(obj);
+                  Object.keys(obj).forEach(function (key) {
+                    if (key == desc) {
+                      desc = obj[key]
+                    }
+                  });
+                }
+
+                if (this.pointInfo[i].UnitOfMeasurement != '') {
+                  desc += this.pointInfo[i].UnitOfMeasurement;
+                }
+
               }
               arr.push({
                 DisplayName: displayName,
@@ -410,16 +427,16 @@
 
   .select-menu {
     float: left;
-    width: 10%;
+    width: 8%;
     height: 80%;
-    padding-top: 60px;
+    padding-top: 80px;
   }
 
   .show-area {
     float: left;
-    width: 88%;
+    width: 92%;
     height: 80%;
-    margin-left: 2%;
+    padding-left: 2%;
   }
 
   .select-container {
@@ -545,19 +562,25 @@
   }
 
 
-  /*/deep/ .ant-menu-dark.ant-menu-inline .ant-menu-item, /deep/ .ant-menu-dark.ant-menu-inline .ant-menu-submenu-title {*/
-  /*height: 40px;*/
-  /*line-height: 28px;*/
-  /*}*/
+  /deep/ .ant-menu-dark.ant-menu-inline .ant-menu-item {
+    cursor: pointer;
+    border-radius: 5px;
+  }
+
   /deep/ .ant-menu-dark, /deep/ .ant-menu-dark .ant-menu-sub {
     color: rgba(255, 255, 255, 0.65);
     background: transparent;
   }
 
-  /deep/ .ant-menu.ant-menu-dark .ant-menu-item-selected,
-  .ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected {
-    /*background: #0b4A86;*/
+  /deep/ .ant-menu-item-selected {
+    text-shadow: 0px 1px 0px #c0c0c0,
+    0px 2px 0px #b0b0b0,
+    0px 3px 0px #a0a0a0,
+    0px 4px 0px #909090,
+    0px 5px 10px rgba(0, 0, 0, 0.6);
+
   }
+
 
   /*/deep/ .ant-menu-dark, .ant-menu-dark .ant-menu-sub {*/
   /*color: rgba(255, 255, 255, 0.65);*/
@@ -570,10 +593,39 @@
   /*}*/
 
 
+  /*/deep/ .ant-tabs-bar {*/
+  /*color: #ffffff;*/
+  /*!*border-bottom: 1px solid #0259ad;*!*/
+  /*border-bottom: none;*/
+  /*}*/
+
+  /*/deep/ .ant-btn {*/
+  /*color: #ffffff;*/
+  /*height: 30px;*/
+  /*background-color: transparent;*/
+  /*border-radius: 200px;*/
+  /*}*/
+
+  /*/deep/ .ant-btn:hover, .ant-btn:focus {*/
+  /*color: #40a9ff;*/
+  /*border-color: #40a9ff;*/
+  /*}*/
+
   /deep/ .ant-tabs-bar {
+    border-bottom: 1px solid #0259ad;
+  }
+
+  /deep/ .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab {
+    width: 125px;
+    padding: 0;
+    text-align: center;
+    background-color: #001529;
     color: #ffffff;
-    /*border-bottom: 1px solid #0259ad;*/
-    border-bottom: none;
+    border-color: #0259ad;
+  }
+
+  /deep/ .ant-layout {
+    border-bottom-color: #0259ad !important;
   }
 
   /deep/ .ant-btn {
@@ -586,6 +638,10 @@
   /deep/ .ant-btn:hover, .ant-btn:focus {
     color: #40a9ff;
     border-color: #40a9ff;
+  }
+
+  /deep/ .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab-active {
+    background-image: linear-gradient(to right, blue, black);
   }
 
 
@@ -645,6 +701,10 @@
 
   /deep/ .ant-carousel .slick-slide img {
     display: inline-block;
+  }
+
+  .ant-carousel[data-v-ad1cccaa] .custom-slick-arrow {
+    /*font-size: 30px;*/
   }
 
 

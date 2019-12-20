@@ -7,7 +7,10 @@
       <div class="borde">设备概览</div>
       <div :id="mcId" class="main-id">
         <div class="none-data">
-          <!--暂无信息-->模块四
+          <div class="device-content">
+            <div class="device-content-0"></div>
+            <div class="device-content-1"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -34,8 +37,21 @@ export default {
       this.mcId = val;
     }
   },
+
   mounted() {
+    // const parentNode = this.$('.device-content-0').parent();
+    const height = window.screen.height;
+    // console.log(parentNode);
+    this.$('.device-content-0').css({
+      'height': height * 0.3 + 'px',
+      'width': '98%'
+    });
+    this.$('.device-content-1').css({
+      'height': height * 0.3 + 'px',
+      'width': '98%'
+    })
   },
+
   created() {},
   methods: {
   }
@@ -59,5 +75,19 @@ export default {
   font-size: 14px;
   text-align: center;
   padding-top: 20px;
+}
+
+.device-content {
+  margin-top: 15px;
+}
+
+  .device-content-0 {
+    background: url("../../../assets/img/main/设备柜.png");
+    background-size: 100% 100%;
+  }
+
+.device-content-1 {
+  background: url("../../../assets/img/main/机房.png");
+  background-size: 100% 100%;
 }
 </style>

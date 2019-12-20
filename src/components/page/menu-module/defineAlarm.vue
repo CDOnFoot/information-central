@@ -36,9 +36,10 @@
                 <a-form-item label="报警类型" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }">
                   <!--<a-input v-model="modalForm.AlarmType"></a-input>-->
                   <a-select v-model="modalForm.AlarmType">
-                    <a-select-option value="OutOfRange">OutOfRange</a-select-option>
-                    <a-select-option value="StatusAlarm">StatusAlarm</a-select-option>
-                    <a-select-option value="Control">Control</a-select-option>
+                    <a-select-option value="OutOfRange">超限报警</a-select-option>
+                    <a-select-option value="StatusAlarm">故障报警</a-select-option>
+                    <a-select-option value="Control">反馈报警</a-select-option>
+                    <a-select-option value="StatusAnomaly">运行报警</a-select-option>
                   </a-select>
                 </a-form-item>
                 <a-form-item label="报警描述" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }">
@@ -68,12 +69,7 @@
                   <a-input v-model="modalForm.LowLimit"></a-input>
                 </a-form-item>
                 <a-form-item label="状态" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }">
-                  <!--<a-input v-model="modalForm.SyncStatus"></a-input>-->
-                  <a-select v-model="modalForm.SyncStatus">
-                    <a-select-option value="AlarmRuleAckSuccess">AlarmRuleAckSuccess</a-select-option>
-                    <a-select-option value="AlarmRuleEditAcking">AlarmRuleEditAcking</a-select-option>
-                    <!--<a-select-option value="Control"></a-select-option>-->
-                  </a-select>
+                  <a-input v-model="modalForm.SyncStatus" disabled="true"></a-input>
                 </a-form-item>
               </div>
             </div>
@@ -426,6 +422,33 @@
       },
       
       methods: {
+          formatStatus (param) {
+            switch (param) {
+              case "AlarmRuleAddAcking":
+                return "增加规则中";
+                break;
+              case "AlarmRuleEditAcking":
+                return "修改规则中";
+                break;
+              case "AlarmRuleDeleteAcking":
+                return "删除规则中";
+                break;
+              case "AlarmRuleAckSuccess":
+                return "报警成功";
+                break;
+              case "AlarmRuleAddAckFail":
+                return "增加规则失败";
+                break;
+              case "AlarmRuleEditAckFail":
+                return "修改规则失败";
+                break;
+              case "AlarmRuleDeleteAckFail":
+                return "删除规则失败";
+                break;
+              default:
+                return ''
+            }
+          },
         /**
          * @function 初始化表格
          */
@@ -445,6 +468,7 @@
                   that.pagination.total = tableContainer.length;
                   tableContainer.forEach((value, index) => {
                     value.CreateDateTime = that.$common.timestampToTime(value.CreateDateTime);
+                    value.SyncStatus = that.formatStatus(value.SyncStatus);
                   });
                   that.tableList = tableContainer;
                 }
@@ -471,6 +495,7 @@
               // that.pagination.total = tableContainer.length;
               tableContainer.forEach((value, index) => {
                 value.CreateDateTime = that.$common.timestampToTime(value.CreateDateTime);
+                value.SyncStatus = that.formatStatus(value.SyncStatus);
                 if (that.defineName !== '') {
                   if (value.AlarmName.includes(that.defineName)) {
                     that.tableList.push(value);
@@ -516,6 +541,7 @@
               // that.pagination.total = tableContainer.length;
               tableContainer.forEach((value, index) => {
                 value.CreateDateTime = that.$common.timestampToTime(value.CreateDateTime);
+                value.SyncStatus = that.formatStatus(value.SyncStatus);
                 if (value.AlarmName.includes(that.defineName)) {
                   // that.tableList.push(value);
                   table.push(value);
@@ -549,6 +575,7 @@
                 that.tableList = res.data.value;
                 tableContainer.forEach((value, index) => {
                   value.CreateDateTime = that.$common.timestampToTime(value.CreateDateTime);
+                  value.SyncStatus = that.formatStatus(value.SyncStatus);
                   table.push(value);
                 });
                 that.tableList = table;

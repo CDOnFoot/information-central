@@ -102,12 +102,12 @@
                 </div>
                 <div class="boxes">
                   <div class="pointInfo">
-                    <a-table
-                      :columns="columns"
-                      :dataSource="dataSource"
-                      :showHeader="false"
-                      :pagination="false"
-                      :loading="loading"
+                    <a-table class="flipInX"
+                             :columns="columns"
+                             :dataSource="dataSource"
+                             :showHeader="false"
+                             :pagination="false"
+                             :loading="loading"
                     >
                     </a-table>
                   </div>
@@ -124,7 +124,8 @@
                     <div class="borde">能量流图</div>
                     <div class="pointStatus-ti">
                       <!--{{pointStatus_ti}}-->
-                      11111111111111111111
+                      2019年12月19日 09:31:31
+
                     </div>
                     <div class="energy">
                       <img src="../../../assets/img/monitor/dev2.png" alt="">
@@ -154,7 +155,7 @@
                     <div class="borde">电池后备时间</div>
                     <div class="pointStatus-ti">
                       <!--{{pointStatus_ti}}-->
-                      11111111111111111111
+                      2019年12月19日 09:31:31
 
                     </div>
                     <div class="battery">
@@ -282,7 +283,8 @@
           if (!obj[objArr[i].Code]) {
             let newObj = {
               Code: objArr[i].Code,
-              DisplayName: objArr[i].Code,
+              // DisplayName: objArr[i].Code,
+              DisplayName: objArr[i].Description.replace(/\d+/g, ''),
               Equipments: [],
             };
             newObj.Equipments.push(objArr[i]);
@@ -344,7 +346,7 @@
           if (this.pointInfo[i]) {
             let displayName = this.pointInfo[i].DisplayName;
             if (displayName.indexOf("只读") == -1 && displayName.indexOf("读构建") == -1) {
-              let desc = '';
+              let desc = "";
               if (this.pointVal[i]) {
                 // 是否坏点
                 if (this.pointVal[i].st.ib) {
@@ -378,12 +380,15 @@
                       Desc: desc,
                     });
                   }
-
                   if (displayName == "通信状态") {
                     this.commStatus.Value = desc;
                     this.commStatus.Time = this.$common.timestampToTime(this.pointVal[i].ti);
                   }
-
+                }
+              } else {
+                if (displayName == "通信状态") {
+                  this.commStatus.Value = "暂无数据";
+                  this.commStatus.Time = "暂无数据";
                 }
               }
               arr.push({
@@ -394,8 +399,6 @@
           }
 
         }
-
-        console.log(this.popWarning)
         this.dataSource = arr;
       },
 
@@ -468,16 +471,16 @@
 
   .select-menu {
     float: left;
-    width: 8%;
+    width: 7%;
     height: 80%;
     padding-top: 80px;
   }
 
   .show-area {
     float: left;
-    width: 92%;
+    width: 90%;
     height: 80%;
-    padding-left: 2%;
+    margin-left: 3%;
   }
 
   .select-container {
@@ -605,23 +608,32 @@
 
   /deep/ .ant-menu-dark.ant-menu-inline .ant-menu-item {
     cursor: pointer;
-    border-radius: 5px;
+    background: #2250ca;
+    margin-bottom: 7px;
+    position: relative;
+    color: rgba(255, 255, 255, 1);
+    text-decoration: none;
+    /*background-color: rgba(219, 87, 51, 1);*/
+    background-color: #6195f1;
+    display: block;
+    padding: 4px;
+    border-radius: 8px;
+    /* let's use box shadows to make the button look more 3-dimensional */
+    box-shadow: 0px 5px 0px #82abf5, 0px 9px 25px rgba(0, 0, 0, .3);
+    -webkit-transition: all .1s ease;
+    -moz-transition: all .1s ease;
+    transition: all .1s ease;
   }
 
   /deep/ .ant-menu-dark, /deep/ .ant-menu-dark .ant-menu-sub {
-    color: rgba(255, 255, 255, 0.65);
     background: transparent;
   }
 
-  /deep/ .ant-menu-item-selected {
-    text-shadow: 0px 1px 0px #c0c0c0,
-    0px 2px 0px #b0b0b0,
-    0px 3px 0px #a0a0a0,
-    0px 4px 0px #909090,
-    0px 5px 10px rgba(0, 0, 0, 0.6);
-
+  /deep/ .ant-menu.ant-menu-dark .ant-menu-item-selected, /deep/ .ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected {
+    width: 110%;
+    height: 50px;
+    line-height: 50px;
   }
-
 
   /*/deep/ .ant-menu-dark, .ant-menu-dark .ant-menu-sub {*/
   /*color: rgba(255, 255, 255, 0.65);*/
@@ -664,8 +676,9 @@
   /deep/ .ant-btn {
     color: #ffffff;
     height: 28px;
-    /*background-color: transparent;*/
     border-radius: 200px;
+    border-color: #0259ad;
+    background-color: transparent;
   }
 
   .ant-carousel {
@@ -743,5 +756,34 @@
     padding: 4px;
   }
 
+  @keyframes flipInX {
+    from {
+      transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+      animation-timing-function: ease-in;
+      opacity: 0;
+    }
 
+    40% {
+      transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
+      animation-timing-function: ease-in;
+    }
+
+    60% {
+      transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
+      opacity: 1;
+    }
+
+    80% {
+      transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
+    }
+
+    to {
+      transform: perspective(400px);
+    }
+  }
+
+  .flipInX {
+    backface-visibility: visible !important;
+    animation-name: flipInX;
+  }
 </style>

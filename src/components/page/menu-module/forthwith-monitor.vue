@@ -58,11 +58,22 @@
               <template v-for="item in eqType.Equipments">
                 <a-tab-pane :tab="item.Description" :key="item.Name"></a-tab-pane>
               </template>
-              <a-button slot="tabBarExtraContent">
-                <a-badge dot :count="10">
-                  <a-icon type="notification"/>
+              <a slot="tabBarExtraContent" style="margin-right: 20px">
+                <a-badge dot :count="popWarning.length">
+                  <a-popover title="告警提示" trigger="click" placement="leftBottom">
+                    <template slot="content">
+                      <p v-for="item in popWarning">
+                        <span>{{item.DisplayName}}</span>
+                        ：
+                        <span style="">{{item.Desc}}</span>
+                      </p>
+                    </template>
+                    <a-button type="primary">
+                      <a-icon type="notification"/>
+                    </a-button>
+                  </a-popover>
                 </a-badge>
-              </a-button>
+              </a>
             </a-tabs>
           </template>
 
@@ -91,12 +102,12 @@
                 </div>
                 <div class="boxes">
                   <div class="pointInfo">
-                    <a-table
-                      :columns="columns"
-                      :dataSource="dataSource"
-                      :showHeader="false"
-                      :pagination="false"
-                      :loading="loading"
+                    <a-table class="flipInX"
+                             :columns="columns"
+                             :dataSource="dataSource"
+                             :showHeader="false"
+                             :pagination="false"
+                             :loading="loading"
                     >
                     </a-table>
                   </div>
@@ -113,25 +124,26 @@
                     <div class="borde">能量流图</div>
                     <div class="pointStatus-ti">
                       <!--{{pointStatus_ti}}-->
-                      11111111111111111111
+                      2019年12月19日 09:31:31
+
                     </div>
                     <div class="energy">
-                      <img :src="imgUrl2" alt="">
+                      <img src="../../../assets/img/monitor/dev2.png" alt="">
                     </div>
                   </div>
                 </div>
                 <div class="boxes">
                   <img class="boxes-bg" src="../../../assets/img/main-border-b.png" alt="">
                   <div class="boxes-cont">
-                    <div class="borde">供电状态</div>
+                    <div class="borde">通信状态</div>
                     <div class="pointStatus-ti">
                       <!--{{pointStatus_ti}}-->
-                      11111111111111111111
+                      {{commStatus.Time}}
 
                     </div>
                     <div class="electricity">
                       <div class="status">
-                        {{electricityStatus}}
+                        {{commStatus.Value}}
                       </div>
                     </div>
                   </div>
@@ -143,7 +155,7 @@
                     <div class="borde">电池后备时间</div>
                     <div class="pointStatus-ti">
                       <!--{{pointStatus_ti}}-->
-                      11111111111111111111
+                      2019年12月19日 09:31:31
 
                     </div>
                     <div class="battery">
@@ -171,16 +183,16 @@
 
   const columns = [
     {
-      title: 'DisplayName',
-      dataIndex: 'DisplayName',
-      align: 'center',
-      width: '50%'
+      title: "名称",
+      dataIndex: "DisplayName",
+      align: "center",
+      width: "50%"
     },
     {
-      title: 'Desc',
-      dataIndex: 'Desc',
-      align: 'center',
-      width: '50%'
+      title: "描述",
+      dataIndex: "Desc",
+      align: "center",
+      width: "50%"
     },
   ];
 
@@ -217,22 +229,24 @@
       return {
         data: [],
         menu: [],
-        eqType: '',
-        eqName: '',
+        eqType: "",
+        eqName: "",
         pointInfo: [],
         pointVal: [],
-
-        dataSource: [],
-        dataSource2: [],
-
-        imgUrl: require('../../../assets/img/monitor/dev5.png'),
-        imgUrl2: require('../../../assets/img/monitor/dev2.png'),
-        electricityStatus: 'normal',
-
         columns,
         columns2,
-        loading: false,
+        dataSource: [],
+        dataSource2: [],
+        popWarning: [],
 
+        imgUrl: require("../../../assets/img/monitor/dev5.png"),
+
+        commStatus: {
+          Value: "",
+          Time: ""
+        },
+
+        loading: false,
         collapsed: false,
         rootSubmenuKeys: [],
         openKeys: [],
@@ -242,6 +256,16 @@
       this.init();
     },
     methods: {
+
+      popConfirm(e) {
+        console.log(e);
+
+      },
+
+      popCancel(e) {
+        console.log(e);
+
+      },
 
       init() {
         this.getEquipments().then((res) => {
@@ -259,7 +283,8 @@
           if (!obj[objArr[i].Code]) {
             let newObj = {
               Code: objArr[i].Code,
-              DisplayName: objArr[i].Code,
+              // DisplayName: objArr[i].Code,
+              DisplayName: objArr[i].Description.replace(/\d+/g, ''),
               Equipments: [],
             };
             newObj.Equipments.push(objArr[i]);
@@ -294,7 +319,7 @@
           console.log(res);
 
           if (res.length == 0) {
-            this.$message.error('暂无数据 T T');
+            this.$message.error("暂无数据");
           }
 
           let arr = [];
@@ -316,36 +341,55 @@
 
       initPage() {
         let arr = [];
+        this.popWarning = [];
         for (let i = 0; i < this.pointInfo.length; i++) {
           if (this.pointInfo[i]) {
             let displayName = this.pointInfo[i].DisplayName;
-            if (displayName.indexOf('只读') == -1 && displayName.indexOf('读构建') == -1) {
-              let desc = '';
+            if (displayName.indexOf("只读") == -1 && displayName.indexOf("读构建") == -1) {
+              let desc = "";
               if (this.pointVal[i]) {
-
-                console.log(this.pointVal[i].ti);
-
-                let t = this.pointVal[i].t;
-                if (t == "String") {
-                  desc = this.pointVal[i].s;
-                } else if (t == "Long") {
-                  desc = this.pointVal[i].l;
+                // 是否坏点
+                if (this.pointVal[i].st.ib) {
+                  desc = "坏点";
+                } else {
+                  // 取点值
+                  let t = this.pointVal[i].t;
+                  if (t == "String") {
+                    desc = this.pointVal[i].s;
+                  } else if (t == "Long") {
+                    desc = this.pointVal[i].l;
+                  }
+                  // 点值描述
+                  if (this.pointInfo[i].MeaningOfValue != '') {
+                    let obj = JSON.parse(this.pointInfo[i].MeaningOfValue);
+                    // console.log(obj);
+                    Object.keys(obj).forEach(function (key) {
+                      if (key == desc) {
+                        desc = obj[key]
+                      }
+                    });
+                  }
+                  // 点值单位
+                  if (this.pointInfo[i].UnitOfMeasurement != '') {
+                    desc += this.pointInfo[i].UnitOfMeasurement;
+                  }
+                  // 是否报警
+                  if (this.pointVal[i].st.ia) {
+                    this.popWarning.push({
+                      DisplayName: displayName,
+                      Desc: desc,
+                    });
+                  }
+                  if (displayName == "通信状态") {
+                    this.commStatus.Value = desc;
+                    this.commStatus.Time = this.$common.timestampToTime(this.pointVal[i].ti);
+                  }
                 }
-
-                if (this.pointInfo[i].MeaningOfValue != '') {
-                  let obj = JSON.parse(this.pointInfo[i].MeaningOfValue);
-                  // console.log(obj);
-                  Object.keys(obj).forEach(function (key) {
-                    if (key == desc) {
-                      desc = obj[key]
-                    }
-                  });
+              } else {
+                if (displayName == "通信状态") {
+                  this.commStatus.Value = "暂无数据";
+                  this.commStatus.Time = "暂无数据";
                 }
-
-                if (this.pointInfo[i].UnitOfMeasurement != '') {
-                  desc += this.pointInfo[i].UnitOfMeasurement;
-                }
-
               }
               arr.push({
                 DisplayName: displayName,
@@ -427,16 +471,16 @@
 
   .select-menu {
     float: left;
-    width: 8%;
+    width: 7%;
     height: 80%;
     padding-top: 80px;
   }
 
   .show-area {
     float: left;
-    width: 92%;
+    width: 90%;
     height: 80%;
-    padding-left: 2%;
+    margin-left: 3%;
   }
 
   .select-container {
@@ -564,23 +608,32 @@
 
   /deep/ .ant-menu-dark.ant-menu-inline .ant-menu-item {
     cursor: pointer;
-    border-radius: 5px;
+    background: #2250ca;
+    margin-bottom: 7px;
+    position: relative;
+    color: rgba(255, 255, 255, 1);
+    text-decoration: none;
+    /*background-color: rgba(219, 87, 51, 1);*/
+    background-color: #6195f1;
+    display: block;
+    padding: 4px;
+    border-radius: 8px;
+    /* let's use box shadows to make the button look more 3-dimensional */
+    box-shadow: 0px 5px 0px #82abf5, 0px 9px 25px rgba(0, 0, 0, .3);
+    -webkit-transition: all .1s ease;
+    -moz-transition: all .1s ease;
+    transition: all .1s ease;
   }
 
   /deep/ .ant-menu-dark, /deep/ .ant-menu-dark .ant-menu-sub {
-    color: rgba(255, 255, 255, 0.65);
     background: transparent;
   }
 
-  /deep/ .ant-menu-item-selected {
-    text-shadow: 0px 1px 0px #c0c0c0,
-    0px 2px 0px #b0b0b0,
-    0px 3px 0px #a0a0a0,
-    0px 4px 0px #909090,
-    0px 5px 10px rgba(0, 0, 0, 0.6);
-
+  /deep/ .ant-menu.ant-menu-dark .ant-menu-item-selected, /deep/ .ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected {
+    width: 110%;
+    height: 50px;
+    line-height: 50px;
   }
-
 
   /*/deep/ .ant-menu-dark, .ant-menu-dark .ant-menu-sub {*/
   /*color: rgba(255, 255, 255, 0.65);*/
@@ -597,18 +650,6 @@
   /*color: #ffffff;*/
   /*!*border-bottom: 1px solid #0259ad;*!*/
   /*border-bottom: none;*/
-  /*}*/
-
-  /*/deep/ .ant-btn {*/
-  /*color: #ffffff;*/
-  /*height: 30px;*/
-  /*background-color: transparent;*/
-  /*border-radius: 200px;*/
-  /*}*/
-
-  /*/deep/ .ant-btn:hover, .ant-btn:focus {*/
-  /*color: #40a9ff;*/
-  /*border-color: #40a9ff;*/
   /*}*/
 
   /deep/ .ant-tabs-bar {
@@ -628,22 +669,17 @@
     border-bottom-color: #0259ad !important;
   }
 
-  /deep/ .ant-btn {
-    color: #ffffff;
-    height: 30px;
-    background-color: transparent;
-    border-radius: 200px;
-  }
-
-  /deep/ .ant-btn:hover, .ant-btn:focus {
-    color: #40a9ff;
-    border-color: #40a9ff;
-  }
-
   /deep/ .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab-active {
     background-image: linear-gradient(to right, blue, black);
   }
 
+  /deep/ .ant-btn {
+    color: #ffffff;
+    height: 28px;
+    border-radius: 200px;
+    border-color: #0259ad;
+    background-color: transparent;
+  }
 
   .ant-carousel {
     width: 100%;
@@ -720,5 +756,34 @@
     padding: 4px;
   }
 
+  @keyframes flipInX {
+    from {
+      transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+      animation-timing-function: ease-in;
+      opacity: 0;
+    }
 
+    40% {
+      transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
+      animation-timing-function: ease-in;
+    }
+
+    60% {
+      transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
+      opacity: 1;
+    }
+
+    80% {
+      transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
+    }
+
+    to {
+      transform: perspective(400px);
+    }
+  }
+
+  .flipInX {
+    backface-visibility: visible !important;
+    animation-name: flipInX;
+  }
 </style>

@@ -107,7 +107,8 @@
             </div>
           </div>
         <div class="sub-content">
-             <component :is="visualList.mb.mk[3].mc.contentNum"  :mcTitle="visualList.mb.mk[3].mc.contentName"  :mcStatus="3"  :mcId="visualList.mb.mk[3].mc.contentNum" class="mc-content"></component>
+             <!--<component :is="visualList.mb.mk[3].mc.contentNum"  :mcTitle="visualList.mb.mk[3].mc.contentName"  :mcStatus="3"  :mcId="visualList.mb.mk[3].mc.contentNum" class="mc-content"></component>-->
+             <component :is="visualList.mb.mk[3].mc.contentNum" :statusList="statusList" :mcTitle="visualList.mb.mk[3].mc.contentName"  :mcStatus="3"  :mcId="visualList.mb.mk[3].mc.contentNum" class="mc-content"></component>
           </div>
       </div>
     </div>
@@ -193,6 +194,7 @@
         name: "MB01",
         data(){
           return{
+            statusList: {},
             selectVal:'',
             btnList:'',
             title:'选择模块内容',
@@ -314,13 +316,23 @@
 
           /**
            * @function 获取所有设备的所有点值
-           * @param data {设备列表}
            */
           dealEquipmentList (data) {
             // param data 用于查询当前需要用到的设备
             const allEquipment = data;
-            console.log('All equipments:');
-            console.log(allEquipment);
+            // console.log('All equipments:');
+            // console.log(allEquipment);
+            let usedEquipment = [];
+            // 筛选需要用到的设备
+            allEquipment.forEach((value) => {
+              if (value.Description.includes('多功能传感器') ||
+                value.Description.includes('ETH')/* ||
+                value.Description.includes('门禁执行器')*/) {
+                usedEquipment.push(value);
+              }
+            });
+            console.log('after filter:');
+            console.log(usedEquipment);
             const that = this;
             this.$http.get(that.$api.allEquipmentPoint).then(res => {
               // console.log(res);
@@ -338,9 +350,47 @@
                 that.$http.post(that.$api.allPointStatus, paramIdList).then(response => {
                   console.log('All points values:');
                   console.log(response.data);
+                  let usedPoints = [];
                   if (response.data) {
+                    let allPointsValue = response.data;
                     // 开始比较
-
+                    usedEquipment.forEach((values) => {
+                      allEquipmentPointValue.forEach((value, index) => {
+                        if (value.Ord.includes(values.Name)) {
+                          usedPoints.splice(index, 1, {});
+                          if (allPointsValue[index] !== null) {
+                            // 当前点名称
+                            usedPoints[index].name = values.Description;
+                            // 当前点描述
+                            usedPoints[index].pointName = value.DisplayName;
+                            // 是否报警
+                            usedPoints[index].isAlarm = allPointsValue[index].st.ib;
+                            const dataType = allPointsValue[index].t;
+                            switch (dataType) {
+                              case "Long":
+                                if (value.MeaningOfValue !== '') {
+                                  usedPoints[index].pointValue = JSON.parse(value.MeaningOfValue)[allPointsValue[index].l];
+                                  // that.$set(usedPoints[index], "pointValue", JSON.parse(value.MeaningOfValue)[parseInt(allPointsValue[index].l)])
+                                  // console.log(allPointsValue[index]);
+                                }
+                                break;
+                              case "String":
+                                usedPoints[index].pointValue = allPointsValue[index].s;
+                                break;
+                              case "DWord":
+                                usedPoints[index].pointValue = allPointsValue[index].dw;
+                                break;
+                              default:
+                                return true;
+                            }
+                          }
+                        }
+                      })
+                    });
+                    // console.log('after copied:');
+                    // console.log(usedPoints)
+                    that.statusList = usedPoints[0];
+                    that.$store.commit('storePoints', usedPoints)
                   }
                 })
               }

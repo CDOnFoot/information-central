@@ -95,7 +95,7 @@
                   <td>
                     <a-popover title="多功能传感器1">
                       <template slot="content">
-                        <p>状态：正常</p>
+                        <p>{{ statusList.pointName }}：{{ statusList.isAlarm ? "报警" : "未报警" }}</p>
                       </template>
                       <!--<a-button type="primary"></a-button>-->
                       <img src="../../../assets/img/main/设备点.png" alt="" width="20" height="24">
@@ -225,7 +225,7 @@ export default {
 
     };
   },
-  props: ["mcStatus", "mcTitle", "mcId"],
+  props: ["mcStatus", "mcTitle", "mcId", "statusList"],
   watch: {
     mcStatus: function(val) {
       this.mcStatus = val;
@@ -236,6 +236,11 @@ export default {
     },
     mcId: function(val) {
       this.mcId = val;
+    },
+    // Is it necessary to use watch attribute.
+    statusList: function (val) {
+      console.log(val);
+      this.statusList = val;
     }
   },
 

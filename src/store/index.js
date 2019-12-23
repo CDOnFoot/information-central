@@ -10,7 +10,9 @@ const store = new Vuex.Store({
     // Authorization: localStorage.getItem('Authorization') ? localStorage.getItem('Authorization') : ''
     Authorization: common.getCookie('Authorization') ? common.getCookie('Authorization') : '',
     screenWidth: '',
-    screenHeight: ''
+    screenHeight: '',
+    // 处理后的设备点值 list
+    usedPoints: []
   },
 
   getters: {
@@ -20,6 +22,10 @@ const store = new Vuex.Store({
 
     getScreenHeight () {
       return state.screenHeight;
+    },
+
+    getPointsList () {
+      return state.usedPoints;
     }
   },
  
@@ -31,6 +37,10 @@ const store = new Vuex.Store({
         common.setCookie('token','530c1597-c5ec-43b0-9f32-e6b61986a9b9',24 * 60);
 
         // localStorage.setItem('Authorization', user.Authorization);
+    },
+
+    storePoints (state, points) {
+      state.usedPoints = points;
     }
   }
 });

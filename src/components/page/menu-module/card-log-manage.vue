@@ -8,8 +8,11 @@
         <a-form-item label="设备">
           <div>
             <a-select defaultValue style="width: 150px" @change="changeEquipment">
-              <a-select-option value>全部</a-select-option>
-              <a-select-option v-for="equipment in equipments" :key="equipment.EntityId">{{equipment.DisplayName}}
+              <a-select-option value>
+                全部
+              </a-select-option>
+              <a-select-option v-for="equipment in equipments" :key="equipment.EntityId">
+                {{equipment.DisplayName}}
               </a-select-option>
             </a-select>
           </div>
@@ -36,7 +39,7 @@
       </a-form>
     </div>
     <div class="table">
-      <a-table :columns="columns" :dataSource="tableList" :pagination="pagination" :loading="loading"
+      <a-table :columns="columns" :dataSource="filterList" :pagination="pagination" :loading="loading"
                :defaultExpandAllRows="expandAllRows" size="small"></a-table>
     </div>
   </div>
@@ -45,12 +48,13 @@
 <script>
   import AFormItem from "ant-design-vue/es/form/FormItem";
 
-  const columns = [{
-    title: "刷卡时间",
-    dataIndex: "DisplayTime",
-    align: "center",
-    width: 40
-  },
+  const columns = [
+    {
+      title: "刷卡时间",
+      dataIndex: "DisplayTime",
+      align: "center",
+      width: 40
+    },
     {
       title: "卡号",
       dataIndex: "BadgeCode",
@@ -77,7 +81,7 @@
     },
     {
       title: "设备名称（门）",
-      dataIndex: "Channel",
+      dataIndex: "Equipment",
       align: "center",
       width: 20
     },
@@ -95,80 +99,6 @@
     }
   ];
 
-  const Equipments = [{
-    EntityId: "0",
-    Name: "0",
-    DisplayName: "0",
-    Code: "HVSG",
-    Location: "高压开关柜室",
-    Model: "35KV隔离开关",
-    Description: "35KV 1#进线隔离开关",
-    JsonCustomColumn: null,
-    TechnicalAddress: "10.166.4.101:2404",
-    TechnicalParameter: null,
-    Manufacturer: null,
-    ControlBoxSerial: "H11",
-    CustomProperties: "",
-    CheckPoint: false,
-    Zones: [],
-    Equipments: [],
-    Definition: {
-      EntityId: 103,
-      Name: "HVSG",
-      DisplayName: "35KV隔离开关",
-      Type: "Default"
-    }
-  },
-    {
-      EntityId: "1449145424",
-      Name: "1012",
-      DisplayName: "1449145424",
-      Code: "HVSG",
-      Location: "高压开关柜室",
-      Model: "35KV隔离开关",
-      Description: "35KV 1#进线隔离开关",
-      JsonCustomColumn: null,
-      TechnicalAddress: "10.166.4.101:2404",
-      TechnicalParameter: null,
-      Manufacturer: null,
-      ControlBoxSerial: "H11",
-      CustomProperties: "",
-      CheckPoint: false,
-      Zones: [],
-      Equipments: [],
-      Definition: {
-        EntityId: 103,
-        Name: "HVSG",
-        DisplayName: "35KV隔离开关",
-        Type: "Default"
-      }
-    },
-    {
-      EntityId: "2307752550",
-      Name: "1013",
-      DisplayName: "2307752550",
-      Code: "HVSG",
-      Location: "高压开关柜室",
-      Model: "35KV隔离开关",
-      Description: "35KV 1#进线隔离开关",
-      JsonCustomColumn: null,
-      TechnicalAddress: "10.166.4.101:2404",
-      TechnicalParameter: null,
-      Manufacturer: null,
-      ControlBoxSerial: "H11",
-      CustomProperties: "",
-      CheckPoint: false,
-      Zones: [],
-      Equipments: [],
-      Definition: {
-        EntityId: 103,
-        Name: "HVSG",
-        DisplayName: "35KV隔离开关",
-        Type: "Default"
-      }
-    }
-  ];
-
   export default {
     name: "card-log-manage",
     components: {
@@ -181,20 +111,21 @@
         pagination: {
           current: 1,
           defaultCurrent: 1,
-          defaultPageSize: 15,
+          defaultPageSize: 20,
           total: 0,
-          size: 'large',
+          size: "large",
           // showQuickJumper: true,
           onChange: current => this.changePage(current)
         },
         loading: false,
-        equipments: Equipments,
+        equipments: [],
+        tableData: [],
+        tableList: [],
+        filterList: [],
         badgeCode: "",
         equipmentId: "",
         starttime: null,
         endtime: null,
-        tableData: [],
-        tableList: []
       };
     },
 
@@ -213,14 +144,14 @@
     mounted() {
       this.loading = true;
       this.$http.get(this.$api.getEquipments).then(res => {
-        // console.log(res.data.value);
-        // this.equipments = res.data.value;
-        // this.equipments = Equipments;
+        console.log(res.data.value);
+        this.equipments = res.data.value;
         this.initTable();
       });
     },
 
     methods: {
+
       initTable() {
         let self = this;
         self.loading = true;
@@ -228,18 +159,52 @@
           if (!err) {
             self.$http.get(self.$api.getTransactions).then(res => {
               self.tableData = res.data.value;
-              self.tableData.forEach((value, index) => {
-                let time = value.Time;
-                value.DisplayTime = self.$common.timestampToTime(time);
-                self.equipments.forEach((value2, index2) => {
-                  if (value.BadgeCode == value2.EntityId) {
-                    // ?
-                    value.Security = value2.Code;
+              if (self.tableData.length == 0) {
+
+              }
+              console.log(self.tableData);
+
+              for (let i = 0; i < self.tableData.length; i++) {
+                let item = self.tableData[i];
+
+                let time = item.Time;
+                let displayTime = self.$common.timestampToTime(time);
+                let badgeCode = item.BadgeCode;
+                let type = item.Type;
+                let cardholder = item.Cardholder;
+                let equipmentId = item.EquipmentId;
+                let equipmentName = "";
+                let security = "";
+                let result = item.Result;
+
+                // item.DisplayTime = self.$common.timestampToTime(item.Time);
+
+                for (let j = 0; j < self.equipments.length; j++) {
+                  let item2 = self.equipments[j];
+                  if (item.EquipmentId == item2.EntityId) {
+                    equipmentName = item2.Name;
+                    security = item2.JsonCustomColumn;
                   }
-                });
-                self.tableList.push(value);
-              });
-              self.pagination.total = self.tableList.length;
+                }
+
+                let bean = {
+                  Time: time,
+                  DisplayTime: displayTime,
+                  BadgeCode: badgeCode,
+                  Type: type,
+                  Cardholder: cardholder,
+                  EquipmentId: equipmentId,
+                  EquipmentName: equipmentName,
+                  Security: security,
+                  Result: result,
+                };
+
+                self.tableList.push(bean);
+              }
+
+              self.filterList = self.tableList;
+
+              self.pagination.total = self.filterList.length;
               self.changePage(self.pagination.current);
             });
           }
@@ -248,28 +213,29 @@
 
       searchFor() {
         let self = this;
-        self.tableList = self.tableData;
-        self.tableList = self.tableList.filter(
+        self.filterList = self.tableList;
+        self.filterList = self.filterList.filter(
           item => (item.BadgeCode + "").indexOf(self.badgeCode) > -1
         );
-        self.tableList = self.tableList.filter(
+        self.filterList = self.filterList.filter(
           item => (item.EquipmentId + "").indexOf(self.equipmentId) > -1
         );
         if (self.starttime != null && self.endtime != null) {
-          self.tableList = self.tableList.filter(
+          self.filterList = self.filterList.filter(
             item =>
               new Date(item.Time).getTime() >
               new Date(self.starttime).getTime() &&
               new Date(item.Time).getTime() < new Date(self.endtime).getTime()
           );
         }
-        self.pagination.total = self.tableList.length;
+        self.pagination.total = self.filterList.length;
         self.pagination.current = 1;
         self.changePage(self.pagination.current);
       },
 
       changePage(page) {
-        this.handleTableChange(page);
+        let self = this;
+        self.handleTableChange(page);
       },
 
       handleTableChange(page) {
@@ -280,9 +246,9 @@
         let array = [];
         for (let i = 0; i < parseInt(pageSize); i++) {
           index = (page - 1) * parseInt(pageSize) + i;
-          if (self.tableList[index] && self.tableList[index].BadgeCode) {
-            if (array.indexOf(self.tableList[index].BadgeCode) == -1) {
-              array.push(self.tableList[index].BadgeCode);
+          if (self.filterList[index] && self.filterList[index].BadgeCode) {
+            if (array.indexOf(self.filterList[index].BadgeCode) == -1) {
+              array.push(self.filterList[index].BadgeCode);
             }
           }
         }
@@ -295,12 +261,11 @@
                   for (let i = 0; i < parseInt(pageSize); i++) {
                     index = (page - 1) * parseInt(pageSize) + i;
                     if (
-                      self.tableList[index] &&
-                      self.tableList[index].BadgeCode == array[_index]
+                      self.filterList[index] &&
+                      self.filterList[index].BadgeCode == array[_index]
                     ) {
                       let Cardholder = item.data.value;
-                      // Cardholder = "N/A";
-                      self.$set(self.tableList[index], "Cardholder", Cardholder);
+                      self.$set(self.filterList[index], "Cardholder", Cardholder);
                     }
                   }
                 });
@@ -328,15 +293,18 @@
       },
 
       changeEquipment(value) {
-        this.equipmentId = value;
+        let self = this;
+        self.equipmentId = value;
       },
 
       changeStarttime(value) {
-        this.starttime = value;
+        let self = this;
+        self.starttime = value;
       },
 
       changeEndtime(value) {
-        this.endtime = value;
+        let self = this;
+        self.endtime = value;
       }
     }
   };

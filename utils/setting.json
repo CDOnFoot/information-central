@@ -80,7 +80,7 @@
                         "mc":{
                             "contentIndex":"2",
                             "contentNum":"MC01",
-                            "contentName":"能耗排行"},
+                            "contentName":"PUE"},
                             "moduleName":"模块一"
                         },
                         {
@@ -88,7 +88,7 @@
                             "mc":{
                                 "contentIndex":"2",
                                 "contentNum":"MC02",
-                                "contentName":"能耗结构"
+                                "contentName":"电量"
                             },
                             "moduleName":"模块二"
                         },
@@ -97,7 +97,7 @@
                             "mc":{
                                 "contentIndex":"2",
                                 "contentNum":"MC03",
-                                "contentName":"客流走势/预测"
+                                "contentName":"平均温度"
                             },
                             "moduleName":"模块三"
                         },
@@ -106,7 +106,7 @@
                             "mc":{
                                 "contentIndex":"1",
                                 "contentNum":"MC04",
-                                "contentName":"列车实时运行图"
+                                "contentName":"设备概览"
                             },
                             "moduleName":"模块四"
                         },
@@ -115,7 +115,7 @@
                             "mc":{
                                 "contentIndex":"2",
                                 "contentNum":"MC11",
-                                "contentName":"当日累计进出站人数"
+                                "contentName":"DCIE"
                             },
                             "moduleName":"模块五"
                         },{
@@ -123,7 +123,7 @@
                             "mc":{
                                 "contentIndex":"2",
                                 "contentNum":"MC06",
-                                "contentName":"昨日OD排行Top7"
+                                "contentName":"空间数据"
                             },
                             "moduleName":"模块六"
                         },{
@@ -131,7 +131,7 @@
                             "mc":{
                                 "contentIndex":"2",
                                 "contentNum":"MC07",
-                                "contentName":"兑现率/正点率"
+                                "contentName":"平均温度"
                             },
                             "moduleName":"模块七"
                         }]
@@ -255,37 +255,37 @@
         "mc":[
             {
                 "contentIndex": "2",
-                "contentName": "能耗排行",
+                "contentName": "PUE",
                 "contentNum": "MC01"
             },
             {
                 "contentIndex": "2",
                 "contentNum": "MC02",
-                "contentName": "能耗结构"
+                "contentName": "电量"
             },
             {
                 "contentIndex": "2",
-                "contentName": "客流走势/预测",
+                "contentName": "平均温度",
                 "contentNum": "MC03"
             },
             {
                 "contentIndex": "1",
-                "contentName": "列车实时运行图",
+                "contentName": "设备概览",
                 "contentNum": "MC04"
             },
             {
                 "contentIndex": "2",
-                "contentName": "车站聚类",
+                "contentName": "DCIE",
                 "contentNum": "MC05"
             },
             {
                 "contentIndex": "2",
-                "contentName": "昨日OD排行Top7",
+                "contentName": "空间数据",
                 "contentNum": "MC06"
             },
             {
                 "contentIndex": "2",
-                "contentName": "兑现率/正点率",
+                "contentName": "平均温度",
                 "contentNum": "MC07"
             },
             {

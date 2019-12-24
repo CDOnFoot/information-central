@@ -251,7 +251,7 @@
          */
         let param = new FormData();
         // param - 0: 用户 ID
-        param.append('userNum', '18324');
+        param.append('userNum', self.$common.getCookie('dvptId'));
         // param - 1: 选取的哪个菜单的 ID
         param.append('menuNum', 'CD01');
         this.$http.postList(self.$api.getUserVisualization, param)

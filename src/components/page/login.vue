@@ -262,18 +262,16 @@ export default {
 
       this.form.validateFields((err, values) => {
         if (!err) {
-          /*console.log('values:');
-            console.log(values);*/
+          /*console.log(values);*/
           self.userName = values.userName;
           self.userPassword = values.password;
           param = {
             loginname: self.userName,
             /**
-             * @description server 暂未处理 sha256 加密算法，直接使用 JSON 字符串
+             * @description 客户端使用 sha256 加密算法加密，然后传递给服务
              * @type {string}
              */
             password: sha256(self.userPassword)
-            // password: self.userPassword
           };
           // self.$common.setCookie('dvptToken','1',24 * 60 * 30);
           // self.$common.setCookie('dvptId','1',24 * 60 * 30);
@@ -285,29 +283,19 @@ export default {
           this.$http.post(self.$api.loginIn, param).then(res => {
             //调取数据成功
             if (res.data) {
-              // console.log('the request response data:');
-              // console.log(res)
-              // if (res.data.code === "0") {
               if (res.status === 200) {
-                // self.userInfo = res.data.data;
                 self.userInfo = res.data;
-                // self.$common.setCookie('dvptToken',self.userInfo.custom_token,24 * 60 * 30);
                 self.$common.setCookie(
                   "dvptToken",
                   self.userInfo.token,
                   24 * 60 * 30
                 );
-                // self.$common.setCookie('dvptId', self.userInfo.userId, 24 * 60 * 30);
-                // 固定一个 id - station
-                self.$common.setCookie("dvptId", 1, 24 * 60 * 30);
-                // 姓名不在保存
+                // ID 使用截取 token 下划线前的数字 - 实际为当前用户的主键 EntityId
+                self.$common.setCookie("dvptId", self.userInfo.token.split("_")[0], 24 * 60 * 30);
+                // 姓名不再保存
                 // self.$common.setCookie('dvptName', self.userName, 24 * 60 * 30);
                 self.$common.setCookie("menuIndex", "0", 24 * 60 * 30);
-
                 self.loadFlag = false;
-                console.log(
-                  "get token is:" + self.$common.getCookie("dvptToken")
-                );
 
                 // self.$router.push('/home/index');
                 // self.$router.push('/home/mainMenu');

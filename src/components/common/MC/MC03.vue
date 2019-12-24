@@ -3,8 +3,8 @@
   <!--   设备分析 模块内容一-->
   <div>
    <div class="main">
-      <!--<div class="borde">{{mcTitle}}</div>-->
-      <div class="borde">平均温度</div>
+      <div class="borde">{{mcTitle}}</div>
+      <!--<div class="borde">平均温度</div>-->
       <div :id="mcId" class="main-id">
         <div class="none-data" id="chart-id">
           <!--&lt;!&ndash;暂无信息&ndash;&gt;模块三-->

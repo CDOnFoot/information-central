@@ -24,7 +24,8 @@ const store = new Vuex.Store({
       return state.screenHeight;
     },
 
-    getPointsList () {
+    getPointsList (state) {
+      state.usedPoints = sessionStorage.getItem("statusList");
       return state.usedPoints;
     }
   },
@@ -39,7 +40,9 @@ const store = new Vuex.Store({
         // localStorage.setItem('Authorization', user.Authorization);
     },
 
+    // 结合 sessionStorage 改变并存储 list
     storePoints (state, points) {
+      sessionStorage.setItem("statusList", JSON.stringify(points));
       state.usedPoints = points;
     }
   }

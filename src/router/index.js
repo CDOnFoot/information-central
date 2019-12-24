@@ -106,21 +106,7 @@ const router = new Router({
           component: resolve => require(['@/components/page/menu-module/forthwith-monitor'], resolve),
           meta: {
             title: '实时监控'
-          },
-          children: [
-            {
-              path: 'info',
-              component: resolve => require(['@/components/page/menu-module/monitor-module/info'], resolve)
-            },
-            {
-              path: 'kpi',
-              component: resolve => require(['@/components/page/menu-module/monitor-module/kpi'], resolve)
-            },
-            {
-              path: 'view',
-              component: resolve => require(['@/components/page/menu-module/monitor-module/view'], resolve)
-            },
-          ]
+          }
         },
         {
           path: 'currentAlarm',
@@ -162,6 +148,34 @@ const router = new Router({
           component: resolve => require(['@/components/page/menu-module/card-log-manage'], resolve),
           meta: {
             title: '刷卡记录日志管理'
+          }
+        },
+        {
+          path: 'videoSetUp',
+          component: resolve => require(['@/components/page/menu-module/video-set-up'], resolve),
+          meta: {
+            title: '设置'
+          }
+        },
+        {
+          path: 'videoLive',
+          component: resolve => require(['@/components/page/menu-module/video-live'], resolve),
+          meta: {
+            title: '实时视频'
+          }
+        },
+        {
+          path: 'videoCapturePic',
+          component: resolve => require(['@/components/page/menu-module/video-capture-pic'], resolve),
+          meta: {
+            title: '抓拍浏览'
+          }
+        },
+        {
+          path: 'videoPlayback',
+          component: resolve => require(['@/components/page/menu-module/video-playback'], resolve),
+          meta: {
+            title: '视频回放'
           }
         },
         {

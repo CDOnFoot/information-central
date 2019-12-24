@@ -1,7 +1,8 @@
 <template>
   <div class="main-menu">
     <div class="main-menu-background" style="">
-      <div ref="menuNode" class="main-menu-content" :style="{ width: '100%', 'font-size': fontSize, margin: '10px 15px 0 60px' }">
+      <div ref="menuNode" class="main-menu-content"
+           :style="{ width: '100%', 'font-size': fontSize, margin: '10px 15px 0 60px' }">
         <tr class="table-header"
             :height="tableHeaderHeight"
             :style="{}">
@@ -153,7 +154,7 @@
       }
     },
 
-    mounted () {
+    mounted() {
       // console.log(this.$refs.rowOne);
       const that = this;
       this.$nextTick(() => {
@@ -218,7 +219,7 @@
     },
 
     methods: {
-      handleMouseOver ($event) {
+      handleMouseOver($event) {
         this.$($event.target).css('position', 'relative');
         this.$($event.target).animate({
           // opacity: '0.4'
@@ -229,7 +230,7 @@
         }, 300);
       },
 
-      handleMouseOut ($event) {
+      handleMouseOut($event) {
         /*this.$($event.target).animate({
           opacity: '1' }, 1000)*/
         this.$($event).stop();
@@ -238,7 +239,7 @@
       /**
        * @module 临时模块
        */
-      moduleTest () {
+      moduleTest() {
         this.$router.push('/home/threeModule');
       },
 
@@ -274,16 +275,16 @@
             this.$router.push('/home/cardLogManage');
             break
           case '设置':
-            // this.$router.push('/home/index');
+            this.$router.push('/home/videoSetUp');
             break
           case '实时视频':
-            // this.$router.push('/home/index');
+            this.$router.push('/home/videoLive');
             break
           case '抓拍浏览':
-            // this.$router.push('/home/index');
+            this.$router.push('/home/videoCapturePic');
             break
           case '视频回放':
-            // this.$router.push('/home/index');
+            this.$router.push('/home/videoPlayback');
             break
           default:
             return true;

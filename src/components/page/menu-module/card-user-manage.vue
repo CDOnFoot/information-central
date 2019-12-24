@@ -1,7 +1,7 @@
 <template>
   <div class="card-user-manage">
     <div class="search-condition">
-      <a-form layout="inline" :form="cardForm">
+      <a-form layout="inline" :form="form">
         <a-form-item label="门禁卡号">
           <a-input placeholder="门禁卡号" v-model="badgeCode"></a-input>
         </a-form-item>
@@ -11,9 +11,9 @@
         <a-form-item>
           <a-button type="primary" icon="search" @click="searchFor">搜索</a-button>
         </a-form-item>
-        <a-form-item>
-          <a-button type="primary" icon="plus" @click="addCard">添加</a-button>
-        </a-form-item>
+        <!--<a-form-item>-->
+        <!--<a-button type="primary" icon="plus" @click="addCard">添加</a-button>-->
+        <!--</a-form-item>-->
       </a-form>
     </div>
 
@@ -46,7 +46,7 @@
                   <a-input v-model="modalForm.DisplayName" :disabled="enableEdit"></a-input>
                 </a-form-item>
                 <a-form-item label="有效期" :label-col="{ span: 7 }" :wrapper-col="{ span: 15 }">
-                  <a-input v-model="modalForm.DisplayExpire" :disabled="enableEdit"></a-input>
+                  <a-input v-model="modalForm.Expire" :disabled="enableEdit"></a-input>
                   <!-- <a-date-picker showTime @change="changeTime" :disabled="enableEdit" /> -->
                 </a-form-item>
                 <a-form-item label="描述" :label-col="{ span: 7 }" :wrapper-col="{ span: 15 }">
@@ -60,7 +60,7 @@
     </div>
 
     <div class="table">
-      <a-table :columns="columns" :dataSource="tableList" :pagination="pagination" :loading="loading"
+      <a-table :columns="columns" :dataSource="filterList" :pagination="pagination" :loading="loading"
                :defaultExpandAllRows="expandAllRows" size="small">
         <template slot="enable" slot-scope="text">
           {{text}}
@@ -79,14 +79,365 @@
 <script>
   import AFormItem from "ant-design-vue/es/form/FormItem";
 
-  const columns = [{
-    title: "门禁卡号",
-    dataIndex: "Encoded",
-    align: "center",
-    // sorter: true,
-    width: 40
-    // scopedSlots: { customRender: 'name' }
-  },
+  const testData = [
+    {
+      "EntityId": 4,
+      "Modified": "2019-11-18T10:42:37.233+08:00",
+      "IsDeleted": false,
+      "Actived": "2019-11-18T10:42:43.417+08:00",
+      "Expired": "2019-11-18T10:42:43.417+08:00",
+      "LastName": "\u80e1\u516d\u4e03",
+      "FirstName": "",
+      "Code": "12131233",
+      "Type": "Job",
+      "Description": "",
+      "IsBlocked": true,
+      "Role": {
+        "EntityId": 85,
+        "Name": "\u89d2\u827285",
+        "DisplayName": "\u6d4b\u8bd5\u89d2\u827285",
+        "Created": "2019-10-14T13:53:30.483+08:00",
+        "Updated": "2019-10-14T13:53:30.483+08:00"
+      },
+      "Department": {
+        "EntityId": 1,
+        "Name": "WMC",
+        "DisplayName": "\u5f31\u7535\u7ef4\u62a4\u4e2d\u5fc3",
+        "Created": "2019-09-24T00:00:00+08:00",
+        "Updated": "2019-09-24T00:00:00+08:00"
+      },
+      "Badges": [{
+        "EntityId": 5315,
+        "IsDeleted": false,
+        "Enable": true,
+        "StampedId": 0,
+        "Encoded": "125412541254",
+        "KeypadID": 11167,
+        "BadgeTechnologyID": 0,
+        "Created": "2019-11-27T17:25:36.487+08:00",
+        "Modified": "2019-11-27T17:25:17.03+08:00",
+        "Expire": "2019-11-27T17:25:36.487+08:00",
+        "BadgeLayoutID": 4,
+        "TimeSheetType": "staff"
+      }]
+    },
+    {
+      "EntityId": 8,
+      "Modified": "2019-10-09T10:53:55.193+08:00",
+      "IsDeleted": false,
+      "Actived": "2019-10-09T10:57:15.11+08:00",
+      "Expired": "2020-10-09T10:57:13.893+08:00",
+      "LastName": "\u5f20\u56db",
+      "FirstName": "",
+      "Code": "123",
+      "Type": "Job",
+      "Description": "123",
+      "IsBlocked": false,
+      "Role": {
+        "EntityId": 1,
+        "Name": "\u89d2\u82721",
+        "DisplayName": "\u6d4b\u8bd5\u89d2\u82721",
+        "Created": "2019-09-24T00:00:00+08:00",
+        "Updated": "2019-10-13T17:40:59.533+08:00"
+      },
+      "Department": {
+        "EntityId": 1,
+        "Name": "WMC",
+        "DisplayName": "\u5f31\u7535\u7ef4\u62a4\u4e2d\u5fc3",
+        "Created": "2019-09-24T00:00:00+08:00",
+        "Updated": "2019-09-24T00:00:00+08:00"
+      },
+      "Badges": [{
+        "EntityId": 1406,
+        "IsDeleted": false,
+        "Enable": true,
+        "StampedId": 0,
+        "Encoded": "00123",
+        "KeypadID": 111111,
+        "BadgeTechnologyID": 0,
+        "Created": "2019-10-16T11:14:17.513+08:00",
+        "Modified": "2019-10-16T11:14:34.9+08:00",
+        "Expire": "2019-10-16T11:14:17.513+08:00",
+        "BadgeLayoutID": 4,
+        "TimeSheetType": "staff"
+      }]
+    }, {
+      "EntityId": 34,
+      "Modified": "2019-09-27T18:37:25.6+08:00",
+      "IsDeleted": false,
+      "Actived": "2019-09-27T18:37:25.6+08:00",
+      "Expired": "2020-09-27T18:37:24.797+08:00",
+      "LastName": "\u5f20\u738b",
+      "FirstName": "",
+      "Code": "10990",
+      "Type": "Job",
+      "Description": "1455",
+      "IsBlocked": false,
+      "Role": {
+        "EntityId": 4,
+        "Name": "\u89d2\u82724",
+        "DisplayName": "\u6d4b\u8bd5\u89d2\u82724",
+        "Created": "2018-10-25T10:12:58+08:00",
+        "Updated": "2018-10-25T10:12:58+08:00"
+      },
+      "Department": {
+        "EntityId": 2,
+        "Name": "BASC",
+        "DisplayName": "\u673a\u7535\u4e2d\u5fc3",
+        "Created": "2018-10-25T10:12:58+08:00",
+        "Updated": "2018-10-25T10:12:58+08:00"
+      },
+      "Badges": [{
+        "EntityId": 42,
+        "IsDeleted": false,
+        "Enable": true,
+        "StampedId": 0,
+        "Encoded": "1111",
+        "KeypadID": 222222,
+        "BadgeTechnologyID": 0,
+        "Created": "2019-09-29T10:22:22.467+08:00",
+        "Modified": "2019-09-29T10:19:26.053+08:00",
+        "Expire": "2019-09-30T08:00:00+08:00",
+        "BadgeLayoutID": 4,
+        "TimeSheetType": "staff"
+      }]
+    }, {
+      "EntityId": 42,
+      "Modified": "2019-10-09T10:56:37.277+08:00",
+      "IsDeleted": false,
+      "Actived": "2019-10-09T10:56:37.277+08:00",
+      "Expired": "2020-10-09T10:56:35.94+08:00",
+      "LastName": "\u5f20\u4e09",
+      "FirstName": "",
+      "Code": "001",
+      "Type": "Job",
+      "Description": "",
+      "IsBlocked": false,
+      "Role": {
+        "EntityId": 4,
+        "Name": "\u89d2\u82724",
+        "DisplayName": "\u6d4b\u8bd5\u89d2\u82724",
+        "Created": "2018-10-25T10:12:58+08:00",
+        "Updated": "2018-10-25T10:12:58+08:00"
+      },
+      "Department": {
+        "EntityId": 2,
+        "Name": "BASC",
+        "DisplayName": "\u673a\u7535\u4e2d\u5fc3",
+        "Created": "2018-10-25T10:12:58+08:00",
+        "Updated": "2018-10-25T10:12:58+08:00"
+      },
+      "Badges": [{
+        "EntityId": 91,
+        "IsDeleted": false,
+        "Enable": true,
+        "StampedId": 0,
+        "Encoded": "1111111111",
+        "KeypadID": 111111,
+        "BadgeTechnologyID": 0,
+        "Created": "2019-10-09T10:59:13.133+08:00",
+        "Modified": "2019-10-09T10:59:13.133+08:00",
+        "Expire": "2020-10-31T08:00:00+08:00",
+        "BadgeLayoutID": 4,
+        "TimeSheetType": "staff"
+      }]
+    }, {
+      "EntityId": 46,
+      "Modified": "2019-11-21T14:59:41.093+08:00",
+      "IsDeleted": false,
+      "Actived": "2019-11-21T14:59:51.11+08:00",
+      "Expired": "2019-11-21T14:59:51.11+08:00",
+      "LastName": "\u80e1\u56db",
+      "FirstName": "",
+      "Code": "101025",
+      "Type": "Job",
+      "Description": "",
+      "IsBlocked": true,
+      "Role": {
+        "EntityId": 1,
+        "Name": "\u89d2\u82721",
+        "DisplayName": "\u6d4b\u8bd5\u89d2\u82721",
+        "Created": "2019-09-24T00:00:00+08:00",
+        "Updated": "2019-10-13T17:40:59.533+08:00"
+      },
+      "Department": {
+        "EntityId": 1,
+        "Name": "WMC",
+        "DisplayName": "\u5f31\u7535\u7ef4\u62a4\u4e2d\u5fc3",
+        "Created": "2019-09-24T00:00:00+08:00",
+        "Updated": "2019-09-24T00:00:00+08:00"
+      },
+      "Badges": [{
+        "EntityId": 4311,
+        "IsDeleted": false,
+        "Enable": true,
+        "StampedId": 0,
+        "Encoded": "138549",
+        "KeypadID": 111111,
+        "BadgeTechnologyID": 0,
+        "Created": "2019-11-28T09:47:41.06+08:00",
+        "Modified": "2019-11-28T09:47:24.727+08:00",
+        "Expire": "2019-11-28T09:47:41.06+08:00",
+        "BadgeLayoutID": 4,
+        "TimeSheetType": "staff"
+      }]
+    }, {
+      "EntityId": 647,
+      "Modified": "2019-11-26T14:36:01.787+08:00",
+      "IsDeleted": false,
+      "Actived": "2019-11-26T14:36:20.277+08:00",
+      "Expired": "2019-11-26T14:36:20.277+08:00",
+      "LastName": "\u674e\u60f3",
+      "FirstName": "",
+      "Code": "12131248",
+      "Type": "Job",
+      "Description": "",
+      "IsBlocked": false,
+      "Role": {
+        "EntityId": 85,
+        "Name": "\u89d2\u827285",
+        "DisplayName": "\u6d4b\u8bd5\u89d2\u827285",
+        "Created": "2019-10-14T13:53:30.483+08:00",
+        "Updated": "2019-10-14T13:53:30.483+08:00"
+      },
+      "Department": {
+        "EntityId": 1,
+        "Name": "WMC",
+        "DisplayName": "\u5f31\u7535\u7ef4\u62a4\u4e2d\u5fc3",
+        "Created": "2019-09-24T00:00:00+08:00",
+        "Updated": "2019-09-24T00:00:00+08:00"
+      },
+      "Badges": [{
+        "EntityId": 5316,
+        "IsDeleted": false,
+        "Enable": true,
+        "StampedId": 0,
+        "Encoded": "222222222222",
+        "KeypadID": 121212,
+        "BadgeTechnologyID": 0,
+        "Created": "2019-11-26T14:36:30.987+08:00",
+        "Modified": "2019-11-26T14:36:30.987+08:00",
+        "Expire": "2019-11-26T14:36:30.987+08:00",
+        "BadgeLayoutID": 4,
+        "TimeSheetType": "staff"
+      }]
+    }, {
+      "EntityId": 648,
+      "Modified": "2019-11-27T10:20:21.403+08:00",
+      "IsDeleted": false,
+      "Actived": "2019-11-27T10:20:41.103+08:00",
+      "Expired": "2019-11-27T10:20:41.103+08:00",
+      "LastName": "\u5f20\u4e09",
+      "FirstName": "",
+      "Code": "12131249",
+      "Type": "Job",
+      "Description": "",
+      "IsBlocked": false,
+      "Role": {
+        "EntityId": 1,
+        "Name": "\u89d2\u82721",
+        "DisplayName": "\u6d4b\u8bd5\u89d2\u82721",
+        "Created": "2019-09-24T00:00:00+08:00",
+        "Updated": "2019-10-13T17:40:59.533+08:00"
+      },
+      "Department": {
+        "EntityId": 1,
+        "Name": "WMC",
+        "DisplayName": "\u5f31\u7535\u7ef4\u62a4\u4e2d\u5fc3",
+        "Created": "2019-09-24T00:00:00+08:00",
+        "Updated": "2019-09-24T00:00:00+08:00"
+      },
+      "Badges": [{
+        "EntityId": 5317,
+        "IsDeleted": false,
+        "Enable": true,
+        "StampedId": 0,
+        "Encoded": "203233010111",
+        "KeypadID": 0,
+        "BadgeTechnologyID": 0,
+        "Created": "2019-12-02T17:00:13.837+08:00",
+        "Modified": "2019-12-02T16:59:54.56+08:00",
+        "Expire": "2019-12-02T17:00:13.837+08:00",
+        "BadgeLayoutID": 4,
+        "TimeSheetType": "staff"
+      }]
+    }, {
+      "EntityId": 649,
+      "Modified": "2019-11-28T09:46:25.933+08:00",
+      "IsDeleted": false,
+      "Actived": "2019-11-28T09:46:40.85+08:00",
+      "Expired": "2019-11-28T09:46:40.85+08:00",
+      "LastName": "\u80e1\u4e8c",
+      "FirstName": "",
+      "Code": "12131259",
+      "Type": "Job",
+      "Description": "",
+      "IsBlocked": false,
+      "Role": {
+        "EntityId": 85,
+        "Name": "\u89d2\u827285",
+        "DisplayName": "\u6d4b\u8bd5\u89d2\u827285",
+        "Created": "2019-10-14T13:53:30.483+08:00",
+        "Updated": "2019-10-14T13:53:30.483+08:00"
+      },
+      "Department": {
+        "EntityId": 1,
+        "Name": "WMC",
+        "DisplayName": "\u5f31\u7535\u7ef4\u62a4\u4e2d\u5fc3",
+        "Created": "2019-09-24T00:00:00+08:00",
+        "Updated": "2019-09-24T00:00:00+08:00"
+      },
+      "Badges": [{
+        "EntityId": 5318,
+        "IsDeleted": false,
+        "Enable": true,
+        "StampedId": 0,
+        "Encoded": "111111111111",
+        "KeypadID": 111111,
+        "BadgeTechnologyID": 0,
+        "Created": "2019-11-28T10:01:10.003+08:00",
+        "Modified": "2019-11-28T10:01:10.003+08:00",
+        "Expire": "2019-11-28T10:01:10.003+08:00",
+        "BadgeLayoutID": 4,
+        "TimeSheetType": "staff"
+      }]
+    }, {
+      "EntityId": 650,
+      "Modified": "2019-11-12T09:42:48.49+08:00",
+      "IsDeleted": false,
+      "Actived": "2019-10-13T19:24:54.173+08:00",
+      "Expired": "2019-10-13T19:24:54.173+08:00",
+      "LastName": "\u80e1\u4e09",
+      "FirstName": "",
+      "Code": "12131251",
+      "Type": "Job",
+      "Description": null,
+      "IsBlocked": false,
+      "Role": {
+        "EntityId": 85,
+        "Name": "\u89d2\u827285",
+        "DisplayName": "\u6d4b\u8bd5\u89d2\u827285",
+        "Created": "2019-10-14T13:53:30.483+08:00",
+        "Updated": "2019-10-14T13:53:30.483+08:00"
+      },
+      "Department": {
+        "EntityId": 1,
+        "Name": "WMC",
+        "DisplayName": "\u5f31\u7535\u7ef4\u62a4\u4e2d\u5fc3",
+        "Created": "2019-09-24T00:00:00+08:00",
+        "Updated": "2019-09-24T00:00:00+08:00"
+      },
+      "Badges": []
+    },
+  ];
+
+  const columns = [
+    {
+      title: "门禁卡号",
+      dataIndex: "Encoded",
+      align: "center",
+      width: 40
+    },
     {
       title: "持卡人",
       dataIndex: "DisplayName",
@@ -95,7 +446,7 @@
     },
     {
       title: "有效期",
-      dataIndex: "DisplayExpire",
+      dataIndex: "Expire",
       align: "center",
       width: 80
     },
@@ -122,7 +473,6 @@
     },
     {
       title: "操 作",
-      // dataIndex: 'tel',
       align: "center",
       width: 40,
       scopedSlots: {
@@ -131,433 +481,18 @@
     }
   ];
 
-  const tableList = [{
-    EntityId: 4,
-    Modified: "2019-11-18T10:42:37.233+08:00",
-    IsDeleted: false,
-    Actived: "2019-11-18T10:42:43.417+08:00",
-    Expired: "2019-11-18T10:42:43.417+08:00",
-    LastName: "胡六七",
-    FirstName: "",
-    Code: "12131233",
-    Type: "Job",
-    Description: "",
-    IsBlocked: true,
-    Role: {
-      EntityId: 85,
-      Name: "角色85",
-      DisplayName: "测试角色85",
-      Created: "2019-10-14T13:53:30.483+08:00",
-      Updated: "2019-10-14T13:53:30.483+08:00"
-    },
-    Department: {
-      EntityId: 1,
-      Name: "WMC",
-      DisplayName: "弱电维护中心",
-      Created: "2019-09-24T00:00:00+08:00",
-      Updated: "2019-09-24T00:00:00+08:00"
-    },
-    Badges: [{
-      EntityId: 5315,
-      IsDeleted: false,
-      Enable: false,
-      StampedId: 0,
-      Encoded: "125412541254",
-      KeypadID: 11167,
-      BadgeTechnologyID: 0,
-      Created: "2019-11-27T17:25:36.487+08:00",
-      Modified: "2019-11-27T17:25:17.03+08:00",
-      Expire: "2019-11-27T17:25:36.487+08:00",
-      BadgeLayoutID: 4,
-      TimeSheetType: "staff"
-    }]
-  },
-    {
-      EntityId: 4,
-      Modified: "2019-11-18T10:42:37.233+08:00",
-      IsDeleted: false,
-      Actived: "2019-11-18T10:42:43.417+08:00",
-      Expired: "2019-11-18T10:42:43.417+08:00",
-      LastName: "胡六七",
-      FirstName: "",
-      Code: "12131233",
-      Type: "Job",
-      Description: "",
-      IsBlocked: true,
-      Role: {
-        EntityId: 85,
-        Name: "角色85",
-        DisplayName: "测试角色86",
-        Created: "2019-10-14T13:53:30.483+08:00",
-        Updated: "2019-10-14T13:53:30.483+08:00"
-      },
-      Department: {
-        EntityId: 1,
-        Name: "WMC",
-        DisplayName: "弱电维护中心",
-        Created: "2019-09-24T00:00:00+08:00",
-        Updated: "2019-09-24T00:00:00+08:00"
-      },
-      Badges: [{
-        EntityId: 5315,
-        IsDeleted: false,
-        Enable: true,
-        StampedId: 0,
-        Encoded: "125412541254",
-        KeypadID: 11167,
-        BadgeTechnologyID: 0,
-        Created: "2019-11-27T17:25:36.487+08:00",
-        Modified: "2019-11-27T17:25:17.03+08:00",
-        Expire: "2019-11-27T17:25:36.487+08:00",
-        BadgeLayoutID: 4,
-        TimeSheetType: "staff"
-      }]
-    },
-    {
-      EntityId: 4,
-      Modified: "2019-11-18T10:42:37.233+08:00",
-      IsDeleted: false,
-      Actived: "2019-11-18T10:42:43.417+08:00",
-      Expired: "2019-11-18T10:42:43.417+08:00",
-      LastName: "胡六七",
-      FirstName: "",
-      Code: "12131233",
-      Type: "Job",
-      Description: "",
-      IsBlocked: true,
-      Role: {
-        EntityId: 85,
-        Name: "角色85",
-        DisplayName: "测试角色85",
-        Created: "2019-10-14T13:53:30.483+08:00",
-        Updated: "2019-10-14T13:53:30.483+08:00"
-      },
-      Department: {
-        EntityId: 1,
-        Name: "WMC",
-        DisplayName: "弱电维护中心",
-        Created: "2019-09-24T00:00:00+08:00",
-        Updated: "2019-09-24T00:00:00+08:00"
-      },
-      Badges: [{
-        EntityId: 5315,
-        IsDeleted: false,
-        Enable: false,
-        StampedId: 0,
-        Encoded: "125412541254",
-        KeypadID: 11167,
-        BadgeTechnologyID: 0,
-        Created: "2019-11-27T17:25:36.487+08:00",
-        Modified: "2019-11-27T17:25:17.03+08:00",
-        Expire: "2019-11-27T17:25:36.487+08:00",
-        BadgeLayoutID: 4,
-        TimeSheetType: "staff"
-      }]
-    },
-    {
-      EntityId: 4,
-      Modified: "2019-11-18T10:42:37.233+08:00",
-      IsDeleted: false,
-      Actived: "2019-11-18T10:42:43.417+08:00",
-      Expired: "2019-11-18T10:42:43.417+08:00",
-      LastName: "胡六七",
-      FirstName: "",
-      Code: "12131233",
-      Type: "Job",
-      Description: "",
-      IsBlocked: true,
-      Role: {
-        EntityId: 85,
-        Name: "角色85",
-        DisplayName: "测试角色85",
-        Created: "2019-10-14T13:53:30.483+08:00",
-        Updated: "2019-10-14T13:53:30.483+08:00"
-      },
-      Department: {
-        EntityId: 1,
-        Name: "WMC",
-        DisplayName: "弱电维护中心",
-        Created: "2019-09-24T00:00:00+08:00",
-        Updated: "2019-09-24T00:00:00+08:00"
-      },
-      Badges: [{
-        EntityId: 5315,
-        IsDeleted: false,
-        Enable: true,
-        StampedId: 0,
-        Encoded: "125412541254",
-        KeypadID: 11167,
-        BadgeTechnologyID: 0,
-        Created: "2019-11-27T17:25:36.487+08:00",
-        Modified: "2019-11-27T17:25:17.03+08:00",
-        Expire: "2019-11-27T17:25:36.487+08:00",
-        BadgeLayoutID: 4,
-        TimeSheetType: "staff"
-      }]
-    },
-    {
-      EntityId: 4,
-      Modified: "2019-11-18T10:42:37.233+08:00",
-      IsDeleted: false,
-      Actived: "2019-11-18T10:42:43.417+08:00",
-      Expired: "2019-11-18T10:42:43.417+08:00",
-      LastName: "胡六七",
-      FirstName: "",
-      Code: "12131233",
-      Type: "Job",
-      Description: "",
-      IsBlocked: true,
-      Role: {
-        EntityId: 85,
-        Name: "角色85",
-        DisplayName: "测试角色85",
-        Created: "2019-10-14T13:53:30.483+08:00",
-        Updated: "2019-10-14T13:53:30.483+08:00"
-      },
-      Department: {
-        EntityId: 1,
-        Name: "WMC",
-        DisplayName: "弱电维护中心",
-        Created: "2019-09-24T00:00:00+08:00",
-        Updated: "2019-09-24T00:00:00+08:00"
-      },
-      Badges: [{
-        EntityId: 5315,
-        IsDeleted: false,
-        Enable: true,
-        StampedId: 0,
-        Encoded: "125412541254",
-        KeypadID: 11167,
-        BadgeTechnologyID: 0,
-        Created: "2019-11-27T17:25:36.487+08:00",
-        Modified: "2019-11-27T17:25:17.03+08:00",
-        Expire: "2019-11-27T17:25:36.487+08:00",
-        BadgeLayoutID: 4,
-        TimeSheetType: "staff"
-      }]
-    },
-    {
-      EntityId: 4,
-      Modified: "2019-11-18T10:42:37.233+08:00",
-      IsDeleted: false,
-      Actived: "2019-11-18T10:42:43.417+08:00",
-      Expired: "2019-11-18T10:42:43.417+08:00",
-      LastName: "胡六七",
-      FirstName: "",
-      Code: "12131233",
-      Type: "Job",
-      Description: "",
-      IsBlocked: true,
-      Role: {
-        EntityId: 85,
-        Name: "角色85",
-        DisplayName: "测试角色85",
-        Created: "2019-10-14T13:53:30.483+08:00",
-        Updated: "2019-10-14T13:53:30.483+08:00"
-      },
-      Department: {
-        EntityId: 1,
-        Name: "WMC",
-        DisplayName: "弱电维护中心",
-        Created: "2019-09-24T00:00:00+08:00",
-        Updated: "2019-09-24T00:00:00+08:00"
-      },
-      Badges: [{
-        EntityId: 5315,
-        IsDeleted: false,
-        Enable: true,
-        StampedId: 0,
-        Encoded: "125412541254",
-        KeypadID: 11167,
-        BadgeTechnologyID: 0,
-        Created: "2019-11-27T17:25:36.487+08:00",
-        Modified: "2019-11-27T17:25:17.03+08:00",
-        Expire: "2019-11-27T17:25:36.487+08:00",
-        BadgeLayoutID: 4,
-        TimeSheetType: "staff"
-      }]
-    },
-    {
-      EntityId: 4,
-      Modified: "2019-11-18T10:42:37.233+08:00",
-      IsDeleted: false,
-      Actived: "2019-11-18T10:42:43.417+08:00",
-      Expired: "2019-11-18T10:42:43.417+08:00",
-      LastName: "胡六七",
-      FirstName: "",
-      Code: "12131233",
-      Type: "Job",
-      Description: "",
-      IsBlocked: true,
-      Role: {
-        EntityId: 85,
-        Name: "角色85",
-        DisplayName: "测试角色85",
-        Created: "2019-10-14T13:53:30.483+08:00",
-        Updated: "2019-10-14T13:53:30.483+08:00"
-      },
-      Department: {
-        EntityId: 1,
-        Name: "WMC",
-        DisplayName: "弱电维护中心",
-        Created: "2019-09-24T00:00:00+08:00",
-        Updated: "2019-09-24T00:00:00+08:00"
-      },
-      Badges: [{
-        EntityId: 5315,
-        IsDeleted: false,
-        Enable: true,
-        StampedId: 0,
-        Encoded: "125412541254",
-        KeypadID: 11167,
-        BadgeTechnologyID: 0,
-        Created: "2019-11-27T17:25:36.487+08:00",
-        Modified: "2019-11-27T17:25:17.03+08:00",
-        Expire: "2019-11-27T17:25:36.487+08:00",
-        BadgeLayoutID: 4,
-        TimeSheetType: "staff"
-      }]
-    },
-    {
-      EntityId: 4,
-      Modified: "2019-11-18T10:42:37.233+08:00",
-      IsDeleted: false,
-      Actived: "2019-11-18T10:42:43.417+08:00",
-      Expired: "2019-11-18T10:42:43.417+08:00",
-      LastName: "胡六七",
-      FirstName: "",
-      Code: "12131233",
-      Type: "Job",
-      Description: "",
-      IsBlocked: true,
-      Role: {
-        EntityId: 85,
-        Name: "角色85",
-        DisplayName: "测试角色85",
-        Created: "2019-10-14T13:53:30.483+08:00",
-        Updated: "2019-10-14T13:53:30.483+08:00"
-      },
-      Department: {
-        EntityId: 1,
-        Name: "WMC",
-        DisplayName: "弱电维护中心",
-        Created: "2019-09-24T00:00:00+08:00",
-        Updated: "2019-09-24T00:00:00+08:00"
-      },
-      Badges: [{
-        EntityId: 5315,
-        IsDeleted: false,
-        Enable: true,
-        StampedId: 0,
-        Encoded: "125412541254",
-        KeypadID: 11167,
-        BadgeTechnologyID: 0,
-        Created: "2019-11-27T17:25:36.487+08:00",
-        Modified: "2019-11-27T17:25:17.03+08:00",
-        Expire: "2019-11-27T17:25:36.487+08:00",
-        BadgeLayoutID: 4,
-        TimeSheetType: "staff"
-      }]
-    },
-    {
-      EntityId: 4,
-      Modified: "2019-11-18T10:42:37.233+08:00",
-      IsDeleted: false,
-      Actived: "2019-11-18T10:42:43.417+08:00",
-      Expired: "2019-11-18T10:42:43.417+08:00",
-      LastName: "胡六七",
-      FirstName: "",
-      Code: "12131233",
-      Type: "Job",
-      Description: "",
-      IsBlocked: true,
-      Role: {
-        EntityId: 85,
-        Name: "角色85",
-        DisplayName: "测试角色85",
-        Created: "2019-10-14T13:53:30.483+08:00",
-        Updated: "2019-10-14T13:53:30.483+08:00"
-      },
-      Department: {
-        EntityId: 1,
-        Name: "WMC",
-        DisplayName: "弱电维护中心",
-        Created: "2019-09-24T00:00:00+08:00",
-        Updated: "2019-09-24T00:00:00+08:00"
-      },
-      Badges: [{
-        EntityId: 5315,
-        IsDeleted: false,
-        Enable: true,
-        StampedId: 0,
-        Encoded: "125412541254",
-        KeypadID: 11167,
-        BadgeTechnologyID: 0,
-        Created: "2019-11-27T17:25:36.487+08:00",
-        Modified: "2019-11-27T17:25:17.03+08:00",
-        Expire: "2019-11-27T17:25:36.487+08:00",
-        BadgeLayoutID: 4,
-        TimeSheetType: "staff"
-      }]
-    },
-    {
-      EntityId: 4,
-      Modified: "2019-11-18T10:42:37.233+08:00",
-      IsDeleted: false,
-      Actived: "2019-11-18T10:42:43.417+08:00",
-      Expired: "2019-11-18T10:42:43.417+08:00",
-      LastName: "胡六七",
-      FirstName: "",
-      Code: "12131233",
-      Type: "Job",
-      Description: "",
-      IsBlocked: true,
-      Role: {
-        EntityId: 85,
-        Name: "角色85",
-        DisplayName: "测试角色85",
-        Created: "2019-10-14T13:53:30.483+08:00",
-        Updated: "2019-10-14T13:53:30.483+08:00"
-      },
-      Department: {
-        EntityId: 1,
-        Name: "WMC",
-        DisplayName: "弱电维护中心",
-        Created: "2019-09-24T00:00:00+08:00",
-        Updated: "2019-09-24T00:00:00+08:00"
-      },
-      Badges: [{
-        EntityId: 5315,
-        IsDeleted: false,
-        Enable: true,
-        StampedId: 0,
-        Encoded: "125412541254",
-        KeypadID: 11167,
-        BadgeTechnologyID: 0,
-        Created: "2019-11-27T17:25:36.487+08:00",
-        Modified: "2019-11-27T17:25:17.03+08:00",
-        Expire: "2019-11-27T17:25:36.487+08:00",
-        BadgeLayoutID: 4,
-        TimeSheetType: "staff"
-      }]
-    }
-  ];
-
   export default {
-    name: "card-card-user-manage",
+    name: "card-user-manage",
     components: {
       AFormItem
     },
     data() {
       return {
         modal: "",
-        cardForm: {},
         isShowModal: false,
         okButton: "",
         modalTitle: "",
         confirmLoading: false,
-        columns,
-        expandAllRows: true,
         enableEdit: false,
         modalForm: {
           Encoded: "",
@@ -567,20 +502,23 @@
           Description: "",
           Enable: ""
         },
+        columns,
+        expandAllRows: true,
         pagination: {
           current: 1,
           defaultCurrent: 1,
           defaultPageSize: 20,
           total: 0,
-          size: 'large',
-          showQuickJumper: true,
+          size: "large",
+          // showQuickJumper: true,
           onChange: current => this.changePage(current)
         },
         loading: false,
+        tableData: [],
+        tableList: [],
+        filterList: [],
         badgeCode: "",
         cardholder: "",
-        tableData: [],
-        tableList: []
       };
     },
 
@@ -608,24 +546,46 @@
           if (!err) {
             self.$http.get(self.$api.getCards).then(res => {
               self.tableData = res.data.value;
-              // console.log(self.tableData);
               if (self.tableData.length == 0) {
-                self.tableData = tableList;
+                self.tableData = testData;
               }
-              self.tableData.forEach((value, index) => {
-                value.Encoded = value.Badges[0].Encoded;
-                value.DisplayName = value.Role.DisplayName;
-                value.Expire = value.Badges[0].Expire;
-                value.DisplayExpire = self.$common.timestampToTime(
-                  value.Badges[0].Expire
-                );
-                value.TimeSheetType = value.Badges[0].TimeSheetType;
-                // value.Description = value.Description;
-                value.Enable = value.Badges[0].Enable;
-                self.tableList.push(value);
-              });
-              console.log(self.tableList);
-              self.pagination.total = self.tableList.length;
+              console.log(self.tableData);
+              for (let i = 0; i < self.tableData.length; i++) {
+                let item = self.tableData[i];
+
+                let encoded = "";
+                let displayName = "";
+                let expire = "";
+                let timeSheetType = "";
+                let description = item.Description;
+                let enable = "";
+
+                if (item.Badges.length > 0) {
+                  encoded = item.Badges[0].Encoded;
+                  expire = self.$common.timestampToTime(item.Badges[0].Expire);
+                  timeSheetType = item.Badges[0].TimeSheetType;
+                  enable = item.Badges[0].Enable;
+                }
+
+                if (item.Role) {
+                  displayName = item.Role.DisplayName;
+                }
+
+                let bean = {
+                  Encoded: encoded,
+                  DisplayName: displayName,
+                  Expire: expire,
+                  TimeSheetType: timeSheetType,
+                  Description: description,
+                  Enable: enable,
+                };
+
+                self.tableList.push(bean);
+              }
+
+              self.filterList = self.tableList;
+
+              self.pagination.total = self.filterList.length;
               self.loading = false;
             });
           }
@@ -634,14 +594,14 @@
 
       searchFor() {
         let self = this;
-        self.tableList = self.tableData;
-        self.tableList = self.tableList.filter(
+        self.filterList = self.tableList;
+        self.filterList = self.filterList.filter(
           item => (item.Encoded + "").indexOf(self.badgeCode) > -1
         );
-        self.tableList = self.tableList.filter(
+        self.filterList = self.filterList.filter(
           item => (item.DisplayName + "").indexOf(self.cardholder) > -1
         );
-        self.pagination.total = self.tableList.length;
+        self.pagination.total = self.filterList.length;
         self.pagination.current = 1;
       },
 

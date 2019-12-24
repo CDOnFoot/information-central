@@ -1,7 +1,7 @@
 <template>
   <div class="card-manage">
     <div class="search-condition">
-      <a-form layout="inline" :form="cardForm">
+      <a-form layout="inline" :form="form">
         <a-form-item label="门禁卡号">
           <a-input placeholder="门禁卡号" v-model="badgeCode"></a-input>
         </a-form-item>
@@ -489,7 +489,6 @@
     data() {
       return {
         modal: "",
-        cardForm: {},
         isShowModal: false,
         okButton: "",
         modalTitle: "",

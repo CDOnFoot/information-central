@@ -389,7 +389,9 @@
                     });
                     // console.log('after copied:');
                     // console.log(usedPoints)
-                    that.statusList = usedPoints[0];
+                    that.statusList = usedPoints;
+                    // 将筛选后的 list 用 JSON 字符串传递
+                    // console.log(JSON.stringify(usedPoints));
                     that.$store.commit('storePoints', usedPoints)
                   }
                 })

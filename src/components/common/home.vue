@@ -309,14 +309,23 @@
                         // 当前点描述
                         usedPoints[index].pointName = value.DisplayName;
                         // 是否报警
-                        usedPoints[index].isAlarm = allPointsValue[index].st.ib;
+                        usedPoints[index].isAlarm = allPointsValue[index].st.ia;
+                        // is it bad point
+                        usedPoints[index].isBadPoint = allPointsValue[index].st.ib;
                         const dataType = allPointsValue[index].t;
                         switch (dataType) {
                           case "Long":
                             if (value.MeaningOfValue !== '') {
+                              // 将当前点值的值描述的 JSON 字符串转成对象，再根据当前索引的所有点值的实际值去找到对应含义
                               usedPoints[index].pointValue = JSON.parse(value.MeaningOfValue)[allPointsValue[index].l];
+                              // 当为坏点时的取值
+                              if (usedPoints[index].pointValue === '') {
+                                usedPoints[index].pointValue = 'N/A'
+                              }
                               // that.$set(usedPoints[index], "pointValue", JSON.parse(value.MeaningOfValue)[parseInt(allPointsValue[index].l)])
                               // console.log(allPointsValue[index]);
+                            } else {
+                              usedPoints[index].pointValue = allPointsValue[index].l;
                             }
                             break;
                           case "String":
@@ -332,11 +341,12 @@
                     }
                   })
                 });
-                // console.log('after copied:');
-                // console.log(usedPoints)
+                // the var not use.
                 that.statusList = usedPoints;
-                // 将筛选后的 list 用 JSON 字符串传递
-                // console.log(JSON.stringify(usedPoints));
+                /**
+                 * @description 使用 Vuex 存储处理完成的点值 list.
+                 * @define 1、组件接收的 props 不能修改；2、Vuex 不能直接存储 list ，该解决方案先将 list 转成 JSON 字符串，使用 Vuex get 时再转成对象.
+                 */
                 that.$store.commit('storePoints', usedPoints)
               }
             })

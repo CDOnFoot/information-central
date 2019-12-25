@@ -45,7 +45,12 @@
                     <div class="socketETH-module">
                       <a-popover title="ETH插座1">
                         <template slot="content">
-                          <p>状态：正常</p>
+                          <p>是否坏点：{{ statusContainer[69].isBadPoint ? "是" : "否" }}</p>
+                          <p>{{ statusContainer[69].pointName }}：{{ statusContainer[69].pointValue }}</p>
+                          <p>{{ statusContainer[65].pointName }}：{{ statusContainer[65].pointValue }}</p>
+                          <p>{{ statusContainer[66].pointName }}：{{ statusContainer[66].pointValue }}</p>
+                          <p>{{ statusContainer[67].pointName }}：{{ statusContainer[67].pointValue }}</p>
+                          <p>{{ statusContainer[68].pointName }}：{{ statusContainer[68].pointValue }}</p>
                         </template>
                         <!--<a-button type="primary"></a-button>-->
                         <img src="../../../assets/img/main/设备点.png" alt="" width="20" height="24">
@@ -124,7 +129,9 @@
                     <div class="multifunction-module">
                       <a-popover title="多功能传感器1">
                         <template slot="content">
-                          <p>{{ statusContainer[0].pointName }}：{{ statusContainer[0].isAlarm ? "报警" : "未报警" }}</p>
+                          <p>是否坏点：{{ statusContainer[0].isBadPoint ? "是" : "否" }}</p>
+                          <p>{{ statusContainer[0].pointName }}：{{ statusContainer[0].pointValue }}</p>
+                          <p>湿度：{{ statusContainer[7].pointValue }}，温度：{{ statusContainer[19].pointValue }}</p>
                         </template>
                         <!--<a-button type="primary"></a-button>-->
                         <img src="../../../assets/img/main/设备点.png" alt="" width="20" height="24">
@@ -317,6 +324,8 @@ export default {
   created() {
     const statusList = this.$store.getters.getPointsList;
     this.statusContainer = JSON.parse(statusList);
+    console.log('after JSON.parse:');
+    console.log(JSON.parse(statusList));
   },
 
   methods: {

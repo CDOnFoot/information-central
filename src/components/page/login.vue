@@ -262,7 +262,6 @@ export default {
 
       this.form.validateFields((err, values) => {
         if (!err) {
-          /*console.log(values);*/
           self.userName = values.userName;
           self.userPassword = values.password;
           param = {
@@ -292,8 +291,8 @@ export default {
                 );
                 // ID 使用截取 token 下划线前的数字 - 实际为当前用户的主键 EntityId
                 self.$common.setCookie("dvptId", self.userInfo.token.split("_")[0], 24 * 60 * 30);
-                // 姓名不再保存
-                // self.$common.setCookie('dvptName', self.userName, 24 * 60 * 30);
+                // 通过 cookie 保存用户名（登录名），在右上角显示
+                self.$common.setCookie('dvptName', self.userName, 24 * 60 * 30);
                 self.$common.setCookie("menuIndex", "0", 24 * 60 * 30);
                 self.loadFlag = false;
 

@@ -4,7 +4,10 @@
   <div>
    <div class="main">
       <div class="borde">{{mcTitle}}</div>
-      <!--<div class="borde">设备概览</div>-->
+     <div class="module-icon">
+       <img src="../../../assets/img/main/module-information.png" alt="" width="23" height="23">
+       <img src="../../../assets/img/main/module-save.png" alt="" width="23" height="23">
+     </div>
       <div :id="mcId" class="main-id">
         <div class="none-data">
           <div class="device-content">
@@ -30,16 +33,19 @@
                 <tr class="the-first-row">
                   <td width="60"></td>
                   <td width="12" height="105"></td>
+                  <td width="10"></td>
                   <td width="62"></td>
                   <td width="45"></td>
-                  <td width="195"></td>
-                  <td width="52"></td>
-                  <td width="55"></td>
+                  <td width="80"></td>
+                  <td width="125"></td>
+                  <td width="58"></td>
+                  <td width="33"></td>
                   <td width="12"></td>
                 </tr>
                 <tr class="the-second-row">
                   <td></td>
                   <td height="30"></td>
+                  <td></td>
                   <td></td>
                   <td>
                     <div class="socketETH-module">
@@ -53,10 +59,13 @@
                           <p>{{ statusContainer[68].pointName }}：{{ statusContainer[68].pointValue }}</p>
                         </template>
                         <!--<a-button type="primary"></a-button>-->
-                        <img src="../../../assets/img/main/设备点.png" alt="" width="20" height="24">
+                        <!--<img src="../../../assets/img/main/设备点.png" alt="" width="20" height="24">-->
+                        <div class='pin'></div>
+                        <div class='pulse'></div>
                       </a-popover>
                     </div>
                   </td>
+                  <td></td>
                   <td>
                     <div class="socketETH-module">
                       <a-popover title="ETH插座2">
@@ -64,7 +73,9 @@
                           <p>状态：正常</p>
                         </template>
                         <!--<a-button type="primary"></a-button>-->
-                        <img src="../../../assets/img/main/设备点.png" alt="" width="20" height="24">
+                        <!--<img src="../../../assets/img/main/设备点.png" alt="" width="20" height="24">-->
+                        <div class='pin'></div>
+                        <div class='pulse'></div>
                       </a-popover>
                     </div>
                   </td>
@@ -75,7 +86,9 @@
                           <p>状态：正常</p>
                         </template>
                         <!--<a-button type="primary"></a-button>-->
-                        <img src="../../../assets/img/main/设备点.png" alt="" width="20" height="24">
+                        <!--<img src="../../../assets/img/main/设备点.png" alt="" width="20" height="24">-->
+                        <div class='pin'></div>
+                        <div class='pulse'></div>
                       </a-popover>
                     </div>
                   </td>
@@ -91,10 +104,14 @@
                           <p>状态：正常</p>
                         </template>
                         <!--<a-button type="primary"></a-button>-->
-                        <img src="../../../assets/img/main/设备点.png" alt="" width="20" height="24">
+                        <!--<img src="../../../assets/img/main/设备点.png" alt="" width="20" height="24">-->
+                        <div class='pin'></div>
+                        <div class='pulse'></div>
                       </a-popover>
                     </div>
                   </td>
+                  <td></td>
+                  <td></td>
                   <td></td>
                   <td></td>
                   <td></td>
@@ -107,7 +124,9 @@
                           <p>状态：正常</p>
                         </template>
                         <!--<a-button type="primary"></a-button>-->
-                        <img src="../../../assets/img/main/设备点.png" alt="" width="20" height="24">
+                        <!--<img src="../../../assets/img/main/设备点.png" alt="" width="20" height="24">-->
+                        <div class='pin'></div>
+                        <div class='pulse'></div>
                       </a-popover>
                     </div>
                   </td>
@@ -121,10 +140,13 @@
                           <p>状态：正常</p>
                         </template>
                         <!--<a-button type="primary"></a-button>-->
-                        <img src="../../../assets/img/main/设备点.png" alt="" width="20" height="24">
+                        <!--<img src="../../../assets/img/main/设备点.png" alt="" width="20" height="24">-->
+                        <div class='pin'></div>
+                        <div class='pulse'></div>
                       </a-popover>
                     </div>
                   </td>
+                  <td></td>
                   <td>
                     <div class="multifunction-module">
                       <a-popover title="多功能传感器1">
@@ -134,10 +156,13 @@
                           <p>湿度：{{ statusContainer[7].pointValue }}，温度：{{ statusContainer[19].pointValue }}</p>
                         </template>
                         <!--<a-button type="primary"></a-button>-->
-                        <img src="../../../assets/img/main/设备点.png" alt="" width="20" height="24">
+                        <!--<img src="../../../assets/img/main/设备点.png" alt="" width="20" height="24">-->
+                        <div class='pin'></div>
+                        <div class='pulse'></div>
                       </a-popover>
                     </div>
                   </td>
+                  <td></td>
                   <td></td>
                   <td>
                     <div class="multifunction-module">
@@ -146,7 +171,9 @@
                           <p>状态：正常</p>
                         </template>
                         <!--<a-button type="primary"></a-button>-->
-                        <img src="../../../assets/img/main/设备点.png" alt="" width="20" height="24">
+                        <!--<img src="../../../assets/img/main/设备点.png" alt="" width="20" height="24">-->
+                        <div class='pin'></div>
+                        <div class='pulse'></div>
                       </a-popover>
                     </div>
                   </td>
@@ -158,7 +185,9 @@
                           <p>状态：正常</p>
                         </template>
                         <!--<a-button type="primary"></a-button>-->
-                        <img src="../../../assets/img/main/设备点.png" alt="" width="20" height="24">
+                        <!--<img src="../../../assets/img/main/设备点.png" alt="" width="20" height="24">-->
+                        <div class='pin'></div>
+                        <div class='pulse'></div>
                       </a-popover>
                     </div>
                   </td>
@@ -169,7 +198,9 @@
                           <p>状态：正常</p>
                         </template>
                         <!--<a-button type="primary"></a-button>-->
-                        <img src="../../../assets/img/main/设备点.png" alt="" width="20" height="24">
+                        <!--<img src="../../../assets/img/main/设备点.png" alt="" width="20" height="24">-->
+                        <div class='pin'></div>
+                        <div class='pulse'></div>
                       </a-popover>
                     </div>
                   </td>
@@ -183,10 +214,14 @@
                           <p>状态：正常</p>
                         </template>
                         <!--<a-button type="primary"></a-button>-->
-                        <img src="../../../assets/img/main/设备点.png" alt="" width="20" height="24">
+                        <!--<img src="../../../assets/img/main/设备点.png" alt="" width="20" height="24">-->
+                        <div class='pin'></div>
+                        <div class='pulse'></div>
                       </a-popover>
                     </div>
                   </td>
+                  <td></td>
+                  <td></td>
                   <td></td>
                   <td></td>
                   <td></td>
@@ -199,12 +234,15 @@
                           <p>状态：正常</p>
                         </template>
                         <!--<a-button type="primary"></a-button>-->
-                        <img src="../../../assets/img/main/设备点.png" alt="" width="20" height="24">
+                        <!--<img src="../../../assets/img/main/设备点.png" alt="" width="20" height="24">-->
+                        <div class='pin'></div>
+                        <div class='pulse'></div>
                       </a-popover>
                     </div>
                   </td>
                 </tr>
                 <tr class="the-sixth-row">
+                  <td></td>
                   <td></td>
                   <td></td>
                   <td></td>
@@ -215,10 +253,13 @@
                           <p>状态：正常</p>
                         </template>
                         <!--<a-button type="primary"></a-button>-->
-                        <img src="../../../assets/img/main/设备点.png" alt="" width="20" height="24">
+                        <!--<img src="../../../assets/img/main/设备点.png" alt="" width="20" height="24">-->
+                        <div class='pin'></div>
+                        <div class='pulse'></div>
                       </a-popover>
                     </div>
                   </td>
+                  <td></td>
                   <td>
                     <div class="socketETH-module">
                       <a-popover title="ETH插座5">
@@ -226,7 +267,9 @@
                           <p>状态：正常</p>
                         </template>
                         <!--<a-button type="primary"></a-button>-->
-                        <img src="../../../assets/img/main/设备点.png" alt="" width="20" height="24">
+                        <!--<img src="../../../assets/img/main/设备点.png" alt="" width="20" height="24">-->
+                        <div class='pin'></div>
+                        <div class='pulse'></div>
                       </a-popover>
                     </div>
                   </td>
@@ -237,7 +280,9 @@
                           <p>状态：正常</p>
                         </template>
                         <!--<a-button type="primary"></a-button>-->
-                        <img src="../../../assets/img/main/设备点.png" alt="" width="20" height="24">
+                        <!--<img src="../../../assets/img/main/设备点.png" alt="" width="20" height="24">-->
+                        <div class='pin'></div>
+                        <div class='pulse'></div>
                       </a-popover>
                     </div>
                   </td>
@@ -253,6 +298,8 @@
                   <td></td>
                 </tr>
                 <tr class="the-seven-row">
+                  <td></td>
+                  <td></td>
                   <td></td>
                   <td></td>
                   <td></td>
@@ -452,5 +499,344 @@ export default {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+  /*
+  动态标记点样式
+  */
+.pin {
+  width: 20px;
+  height: 20px;
+  border-radius: 50% 50% 50% 0;
+  background: #27b5d4;
+  /*position: absolute;*/
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  /*left: 50%;
+  top: 50%;*/
+  /*margin: -20px 0 0 -20px;*/
+  -webkit-animation-name: bounce;
+  -moz-animation-name: bounce;
+  -o-animation-name: bounce;
+  -ms-animation-name: bounce;
+  animation-name: bounce;
+  -webkit-animation-fill-mode: both;
+  -moz-animation-fill-mode: both;
+  -o-animation-fill-mode: both;
+  -ms-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration: 1s;
+  -o-animation-duration: 1s;
+  -ms-animation-duration: 1s;
+  animation-duration: 1s;
+}
+.pin:after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  margin: 5px 0 0 -5px;
+  background: #2f2f2f;
+  position: absolute;
+  border-radius: 50%;
+}
+.pulse {
+  background: rgba(0,0,0,0.2);
+  border-radius: 50%;
+  height: 12px;
+  width: 12px;
+  position: absolute;
+  /*left: 50%;
+  top: 50%;*/
+  /*margin: 11px 0px 0px -12px;*/
+  -webkit-transform: rotateX(55deg);
+  -moz-transform: rotateX(55deg);
+  -o-transform: rotateX(55deg);
+  -ms-transform: rotateX(55deg);
+  transform: rotateX(55deg);
+  /*z-index: -2;*/
+}
+.pulse:after {
+  content: "";
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  position: absolute;
+  margin: -13px 0 0 -15px;
+  -webkit-animation: pulsate 1s ease-out;
+  -moz-animation: pulsate 1s ease-out;
+  -o-animation: pulsate 1s ease-out;
+  -ms-animation: pulsate 1s ease-out;
+  animation: pulsate 1s ease-out;
+  -webkit-animation-iteration-count: infinite;
+  -moz-animation-iteration-count: infinite;
+  -o-animation-iteration-count: infinite;
+  -ms-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  opacity: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+  -webkit-box-shadow: 0 0 1px 2px #27b5d4;
+  box-shadow: 0 0 1px 2px #27b5d4;
+  -webkit-animation-delay: 1.1s;
+  -moz-animation-delay: 1.1s;
+  -o-animation-delay: 1.1s;
+  -ms-animation-delay: 1.1s;
+  animation-delay: 1.1s;
+}
+@-moz-keyframes pulsate {
+  0% {
+    -webkit-transform: scale(0.1, 0.1);
+    -moz-transform: scale(0.1, 0.1);
+    -o-transform: scale(0.1, 0.1);
+    -ms-transform: scale(0.1, 0.1);
+    transform: scale(0.1, 0.1);
+    opacity: 0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+  }
+  50% {
+    opacity: 1;
+    -ms-filter: none;
+    filter: none;
+  }
+  100% {
+    -webkit-transform: scale(1.2, 1.2);
+    -moz-transform: scale(1.2, 1.2);
+    -o-transform: scale(1.2, 1.2);
+    -ms-transform: scale(1.2, 1.2);
+    transform: scale(1.2, 1.2);
+    opacity: 0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+  }
+}
+@-webkit-keyframes pulsate {
+  0% {
+    -webkit-transform: scale(0.1, 0.1);
+    -moz-transform: scale(0.1, 0.1);
+    -o-transform: scale(0.1, 0.1);
+    -ms-transform: scale(0.1, 0.1);
+    transform: scale(0.1, 0.1);
+    opacity: 0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+  }
+  50% {
+    opacity: 1;
+    -ms-filter: none;
+    filter: none;
+  }
+  100% {
+    -webkit-transform: scale(1.2, 1.2);
+    -moz-transform: scale(1.2, 1.2);
+    -o-transform: scale(1.2, 1.2);
+    -ms-transform: scale(1.2, 1.2);
+    transform: scale(1.2, 1.2);
+    opacity: 0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+  }
+}
+@-o-keyframes pulsate {
+  0% {
+    -webkit-transform: scale(0.1, 0.1);
+    -moz-transform: scale(0.1, 0.1);
+    -o-transform: scale(0.1, 0.1);
+    -ms-transform: scale(0.1, 0.1);
+    transform: scale(0.1, 0.1);
+    opacity: 0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+  }
+  50% {
+    opacity: 1;
+    -ms-filter: none;
+    filter: none;
+  }
+  100% {
+    -webkit-transform: scale(1.2, 1.2);
+    -moz-transform: scale(1.2, 1.2);
+    -o-transform: scale(1.2, 1.2);
+    -ms-transform: scale(1.2, 1.2);
+    transform: scale(1.2, 1.2);
+    opacity: 0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+  }
+}
+@keyframes pulsate {
+  0% {
+    -webkit-transform: scale(0.1, 0.1);
+    -moz-transform: scale(0.1, 0.1);
+    -o-transform: scale(0.1, 0.1);
+    -ms-transform: scale(0.1, 0.1);
+    transform: scale(0.1, 0.1);
+    opacity: 0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+  }
+  50% {
+    opacity: 1;
+    -ms-filter: none;
+    filter: none;
+  }
+  100% {
+    -webkit-transform: scale(1.2, 1.2);
+    -moz-transform: scale(1.2, 1.2);
+    -o-transform: scale(1.2, 1.2);
+    -ms-transform: scale(1.2, 1.2);
+    transform: scale(1.2, 1.2);
+    opacity: 0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+  }
+}
+@-moz-keyframes bounce {
+  0% {
+    opacity: 0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+    -webkit-transform: translateY(-2000px) rotate(-45deg);
+    -moz-transform: translateY(-2000px) rotate(-45deg);
+    -o-transform: translateY(-2000px) rotate(-45deg);
+    -ms-transform: translateY(-2000px) rotate(-45deg);
+    transform: translateY(-2000px) rotate(-45deg);
+  }
+  60% {
+    opacity: 1;
+    -ms-filter: none;
+    filter: none;
+    -webkit-transform: translateY(30px) rotate(-45deg);
+    -moz-transform: translateY(30px) rotate(-45deg);
+    -o-transform: translateY(30px) rotate(-45deg);
+    -ms-transform: translateY(30px) rotate(-45deg);
+    transform: translateY(30px) rotate(-45deg);
+  }
+  80% {
+    -webkit-transform: translateY(-10px) rotate(-45deg);
+    -moz-transform: translateY(-10px) rotate(-45deg);
+    -o-transform: translateY(-10px) rotate(-45deg);
+    -ms-transform: translateY(-10px) rotate(-45deg);
+    transform: translateY(-10px) rotate(-45deg);
+  }
+  100% {
+    -webkit-transform: translateY(0) rotate(-45deg);
+    -moz-transform: translateY(0) rotate(-45deg);
+    -o-transform: translateY(0) rotate(-45deg);
+    -ms-transform: translateY(0) rotate(-45deg);
+    transform: translateY(0) rotate(-45deg);
+  }
+}
+@-webkit-keyframes bounce {
+  0% {
+    opacity: 0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+    -webkit-transform: translateY(-2000px) rotate(-45deg);
+    -moz-transform: translateY(-2000px) rotate(-45deg);
+    -o-transform: translateY(-2000px) rotate(-45deg);
+    -ms-transform: translateY(-2000px) rotate(-45deg);
+    transform: translateY(-2000px) rotate(-45deg);
+  }
+  60% {
+    opacity: 1;
+    -ms-filter: none;
+    filter: none;
+    -webkit-transform: translateY(30px) rotate(-45deg);
+    -moz-transform: translateY(30px) rotate(-45deg);
+    -o-transform: translateY(30px) rotate(-45deg);
+    -ms-transform: translateY(30px) rotate(-45deg);
+    transform: translateY(30px) rotate(-45deg);
+  }
+  80% {
+    -webkit-transform: translateY(-10px) rotate(-45deg);
+    -moz-transform: translateY(-10px) rotate(-45deg);
+    -o-transform: translateY(-10px) rotate(-45deg);
+    -ms-transform: translateY(-10px) rotate(-45deg);
+    transform: translateY(-10px) rotate(-45deg);
+  }
+  100% {
+    -webkit-transform: translateY(0) rotate(-45deg);
+    -moz-transform: translateY(0) rotate(-45deg);
+    -o-transform: translateY(0) rotate(-45deg);
+    -ms-transform: translateY(0) rotate(-45deg);
+    transform: translateY(0) rotate(-45deg);
+  }
+}
+@-o-keyframes bounce {
+  0% {
+    opacity: 0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+    -webkit-transform: translateY(-2000px) rotate(-45deg);
+    -moz-transform: translateY(-2000px) rotate(-45deg);
+    -o-transform: translateY(-2000px) rotate(-45deg);
+    -ms-transform: translateY(-2000px) rotate(-45deg);
+    transform: translateY(-2000px) rotate(-45deg);
+  }
+  60% {
+    opacity: 1;
+    -ms-filter: none;
+    filter: none;
+    -webkit-transform: translateY(30px) rotate(-45deg);
+    -moz-transform: translateY(30px) rotate(-45deg);
+    -o-transform: translateY(30px) rotate(-45deg);
+    -ms-transform: translateY(30px) rotate(-45deg);
+    transform: translateY(30px) rotate(-45deg);
+  }
+  80% {
+    -webkit-transform: translateY(-10px) rotate(-45deg);
+    -moz-transform: translateY(-10px) rotate(-45deg);
+    -o-transform: translateY(-10px) rotate(-45deg);
+    -ms-transform: translateY(-10px) rotate(-45deg);
+    transform: translateY(-10px) rotate(-45deg);
+  }
+  100% {
+    -webkit-transform: translateY(0) rotate(-45deg);
+    -moz-transform: translateY(0) rotate(-45deg);
+    -o-transform: translateY(0) rotate(-45deg);
+    -ms-transform: translateY(0) rotate(-45deg);
+    transform: translateY(0) rotate(-45deg);
+  }
+}
+@keyframes bounce {
+  0% {
+    opacity: 0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+    -webkit-transform: translateY(-2000px) rotate(-45deg);
+    -moz-transform: translateY(-2000px) rotate(-45deg);
+    -o-transform: translateY(-2000px) rotate(-45deg);
+    -ms-transform: translateY(-2000px) rotate(-45deg);
+    transform: translateY(-2000px) rotate(-45deg);
+  }
+  60% {
+    opacity: 1;
+    -ms-filter: none;
+    filter: none;
+    -webkit-transform: translateY(30px) rotate(-45deg);
+    -moz-transform: translateY(30px) rotate(-45deg);
+    -o-transform: translateY(30px) rotate(-45deg);
+    -ms-transform: translateY(30px) rotate(-45deg);
+    transform: translateY(30px) rotate(-45deg);
+  }
+  80% {
+    -webkit-transform: translateY(-10px) rotate(-45deg);
+    -moz-transform: translateY(-10px) rotate(-45deg);
+    -o-transform: translateY(-10px) rotate(-45deg);
+    -ms-transform: translateY(-10px) rotate(-45deg);
+    transform: translateY(-10px) rotate(-45deg);
+  }
+  100% {
+    -webkit-transform: translateY(0) rotate(-45deg);
+    -moz-transform: translateY(0) rotate(-45deg);
+    -o-transform: translateY(0) rotate(-45deg);
+    -ms-transform: translateY(0) rotate(-45deg);
+    transform: translateY(0) rotate(-45deg);
+  }
 }
 </style>

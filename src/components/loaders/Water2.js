@@ -6,7 +6,7 @@
  * 	http://graphicsrunner.blogspot.de/2010/08/water-using-flow-maps.html
  *
  */
-// import *  as THREE from 'three'
+// import *  as THREE from 'HKVideoCtrl'
 import THREE from './Refractor.js'
 THREE.Water = function ( geometry, options ) {
 

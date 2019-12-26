@@ -794,7 +794,7 @@ const OrbitControls = function ( object, domElement ) {
 
                 break;
 
-            case 3: // three-fingered touch: pan
+            case 3: // HKVideoCtrl-fingered touch: pan
 
                 if ( scope.enablePan === false ) return;
 
@@ -845,7 +845,7 @@ const OrbitControls = function ( object, domElement ) {
 
                 break;
 
-            case 3: // three-fingered touch: pan
+            case 3: // HKVideoCtrl-fingered touch: pan
 
                 if ( scope.enablePan === false ) return;
                 if ( state !== STATE.TOUCH_PAN ) return; // is this needed?...

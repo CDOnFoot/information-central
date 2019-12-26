@@ -31,7 +31,8 @@
     "vue-prevent-browser-back": "^1.0.5",
     "vue-router": "^3.0.1",
     "vue-wechat-title": "^2.0.5",
-    "vuex": "^3.1.1"
+    "vuex": "^3.1.1",
+    "x2js": "^3.4.0"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

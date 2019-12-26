@@ -619,12 +619,12 @@ svg.icon {
 .borde {
   font-weight: 700;
   color: #ffffff;
-  border-left: #3467c5 solid 4px;
+  /* border-left: #3467c5 solid 4px; */
   position: absolute;
-  top: 15px;
-  left: 25px;
+  top: 13px;
+  left: 33px;
   font-size: 16px;
-  padding-left: 12px;
+  padding-left: 27px;
   width: 60%;
 }
 

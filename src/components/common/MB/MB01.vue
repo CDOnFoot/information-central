@@ -39,7 +39,7 @@
       <!-- left modules - 0 -->
       <div class="left">
         <div class="left-sub">
-          <img src="../../../assets/img/sub-border-l.png" alt="" class="sub-bg">
+          <img src="../../../assets/img/sub-border-r.png" alt="" class="sub-bg">
           <div class="hide-sub-left" v-show="setFlag">
             <div class="sub-btn">
               <div class="sub-btn-item" v-for="(item,index) in btnList" :key="index" :class="(index===0 || index===2)?'marginLeft':''">
@@ -59,7 +59,7 @@
       <!-- left module - 1 -->
       <div class="left">
         <div class="left-sub">
-          <img src="../../../assets/img/sub-border-l.png" alt="" class="sub-bg">
+          <img src="../../../assets/img/sub-border-r.png" alt="" class="sub-bg">
           <div class="hide-sub-left" v-show="setFlag">
             <div class="sub-btn">
               <div class="sub-btn-item" v-for="(item,index) in btnList" :key="index" :class="(index===0 || index===2)?'marginLeft':''">
@@ -78,7 +78,7 @@
       <!-- left module - 2 -->
       <div class="left">
         <div class="left-sub">
-          <img src="../../../assets/img/sub-border-l.png" alt="" class="sub-bg">
+          <img src="../../../assets/img/sub-border-r.png" alt="" class="sub-bg">
           <div class="hide-sub-left" v-show="setFlag">
             <div class="sub-btn">
               <div class="sub-btn-item" v-for="(item,index) in btnList" :key="index" :class="(index===0 || index===2)?'marginLeft':''">
@@ -498,4 +498,5 @@
     width: 100%;
     height: 100%;
   }
+      
 </style>

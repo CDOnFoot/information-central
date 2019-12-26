@@ -17,6 +17,8 @@ import Antd from 'ant-design-vue'
 import api from '../utils/api'
 import http from '../utils/http'
 import VueWechatTitle from 'vue-wechat-title'
+// 引入 x2js ，用于视频模块
+import x2js from 'x2js'
 
 // element-ui
 import ElementUI from 'element-ui'
@@ -49,6 +51,8 @@ Vue.prototype.$api= api;
 Vue.prototype.$http= http;
 // jquery 继承原型链
 Vue.prototype.$ = $;
+// x2js 继承原型链
+Vue.prototype.$x2js = x2js;
     //路由判断权限
 
 /* eslint-disable no-new */

@@ -12,7 +12,9 @@ const store = new Vuex.Store({
     screenWidth: '',
     screenHeight: '',
     // 处理后的设备点值 list
-    usedPoints: []
+    usedPoints: [],
+    // 每个组件的页签
+    pageTarget: ''
   },
 
   getters: {
@@ -27,6 +29,11 @@ const store = new Vuex.Store({
     getPointsList (state) {
       state.usedPoints = sessionStorage.getItem("statusList");
       return state.usedPoints;
+    },
+
+    getPageTarget (state) {
+      state.pageTarget = sessionStorage.getItem("pageTarget");
+      return state.pageTarget;
     }
   },
  
@@ -44,6 +51,11 @@ const store = new Vuex.Store({
     storePoints (state, points) {
       sessionStorage.setItem("statusList", JSON.stringify(points));
       state.usedPoints = points;
+    },
+
+    changePageTarget (state, value) {
+      sessionStorage.setItem("pageTarget", value);
+      state.pageTarget = value;
     }
   }
 });

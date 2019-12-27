@@ -315,7 +315,7 @@
     /*align-items: center;*/
     /*align-content: center;*/
     /*justify-items: center;*/
-    background: url("../../assets/img/back/menu-bg.png") no-repeat;
+    /* background: url("../../assets/img/back/menu-bg.png") no-repeat; */
     background-size: 100% 100%;
   }
 

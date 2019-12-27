@@ -57,6 +57,16 @@ export default {
     initChart() {
       let chartInit = this.$echarts.init(document.getElementById("chart-id"));
 
+      // 横轴模板数据 - 日期
+      const dateTemplate = new Date();
+      const date_0 = dateTemplate.getDate() + "日";
+      const date_1 = dateTemplate.getDate() - 1 + "日";
+      const date_2 = dateTemplate.getDate() - 2 + "日";
+      const date_3 = dateTemplate.getDate() - 3 + "日";
+      const date_4 = dateTemplate.getDate() - 4 + "日";
+      const date_5 = dateTemplate.getDate() - 5 + "日";
+      const date_6 = dateTemplate.getDate() - 6 + "日";
+
       // 配置项
       let option = {
         xAxis: {
@@ -71,11 +81,14 @@ export default {
             }
           },
           // 数据结构需要修改
-          data: ["1", "2", "3", "4", "5", "6", "7"]
+          data: [date_0, date_1, date_2, date_3, date_4, date_5, date_6].reverse()
         },
 
         yAxis: {
+          name: '℃',
           type: "value",
+          /*min: -20,
+          max: 50,*/
           axisLabel: {
             color: "#fff"
           },
@@ -90,7 +103,7 @@ export default {
 
         series: [
           {
-            data: [820, 932, 901, 934, 1290, 1330, 500],
+            data: [6, 3, 4, 3, 2, 5, 1],
             type: "line",
             smooth: true,
             // symbol: "none",
@@ -235,6 +248,6 @@ export default {
   text-align: center;
   padding-top: 6px;
   width: 98%;
-  height: 110%;
+  height: 100%;
 }
 </style>

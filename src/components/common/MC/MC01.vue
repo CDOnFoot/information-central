@@ -109,8 +109,8 @@ export default {
             startAngle: 180, // 仪表盘起始角度,默认 225。圆心 正右手侧为0度，正上方为90度，正左手侧为180度。
             endAngle: 0, // 仪表盘结束角度,默认 -45
             clockwise: true, // 仪表盘刻度是否是顺时针增长,默认 true。
-            min: 0, // 最小的数据值,默认 0 。映射到 minAngle。
-            max: 100, // 最大的数据值,默认 100 。映射到 maxAngle。
+            min: 1, // 最小的数据值,默认 0 。映射到 minAngle。
+            max: 3, // 最大的数据值,默认 100 。映射到 maxAngle。
             splitNumber: 10, // 仪表盘刻度的分割段数,默认 10。q
 
             axisLine: {
@@ -166,7 +166,7 @@ export default {
               color: "#25AFB8", // 文字的颜色,默认 #fff。
               fontSize: 15, // 文字的字体大小,默认 5。
               fontWeight: "bold", // 文字粗细
-              formatter: "{value}%" // 刻度标签的内容格式器，支持字符串模板和回调函数两种形式。 示例:// 使用字符串模板，模板变量为刻度默认标签 {value},如:formatter: '{value} kg'; // 使用函数模板，函数参数分别为刻度数值,如formatter: function (value) {return value + 'km/h';}
+              formatter: "{value}" // 刻度标签的内容格式器，支持字符串模板和回调函数两种形式。 示例:// 使用字符串模板，模板变量为刻度默认标签 {value},如:formatter: '{value} kg'; // 使用函数模板，函数参数分别为刻度数值,如formatter: function (value) {return value + 'km/h';}
             },
 
             pointer: {
@@ -210,13 +210,13 @@ export default {
               offsetCenter: [0, "50%"], // 相对于仪表盘中心的偏移位置，数组第一项是水平方向的偏移，第二项是垂直方向的偏移。可以是绝对的数值，也可以是相对于仪表盘半径的百分比。
               color: "auto", // 文字的颜色,默认 auto。
               fontSize: 1, // 文字的字体大小,默认 15。
-              formatter: "{value}%" // 格式化函数或者字符串
+              formatter: "{value}" // 格式化函数或者字符串
             },
 
             data: [
               {
-                name: "Name",
-                value: 45
+                name: "value",
+                value: 1.3
               }
             ]
           }

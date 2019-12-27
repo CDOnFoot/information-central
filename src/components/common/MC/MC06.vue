@@ -202,6 +202,6 @@ export default {
   text-align: center;
   padding-top: 6px;
   width: 98%;
-  height: 100%;
+  height: 98%;
 }
 </style>

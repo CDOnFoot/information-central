@@ -12,7 +12,8 @@
           <span></span>
         </div>
       </div>
-      <div class="borde">{{mcTitle}}</div>
+      <!--<div class="borde">{{mcTitle}}</div>-->
+      <div class="borde">平均湿度</div>
      <!-- <div class="module-icon">
        <img src="../../../assets/img/main/module-information.png" alt="" width="23" height="23">
        <img src="../../../assets/img/main/module-save.png" alt="" width="23" height="23">
@@ -58,7 +59,17 @@ export default {
 
   methods: {
     initChart () {
-      let chartInit = this.$echarts.init(document.getElementById('chart-id-3'))
+      let chartInit = this.$echarts.init(document.getElementById('chart-id-3'));
+
+      // 横轴模板数据 - 日期
+      const dateTemplate = new Date();
+      const date_0 = dateTemplate.getDate() + "日";
+      const date_1 = dateTemplate.getDate() - 1 + "日";
+      const date_2 = dateTemplate.getDate() - 2 + "日";
+      const date_3 = dateTemplate.getDate() - 3 + "日";
+      const date_4 = dateTemplate.getDate() - 4 + "日";
+      const date_5 = dateTemplate.getDate() - 5 + "日";
+      const date_6 = dateTemplate.getDate() - 6 + "日";
 
       let option = {
         xAxis: {
@@ -73,10 +84,11 @@ export default {
             }
           },
           // 数据结构需要修改
-          data: ['1', '2', '3', '4', '5', '6', '7']
+          data: [date_0, date_1, date_2, date_3, date_4, date_5, date_6].reverse()
         },
 
         yAxis: {
+          name: '%RH',
           type: 'value',
           axisLabel: {
             color: '#fff'
@@ -92,7 +104,7 @@ export default {
 
         series: [
           {
-            data: [820, 932, 901, 934, 1290, 1330, 500],
+            data: [60, 72, 58, 38, 49, 33, 59],
             type: 'line',
             smooth: true,
             // symbol: 'none',

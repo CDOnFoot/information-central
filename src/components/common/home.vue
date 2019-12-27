@@ -77,7 +77,7 @@
           </div>
         </div>
 
-        <div class="menu-sub">
+        <!-- <div class="menu-sub">
           <div class="menu-sub-item">
             <img src="../../assets/img/title-sub-bg.png" alt="" class="menu-sub-img">
           </div>
@@ -87,11 +87,11 @@
           <div class="menu-sub-item">
             <img src="../../assets/img/title-sub-bg.png" alt="" class="menu-sub-img">
           </div>
-        </div>
+        </div> -->
 
         <div class="menu-item-bread">
           <div class="item-info">
-            <img :src="require('../../assets/img/titleBg.png')" alt="" class="menu-img">
+            <img :src="require('../../assets/img/title-1.png')" alt="" class="menu-img1">
             <div class="item-title">{{ pageTarget }}</div>
           </div>
         </div>
@@ -864,6 +864,10 @@
   }
 </script>
 <style scoped>
+.menu-img1{
+  padding-top:10px;
+  margin-left: -10px;
+}
 .main111 {
   /* width: 90px;
 			height: 90px;

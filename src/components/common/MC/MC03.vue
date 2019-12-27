@@ -136,11 +136,21 @@ export default {
               // }
             // }
             lineStyle: {
-              width: 3
+              width: 3,
             },
             // 区域填充样式
             areaStyle: {
-              opacity: 0.2
+              // opacity: 0.2,
+              normal: { //颜色渐变函数 前四个参数分别表示四个位置依次为左、下、右、上
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1,[{
+                            offset: 0, color: '#fdb751' // 0% 处的颜色
+                        }, {
+                            offset: 0.4, color: '#fdb751b0' 
+                        }, {
+                            offset: 1, color: '#141e3f' // 100% 处的颜色
+                        }]
+                    ),    
+                },   
             }
           }
         ]
@@ -178,7 +188,7 @@ export default {
   width: 8px;
   height: 66%;
   margin-right: 5px;
-  background: #3374d0;
+  background: #60dbff;
   -webkit-animation: load-data-v-536c2323 1.04s ease infinite;
   transform: skewX(50deg);
 }

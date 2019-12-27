@@ -26,6 +26,9 @@
   </div>
 </template>
 <script>
+
+import echarts from "echarts";
+
 export default {
   name: "MC06",
   data() {
@@ -58,7 +61,7 @@ export default {
       let chartInit = this.$echarts.init(document.getElementById('chart-id-2'));
 
       let option = {
-        color: ['#3398DB'],
+        // color: ['#3398DB'],
         tooltip : {
           trigger: 'axis',
           axisPointer : {            // 坐标轴指示器，坐标轴触发有效
@@ -80,7 +83,12 @@ export default {
             },
             axisLabel: {
               color: '#fff'
+            },
+            axisLine: {
+            lineStyle: {
+              color: "#fff"
             }
+          },
           }
         ],
         yAxis : [
@@ -88,7 +96,12 @@ export default {
             type : 'value',
             axisLabel: {
               color: '#fff'
+            },
+            axisLine: {
+            lineStyle: {
+              color: "#fff"
             }
+          },
           }
         ],
         series : [
@@ -97,6 +110,15 @@ export default {
             type:'bar',
             barWidth: '60%',
             data:[10, 52, 200, 334, 390, 330],
+            itemStyle: {
+                normal: {
+                      barBorderRadius:[10, 10, 0, 0],
+                     color: new echarts.graphic.LinearGradient(0, 0, 1, 1, [{offset: 0,color: '#ff9b0a'}, {offset: 1,color: '#fffb83d9'}]),
+
+                    //  color: new echarts.graphic.LinearGradient(1, 0, 1, 1, [{offset: 0,color: '#ff9b0a'}, {offset: 1,color: '#fffb83a0'}]),
+                     lable:{textStyle:{color: '#fff'}},
+                   }
+              },
           }
         ]
       };

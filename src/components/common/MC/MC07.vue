@@ -26,6 +26,9 @@
   </div>
 </template>
 <script>
+
+import echarts from "echarts";
+
 export default {
   name: "MC07",
   data() {
@@ -64,6 +67,11 @@ export default {
           axisLabel: {
             color: '#fff'
           },
+          axisLine: {
+            lineStyle: {
+              color: "#fff"
+            }
+          },
           // 数据结构需要修改
           data: ['1', '2', '3', '4', '5', '6', '7']
         },
@@ -72,7 +80,12 @@ export default {
           type: 'value',
           axisLabel: {
             color: '#fff'
-          }
+          },
+          axisLine: {
+            lineStyle: {
+              color: "#fff"
+            }
+          },
         },
 
         color: ['#B88BE0'],
@@ -82,7 +95,7 @@ export default {
             data: [820, 932, 901, 934, 1290, 1330, 500],
             type: 'line',
             smooth: true,
-            symbol: 'none',
+            // symbol: 'none',
             // 折线样式
             lineStyle: {
               width: 3

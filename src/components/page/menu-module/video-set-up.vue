@@ -358,7 +358,7 @@
     name: "video-set-up",
     data() {
       return {
-        visible: false,
+        visible: true,
         maskClosable: false,
         loading: false,
       };
@@ -428,7 +428,6 @@
       clickGetDeviceInfo() {
         this.$message.info('This is a normal message');
       },
-
       // localconfig
       clickOpenFileDlg(id, iType) {
         let szDirPath = WebVideoCtrl.I_OpenFileDlg(iType);
@@ -451,7 +450,6 @@
           $("#devicePicPath").val($(xmlDoc).find("DeviceCapturePath").eq(0).text());
           $("#playbackFilePath").val($(xmlDoc).find("PlaybackFilePath").eq(0).text());
           $("#protocolType").val($(xmlDoc).find("ProtocolType").eq(0).text());
-
           showOPInfo("本地配置获取成功！");
         } else {
           showOPInfo("本地配置获取失败！");

@@ -77,16 +77,6 @@
           </div>
         </div>
 
-        <!--<div v-for="(item,index) in menuList" class="menu-item" :class="menuIndex==index?'font-active':''" :key="index"
-             @click="selectMenu(index)">
-          <div class="item-info">
-            <img :src="menuIndex === index?require('../../assets/img/titleBg-active.png'):require('../../assets/img/titleBg.png')" alt="" class="menu-img">
-            <div class="item-title">
-              {{ item.menuName }}
-            </div>
-          </div>
-        </div>-->
-
         <!-- <div class="menu-sub">
           <div class="menu-sub-item">
             <img src="../../assets/img/title-sub-bg.png" alt="" class="menu-sub-img">
@@ -98,6 +88,35 @@
             <img src="../../assets/img/title-sub-bg.png" alt="" class="menu-sub-img">
           </div>
         </div> -->
+
+        <div class="menu-item-bread">
+          <div class="item-info">
+            <img :src="require('../../assets/img/title-1.png')" alt="" class="menu-img1">
+            <div class="item-title">{{ pageTarget }}</div>
+          </div>
+        </div>
+
+        <!--<div v-for="(item,index) in menuList" class="menu-item" :class="menuIndex==index?'font-active':''" :key="index"
+             @click="selectMenu(index)">
+          <div class="item-info">
+            <img :src="menuIndex === index?require('../../assets/img/titleBg-active.png'):require('../../assets/img/titleBg.png')" alt="" class="menu-img">
+            <div class="item-title">
+              {{ item.menuName }}
+            </div>
+          </div>
+        </div>-->
+
+         <!--<div class="menu-sub">
+          <div class="menu-sub-item">
+            <img src="../../assets/img/title-sub-bg.png" alt="" class="menu-sub-img">
+          </div>
+          <div class="menu-sub-item">
+            <img src="../../assets/img/title-sub-bg.png" alt="" class="menu-sub-img">
+          </div>
+          <div class="menu-sub-item">
+            <img src="../../assets/img/title-sub-bg.png" alt="" class="menu-sub-img">
+          </div>
+        </div>-->
       </div>
       <div class="layout-btn">
         <!--<a-button size="large" class="btn-item" @click="layoutSetting" v-show="menuIndex<=0">布局配置</a-button>-->
@@ -122,6 +141,7 @@
 
     data(){
       return{
+        pageTarget: '',
         menuList:[],
         menuIndex:0,
         menuId:'',
@@ -158,6 +178,28 @@
      * @param from
      * @param next
      */
+    beforeRouteUpdate (to, from, next) {
+      const that = this, toRoute = to.meta.title;
+      new Promise((resolve, reject) => {
+        resolve(toRoute);
+      }).then(res => {
+        if (res === '菜单') {
+          this.$('.menu-sub').hide();
+          this.$('.menu-item-bread').hide();
+          next();
+          return;
+        }
+        this.$('.menu-sub').show();
+        this.$('.menu-item-bread').show();
+        // 将异步获得的页签存入 store 并执行跳转
+        that.$store.commit("changePageTarget", res);
+        that.pageTarget = that.$store.getters.getPageTarget;
+        /*setInterval(() => {
+          console.log(that.$store.getters.getPageTarget);
+        }, 2000);*/
+        next();
+      })
+    },
     /*beforeRouteUpdate (to, from, next) {
       let self = this;
       var routerVal = to.matched[1].path;
@@ -211,6 +253,8 @@
     //   console.log(this.menuId);
     // },
     mounted() {
+      this.$('.menu-sub').hide();
+      this.$('.menu-item-bread').hide();
       let self = this;
       // 查看菜单栏数据信息
       this.getMenuInfo();
@@ -820,6 +864,10 @@
   }
 </script>
 <style scoped>
+.menu-img1{
+  padding-top:10px;
+  margin-left: -10px;
+}
 .main111 {
   /* width: 90px;
 			height: 90px;

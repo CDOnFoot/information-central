@@ -155,7 +155,7 @@ export default {
   width: 8px;
   height: 66%;
   margin-right: 5px;
-  background: #3374d0;
+  background: #60dbff;
   -webkit-animation: load-data-v-536c2323 1.04s ease infinite;
   transform: skewX(50deg);
 }
@@ -202,6 +202,6 @@ export default {
   text-align: center;
   padding-top: 6px;
   width: 98%;
-  height: 100%;
+  height: 98%;
 }
 </style>

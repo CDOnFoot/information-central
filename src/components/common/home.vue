@@ -34,7 +34,7 @@
         <img src="../../assets/img/logo.png" alt="">
       </div>
       <div class="header-canvas">
-        <div class="title">信息中心</div>
+        <div class="title">数据中心动环监控平台</div>
         <div class="time-interval">{{timeStamp}}</div>
         <!-- <div class="weather">
           <iframe width="66%" scrolling="no" height="24" frameborder="0" allowtransparency="false" src="//i.tianqi.com/index.php?c=code&id=1&color=%23FFFFFF&icon=1&py=beijing&wind=0&num=1&site=12" style="float:right;"></iframe>
@@ -173,7 +173,7 @@
     },
 
     /**
-     * @description ‘信息中心’ 项目暂不使用从服务获取的菜单列表，直接写一个假的数据列表以供选择
+     * @description ‘数据中心动环监控平台’ 项目暂不使用从服务获取的菜单列表，直接写一个假的数据列表以供选择
      * @param to
      * @param from
      * @param next

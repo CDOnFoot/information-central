@@ -103,140 +103,157 @@
       width="40%"
     >
       <div class="localconfig">
-        <a-card size="small" title="本地配置" style="height: 100%">
-          <a-form
-            id="localconfig"
-            :form="localconfig"
-            @submit="clickSetLocalCfg"
-            layout="inline"
-          >
-            <table style="width: 100%;">
-              <tr>
-                <td>
-                  <a-form-item label="播放性能">
-                    <a-select v-decorator="['netsPreach',{initialValue:'最短延时'}]" style="width: 100px">
-                      <a-select-option value="最短延时">最短延时</a-select-option>
-                      <a-select-option value="实时性好">实时性好</a-select-option>
-                      <a-select-option value="均衡">均衡</a-select-option>
-                      <a-select-option value="流畅性好">流畅性好</a-select-option>
-                    </a-select>
-                  </a-form-item>
-                </td>
-                <td>
-                  <a-form-item label="图像尺寸">
-                    <a-select v-decorator="['wndSize',{initialValue:'充满'}]" style="width: 100px">
-                      <a-select-option value="充满">充满</a-select-option>
-                      <a-select-option value="4:3">4:3</a-select-option>
-                      <a-select-option value="16:9">16:9</a-select-option>
-                    </a-select>
-                  </a-form-item>
-                </td>
-                <td>
-                  <a-form-item label="规则信息">
-                    <a-select v-decorator="['rulesInfo',{initialValue:'禁用'}]" style="width: 100px">
-                      <a-select-option value="禁用">禁用</a-select-option>
-                      <a-select-option value="启用">启用</a-select-option>
-                    </a-select>
-                  </a-form-item>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <a-form-item label="文件格式">
-                    <a-select v-decorator="['captureFileFormat',{initialValue:'JPEG'}]" style="width: 100px">
-                      <a-select-option value="JPEG">JPEG</a-select-option>
-                      <a-select-option value="BMP">BMP</a-select-option>
-                    </a-select>
-                  </a-form-item>
-                </td>
-                <td>
-                  <a-form-item label="打包大小">
-                    <a-select v-decorator="['packSize',{initialValue:'256M'}]" style="width: 100px">
-                      <a-select-option value="256M">256M</a-select-option>
-                      <a-select-option value="512M">512M</a-select-option>
-                      <a-select-option value="1G">1G</a-select-option>
-                    </a-select>
-                  </a-form-item>
-                </td>
-                <td>
-                  <a-form-item label="协议类型">
-                    <a-select v-decorator="['protocolType',{initialValue:'TCP'}]" style="width: 100px">
-                      <a-select-option value="TCP">TCP</a-select-option>
-                      <a-select-option value="UDP">UDP</a-select-option>
-                    </a-select>
-                  </a-form-item>
-                </td>
-              </tr>
-              <tr>
-                <td colspan="3">
-                  <a-form-item label="录像文件保存路径">
-                    <a-input v-decorator="['recordPath']" @click="clickOpenFileDlg('recordPath', 0)" disabled>
-                      <a-icon slot="addonAfter" type="folder-open" style="cursor: pointer"/>
-                    </a-input>
-                  </a-form-item>
-                </td>
-              </tr>
-              <tr>
-                <td colspan="3">
-                  <a-form-item label="回放下载保存路径">
-                    <a-input v-decorator="['downloadPath']" @click="clickOpenFileDlg('downloadPath', 0)" disabled>
-                      <a-icon slot="addonAfter" type="folder-open" style="cursor: pointer"/>
-                    </a-input>
-                  </a-form-item>
-                </td>
-              </tr>
-              <tr>
-                <td colspan="3">
-                  <a-form-item label="预览抓图保存路径">
-                    <a-input v-decorator="['previewPicPath']" @click="clickOpenFileDlg('previewPicPath', 0)"
-                             disabled>
-                      <a-icon slot="addonAfter" type="folder-open" style="cursor: pointer"/>
-                    </a-input>
-                  </a-form-item>
-                </td>
-              </tr>
-              <tr>
-                <td colspan="3">
-                  <a-form-item label="回放抓图保存路径">
-                    <a-input v-decorator="['playbackPicPath']" @click="clickOpenFileDlg('playbackPicPath', 0)"
-                             disabled>
-                      <a-icon slot="addonAfter" type="folder-open" style="cursor: pointer"/>
-                    </a-input>
-                  </a-form-item>
-                </td>
-              </tr>
-              <tr>
-                <td colspan="3">
-                  <a-form-item label="回放剪辑保存路径">
-                    <a-input v-decorator="['playbackFilePath']" @click="clickOpenFileDlg('playbackFilePath', 0)"
-                             disabled>
-                      <a-icon slot="addonAfter" type="folder-open" style="cursor: pointer"/>
-                    </a-input>
-                  </a-form-item>
-                </td>
-              </tr>
-              <tr>
-                <td colspan="3">
-                  <a-form-item label="设备抓图保存路径">
-                    <a-input v-decorator="['devicePicPath']" @click="clickOpenFileDlg('devicePicPath', 0)" disabled>
-                      <a-icon slot="addonAfter" type="folder-open" style="cursor: pointer"/>
-                    </a-input>
-                  </a-form-item>
-                </td>
-              </tr>
-              <tr>
-                <td colspan="3">
-                  <a-button type="primary" @click="clickGetLocalCfg">
-                    获取
-                  </a-button>
-                  <a-button type="primary" @click="clickSetLocalCfg">
-                    设置
-                  </a-button>
-                </td>
-              </tr>
-            </table>
-          </a-form>
-        </a-card>
+        <a-form
+          id="localconfig"
+          :form="localconfig"
+          @submit="clickSetLocalCfg"
+          layout="inline"
+        >
+          <table cellpadding="3" cellspacing="3" border="0" width="100%" style="color: black">
+            <tr>
+              <td style="width: 20%;">
+                播放性能
+              </td>
+              <td style="width: 30%;">
+                <a-select v-decorator="['netsPreach',{initialValue:'最短延时'}]">
+                  <a-select-option value="最短延时">最短延时</a-select-option>
+                  <a-select-option value="实时性好">实时性好</a-select-option>
+                  <a-select-option value="均衡">均衡</a-select-option>
+                  <a-select-option value="流畅性好">流畅性好</a-select-option>
+                </a-select>
+              </td>
+              <td style="width: 20%;">
+                图像尺寸
+              </td>
+              <td style="width: 30%;">
+                <a-select v-decorator="['wndSize',{initialValue:'充满'}]">
+                  <a-select-option value="充满">充满</a-select-option>
+                  <a-select-option value="4:3">4:3</a-select-option>
+                  <a-select-option value="16:9">16:9</a-select-option>
+                </a-select>
+              </td>
+
+            </tr>
+            <tr>
+              <td>
+                规则信息
+              </td>
+              <td>
+                <a-select v-decorator="['rulesInfo',{initialValue:'禁用'}]">
+                  <a-select-option value="禁用">禁用</a-select-option>
+                  <a-select-option value="启用">启用</a-select-option>
+                </a-select>
+              </td>
+              <td>
+                抓图文件格式
+              </td>
+              <td>
+                <a-select v-decorator="['captureFileFormat',{initialValue:'JPEG'}]">
+                  <a-select-option value="JPEG">JPEG</a-select-option>
+                  <a-select-option value="BMP">BMP</a-select-option>
+                </a-select>
+              </td>
+
+            </tr>
+            <tr>
+              <td>
+                录像文件打包大小
+              </td>
+              <td>
+                <a-select v-decorator="['packSize',{initialValue:'256M'}]" style="width:100%;">
+                  <a-select-option value="256M">256M</a-select-option>
+                  <a-select-option value="512M">512M</a-select-option>
+                  <a-select-option value="1G">1G</a-select-option>
+                </a-select>
+              </td>
+              <td>
+                协议类型
+              </td>
+              <td>
+                <a-select v-decorator="['protocolType',{initialValue:'TCP'}]" style="width: 100%">
+                  <a-select-option value="TCP">TCP</a-select-option>
+                  <a-select-option value="UDP">UDP</a-select-option>
+                </a-select>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                录像文件保存路径
+              </td>
+              <td colspan="3">
+                <a-input v-decorator="['recordPath']" @click="clickOpenFileDlg('recordPath', 0)" disabled>
+                  <a-icon slot="addonAfter" type="folder-open" style="cursor: pointer"/>
+                </a-input>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                回放下载保存路径
+              </td>
+              <td colspan="3">
+                <a-input v-decorator="['downloadPath']" @click="clickOpenFileDlg('downloadPath', 0)" disabled>
+                  <a-icon slot="addonAfter" type="folder-open" style="cursor: pointer"/>
+                </a-input>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                预览抓图保存路径
+              </td>
+              <td colspan="3">
+                <a-input v-decorator="['previewPicPath']" @click="clickOpenFileDlg('previewPicPath', 0)"
+                         disabled>
+                  <a-icon slot="addonAfter" type="folder-open" style="cursor: pointer"/>
+                </a-input>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                回放抓图保存路径
+              </td>
+              <td colspan="3">
+                <a-input v-decorator="['playbackPicPath']" @click="clickOpenFileDlg('playbackPicPath', 0)"
+                         disabled>
+                  <a-icon slot="addonAfter" type="folder-open" style="cursor: pointer"/>
+                </a-input>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                回放剪辑保存路径
+              </td>
+              <td colspan="3">
+                <a-input v-decorator="['playbackFilePath']" @click="clickOpenFileDlg('playbackFilePath', 0)"
+                         disabled>
+                  <a-icon slot="addonAfter" type="folder-open" style="cursor: pointer"/>
+                </a-input>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                设备抓图保存路径
+              </td>
+              <td colspan="3">
+                <a-input v-decorator="['devicePicPath']" @click="clickOpenFileDlg('devicePicPath', 0)" disabled>
+                  <a-icon slot="addonAfter" type="folder-open" style="cursor: pointer"/>
+                </a-input>
+              </td>
+            </tr>
+            <tr>
+              <td>
+
+              </td>
+              <td>
+                <a-button type="primary" @click="clickGetLocalCfg">
+                  获取
+                </a-button>
+                <a-button type="primary" @click="clickSetLocalCfg">
+                  设置
+                </a-button>
+              </td>
+            </tr>
+          </table>
+        </a-form>
       </div>
     </a-drawer>
     <div class="video-live-module">
@@ -249,65 +266,65 @@
                 <a href="#" slot="extra" @click="showDrawer">本地配置</a>
                 <a-row :gutter="20">
                   <a-col class="gutter-row" :span="9">
-                    <table cellpadding="1" cellspacing="3" border="0">
+                    <table cellpadding="3" cellspacing="3" border="0" width="100%" style="color: #ffffff">
                       <tr>
                         <td>
-                          <a-button type="primary" style="width: 65px" onmousedown="mouseDownPTZControl(5);"
-                                    onmouseup="mouseUpPTZControl();">左上
+                          <a-button type="primary" onmousedown="mouseDownPTZControl(5);"
+                                    onmouseup="mouseUpPTZControl();" block>左上
                           </a-button>
                         </td>
                         <td>
-                          <a-button type="primary" style="width: 65px" onmousedown="mouseDownPTZControl(1);"
-                                    onmouseup="mouseUpPTZControl();">上
+                          <a-button type="primary" onmousedown="mouseDownPTZControl(1);"
+                                    onmouseup="mouseUpPTZControl();" block>上
                           </a-button>
                         </td>
                         <td>
-                          <a-button type="primary" style="width: 65px" onmousedown="mouseDownPTZControl(7);"
-                                    onmouseup="mouseUpPTZControl();">右上
+                          <a-button type="primary" onmousedown="mouseDownPTZControl(7);"
+                                    onmouseup="mouseUpPTZControl();" block>右上
                           </a-button>
                         </td>
                       <tr>
                         <td>
-                          <a-button type="primary" style="width: 65px" onmousedown="mouseDownPTZControl(3);"
-                                    onmouseup="mouseUpPTZControl();">左
+                          <a-button type="primary" onmousedown="mouseDownPTZControl(3);"
+                                    onmouseup="mouseUpPTZControl();" block>左
                           </a-button>
                         </td>
                         <td>
-                          <a-button type="primary" style="width: 65px" onclick="mouseDownPTZControl(9);">自动</a-button>
+                          <a-button type="primary" onclick="mouseDownPTZControl(9);" block>自动</a-button>
                         </td>
                         <td>
-                          <a-button type="primary" style="width: 65px" onmousedown="mouseDownPTZControl(4);"
-                                    onmouseup="mouseUpPTZControl();">右
+                          <a-button type="primary" onmousedown="mouseDownPTZControl(4);"
+                                    onmouseup="mouseUpPTZControl();" block>右
                           </a-button>
                         </td>
                       </tr>
                       <tr>
                         <td>
-                          <a-button type="primary" style="width: 65px" onmousedown="mouseDownPTZControl(6);"
-                                    onmouseup="mouseUpPTZControl();">左下
+                          <a-button type="primary" onmousedown="mouseDownPTZControl(6);"
+                                    onmouseup="mouseUpPTZControl();" block>左下
                           </a-button>
                         </td>
                         <td>
-                          <a-button type="primary" style="width: 65px" onmousedown="mouseDownPTZControl(2);"
-                                    onmouseup="mouseUpPTZControl();">下
+                          <a-button type="primary" onmousedown="mouseDownPTZControl(2);"
+                                    onmouseup="mouseUpPTZControl();" block>下
                           </a-button>
                         </td>
                         <td>
-                          <a-button type="primary" style="width: 65px" onmousedown="mouseDownPTZControl(8);"
-                                    onmouseup="mouseUpPTZControl();">右下
+                          <a-button type="primary" onmousedown="mouseDownPTZControl(8);"
+                                    onmouseup="mouseUpPTZControl();" block>右下
                           </a-button>
                         </td>
                       </tr>
                     </table>
                   </a-col>
                   <a-col class="gutter-row" :span="8">
-                    <table cellpadding="1" cellspacing="3" border="0">
+                    <table cellpadding="3" cellspacing="3" border="0" width="100%" style="color: #ffffff">
                       <tr>
-                        <td style="color: #ffffff">
+                        <td>
                           云台速度
                         </td>
                         <td>
-                          <a-select id="ptzspeed" defaultValue="1" style="width: 100px">
+                          <a-select id="ptzspeed" defaultValue="1" style="width: 100%">
                             <a-select-option value="1">1</a-select-option>
                             <a-select-option value="2">2</a-select-option>
                             <a-select-option value="3">3</a-select-option>
@@ -319,65 +336,65 @@
                         </td>
                       </tr>
                       <tr>
-                        <td style="color: #ffffff">
+                        <td>
                           预置点号
                         </td>
                         <td>
-                          <a-input v-decorator="['serverport']" style="width: 100px;"></a-input>
+                          <a-input v-decorator="['serverport']"></a-input>
                         </td>
                       </tr>
                       <tr>
                         <td>
-                          <a-button type="primary" style="width: 65px" onclick="clickSetPreset();">设置
+                          <a-button type="primary" onclick="clickSetPreset();" block>设置
                           </a-button>
                         </td>
                         <td>
-                          <a-button type="primary" style="width: 65px" onclick="clickGoPreset();">调用
+                          <a-button type="primary" onclick="clickGoPreset();" block>调用
                           </a-button>
                         </td>
                       </tr>
                     </table>
                   </a-col>
                   <a-col class="gutter-row" :span="7">
-                    <table cellpadding="1" cellspacing="3" border="0">
+                    <table cellpadding="3" cellspacing="3" border="0" width="100%" style="color: #ffffff">
                       <tr>
                         <td>
-                          <a-button type="primary" style="width: 70px" onmousedown="PTZZoomIn()"
-                                    onmouseup="PTZZoomStop()">
+                          <a-button type="primary" onmousedown="PTZZoomIn()"
+                                    onmouseup="PTZZoomStop()" block>
                             变倍+
                           </a-button>
                         </td>
                         <td>
-                          <a-button type="primary" style="width: 70px" onmousedown="PTZZoomout()"
-                                    onmouseup="PTZZoomStop()">
+                          <a-button type="primary" onmousedown="PTZZoomout()"
+                                    onmouseup="PTZZoomStop()" block>
                             变倍-
                           </a-button>
                         </td>
 
                       <tr>
                         <td>
-                          <a-button type="primary" style="width: 70px" onmousedown="PTZFocusIn()"
-                                    onmouseup="PTZFoucusStop()">
+                          <a-button type="primary" onmousedown="PTZFocusIn()"
+                                    onmouseup="PTZFoucusStop()" block>
                             变焦+
                           </a-button>
                         </td>
                         <td>
-                          <a-button type="primary" style="width: 70px" onmousedown="PTZFoucusOut()"
-                                    onmouseup="PTZFoucusStop()">
+                          <a-button type="primary" onmousedown="PTZFoucusOut()"
+                                    onmouseup="PTZFoucusStop()" block>
                             变焦-
                           </a-button>
                         </td>
                       </tr>
                       <tr>
                         <td>
-                          <a-button type="primary" style="width: 70px" onmousedown="PTZIrisIn()"
-                                    onmouseup="PTZIrisStop()">
+                          <a-button type="primary" onmousedown="PTZIrisIn()"
+                                    onmouseup="PTZIrisStop()" block>
                             光圈+
                           </a-button>
                         </td>
                         <td>
-                          <a-button type="primary" style="width: 70px" onmousedown="PTZIrisOut()"
-                                    onmouseup="PTZIrisStop()">
+                          <a-button type="primary" onmousedown="PTZIrisOut()"
+                                    onmouseup="PTZIrisStop()" block>
                             光圈-
                           </a-button>
                         </td>
@@ -393,13 +410,11 @@
           <div class="gutter-box">
             <div class="preview">
               <a-card size="small" title="预览">
-                <table cellpadding="3" cellspacing="3" border="0">
+                <table cellpadding="3" cellspacing="3" border="0" width="100%" style="color: #ffffff">
                   <tr>
-                    <td style="color: #ffffff">码流类型</td>
-                  </tr>
-                  <tr>
-                    <td colspan="3">
-                      <a-select id="streamtype" defaultValue="1" style="width: 110px">
+                    <td>码流类型</td>
+                    <td>
+                      <a-select id="streamtype" defaultValue="1" style="width: 100%">
                         <a-select-option value="1">主码流</a-select-option>
                         <a-select-option value="2">子码流</a-select-option>
                         <a-select-option value="3">第三码流</a-select-option>
@@ -407,135 +422,120 @@
                       </a-select>
                     </td>
                     <td>
-                      <a-button type="primary" style="width: 110px" onclick="clickStartRealPlay();">
+
+                    </td>
+                    <td>
+                      <a-button type="primary" onclick="clickStartRealPlay();" block>
                         开始预览
                       </a-button>
                     </td>
                     <td>
-                      <a-button type="primary" style="width: 110px" onclick="clickStopRealPlay();">
+                      <a-button type="primary" onclick="clickStopRealPlay();" block>
                         停止预览
                       </a-button>
                     </td>
                   </tr>
                   <tr>
-                    <td colspan="2" style="color: #ffffff">音量（范围：0~100）</td>
-                  </tr>
-                  <tr>
+                    <td>音量（0~100）</td>
                     <td>
                       <a-input v-decorator="['volume']" id="volume" value="50" maxlength="3"
-                               style="width: 110px;"></a-input>
+                      ></a-input>
                     </td>
-                    <td colspan="2">
-                      <a-button type="primary" style="width: 110px" onclick="clickSetVolume();">
+                    <td>
+                      <a-button type="primary" nclick="clickSetVolume();" block>
                         设置
                       </a-button>
                     </td>
                     <td>
-                      <a-button type="primary" style="width: 110px" onclick="clickOpenSound();">
+                      <a-button type="primary" onclick="clickOpenSound();" block>
                         打开声音
                       </a-button>
                     </td>
                     <td>
-                      <a-button type="primary" style="width: 110px" onclick="clickCloseSound();">
+                      <a-button type="primary" onclick="clickCloseSound();" block>
                         关闭声音
                       </a-button>
                     </td>
                   </tr>
                   <tr>
-                    <td style="color: #ffffff">对讲通道</td>
-                  </tr>
-                  <tr>
+                    <td>对讲通道</td>
                     <td>
-                      <a-select id="audiochannels" defaultValue="1" style="width: 110px">
+                      <a-select id="audiochannels" defaultValue="1" style="width: 100%">
                         <a-select-option value="1">主码流</a-select-option>
                         <a-select-option value="2">子码流</a-select-option>
                         <a-select-option value="3">第三码流</a-select-option>
                         <a-select-option value="4">转码码流</a-select-option>
                       </a-select>
                     </td>
-                    <td colspan="2">
-                      <a-button type="primary" style="width: 110px" onclick="clickGetAudioInfo();">
+                    <td>
+                      <a-button type="primary" onclick="clickGetAudioInfo();" block>
                         获取通道
                       </a-button>
                     </td>
                     <td>
-                      <a-button type="primary" style="width: 110px" onclick="clickStartVoiceTalk();">
+                      <a-button type="primary" onclick="clickStartVoiceTalk();" block>
                         开始对讲
                       </a-button>
                     </td>
                     <td>
-                      <a-button type="primary" style="width: 110px" onclick="clickStopVoiceTalk();">
+                      <a-button type="primary" onclick="clickStopVoiceTalk();" block>
                         停止对讲
                       </a-button>
                     </td>
                   </tr>
                   <tr>
                     <td>
-                      <a-button type="primary" style="width: 110px" onclick="clickCapturePic();">
+                      <a-button type="primary" onclick="clickCapturePic();" block>
                         抓图
                       </a-button>
                     </td>
                     <td>
-                      <a-button type="primary" style="width: 110px" onclick="clickStartRecord('realplay');">
+                      <a-button type="primary" onclick="clickStartRecord('realplay');" block>
                         开始录像
                       </a-button>
                     </td>
                     <td>
-                      <a-button type="primary" style="width: 110px" onclick="clickStopRecord('realplay');">
+                      <a-button type="primary" onclick="clickStopRecord('realplay');" block>
                         停止录像
                       </a-button>
                     </td>
                   </tr>
                   <tr>
                     <td>
-                      <a-button type="primary" style="width: 110px" onclick="clickEnableEZoom();">
+                      <a-button type="primary" onclick="clickEnableEZoom();" block>
                         启用电子放大
                       </a-button>
                     </td>
                     <td>
-                      <a-button type="primary" style="width: 110px" onclick="clickDisableEZoom();">
+                      <a-button type="primary" onclick="clickDisableEZoom();" block>
                         禁用电子放大
                       </a-button>
                     </td>
                     <td>
-                      <a-button type="primary" style="width: 110px" onclick="clickEnable3DZoom();">
+                      <a-button type="primary" onclick="clickEnable3DZoom();" block>
                         启用3D放大
                       </a-button>
                     </td>
                     <td>
-                      <a-button type="primary" style="width: 110px" onclick="clickDisable3DZoom();">
+                      <a-button type="primary" onclick="clickDisable3DZoom();" block>
                         禁用3D放大
                       </a-button>
                     </td>
                     <td>
-                      <a-button type="primary" style="width: 110px" onclick="clickFullScreen();">
+                      <a-button type="primary" onclick="clickFullScreen();" block>
                         全屏
                       </a-button>
                     </td>
                   </tr>
                   <tr>
-                    <td style="color: #ffffff">分辨率</td>
-                  </tr>
-                  <tr>
+                    <td>分辨率</td>
                     <td colspan="2">
-                      <!--<a-row :gutter="8">-->
-                      <!--<a-col :span="6">-->
-                      <!--<a-input defaultValue="0571" />-->
-                      <!--</a-col>-->
-                      <!--<a-col :span="2">-->
-                      <!--*-->
-                      <!--</a-col>-->
-                      <!--<a-col :span="6">-->
-                      <!--<a-input defaultValue="26888888" />-->
-                      <!--</a-col>-->
-                      <!--</a-row>-->
-                      <a-input-group>
-                        <a-input style="width: 100px; text-align: center;"/>
-                        <a-input style="width: 100px; text-align: center;"/>
-                      </a-input-group>
+                      <a-input style="width: 100px; text-align: center;"/>
+                      <a-icon type="close"/>
+                      <a-input style="width: 100px; text-align: center;"/>
                     </td>
                     <td>
-                      <a-button type="primary" style="width: 110px" onclick="clickDeviceCapturePic();">
+                      <a-button type="primary" onclick="clickDeviceCapturePic();" block>
                         设备抓图
                       </a-button>
                     </td>
@@ -545,8 +545,117 @@
             </div>
             <div class="playback">
               <a-card size="small" title="回放">
-                <table>
-
+                <table cellpadding="3" cellspacing="3" border="0" width="100%" style="color: #ffffff">
+                  <tr>
+                    <td>码流类型</td>
+                    <td>
+                      <a-select id="record_streamtype" defaultValue="1" style="width: 100%">
+                        <a-select-option value="1">主码流</a-select-option>
+                        <a-select-option value="2">子码流</a-select-option>
+                        <!--<a-select-option value="3">第三码流</a-select-option>-->
+                        <!--<a-select-option value="4">转码码流</a-select-option>-->
+                      </a-select>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>开始时间</td>
+                    <td colspan="2">
+                      <a-input v-decorator="['starttime']" id="starttime" value="2013-12-10 00:00:00"></a-input>
+                    </td>
+                    <td colspan="2">
+                      （时间格式：2013-11-11 12:34:56）
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>结束时间</td>
+                    <td colspan="2">
+                      <a-input v-decorator="['endtime']" id="endtime" value="2013-12-11 23:59:59"></a-input>
+                    </td>
+                    <td>
+                      <a-button type="primary" onclick="clickRecordSearch(0);" block>
+                        搜索
+                      </a-button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="5">
+                      <div id="searchdiv" class="searchdiv" style="height: 200px;background: #dddddd">
+                        <table id="searchlist" class="searchlist" cellpadding="0" cellspacing="0" border="0"></table>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <a-button type="primary" onclick="clickStartPlayback();" block>
+                        开始回放
+                      </a-button>
+                    </td>
+                    <td>
+                      <a-button type="primary" onclick="clickStopPlayback();" block>
+                        倒放
+                      </a-button>
+                    </td>
+                    <td>
+                      <a-button type="primary" onclick="clickFrame();" block>
+                        单帧
+                      </a-button>
+                    </td>
+                    <td>
+                      <a-button type="primary" onclick="clickStopPlayback();" block>
+                        倒放
+                      </a-button>
+                    </td>
+                    <td>
+                      <a-checkbox id="transstream" @change="onChange" style="color: #ffffff">启用转码码流</a-checkbox>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <a-button type="primary" onclick="clickPause();" block>
+                        暂停
+                      </a-button>
+                    </td>
+                    <td>
+                      <a-button type="primary" onclick="clickResume();" block>
+                        恢复
+                      </a-button>
+                    </td>
+                    <td>
+                      <a-button type="primary" onclick="clickPlaySlow();" block>
+                        慢放
+                      </a-button>
+                    </td>
+                    <td>
+                      <a-button type="primary" onclick="clickPlayFast();" block>
+                        快放
+                      </a-button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <a-button type="primary" onclick="clickCapturePic();" block>
+                        抓图
+                      </a-button>
+                    </td>
+                    <td>
+                      <a-button type="primary" onclick="clickStartRecord('playback');" block>
+                        开始剪辑
+                      </a-button>
+                    </td>
+                    <td>
+                      <a-button type="primary" onclick="clickStopRecord('playback');" block>
+                        停止剪辑
+                      </a-button>
+                    </td>
+                    <td>
+                      <a-button type="primary" onclick="clickGetOSDTime();" block>
+                        OSD时间
+                      </a-button>
+                    </td>
+                    <td>
+                      <a-input id="osdtime" readonly/>
+                    </td>
+                  </tr>
                 </table>
               </a-card>
             </div>
@@ -566,45 +675,51 @@
             </div>
             <div class="maintain">
               <a-card size="small" title="系统维护">
-                <table style="width: 100%;border-collapse:separate; border-spacing:0px 10px;">
+                <table cellpadding="3" cellspacing="3" border="0" width="100%" style="color: #ffffff">
                   <tr>
                     <td>
-                      <a-button type="primary" @click="clickExportDeviceConfig">
+                      <a-button type="primary" @click="clickExportDeviceConfig" block>
                         导出配置文件
                       </a-button>
-                      <a-button type="primary" @click="clickCheckPluginVersion">
+                    </td>
+                    <td>
+                      <a-button type="primary" @click="clickCheckPluginVersion" block>
                         检查插件版本
                       </a-button>
-                      <a-button type="primary" @click="clickRemoteConfig">
+                    </td>
+                    <td>
+                      <a-button type="primary" @click="clickRemoteConfig" block>
                         远程配置库
                       </a-button>
-                      <a-button type="primary" @click="clickRestoreDefault">
+                    </td>
+                    <td>
+                      <a-button type="primary" @click="clickRestoreDefault" block>
                         恢复默认参数
                       </a-button>
                     </td>
                   </tr>
-                  <tr style="margin-top: 10px">
-                    <td>
+                  <tr>
+                    <td colspan="3">
                       <a-input v-decorator="['playbackFilePath']" @click="clickOpenFileDlg('configFile', 1)"
                                disabled>
                         <a-icon slot="addonAfter" type="folder-open" style="cursor: pointer"/>
                       </a-input>
                     </td>
                     <td>
-                      <a-button type="primary" @click="clickImportDeviceConfig">
+                      <a-button type="primary" @click="clickImportDeviceConfig" block>
                         导入配置文件
                       </a-button>
                     </td>
                   </tr>
                   <tr>
-                    <td>
+                    <td colspan="3">
                       <a-input v-decorator="['playbackFilePath']" @click="clickOpenFileDlg('upgradeFile', 1)"
                                disabled>
                         <a-icon slot="addonAfter" type="folder-open" style="cursor: pointer"/>
                       </a-input>
                     </td>
                     <td>
-                      <a-button type="primary" @click="clickStartUpgrade">
+                      <a-button type="primary" @click="clickStartUpgrade" block>
                         升级
                       </a-button>
                     </td>
@@ -621,35 +736,43 @@
                   @submit=""
                   layout="inline"
                 >
-                  <table style="width: 100%;">
+                  <table cellpadding="3" cellspacing="3" border="0" width="100%" style="color: #ffffff">
                     <tr>
                       <td>
-                        <a-form-item label="模式">
-                          <a-select v-decorator="['devicemode',{initialValue:'IPServer'}]" style="width: 120px">
-                            <a-select-option value="IPServer">IPServer</a-select-option>
-                            <a-select-option value="HiDDNS">HiDDNS</a-select-option>
-                          </a-select>
-                        </a-form-item>
+                        模式
                       </td>
                       <td>
-                        <a-form-item label="服务器地址">
-                          <a-input v-decorator="['serveraddress']"></a-input>
-                        </a-form-item>
-                      </td>
-                      <td>
-                        <a-form-item label="端口号">
-                          <a-input v-decorator="['serverport']"></a-input>
-                        </a-form-item>
-                      </td>
-                      <td>
-                        <a-form-item label="设备标识">
-                          <a-input v-decorator="['deviceid']"></a-input>
-                        </a-form-item>
+                        <a-select v-decorator="['devicemode',{initialValue:'IPServer'}]" style="width: 100%">
+                          <a-select-option value="IPServer">IPServer</a-select-option>
+                          <a-select-option value="HiDDNS">HiDDNS</a-select-option>
+                        </a-select>
                       </td>
                     </tr>
                     <tr>
-                      <td colspan="4">
-                        <a-button type="primary" @click="clickGetDeviceIP">
+                      <td>
+                        服务器地址
+                      </td>
+                      <td>
+                        <a-input id="serveraddress" v-decorator="['serveraddress']"></a-input>
+                      </td>
+                      <td>
+                        端口号
+                      </td>
+                      <td>
+                        <a-input id="serverport" v-decorator="['serverport']"></a-input>
+                      </td>
+                    </tr>
+                    <tr>
+                    <tr>
+                      <td>
+                        设备标识
+                      </td>
+                      <td>
+                        <a-input v-decorator="['deviceid']"></a-input>
+                      </td>
+                      <td></td>
+                      <td>
+                        <a-button type="primary" @click="clickGetDeviceIP();">
                           获取设备IP
                         </a-button>
                       </td>
@@ -714,7 +837,7 @@
     },
     mounted() {
       // 初始化 webVideoCtrl 插件
-
+      this.initPlugin();
     },
     methods: {
       showDrawer() {
@@ -723,42 +846,84 @@
       hideDrawer() {
         this.drawervisible = false;
       },
-
-
-      videoInitPlugin() {
-        // 检查插件是否安装
-        let iRet = WebVideoCtrl.I_CheckPluginInstall();
-        // console.log('check the plugin result:');
-        // console.log(iRet);
-        // console.log(WebVideoCtrl);
-        if (iRet === -1) {
-          alert('未安装 WebComponentsKits.exe 插件。');
-          return
-        }
-        this.initPlugin();
-      },
+      // 初始化插件
       initPlugin() {
-        var that = this;
-
+        let self = this;
+        // 检查插件是否已经安装过
+        let iRet = WebVideoCtrl.I_CheckPluginInstall();
+        if (-1 == iRet) {
+          alert("您还未安装过插件，双击开发包目录里的WebComponentsKit.exe安装！");
+          return;
+        }
+        console.log(WebVideoCtrl)
+        // 初始化插件参数及插入插件
         WebVideoCtrl.I_InitPlugin(500, 300, {
-          bWndFull: true,//是否支持单窗口双击全屏，默I_CheckPluginInstall
+          bWndFull: true,     //是否支持单窗口双击全屏，默认支持 true:支持 false:不支持
+          iPackageType: 2,    //2:PS 11:MP4
           iWndowType: 2,
-          myCbSelWnd: function (xmlStr) { //自己新增的方法
-            var jsonObj = that.$x2js.xml2js(xmlStr);
-            var szInfo = "当前选择的窗口编号：" + jsonObj.RealPlayInfo.SelectWnd;
-            this.mySelectWnd = jsonObj.RealPlayInfo.SelectWnd;
-            console.log(szInfo);
+          bNoPlugin: true,
+          cbSelWnd: function (xmlDoc) {
+            g_iWndIndex = parseInt($(xmlDoc).find("SelectWnd").eq(0).text(), 10);
+            var szInfo = "当前选择的窗口编号：" + g_iWndIndex;
+            showCBInfo(szInfo);
+          },
+          cbDoubleClickWnd: function (iWndIndex, bFullScreen) {
+            var szInfo = "当前放大的窗口编号：" + iWndIndex;
+            if (!bFullScreen) {
+              szInfo = "当前还原的窗口编号：" + iWndIndex;
+            }
+            showCBInfo(szInfo);
+
+            // 此处可以处理单窗口的码流切换
+            /*if (bFullScreen) {
+                clickStartRealPlay(1);
+            } else {
+                clickStartRealPlay(2);
+            }*/
+          },
+          cbEvent: function (iEventType, iParam1, iParam2) {
+            if (2 == iEventType) {// 回放正常结束
+              showCBInfo("窗口" + iParam1 + "回放结束！");
+            } else if (-1 == iEventType) {
+              showCBInfo("设备" + iParam1 + "网络错误！");
+            } else if (3001 == iEventType) {
+              clickStopRecord(g_szRecordType, iParam1);
+            }
+          },
+          cbRemoteConfig: function () {
+            showCBInfo("关闭远程配置库！");
           },
           cbInitPluginComplete: function () {
             WebVideoCtrl.I_InsertOBJECTPlugin("divPlugin");
+
             // 检查插件是否最新
-            if (WebVideoCtrl.I_CheckPluginVersion() === -1) {
+            if (-1 == WebVideoCtrl.I_CheckPluginVersion()) {
               alert("检测到新的插件版本，双击开发包目录里的WebComponentsKit.exe升级！");
               return;
             }
           }
         });
+
+        // 窗口事件绑定
+        $(window).bind({
+          resize: function () {
+            var $Restart = $("#restartDiv");
+            if ($Restart.length > 0) {
+              var oSize = getWindowSize();
+              $Restart.css({
+                width: oSize.width + "px",
+                height: oSize.height + "px"
+              });
+            }
+          }
+        });
+
+        //初始化日期时间
+        var szCurTime = dateFormat(new Date(), "yyyy-MM-dd");
+        $("#starttime").val(szCurTime + " 00:00:00");
+        $("#endtime").val(szCurTime + " 23:59:59");
       },
+
       // 显示操作信息
       showOPInfo(szInfo, status, xmlDoc) {
         var szTip = "<div>" + dateFormat(new Date(), "yyyy-MM-dd hh:mm:ss") + " " + szInfo;
@@ -2742,39 +2907,38 @@
   .plugin {
     width: 100%;
     height: 60%;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     border: 1px solid #ddd;
   }
 
   .ptz {
     width: 100%;
-    height: 30%;
-
+    margin-bottom: 10px;
   }
 
   .preview {
     width: 100%;
-    height: 50%;
+    margin-bottom: 10px;
   }
 
   .playback {
     width: 100%;
-    height: 50%;
+    margin-bottom: 10px;
   }
 
   .ipchannel {
     width: 100%;
-    height: 40%;
+    margin-bottom: 10px;
   }
 
   .maintain {
     width: 100%;
-    height: 30%;
+    margin-bottom: 10px;
   }
 
   .ipparse {
     width: 100%;
-    height: 30%;
+    margin-bottom: 10px;
   }
 
   /deep/ .ant-card {

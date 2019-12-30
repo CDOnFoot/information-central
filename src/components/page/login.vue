@@ -6,7 +6,7 @@
 
       <div class="form">
         <div class="form-detail">
-          <div class="title">信 息 中 心</div>
+          <div class="title">数据中心动环监控平台</div>
           <div class="form-content">
             <a-form :form="form" @submit="handleSubmit" id="components-form-demo-normal-login">
               <div class="components-input-demo-presuffix">
@@ -283,7 +283,9 @@ export default {
             //调取数据成功
             if (res.data) {
               if (res.status === 200) {
-                self.userInfo = res.data;
+                // self.userInfo = res.data;
+                // production environment 需要从报文 headers 拿 token
+                self.userInfo = res.headers;
                 self.$common.setCookie(
                   "dvptToken",
                   self.userInfo.token,

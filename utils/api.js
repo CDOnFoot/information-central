@@ -8,7 +8,8 @@ export default {
   /**
    * @variation new API
    */
-  loginIn: ':81/Authorization/api/Authentication/LoginForWeb',
+  loginIn: ':81/Authorization/api/Authentication/LoginForWeb', // development API
+  // loginIn: ':81/Authorization/api/Authentication/Login', // production server API
 
   getUsers: "/config/Users?$filter=status ne 'Disable'",
 

@@ -1365,7 +1365,6 @@
       },
 
       initPoint() {
-        console.log(this.eqName)
         this.getPointInformations(this.eqName).then((res) => {
           console.log(res);
 
@@ -1579,7 +1578,7 @@
   .pointInfo {
     width: 100%;
     height: 100%;
-    padding: 5% 10%;
+    padding: 5% 20% 5% 10%;
   }
 
 
@@ -1805,6 +1804,13 @@
   /deep/ .ant-table-row > td {
     padding: 4px;
   }
+
+  /deep/ .ant-table-placeholder {
+    color: #ffffff;
+    background: transparent;
+    border-bottom: none;
+  }
+
 
   @keyframes flipInX {
     from {

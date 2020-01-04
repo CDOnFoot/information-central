@@ -124,8 +124,8 @@ export default {
           {
             type: "gauge",
             radius: "50%",
-            startAngle: 260,
-            endAngle: -80,
+            startAngle: 268,
+            endAngle: -85,
 
             data: [
               {
@@ -165,6 +165,11 @@ export default {
       };
 
       chartInit.setOption(option);
+      setInterval(() => {
+        const value = Math.random() * 100;
+        chartInit.clear();
+        chartInit.setOption(option);
+      }, 4000);
     }
   }
 };

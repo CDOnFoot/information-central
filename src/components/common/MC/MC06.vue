@@ -123,7 +123,11 @@ export default {
         ]
       };
 
-      chartInit.setOption(option)
+      chartInit.setOption(option);
+      setInterval(() => {
+        chartInit.clear();
+        chartInit.setOption(option);
+      }, 4000)
     }
   }
 };

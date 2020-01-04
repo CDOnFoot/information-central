@@ -224,6 +224,12 @@ export default {
       };
 
       chartInit.setOption(option);
+      // 增加图表数据的动态改变
+      setInterval(() => {
+        const value = Math.random() * 3;
+        chartInit.clear();
+        chartInit.setOption(option);
+      }, 4000);
     }
   }
 };

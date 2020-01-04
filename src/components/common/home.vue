@@ -269,7 +269,7 @@
         return false;
       };
       // 清除缓存的时间
-      clearInterval(this.timeInterval)
+      clearInterval(this.timeInterval);
         this.timeInterval = setInterval(function(){
           self.timeStamp = self.$common.timestampToTime(new Date());
         }, 1000);
@@ -293,7 +293,8 @@
       equipmentListRequest (callback) {
         const that = this;
         this.$http.get(that.$api.monitorEquipments).then(response => {
-          // console.log(response);
+          console.log("all equipment:");
+          console.log(response);
           if (response.data) {
             // 所有设备 list
             callback(response.data.value);
@@ -314,9 +315,19 @@
         let usedEquipment = [];
         // 筛选需要用到的设备
         allEquipment.forEach((value) => {
-          if (value.Description.includes('多功能传感器') ||
-            value.Description.includes('ETH')/* ||
-                value.Description.includes('门禁执行器')*/) {
+          if (value.Name.includes('多功能传感器') ||
+            value.Name.includes('ETH') ||
+            value.Name.includes('门禁执行器') ||
+            value.Name.includes('交流执行器') ||
+            value.Name.includes('天窗执行器') ||
+            value.Name.includes('eLight') ||
+            value.Name.includes('水浸传感器') ||
+            value.Name.includes('温湿度传感器') ||
+            value.Name.includes('风冷行级精密空调') ||
+            value.Name.includes('ECC800') ||
+            value.Name.includes('配电柜') ||
+            value.Name.includes('配电柜输入') ||
+            value.Name.includes('配电柜输出')) {
             usedEquipment.push(value);
           }
         });
@@ -345,11 +356,11 @@
                 // 开始比较
                 usedEquipment.forEach((values) => {
                   allEquipmentPointValue.forEach((value, index) => {
-                    if (value.Ord.includes(values.Name)) {
+                    if (value.Name.includes(values.Code)) {
                       usedPoints.splice(index, 1, {});
                       if (allPointsValue[index] !== null) {
                         // 当前点名称
-                        usedPoints[index].name = values.Description;
+                        usedPoints[index].name = values.Name;
                         // 当前点描述
                         usedPoints[index].pointName = value.DisplayName;
                         // 是否报警
@@ -391,7 +402,10 @@
                  * @description 使用 Vuex 存储处理完成的点值 list.
                  * @define 1、组件接收的 props 不能修改；2、Vuex 不能直接存储 list ，该解决方案先将 list 转成 JSON 字符串，使用 Vuex get 时再转成对象.
                  */
-                that.$store.commit('storePoints', usedPoints)
+                that.$store.commit('storePoints', usedPoints);
+                setTimeout(()=>{
+                  that.loadFlag= false;
+                },1000);
               }
             })
           }
@@ -444,9 +458,6 @@
       visualizationInfo:function(data){
         // console.log(' -------- current getting data:')
         // console.log(data)
-        setTimeout(()=>{
-          this.loadFlag= false;
-        },1000);
         this.visualList = JSON.parse(JSON.stringify(data.menuList));
         this.visualHomeList = JSON.parse(JSON.stringify(data.menuList));
         this.visualParamList = JSON.parse(JSON.stringify(data.menuList));

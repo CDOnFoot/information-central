@@ -1330,24 +1330,31 @@
         let res = [];
         let obj = {};
         for (let i = 0; i < objArr.length; i++) {
-          if (!obj[objArr[i].Code]) {
-            let newObj = {
-              Code: objArr[i].Code,
-              // DisplayName: objArr[i].Code,
-              DisplayName: objArr[i].Description == 'ECC800' ? 'ECC800' : objArr[i].Description.replace(/\d+/g, ''),
-              Equipments: [],
-            };
-            newObj.Equipments.push(objArr[i]);
-            res.push(newObj);
-            this.rootSubmenuKeys.push(objArr[i].Code);
-            obj[objArr[i].Code] = true;
-          } else {
-            res.forEach(function (item) {
-              if (item.Code == objArr[i].Code) {
-                item.Equipments.push(objArr[i]);
-              }
-            });
+
+          let pattern = new RegExp("[\u4E00-\u9FA5]+");
+          if (pattern.test(objArr[i].Name)) {
+
+            if (!obj[objArr[i].Code]) {
+              let newObj = {
+                Code: objArr[i].Code,
+                // DisplayName: objArr[i].Code,
+                DisplayName: objArr[i].Description == 'ECC800' ? 'ECC800' : objArr[i].Description.replace(/\d+/g, ''),
+                Equipments: [],
+              };
+              newObj.Equipments.push(objArr[i]);
+              res.push(newObj);
+              this.rootSubmenuKeys.push(objArr[i].Code);
+              obj[objArr[i].Code] = true;
+            } else {
+              res.forEach(function (item) {
+                if (item.Code == objArr[i].Code) {
+                  item.Equipments.push(objArr[i]);
+                }
+              });
+            }
+
           }
+
         }
         this.openKeys.push(this.rootSubmenuKeys[0]);
         return res;

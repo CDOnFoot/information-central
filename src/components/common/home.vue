@@ -359,7 +359,7 @@
                     usedPoints.splice(index, 1, {});
                     if (allPointsValue[index] !== null) {
                       // 当前点名称
-                      usedPoints[index].name = value.Name;
+                      usedPoints[index].name = value.Name.match(/[\u4e00-\u9fa5]/g).join("");
                       // 当前点描述
                       usedPoints[index].pointName = value.DisplayName;
                       // 是否报警

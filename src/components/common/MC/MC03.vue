@@ -31,7 +31,9 @@
   export default {
     name: "MC03",
     data() {
-      return {};
+      return {
+        statusContainer_2: ''
+      };
     },
     props: ["mcStatus", "mcTitle", "mcId"],
     watch: {
@@ -56,16 +58,25 @@
     methods: {
       initChart() {
         let chartInit = this.$echarts.init(document.getElementById("chart-id"));
+        const that = this;
+        const pointsList = JSON.parse(that.$store.getters.getPointsList);
 
         // 横轴模板数据 - 日期
-        const dateTemplate = new Date();
+        /*const dateTemplate = new Date();
         const date_0 = dateTemplate.getDate() + "日";
         const date_1 = dateTemplate.getDate() - 1 + "日";
         const date_2 = dateTemplate.getDate() - 2 + "日";
         const date_3 = dateTemplate.getDate() - 3 + "日";
         const date_4 = dateTemplate.getDate() - 4 + "日";
         const date_5 = dateTemplate.getDate() - 5 + "日";
-        const date_6 = dateTemplate.getDate() - 6 + "日";
+        const date_6 = dateTemplate.getDate() - 6 + "日";*/
+        const date_0 = "多功能传感器1", value_0 = pointsList[208].pointValue;
+        const date_1 = "多功能传感器2", value_1 = pointsList[229].pointValue;
+        const date_2 = "多功能传感器3", value_2 = pointsList[250].pointValue;
+        const date_3 = "温湿度传感器1", value_3 = pointsList[587].pointValue;
+        const date_4 = "温湿度传感器2", value_4 = pointsList[610].pointValue;
+        const date_5 = "温湿度传感器3", value_5 = pointsList[633].pointValue;
+        const date_6 = "PUD8000", value_6 = pointsList[633].pointValue;
 
         // 配置项
         let option = {
@@ -81,7 +92,7 @@
               }
             },
             // 数据结构需要修改
-            data: [date_0, date_1, date_2, date_3, date_4, date_5, date_6].reverse()
+            data: [date_0, date_1, date_2, date_3, date_4, date_5]
           },
 
           yAxis: {
@@ -103,7 +114,7 @@
 
           series: [
             {
-              data: [6, 3, 4, 3, 2, 5, 1],
+              data: [value_0, value_1, value_2, value_3, value_4, value_5],
               type: "line",
               smooth: true,
               // symbol: "none",

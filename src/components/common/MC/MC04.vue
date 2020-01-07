@@ -322,13 +322,13 @@
                     </div>
                   </td>
                   <td>
-                    <a-popover title="水浸传感器">
+                    <!--<a-popover title="水浸传感器">
                       <template slot="content">
                         <p>{{ statusContainer[542].pointName }}：{{ statusContainer[542].pointValue }}</p>
                       </template>
-                      <!--<a-button type="primary"></a-button>-->
+                      &lt;!&ndash;<a-button type="primary"></a-button>&ndash;&gt;
                       <img src="../../../assets/img/main/设备点.png" alt="" width="20" height="24">
-                    </a-popover>
+                    </a-popover>-->
                   </td>
                   <td></td>
                 </tr>
@@ -404,13 +404,14 @@ export default {
     this.$('.exchange-module').hide();
 
     const statusList = this.$store.getters.getPointsList;
-    this.statusContainer = JSON.parse(statusList);
+    // this.statusContainer = JSON.parse(statusList);
     console.log('after JSON.parse:');
     console.log(JSON.parse(statusList));
   },
 
   created() {
-
+    const statusList = this.$store.getters.getPointsList;
+    this.statusContainer = JSON.parse(statusList);
   },
 
   methods: {

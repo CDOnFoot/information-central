@@ -6,7 +6,10 @@
       <div class="borde">{{mcTitle}}</div>
       <div :id="mcId" class="main-id">
         <div class="none-data">
-          模块八
+          <div class="">
+            <div class="PUD-module-0"></div>
+            <div class="PUD-module-1"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -17,7 +20,8 @@ export default {
   name: "MC08",
   data() {
     return {
-
+      totalCapacity: '', // 总功率
+      electricEnergy: '' // 电能
     };
   },
   props: ["mcStatus", "mcTitle", "mcId"],
@@ -59,4 +63,14 @@ export default {
   text-align: center;
   padding-top: 20px;
 }
+
+  .PUD-module-0 {
+    background: url("../../../assets/img/enterPel.png") no-repeat;
+    background-size: 100% 100%;
+  }
+
+  .PUD-module-1 {
+    background: url("../../../assets/img/outPel.png") no-repeat;
+    background-size: 100% 100%;
+  }
 </style>

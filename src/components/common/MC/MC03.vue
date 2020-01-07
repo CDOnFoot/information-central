@@ -70,21 +70,50 @@
         const date_4 = dateTemplate.getDate() - 4 + "日";
         const date_5 = dateTemplate.getDate() - 5 + "日";
         const date_6 = dateTemplate.getDate() - 6 + "日";*/
-        const date_0 = "多功能传感器1", value_0 = pointsList[208].pointValue;
-        const date_1 = "多功能传感器2", value_1 = pointsList[229].pointValue;
-        const date_2 = "多功能传感器3", value_2 = pointsList[250].pointValue;
-        const date_3 = "温湿度传感器1", value_3 = pointsList[587].pointValue;
-        const date_4 = "温湿度传感器2", value_4 = pointsList[610].pointValue;
-        const date_5 = "温湿度传感器3", value_5 = pointsList[633].pointValue;
+        const date_0 = "多功能传感器-1-", value_0 = pointsList[208].pointValue;
+        const date_1 = "多功能传感器-2-", value_1 = pointsList[229].pointValue;
+        const date_2 = "多功能传感器-3-", value_2 = pointsList[250].pointValue;
+        const date_3 = "温湿度传感器-1-", value_3 = pointsList[587].pointValue;
+        const date_4 = "温湿度传感器-2-", value_4 = pointsList[610].pointValue;
+        const date_5 = "温湿度传感器-3-", value_5 = pointsList[633].pointValue;
         const date_6 = "PUD8000", value_6 = pointsList[633].pointValue;
 
         // 配置项
         let option = {
+          // 提示框
+          tooltip: {
+            trigger: 'item',
+            // backgroundColor: '',
+            // borderColor: '',
+            axisPointer: {
+              type: 'line'
+            }
+          },
+
           xAxis: {
             type: "category",
             boundaryGap: false,
             axisLabel: {
-              color: "#fff"
+              color: "#fff",
+              // rotate: -40
+              formatter: function (value, index) {
+                let ret = "";
+                const maxLength = 3, valueLength = value.length;
+                const rowTimes = Math.ceil(valueLength/maxLength);
+                if (rowTimes > 1) {
+                  for (let i=0;i<rowTimes;i++) {
+                    let temp = "";
+                    const start = i * maxLength;
+                    const end = start + maxLength;
+
+                    temp = value.substring(start, end) + "\n";
+                    ret += temp;
+                  }
+                  return ret;
+                } else {
+                  return value;
+                }
+              }
             },
             axisLine: {
               lineStyle: {
@@ -115,6 +144,7 @@
           series: [
             {
               data: [value_0, value_1, value_2, value_3, value_4, value_5],
+              // data: [10, 43, 32, 55, 43, 12],
               type: "line",
               smooth: true,
               // symbol: "none",
@@ -262,7 +292,7 @@
     font-size: 14px;
     text-align: center;
     padding-top: 6px;
-    width: 98%;
-    height: 100%;
+    width: 96%;
+    height: 97%;
   }
 </style>

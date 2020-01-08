@@ -544,8 +544,10 @@
         self.loading = true;
         self.form.validateFields((err, values) => {
           if (!err) {
-            self.$http.get(self.$api.getCards).then(res => {
+            let url = "/ACS/Cardholders?$expand=role,department,badges($filter=Enable eq true) ";
+            self.$http.get(url).then(res => {
               self.tableData = res.data.value;
+              console.log(self.tableData);
               if (self.tableData.length == 0) {
                 self.tableData = testData;
               }
@@ -693,19 +695,20 @@
           let description = self.modalForm.Description;
           let enable = self.modalForm.Enable;
 
+
           param = {
-            Modified: new Date(),
-            IsDeleted: false,
-            Actived: new Date(),
-            Expired: new Date(),
-            Type: timeSheetType,
-            FirstName: "",
-            LastName: displayName,
-            Description: description,
-            IsBlocked: false,
-            Code: encoded,
-            Role: "",
-            Department: ""
+            "IsDeleted": false,
+            "Enable": true,
+            "Cardholder": '',
+            "Encoded": $("#cardCode").val().trim(),
+            "KeypadID": $("#cardPWD").val().trim(),
+            "BadgeTechnologyID": 0,
+            "Created": new Date(),
+            "BadgeLayoutID": 4,
+            "StampedId": 0,
+            "Modified": new Date(),
+            "Expire": new Date(),
+            "TimeSheetType": "staff",
           };
 
           console.log(param);

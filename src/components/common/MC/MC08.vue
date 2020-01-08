@@ -7,8 +7,31 @@
       <div :id="mcId" class="main-id">
         <div class="none-data">
           <div class="">
-            <div class="PUD-module-0"></div>
-            <div class="PUD-module-1"></div>
+            <div class="PUD-module-0">
+              <div class="module-value-popover">
+                <a-popover title="ETH插座1">
+                  <template slot="content">
+                    <p>是否坏点：{{}}</p>
+                  </template>
+                  <!--<a-button type="primary"></a-button>-->
+                  <!--<img src="../../../assets/img/main/设备点.png" alt="" width="20" height="24">-->
+                  <span>{{ totalCapacity.pointValue }}</span>
+                </a-popover>
+              </div>
+            </div>
+
+            <div class="PUD-module-1">
+              <div class="module-value-popover">
+                <a-popover title="ETH插座1">
+                  <template slot="content">
+                    <p>是否坏点：{{}}</p>
+                  </template>
+                  <!--<a-button type="primary"></a-button>-->
+                  <!--<img src="../../../assets/img/main/设备点.png" alt="" width="20" height="24">-->
+                  <span>{{ electricEnergy.pointValue }}</span>
+                </a-popover>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -39,7 +62,12 @@ export default {
   },
   mounted() {
   },
-  created() {},
+  created() {
+    // 必须在组件挂载前拿到数据
+    const pointsList = this.$store.getters.getPointsList;
+    this.totalCapacity = JSON.parse(pointsList)[3513]; // 总输入功率
+    this.electricEnergy = JSON.parse(pointsList)[3512]; // 总输入电能
+  },
   methods: {
   }
 };

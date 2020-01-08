@@ -11,11 +11,11 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/apis':{
-        target:'ip', //域名
-        changeOrigin:true,//是否跨域
+      '/api':{
+        target:'http://open.ys7.com', // 域名 - 萤石开放平台域名必须直接使用 axios 访问 localhost 转代理
+        changeOrigin:true, // 是否跨域
         pathRewrite:{
-          '^/apis':'' //需要rewrite重写的
+          '^/api':'' // 需要rewrite重写的
         }
       }
     },

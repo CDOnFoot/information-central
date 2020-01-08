@@ -39,8 +39,15 @@
       </a-form>
     </div>
     <div class="table">
-      <a-table :columns="columns" :dataSource="filterList" :pagination="pagination" :loading="loading"
-               :defaultExpandAllRows="expandAllRows" size="small"></a-table>
+      <a-table
+        :columns="columns"
+        :dataSource="filterList"
+        :pagination="pagination"
+        :loading="loading"
+        :defaultExpandAllRows="expandAllRows"
+        size="small"
+      >
+      </a-table>
     </div>
   </div>
 </template>

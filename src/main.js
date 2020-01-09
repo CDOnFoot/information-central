@@ -53,7 +53,8 @@ Vue.prototype.$api= api;
 Vue.prototype.$http= http;
 // 请求第三方 API 需使用原生 axios 访问 localhost 转代理
 Vue.prototype.$axios = axios;
-axios.defaults.baseURL = '/api';
+// axios.defaults.baseURL = '/api';
+Vue.prototype.$baseUrl = process.env.API_PORT;
 // jquery 继承原型链
 Vue.prototype.$ = $;
 // x2js 继承原型链

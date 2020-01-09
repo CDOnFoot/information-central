@@ -7,11 +7,13 @@
                height="350px"
                src="ezopen://open.ys7.com/D14931813/1.live"
                autoplay controls playsInline webkit-playsinLine></video>-->
-        <iframe src="https://open.ys7.com/ezopen/h5/iframe?url=ezopen://open.ys7.com/D14931813/2.live&autoplay=1&accessToken=at.0trb40gkdhomm5yn5aj3zfnb017vs7n5-4g2kk8g8lx-14k1r6k-ckuvbxzfy"
+        <!--<iframe src="https://open.ys7.com/ezopen/h5/iframe?url=ezopen://open.ys7.com/D14931813/2.live&autoplay=1&accessToken=at.0trb40gkdhomm5yn5aj3zfnb017vs7n5-4g2kk8g8lx-14k1r6k-ckuvbxzfy"-->
+        <iframe :src="ysUrl.ysUrl_0"
                 width="600" height="400" id="ysOpenDevice" allowfullscreen></iframe>
       </div>
       <div class="video-content-1">
-        <iframe src="https://open.ys7.com/ezopen/h5/iframe?url=ezopen://open.ys7.com/D14931813/3.live&autoplay=1&accessToken=at.0trb40gkdhomm5yn5aj3zfnb017vs7n5-4g2kk8g8lx-14k1r6k-ckuvbxzfy"
+        <!--<iframe src="https://open.ys7.com/ezopen/h5/iframe?url=ezopen://open.ys7.com/D14931813/3.live&autoplay=1&accessToken=at.0trb40gkdhomm5yn5aj3zfnb017vs7n5-4g2kk8g8lx-14k1r6k-ckuvbxzfy"-->
+        <iframe :src="ysUrl.ysUrl_1"
                 width="600" height="400" id="ysOpenDevice-1" allowfullscreen>
         </iframe>
       </div>
@@ -19,11 +21,13 @@
 
     <div class="video-area-1">
       <div class="video-content-2">
-        <iframe src="https://open.ys7.com/ezopen/h5/iframe?url=ezopen://open.ys7.com/D14931813/4.live&autoplay=1&accessToken=at.0trb40gkdhomm5yn5aj3zfnb017vs7n5-4g2kk8g8lx-14k1r6k-ckuvbxzfy"
+        <!--<iframe src="https://open.ys7.com/ezopen/h5/iframe?url=ezopen://open.ys7.com/D14931813/4.live&autoplay=1&accessToken=at.0trb40gkdhomm5yn5aj3zfnb017vs7n5-4g2kk8g8lx-14k1r6k-ckuvbxzfy"-->
+        <iframe :src="ysUrl.ysUrl_2"
                 width="600" height="400" id="ysOpenDevice-2" allowfullscreen></iframe>
       </div>
       <div class="video-content-3">
-        <iframe src="https://open.ys7.com/ezopen/h5/iframe?url=ezopen://open.ys7.com/D14931813/5.live&autoplay=1&accessToken=at.0trb40gkdhomm5yn5aj3zfnb017vs7n5-4g2kk8g8lx-14k1r6k-ckuvbxzfy"
+        <!--<iframe src="https://open.ys7.com/ezopen/h5/iframe?url=ezopen://open.ys7.com/D14931813/5.live&autoplay=1&accessToken=at.0trb40gkdhomm5yn5aj3zfnb017vs7n5-4g2kk8g8lx-14k1r6k-ckuvbxzfy"-->
+        <iframe :src="ysUrl.ysUrl_3"
                 width="600" height="400" id="ysOpenDevice-3" allowfullscreen></iframe>
       </div>
       <div class="video-content"></div>
@@ -49,18 +53,27 @@
         player: '',
         // 视频长宽 - 根据显示台数改变
         videoWidth: 600,
-        videoHeight: 400
+        videoHeight: 400,
+        // 动态获取 accessToken，拼接 url
+        ysUrl: {
+          ysUrl_0: '',
+          ysUrl_1: '',
+          ysUrl_2: '',
+          ysUrl_3: '',
+        },
+        accessTokenIn: ''
       }
     },
 
     // 在组件挂载前就必须拿到 token
-    beforeMount () {
+    created () {
       this.getAccessTokenIn();
     },
 
     mounted () {
       // 优先获取 accessToken 用于调用其他萤石官方 API
       // this.player = new EZUIKit.EZUIPlayer('myPlayer');
+      // 挂载完成在获取 DOM 节点操作视频组件
       let player = document.getElementById("ysOpenDevice").contentWindow;
       let player_1 = document.getElementById("ysOpenDevice-1").contentWindow;
       let player_2 = document.getElementById("ysOpenDevice-2").contentWindow;
@@ -68,20 +81,45 @@
     },
 
     methods: {
+      /**
+       * @function 获取 ys 平台连接视频的 token
+       */
       getAccessTokenIn () {
         const that = this;
         // 跨域
         let param = new FormData();
         param.append('appKey', '31b9d2360c7845ecaff4870f68e10b20');
         param.append('appSecret', '2b54e82f434c0667299b130f4d85e3f9');
-        /*this.$http.post(that.$api.getAccessToken, param).then(res => {
-          console.log(res)
-        })*/
-        this.$axios.post("/api/lapp/token/get", param)
+        // 使用原生 axios 访问 localhost 模拟 server 解决浏览器同源访问限制
+        this.$axios.post(that.$baseUrl + "/api/lapp/token/get", param)
           .then(res => {
-            console.log(res);
+            // console.log(res);
+            if (res.data.code === "200") {
+              const token = res.data.data.accessToken,
+                ysUrl = "https://open.ys7.com/ezopen/h5/iframe?url=ezopen://open.ys7.com/D14931813/",
+                tokenString = ".live&autoplay=1&accessToken=" + token;
+              that.ysUrl.ysUrl_0 = ysUrl + "2" + tokenString;
+              that.ysUrl.ysUrl_1 = ysUrl + "3" + tokenString;
+              that.ysUrl.ysUrl_2 = ysUrl + "4" + tokenString;
+              that.ysUrl.ysUrl_3 = ysUrl + "5" + tokenString;
+              that.$common.setCookie("ysAccessToken", res.data.data.accessToken, 6 * 24 * 60);
+            } else {
+              // 如果请求失败则使用 cookie 中缓存的 token
+              console.log("get token in cookie.");
+              const token = that.$common.getCookie("ysAccessToken"),
+                ysUrl = "https://open.ys7.com/ezopen/h5/iframe?url=ezopen://open.ys7.com/D14931813/",
+                tokenString = ".live&autoplay=1&accessToken=" + token;
+              that.ysUrl.ysUrl_0 = ysUrl + "2" + tokenString;
+              that.ysUrl.ysUrl_1 = ysUrl + "3" + tokenString;
+              that.ysUrl.ysUrl_2 = ysUrl + "4" + tokenString;
+              that.ysUrl.ysUrl_3 = ysUrl + "5" + tokenString;
+            }
+          })
+          .catch(err => {
+            console.log(err);
           })
       },
+
       startVideo () {
         // this.player.play();
       },

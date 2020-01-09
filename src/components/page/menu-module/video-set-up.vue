@@ -1,27 +1,30 @@
 <template>
   <div>
     <div class="video-area-0">
-      <div class="video-content">
+      <div class="video-content-0">
         <!--<video id="myPlayer"
                width="500px"
                height="350px"
                src="ezopen://open.ys7.com/D14931813/1.live"
                autoplay controls playsInline webkit-playsinLine></video>-->
-        <iframe src="https://open.ys7.com/ezopen/h5/iframe?url=ezopen://open.ys7.com/D14931813/2.hd.live&autoplay=1&accessToken=at.72oty9n81fltu3e792o8r7xz4h1dwnn5-1vwq1wqtol-0ffw440-tfrgzl1jz"
-                width="500" height="400" id="ysOpenDevice" allowfullscreen></iframe>
+        <iframe src="https://open.ys7.com/ezopen/h5/iframe?url=ezopen://open.ys7.com/D14931813/2.live&autoplay=1&accessToken=at.0trb40gkdhomm5yn5aj3zfnb017vs7n5-4g2kk8g8lx-14k1r6k-ckuvbxzfy"
+                width="600" height="400" id="ysOpenDevice" allowfullscreen></iframe>
       </div>
-      <div class="video-content">
-        <iframe src="" width="" height="" id="" allowfullscreen>
+      <div class="video-content-1">
+        <iframe src="https://open.ys7.com/ezopen/h5/iframe?url=ezopen://open.ys7.com/D14931813/3.live&autoplay=1&accessToken=at.0trb40gkdhomm5yn5aj3zfnb017vs7n5-4g2kk8g8lx-14k1r6k-ckuvbxzfy"
+                width="600" height="400" id="ysOpenDevice-1" allowfullscreen>
         </iframe>
       </div>
     </div>
 
     <div class="video-area-1">
-      <div class="video-content">
-        <iframe src="" width="" height="" id="" allowfullscreen></iframe>
+      <div class="video-content-2">
+        <iframe src="https://open.ys7.com/ezopen/h5/iframe?url=ezopen://open.ys7.com/D14931813/4.live&autoplay=1&accessToken=at.0trb40gkdhomm5yn5aj3zfnb017vs7n5-4g2kk8g8lx-14k1r6k-ckuvbxzfy"
+                width="600" height="400" id="ysOpenDevice-2" allowfullscreen></iframe>
       </div>
-      <div class="video-content">
-        <iframe src="" width="" height="" id="" allowfullscreen></iframe>
+      <div class="video-content-3">
+        <iframe src="https://open.ys7.com/ezopen/h5/iframe?url=ezopen://open.ys7.com/D14931813/5.live&autoplay=1&accessToken=at.0trb40gkdhomm5yn5aj3zfnb017vs7n5-4g2kk8g8lx-14k1r6k-ckuvbxzfy"
+                width="600" height="400" id="ysOpenDevice-3" allowfullscreen></iframe>
       </div>
       <div class="video-content"></div>
     </div>
@@ -43,26 +46,41 @@
   export default {
     data () {
       return {
-        player: ''
+        player: '',
+        // 视频长宽 - 根据显示台数改变
+        videoWidth: 600,
+        videoHeight: 400
       }
+    },
+
+    // 在组件挂载前就必须拿到 token
+    beforeMount () {
+      this.getAccessTokenIn();
     },
 
     mounted () {
       // 优先获取 accessToken 用于调用其他萤石官方 API
       // this.player = new EZUIKit.EZUIPlayer('myPlayer');
       let player = document.getElementById("ysOpenDevice").contentWindow;
+      let player_1 = document.getElementById("ysOpenDevice-1").contentWindow;
+      let player_2 = document.getElementById("ysOpenDevice-2").contentWindow;
+      let player_3 = document.getElementById("ysOpenDevice-3").contentWindow;
     },
 
     methods: {
-      getAccessToken () {
+      getAccessTokenIn () {
         const that = this;
         // 跨域
-        /*let param = new FormData();
+        let param = new FormData();
         param.append('appKey', '31b9d2360c7845ecaff4870f68e10b20');
-        param.append('appKey', '2b54e82f434c0667299b130f4d85e3f9');
-        this.$http.post(that.$api.getAccessToken, param).then(res => {
+        param.append('appSecret', '2b54e82f434c0667299b130f4d85e3f9');
+        /*this.$http.post(that.$api.getAccessToken, param).then(res => {
           console.log(res)
         })*/
+        this.$axios.post("/api/lapp/token/get", param)
+          .then(res => {
+            console.log(res);
+          })
       },
       startVideo () {
         // this.player.play();
@@ -93,5 +111,8 @@
 </script>
 
 <style scoped>
-
+  .video-area-0, .video-area-1 {
+    display: flex;
+    flex-direction: row;
+  }
 </style>

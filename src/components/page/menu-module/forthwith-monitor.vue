@@ -54,7 +54,7 @@
           <!--</a-tabs>-->
 
           <template>
-            <a-tabs @change="changeTab" type="card">
+            <a-tabs @change="changeTab" defaultActiveKey="2">
               <template v-for="item in eqType.Equipments">
                 <a-tab-pane :tab="item.Description" :key="item.Name"></a-tab-pane>
               </template>
@@ -652,17 +652,17 @@
   /*border-bottom: none;*/
   /*}*/
 
-  /deep/ .ant-tabs-bar {
+  /* /deep/ .ant-tabs-bar {
     border-bottom: 1px solid #0259ad;
-  }
+  } */
 
   /deep/ .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab {
     width: 125px;
     padding: 0;
     text-align: center;
-    background-color: #001529;
+    /* background-color: #001529; */
     color: #ffffff;
-    border-color: #0259ad;
+    /* border-color: #0259ad; */
   }
 
   /deep/ .ant-layout {

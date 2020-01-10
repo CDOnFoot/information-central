@@ -78,6 +78,7 @@
       let player_1 = document.getElementById("ysOpenDevice-1").contentWindow;
       let player_2 = document.getElementById("ysOpenDevice-2").contentWindow;
       let player_3 = document.getElementById("ysOpenDevice-3").contentWindow;
+      // console.log("current env:" + process.env.NODE_ENV);
     },
 
     methods: {
@@ -86,12 +87,16 @@
        */
       getAccessTokenIn () {
         const that = this;
-        // 跨域
+        /**
+         * @exception 跨域：dev env 使用本地代理，prod env 使用 nginx 代理
+         * @type {FormData}
+         */
         let param = new FormData();
         param.append('appKey', '31b9d2360c7845ecaff4870f68e10b20');
         param.append('appSecret', '2b54e82f434c0667299b130f4d85e3f9');
         // 使用原生 axios 访问 localhost 模拟 server 解决浏览器同源访问限制
-        this.$axios.post(that.$baseUrl + "/api/lapp/token/get", param)
+        const url = process.env.NODE_ENV === "development" ? "/api" : "http://open.ys7.com";
+        this.$axios.post(url + "/api/lapp/token/get", param)
           .then(res => {
             // console.log(res);
             if (res.data.code === "200") {
@@ -102,7 +107,7 @@
               that.ysUrl.ysUrl_1 = ysUrl + "3" + tokenString;
               that.ysUrl.ysUrl_2 = ysUrl + "4" + tokenString;
               that.ysUrl.ysUrl_3 = ysUrl + "5" + tokenString;
-              that.$common.setCookie("ysAccessToken", res.data.data.accessToken, 6 * 24 * 60);
+              that.$common.setCookie("ysAccessToken", token, 6 * 24 * 60);
             } else {
               // 如果请求失败则使用 cookie 中缓存的 token
               console.log("get token in cookie.");

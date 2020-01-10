@@ -169,7 +169,7 @@ export default {
         const value = Math.random() * 100;
         chartInit.clear();
         chartInit.setOption(option);
-      }, 4000);
+      }, 10000);
     }
   }
 };

@@ -1,530 +1,156 @@
 <template>
-  <div class="video-set-up">
-    <a-modal
-      title="登录"
-      :visible="visible"
-      :maskClosable="maskClosable"
-      style="top: 160px;"
-    >
-      <template slot="footer">
-        <a-button type="primary" :loading="loading" @click="clickLogin">
-          确认
-        </a-button>
-        <a-button type="primary" @click="clickLogout">
-          取消
-        </a-button>
-        <a-button type="primary" @click="clickGetDeviceInfo">
-          获取基本信息
-        </a-button>
-      </template>
-      <div>
-        <a-form
-          id="login"
-          :form="login"
-          class="login"
-          @submit="clickLogin"
-        >
-          <a-form-item label="用户名" :label-col="{ span: 8 }" :wrapper-col="{ span: 12 }">
-            <a-input
-              v-decorator="[
-          'username',
-          { rules: [{ required: true, message: '请输入用户名' }] },
-        ]"
-              placeholder="username"
-            >
-              <a-icon slot="prefix" type="user" style="color: rgba(0,0,0,.25)"/>
-            </a-input>
-          </a-form-item>
-          <a-form-item label="密码" :label-col="{ span: 8 }" :wrapper-col="{ span: 12 }">
-            <a-input
-              v-decorator="[
-          'password',
-          { rules: [{ required: true, message: '请输入密码' }] },
-        ]"
-              type="password"
-              placeholder="password"
-            >
-              <a-icon slot="prefix" type="lock" style="color: rgba(0,0,0,.25)"/>
-            </a-input>
-          </a-form-item>
-          <a-form-item label="IP地址" :label-col="{ span: 8 }" :wrapper-col="{ span: 12 }">
-            <a-input
-              v-decorator="[
-          'loginip',
-          { rules: [{ required: true, message: '请输入IP地址' }] },
-        ]"
-              placeholder="loginip"
-            >
-              <a-icon slot="prefix" type="lock" style="color: rgba(0,0,0,.25)"/>
-            </a-input>
-          </a-form-item>
-          <a-form-item label="端口号" :label-col="{ span: 8 }" :wrapper-col="{ span: 12 }">
-            <a-input
-              v-decorator="[
-          'port',
-          { rules: [{ required: true, message: '请输入端口号' }] },
-        ]"
-              placeholder="port"
-            >
-              <a-icon slot="prefix" type="lock" style="color: rgba(0,0,0,.25)"/>
-            </a-input>
-          </a-form-item>
-          <a-form-item label="设备端口" :label-col="{ span: 8 }" :wrapper-col="{ span: 12 }">
-            <a-input
-              v-decorator="[
-          'deviceport',
-          { rules: [{ required: true, message: '请输入设备端口' }] },
-        ]"
-              placeholder="deviceport"
-            >
-              <a-icon slot="prefix" type="lock" style="color: rgba(0,0,0,.25)"/>
-            </a-input>
-          </a-form-item>
-          <a-form-item label="RTSP端口" :label-col="{ span: 8 }" :wrapper-col="{ span: 12 }">
-            <a-input
-              v-decorator="[
-          'rtspport',
-          { rules: [{ required: true, message: '请输入设备RTSP端口' }] },
-        ]"
-              placeholder="rtspport"
-            >
-              <a-icon slot="prefix" type="lock" style="color: rgba(0,0,0,.25)"/>
-            </a-input>
-          </a-form-item>
-        </a-form>
+  <div>
+    <div class="video-area-0">
+      <div class="video-content-0">
+        <!--<video id="myPlayer"
+               width="500px"
+               height="350px"
+               src="ezopen://open.ys7.com/D14931813/1.live"
+               autoplay controls playsInline webkit-playsinLine></video>-->
+        <!--<iframe src="https://open.ys7.com/ezopen/h5/iframe?url=ezopen://open.ys7.com/D14931813/2.live&autoplay=1&accessToken=at.0trb40gkdhomm5yn5aj3zfnb017vs7n5-4g2kk8g8lx-14k1r6k-ckuvbxzfy"-->
+        <iframe :src="ysUrl.ysUrl_0"
+                width="600" height="400" id="ysOpenDevice" allowfullscreen></iframe>
       </div>
-    </a-modal>
-    <div class="set-up-module">
-      <a-row :gutter="16" style="height: 100%;">
-        <a-col class="gutter-row" :span="10" style="height: 100%;">
-          <div class="gutter-box" style="height: 100%;">
-            <a-card size="small" title="本地配置" style="height: 100%;">
-              <a href="#" slot="extra" @click="showModal">Login</a>
-              <a-form
-                id="localconfig"
-                :form="localconfig"
-                class="localconfig"
-                @submit="clickSetLocalCfg"
-                layout="inline"
-              >
-                <table style="width: 100%;">
-                  <tr>
-                    <td>
-                      <a-form-item label="播放性能">
-                        <a-select v-decorator="['netsPreach',{initialValue:'最短延时'}]" style="width: 100px">
-                          <a-select-option value="最短延时">最短延时</a-select-option>
-                          <a-select-option value="实时性好">实时性好</a-select-option>
-                          <a-select-option value="均衡">均衡</a-select-option>
-                          <a-select-option value="流畅性好">流畅性好</a-select-option>
-                        </a-select>
-                      </a-form-item>
-                    </td>
-                    <td>
-                      <a-form-item label="图像尺寸">
-                        <a-select v-decorator="['wndSize',{initialValue:'充满'}]" style="width: 100px">
-                          <a-select-option value="充满">充满</a-select-option>
-                          <a-select-option value="4:3">4:3</a-select-option>
-                          <a-select-option value="16:9">16:9</a-select-option>
-                        </a-select>
-                      </a-form-item>
-                    </td>
-                    <td>
-                      <a-form-item label="规则信息">
-                        <a-select v-decorator="['rulesInfo',{initialValue:'禁用'}]" style="width: 100px">
-                          <a-select-option value="禁用">禁用</a-select-option>
-                          <a-select-option value="启用">启用</a-select-option>
-                        </a-select>
-                      </a-form-item>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <a-form-item label="文件格式">
-                        <a-select v-decorator="['captureFileFormat',{initialValue:'JPEG'}]" style="width: 100px">
-                          <a-select-option value="JPEG">JPEG</a-select-option>
-                          <a-select-option value="BMP">BMP</a-select-option>
-                        </a-select>
-                      </a-form-item>
-                    </td>
-                    <td>
-                      <a-form-item label="打包大小">
-                        <a-select v-decorator="['packSize',{initialValue:'256M'}]" style="width: 100px">
-                          <a-select-option value="256M">256M</a-select-option>
-                          <a-select-option value="512M">512M</a-select-option>
-                          <a-select-option value="1G">1G</a-select-option>
-                        </a-select>
-                      </a-form-item>
-                    </td>
-                    <td>
-                      <a-form-item label="协议类型">
-                        <a-select v-decorator="['protocolType',{initialValue:'TCP'}]" style="width: 100px">
-                          <a-select-option value="TCP">TCP</a-select-option>
-                          <a-select-option value="UDP">UDP</a-select-option>
-                        </a-select>
-                      </a-form-item>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td colspan="3">
-                      <a-form-item label="录像文件保存路径">
-                        <a-input v-decorator="['recordPath']" @click="clickOpenFileDlg('recordPath', 0)" disabled>
-                          <a-icon slot="addonAfter" type="folder-open" style="cursor: pointer"/>
-                        </a-input>
-                      </a-form-item>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td colspan="3">
-                      <a-form-item label="回放下载保存路径">
-                        <a-input v-decorator="['downloadPath']" @click="clickOpenFileDlg('downloadPath', 0)" disabled>
-                          <a-icon slot="addonAfter" type="folder-open" style="cursor: pointer"/>
-                        </a-input>
-                      </a-form-item>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td colspan="3">
-                      <a-form-item label="预览抓图保存路径">
-                        <a-input v-decorator="['previewPicPath']" @click="clickOpenFileDlg('previewPicPath', 0)"
-                                 disabled>
-                          <a-icon slot="addonAfter" type="folder-open" style="cursor: pointer"/>
-                        </a-input>
-                      </a-form-item>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td colspan="3">
-                      <a-form-item label="回放抓图保存路径">
-                        <a-input v-decorator="['playbackPicPath']" @click="clickOpenFileDlg('playbackPicPath', 0)"
-                                 disabled>
-                          <a-icon slot="addonAfter" type="folder-open" style="cursor: pointer"/>
-                        </a-input>
-                      </a-form-item>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td colspan="3">
-                      <a-form-item label="回放剪辑保存路径">
-                        <a-input v-decorator="['playbackFilePath']" @click="clickOpenFileDlg('playbackFilePath', 0)"
-                                 disabled>
-                          <a-icon slot="addonAfter" type="folder-open" style="cursor: pointer"/>
-                        </a-input>
-                      </a-form-item>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td colspan="3">
-                      <a-form-item label="设备抓图保存路径">
-                        <a-input v-decorator="['devicePicPath']" @click="clickOpenFileDlg('devicePicPath', 0)" disabled>
-                          <a-icon slot="addonAfter" type="folder-open" style="cursor: pointer"/>
-                        </a-input>
-                      </a-form-item>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td colspan="3">
-                      <a-button type="primary" @click="clickGetLocalCfg">
-                        获取
-                      </a-button>
-                      <a-button type="primary" @click="clickSetLocalCfg">
-                        设置
-                      </a-button>
-                    </td>
-                  </tr>
-                </table>
-              </a-form>
-            </a-card>
-          </div>
-        </a-col>
-        <a-col class="gutter-row" :span="14" style="height: 100%;">
-          <div class="gutter-box" style="height: 100%;">
-            <a-card size="small" title="数字通道" style="height: 38%; margin-bottom: 1%">
-              <a href="#" slot="extra">more</a>
-              <div>
-                <div>
-                  <a-button type="primary" @click="clickGetDigitalChannelInfo">
-                    获取数字通道列表
-                  </a-button>
-                </div>
-                <div>
+      <div class="video-content-1">
+        <!--<iframe src="https://open.ys7.com/ezopen/h5/iframe?url=ezopen://open.ys7.com/D14931813/3.live&autoplay=1&accessToken=at.0trb40gkdhomm5yn5aj3zfnb017vs7n5-4g2kk8g8lx-14k1r6k-ckuvbxzfy"-->
+        <iframe :src="ysUrl.ysUrl_1"
+                width="600" height="400" id="ysOpenDevice-1" allowfullscreen>
+        </iframe>
+      </div>
+    </div>
 
-                </div>
-              </div>
-            </a-card>
-            <a-card size="small" title="系统维护" style="height: 30%; margin-bottom: 1%">
-              <a href="#" slot="extra">more</a>
-              <table style="width: 100%;border-collapse:separate; border-spacing:0px 10px;">
-                <tr>
-                  <td>
-                    <a-button type="primary" @click="clickExportDeviceConfig">
-                      导出配置文件
-                    </a-button>
-                    <a-button type="primary" @click="clickCheckPluginVersion">
-                      检查插件版本
-                    </a-button>
-                    <a-button type="primary" @click="clickRemoteConfig">
-                      远程配置库
-                    </a-button>
-                    <a-button type="primary" @click="clickRestoreDefault">
-                      恢复默认参数
-                    </a-button>
-                  </td>
-                </tr>
-                <tr style="margin-top: 10px">
-                  <td>
-                    <a-input v-decorator="['playbackFilePath']" @click="clickOpenFileDlg('configFile', 1)"
-                             disabled>
-                      <a-icon slot="addonAfter" type="folder-open" style="cursor: pointer"/>
-                    </a-input>
-                  </td>
-                  <td>
-                    <a-button type="primary" @click="clickImportDeviceConfig">
-                      导入配置文件
-                    </a-button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <a-input v-decorator="['playbackFilePath']" @click="clickOpenFileDlg('upgradeFile', 1)"
-                             disabled>
-                      <a-icon slot="addonAfter" type="folder-open" style="cursor: pointer"/>
-                    </a-input>
-                  </td>
-                  <td>
-                    <a-button type="primary" @click="clickStartUpgrade">
-                      升级
-                    </a-button>
-                  </td>
-                </tr>
-              </table>
-            </a-card>
-            <a-card size="small" title="设备IP解析" style="height: 30%;">
-              <a href="#" slot="extra">more</a>
-              <a-form
-                id="ipparse"
-                :form="ipparse"
-                class="ipparse"
-                @submit=""
-                layout="inline"
-              >
-                <table style="width: 100%;">
-                  <tr>
-                    <td>
-                      <a-form-item label="模式">
-                        <a-select v-decorator="['devicemode',{initialValue:'IPServer'}]" style="width: 120px">
-                          <a-select-option value="IPServer">IPServer</a-select-option>
-                          <a-select-option value="HiDDNS">HiDDNS</a-select-option>
-                        </a-select>
-                      </a-form-item>
-                    </td>
-                    <td>
-                      <a-form-item label="服务器地址">
-                        <a-input v-decorator="['serveraddress']"></a-input>
-                      </a-form-item>
-                    </td>
-                    <td>
-                      <a-form-item label="端口号">
-                        <a-input v-decorator="['serverport']"></a-input>
-                      </a-form-item>
-                    </td>
-                    <td>
-                      <a-form-item label="设备标识">
-                        <a-input v-decorator="['deviceid']"></a-input>
-                      </a-form-item>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td colspan="4">
-                      <a-button type="primary" @click="clickGetDeviceIP">
-                        获取设备IP
-                      </a-button>
-                    </td>
-                  </tr>
-                </table>
-              </a-form>
-            </a-card>
-          </div>
-        </a-col>
-      </a-row>
+    <div class="video-area-1">
+      <div class="video-content-2">
+        <!--<iframe src="https://open.ys7.com/ezopen/h5/iframe?url=ezopen://open.ys7.com/D14931813/4.live&autoplay=1&accessToken=at.0trb40gkdhomm5yn5aj3zfnb017vs7n5-4g2kk8g8lx-14k1r6k-ckuvbxzfy"-->
+        <iframe :src="ysUrl.ysUrl_2"
+                width="600" height="400" id="ysOpenDevice-2" allowfullscreen></iframe>
+      </div>
+      <div class="video-content-3">
+        <!--<iframe src="https://open.ys7.com/ezopen/h5/iframe?url=ezopen://open.ys7.com/D14931813/5.live&autoplay=1&accessToken=at.0trb40gkdhomm5yn5aj3zfnb017vs7n5-4g2kk8g8lx-14k1r6k-ckuvbxzfy"-->
+        <iframe :src="ysUrl.ysUrl_3"
+                width="600" height="400" id="ysOpenDevice-3" allowfullscreen></iframe>
+      </div>
+      <div class="video-content"></div>
+    </div>
+    <div class="control">
+      <a-button @click="startVideo">start</a-button>
+      <a-button @click="endVideo">pause</a-button>
+      <a-select defaultValue="0" style="width: 150px" @change="chooseVideos">
+        <a-icon slot="suffixIcon" type="down-circle" theme="twoTone" twoToneColor="#27b5d4"/>
+        <a-select-option value="0">1 × 1</a-select-option>
+        <a-select-option value="1">2 × 2</a-select-option>
+      </a-select>
     </div>
   </div>
 </template>
 
 <script>
-
-  const g_iWndIndex = 0;
-
+  // 不用再额外引入
+  // import {EZUIKit} from '../../../../static/ezuikit'
   export default {
-    name: "video-set-up",
-    data() {
+    data () {
       return {
-        visible: true,
-        maskClosable: false,
-        loading: false,
-      };
+        player: '',
+        // 视频长宽 - 根据显示台数改变
+        videoWidth: 600,
+        videoHeight: 400,
+        // 动态获取 accessToken，拼接 url
+        ysUrl: {
+          ysUrl_0: '',
+          ysUrl_1: '',
+          ysUrl_2: '',
+          ysUrl_3: '',
+        },
+        accessTokenIn: ''
+      }
     },
+
+    // 在组件挂载前就必须拿到 token
+    created () {
+      this.getAccessTokenIn();
+    },
+
+    mounted () {
+      // 优先获取 accessToken 用于调用其他萤石官方 API
+      // this.player = new EZUIKit.EZUIPlayer('myPlayer');
+      // 挂载完成在获取 DOM 节点操作视频组件
+      let player = document.getElementById("ysOpenDevice").contentWindow;
+      let player_1 = document.getElementById("ysOpenDevice-1").contentWindow;
+      let player_2 = document.getElementById("ysOpenDevice-2").contentWindow;
+      let player_3 = document.getElementById("ysOpenDevice-3").contentWindow;
+    },
+
     methods: {
-      init() {
-
-      },
-      // login
-      showModal() {
-        this.visible = true;
-      },
-      clickLogin(e) {
-        e.preventDefault();
-        this.loading = true;
-        this.login.validateFields((err, values) => {
-          if (!err) {
-            console.log('Received values of form: ', values);
-            let szIP = values.loginip;
-            let szPort = values.port;
-            let szUsername = values.username;
-            let szPassword = values.password;
-
-            if ("" == szIP || "" == szPort) {
-              return;
+      /**
+       * @function 获取 ys 平台连接视频的 token
+       */
+      getAccessTokenIn () {
+        const that = this;
+        // 跨域
+        let param = new FormData();
+        param.append('appKey', '31b9d2360c7845ecaff4870f68e10b20');
+        param.append('appSecret', '2b54e82f434c0667299b130f4d85e3f9');
+        // 使用原生 axios 访问 localhost 模拟 server 解决浏览器同源访问限制
+        this.$axios.post(that.$baseUrl + "/api/lapp/token/get", param)
+          .then(res => {
+            // console.log(res);
+            if (res.data.code === "200") {
+              const token = res.data.data.accessToken,
+                ysUrl = "https://open.ys7.com/ezopen/h5/iframe?url=ezopen://open.ys7.com/D14931813/",
+                tokenString = ".live&autoplay=1&accessToken=" + token;
+              that.ysUrl.ysUrl_0 = ysUrl + "2" + tokenString;
+              that.ysUrl.ysUrl_1 = ysUrl + "3" + tokenString;
+              that.ysUrl.ysUrl_2 = ysUrl + "4" + tokenString;
+              that.ysUrl.ysUrl_3 = ysUrl + "5" + tokenString;
+              that.$common.setCookie("ysAccessToken", res.data.data.accessToken, 6 * 24 * 60);
+            } else {
+              // 如果请求失败则使用 cookie 中缓存的 token
+              console.log("get token in cookie.");
+              const token = that.$common.getCookie("ysAccessToken"),
+                ysUrl = "https://open.ys7.com/ezopen/h5/iframe?url=ezopen://open.ys7.com/D14931813/",
+                tokenString = ".live&autoplay=1&accessToken=" + token;
+              that.ysUrl.ysUrl_0 = ysUrl + "2" + tokenString;
+              that.ysUrl.ysUrl_1 = ysUrl + "3" + tokenString;
+              that.ysUrl.ysUrl_2 = ysUrl + "4" + tokenString;
+              that.ysUrl.ysUrl_3 = ysUrl + "5" + tokenString;
             }
-
-            let szDeviceIdentify = szIP + "_" + szPort;
-
-            let iRet = WebVideoCtrl.I_Login(szIP, 1, szPort, szUsername, szPassword, {
-              success: function (xmlDoc) {
-                this.$message.info(szDeviceIdentify + " 登录成功！");
-
-                $("#ip").prepend("<option value='" + szDeviceIdentify + "'>" + szDeviceIdentify + "</option>");
-
-                setTimeout(function () {
-                  $("#ip").val(szDeviceIdentify);
-                  getChannelInfo();
-                  getDevicePort();
-                }, 10);
-
-                this.visible = false;
-                this.loading = false;
-
-              },
-              error: function (status, xmlDoc) {
-                this.$message.info(szDeviceIdentify + " 登录失败！", status, xmlDoc);
-                this.loading = false;
-
-              }
-            });
-
-            if (-1 == iRet) {
-              this.$message.info(szDeviceIdentify + " 已登录过！");
-              this.loading = false;
-
-            }
-          } else {
-            this.loading = false;
-          }
-        });
+          })
+          .catch(err => {
+            console.log(err);
+          })
       },
-      clickLogout(e) {
-        this.$message.info('Clicked cancel button');
-        this.visible = false;
+
+      startVideo () {
+        // this.player.play();
       },
-      clickGetDeviceInfo() {
-        this.$message.info('This is a normal message');
+
+      endVideo () {
+        // this.player.stop();
       },
-      // localconfig
-      clickOpenFileDlg(id, iType) {
-        let szDirPath = WebVideoCtrl.I_OpenFileDlg(iType);
-        if (szDirPath != -1 && szDirPath != "" && szDirPath != null) {
-          $("#" + id).val(szDirPath);
+
+      /**
+       * @function 选择不同的摄像头个数
+       */
+      chooseVideos (value) {
+        const that = this;
+        switch (value) {
+          case "0":
+            // 选择了 1 * 1 视频
+            break;
+          case "1":
+            // 选择了 2 * 2 视频
+            break;
+          default:
+            return;
         }
-      },
-      clickGetLocalCfg() {
-        let xmlDoc = WebVideoCtrl.I_GetLocalCfg();
-        if (xmlDoc != null) {
-          $("#netsPreach").val($(xmlDoc).find("BuffNumberType").eq(0).text());
-          $("#wndSize").val($(xmlDoc).find("PlayWndType").eq(0).text());
-          $("#rulesInfo").val($(xmlDoc).find("IVSMode").eq(0).text());
-          $("#captureFileFormat").val($(xmlDoc).find("CaptureFileFormat").eq(0).text());
-          $("#packSize").val($(xmlDoc).find("PackgeSize").eq(0).text());
-          $("#recordPath").val($(xmlDoc).find("RecordPath").eq(0).text());
-          $("#downloadPath").val($(xmlDoc).find("DownloadPath").eq(0).text());
-          $("#previewPicPath").val($(xmlDoc).find("CapturePath").eq(0).text());
-          $("#playbackPicPath").val($(xmlDoc).find("PlaybackPicPath").eq(0).text());
-          $("#devicePicPath").val($(xmlDoc).find("DeviceCapturePath").eq(0).text());
-          $("#playbackFilePath").val($(xmlDoc).find("PlaybackFilePath").eq(0).text());
-          $("#protocolType").val($(xmlDoc).find("ProtocolType").eq(0).text());
-          showOPInfo("本地配置获取成功！");
-        } else {
-          showOPInfo("本地配置获取失败！");
-        }
-      },
-      clickSetLocalCfg(e) {
-        e.preventDefault();
-        this.loading = true;
-        setTimeout(() => {
-          this.localconfig.validateFields((err, values) => {
-            if (!err) {
-              console.log('Received values of form: ', values);
-            }
-          });
-          this.loading = false;
-          this.$message.info('Success');
-
-        }, 2000);
-      },
-
-      // ipchannel
-      clickGetDigitalChannelInfo() {
-      },
-
-      // maintain
-      clickExportDeviceConfig() {
-      },
-      clickCheckPluginVersion() {
-      },
-      clickRemoteConfig() {
-      },
-      clickRestoreDefault() {
-      },
-      clickImportDeviceConfig() {
-      },
-      clickStartUpgrade() {
-      },
-
-      // ipparse
-      clickGetDeviceIP() {
-      },
-
-    },
-    beforeCreate() {
-      this.login = this.$form.createForm(this, {name: 'login'});
-      this.localconfig = this.$form.createForm(this, {name: 'localconfig'});
-      this.ipparse = this.$form.createForm(this, {name: 'ipparse'});
-
-
-    },
-  };
-
+      }
+    }
+  }
 </script>
 
 <style scoped>
-  .video-set-up {
-    width: 100%;
-    height: 90%;
-  }
-
-  .set-up-module {
-    width: 100%;
-    height: 100%;
-    padding: 20px;
-  }
-
-  /deep/ .ant-card {
-    background: transparent;
-  }
-
-  /deep/ .ant-card-head {
-    color: #ffffff;
-  }
-
-  /deep/ .ant-form-inline .ant-form-item {
-    margin-right: 0;
+  .video-area-0, .video-area-1 {
+    display: flex;
+    flex-direction: row;
   }
 </style>

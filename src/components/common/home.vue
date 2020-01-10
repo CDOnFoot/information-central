@@ -34,7 +34,7 @@
         <img src="../../assets/img/logo.png" alt="">
       </div>
       <div class="header-canvas">
-        <div class="title">信息中心</div>
+        <div class="title">数据中心动环监控平台</div>
         <div class="time-interval">{{timeStamp}}</div>
         <!-- <div class="weather">
           <iframe width="66%" scrolling="no" height="24" frameborder="0" allowtransparency="false" src="//i.tianqi.com/index.php?c=code&id=1&color=%23FFFFFF&icon=1&py=beijing&wind=0&num=1&site=12" style="float:right;"></iframe>
@@ -173,7 +173,7 @@
     },
 
     /**
-     * @description ‘信息中心’ 项目暂不使用从服务获取的菜单列表，直接写一个假的数据列表以供选择
+     * @description ‘数据中心动环监控平台’ 项目暂不使用从服务获取的菜单列表，直接写一个假的数据列表以供选择
      * @param to
      * @param from
      * @param next
@@ -269,7 +269,7 @@
         return false;
       };
       // 清除缓存的时间
-      clearInterval(this.timeInterval)
+      clearInterval(this.timeInterval);
         this.timeInterval = setInterval(function(){
           self.timeStamp = self.$common.timestampToTime(new Date());
         }, 1000);
@@ -293,7 +293,8 @@
       equipmentListRequest (callback) {
         const that = this;
         this.$http.get(that.$api.monitorEquipments).then(response => {
-          // console.log(response);
+          console.log("all equipment:");
+          console.log(response);
           if (response.data) {
             // 所有设备 list
             callback(response.data.value);
@@ -314,9 +315,19 @@
         let usedEquipment = [];
         // 筛选需要用到的设备
         allEquipment.forEach((value) => {
-          if (value.Description.includes('多功能传感器') ||
-            value.Description.includes('ETH')/* ||
-                value.Description.includes('门禁执行器')*/) {
+          if (value.Name.includes('多功能传感器') ||
+            value.Name.includes('ETH') ||
+            value.Name.includes('门禁执行器') ||
+            value.Name.includes('交流执行器') ||
+            value.Name.includes('天窗执行器') ||
+            value.Name.includes('eLight') ||
+            value.Name.includes('水浸传感器') ||
+            value.Name.includes('温湿度传感器') ||
+            value.Name.includes('风冷行级精密空调') ||
+            value.Name.includes('ECC800') ||
+            value.Name.includes('配电柜') ||
+            value.Name.includes('配电柜输入') ||
+            value.Name.includes('配电柜输出')) {
             usedEquipment.push(value);
           }
         });
@@ -343,55 +354,58 @@
               if (response.data) {
                 let allPointsValue = response.data;
                 // 开始比较
-                usedEquipment.forEach((values) => {
+                usedEquipment.forEach((items) => {
                   allEquipmentPointValue.forEach((value, index) => {
-                    if (value.Ord.includes(values.Name)) {
-                      usedPoints.splice(index, 1, {});
-                      if (allPointsValue[index] !== null) {
-                        // 当前点名称
-                        usedPoints[index].name = values.Description;
-                        // 当前点描述
-                        usedPoints[index].pointName = value.DisplayName;
-                        // 是否报警
-                        usedPoints[index].isAlarm = allPointsValue[index].st.ia;
-                        // is it bad point
-                        usedPoints[index].isBadPoint = allPointsValue[index].st.ib;
-                        const dataType = allPointsValue[index].t;
-                        switch (dataType) {
-                          case "Long":
-                            if (value.MeaningOfValue !== '') {
-                              // 将当前点值的值描述的 JSON 字符串转成对象，再根据当前索引的所有点值的实际值去找到对应含义
-                              usedPoints[index].pointValue = JSON.parse(value.MeaningOfValue)[allPointsValue[index].l];
-                              // 当为坏点时的取值
-                              if (usedPoints[index].pointValue === '') {
-                                usedPoints[index].pointValue = 'N/A'
-                              }
-                              // that.$set(usedPoints[index], "pointValue", JSON.parse(value.MeaningOfValue)[parseInt(allPointsValue[index].l)])
-                              // console.log(allPointsValue[index]);
-                            } else {
-                              usedPoints[index].pointValue = allPointsValue[index].l;
+                    usedPoints.splice(index, 1, {});
+                    if (allPointsValue[index] !== null) {
+                      // 当前点名称
+                      usedPoints[index].name = value.Name.match(/[\u4e00-\u9fa5]/g).join("");
+                      // 当前点描述
+                      usedPoints[index].pointName = value.DisplayName;
+                      // 是否报警
+                      usedPoints[index].isAlarm = allPointsValue[index].st.ia;
+                      // is it bad point
+                      usedPoints[index].isBadPoint = allPointsValue[index].st.ib;
+                      const dataType = allPointsValue[index].t;
+                      switch (dataType) {
+                        case "Long":
+                          if (value.MeaningOfValue !== '') {
+                            // 将当前点值的值描述的 JSON 字符串转成对象，再根据当前索引的所有点值的实际值去找到对应含义
+                            usedPoints[index].pointValue = JSON.parse(value.MeaningOfValue)[allPointsValue[index].l];
+                            // 当为坏点时的取值
+                            if (usedPoints[index].pointValue === '') {
+                              usedPoints[index].pointValue = 'N/A'
                             }
-                            break;
-                          case "String":
-                            usedPoints[index].pointValue = allPointsValue[index].s;
-                            break;
-                          case "DWord":
-                            usedPoints[index].pointValue = allPointsValue[index].dw;
-                            break;
-                          default:
-                            return true;
-                        }
+                            // that.$set(usedPoints[index], "pointValue", JSON.parse(value.MeaningOfValue)[parseInt(allPointsValue[index].l)])
+                            // console.log(allPointsValue[index]);
+                          } else {
+                            usedPoints[index].pointValue = allPointsValue[index].l;
+                          }
+                          break;
+                        case "String":
+                          usedPoints[index].pointValue = allPointsValue[index].s;
+                          break;
+                        case "DWord":
+                          usedPoints[index].pointValue = allPointsValue[index].dw;
+                          break;
+                        default:
+                          return true;
                       }
+                    } else {
+                      return false;
                     }
                   })
                 });
                 // the var not use.
-                that.statusList = usedPoints;
+                // that.statusList = usedPoints;
                 /**
                  * @description 使用 Vuex 存储处理完成的点值 list.
                  * @define 1、组件接收的 props 不能修改；2、Vuex 不能直接存储 list ，该解决方案先将 list 转成 JSON 字符串，使用 Vuex get 时再转成对象.
                  */
-                that.$store.commit('storePoints', usedPoints)
+                that.$store.commit('storePoints', usedPoints);
+                setTimeout(()=>{
+                  that.loadFlag= false;
+                },1000);
               }
             })
           }
@@ -444,9 +458,6 @@
       visualizationInfo:function(data){
         // console.log(' -------- current getting data:')
         // console.log(data)
-        setTimeout(()=>{
-          this.loadFlag= false;
-        },1000);
         this.visualList = JSON.parse(JSON.stringify(data.menuList));
         this.visualHomeList = JSON.parse(JSON.stringify(data.menuList));
         this.visualParamList = JSON.parse(JSON.stringify(data.menuList));

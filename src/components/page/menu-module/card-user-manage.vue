@@ -1,83 +1,219 @@
 <template>
   <div class="card-user-manage">
-    <div class="search-condition">
-      <a-form layout="inline" :form="form">
-        <a-form-item label="门禁卡号">
-          <a-input placeholder="门禁卡号" v-model="badgeCode"></a-input>
-        </a-form-item>
-        <a-form-item label="持卡人">
-          <a-input placeholder="持卡人" v-model="cardholder"></a-input>
-        </a-form-item>
-        <a-form-item>
-          <a-button type="primary" icon="search" @click="searchFor">搜索</a-button>
-        </a-form-item>
-        <!--<a-form-item>-->
-        <!--<a-button type="primary" icon="plus" @click="addCard">添加</a-button>-->
-        <!--</a-form-item>-->
-      </a-form>
-    </div>
-
-    <div class="modal">
-      <a-modal width="800px" :visible="isShowModal" :okText="okButton" centered destroyOnClose :title="modalTitle"
-               :confirm-loading="confirmLoading" @ok="handleOk" @cancel="closeModal">
-        <div class="form-in-modal">
-          <a-form :form="modalForm">
-            <div class="modal-form">
-              <div class="modal-form-one" style="width:50%">
-                <a-form-item label="门禁卡号" :label-col="{ span: 7 }" :wrapper-col="{ span: 15 }">
-                  <a-input v-model="modalForm.Encoded" :disabled="enableEdit"></a-input>
+    <a-tabs
+      type="card"
+      defaultActiveKey="1"
+      tabPosition="left"
+      @change="init"
+    >
+      <a-tab-pane tab="部门" key="1">
+        <a-form layout="inline">
+          <a-form-item>
+            <a-button type="primary" icon="plus" @click="addCard(1)">新增</a-button>
+          </a-form-item>
+        </a-form>
+        <a-table
+          :columns="columns1"
+          :dataSource="data"
+          :pagination="pagination"
+          :loading="loading"
+          :defaultExpandAllRows="expandAllRows"
+          size="small"
+        >
+          <template slot="operation" slot-scope="text, record">
+            <a-button type="primary" @click="editCard(record)">编辑</a-button>
+            <a-button type="primary" @click="deleteCard(record)">删除</a-button>
+          </template>
+        </a-table>
+        <a-modal
+          :visible="isShowModal1"
+          :title="modalTitle"
+          @ok="handleOk(1)"
+          @cancel="closeModal(1)"
+          centered
+          destroyOnClose
+        >
+          <div class="form-in-modal">
+            <a-form layout="inline" :form="modalForm">
+              <div class="modal-form" style="text-align: center">
+                <a-form-item label="部门代码">
+                  <a-input v-model="modalForm.Code" :disabled="enableEdit"></a-input>
                 </a-form-item>
-                <a-form-item label="门禁卡类型" :label-col="{ span: 7 }" :wrapper-col="{ span: 15 }">
-                  <a-input v-model="modalForm.TimeSheetType" :disabled="enableEdit"></a-input>
+                <a-form-item label="部门名称">
+                  <a-input v-model="modalForm.Name" :disabled="enableEdit"></a-input>
                 </a-form-item>
-                <!-- <a-form-item label="状态" :label-col="{ span: 7 }" :wrapper-col="{ span: 10 }">
-                  <a-input v-model="modalForm.cardStatus" :disabled="enableEdit"></a-input>
-                </a-form-item>-->
-                <a-form-item label="状态" :label-col="{ span: 7 }" :wrapper-col="{ span: 15 }">
-                  <!--<a-input v-model="modalForm.Status"></a-input>-->
-                  <a-select v-model="modalForm.Enable" :disabled="enableEdit">
+              </div>
+            </a-form>
+          </div>
+        </a-modal>
+      </a-tab-pane>
+      <a-tab-pane tab="岗位" key="2">
+        <a-form layout="inline">
+          <a-form-item>
+            <a-button type="primary" icon="plus" @click="addCard(2)">新增</a-button>
+          </a-form-item>
+        </a-form>
+        <a-table
+          :columns="columns2"
+          :dataSource="data"
+          :pagination="pagination"
+          :loading="loading"
+          :defaultExpandAllRows="expandAllRows"
+          size="small"
+        >
+          <template slot="operation" slot-scope="text, record">
+            <a-button type="primary" @click="editCard(record)">编辑</a-button>
+            <a-button type="primary" @click="deleteCard(record)">删除</a-button>
+          </template>
+        </a-table>
+        <a-modal
+          :visible="isShowModal2"
+          :title="modalTitle"
+          @ok="handleOk(2)"
+          @cancel="closeModal(2)"
+          centered
+          destroyOnClose
+        >
+          <div class="form-in-modal">
+            <a-form layout="inline" :form="modalForm">
+              <div class="modal-form" style="text-align: center">
+                <a-form-item label="从属部门">
+                  <a-select v-model="modalForm.Department" :disabled="enableEdit">
                     <a-select-option value="Enable">启用</a-select-option>
                     <a-select-option value="Disable">未启用</a-select-option>
                   </a-select>
                 </a-form-item>
-              </div>
-              <div class="modal-form-two" style="width:50%">
-                <a-form-item label="持卡人" :label-col="{ span: 7 }" :wrapper-col="{ span: 15 }">
-                  <a-input v-model="modalForm.DisplayName" :disabled="enableEdit"></a-input>
+                <a-form-item label="岗位代码">
+                  <a-input v-model="modalForm.Code" :disabled="enableEdit"></a-input>
                 </a-form-item>
-                <a-form-item label="有效期" :label-col="{ span: 7 }" :wrapper-col="{ span: 15 }">
-                  <a-input v-model="modalForm.Expire" :disabled="enableEdit"></a-input>
-                  <!-- <a-date-picker showTime @change="changeTime" :disabled="enableEdit" /> -->
-                </a-form-item>
-                <a-form-item label="描述" :label-col="{ span: 7 }" :wrapper-col="{ span: 15 }">
-                  <a-input v-model="modalForm.Description" :disabled="enableEdit"></a-input>
+                <a-form-item label="岗位名称">
+                  <a-input v-model="modalForm.Name" :disabled="enableEdit"></a-input>
                 </a-form-item>
               </div>
-            </div>
-          </a-form>
-        </div>
-      </a-modal>
-    </div>
-
-    <div class="table">
-      <a-table :columns="columns" :dataSource="filterList" :pagination="pagination" :loading="loading"
-               :defaultExpandAllRows="expandAllRows" size="small">
-        <template slot="enable" slot-scope="text">
-          {{text}}
-          <!-- <a-icon type="check" /> -->
-        </template>
-        <template slot="operation" slot-scope="text, record">
-          <a-button type="primary" @click="checkCard(record)">查看</a-button>
-          <a-button type="primary" @click="editCard(record)">编辑</a-button>
-          <a-button type="primary" @click="deleteCard(record)">删除</a-button>
-        </template>
-      </a-table>
-    </div>
+            </a-form>
+          </div>
+        </a-modal>
+      </a-tab-pane>
+      <a-tab-pane tab="岗位权限配置" key="3">
+        <a-table
+          :columns="columns3"
+          :dataSource="data"
+          :pagination="pagination"
+          :loading="loading"
+          :defaultExpandAllRows="expandAllRows"
+          size="small"
+        >
+          <template slot="operation" slot-scope="text, record">
+            <a-button type="primary" @click="editCard(record)">编辑</a-button>
+          </template>
+        </a-table>
+        <a-modal
+          :visible="isShowModal3"
+          :title="modalTitle"
+          @ok="handleOk(3)"
+          @cancel="closeModal(3)"
+          centered
+          destroyOnClose
+        >
+          <div class="form-in-modal">
+            <a-form layout="inline" :form="modalForm">
+              <div class="modal-form" style="text-align: center">
+                <a-form-item label="从属部门">
+                  <a-select v-model="modalForm.Department" :disabled="enableEdit">
+                    <a-select-option value="Enable">启用</a-select-option>
+                    <a-select-option value="Disable">未启用</a-select-option>
+                  </a-select>
+                </a-form-item>
+                <a-form-item label="岗位代码">
+                  <a-input v-model="modalForm.Code" :disabled="enableEdit"></a-input>
+                </a-form-item>
+                <a-form-item label="岗位名称">
+                  <a-input v-model="modalForm.Name" :disabled="enableEdit"></a-input>
+                </a-form-item>
+              </div>
+            </a-form>
+          </div>
+        </a-modal>
+      </a-tab-pane>
+    </a-tabs>
   </div>
 </template>
 
 <script>
   import AFormItem from "ant-design-vue/es/form/FormItem";
+
+  const columns1 = [
+    {
+      title: '部门代码',
+      dataIndex: 'Code',
+    },
+    {
+      title: '部门名称',
+      dataIndex: 'LastName',
+    },
+    {
+      title: "操 作",
+      align: "center",
+      scopedSlots: {
+        customRender: "operation"
+      },
+      width: 300,
+    }
+  ];
+
+  const columns2 = [
+    {
+      title: '岗位ID',
+      dataIndex: 'EntityId',
+    },
+    {
+      title: '岗位代码',
+      dataIndex: 'Modified',
+    },
+    {
+      title: '从属部门',
+      dataIndex: 'Actived',
+    },
+    {
+      title: '岗位名称',
+      dataIndex: 'Expired',
+    },
+    {
+      title: "操 作",
+      align: "center",
+      scopedSlots: {
+        customRender: "operation"
+      },
+      width: 300,
+    }
+  ];
+
+  const columns3 = [
+    {
+      title: '部门名称',
+      dataIndex: 'EntityId',
+    },
+    {
+      title: '岗位名称',
+      dataIndex: 'Modified',
+    },
+    {
+      title: '可通行门',
+      dataIndex: 'Actived',
+    },
+    {
+      title: '状态',
+      dataIndex: 'Expired',
+    },
+    {
+      title: "操 作",
+      align: "center",
+      scopedSlots: {
+        customRender: "operation"
+      },
+      width: 300,
+    }
+  ];
 
   const testData = [
     {
@@ -431,56 +567,6 @@
     },
   ];
 
-  const columns = [
-    {
-      title: "门禁卡号",
-      dataIndex: "Encoded",
-      align: "center",
-      width: 40
-    },
-    {
-      title: "持卡人",
-      dataIndex: "DisplayName",
-      align: "center",
-      width: 40
-    },
-    {
-      title: "有效期",
-      dataIndex: "Expire",
-      align: "center",
-      width: 80
-    },
-    {
-      title: "门禁卡类型",
-      dataIndex: "TimeSheetType",
-      align: "center",
-      width: 40
-    },
-    {
-      title: "描述",
-      dataIndex: "Description",
-      align: "center",
-      width: 40
-    },
-    {
-      title: "状态",
-      dataIndex: "Enable",
-      align: "center",
-      width: 40,
-      scopedSlots: {
-        customRender: "enable"
-      }
-    },
-    {
-      title: "操 作",
-      align: "center",
-      width: 40,
-      scopedSlots: {
-        customRender: "operation"
-      }
-    }
-  ];
-
   export default {
     name: "card-user-manage",
     components: {
@@ -488,21 +574,9 @@
     },
     data() {
       return {
-        modal: "",
-        isShowModal: false,
-        okButton: "",
-        modalTitle: "",
-        confirmLoading: false,
-        enableEdit: false,
-        modalForm: {
-          Encoded: "",
-          DisplayName: "",
-          DisplayExpire: "",
-          TimeSheetType: "",
-          Description: "",
-          Enable: ""
-        },
-        columns,
+        columns1,
+        columns2,
+        columns3,
         expandAllRows: true,
         pagination: {
           current: 1,
@@ -514,108 +588,64 @@
           onChange: current => this.changePage(current)
         },
         loading: false,
-        tableData: [],
-        tableList: [],
-        filterList: [],
-        badgeCode: "",
-        cardholder: "",
+        data: [],
+
+        loading: false,
+        enableEdit: false,
+        isShowModal1: false,
+        isShowModal2: false,
+        isShowModal3: false,
+        modalTitle: "",
+        modalForm: {},
+
       };
     },
 
-    beforeCreate() {
-      this.form = this.$form.createForm(this, {
-        name: "advanced_search"
-      });
-    },
-
-    created() {
-    },
-
-    beforeMount() {
-    },
-
     mounted() {
-      this.initTable();
+      this.init(1);
     },
 
     methods: {
-      initTable() {
+      init(key) {
         let self = this;
-        self.loading = true;
-        self.form.validateFields((err, values) => {
-          if (!err) {
-            self.$http.get(self.$api.getCards).then(res => {
-              self.tableData = res.data.value;
-              if (self.tableData.length == 0) {
-                self.tableData = testData;
-              }
-              console.log(self.tableData);
-              for (let i = 0; i < self.tableData.length; i++) {
-                let item = self.tableData[i];
+        if (key == 1) {
+          // self.loading = true;
+          // let url = "/config/departments";
+          // self.$http.get(url).then(res => {
+          //   console.log(res);
+          //   self.data = res.data.value;
+          //   if (self.data.length == 0) {
+          //     self.data = testData;
+          //   }
+          //   self.pagination.total = self.data.length;
+          //   self.loading = false;
+          // });
+        } else if (key == 2) {
 
-                let encoded = "";
-                let displayName = "";
-                let expire = "";
-                let timeSheetType = "";
-                let description = item.Description;
-                let enable = "";
+        } else {
 
-                if (item.Badges.length > 0) {
-                  encoded = item.Badges[0].Encoded;
-                  expire = self.$common.timestampToTime(item.Badges[0].Expire);
-                  timeSheetType = item.Badges[0].TimeSheetType;
-                  enable = item.Badges[0].Enable;
-                }
-
-                if (item.Role) {
-                  displayName = item.Role.DisplayName;
-                }
-
-                let bean = {
-                  Encoded: encoded,
-                  DisplayName: displayName,
-                  Expire: expire,
-                  TimeSheetType: timeSheetType,
-                  Description: description,
-                  Enable: enable,
-                };
-
-                self.tableList.push(bean);
-              }
-
-              self.filterList = self.tableList;
-
-              self.pagination.total = self.filterList.length;
-              self.loading = false;
-            });
-          }
-        });
-      },
-
-      searchFor() {
-        let self = this;
-        self.filterList = self.tableList;
-        self.filterList = self.filterList.filter(
-          item => (item.Encoded + "").indexOf(self.badgeCode) > -1
-        );
-        self.filterList = self.filterList.filter(
-          item => (item.DisplayName + "").indexOf(self.cardholder) > -1
-        );
-        self.pagination.total = self.filterList.length;
-        self.pagination.current = 1;
+        }
+        self.data = testData;
       },
 
       changePage(page) {
         this.pagination.current = page;
       },
 
-      addCard() {
+      addCard(key) {
         let self = this;
         self.modalForm = Object.assign({}, {});
-        self.modalTitle = "添加门禁卡";
-        self.okButton = "保存";
         self.enableEdit = false;
-        self.isShowModal = true;
+        if (key == 1) {
+          self.modalTitle = "新增部门信息";
+          self.isShowModal1 = true;
+        } else if (key == 2) {
+          self.modalTitle = "新增岗位信息";
+          self.isShowModal2 = true;
+        } else {
+          self.modalTitle = "新增权限信息";
+          self.isShowModal3 = true;
+        }
       },
 
       checkCard(row) {
@@ -768,23 +798,17 @@
             self.confirmLoading = false;
           });
         }
-
-        // this.isShowModal = false;
-        // // 手动封装表单数据
-        // const modalForm = this.modalForm;
-        // let form = new FormData();
-        // for (let i = 0; i <= Object.keys(modalForm); i++) {
-        //   form.append(
-        //     Object.keys(modalForm)[i].toString(),
-        //     Object.values(modalForm)[i]
-        //   );
-        // }
-        // this.$http.post('', {}).then()
       },
 
-      closeModal(e) {
-        this.confirmLoading = false;
-        this.isShowModal = false;
+      closeModal(key) {
+        let self = this;
+        if (key == 1) {
+          self.isShowModal1 = false;
+        } else if (key == 2) {
+          self.isShowModal2 = false;
+        } else {
+          self.isShowModal3 = false;
+        }
       },
 
       changeTime(date, dateString) {
@@ -796,41 +820,46 @@
 </script>
 
 <style scoped>
-  .modal-form {
-    display: flex;
-    flex-direction: row;
+  .card-user-manage {
+    width: 100%;
+    height: 90%;
   }
 
-  /*/deep/ .ant-table-body {*/
-  /*font-size: .2em;*/
-  /*}*/
+  .ant-tabs {
+    color: white;
+    width: 100%;
+    height: 100%;
+  }
 
-  /deep/ .ant-form-item-label label {
+  /deep/ .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab {
+    width: 120px;
+    background: transparent;
+  }
+
+  /deep/ .ant-tabs-vertical.ant-tabs-card.ant-tabs-left .ant-tabs-card-bar.ant-tabs-left-bar .ant-tabs-tab-active {
+    /*padding-top: 4px;*/
+  }
+
+
+  /deep/ .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab {
+    text-align: center;
+    background-color: #001529;
     color: #ffffff;
+    border-color: #0259ad;
   }
 
-  /*/deep/ .ant-pagination {*/
-  /*color: #ffffff;*/
-  /*}*/
-
-  /*/deep/ .ant-pagination-item a {*/
-  /*color: #ffffff;*/
-  /*}*/
-
-  /*/deep/ .ant-pagination-item-active a {*/
-  /*color: #000000;*/
-  /*}*/
-
-  /*/deep/ .ant-pagination-jump-prev, .ant-pagination-jump-next {*/
-  /*color: #ffffff;*/
-  /*}*/
-
-  /*/deep/ .ant-pagination-prev a, /deep/ .ant-pagination-next a {*/
-  /*color: #ffffff;*/
-  /*}*/
-
-  /deep/ .ant-pagination-jump-prev .ant-pagination-item-container .ant-pagination-item-ellipsis, /deep/ .ant-pagination-jump-next .ant-pagination-item-container .ant-pagination-item-ellipsis {
-    color: #ffffff;
+  /deep/ .ant-tabs .ant-tabs-left-bar {
+    border-right: 1px solid #0259ad;
   }
+
+  /deep/ .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab-active {
+    background-image: linear-gradient(to right, blue, black);
+  }
+
+
+  /deep/ .ant-tabs-content {
+    height: 100%;
+  }
+
 
 </style>

@@ -135,7 +135,7 @@
           {name: '首页', icon: 'main-page'},
           {name: '当前报警', icon: 'alarm-2'},
           {name: '门禁卡管理', icon: 'card-manage'},
-          {name: '设置', icon: 'setting'}
+          {name: '视频监控', icon: 'current-video'}
         ],
 
         secondModuleList: [
@@ -274,7 +274,7 @@
           case '刷卡记录日志管理':
             this.$router.push('/home/cardLogManage');
             break
-          case '设置':
+          case '视频监控':
             this.$router.push('/home/videoSetUp');
             break
           case '实时视频':

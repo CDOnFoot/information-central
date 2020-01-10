@@ -19,6 +19,8 @@ import http from '../utils/http'
 import VueWechatTitle from 'vue-wechat-title'
 // 引入 x2js ，用于视频模块
 import x2js from 'x2js'
+// 引入原生 axios 模块
+import axios from 'axios';
 
 // element-ui
 import ElementUI from 'element-ui'
@@ -32,12 +34,12 @@ Vue.use(VueWechatTitle)
 Vue.config.productionTip = false
 Vue.use(Antd);
 Vue.use(Button);
-Vue.use(ElementUI)
-Vue.use(Vuex)
+Vue.use(ElementUI);
+Vue.use(Vuex);
 
 import echarts from '../node_modules/echarts'
-Vue.prototype.$echarts = echarts
-Vue.prototype.Modal =  Modal
+Vue.prototype.$echarts = echarts;
+Vue.prototype.Modal =  Modal;
 
 // 支持IE浏览器兼容问题（Promise）
 import 'es6-promise/auto'
@@ -49,6 +51,10 @@ import '../src/assets/font/iconfont.js';
 Vue.prototype.$common= common;
 Vue.prototype.$api= api;
 Vue.prototype.$http= http;
+// 请求第三方 API 需使用原生 axios 访问 localhost 转代理
+Vue.prototype.$axios = axios;
+// axios.defaults.baseURL = '/api';
+Vue.prototype.$baseUrl = process.env.API_PORT;
 // jquery 继承原型链
 Vue.prototype.$ = $;
 // x2js 继承原型链
@@ -62,4 +68,4 @@ new Vue({
   store,
   components: { App },
   template: '<App/>'
-})
+});

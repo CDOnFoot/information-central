@@ -161,7 +161,7 @@ export default {
       setInterval(() => {
         chartInit.clear();
         chartInit.setOption(option);
-      }, 4000)
+      }, 10000)
     }
   }
 };

@@ -229,7 +229,7 @@ export default {
         const value = Math.random() * 3;
         chartInit.clear();
         chartInit.setOption(option);
-      }, 4000);
+      }, 10000);
     }
   }
 };

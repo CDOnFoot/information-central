@@ -61,13 +61,20 @@
           ysUrl_2: '',
           ysUrl_3: '',
         },
-        accessTokenIn: ''
+        accessTokenIn: '',
+        testAccessToken: 'at.9fj5sml0bare3yy7cmx92sc75ki05r5d-3gmhe8sy91-04uffq3-sudrfzy6g'
       }
     },
 
     // 在组件挂载前就必须拿到 token
     created () {
-      this.getAccessTokenIn();
+      // this.getAccessTokenIn();
+      const ysUrl = "https://open.ys7.com/ezopen/h5/iframe?url=ezopen://open.ys7.com/D14931813/",
+        tokenString = ".live&autoplay=1&accessToken=" + this.testAccessToken;
+      this.ysUrl.ysUrl_0 = ysUrl + "2" + tokenString;
+      this.ysUrl.ysUrl_1 = ysUrl + "3" + tokenString;
+      this.ysUrl.ysUrl_2 = ysUrl + "4" + tokenString;
+      this.ysUrl.ysUrl_3 = ysUrl + "5" + tokenString;
     },
 
     mounted () {

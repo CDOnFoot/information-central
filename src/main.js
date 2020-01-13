@@ -24,7 +24,7 @@ import axios from 'axios';
 
 // element-ui
 import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
+// import 'element-ui/lib/theme-chalk/index.css'
 
 // antd single module import
 import { Button } from 'ant-design-vue'
@@ -34,7 +34,7 @@ Vue.use(VueWechatTitle)
 Vue.config.productionTip = false
 Vue.use(Antd);
 Vue.use(Button);
-Vue.use(ElementUI);
+// Vue.use(ElementUI);
 Vue.use(Vuex);
 
 import echarts from '../node_modules/echarts'

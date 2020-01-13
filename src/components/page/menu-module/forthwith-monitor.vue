@@ -1316,11 +1316,13 @@
       init() {
         this.getEquipments().then((res) => {
           this.data = res;
+          console.log(this.data)
 
           // 测试
           // this.data = testEquipments.value;
 
           this.menu = this.unique(this.data);
+          console.log(this.menu)
           this.eqType = this.menu[0];
           this.changeMenu(this.eqType);
         });
@@ -1330,31 +1332,25 @@
         let res = [];
         let obj = {};
         for (let i = 0; i < objArr.length; i++) {
-
-          let pattern = new RegExp("[\u4E00-\u9FA5]+");
-          if (pattern.test(objArr[i].Name)) {
-
-            if (!obj[objArr[i].Code]) {
-              let newObj = {
-                Code: objArr[i].Code,
-                // DisplayName: objArr[i].Code,
-                DisplayName: objArr[i].Description == 'ECC800' ? 'ECC800' : objArr[i].Description.replace(/\d+/g, ''),
-                Equipments: [],
-              };
-              newObj.Equipments.push(objArr[i]);
-              res.push(newObj);
-              this.rootSubmenuKeys.push(objArr[i].Code);
-              obj[objArr[i].Code] = true;
-            } else {
-              res.forEach(function (item) {
-                if (item.Code == objArr[i].Code) {
-                  item.Equipments.push(objArr[i]);
-                }
-              });
-            }
-
+          console.log(objArr[i].Description)
+          if (!obj[objArr[i].Code]) {
+            let newObj = {
+              Code: objArr[i].Code,
+              // DisplayName: objArr[i].Code,
+              DisplayName: objArr[i].Description == 'ECC800' ? 'ECC800' : objArr[i].Description.replace(/\d+/g, ''),
+              Equipments: [],
+            };
+            newObj.Equipments.push(objArr[i]);
+            res.push(newObj);
+            this.rootSubmenuKeys.push(objArr[i].Code);
+            obj[objArr[i].Code] = true;
+          } else {
+            res.forEach(function (item) {
+              if (item.Code == objArr[i].Code) {
+                item.Equipments.push(objArr[i]);
+              }
+            });
           }
-
         }
         this.openKeys.push(this.rootSubmenuKeys[0]);
         return res;
@@ -1636,7 +1632,6 @@
     position: absolute;
     top: 5%;
     left: 40%;
-
   }
 
   #KPI .electricity {
@@ -1713,12 +1708,20 @@
     border-bottom: 1px solid #0259ad;
   } */
 
+  /deep/ .ant-tabs {
+    color: #ffffff;
+  }
+
   /deep/ .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab {
     padding: 0 10px;
     text-align: center;
-    /* background-color: #001529; */
+    background-color: transparent;
     color: #ffffff;
     /* border-color: #0259ad; */
+  }
+
+  /deep/ .ant-tabs-nav .ant-tabs-tab {
+    margin: 0;
   }
 
   /deep/ .ant-layout {

@@ -70,13 +70,13 @@
         const date_4 = dateTemplate.getDate() - 4 + "日";
         const date_5 = dateTemplate.getDate() - 5 + "日";
         const date_6 = dateTemplate.getDate() - 6 + "日";*/
-        const date_0 = "多功能传感器-1-", value_0 = pointsList[208].pointValue;
-        const date_1 = "多功能传感器-2-", value_1 = pointsList[229].pointValue;
-        const date_2 = "多功能传感器-3-", value_2 = pointsList[250].pointValue;
-        const date_3 = "温湿度传感器-1-", value_3 = pointsList[587].pointValue;
-        const date_4 = "温湿度传感器-2-", value_4 = pointsList[610].pointValue;
-        const date_5 = "温湿度传感器-3-", value_5 = pointsList[633].pointValue;
-        const date_6 = "PUD8000", value_6 = pointsList[633].pointValue;
+        const date_0 = "多功能传感器-1-", value_0 = pointsList[19].pointValue;
+        const date_1 = "多功能传感器-2-", value_1 = pointsList[40].pointValue;
+        const date_2 = "多功能传感器-3-", value_2 = pointsList[61].pointValue;
+        const date_3 = "温湿度传感器-1-", value_3 = pointsList[398].pointValue;
+        const date_4 = "温湿度传感器-2-", value_4 = pointsList[421].pointValue;
+        const date_5 = "温湿度传感器-3-", value_5 = pointsList[444].pointValue;
+        // const date_6 = "PUD8000", value_6 = pointsList[633].pointValue;
 
         // 配置项
         let option = {

@@ -65,8 +65,8 @@
     created() {
       // 必须在组件挂载前拿到数据
       const pointsList = this.$store.getters.getPointsList;
-      this.totalCapacity = JSON.parse(pointsList)[3513]; // 总输入功率
-      this.electricEnergy = JSON.parse(pointsList)[3512]; // 总输入电能
+      this.totalCapacity = JSON.parse(pointsList)[1036]; // 总输入功率
+      this.electricEnergy = JSON.parse(pointsList)[1035]; // 总输入电能
     },
     methods: {
     }

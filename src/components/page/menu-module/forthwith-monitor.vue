@@ -56,7 +56,7 @@
           <template>
             <a-tabs @change="changeTab" defaultActiveKey="2">
               <template v-for="item in eqType.Equipments">
-                <a-tab-pane :tab="item.Description" :key="item.Name"></a-tab-pane>
+                <a-tab-pane :tab="item.DisplayName" :key="item.Name"></a-tab-pane>
               </template>
               <a slot="tabBarExtraContent" style="margin-right: 20px">
                 <a-badge dot :count="popWarning.length">
@@ -96,8 +96,8 @@
               <div class="select-container-bg"></div>
               <div class="select-container-module" id="basicInfo">
                 <div class="boxes">
-                  <div class="equipment">
-                    <img :src="imgUrl" alt="">
+                  <div class="equipment" v-bind:style="{backgroundImage:'url(' + imgUrl + ')'}">
+                    <!--<img :src="imgUrl" alt="">-->
                   </div>
                 </div>
                 <div class="boxes">
@@ -1285,7 +1285,7 @@
         dataSource2: [],
         popWarning: [],
 
-        imgUrl: require("../../../assets/img/monitor/dev5.png"),
+        imgUrl: "",
 
         commStatus: {
           Value: "",
@@ -1316,13 +1316,13 @@
       init() {
         this.getEquipments().then((res) => {
           this.data = res;
-          console.log(this.data)
+          console.log(this.data);
 
           // 测试
           // this.data = testEquipments.value;
 
           this.menu = this.unique(this.data);
-          console.log(this.menu)
+          console.log(this.menu);
           this.eqType = this.menu[0];
           this.changeMenu(this.eqType);
         });
@@ -1332,13 +1332,69 @@
         let res = [];
         let obj = {};
         for (let i = 0; i < objArr.length; i++) {
-          console.log(objArr[i].Description)
+          console.log(objArr[i].Description);
           if (!obj[objArr[i].Code]) {
+            let imgUrl = "";
+            switch (objArr[i].Description) {
+              case "多功能传感器1":
+                imgUrl = require("../../../assets/img/monitor/ECC800.png");
+                break;
+              case "风冷行级精密空调":
+                imgUrl = require("../../../assets/img/monitor/风冷行级精密空调.png");
+                break;
+              case "配电柜输入":
+                imgUrl = require("../../../assets/img/monitor/配电柜输入.png");
+                break;
+              case "配电柜输出":
+                imgUrl = require("../../../assets/img/monitor/配电柜输出.png");
+                break;
+              case "水浸传感器":
+                imgUrl = require("../../../assets/img/monitor/水浸传感器和水浸绳.png");
+                break;
+              case "LED灯":
+                imgUrl = require("../../../assets/img/monitor/LED灯.png");
+                break;
+              case "半高型rPDU":
+                imgUrl = require("../../../assets/img/monitor/半高型rPDU.png");
+                break;
+              case "灯光告警器":
+                imgUrl = require("../../../assets/img/monitor/灯光告警器.png");
+                break;
+              case "机房":
+                imgUrl = require("../../../assets/img/monitor/机房.png");
+                break;
+              case "门禁":
+                imgUrl = require("../../../assets/img/monitor/门禁.png");
+                break;
+              case "门禁执行器":
+                imgUrl = require("../../../assets/img/monitor/门禁执行器.png");
+                break;
+              case "全高型rPDU":
+                imgUrl = require("../../../assets/img/monitor/全高型rPDU.png");
+                break;
+              case "摄像机":
+                imgUrl = require("../../../assets/img/monitor/摄像机.png");
+                break;
+              case "天窗执行器":
+                imgUrl = require("../../../assets/img/monitor/天窗执行器.png");
+                break;
+              case "网络硬盘刻录机":
+                imgUrl = require("../../../assets/img/monitor/网络硬盘刻录机.png");
+                break;
+              case "一体化机房":
+                imgUrl = require("../../../assets/img/monitor/一体化机房.png");
+                break;
+              case "指纹密码刷卡门禁机":
+                imgUrl = require("../../../assets/img/monitor/指纹密码刷卡门禁机.jpg");
+                break;
+              default:
+            }
             let newObj = {
               Code: objArr[i].Code,
-              // DisplayName: objArr[i].Code,
-              DisplayName: objArr[i].Description == 'ECC800' ? 'ECC800' : objArr[i].Description.replace(/\d+/g, ''),
+              DisplayName: objArr[i].Description,
+              // DisplayName: objArr[i].Description == 'ECC800' ? 'ECC800' : objArr[i].Description.replace(/\d+/g, ''),
               Equipments: [],
+              ImgUrl: imgUrl,
             };
             newObj.Equipments.push(objArr[i]);
             res.push(newObj);
@@ -1358,6 +1414,7 @@
 
       changeMenu(key) {
         this.eqType = key;
+        this.imgUrl = this.eqType.ImgUrl;
         this.eqName = this.eqType.Equipments[0].Name;
         this.changeTab(this.eqName);
       },
@@ -1524,7 +1581,7 @@
 
   .select-menu {
     float: left;
-    width: 7%;
+    width: 8%;
     height: 80%;
     padding-top: 80px;
   }
@@ -1533,7 +1590,7 @@
     float: left;
     width: 90%;
     height: 80%;
-    margin-left: 3%;
+    margin-left: 2%;
   }
 
   .select-container {
@@ -1568,14 +1625,14 @@
   }
 
   .equipment {
-    width: 100%;
-    height: 100%;
-    padding: 5% 10%;
+    width: 80%;
+    height: 90%;
+    margin: 5% 10%;
     text-align: center;
-  }
-
-  .equipment img {
-    height: 100%;
+    /*background-image: url("../../../assets/img/monitor/配电柜输入.png");*/
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
   }
 
   .pointInfo {
@@ -1583,7 +1640,6 @@
     height: 100%;
     padding: 5% 20% 5% 10%;
   }
-
 
   #KPI .boxes {
     height: 50%;
@@ -1656,7 +1712,6 @@
     top: 20%;
     left: 0;
   }
-
 
   /deep/ .ant-menu-dark.ant-menu-inline .ant-menu-item {
     cursor: pointer;

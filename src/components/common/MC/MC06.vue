@@ -4,13 +4,13 @@
   <div>
    <div class="main">
      <div class="main111">
-        <div class="loading">
+        <!-- <div class="loading">
           <span></span>
           <span></span>
           <span></span>
           <span></span>
           <span></span>
-        </div>
+        </div> -->
       </div>
       <div class="borde">{{mcTitle}}</div>
      <!-- <div class="module-icon">
@@ -135,60 +135,12 @@ export default {
 
 <style scoped>
 .main111 {
-  /* width: 90px;
-			height: 90px;
-			padding-top: 100px; */
-}
-.main111 a {
-  display: block;
-  text-align: center;
-  font-size: 20px;
-  margin-top: 200px;
-}
-.loading {
-  /* width: 150px; */
-  height: 15px;
-  /* margin: 0 auto; */
-  /* margin-top:100px; */
-  margin-left: 150px;
-  text-align: center;
-  margin-top: -5px;
-}
-.loading span {
-  display: inline-block;
-  width: 8px;
-  height: 66%;
-  margin-right: 5px;
-  background: #60dbff;
-  -webkit-animation: load-data-v-536c2323 1.04s ease infinite;
-  transform: skewX(50deg);
-}
-.loading span:last-child {
-  margin-right: 0px;
-}
-@-webkit-keyframes load {
-  0% {
-    opacity: 0;
+    margin-left: 56%;
+    height: 15px;
+    width: 110px;
+    background: url('../../../assets/img/loading.png');
   }
-  100% {
-    opacity: 1;
-  }
-}
-.loading span:nth-child(1) {
-  -webkit-animation-delay: 0.13s;
-}
-.loading span:nth-child(2) {
-  -webkit-animation-delay: 0.26s;
-}
-.loading span:nth-child(3) {
-  -webkit-animation-delay: 0.39s;
-}
-.loading span:nth-child(4) {
-  -webkit-animation-delay: 0.52s;
-}
-.loading span:nth-child(5) {
-  -webkit-animation-delay: 0.65s;
-}
+
 .main {
   color: #ffffff;
   padding: 1%;

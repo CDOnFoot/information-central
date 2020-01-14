@@ -3,6 +3,8 @@
   <!--   设备分析 模块内容一-->
   <div>
     <div class="main">
+      <div class="main111">
+      </div>
       <!--<div class="borde">{{mcTitle}}</div>-->
       <div class="borde">PDU</div>
       <div :id="mcId" class="main-id">
@@ -75,6 +77,12 @@
 </script>
 
 <style scoped>
+.main111 {
+    margin-left: 56%;
+    height: 15px;
+    width: 110px;
+    background: url('../../../assets/img/loading.png');
+  }
   .main {
     color: #ffffff;
     padding: 1%;

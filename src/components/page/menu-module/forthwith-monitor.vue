@@ -1333,79 +1333,83 @@
         let obj = {};
         for (let i = 0; i < objArr.length; i++) {
           console.log(objArr[i].Description);
-          if (!obj[objArr[i].Code]) {
-            let imgUrl = "";
-            switch (objArr[i].Description) {
-              case "多功能传感器1":
-                imgUrl = require("../../../assets/img/monitor/ECC800.png");
-                break;
-              case "风冷行级精密空调":
-                imgUrl = require("../../../assets/img/monitor/风冷行级精密空调.png");
-                break;
-              case "配电柜输入":
-                imgUrl = require("../../../assets/img/monitor/配电柜输入.png");
-                break;
-              case "配电柜输出":
-                imgUrl = require("../../../assets/img/monitor/配电柜输出.png");
-                break;
-              case "水浸传感器":
-                imgUrl = require("../../../assets/img/monitor/水浸传感器和水浸绳.png");
-                break;
-              case "LED灯":
-                imgUrl = require("../../../assets/img/monitor/LED灯.png");
-                break;
-              case "半高型rPDU":
-                imgUrl = require("../../../assets/img/monitor/半高型rPDU.png");
-                break;
-              case "灯光告警器":
-                imgUrl = require("../../../assets/img/monitor/灯光告警器.png");
-                break;
-              case "机房":
-                imgUrl = require("../../../assets/img/monitor/机房.png");
-                break;
-              case "门禁":
-                imgUrl = require("../../../assets/img/monitor/门禁.png");
-                break;
-              case "门禁执行器":
-                imgUrl = require("../../../assets/img/monitor/门禁执行器.png");
-                break;
-              case "全高型rPDU":
-                imgUrl = require("../../../assets/img/monitor/全高型rPDU.png");
-                break;
-              case "摄像机":
-                imgUrl = require("../../../assets/img/monitor/摄像机.png");
-                break;
-              case "天窗执行器":
-                imgUrl = require("../../../assets/img/monitor/天窗执行器.png");
-                break;
-              case "网络硬盘刻录机":
-                imgUrl = require("../../../assets/img/monitor/网络硬盘刻录机.png");
-                break;
-              case "一体化机房":
-                imgUrl = require("../../../assets/img/monitor/一体化机房.png");
-                break;
-              case "指纹密码刷卡门禁机":
-                imgUrl = require("../../../assets/img/monitor/指纹密码刷卡门禁机.jpg");
-                break;
-              default:
-            }
-            let newObj = {
-              Code: objArr[i].Code,
-              DisplayName: objArr[i].Description,
-              // DisplayName: objArr[i].Description == 'ECC800' ? 'ECC800' : objArr[i].Description.replace(/\d+/g, ''),
-              Equipments: [],
-              ImgUrl: imgUrl,
-            };
-            newObj.Equipments.push(objArr[i]);
-            res.push(newObj);
-            this.rootSubmenuKeys.push(objArr[i].Code);
-            obj[objArr[i].Code] = true;
-          } else {
-            res.forEach(function (item) {
-              if (item.Code == objArr[i].Code) {
-                item.Equipments.push(objArr[i]);
+          if (objArr[i].DisplayName.indexOf("0x10") == -1) {
+
+            if (!obj[objArr[i].Code]) {
+              let imgUrl = "";
+              switch (objArr[i].Description) {
+                case "多功能传感器1":
+                  imgUrl = require("../../../assets/img/monitor/ECC800.png");
+                  break;
+                case "风冷行级精密空调":
+                  imgUrl = require("../../../assets/img/monitor/风冷行级精密空调.png");
+                  break;
+                case "配电柜输入":
+                  imgUrl = require("../../../assets/img/monitor/配电柜输入.png");
+                  break;
+                case "配电柜输出":
+                  imgUrl = require("../../../assets/img/monitor/配电柜输出.png");
+                  break;
+                case "水浸传感器":
+                  imgUrl = require("../../../assets/img/monitor/水浸传感器和水浸绳.png");
+                  break;
+                case "LED灯":
+                  imgUrl = require("../../../assets/img/monitor/LED灯.png");
+                  break;
+                case "半高型rPDU":
+                  imgUrl = require("../../../assets/img/monitor/半高型rPDU.png");
+                  break;
+                case "灯光告警器":
+                  imgUrl = require("../../../assets/img/monitor/灯光告警器.png");
+                  break;
+                case "机房":
+                  imgUrl = require("../../../assets/img/monitor/机房.png");
+                  break;
+                case "门禁":
+                  imgUrl = require("../../../assets/img/monitor/门禁.png");
+                  break;
+                case "门禁执行器":
+                  imgUrl = require("../../../assets/img/monitor/门禁执行器.png");
+                  break;
+                case "全高型rPDU":
+                  imgUrl = require("../../../assets/img/monitor/全高型rPDU.png");
+                  break;
+                case "摄像机":
+                  imgUrl = require("../../../assets/img/monitor/摄像机.png");
+                  break;
+                case "天窗执行器":
+                  imgUrl = require("../../../assets/img/monitor/天窗执行器.png");
+                  break;
+                case "网络硬盘刻录机":
+                  imgUrl = require("../../../assets/img/monitor/网络硬盘刻录机.png");
+                  break;
+                case "一体化机房":
+                  imgUrl = require("../../../assets/img/monitor/一体化机房.png");
+                  break;
+                case "指纹密码刷卡门禁机":
+                  imgUrl = require("../../../assets/img/monitor/指纹密码刷卡门禁机.jpg");
+                  break;
+                default:
               }
-            });
+              let newObj = {
+                Code: objArr[i].Code,
+                DisplayName: objArr[i].Description,
+                // DisplayName: objArr[i].Description == 'ECC800' ? 'ECC800' : objArr[i].Description.replace(/\d+/g, ''),
+                Equipments: [],
+                ImgUrl: imgUrl,
+              };
+              newObj.Equipments.push(objArr[i]);
+              res.push(newObj);
+              this.rootSubmenuKeys.push(objArr[i].Code);
+              obj[objArr[i].Code] = true;
+            } else {
+              res.forEach(function (item) {
+                if (item.Code == objArr[i].Code) {
+                  item.Equipments.push(objArr[i]);
+                }
+              });
+            }
+
           }
         }
         this.openKeys.push(this.rootSubmenuKeys[0]);

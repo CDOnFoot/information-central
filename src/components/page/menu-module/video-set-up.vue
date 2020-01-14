@@ -68,13 +68,13 @@
 
     // 在组件挂载前就必须拿到 token
     created () {
-      // this.getAccessTokenIn();
-      const ysUrl = "https://open.ys7.com/ezopen/h5/iframe?url=ezopen://open.ys7.com/D14931813/",
+      this.getAccessTokenIn();
+      /*const ysUrl = "https://open.ys7.com/ezopen/h5/iframe?url=ezopen://open.ys7.com/D14931813/",
         tokenString = ".live&autoplay=1&accessToken=" + this.testAccessToken;
       this.ysUrl.ysUrl_0 = ysUrl + "2" + tokenString;
       this.ysUrl.ysUrl_1 = ysUrl + "3" + tokenString;
       this.ysUrl.ysUrl_2 = ysUrl + "4" + tokenString;
-      this.ysUrl.ysUrl_3 = ysUrl + "5" + tokenString;
+      this.ysUrl.ysUrl_3 = ysUrl + "5" + tokenString;*/
     },
 
     mounted () {
@@ -94,8 +94,10 @@
        */
       getAccessTokenIn () {
         const that = this;
+        console.log("current environment url:", process.env.API_PORT);
         /**
          * @exception 跨域：dev env 使用本地代理，prod env 使用 nginx 代理
+         * @solve 请求时不加 IP，则自动访问 localhost，build 后由 nginx 增加属性 location /api/ { proxy_pass http://url } 转发以 /api/ 开头的请求
          * @type {FormData}
          */
         let param = new FormData();
@@ -103,7 +105,7 @@
         param.append('appSecret', '2b54e82f434c0667299b130f4d85e3f9');
         // 使用原生 axios 访问 localhost 模拟 server 解决浏览器同源访问限制
         const url = process.env.NODE_ENV === "development" ? "/api" : "http://open.ys7.com";
-        this.$axios.post(url + "/api/lapp/token/get", param)
+        this.$axios.post("/api/lapp/token/get", param)
           .then(res => {
             // console.log(res);
             if (res.data.code === "200") {

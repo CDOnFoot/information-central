@@ -331,16 +331,14 @@
             usedEquipment.push(value);
           }
         });
-        console.log('after filter:');
-        console.log(usedEquipment);
+        console.log('after filter:', usedEquipment);
         const that = this;
         this.$http.get(that.$api.allEquipmentPoint).then(res => {
           // console.log(res);
           if (res.data.value) {
             // 全部设备的所有点
             const allEquipmentPointValue = res.data.value;
-            console.log('All points:');
-            console.log(allEquipmentPointValue);
+            console.log('All points:', allEquipmentPointValue);
             let paramIdList = [];
             allEquipmentPointValue.forEach((value, index) => {
               paramIdList.splice(index, 1, {});
@@ -348,8 +346,7 @@
             });
             // 用从服务取到的 id list 去获取所有点值
             that.$http.post(that.$api.allPointStatus, paramIdList).then(response => {
-              console.log('All points values:');
-              console.log(response.data);
+              console.log('All points values:', response.data);
               let usedPoints = [];
               if (response.data) {
                 let allPointsValue = response.data;

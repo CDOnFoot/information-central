@@ -10,26 +10,26 @@
           <div class="module-area">
             <div class="PUD-module-0">
               <div class="module-value-popover-0">
-                <a-popover title="总输入功率">
+                <a-popover title="详情">
                   <template slot="content">
                     <p>是否坏点：{{ totalCapacity.isBadPoint ? "是" : "否" }}</p>
                   </template>
                   <!--<a-button type="primary"></a-button>-->
                   <!--<img src="../../../assets/img/main/设备点.png" alt="" width="20" height="24">-->
-                  <span>{{ totalCapacity.pointValue }}</span>
+                  <span>总输入功率<hr/>{{ totalCapacity.pointValue }}</span>
                 </a-popover>
               </div>
             </div>
 
             <div class="PUD-module-1">
               <div class="module-value-popover-1">
-                <a-popover title="总输入电能">
+                <a-popover title="详情">
                   <template slot="content">
                     <p>是否坏点：{{ electricEnergy.isBadPoint ? "是" : "否" }}</p>
                   </template>
                   <!--<a-button type="primary"></a-button>-->
                   <!--<img src="../../../assets/img/main/设备点.png" alt="" width="20" height="24">-->
-                  <span>{{ electricEnergy.pointValue }}</span>
+                  <span>总输入电能<hr/>{{ electricEnergy.pointValue }}</span>
                 </a-popover>
               </div>
             </div>
@@ -101,14 +101,14 @@
 
   .module-value-popover-0 {
     position: absolute;
-    top: 50%;
+    top: 45%;
     left: 16%;
   }
 
   .module-value-popover-1 {
     position: absolute;
-    top: 50%;
-    left: 70%;
+    top: 45%;
+    left: 64%;
   }
 
   .PUD-module-0 {

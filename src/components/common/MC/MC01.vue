@@ -18,7 +18,8 @@
                   </template>
                   <!--<a-button type="primary"></a-button>-->
                   <!--<img src="../../../assets/img/main/设备点.png" alt="" width="20" height="24">-->
-                  <span>总输入功率<hr/>{{ totalCapacity.pointValue }}</span>
+                  <span>总输入功率<hr/>{{ totalCapacity.pointValue }}kW</span>
+                  <!--<span>总输入功率<hr/>test</span>-->
                 </a-popover>
               </div>
             </div>
@@ -31,7 +32,8 @@
                   </template>
                   <!--<a-button type="primary"></a-button>-->
                   <!--<img src="../../../assets/img/main/设备点.png" alt="" width="20" height="24">-->
-                  <span>总输入电能<hr/>{{ electricEnergy.pointValue }}</span>
+                  <span>总输入电能<hr/>{{ electricEnergy.pointValue }}kWh</span>
+                  <!--<span>总输入电能<hr/>test</span>-->
                 </a-popover>
               </div>
             </div>
@@ -104,31 +106,31 @@
   .module-area {
     display: flex;
     flex-direction: row;
-    padding-top: 40px;
+    padding-top: 15px;
   }
 
   .module-value-popover-0 {
     position: absolute;
-    top: 45%;
-    left: 16%;
+    top: 42%;
+    left: 14.5%;
   }
 
   .module-value-popover-1 {
     position: absolute;
-    top: 45%;
+    top: 42%;
     left: 64%;
   }
 
   .PUD-module-0 {
     width: 47%;
-    height: 200px;
+    height: 230px;
     background: url("../../../assets/img/enterPel.png") no-repeat;
     background-size: 100% 100%;
   }
 
   .PUD-module-1 {
     width: 47%;
-    height: 200px;
+    height: 230px;
     background: url("../../../assets/img/outPel.png") no-repeat;
     background-size: 100% 100%;
   }

@@ -33,13 +33,13 @@
       <div class="video-content"></div>
     </div>
     <div class="control">
-      <a-button @click="startVideo">start</a-button>
+      <!--<a-button @click="startVideo">start</a-button>
       <a-button @click="endVideo">pause</a-button>
       <a-select defaultValue="0" style="width: 150px" @change="chooseVideos">
         <a-icon slot="suffixIcon" type="down-circle" theme="twoTone" twoToneColor="#27b5d4"/>
         <a-select-option value="0">1 × 1</a-select-option>
         <a-select-option value="1">2 × 2</a-select-option>
-      </a-select>
+      </a-select>-->
     </div>
   </div>
 </template>

@@ -359,6 +359,8 @@
                       usedPoints[index].name = value.Name.match(/[\u4e00-\u9fa5]/g).join("");
                       // 当前点描述
                       usedPoints[index].pointName = value.DisplayName;
+                      // unit of value
+                      usedPoints[index].unitOfValue = value.UnitOfMeasurement;
                       // 是否报警
                       usedPoints[index].isAlarm = allPointsValue[index].st.ia;
                       // is it bad point

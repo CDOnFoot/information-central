@@ -2,8 +2,8 @@
   <div>
     <div class="search-condition">
       <a-form layout="inline" :form="form" @submit="searchFor">
-        <a-form-item label="姓名：">
-          <a-input placeholder="登录名" v-model="searchName"></a-input>
+        <a-form-item label="登录名：">
+          <a-input placeholder="" v-model="searchName"></a-input>
         </a-form-item>
         <a-form-item>
           <a-button type="primary" icon="search" html-type="submit">搜索</a-button>
@@ -19,6 +19,7 @@
                :okText="okButton"
                centered
                destroyOnClose
+               :maskClosable="ifMaskClosable"
                :title="modalTitle"
                :confirm-loading="confirmLoading"
                @ok="handleOk"
@@ -30,10 +31,10 @@
                 <a-form-item label="登录名" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }" required>
                   <a-input v-model="modalForm.Name" :disabled="enableEdit"></a-input>
                 </a-form-item>
-                <a-form-item label="姓名" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }">
+                <a-form-item label="姓名" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }" required>
                   <a-input v-model="modalForm.DisplayName" :disabled="enableEdit"></a-input>
                 </a-form-item>
-                <a-form-item label="状态" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }">
+                <a-form-item label="状态" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }" required>
                   <a-select :disabled="enableEdit" v-model="modalForm.Status">
                     <a-select-option value="Enable">启用</a-select-option>
                     <a-select-option value="Disable">未启用</a-select-option>
@@ -44,10 +45,20 @@
                 <!--</a-form-item>-->
               </div>
               <div class="modal-form-two">
-                <a-form-item label="固话" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }">
+                <a-form-item label="固话"
+                             :validate-status="validateTel"
+                             :help="telTips"
+                             :label-col="{ span: 7 }"
+                             :wrapper-col="{ span: 14 }"
+                             required>
                   <a-input v-model="modalForm.Tel" :disabled="enableEdit"></a-input>
                 </a-form-item>
-                <a-form-item label="手机号" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }">
+                <a-form-item label="手机号"
+                             :validate-status="validatePhone"
+                             :help="phoneTips"
+                             :label-col="{ span: 7 }"
+                             :wrapper-col="{ span: 14 }"
+                             required>
                   <a-input v-model="modalForm.PhoneNumber" :disabled="enableEdit"></a-input>
                 </a-form-item>
                 <!--<a-form-item label="过期时间" :label-col="{ span: 7 }" :wrapper-col="{ span: 14 }">-->
@@ -164,6 +175,11 @@
         enableEdit: false,
         // 创建时间和更新时间永远不能更改
         enableEditTime: true,
+        ifMaskClosable: false,
+        telTips: '',
+        validateTel: '',
+        phoneTips: '',
+        validatePhone: '',
         // 分页信息
         pagination: {
           current: 0,
@@ -375,7 +391,46 @@
       }
     },
 
+    watch: {
+      Tel: function (value) {
+        const reg = /^0[0-9]{2,3}-[1-9]\d{5,8}$/;
+        if (!reg.test(value)) {
+          this.validateTel = 'warning';
+          this.telTips = '固话格式XXX-XXXXXX';
+        } else {
+          this.validateTel = '';
+          this.telTips = '';
+        }
+      },
 
+      PhoneNumber: function (value) {
+        const reg = /^1[34578]\d{9}$/;
+        if (!reg.test(value)) {
+          this.validatePhone = 'warning';
+          this.phoneTips = '手机格式：1XXXXXXXX';
+        } else {
+          this.validatePhone = '';
+          this.phoneTips = '';
+        }
+      }
+    },
+
+    // 使用 computed 作中间件
+    computed: {
+      /**
+       * @return {string}
+       */
+      Tel () {
+        return this.modalForm.Tel;
+      },
+
+      /**
+       * @return {string}
+       */
+      PhoneNumber () {
+        return this.modalForm.PhoneNumber;
+      }
+    },
 
     beforeCreate () {
       this.form = this.$form.createForm(this, { name: 'advanced_search' });
@@ -402,6 +457,7 @@
       initTable () {
         const that = this;
         const len = this.tableList.length;
+        this.pagination.current = 1;
         for (let i=0;i<=len;i++) {
           this.tableList.pop();
         }
@@ -463,8 +519,8 @@
             }
           });
           that.tableList = tableContainer;
-          // 不清除搜索条件用以比对搜索结果是否正确
-          // that.searchName = '';
+          // 多次查询所以清空搜索条件
+          that.searchName = '';
           that.loading = false;
         })
       },
@@ -503,8 +559,8 @@
               // 缓存数据，用于翻页
               that.tableContainer = tableContainer;
               that.pagination.total = that.tableList.length;
-              // 不清除搜索条件用以比对搜索结果是否正确
-              // that.searchName = '';
+              // 多次查询清空搜索条件
+              that.searchName = '';
               that.loading = false;
             })
           }
@@ -620,6 +676,7 @@
                       title: '完成',
                       content: '已删除当前用户！',
                       onOk() {
+                        that.initTable();
                         that.modal.destroy();
                       },
                     });
@@ -649,12 +706,19 @@
          * @description http request 没问题，请求参数需要确定
          */
         if (titleStatus === '添加用户信息') {
+          /*const phoneReg = /^1[34578]\d{9}$/, telReg = /^0[0-9]{2,3}-[1-9]\d{5,8}$/;
+          if (!telReg.test(that.modalForm.Tel) || !phoneReg.test(that.modalForm.PhoneNumber)) {
+            that.$message.warning("请输入正确的手机号与固话格式");
+            this.telTips = '固话格式XXX-XXXXXXX';
+            this.confirmLoading = false;
+            return false;
+          }*/
           param = {
             EntityId: 0, // 主键固定
             Name: that.modalForm.Name,
             DisplayName: that.modalForm.DisplayName,
-            // Tel: that.modalForm.Tel,
-            // PhoneNumber: that.modalForm.PhoneNumber,
+            Tel: that.modalForm.Tel,
+            PhoneNumber: that.modalForm.PhoneNumber,
           };
           // 调用添加的 API
           this.$http.post(that.$api.addUsers, param)
@@ -666,6 +730,7 @@
                   content: '添加成功！',
                   onOk() {
                     that.isShowModal = false;
+                    that.initTable();
                   },
                 });
               } else if (res.data.Message === '登录名称重复') {
@@ -732,6 +797,7 @@
                 content: '修改成功！',
                 onOk() {
                   that.isShowModal = false;
+                  that.initTable();
                 },
               });
             }

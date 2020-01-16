@@ -13,7 +13,7 @@
         </div> -->
       </div>
       <!--<div class="borde">{{mcTitle}}</div>-->
-      <div class="borde">平均湿度</div>
+      <div class="borde">设备湿度</div>
      <!-- <div class="module-icon">
        <img src="../../../assets/img/main/module-information.png" alt="" width="23" height="23">
        <img src="../../../assets/img/main/module-save.png" alt="" width="23" height="23">
@@ -125,7 +125,7 @@ export default {
         },
 
         yAxis: {
-          name: '%RH',
+          name: '湿度（%RH）',
           type: 'value',
           axisLabel: {
             color: '#fff'

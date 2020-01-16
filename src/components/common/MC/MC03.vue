@@ -12,7 +12,8 @@
           <span></span>
         </div> -->
       </div>
-      <div class="borde">{{mcTitle}}</div>
+      <!--<div class="borde">{{mcTitle}}</div>-->
+      <div class="borde">设备温度</div>
       <!-- <div class="module-icon">
        <img src="../../../assets/img/main/module-information.png" alt="" width="23" height="23">
        <img src="../../../assets/img/main/module-save.png" alt="" width="23" height="23">
@@ -125,7 +126,7 @@
           },
 
           yAxis: {
-            name: '℃',
+            name: '温度（℃）',
             type: "value",
             /*min: -20,
             max: 50,*/

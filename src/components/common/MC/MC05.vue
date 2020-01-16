@@ -82,8 +82,8 @@
               endAngle: 0,			// 仪表盘结束角度,默认 -45
               clockwise: true,		// 仪表盘刻度是否是顺时针增长,默认 true。
               min: 0,					// 最小的数据值,默认 0 。映射到 minAngle。
-              max: 260,				// 最大的数据值,默认 100 。映射到 maxAngle。
-              splitNumber: 13,		// 仪表盘刻度的分割段数,默认 10。q
+              max: 100,				// 最大的数据值,默认 100 。映射到 maxAngle。
+              splitNumber: 10,		// 仪表盘刻度的分割段数,默认 10。q
 
               axisLine: {				// 仪表盘轴线(轮廓线)相关配置。
                 show: true,				// 是否显示仪表盘轴线(轮廓线),默认 true。
@@ -130,7 +130,7 @@
                 distance: 7,			// 标签与刻度线的距离,默认 5。
                 color: "#fff",			// 文字的颜色,默认 #fff。
                 fontSize: 15,			// 文字的字体大小,默认 5。
-                formatter: "{value}",	// 刻度标签的内容格式器，支持字符串模板和回调函数两种形式。 示例:// 使用字符串模板，模板变量为刻度默认标签 {value},如:formatter: '{value} kg'; // 使用函数模板，函数参数分别为刻度数值,如formatter: function (value) {return value + 'km/h';}
+                formatter: "{value}%",	// 刻度标签的内容格式器，支持字符串模板和回调函数两种形式。 示例:// 使用字符串模板，模板变量为刻度默认标签 {value},如:formatter: '{value} kg'; // 使用函数模板，函数参数分别为刻度数值,如formatter: function (value) {return value + 'km/h';}
               },
 
               pointer: {				// 仪表盘指针。
@@ -174,8 +174,8 @@
 
               data: [
                 {
-                  name: "Name",
-                  value: 45
+                  name: "DCIE",
+                  value: 87
                 }
               ]
             }

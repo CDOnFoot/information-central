@@ -20,6 +20,7 @@
     <div class="define-alarm-dialog">
       <a-modal :visible="isShowModal"
                :okText="okButton"
+               :maskClosable="false"
                centered
                destroyOnClose
                :title="modalTitle"

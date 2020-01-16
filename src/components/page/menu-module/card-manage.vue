@@ -19,7 +19,7 @@
 
     <div class="modal">
       <a-modal width="800px" :visible="isShowModal" :okText="okButton" centered destroyOnClose :title="modalTitle"
-               :confirm-loading="confirmLoading" @ok="handleOk" @cancel="closeModal">
+               :confirm-loading="confirmLoading" @ok="handleOk" @cancel="closeModal" :maskClosable="false">
         <div class="form-in-modal">
           <a-form :form="modalForm">
             <div class="modal-form">

@@ -5,7 +5,7 @@
         <a-form-item label="门禁卡号">
           <a-input placeholder="门禁卡号" v-model="badgeCode"></a-input>
         </a-form-item>
-        <a-form-item label="设备">
+        <a-form-item label="设备名称">
           <div>
             <a-select defaultValue style="width: 150px" @change="changeEquipment">
               <a-select-option value>
@@ -63,7 +63,7 @@
       width: 40
     },
     {
-      title: "卡号",
+      title: "门禁卡号",
       dataIndex: "BadgeCode",
       align: "center",
       width: 20

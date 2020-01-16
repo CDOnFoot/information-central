@@ -32,6 +32,7 @@
           @cancel="closeModal()"
           centered
           destroyOnClose
+          :maskClosable="false"
         >
           <div class="form-in-modal">
             <a-form layout="inline" :form="modalForm">
@@ -73,6 +74,7 @@
           @cancel="closeModal()"
           centered
           destroyOnClose
+          :maskClosable="false"
         >
           <div class="form-in-modal">
             <a-form layout="inline" :form="modalForm">
@@ -114,6 +116,7 @@
           @cancel="closeModal()"
           centered
           destroyOnClose
+          :maskClosable="false"
         >
           <div class="form-in-modal">
             <a-form layout="inline" :form="modalForm">
@@ -256,7 +259,7 @@
         self.loading = true;
         self.key = key;
         if (self.key == 1) {
-          let url = "/config";
+          let url = "/acs/Departments";
           self.$http.get(url).then(res => {
             console.log(res);
             self.data = res.data.value;
@@ -264,7 +267,7 @@
             self.loading = false;
           });
         } else if (self.key == 2) {
-          let url = "/config/Roles";
+          let url = "/acs/Roles";
           self.$http.get(url).then(res => {
             console.log(res);
             self.data = res.data.value;
@@ -404,28 +407,15 @@
 
         if (self.key == 1) {
           if (self.modalTitle === "新增部门信息") {
-            let encoded = self.modalForm.Encoded;
-            let displayName = self.modalForm.DisplayName;
-            let expire = self.modalForm.Expire;
-            let timeSheetType = self.modalForm.TimeSheetType;
-            let description = self.modalForm.Description;
-            let enable = self.modalForm.Enable;
+            let code = self.modalForm.Code;
+            let name = self.modalForm.Name;
             param = {
-              Modified: new Date(),
-              IsDeleted: false,
-              Actived: new Date(),
-              Expired: new Date(),
-              Type: timeSheetType,
-              FirstName: "",
-              LastName: displayName,
-              Description: description,
-              IsBlocked: false,
-              Code: encoded,
-              Role: "",
-              Department: ""
+              Code: code,
+              Name: name,
             };
             console.log(param);
-            self.$http.post(self.$api.getCards, param).then(res => {
+            let url = "/acs/Departments";
+            self.$http.post(url, param).then(res => {
               console.log(res);
               if (res.data === "success") {
                 self.$info({

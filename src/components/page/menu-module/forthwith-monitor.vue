@@ -1339,8 +1339,8 @@
               imgUrl = require("../../../assets/img/monitor/ECC800.png");
             } else if (objArr[i].Description.indexOf("eLight") > -1) {
               imgUrl = require("../../../assets/img/monitor/eLight.jpg");
-            } else if (objArr[i].Description.indexOf("ETH") > -1) {
-              imgUrl = require("../../../assets/img/monitor/智能 ETH插座.png");
+            } else if (objArr[i].Description == "智能 ETH 插座") {
+              imgUrl = require("../../../assets/img/monitor/智能ETH插座.png");
             } else if (objArr[i].Description.indexOf("LED灯") > -1) {
               imgUrl = require("../../../assets/img/monitor/LED灯.png");
             } else if (objArr[i].Description.indexOf("多功能传感器") > -1) {

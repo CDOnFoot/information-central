@@ -1339,7 +1339,7 @@
               imgUrl = require("../../../assets/img/monitor/ECC800.png");
             } else if (objArr[i].Description.indexOf("eLight") > -1) {
               imgUrl = require("../../../assets/img/monitor/eLight.jpg");
-            } else if (objArr[i].Description.indexOf("智能 ETH插座") > -1) {
+            } else if (objArr[i].Description.indexOf("ETH") > -1) {
               imgUrl = require("../../../assets/img/monitor/智能 ETH插座.png");
             } else if (objArr[i].Description.indexOf("LED灯") > -1) {
               imgUrl = require("../../../assets/img/monitor/LED灯.png");
@@ -1382,7 +1382,7 @@
             } else if (objArr[i].Description.indexOf("摄像机") > -1) {
               imgUrl = require("../../../assets/img/monitor/摄像机.png");
             } else if (objArr[i].Description.indexOf("水浸传感器") > -1) {
-              imgUrl = require("../../../assets/img/monitor/水浸传感器和水浸绳.png");
+              imgUrl = require("../../../assets/img/monitor/水浸传感器.png");
             } else if (objArr[i].Description.indexOf("天窗执行器") > -1) {
               imgUrl = require("../../../assets/img/monitor/天窗执行器.png");
             } else if (objArr[i].Description.indexOf("网络硬盘刻录机") > -1) {

@@ -128,7 +128,7 @@
 
                     </div>
                     <div class="energy">
-                      <img src="../../../assets/img/monitor/dev2.png" alt="">
+                      <img src="../../../assets/img/monitor/ECC800.png" alt="">
                     </div>
                   </div>
                 </div>
@@ -1335,59 +1335,64 @@
           console.log(objArr[i].Description);
           if (!obj[objArr[i].Code]) {
             let imgUrl = "";
-            switch (objArr[i].Description) {
-              case "多功能传感器1":
-                imgUrl = require("../../../assets/img/monitor/ECC800.png");
-                break;
-              case "风冷行级精密空调":
-                imgUrl = require("../../../assets/img/monitor/风冷行级精密空调.png");
-                break;
-              case "配电柜输入":
-                imgUrl = require("../../../assets/img/monitor/配电柜输入.png");
-                break;
-              case "配电柜输出":
-                imgUrl = require("../../../assets/img/monitor/配电柜输出.png");
-                break;
-              case "水浸传感器":
-                imgUrl = require("../../../assets/img/monitor/水浸传感器和水浸绳.png");
-                break;
-              case "LED灯":
-                imgUrl = require("../../../assets/img/monitor/LED灯.png");
-                break;
-              case "半高型rPDU":
-                imgUrl = require("../../../assets/img/monitor/半高型rPDU.png");
-                break;
-              case "灯光告警器":
-                imgUrl = require("../../../assets/img/monitor/灯光告警器.png");
-                break;
-              case "机房":
-                imgUrl = require("../../../assets/img/monitor/机房.png");
-                break;
-              case "门禁":
-                imgUrl = require("../../../assets/img/monitor/门禁.png");
-                break;
-              case "门禁执行器":
-                imgUrl = require("../../../assets/img/monitor/门禁执行器.png");
-                break;
-              case "全高型rPDU":
-                imgUrl = require("../../../assets/img/monitor/全高型rPDU.png");
-                break;
-              case "摄像机":
-                imgUrl = require("../../../assets/img/monitor/摄像机.png");
-                break;
-              case "天窗执行器":
-                imgUrl = require("../../../assets/img/monitor/天窗执行器.png");
-                break;
-              case "网络硬盘刻录机":
-                imgUrl = require("../../../assets/img/monitor/网络硬盘刻录机.png");
-                break;
-              case "一体化机房":
-                imgUrl = require("../../../assets/img/monitor/一体化机房.png");
-                break;
-              case "指纹密码刷卡门禁机":
-                imgUrl = require("../../../assets/img/monitor/指纹密码刷卡门禁机.jpg");
-                break;
-              default:
+            if (objArr[i].Description.indexOf("ECC800") > -1) {
+              imgUrl = require("../../../assets/img/monitor/ECC800.png");
+            } else if (objArr[i].Description.indexOf("eLight") > -1) {
+              imgUrl = require("../../../assets/img/monitor/eLight.jpg");
+            } else if (objArr[i].Description.indexOf("智能 ETH插座") > -1) {
+              imgUrl = require("../../../assets/img/monitor/智能 ETH插座.png");
+            } else if (objArr[i].Description.indexOf("LED灯") > -1) {
+              imgUrl = require("../../../assets/img/monitor/LED灯.png");
+            } else if (objArr[i].Description.indexOf("多功能传感器") > -1) {
+              imgUrl = require("../../../assets/img/monitor/多功能传感器.png");
+            } else if (objArr[i].Description.indexOf("rPDU") > -1) {
+              imgUrl = require("../../../assets/img/monitor/rPDU.png");
+            } else if (objArr[i].Description.indexOf("UPS—关门") > -1) {
+              imgUrl = require("../../../assets/img/monitor/UPS—关门.jpg");
+            } else if (objArr[i].Description.indexOf("UPS—开门") > -1) {
+              imgUrl = require("../../../assets/img/monitor/UPS—开门.png");
+            } else if (objArr[i].Description.indexOf("半高型rPDU") > -1) {
+              imgUrl = require("../../../assets/img/monitor/半高型rPDU.png");
+            } else if (objArr[i].Description.indexOf("灯光告警器") > -1) {
+              imgUrl = require("../../../assets/img/monitor/灯光告警器.png");
+            } else if (objArr[i].Description.indexOf("电池监控采集器") > -1) {
+              imgUrl = require("../../../assets/img/monitor/电池监控采集器.png");
+            } else if (objArr[i].Description.indexOf("电池监控盒") > -1) {
+              imgUrl = require("../../../assets/img/monitor/电池监控盒.png");
+            } else if (objArr[i].Description.indexOf("电池监控组网图") > -1) {
+              imgUrl = require("../../../assets/img/monitor/电池监控组网图.png");
+            } else if (objArr[i].Description.indexOf("机房") > -1) {
+              imgUrl = require("../../../assets/img/monitor/机房.png");
+            } else if (objArr[i].Description.indexOf("交流执行器") > -1) {
+              imgUrl = require("../../../assets/img/monitor/交流执行器.png");
+            } else if (objArr[i].Description.indexOf("精密配电柜") > -1) {
+              imgUrl = require("../../../assets/img/monitor/精密配电柜.png");
+            } else if (objArr[i].Description.indexOf("空调") > -1) {
+              imgUrl = require("../../../assets/img/monitor/空调.png");
+            } else if (objArr[i].Description.indexOf("控制天窗") > -1) {
+              imgUrl = require("../../../assets/img/monitor/控制天窗.png");
+            } else if (objArr[i].Description.indexOf("锂电池") > -1) {
+              imgUrl = require("../../../assets/img/monitor/锂电池.png");
+            } else if (objArr[i].Description.indexOf("门禁执行器") > -1) {
+              imgUrl = require("../../../assets/img/monitor/门禁执行器.png");
+            } else if (objArr[i].Description.indexOf("配电柜") > -1) {
+              imgUrl = require("../../../assets/img/monitor/配电柜.png");
+            } else if (objArr[i].Description.indexOf("全高型rPDU") > -1) {
+              imgUrl = require("../../../assets/img/monitor/全高型rPDU.png");
+            } else if (objArr[i].Description.indexOf("摄像机") > -1) {
+              imgUrl = require("../../../assets/img/monitor/摄像机.png");
+            } else if (objArr[i].Description.indexOf("水浸传感器") > -1) {
+              imgUrl = require("../../../assets/img/monitor/水浸传感器和水浸绳.png");
+            } else if (objArr[i].Description.indexOf("天窗执行器") > -1) {
+              imgUrl = require("../../../assets/img/monitor/天窗执行器.png");
+            } else if (objArr[i].Description.indexOf("网络硬盘刻录机") > -1) {
+              imgUrl = require("../../../assets/img/monitor/网络硬盘刻录机.png");
+            } else if (objArr[i].Description.indexOf("温湿度传感器") > -1) {
+              imgUrl = require("../../../assets/img/monitor/温湿度传感器.png");
+            } else if (objArr[i].Description.indexOf("一体化机房") > -1) {
+              imgUrl = require("../../../assets/img/monitor/一体化机房.png");
+            } else if (objArr[i].Description.indexOf("指纹密码刷卡门禁机") > -1) {
+              imgUrl = require("../../../assets/img/monitor/指纹密码刷卡门禁机.jpg");
             }
             let newObj = {
               Code: objArr[i].Code,

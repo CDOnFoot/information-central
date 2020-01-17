@@ -7,6 +7,9 @@
       </div>
       <!--<div class="borde">{{mcTitle}}</div>-->
       <div class="borde">PDU</div>
+      <div class="module-icon">
+        <span>{{this.$common.timestampToTime(totalCapacity.pointTime)}}</span>
+      </div>
       <div :id="mcId" class="main-id">
         <div class="none-data">
           <div class="module-area">

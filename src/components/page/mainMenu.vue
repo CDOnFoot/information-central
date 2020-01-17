@@ -7,9 +7,9 @@
             :height="tableHeaderHeight"
             :style="{}">
           <th class="table-header-title" :width="tableHeaderWidth"></th>
-          <th :width="tableHeaderWidth">报警管理</th>
-          <th :width="tableHeaderWidth">门禁管理</th>
-          <th :width="tableHeaderWidth">视频监控管理</th>
+          <th :width="tableHeaderWidth"></th>
+          <th :width="tableHeaderWidth"></th>
+          <th :width="tableHeaderWidth"></th>
           <th :width="tableHeaderWidth"></th>
         </tr>
         <tr class="the-first-row">

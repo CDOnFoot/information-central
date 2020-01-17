@@ -14,10 +14,11 @@
       </div>
       <!--<div class="borde">{{mcTitle}}</div>-->
       <div class="borde">设备湿度</div>
-     <!-- <div class="module-icon">
-       <img src="../../../assets/img/main/module-information.png" alt="" width="23" height="23">
-       <img src="../../../assets/img/main/module-save.png" alt="" width="23" height="23">
-     </div> -->
+      <div class="module-icon">
+       <!--<img src="../../../assets/img/main/module-information.png" alt="" width="23" height="23">
+       <img src="../../../assets/img/main/module-save.png" alt="" width="23" height="23">-->
+        <span>{{this.$common.timestampToTime(pointValueContainer[7].pointTime)}}</span>
+     </div>
       <div :id="mcId" class="main-id">
         <div class="none-data" id="chart-id-3">
           <!--模块七-->
@@ -34,7 +35,7 @@ export default {
   name: "MC07",
   data() {
     return {
-
+      pointValueContainer: ''
     };
   },
   props: ["mcStatus", "mcTitle", "mcId"],
@@ -55,7 +56,10 @@ export default {
     this.initChart()
   },
 
-  created() {},
+  created() {
+    const that = this;
+    this.pointValueContainer = JSON.parse(that.$store.getters.getPointsList)
+  },
 
   methods: {
     initChart () {

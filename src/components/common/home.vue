@@ -365,6 +365,7 @@
                       usedPoints[index].isAlarm = allPointsValue[index].st.ia;
                       // is it bad point
                       usedPoints[index].isBadPoint = allPointsValue[index].st.ib;
+                      usedPoints[index].pointTime = allPointsValue[index].ti;
                       const dataType = allPointsValue[index].t;
                       switch (dataType) {
                         case "Long":

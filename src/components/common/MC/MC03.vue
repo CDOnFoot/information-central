@@ -14,10 +14,11 @@
       </div>
       <!--<div class="borde">{{mcTitle}}</div>-->
       <div class="borde">设备温度</div>
-      <!-- <div class="module-icon">
-       <img src="../../../assets/img/main/module-information.png" alt="" width="23" height="23">
-       <img src="../../../assets/img/main/module-save.png" alt="" width="23" height="23">
-      </div>-->
+      <div class="module-icon">
+       <!--<img src="../../../assets/img/main/module-information.png" alt="" width="23" height="23">
+       <img src="../../../assets/img/main/module-save.png" alt="" width="23" height="23">-->
+        <span>{{this.$common.timestampToTime(statusContainer_2[19].pointTime)}}</span>
+      </div>
       <div :id="mcId" class="main-id">
         <div class="none-data" id="chart-id">
           <!--&lt;!&ndash;暂无信息&ndash;&gt;模块三-->
@@ -54,7 +55,10 @@
       this.initChart();
     },
 
-    created() {},
+    created() {
+      const that = this;
+      this.statusContainer_2 = JSON.parse(that.$store.getters.getPointsList)
+    },
 
     methods: {
       initChart() {

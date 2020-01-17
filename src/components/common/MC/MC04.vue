@@ -4,10 +4,11 @@
   <div>
    <div class="main">
       <div class="borde">{{mcTitle}}</div>
-     <!-- <div class="module-icon">
-       <img src="../../../assets/img/main/module-information.png" alt="" width="23" height="23">
-       <img src="../../../assets/img/main/module-save.png" alt="" width="23" height="23">
-     </div> -->
+      <div class="module-icon">
+       <!--<img src="../../../assets/img/main/module-information.png" alt="" width="23" height="23">
+       <img src="../../../assets/img/main/module-save.png" alt="" width="23" height="23">-->
+        <span>{{this.$common.timestampToTime(new Date())}}</span>
+     </div>
       <div :id="mcId" class="main-id">
         <div class="none-data">
           <div class="device-content">

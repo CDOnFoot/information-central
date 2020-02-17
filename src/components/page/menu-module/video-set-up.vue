@@ -77,13 +77,12 @@
         },
         accessTokenIn: '',
         testAccessToken: 'at.9fj5sml0bare3yy7cmx92sc75ki05r5d-3gmhe8sy91-04uffq3-sudrfzy6g',
-<<<<<<< HEAD
         // 设备信息，由于部分 API 请求会自动转换请求方式，所有需要用到的数据写死
         deviceData: {
           deviceSerial: "D14931813", // 设备序列号
           deviceVersion: "V3.4.103 build 181128", // 版本号
           deviceModel: "DS-7808NB-K1/C", // 设备型号
-=======
+        },
         // API HTTPS 自动转换 get 为 post 的问题，直接使用设备列表
         deviceList: {
           deviceSerial: "D14931813",
@@ -94,7 +93,6 @@
           deviceVersion: "V3.4.103 build 181128",
           addTime: 1578127170000,
           parentCategory: "COMMON"
->>>>>>> fixnew
         }
       }
     },

@@ -67,6 +67,7 @@
         // 视频长宽 - 根据显示台数改变
         videoWidth: 600,
         videoHeight: 400,
+        url: process.env.NODE_ENV === "development" ? "/api" : "http://open.ys7.com",
         // 动态获取 accessToken，拼接 url
         ysUrl: {
           ysUrl_0: '',
@@ -76,11 +77,24 @@
         },
         accessTokenIn: '',
         testAccessToken: 'at.9fj5sml0bare3yy7cmx92sc75ki05r5d-3gmhe8sy91-04uffq3-sudrfzy6g',
+<<<<<<< HEAD
         // 设备信息，由于部分 API 请求会自动转换请求方式，所有需要用到的数据写死
         deviceData: {
           deviceSerial: "D14931813", // 设备序列号
           deviceVersion: "V3.4.103 build 181128", // 版本号
           deviceModel: "DS-7808NB-K1/C", // 设备型号
+=======
+        // API HTTPS 自动转换 get 为 post 的问题，直接使用设备列表
+        deviceList: {
+          deviceSerial: "D14931813",
+          deviceName: "DS-7808NB-K1/C(D14931813)",
+          deviceType: "DS-7808NB-K1/C",
+          status: 1,
+          defence: 0,
+          deviceVersion: "V3.4.103 build 181128",
+          addTime: 1578127170000,
+          parentCategory: "COMMON"
+>>>>>>> fixnew
         }
       }
     },
@@ -135,6 +149,8 @@
               that.ysUrl.ysUrl_1 = ysUrl + "3" + tokenString;
               that.ysUrl.ysUrl_2 = ysUrl + "4" + tokenString;
               that.ysUrl.ysUrl_3 = ysUrl + "5" + tokenString;
+              // 使用获取的 accessToken 去获取设备列表
+              that.getCameraList(token);
               that.$common.setCookie("ysAccessToken", token, 6 * 24 * 60);
             } else {
               // 如果请求失败则使用 cookie 中缓存的 token
@@ -150,6 +166,23 @@
           })
           .catch(err => {
             console.log(err);
+          })
+      },
+
+      /**
+       * @function
+       * @exception 目前不能在 web 中使用的 API {deviceList, deviceInfo, cameraList}
+       */
+      getCameraList (token) {
+        const that = this;
+        let param = new FormData;
+        param.append('accessToken', token);
+        this.$axios.post(that.url + "/api/lapp/camera/list", param)
+          .then(res => {
+            console.log("device list:", res)
+          })
+          .catch(err => {
+            console.log("come error throw:", err)
           })
       },
 

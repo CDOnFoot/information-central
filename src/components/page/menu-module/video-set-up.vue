@@ -1,45 +1,58 @@
 <template>
-  <div>
-    <div class="video-area-0">
-      <div class="video-content-0">
-        <!--<video id="myPlayer"
-               width="500px"
-               height="350px"
-               src="ezopen://open.ys7.com/D14931813/1.live"
-               autoplay controls playsInline webkit-playsinLine></video>-->
-        <!--<iframe src="https://open.ys7.com/ezopen/h5/iframe?url=ezopen://open.ys7.com/D14931813/2.live&autoplay=1&accessToken=at.0trb40gkdhomm5yn5aj3zfnb017vs7n5-4g2kk8g8lx-14k1r6k-ckuvbxzfy"-->
-        <iframe :src="ysUrl.ysUrl_0"
-                width="600" height="400" id="ysOpenDevice" allowfullscreen></iframe>
+  <div class="video-set-module">
+    <div class="video-area">
+      <div class="video-area-0">
+        <div class="video-content-0">
+          <!--<video id="myPlayer"
+                 width="500px"
+                 height="350px"
+                 src="ezopen://open.ys7.com/D14931813/1.live"
+                 autoplay controls playsInline webkit-playsinLine></video>-->
+          <!--<iframe src="https://open.ys7.com/ezopen/h5/iframe?url=ezopen://open.ys7.com/D14931813/2.live&autoplay=1&accessToken=at.0trb40gkdhomm5yn5aj3zfnb017vs7n5-4g2kk8g8lx-14k1r6k-ckuvbxzfy"-->
+          <iframe :src="ysUrl.ysUrl_0"
+                  width="640" height="430" id="ysOpenDevice" allowfullscreen></iframe>
+        </div>
+        <div class="video-content-1">
+          <!--<iframe src="https://open.ys7.com/ezopen/h5/iframe?url=ezopen://open.ys7.com/D14931813/3.live&autoplay=1&accessToken=at.0trb40gkdhomm5yn5aj3zfnb017vs7n5-4g2kk8g8lx-14k1r6k-ckuvbxzfy"-->
+          <iframe :src="ysUrl.ysUrl_1"
+                  width="640" height="430" id="ysOpenDevice-1" allowfullscreen>
+          </iframe>
+        </div>
       </div>
-      <div class="video-content-1">
-        <!--<iframe src="https://open.ys7.com/ezopen/h5/iframe?url=ezopen://open.ys7.com/D14931813/3.live&autoplay=1&accessToken=at.0trb40gkdhomm5yn5aj3zfnb017vs7n5-4g2kk8g8lx-14k1r6k-ckuvbxzfy"-->
-        <iframe :src="ysUrl.ysUrl_1"
-                width="600" height="400" id="ysOpenDevice-1" allowfullscreen>
-        </iframe>
+
+      <div class="video-area-1">
+        <div class="video-content-2">
+          <!--<iframe src="https://open.ys7.com/ezopen/h5/iframe?url=ezopen://open.ys7.com/D14931813/4.live&autoplay=1&accessToken=at.0trb40gkdhomm5yn5aj3zfnb017vs7n5-4g2kk8g8lx-14k1r6k-ckuvbxzfy"-->
+          <iframe :src="ysUrl.ysUrl_2"
+                  width="640" height="430" id="ysOpenDevice-2" allowfullscreen></iframe>
+        </div>
+        <div class="video-content-3">
+          <!--<iframe src="https://open.ys7.com/ezopen/h5/iframe?url=ezopen://open.ys7.com/D14931813/5.live&autoplay=1&accessToken=at.0trb40gkdhomm5yn5aj3zfnb017vs7n5-4g2kk8g8lx-14k1r6k-ckuvbxzfy"-->
+          <iframe :src="ysUrl.ysUrl_3"
+                  width="640" height="430" id="ysOpenDevice-3" allowfullscreen></iframe>
+        </div>
+        <div class="video-content"></div>
       </div>
     </div>
 
-    <div class="video-area-1">
-      <div class="video-content-2">
-        <!--<iframe src="https://open.ys7.com/ezopen/h5/iframe?url=ezopen://open.ys7.com/D14931813/4.live&autoplay=1&accessToken=at.0trb40gkdhomm5yn5aj3zfnb017vs7n5-4g2kk8g8lx-14k1r6k-ckuvbxzfy"-->
-        <iframe :src="ysUrl.ysUrl_2"
-                width="600" height="400" id="ysOpenDevice-2" allowfullscreen></iframe>
-      </div>
-      <div class="video-content-3">
-        <!--<iframe src="https://open.ys7.com/ezopen/h5/iframe?url=ezopen://open.ys7.com/D14931813/5.live&autoplay=1&accessToken=at.0trb40gkdhomm5yn5aj3zfnb017vs7n5-4g2kk8g8lx-14k1r6k-ckuvbxzfy"-->
-        <iframe :src="ysUrl.ysUrl_3"
-                width="600" height="400" id="ysOpenDevice-3" allowfullscreen></iframe>
-      </div>
-      <div class="video-content"></div>
-    </div>
     <div class="control">
-      <!--<a-button @click="startVideo">start</a-button>
-      <a-button @click="endVideo">pause</a-button>
-      <a-select defaultValue="0" style="width: 150px" @change="chooseVideos">
-        <a-icon slot="suffixIcon" type="down-circle" theme="twoTone" twoToneColor="#27b5d4"/>
-        <a-select-option value="0">1 × 1</a-select-option>
-        <a-select-option value="1">2 × 2</a-select-option>
-      </a-select>-->
+      <div class="the-first-area">
+        <div class="area-title">
+          <div class="area-title-font">设备信息</div>
+        </div>
+      </div>
+
+      <div class="the-second-area">
+        <div class="area-title">
+          <div></div>
+        </div>
+      </div>
+
+      <div class="the-third-area">
+        <div class="area-title">
+          <div></div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -62,7 +75,13 @@
           ysUrl_3: '',
         },
         accessTokenIn: '',
-        testAccessToken: 'at.9fj5sml0bare3yy7cmx92sc75ki05r5d-3gmhe8sy91-04uffq3-sudrfzy6g'
+        testAccessToken: 'at.9fj5sml0bare3yy7cmx92sc75ki05r5d-3gmhe8sy91-04uffq3-sudrfzy6g',
+        // 设备信息，由于部分 API 请求会自动转换请求方式，所有需要用到的数据写死
+        deviceData: {
+          deviceSerial: "D14931813", // 设备序列号
+          deviceVersion: "V3.4.103 build 181128", // 版本号
+          deviceModel: "DS-7808NB-K1/C", // 设备型号
+        }
       }
     },
 
@@ -105,7 +124,7 @@
         param.append('appSecret', '2b54e82f434c0667299b130f4d85e3f9');
         // 使用原生 axios 访问 localhost 模拟 server 解决浏览器同源访问限制
         const url = process.env.NODE_ENV === "development" ? "/api" : "http://open.ys7.com";
-        this.$axios.post("/api/lapp/token/get", param)
+        this.$axios.post(url + "/api/lapp/token/get", param)
           .then(res => {
             // console.log(res);
             if (res.data.code === "200") {
@@ -166,5 +185,37 @@
   .video-area-0, .video-area-1 {
     display: flex;
     flex-direction: row;
+  }
+
+  .video-set-module {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .control {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .the-first-area, .the-second-area, .the-third-area {
+    width: 560px;
+    height: 290px;
+    color: #fff;
+    margin: 0 0 20px 28px;
+    border-radius: 10px;
+    box-shadow: 0 0 35px rgba(0, 204, 255, 1) inset;
+  }
+
+  .area-title {
+    height: 50px;
+    width: 100%;
+    display: flex;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 204, 255, 1) inset;
+  }
+
+  .area-title-font {
+    font-size: 22px;
+    margin: 5px 0 0 10px;
   }
 </style>

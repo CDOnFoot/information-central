@@ -40,6 +40,9 @@
         <div class="area-title">
           <div class="area-title-font">设备信息</div>
         </div>
+        <div class="video-status">
+          <video-information :access-token="accessTokenIn"></video-information>
+        </div>
       </div>
 
       <div class="the-second-area">
@@ -60,7 +63,10 @@
 <script>
   // 不用再额外引入
   // import {EZUIKit} from '../../../../static/ezuikit'
+  // 引入外部组件
+  import VideoInformation from "../menu-module-components/video-information";
   export default {
+    components: {VideoInformation},
     data () {
       return {
         player: '',
@@ -100,12 +106,10 @@
     // 在组件挂载前就必须拿到 token
     created () {
       this.getAccessTokenIn();
-      /*const ysUrl = "https://open.ys7.com/ezopen/h5/iframe?url=ezopen://open.ys7.com/D14931813/",
-        tokenString = ".live&autoplay=1&accessToken=" + this.testAccessToken;
-      this.ysUrl.ysUrl_0 = ysUrl + "2" + tokenString;
-      this.ysUrl.ysUrl_1 = ysUrl + "3" + tokenString;
-      this.ysUrl.ysUrl_2 = ysUrl + "4" + tokenString;
-      this.ysUrl.ysUrl_3 = ysUrl + "5" + tokenString;*/
+      // 延迟获取设备信息列表
+      setTimeout(() => {
+        this.checkDeviceList()
+      }, 2000)
     },
 
     mounted () {
@@ -120,6 +124,20 @@
     },
 
     methods: {
+      // 获取通道信息
+      checkDeviceList () {
+        const that = this;
+        let param = new FormData;
+        param.append("accessToken", that.accessTokenIn);
+        param.append("deviceSerial", that.deviceSerial);
+        this.$axios.post("/api/lapp/device/camera/list", param)
+          .then(res => {
+            if (res.data) {
+              console.log("获取设备通道信息：", res)
+            }
+          })
+      },
+
       /**
        * @function 获取 ys 平台连接视频的 token
        */
@@ -148,7 +166,7 @@
               that.ysUrl.ysUrl_2 = ysUrl + "4" + tokenString;
               that.ysUrl.ysUrl_3 = ysUrl + "5" + tokenString;
               // 使用获取的 accessToken 去获取设备列表
-              that.getCameraList(token);
+              // that.getCameraList(token);
               that.$common.setCookie("ysAccessToken", token, 6 * 24 * 60);
             } else {
               // 如果请求失败则使用 cookie 中缓存的 token
@@ -182,14 +200,6 @@
           .catch(err => {
             console.log("come error throw:", err)
           })
-      },
-
-      startVideo () {
-        // this.player.play();
-      },
-
-      endVideo () {
-        // this.player.stop();
       },
 
       /**

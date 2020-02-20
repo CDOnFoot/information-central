@@ -15,7 +15,7 @@
           </th>
         </tr>
         <tr>
-          <td height="45" width="132"><div class="status-title"><div>隐私状态</div></div></td>
+          <th height="45" width="132"><div class="status-title"><div>隐私状态</div></div></th>
           <td height="45" width="132">
             <div class="status-menu"><div>隐私关闭</div></div>
           </td>
@@ -27,20 +27,26 @@
       </div>
 
       <div class="channel-area">
-        <a-dropdown>
-          <a class="ant-dropdown-link" href="#"> Hover me <a-icon type="down" /> </a>
-          <a-menu slot="overlay">
-            <a-menu-item>
-              <a href="javascript:;">1st menu item</a>
-            </a-menu-item>
-            <a-menu-item>
-              <a href="javascript:;">2nd menu item</a>
-            </a-menu-item>
-            <a-menu-item>
-              <a href="javascript:;">3rd menu item</a>
-            </a-menu-item>
-          </a-menu>
-        </a-dropdown>
+        <tr>
+          <th height="45" width="132"><div class="status-title"><div>选择通道</div></div></th>
+          <th height="45" width="130">
+            <a-dropdown>
+              <a-menu slot="overlay" @click="handleMenuClick">
+                <a-menu-item key="1"><a-icon type="play-circle" />视频1</a-menu-item>
+                <a-menu-item key="2"><a-icon type="play-circle" />视频2</a-menu-item>
+                <a-menu-item key="3"><a-icon type="play-circle" />视频3</a-menu-item>
+                <a-menu-item key="4"><a-icon type="play-circle" />视频4</a-menu-item>
+                <a-menu-item key="5"><a-icon type="play-circle" />视频5</a-menu-item>
+                <a-menu-item key="6"><a-icon type="play-circle" />视频6</a-menu-item>
+                <a-menu-item key="7"><a-icon type="play-circle" />视频7</a-menu-item>
+                <a-menu-item key="8"><a-icon type="play-circle" />视频8</a-menu-item>
+              </a-menu>
+              <a-button style="margin-left: 8px"> 选择 <a-icon type="down" /> </a-button>
+            </a-dropdown>
+          </th>
+          <th width="132"><div class="status-title"><div>运行状态</div></div></th>
+          <th width="130"><div class="status-menu"><div>在线</div></div></th>
+        </tr>
       </div>
       <!--<div class="video-information" id="video-information-1" style="width: 90%;height: 105px"></div>-->
     </div>
@@ -76,7 +82,13 @@
       },
 
       methods: {
-
+        handleMenuClick (e) {
+          console.log("选择了通道：", e);
+          const key = e.key;
+          switch (key) {
+            // ...
+          }
+        }
       }
     }
 </script>
@@ -108,6 +120,6 @@
 }
 
   .channel-area {
-    margin: 20px 0 0 20px;
+    margin: 20px 0 0 0;
   }
 </style>

@@ -47,13 +47,26 @@
 
       <div class="the-second-area">
         <div class="area-title">
-          <div></div>
+          <div class="area-title-font">监控预览</div>
+        </div>
+        <div class="video-status">
+          <video-setting @changeAlarmMode="changeAlarmMode"></video-setting>
         </div>
       </div>
 
       <div class="the-third-area">
         <div class="area-title">
-          <div></div>
+          <div class="area-title-font">监控告警</div>
+        </div>
+        <div class="video-status">
+          <div class="video-alarm-content">
+            <a-table :columns="columnVideo"
+                     :loading="loadingFlag"
+                     :dataSource="tableListVideo"
+                     :pagination="paginationVideo"
+                     size="small">
+            </a-table>
+          </div>
         </div>
       </div>
     </div>
@@ -65,10 +78,22 @@
   // import {EZUIKit} from '../../../../static/ezuikit'
   // 引入外部组件
   import VideoInformation from "../menu-module-components/video-information";
+  import VideoSetting from "../menu-module-components/video-setting";
   export default {
-    components: {VideoInformation},
+    components: {VideoSetting, VideoInformation},
     data () {
       return {
+        columnVideo: [
+
+        ],
+        loadingFlag: false,
+        tableListVideo: [],
+        paginationVideo: {
+          current: 1,
+          defaultCurrent: 1,
+          defaultPageSize: 4,
+          total: 0
+        },
         player: '',
         // 视频长宽 - 根据显示台数改变
         videoWidth: 600,
@@ -121,6 +146,16 @@
       let player_2 = document.getElementById("ysOpenDevice-2").contentWindow;
       let player_3 = document.getElementById("ysOpenDevice-3").contentWindow;
       // console.log("current env:" + process.env.NODE_ENV);
+      this.loadingFlag = true;
+      setTimeout(() => {
+        this.loadingFlag = false;
+        setInterval(() => {
+          this.loadingFlag = true;
+          setTimeout(() => {
+            this.loadingFlag = false;
+          }, 2000)
+        }, 7000)
+      }, 2500)
     },
 
     methods: {
@@ -203,19 +238,21 @@
       },
 
       /**
-       * @function 选择不同的摄像头个数
+       * @function 改变设备报警模式
        */
-      chooseVideos (value) {
+      changeAlarmMode (key) {
         const that = this;
-        switch (value) {
-          case "0":
-            // 选择了 1 * 1 视频
-            break;
+        console.log("当前选择：", key);
+        switch (key) {
           case "1":
-            // 选择了 2 * 2 视频
+            this.$message.info("当前模式为短叫。");
             break;
-          default:
-            return;
+          case "2":
+            this.$message.info("当前模式为长叫。");
+            break;
+          case "3":
+            this.$message.info("当前模式为静音。");
+            break;
         }
       }
     }
@@ -258,5 +295,9 @@
   .area-title-font {
     font-size: 22px;
     margin: 5px 0 0 10px;
+  }
+
+  .video-alarm-content {
+    padding: 0 13px 0 13px;
   }
 </style>

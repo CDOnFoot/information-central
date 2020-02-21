@@ -41,7 +41,9 @@
           <div class="area-title-font">设备信息</div>
         </div>
         <div class="video-status">
-          <video-information :access-token="accessTokenIn"></video-information>
+          <video-information
+            :access-token="accessTokenIn"
+            @chooseChannel="chooseChannel"></video-information>
         </div>
       </div>
 
@@ -84,7 +86,32 @@
     data () {
       return {
         columnVideo: [
-
+          {
+            title: '序号',
+            dataIndex: 'alarmId',
+            align: 'center',
+            // sorter: true,
+            width: '10%',
+            // scopedSlots: { customRender: 'name' }
+          },
+          {
+            title: '告警类型',
+            dataIndex: 'alarmType',
+            align: 'center',
+            width: '10%'
+          },
+          {
+            title: '告警时间',
+            dataIndex: 'alarmTime',
+            align: 'center',
+            width: '10%'
+          },
+          {
+            title: '告警名称',
+            dataIndex: 'alarmName',
+            align: 'center',
+            width: '10%'
+          }
         ],
         loadingFlag: false,
         tableListVideo: [],
@@ -133,7 +160,7 @@
       this.getAccessTokenIn();
       // 延迟获取设备信息列表
       setTimeout(() => {
-        this.checkDeviceList()
+        // this.checkDeviceList()
       }, 2000)
     },
 
@@ -159,6 +186,13 @@
     },
 
     methods: {
+      /**
+       * @function 选择通道
+       */
+      chooseChannel (key) {
+        // get store
+        console.log("current channel number:", key)
+      },
       // 获取通道信息
       checkDeviceList () {
         const that = this;

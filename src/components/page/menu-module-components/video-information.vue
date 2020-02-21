@@ -44,8 +44,14 @@
               <a-button style="margin-left: 8px"> 选择 <a-icon type="down" /> </a-button>
             </a-dropdown>
           </th>
-          <th width="132"><div class="status-title"><div>运行状态</div></div></th>
-          <th width="130"><div class="status-menu"><div>在线</div></div></th>
+          <th width="132"><div class="status-title"><div>当前通道</div></div></th>
+          <th width="130"><div class="status-menu"><div>{{channelNum}}</div></div></th>
+        </tr>
+        <tr>
+          <td height="45" width="132"><div class="status-title"><div>运行状态</div></div></td>
+          <td><div class="status-menu"><div>在线</div></div></td>
+          <td><div class="status-title"><div>视频质量</div></div></td>
+          <td><div class="status-menu"><div>流畅</div></div></td>
         </tr>
       </div>
       <!--<div class="video-information" id="video-information-1" style="width: 90%;height: 105px"></div>-->
@@ -60,7 +66,8 @@
       data () {
           return {
             loadSymbol: false,
-            deviceSerial: 'D14931813'
+            deviceSerial: 'D14931813',
+            channelNum: '视频1'
           }
       },
 
@@ -86,7 +93,40 @@
           console.log("选择了通道：", e);
           const key = e.key;
           switch (key) {
-            // ...
+            case "1":
+              this.channelNum = "视频1";
+              this.$emit("chooseChannel", key);
+              break;
+            case "2":
+              this.channelNum = "视频2";
+              this.$emit("chooseChannel", key);
+              break;
+            case "3":
+              this.channelNum = "视频3";
+              this.$emit("chooseChannel", key);
+              break;
+            case "4":
+              this.channelNum = "视频4";
+              this.$emit("chooseChannel", key);
+              break;
+            case "5":
+              this.channelNum = "视频5";
+              this.$emit("chooseChannel", key);
+              break;
+            case "6":
+              this.channelNum = "视频6";
+              this.$emit("chooseChannel", key);
+              break;
+            case "7":
+              this.channelNum = "视频7";
+              this.$emit("chooseChannel", key);
+              break;
+            case "8":
+              this.channelNum = "视频8";
+              this.$emit("chooseChannel", key);
+              break;
+            default:
+              return;
           }
         }
       }
@@ -113,13 +153,13 @@
   text-align: center;
   font-size: 18px;
   width: 100%;
-  height: 45px;
+  height: 32px;
   color: #fff;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 204, 255, 1) inset;
 }
 
   .channel-area {
-    margin: 20px 0 0 0;
+    margin: 10px 0 0 0;
   }
 </style>

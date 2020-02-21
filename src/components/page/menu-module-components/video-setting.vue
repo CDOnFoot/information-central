@@ -44,9 +44,9 @@
           <td height="45" width="130">
             <a-dropdown>
               <a-menu slot="overlay" @click="handleMenuClick">
-                <a-menu-item key="1"><a-icon type="user" />短叫</a-menu-item>
-                <a-menu-item key="2"><a-icon type="user" />长叫</a-menu-item>
-                <a-menu-item key="3"><a-icon type="user" />静音</a-menu-item>
+                <a-menu-item key="1"><a-icon type="bell" />短叫</a-menu-item>
+                <a-menu-item key="2"><a-icon type="sound" />长叫</a-menu-item>
+                <a-menu-item key="3"><a-icon type="disconnect" />静音</a-menu-item>
               </a-menu>
               <a-button style="margin-left: 8px"> 选择 <a-icon type="down" /> </a-button>
             </a-dropdown>
@@ -112,7 +112,7 @@
   text-align: center;
   font-size: 18px;
   width: 100%;
-  height: 45px;
+  height: 32px;
   color: #fff;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 204, 255, 1) inset;

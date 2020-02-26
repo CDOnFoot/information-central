@@ -308,7 +308,7 @@
        * @function 获取所有设备的所有点值
        */
       dealEquipmentList (data) {
-        // param data 用于查询当前需要用到的设备z
+        // param data 用于查询当前需要用到的设备
         const allEquipment = data;
         // console.log('All equipments:');
         // console.log(allEquipment);

@@ -20,6 +20,15 @@
         <span>{{this.$common.timestampToTime(pointValueContainer[7].pointTime)}}</span>
      </div>
       <div :id="mcId" class="main-id">
+        <div class="choose-menu">
+          <!-- 激活的菜单为 active 类 -->
+          <!-- 使用 prevent 修饰符来防止连接在点击时发生跳转 -->
+          <nav :class="active" @click.prevent>
+            <a href="#" class="home" @click="makeActive('home')">一层</a>
+            <a href="#" class="projects" @click="makeActive('projects')">二层</a>
+          </nav>
+        </div>
+
         <div class="none-data" id="chart-id-3">
           <!--模块七-->
         </div>
@@ -53,7 +62,8 @@ export default {
   },
 
   mounted() {
-    this.initChart()
+    // 初始化一个空的图表
+    this.initChartForTemp('')
   },
 
   created() {
@@ -62,8 +72,25 @@ export default {
   },
 
   methods: {
-    initChart () {
+    makeActive (item) {
+      // this.active = item;
+      this.initChartForTemp(item)
+    },
+
+    initChartForTemp (key) {
+      // 创建 echarts 图表实例
       let chartInit = this.$echarts.init(document.getElementById('chart-id-3'));
+      chartInit.clear();
+      // 模拟数据
+      let data0, data1;
+      if (key === 'home') {
+        data0 = [47, 38, 29, 49, 40];
+        data1 = [38, 56, 38, 58, 39];
+      } else {
+        data0 = [30, 39, 40, 40, 38];
+        data1 = [20, 50, 48, 47, 39];
+      }
+
       const that = this;
       const pointsList = JSON.parse(that.$store.getters.getPointsList);
 
@@ -84,88 +111,83 @@ export default {
       const date_5 = "温湿度传感器-3-", value_5 = pointsList[431].pointValue;
       // const date_6 = "风冷空调", value_6 = pointsList[633].pointValue;
 
-      let option = {
-        // 提示框
+      const option = {
         tooltip: {
-          trigger: 'item',
-          // backgroundColor: '',
-          // borderColor: '',
+          trigger: 'axis',
           axisPointer: {
-            type: 'line'
+            type: 'cross'
           }
         },
-        xAxis: {
-          type: 'category',
-          boundaryGap: false,
-          axisLabel: {
-            color: '#fff',
-            // rotate: -40
-            formatter: function (value, index) {
-              let ret = "";
-              const maxLength = 3, valueLength = value.length;
-              const rowTimes = Math.ceil(valueLength/maxLength);
-              if (rowTimes > 1) {
-                for (let i=0;i<rowTimes;i++) {
-                  let temp = "";
-                  const start = i * maxLength;
-                  const end = start + maxLength;
 
-                  temp = value.substring(start, end) + "\n";
-                  ret += temp;
-                }
-                return ret;
-              } else {
-                return value;
+        legend: {
+          y: '20px',
+          data: ['test0', 'test1'],
+          selectedMode: false
+        },
+        xAxis: [
+          {
+            type: 'category',
+            name: '时间',
+            boundaryGap: false,
+            data: [0, 1, 2, 3, 4],
+            axisLine: {
+              lineStyle: {
+                color: '#fff'
+              }
+            }
+          }
+        ],
+
+        yAxis: [
+          {
+            type: 'value',
+            name: "温度（℃）",
+            axisLine: {
+              lineStyle: {
+                color: '#fff'
               }
             }
           },
-          axisLine: {
-            lineStyle: {
-              color: "#fff"
-            }
-          },
-          // 数据结构需要修改
-          data: [date_0, date_1, date_2, date_3, date_4, date_5]
-        },
-
-        yAxis: {
-          name: '湿度（%RH）',
-          type: 'value',
-          axisLabel: {
-            color: '#fff'
-          },
-          axisLine: {
-            lineStyle: {
-              color: "#fff"
-            }
-          },
-        },
-
-        color: ['#B88BE0'],
-
-        series: [
           {
-            data: [value_0, value_1, value_2, value_3, value_4, value_5],
+            type: 'value',
+            name: '湿度（RH）',
+            axisLine: {
+              lineStyle: {
+                color: '#fff'
+              }
+            }
+          }
+        ],
+
+        // 曲线
+        series: [
+          // 左边的数据
+          {
+            name: 'data0',
+            type: 'line',
+            symbol: 'emptyCircle',
+            smooth: true,
+            showAllSymbol: true, //动画效果
+            yAxisIndex: '0',
+            data: data0
+          },
+          {
+            name: 'data1',
             type: 'line',
             smooth: true,
-            // symbol: 'none',
-            // 折线样式
-            lineStyle: {
-              width: 3
-            },
-            // 区域填充样式
-            areaStyle: {
-              opacity: 0.2
-            }
+            symbol: 'emptyCircle',
+            showAllSymbol: true, //动画效果
+            yAxisIndex: '1',
+            data: data1
           }
         ]
       };
 
       chartInit.setOption(option);
-      setInterval(() => {
+      /*setInterval(() => {
         chartInit.clear();
         chartInit.setOption(option);
-      }, 10000)
+      }, 10000)*/
     }
   }
 };
@@ -194,7 +216,76 @@ export default {
   font-size: 14px;
   text-align: center;
   padding-top: 20px;
-  width: 100%;
+  width: 95%;
   height: 97%;
+}
+
+a, a:visited {
+  outline:none;
+  color:#389dc1;
+}
+
+a:hover{
+  text-decoration:none;
+}
+
+section, footer, header, aside, nav{
+  display: block;
+}
+
+nav{
+  display:inline-block;
+  /*margin:60px auto 45px;*/
+  margin: 0 0 0 60px;
+  background-color:#5597b4;
+  box-shadow:0 1px 1px #ccc;
+  border-radius:2px;
+}
+
+nav a{
+  display:inline-block;
+  padding: 12px 20px;
+  color:#fff !important;
+  font-weight:bold;
+  font-size:10px;
+  text-decoration:none !important;
+  line-height:0.1;
+  text-transform: uppercase;
+  background-color:transparent;
+
+  -webkit-transition:background-color 0.25s;
+  -moz-transition:background-color 0.25s;
+  transition:background-color 0.25s;
+}
+
+nav a:first-child{
+  border-radius:2px 0 0 2px;
+}
+
+nav a:last-child{
+  border-radius:0 2px 2px 0;
+}
+
+nav.home .home,
+nav.projects .projects,
+nav.services .services,
+nav.contact .contact{
+  background-color:#e35885;
+}
+
+p{
+  font-size:22px;
+  font-weight:bold;
+  color:#7d9098;
+}
+
+p b{
+  color:#ffffff;
+  display:inline-block;
+  padding:5px 10px;
+  background-color:#c4d7e0;
+  border-radius:2px;
+  text-transform:uppercase;
+  font-size:18px;
 }
 </style>

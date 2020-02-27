@@ -41,11 +41,19 @@
                 <a-menu-item key="7"><a-icon type="play-circle" />视频7</a-menu-item>
                 <a-menu-item key="8"><a-icon type="play-circle" />视频8</a-menu-item>
               </a-menu>
-              <a-button style="margin-left: 8px"> 选择 <a-icon type="down" /> </a-button>
+              <a-button style="margin-left: 8px"> {{channelNum}} <a-icon type="down" /> </a-button>
             </a-dropdown>
           </th>
-          <th width="132"><div class="status-title"><div>当前通道</div></div></th>
-          <th width="130"><div class="status-menu"><div>{{channelNum}}</div></div></th>
+          <th width="132"><div class="status-title"><div>窗口个数</div></div></th>
+          <th width="130">
+            <a-dropdown>
+              <a-menu slot="overlay" @click="handleMenuClickForWindow">
+                <a-menu-item key="1"><a-icon type="play-circle" />1 X 1</a-menu-item>
+                <a-menu-item key="2"><a-icon type="play-circle" />2 X 2</a-menu-item>
+              </a-menu>
+              <a-button style="margin-left: 8px"> {{windowNumber}} <a-icon type="down" /> </a-button>
+            </a-dropdown>
+          </th>
         </tr>
         <tr>
           <td height="45" width="132"><div class="status-title"><div>运行状态</div></div></td>
@@ -67,7 +75,8 @@
           return {
             loadSymbol: false,
             deviceSerial: 'D14931813',
-            channelNum: '视频1'
+            channelNum: '视频1',
+            windowNumber: '2 X 2'
           }
       },
 
@@ -89,8 +98,22 @@
       },
 
       methods: {
+          // 更改窗口个数
+        handleMenuClickForWindow (e) {
+          // console.log("选择了窗口个数：", e);
+          const key = e.key;
+          switch (key) {
+            case "2":
+              this.windowNumber = "2 X 2";
+              break;
+            default:
+              this.windowNumber = "1 X 1";
+              break;
+          }
+        },
+          // 设置通道
         handleMenuClick (e) {
-          console.log("选择了通道：", e);
+          // console.log("选择了通道：", e);
           const key = e.key;
           switch (key) {
             case "1":

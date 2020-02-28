@@ -17,7 +17,8 @@
       <div class="module-icon">
        <!--<img src="../../../assets/img/main/module-information.png" alt="" width="23" height="23">
        <img src="../../../assets/img/main/module-save.png" alt="" width="23" height="23">-->
-        <span>{{this.$common.timestampToTime(pointValueContainer[7].pointTime)}}</span>
+        <!--<span>{{this.$common.timestampToTime(pointValueContainer[7].pointTime)}}</span>-->
+        <span>{{this.$common.timestampToTime(new Date())}}</span>
      </div>
       <div :id="mcId" class="main-id">
         <div class="choose-menu">
@@ -68,13 +69,13 @@ export default {
 
   created() {
     const that = this;
-    this.pointValueContainer = JSON.parse(that.$store.getters.getPointsList)
+    // this.pointValueContainer = JSON.parse(that.$store.getters.getPointsList)
   },
 
   methods: {
     makeActive (item) {
       // this.active = item;
-      this.initChartForTemp(item)
+      this.initChartForTemp(item);
     },
 
     initChartForTemp (key) {
@@ -82,17 +83,27 @@ export default {
       let chartInit = this.$echarts.init(document.getElementById('chart-id-3'));
       chartInit.clear();
       // 模拟数据
-      let data0, data1;
+      let data0, data1, data2, data3, data4, data5;
       if (key === 'home') {
         data0 = [47, 38, 29, 49, 40];
         data1 = [38, 56, 38, 58, 39];
+        data2 = [39, 58, 49, 39, 57];
+
+        data3 = [104, 89, 94, 101, 99];
+        data4 = [80, 85, 87, 96, 105];
+        data5 = [96, 95, 97, 94, 96];
       } else {
         data0 = [30, 39, 40, 40, 38];
         data1 = [20, 50, 48, 47, 39];
+        data2 = [39, 58, 49, 39, 57];
+
+        data3 = [104, 89, 94, 101, 99];
+        data4 = [80, 85, 87, 96, 105];
+        data5 = [96, 95, 97, 94, 96];
       }
 
       const that = this;
-      const pointsList = JSON.parse(that.$store.getters.getPointsList);
+      // const pointsList = JSON.parse(that.$store.getters.getPointsList);
 
       // 横轴模板数据 - 日期
       /*const dateTemplate = new Date();
@@ -103,13 +114,16 @@ export default {
       const date_4 = dateTemplate.getDate() - 4 + "日";
       const date_5 = dateTemplate.getDate() - 5 + "日";
       const date_6 = dateTemplate.getDate() - 6 + "日";*/
-      const date_0 = "多功能传感器-1-", value_0 = pointsList[7].pointValue;
+
+      /*const date_0 = "多功能传感器-1-", value_0 = pointsList[7].pointValue;
       const date_1 = "多功能传感器-2-", value_1 = pointsList[28].pointValue;
       const date_2 = "多功能传感器-3-", value_2 = pointsList[49].pointValue;
       const date_3 = "温湿度传感器-1-", value_3 = pointsList[385].pointValue;
       const date_4 = "温湿度传感器-2-", value_4 = pointsList[408].pointValue;
-      const date_5 = "温湿度传感器-3-", value_5 = pointsList[431].pointValue;
+      const date_5 = "温湿度传感器-3-", value_5 = pointsList[431].pointValue;*/
       // const date_6 = "风冷空调", value_6 = pointsList[633].pointValue;
+
+      const colorTemplate = ['#beff91', '#beff91', '#beff91', '#fab0ff', '#fab0ff', '#fab0ff'];
 
       const option = {
         tooltip: {
@@ -119,10 +133,16 @@ export default {
           }
         },
 
+        color: colorTemplate,
+
         legend: {
-          y: '20px',
-          data: ['test0', 'test1'],
-          selectedMode: false
+          // y: '20px',
+          top: -5,
+          data: ['多功能传感器1', '多功能传感器2', '多功能传感器3', '温湿度传感器1', '温湿度传感器2', '温湿度传感器3'],
+          selectedMode: false,
+          textStyle: {
+            color: '#fff'
+          }
         },
         xAxis: [
           {
@@ -146,6 +166,9 @@ export default {
               lineStyle: {
                 color: '#fff'
               }
+            },
+            nameTextStyle: {
+              padding: [0, 10, 0, 0]
             }
           },
           {
@@ -155,6 +178,13 @@ export default {
               lineStyle: {
                 color: '#fff'
               }
+            },
+            // 坐标轴 grid 中的刻度线
+            splitLine: {
+              show: false
+            },
+            nameTextStyle: {
+              padding: [20, 0, 0, 30]
             }
           }
         ],
@@ -163,7 +193,7 @@ export default {
         series: [
           // 左边的数据
           {
-            name: 'data0',
+            name: '多功能传感器1',
             type: 'line',
             symbol: 'emptyCircle',
             smooth: true,
@@ -172,13 +202,50 @@ export default {
             data: data0
           },
           {
-            name: 'data1',
+            name: '多功能传感器2',
             type: 'line',
             smooth: true,
             symbol: 'emptyCircle',
             showAllSymbol: true, //动画效果
             yAxisIndex: '1',
             data: data1
+          },
+          {
+            name: '多功能传感器3',
+            type: 'line',
+            smooth: true,
+            symbol: 'emptyCircle',
+            showAllSymbol: true, //动画效果
+            yAxisIndex: '1',
+            data: data2
+          },
+          // 以右边轴为基准的数据
+          {
+            name: '温湿度传感器1',
+            type: 'line',
+            symbol: 'emptyCircle',
+            smooth: true,
+            showAllSymbol: true, //动画效果
+            yAxisIndex: '0',
+            data: data3
+          },
+          {
+            name: '温湿度传感器2',
+            type: 'line',
+            smooth: true,
+            symbol: 'emptyCircle',
+            showAllSymbol: true, //动画效果
+            yAxisIndex: '1',
+            data: data4
+          },
+          {
+            name: '温湿度传感器3',
+            type: 'line',
+            smooth: true,
+            symbol: 'emptyCircle',
+            showAllSymbol: true, //动画效果
+            yAxisIndex: '1',
+            data: data5
           }
         ]
       };
@@ -236,7 +303,7 @@ section, footer, header, aside, nav{
 nav{
   display:inline-block;
   /*margin:60px auto 45px;*/
-  margin: 0 0 0 60px;
+  margin: 0 0 0 130px;
   background-color:#5597b4;
   box-shadow:0 1px 1px #ccc;
   border-radius:2px;

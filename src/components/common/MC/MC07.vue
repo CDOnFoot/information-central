@@ -123,7 +123,7 @@ export default {
       const date_5 = "温湿度传感器-3-", value_5 = pointsList[431].pointValue;*/
       // const date_6 = "风冷空调", value_6 = pointsList[633].pointValue;
 
-      const colorTemplate = ['#beff91', '#beff91', '#beff91', '#fab0ff', '#fab0ff', '#fab0ff'];
+      const colorTemplate = ['#ff9745', '#ff9745', '#ff9745', '#a859ff', '#a859ff', '#a859ff'];
 
       const option = {
         tooltip: {
@@ -138,7 +138,7 @@ export default {
         legend: {
           // y: '20px',
           top: -5,
-          data: ['多功能传感器1', '多功能传感器2', '多功能传感器3', '温湿度传感器1', '温湿度传感器2', '温湿度传感器3'],
+          data: ['多功能1-温度', '多功能2-温度', '多功能3-温度', '多功能1-湿度', '多功能2-湿度', '多功能3-湿度'],
           selectedMode: false,
           textStyle: {
             color: '#fff'
@@ -193,58 +193,130 @@ export default {
         series: [
           // 左边的数据
           {
-            name: '多功能传感器1',
+            name: '多功能1-温度',
             type: 'line',
             symbol: 'emptyCircle',
             smooth: true,
             showAllSymbol: true, //动画效果
             yAxisIndex: '0',
+            /*areaStyle: {
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                offset: 0,
+                color: '#ff9745'
+              },{
+                offset: 0.4,
+                color: '#fdb751b0'
+              },{
+                offset: 1,
+                color: '#838383'
+              }])
+            },*/
             data: data0
           },
           {
-            name: '多功能传感器2',
+            name: '多功能2-温度',
             type: 'line',
             smooth: true,
             symbol: 'emptyCircle',
             showAllSymbol: true, //动画效果
-            yAxisIndex: '1',
+            yAxisIndex: '0',
+            /*areaStyle: {
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                offset: 0,
+                color: '#d68262'
+              },{
+                offset: 0.4,
+                color: '#fdb751b0'
+              },{
+                offset: 1,
+                color: '#838383'
+              }])
+            },*/
             data: data1
           },
           {
-            name: '多功能传感器3',
+            name: '多功能3-温度',
             type: 'line',
             smooth: true,
             symbol: 'emptyCircle',
             showAllSymbol: true, //动画效果
-            yAxisIndex: '1',
+            yAxisIndex: '0',
+            /*areaStyle: {
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                offset: 0,
+                color: '#d68262'
+              },{
+                offset: 0.4,
+                color: '#fdb751b0'
+              },{
+                offset: 1,
+                color: '#838383'
+              }])
+            },*/
             data: data2
           },
           // 以右边轴为基准的数据
           {
-            name: '温湿度传感器1',
+            name: '多功能1-湿度',
             type: 'line',
             symbol: 'emptyCircle',
             smooth: true,
             showAllSymbol: true, //动画效果
-            yAxisIndex: '0',
+            yAxisIndex: '1',
+            /*areaStyle: {
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                offset: 0,
+                color: '#a859ff'
+              },{
+                offset: 0.4,
+                color: '#fdb751b0'
+              },{
+                offset: 1,
+                color: '#838383'
+              }])
+            },*/
             data: data3
           },
           {
-            name: '温湿度传感器2',
+            name: '多功能2-湿度',
             type: 'line',
             smooth: true,
             symbol: 'emptyCircle',
             showAllSymbol: true, //动画效果
             yAxisIndex: '1',
+            /*areaStyle: {
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                offset: 0,
+                color: '#a859ff'
+              },{
+                offset: 0.4,
+                color: '#fdb751b0'
+              },{
+                offset: 1,
+                color: '#838383'
+              }])
+            },*/
             data: data4
           },
           {
-            name: '温湿度传感器3',
+            name: '多功能3-湿度',
             type: 'line',
             smooth: true,
             symbol: 'emptyCircle',
             showAllSymbol: true, //动画效果
             yAxisIndex: '1',
+            /*areaStyle: {
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                offset: 0,
+                color: '#a859ff'
+              },{
+                offset: 0.4,
+                color: '#fdb751b0'
+              },{
+                offset: 1,
+                color: '#838383'
+              }])
+            },*/
             data: data5
           }
         ]

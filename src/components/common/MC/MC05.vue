@@ -100,8 +100,9 @@
               // name: '直接访问',
               type: 'bar',
               stack: '总量',
+              color: '#34abff',
               label: {
-                show: true,
+                show: false,
                 position: 'insideRight'
               },
               data: [3, 2, 4, 3, 12, 0, 0]
@@ -110,10 +111,10 @@
         };
 
         chartInit.setOption(option);
-        setInterval(() => {
+        /*setInterval(() => {
           chartInit.clear();
           chartInit.setOption(option);
-        }, 10000)
+        }, 10000)*/
       }
     }
   };

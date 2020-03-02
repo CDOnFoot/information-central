@@ -43,22 +43,22 @@ export default {
     return {
       column: [
         {
-          title: '设备名称',
-          // dataIndex: 'DisplayName',
+          title: '报警名称',
+          dataIndex: 'AlarmName',
           align: 'center',
           width: '10%'
         },
         {
           title: '告警时间',
-          // dataIndex: 'DisplayName',
+          dataIndex: 'AlarmDateTime',
           align: 'center',
-          width: '10%'
+          width: '20%'
         },
         {
-          title: '告警内容',
-          // dataIndex: 'DisplayName',
+          title: '告警等级',
+          dataIndex: 'AlarmLevel',
           align: 'center',
-          width: '10%'
+          width: '6%'
         }
       ],
       loading: false,
@@ -69,7 +69,8 @@ export default {
         // 默认页容量
         defaultPageSize: 4,
         total: 0,
-        size: 'small'
+        size: 'small',
+        onChange: current => this.onChangePage(current)
       }
     };
   },
@@ -89,6 +90,7 @@ export default {
 
   mounted() {
     // this.initChart();
+    this.getCurrentAlarm();
   },
 
   created() {
@@ -105,6 +107,43 @@ export default {
   },
 
   methods: {
+    // 请求获取报警数据
+    getCurrentAlarm () {
+      const that = this;
+      this.pagination.current = 1;
+      this.loading = true;
+      this.$http.get(that.$api.getAlarmForPagination)
+        .then(res => {
+          console.log(res);
+          if (res.status === 200) {
+            if (res.data.value) {
+              let formattedTable = [];
+              const tableContainer = res.data.value;
+              // 筛选等级
+              tableContainer.forEach((values, index) => {
+                if (values.AlarmLevel.Name === '二级') {
+                  // 控制单元格长度
+                  if (values.AlarmName.length >= 6) {
+                    values.AlarmName = values.AlarmName.slice(0, 6) + "...";
+                  }
+                  values.AlarmDateTime = this.$common.timestampToTime(values.AlarmDateTime);
+                  // values.AlarmDescription = values.AlarmDescription.split('-')[1];
+                  values.AlarmLevel = values.AlarmLevel.Name;
+                  formattedTable.push(values);
+                }
+              });
+              this.tableList = formattedTable;
+              this.loading = false;
+            }
+          }
+        })
+    },
+
+    // 页码改变的回调
+    onChangePage (page) {
+      this.pagination.current = page;
+    },
+    
     initChart () {
       let chartInit = this.$echarts.init(document.getElementById('chart-id-2'));
 
@@ -147,5 +186,9 @@ export default {
   padding-top: 6px;
   width: 98%;
   height: 98%;
+}
+
+/deep/ .ant-table-pagination.ant-pagination {
+  height: 40px;
 }
 </style>

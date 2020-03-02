@@ -52,126 +52,134 @@
 
     methods: {
       initChart() {
+        let chartInit = this.$echarts.init(document.getElementById('chart-0'));
 
-        let posList = [
-          'left', 'right', 'top', 'bottom',
-          'inside',
-          'insideTop', 'insideLeft', 'insideRight', 'insideBottom',
-          'insideTopLeft', 'insideTopRight', 'insideBottomLeft', 'insideBottomRight'
-        ];
+        app.config = {
+          rotate: 90,
+          align: 'left',
+          verticalAlign: 'middle',
+          position: 'insideBottom',
+          distance: 15,
+          onChange: function () {
+            var labelOption = {
+              normal: {
+                rotate: app.config.rotate,
+                align: app.config.align,
+                verticalAlign: app.config.verticalAlign,
+                position: app.config.position,
+                distance: app.config.distance
+              }
+            };
+            chartInit.setOption({
+              series: [{
+                label: labelOption
+              }, {
+                label: labelOption
+              }, {
+                label: labelOption
+              }, {
+                label: labelOption
+              }]
+            });
+          }
+        };
 
-        let chartInit = this.$echarts.init(document.getElementById("chart-0"));
+
+        let labelOption = {
+          show: true,
+          position: app.config.position,
+          distance: app.config.distance,
+          align: app.config.align,
+          verticalAlign: app.config.verticalAlign,
+          rotate: app.config.rotate,
+          formatter: '{c}  {name|{a}}',
+          fontSize: 16,
+          rich: {
+            name: {
+              textBorderColor: '#fff'
+            }
+          }
+        };
+
 
         let option = {
-          /*title: {
-            text: '当前电量',
-            textStyle: {
-              color: '#fff',
-              // fontStyle: 'italic',
-              fontWeight: 'bold',
-              fontFamily: '黑体'
+          color: ['#003366', '#006699', '#4cabce', '#e5323e'],
+          tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+              type: 'shadow'
             }
-          },*/
-
-          // color: ['#365fb4'],
-
+          },
+          legend: {
+            data: ['TOP1', 'TOP2', 'TOP3', 'TOP4', 'TOP5']
+          },
+          toolbox: {
+            show: false,
+            orient: 'vertical',
+            left: 'right',
+            top: 'center',
+            feature: {
+              mark: {show: true},
+              dataView: {show: true, readOnly: false},
+              magicType: {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+              restore: {show: true},
+              saveAsImage: {show: true}
+            }
+          },
+          xAxis: [
+            {
+              type: 'category',
+              axisTick: {show: false},
+              data: ['云计算CPU利用率', '云计算内存利用率', '云计算存储利用率', '云桌面CPU利用率', '云桌面内存利用率', '云桌面存储利用率']
+            }
+          ],
+          yAxis: [
+            {
+              type: 'value',
+              name: '利用率（%）'
+            }
+          ],
           series: [
-            // 外圈 - 饼 pie
             {
-              type: "pie",
-              name: "当前电量",
-              radius: ["65%", "80%"],
-              startAngle: 270,
-              hoverAnimation: false,
-
-              label: {
-                show: true,
-                formatter: "{b}",
-                color: "#ffffff"
-              },
-
-              itemStyle: {
-                color: "#2852bc",
-                borderColor: "#132245",
-                borderWidth: 10,
-                opacity: 0.7
-              },
-
-              center: ["50%", "50%"],
-
-              data: [
-                {
-                  name: "0%",
-                  value: 16
-                },
-                {
-                  name: "20%",
-                  value: 16
-                },
-                {
-                  name: "40%",
-                  value: 16
-                },
-                {
-                  name: "60%",
-                  value: 16
-                },
-                {
-                  name: "80%",
-                  value: 16
-                },
-                {
-                  name: "100%",
-                  value: 16
-                }
-              ]
+              name: 'TOP1',
+              type: 'bar',
+              barGap: 0,
+              label: labelOption,
+              data: [31, 22, 26, 23, 43, 21]
             },
-
-            // 内圈 - 基于仪表盘
             {
-              type: "gauge",
-              radius: "50%",
-              startAngle: 268,
-              endAngle: -85,
-
-              data: [
-                {
-                  name: "test",
-                  value: 50
-                }
-              ],
-
-              axisLine: {
-                show: false
-              },
-
-              splitLine: {
-                show: false
-              },
-
-              axisTick: {
-                length: 12,
-                lineStyle: {
-                  width: 3
-                }
-              },
-
-              pointer: {
-                width: 3
-              },
-
-              axisLabel: {
-                show: false
-              },
-
-              title: {
-                show: false
-              }
+              name: 'TOP2',
+              type: 'bar',
+              label: labelOption,
+              data: [24, 20, 23, 21, 38, 17]
+            },
+            {
+              name: 'TOP3',
+              type: 'bar',
+              label: labelOption,
+              data: [23, 17, 14, 17, 37, 8]
+            },
+            {
+              name: 'TOP4',
+              type: 'bar',
+              label: labelOption,
+              data: [15, 14, 11, 9, 32, 7]
+            },
+            {
+              name: 'TOP5',
+              type: 'bar',
+              label: labelOption,
+              data: [13, 7, 7, 32, 9, 5]
             }
           ]
         };
 
         chartInit.setOption(option);
+
+
+
+
+
         setInterval(() => {
           const value = Math.random() * 100;
           chartInit.clear();

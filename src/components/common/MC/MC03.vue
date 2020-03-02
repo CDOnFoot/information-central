@@ -1,4 +1,3 @@
-
 <template>
   <!--   设备分析 模块内容一-->
   <div>
@@ -15,9 +14,9 @@
       <!--<div class="borde">{{mcTitle}}</div>-->
       <div class="borde">设备温度</div>
       <div class="module-icon">
-       <!--<img src="../../../assets/img/main/module-information.png" alt="" width="23" height="23">
-       <img src="../../../assets/img/main/module-save.png" alt="" width="23" height="23">-->
-        <span>{{this.$common.timestampToTime(statusContainer_2[19].pointTime)}}</span>
+        <!--<img src="../../../assets/img/main/module-information.png" alt="" width="23" height="23">
+        <img src="../../../assets/img/main/module-save.png" alt="" width="23" height="23">-->
+        <span>{{this.$common.timestampToTime(new Date())}}</span>
       </div>
       <div :id="mcId" class="main-id">
         <div class="none-data" id="chart-id">
@@ -39,14 +38,14 @@
     },
     props: ["mcStatus", "mcTitle", "mcId"],
     watch: {
-      mcStatus: function(val) {
+      mcStatus: function (val) {
         this.mcStatus = val;
       },
-      mcTitle: function(val) {
+      mcTitle: function (val) {
         console.log(this.mcTitle);
         this.mcTitle = val;
       },
-      mcId: function(val) {
+      mcId: function (val) {
         this.mcId = val;
       }
     },
@@ -104,9 +103,9 @@
               formatter: function (value, index) {
                 let ret = "";
                 const maxLength = 3, valueLength = value.length;
-                const rowTimes = Math.ceil(valueLength/maxLength);
+                const rowTimes = Math.ceil(valueLength / maxLength);
                 if (rowTimes > 1) {
-                  for (let i=0;i<rowTimes;i++) {
+                  for (let i = 0; i < rowTimes; i++) {
                     let temp = "";
                     const start = i * maxLength;
                     const end = start + maxLength;
@@ -201,7 +200,7 @@
               areaStyle: {
                 // opacity: 0.2,
                 normal: { //颜色渐变函数 前四个参数分别表示四个位置依次为左、下、右、上
-                  color: new echarts.graphic.LinearGradient(0, 0, 0, 1,[{
+                  color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
                       offset: 0, color: '#fdb751' // 0% 处的颜色
                     }, {
                       offset: 0.4, color: '#fdb751b0'
@@ -226,18 +225,20 @@
 </script>
 
 <style scoped>
-.main111 {
+  .main111 {
     margin-left: 56%;
     height: 15px;
     width: 110px;
     background: url('../../../assets/img/loading.png');
   }
+
   .main111 a {
     display: block;
     text-align: center;
     font-size: 20px;
     margin-top: 200px;
   }
+
   .loading {
     /* width: 150px; */
     height: 15px;
@@ -247,6 +248,7 @@
     text-align: center;
     margin-top: -5px;
   }
+
   .loading span {
     display: inline-block;
     width: 8px;
@@ -256,9 +258,11 @@
     -webkit-animation: load-data-v-536c2323 1.04s ease infinite;
     transform: skewX(50deg);
   }
+
   .loading span:last-child {
     margin-right: 0px;
   }
+
   @-webkit-keyframes load {
     0% {
       opacity: 0;
@@ -267,21 +271,27 @@
       opacity: 1;
     }
   }
+
   .loading span:nth-child(1) {
     -webkit-animation-delay: 0.13s;
   }
+
   .loading span:nth-child(2) {
     -webkit-animation-delay: 0.26s;
   }
+
   .loading span:nth-child(3) {
     -webkit-animation-delay: 0.39s;
   }
+
   .loading span:nth-child(4) {
     -webkit-animation-delay: 0.52s;
   }
+
   .loading span:nth-child(5) {
     -webkit-animation-delay: 0.65s;
   }
+
   .main {
     color: #ffffff;
     padding: 1%;
@@ -289,11 +299,13 @@
     width: 102.3%;
     height: 100.7%;
   }
+
   .main-id {
     width: 100%;
     height: 100%;
     position: relative;
   }
+
   .none-data {
     font-size: 14px;
     text-align: center;

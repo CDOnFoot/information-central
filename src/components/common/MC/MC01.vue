@@ -1,4 +1,3 @@
-
 <template>
   <!--   设备分析 模块内容一-->
   <div>
@@ -6,39 +5,77 @@
       <div class="main111">
       </div>
       <!--<div class="borde">{{mcTitle}}</div>-->
-      <div class="borde">PDU</div>
+      <div class="borde">云计算&云桌面</div>
       <div class="module-icon">
-        <span>{{this.$common.timestampToTime(totalCapacity.pointTime)}}</span>
+        <span>{{this.$common.timestampToTime(new Date())}}</span>
       </div>
       <div :id="mcId" class="main-id">
         <div class="none-data">
           <div class="module-area">
-            <div class="PUD-module-0">
-              <div class="module-value-popover-0">
-                <a-popover title="详情">
-                  <template slot="content">
-                    <p>是否坏点：{{ totalCapacity.isBadPoint ? "是" : "否" }}</p>
-                  </template>
-                  <!--<a-button type="primary"></a-button>-->
-                  <!--<img src="../../../assets/img/main/设备点.png" alt="" width="20" height="24">-->
-                  <span>总输入功率<hr/>{{ totalCapacity.pointValue }}kW</span>
-                  <!--<span>总输入功率<hr/>test</span>-->
-                </a-popover>
-              </div>
+            <div class="module-area-item" style="margin-bottom: 15px">
+              <b>云计算设备数量</b>
             </div>
-
-            <div class="PUD-module-1">
-              <div class="module-value-popover-1">
-                <a-popover title="详情">
-                  <template slot="content">
-                    <p>是否坏点：{{ electricEnergy.isBadPoint ? "是" : "否" }}</p>
-                  </template>
-                  <!--<a-button type="primary"></a-button>-->
-                  <!--<img src="../../../assets/img/main/设备点.png" alt="" width="20" height="24">-->
-                  <span>总输入电能<hr/>{{ electricEnergy.pointValue }}kWh</span>
-                  <!--<span>总输入电能<hr/>test</span>-->
-                </a-popover>
-              </div>
+            <div class="module-area-item">
+              <!--<a-icon type="copy"/>-->
+              <img src="../../../assets/img/index/MC01/03.png" alt="">
+              <span class="module-area-title">
+                 计算板卡（个）
+              </span>
+              <span class="module-area-data">15</span>
+            </div>
+            <div class="module-area-item">
+              <img src="../../../assets/img/index/MC01/04.png" alt="">
+              <span class="module-area-title">
+                 存储板卡（个）
+              </span>
+              <span class="module-area-data">15</span>
+            </div>
+            <div class="module-area-item">
+              <img src="../../../assets/img/index/MC01/02.png" alt="">
+              <span class="module-area-title">
+                 虚拟机（台）
+              </span>
+              <span class="module-area-data">15</span>
+            </div>
+          </div>
+          <div class="module-area">
+            <div class="module-area-item" style="margin-bottom: 15px">
+              <b>云桌面设备数量</b>
+            </div>
+            <div class="module-area-item">
+              <img src="../../../assets/img/index/MC01/03.png" alt="">
+              <span class="module-area-title">
+                 计算板卡（个）
+              </span>
+              <span class="module-area-data">15</span>
+            </div>
+            <div class="module-area-item">
+              <img src="../../../assets/img/index/MC01/04.png" alt="">
+              <span class="module-area-title">
+                 存储板卡（个）
+              </span>
+              <span class="module-area-data">15</span>
+            </div>
+            <div class="module-area-item">
+              <img src="../../../assets/img/index/MC01/01.png" alt="">
+              <span class="module-area-title">
+                 超融合GPU节点（台）
+              </span>
+              <span class="module-area-data">15</span>
+            </div>
+            <div class="module-area-item">
+              <img src="../../../assets/img/index/MC01/05.png" alt="">
+              <span class="module-area-title">
+                 办公云桌面（台）
+              </span>
+              <span class="module-area-data">15</span>
+            </div>
+            <div class="module-area-item">
+              <img src="../../../assets/img/index/MC01/06.png" alt="">
+              <span class="module-area-title">
+                 图形工作站桌面（台）
+              </span>
+              <span class="module-area-data">15</span>
             </div>
           </div>
         </div>
@@ -48,46 +85,41 @@
 </template>
 <script>
   export default {
-    name: "MC08",
+    name: "MC01",
     data() {
-      return {
-        totalCapacity: '', // 总功率
-        electricEnergy: '' // 电能
-      };
+      return {};
     },
     props: ["mcStatus", "mcTitle", "mcId"],
     watch: {
-      mcStatus: function(val) {
+      mcStatus: function (val) {
         this.mcStatus = val;
       },
-      mcTitle: function(val) {
+      mcTitle: function (val) {
         console.log(this.mcTitle);
         this.mcTitle = val;
       },
-      mcId: function(val) {
+      mcId: function (val) {
         this.mcId = val;
       }
     },
-    mounted() {
-    },
     created() {
-      // 必须在组件挂载前拿到数据
-      const pointsList = this.$store.getters.getPointsList;
-      this.totalCapacity = JSON.parse(pointsList)[1036]; // 总输入功率
-      this.electricEnergy = JSON.parse(pointsList)[1035]; // 总输入电能
+
     },
-    methods: {
-    }
+    mounted() {
+
+    },
+    methods: {}
   };
 </script>
 
 <style scoped>
-.main111 {
+  .main111 {
     margin-left: 56%;
     height: 15px;
     width: 110px;
     background: url('../../../assets/img/loading.png');
   }
+
   .main {
     color: #ffffff;
     padding: 1%;
@@ -95,46 +127,43 @@
     width: 102.3%;
     height: 100.7%;
   }
-  .main-id{
+
+  .main-id {
+    position: relative;
     width: 100%;
     height: 100%;
-    position: relative;
   }
-  .none-data{
+
+  .none-data {
     font-size: 14px;
-    text-align: center;
-    padding-top: 20px;
+    padding-top: 40px;
+    width: 98%;
+    height: 90%;
   }
 
   .module-area {
-    display: flex;
-    flex-direction: row;
-    padding-top: 15px;
+    float: left;
+    width: 45%;
+    height: 100%;
+    margin-left: 3%;
   }
 
-  .module-value-popover-0 {
-    position: absolute;
-    top: 42%;
-    left: 14.5%;
+  .module-area-item {
+    margin: 8px 0;
   }
 
-  .module-value-popover-1 {
-    position: absolute;
-    top: 42%;
-    left: 64%;
+  .module-area-item img {
+    width: 18px;
   }
 
-  .PUD-module-0 {
-    width: 47%;
-    height: 230px;
-    background: url("../../../assets/img/enterPel.png") no-repeat;
-    background-size: 100% 100%;
+  .module-area-title {
+    display: inline-block;
+    width: 140px;
+    margin-left: 10px;
+    font-size: 12px;
   }
 
-  .PUD-module-1 {
-    width: 47%;
-    height: 230px;
-    background: url("../../../assets/img/outPel.png") no-repeat;
-    background-size: 100% 100%;
+  .module-area-data {
   }
+
 </style>

@@ -12,7 +12,7 @@
         </div> -->
       </div>
       <!--<div class="borde">{{mcTitle}}</div>-->
-      <div class="borde">利用率</div>
+      <div class="borde">利用率排行</div>
       <div class="module-icon">
         <!--<img src="../../../assets/img/main/module-information.png" alt="" width="23" height="23">
         <img src="../../../assets/img/main/module-save.png" alt="" width="23" height="23">-->
@@ -43,13 +43,11 @@
         this.mcId = val;
       }
     },
+    created() {
+    },
     mounted() {
       this.initChart();
     },
-
-    created() {
-    },
-
     methods: {
       initChart() {
         let chartInit = this.$echarts.init(document.getElementById('chart-0'));
@@ -59,7 +57,7 @@
           align: 'left',
           verticalAlign: 'middle',
           position: 'insideBottom',
-          distance: 15,
+          distance: 20,
           onChange: function () {
             var labelOption = {
               normal: {
@@ -84,7 +82,6 @@
           }
         };
 
-
         let labelOption = {
           show: true,
           position: app.config.position,
@@ -93,7 +90,7 @@
           verticalAlign: app.config.verticalAlign,
           rotate: app.config.rotate,
           formatter: '{c}  {name|{a}}',
-          fontSize: 16,
+          fontSize: 14,
           rich: {
             name: {
               textBorderColor: '#fff'
@@ -101,9 +98,9 @@
           }
         };
 
-
         let option = {
-          color: ['#003366', '#006699', '#4cabce', '#e5323e'],
+          // color: ['#003366', '#006699', '#4cabce', '#e5323e'],
+          color: ['#ff9745', '#a859ff', '#34abff', '#6b89ff', '#006699'],
           tooltip: {
             trigger: 'axis',
             axisPointer: {
@@ -111,6 +108,10 @@
             }
           },
           legend: {
+            y: '15px',
+            textStyle: {
+              color: '#ffffff',
+            },
             data: ['TOP1', 'TOP2', 'TOP3', 'TOP4', 'TOP5']
           },
           toolbox: {
@@ -126,17 +127,39 @@
               saveAsImage: {show: true}
             }
           },
+          grid: {
+            left: '8%',
+            right: '8%',
+            top: '30%',
+            bottom: '8%',
+            containLabel: true
+          },
           xAxis: [
             {
               type: 'category',
               axisTick: {show: false},
+              axisLine: {
+                lineStyle: {
+                  color: '#fff'
+                }
+              },
+              axisLabel: {    //底部文字倾斜
+                interval: 0,
+                rotate: 15
+              },
+
               data: ['云计算CPU利用率', '云计算内存利用率', '云计算存储利用率', '云桌面CPU利用率', '云桌面内存利用率', '云桌面存储利用率']
             }
           ],
           yAxis: [
             {
               type: 'value',
-              name: '利用率（%）'
+              name: '利用率（%）',
+              axisLine: {
+                lineStyle: {
+                  color: '#fff'
+                }
+              },
             }
           ],
           series: [
@@ -175,10 +198,6 @@
         };
 
         chartInit.setOption(option);
-
-
-
-
 
         setInterval(() => {
           const value = Math.random() * 100;

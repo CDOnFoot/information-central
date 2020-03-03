@@ -103,10 +103,8 @@
       }
     },
     created() {
-
     },
     mounted() {
-
     },
     methods: {}
   };
@@ -145,7 +143,7 @@
     float: left;
     width: 45%;
     height: 100%;
-    margin-left: 3%;
+    margin-left: 4%;
   }
 
   .module-area-item {
@@ -159,7 +157,7 @@
   .module-area-title {
     display: inline-block;
     width: 140px;
-    margin-left: 10px;
+    margin-left: 5px;
     font-size: 12px;
   }
 

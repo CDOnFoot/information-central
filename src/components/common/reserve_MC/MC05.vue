@@ -3,15 +3,6 @@
   <!--   设备分析 模块内容一-->
   <div>
     <div class="main">
-      <div class="main111">
-        <!-- <div class="loading">
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-        </div> -->
-      </div>
       <!--<div class="borde">{{mcTitle}}</div>-->
       <div class="borde">DCIE(基础架构效率)</div>
       <div class="module-icon">
@@ -195,18 +186,6 @@
 </script>
 
 <style scoped>
-  .main111 {
-    margin-left: 56%;
-    height: 15px;
-    width: 110px;
-    background: url('../../../assets/img/loading.png');
-  }
-  .main111 a {
-    display: block;
-    text-align: center;
-    font-size: 20px;
-    margin-top: 200px;
-  }
   .loading {
     /* width: 150px; */
     height: 15px;

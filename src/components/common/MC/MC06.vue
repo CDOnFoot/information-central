@@ -3,15 +3,7 @@
   <!--   设备分析 模块内容一-->
   <div>
    <div class="main">
-     <div class="main111">
-        <!-- <div class="loading">
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-        </div> -->
-      </div>
+
       <div class="borde">报警信息</div>
       <div class="module-icon">
        <!--<img src="../../../assets/img/main/module-information.png" alt="" width="23" height="23">
@@ -160,13 +152,6 @@ export default {
 </script>
 
 <style scoped>
-.main111 {
-    margin-left: 56%;
-    height: 15px;
-    width: 110px;
-    background: url('../../../assets/img/loading.png');
-  }
-
 .main {
   color: #ffffff;
   padding: 1%;

@@ -2,15 +2,6 @@
   <!--   设备分析 模块内容一-->
   <div>
     <div class="main">
-      <div class="main111">
-        <!-- <div class="loading">
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-        </div> -->
-      </div>
       <!--<div class="borde">{{mcTitle}}</div>-->
       <div class="borde">利用率排行</div>
       <div class="module-icon">
@@ -145,11 +136,32 @@
               },
               axisLabel: {    //底部文字倾斜
                 interval: 0,
-                rotate: 15
-              },
+                // rotate: 15,
+                textStyle:{
+                  fontSize: 8
+                },
+                formatter:function(value){
+    			var ret = '';
+    			var maxLength = 3;
+    			var rowNum = Math.ceil(value.length/maxLength);
+    			if(rowNum > 1) {
+    				for(var i = 0; i < rowNum; i++) {
+    					var temp ="";
+    					var start = i * maxLength;
+    					var end = start + maxLength;
+    					temp = value.substring(start,end) + "\n";
+    					ret += temp;
+    				}
+    				return ret;
+    			}else {
+    			return value;
+    			}
+    		}
+            },
+              data: ['云计算CPU利用率', '云计算内存利用率', '云计算存储利用率', '云桌面CPU利用率', '云桌面内存利用率', '云桌面存储利用率'],
 
-              data: ['云计算CPU利用率', '云计算内存利用率', '云计算存储利用率', '云桌面CPU利用率', '云桌面内存利用率', '云桌面存储利用率']
             }
+
           ],
           yAxis: [
             {
@@ -158,7 +170,7 @@
               axisLine: {
                 lineStyle: {
                   color: '#fff'
-                }
+                },
               },
             }
           ],
@@ -210,32 +222,25 @@
 </script>
 
 <style scoped>
-  .main111 {
-    margin-left: 56%;
-    height: 15px;
-    width: 110px;
-    background: url('../../../assets/img/loading.png');
-  }
+.main {
+  color: #ffffff;
+  padding: 1%;
+  position: relative;
+  width: 102.3%;
+  height: 100.7%;
+}
 
-  .main {
-    color: #ffffff;
-    padding: 1%;
-    position: relative;
-    width: 102.3%;
-    height: 100.7%;
-  }
+.main-id {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
 
-  .main-id {
-    width: 100%;
-    height: 100%;
-    position: relative;
-  }
-
-  .none-data {
-    font-size: 14px;
-    text-align: center;
-    padding-top: 20px;
-    width: 100%;
-    height: 100%;
-  }
+.none-data {
+  font-size: 14px;
+  text-align: center;
+  padding-top: 20px;
+  width: 100%;
+  height: 100%;
+}
 </style>

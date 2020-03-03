@@ -23,10 +23,10 @@
  * @variation 新的登录 IP
  * @type {string}
  */
-// var host = 'http://10.28.3.149';
-var host = 'http://10.0.14.7'; // 服务器 IP，登录、用户管理 ...
-// var hostList = 'http://10.28.3.145:8080';
-var hostList = 'http://10.0.14.6:8080'; // 服务器 IP，首页布局列表
+var host = 'http://10.28.3.149';
+// var host = 'http://10.0.14.7'; // 服务器 IP，登录、用户管理 ...
+var hostList = 'http://10.28.3.145:8080';
+// var hostList = 'http://10.0.14.6:8080'; // 服务器 IP，首页布局列表
 
 var homeHost = useStaging ? 'http://10.66.1.102:28070':'http://10.66.1.160:28070';
     // websocket配置信息/url+user/id+token

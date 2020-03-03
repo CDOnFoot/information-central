@@ -2,8 +2,6 @@
   <!--   设备分析 模块内容一-->
   <div>
     <div class="main">
-      <div class="main111">
-      </div>
       <!--<div class="borde">{{mcTitle}}</div>-->
       <div class="borde">云计算&云桌面</div>
       <div class="module-icon">
@@ -17,21 +15,21 @@
             </div>
             <div class="module-area-item">
               <!--<a-icon type="copy"/>-->
-              <img src="../../../assets/img/index/MC01/03.png" alt="">
+              <div class="indexZreo indexThree"><img src="../../../assets/img/index/MC01/03.png" alt=""></div>
               <span class="module-area-title">
                  计算板卡（个）
               </span>
               <span class="module-area-data">15</span>
             </div>
             <div class="module-area-item">
-              <img src="../../../assets/img/index/MC01/04.png" alt="">
+              <div class="indexZreo indexFour"><img src="../../../assets/img/index/MC01/04.png" alt=""></div>
               <span class="module-area-title">
                  存储板卡（个）
               </span>
               <span class="module-area-data">15</span>
             </div>
             <div class="module-area-item">
-              <img src="../../../assets/img/index/MC01/02.png" alt="">
+              <div class="indexZreo indexTwo"><img src="../../../assets/img/index/MC01/02.png" alt=""></div>
               <span class="module-area-title">
                  虚拟机（台）
               </span>
@@ -43,35 +41,35 @@
               <b>云桌面设备数量</b>
             </div>
             <div class="module-area-item">
-              <img src="../../../assets/img/index/MC01/03.png" alt="">
+              <div class="indexZreo indexThree"><img src="../../../assets/img/index/MC01/03.png" alt=""></div>
               <span class="module-area-title">
                  计算板卡（个）
               </span>
               <span class="module-area-data">15</span>
             </div>
             <div class="module-area-item">
-              <img src="../../../assets/img/index/MC01/04.png" alt="">
+              <div class="indexZreo indexFour"><img src="../../../assets/img/index/MC01/04.png" alt=""></div>
               <span class="module-area-title">
                  存储板卡（个）
               </span>
               <span class="module-area-data">15</span>
             </div>
             <div class="module-area-item">
-              <img src="../../../assets/img/index/MC01/01.png" alt="">
+              <div class="indexZreo indexOne"><img src="../../../assets/img/index/MC01/01.png" alt=""></div>
               <span class="module-area-title">
                  超融合GPU节点（台）
               </span>
               <span class="module-area-data">15</span>
             </div>
             <div class="module-area-item">
-              <img src="../../../assets/img/index/MC01/05.png" alt="">
+              <div class="indexZreo indexFive"><img src="../../../assets/img/index/MC01/05.png" alt=""></div>
               <span class="module-area-title">
                  办公云桌面（台）
               </span>
               <span class="module-area-data">15</span>
             </div>
             <div class="module-area-item">
-              <img src="../../../assets/img/index/MC01/06.png" alt="">
+              <div class="indexZreo indexSix"><img src="../../../assets/img/index/MC01/06.png" alt=""></div>
               <span class="module-area-title">
                  图形工作站桌面（台）
               </span>
@@ -111,14 +109,7 @@
 </script>
 
 <style scoped>
-  .main111 {
-    margin-left: 56%;
-    height: 15px;
-    width: 110px;
-    background: url('../../../assets/img/loading.png');
-  }
-
-  .main {
+.main {
     color: #ffffff;
     padding: 1%;
     position: relative;
@@ -152,6 +143,8 @@
 
   .module-area-item img {
     width: 18px;
+    margin-left: 5px;
+    margin-top: 5px;
   }
 
   .module-area-title {
@@ -160,8 +153,28 @@
     margin-left: 5px;
     font-size: 12px;
   }
-
-  .module-area-data {
-  }
-
+.indexSix{
+  background-color: #6b89ff;
+}
+.indexFive{
+  background-color: blueviolet;
+}
+.indexOne{
+  background-color: #34abff;
+}
+.indexFour{
+  background-color: #ff9745;
+}
+.indexThree{
+  background-color: blueviolet;
+}
+.indexTwo{
+  background-color: #34abff;
+}
+.indexZreo{
+    height: 28px;
+    width: 28px;
+    float: left;
+    border-radius: 14px;
+}
 </style>

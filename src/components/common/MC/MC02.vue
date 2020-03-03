@@ -16,7 +16,7 @@
       <div class="module-icon">
         <!--<img src="../../../assets/img/main/module-information.png" alt="" width="23" height="23">
         <img src="../../../assets/img/main/module-save.png" alt="" width="23" height="23">-->
-        <span>{{this.$common.timestampToTime(new Date())}}</span>
+        <span style="font-size: 14px">{{this.$common.timestampToTime(new Date())}}</span>
       </div>
       <div :id="mcId" class="main-id">
         <div class="none-data" id="chart-0"></div>
@@ -89,8 +89,8 @@
           align: app.config.align,
           verticalAlign: app.config.verticalAlign,
           rotate: app.config.rotate,
-          formatter: '{c}  {name|{a}}',
-          fontSize: 14,
+          // formatter: '{c}  {name|{a}}',
+          fontSize: 12,
           rich: {
             name: {
               textBorderColor: '#fff'
@@ -100,7 +100,8 @@
 
         let option = {
           // color: ['#003366', '#006699', '#4cabce', '#e5323e'],
-          color: ['#ff9745', '#a859ff', '#34abff', '#6b89ff', '#006699'],
+          // color: ['#ff9745', '#a859ff', '#34abff', '#6b89ff', '#006699'],
+          color: ['#60acfc', '#32d3eb', '#5bc49f', '#feb64d', '#9287e7'],
           tooltip: {
             trigger: 'axis',
             axisPointer: {
@@ -108,7 +109,8 @@
             }
           },
           legend: {
-            y: '15px',
+            x: '100px',
+            y: '20px',
             textStyle: {
               color: '#ffffff',
             },
@@ -130,24 +132,25 @@
           grid: {
             left: '8%',
             right: '8%',
-            top: '30%',
+            top: '20%',
             bottom: '8%',
             containLabel: true
           },
           xAxis: [
             {
               type: 'category',
-              axisTick: {show: false},
+              axisTick: {
+                show: false,
+              },
               axisLine: {
                 lineStyle: {
-                  color: '#fff'
+                  color: '#fff',
                 }
               },
               axisLabel: {    //底部文字倾斜
                 interval: 0,
                 rotate: 15
               },
-
               data: ['云计算CPU利用率', '云计算内存利用率', '云计算存储利用率', '云桌面CPU利用率', '云桌面内存利用率', '云桌面存储利用率']
             }
           ],

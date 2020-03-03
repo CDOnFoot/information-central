@@ -7,12 +7,13 @@
       <!--<div class="borde">{{mcTitle}}</div>-->
       <div class="borde">云计算&云桌面</div>
       <div class="module-icon">
-        <span>{{this.$common.timestampToTime(new Date())}}</span>
+        <span style="font-size: 14px">{{this.$common.timestampToTime(new Date())}}</span>
       </div>
       <div :id="mcId" class="main-id">
         <div class="none-data">
           <div class="module-area">
-            <div class="module-area-item" style="margin-bottom: 15px">
+            <div class="module-area-item"
+                 style="line-height: 30px; margin-bottom: 15px; width: 90%; border-bottom: 1px solid #ffffff">
               <b>云计算设备数量</b>
             </div>
             <div class="module-area-item">
@@ -39,7 +40,8 @@
             </div>
           </div>
           <div class="module-area">
-            <div class="module-area-item" style="margin-bottom: 15px">
+            <div class="module-area-item"
+                 style="line-height: 30px; margin-bottom: 15px; width: 90%; border-bottom: 1px solid #ffffff">
               <b>云桌面设备数量</b>
             </div>
             <div class="module-area-item">

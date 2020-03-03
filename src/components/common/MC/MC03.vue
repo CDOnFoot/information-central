@@ -16,27 +16,49 @@
       <div class="module-icon">
         <!--<img src="../../../assets/img/main/module-information.png" alt="" width="23" height="23">
         <img src="../../../assets/img/main/module-save.png" alt="" width="23" height="23">-->
-        <span>{{this.$common.timestampToTime(new Date())}}</span>
+        <span style="font-size: 14px">{{this.$common.timestampToTime(new Date())}}</span>
       </div>
       <div :id="mcId" class="main-id">
         <div class="module-area">
           <div class="module-area-title">
-            云计算
+            <b>
+              云计算
+            </b>
           </div>
           <div class="module-area-data">
-            <div class="none-data" id="chart-0"></div>
-            <div class="none-data" id="chart-1"></div>
-            <div class="none-data" id="chart-2"></div>
+            <div class="none-data" id="chart-0">
+              <a-progress type="circle" strokeLinecap="square" :percent="75" :format="percent => `${percent}% CPU`"
+                          status="active" strokeWidth="10" strokeColor="#0ff" width="92px"/>
+            </div>
+            <div class="none-data" id="chart-1">
+              <a-progress type="circle" strokeLinecap="square" :percent="25" :format="percent => `${percent}% 内存`"
+                          status="active" strokeWidth="10" strokeColor="#0ff" width="92px"/>
+            </div>
+            <div class="none-data" id="chart-2">
+              <a-progress type="circle" strokeLinecap="square" :percent="66" :format="percent => `${percent}% 存储`"
+                          status="active" strokeWidth="10" strokeColor="#0ff" width="92px"/>
+            </div>
           </div>
         </div>
         <div class="module-area">
           <div class="module-area-title">
-            云桌面
+            <b>
+              云桌面
+            </b>
           </div>
           <div class="module-area-data">
-            <div class="none-data" id="chart-3"></div>
-            <div class="none-data" id="chart-4"></div>
-            <div class="none-data" id="chart-5"></div>
+            <div class="none-data" id="chart-3">
+              <a-progress type="circle" strokeLinecap="square" :percent="82" :format="percent => `${percent}% CPU`"
+                          status="active" strokeWidth="10" strokeColor="#0ff" width="92px"/>
+            </div>
+            <div class="none-data" id="chart-4">
+              <a-progress type="circle" strokeLinecap="square" :percent="75" :format="percent => `${percent}% 内存`"
+                          status="active" strokeWidth="10" strokeColor="#0ff" width="92px"/>
+            </div>
+            <div class="none-data" id="chart-5">
+              <a-progress type="circle" strokeLinecap="square" :percent="48" :format="percent => `${percent}% 存储`"
+                          status="active" strokeWidth="10" strokeColor="#0ff" width="92px"/>
+            </div>
           </div>
         </div>
       </div>
@@ -111,7 +133,6 @@
   }
 
 
-
   .module-area {
     width: 100%;
     height: 50%;
@@ -119,23 +140,40 @@
   }
 
   .module-area-title {
-    width: 100%;
-    height: 20%;
+    float: left;
+    width: 15%;
+    height: 100%;
+    line-height: 4;
+    text-align: center;
     font-size: 14px;
+    word-wrap: break-word;
+    writing-mode: vertical-lr; /*从左向右 从右向左是 writing-mode: vertical-rl;*/
+    writing-mode: tb-lr; /*IE浏览器的从左向右 从右向左是 writing-mode: tb-rl；*/
   }
 
   .module-area-data {
-    width: 100%;
-    height: 80%;
-    /*background-color: #3467c5;*/
-
+    float: left;
+    width: 85%;
+    height: 100%;
   }
 
   .none-data {
     float: left;
     width: 32%;
     height: 100%;
+    margin-top: 3%;
     margin-left: 1%;
+  }
+
+  /deep/ .ant-progress-circle-trail {
+    stroke: #175372 !important;
+    opacity: .3;
+  }
+
+  /deep/ .ant-progress-text {
+    color: #e4e8ec;
+    font-size: 14px;
+    font-weight: bold;
   }
 
 </style>

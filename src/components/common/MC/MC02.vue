@@ -212,11 +212,20 @@ export default {
             label: labelOption,
             data: [23, 17, 14, 17, 37, 8]
           },
+<<<<<<< HEAD
           {
             name: "TOP4",
             type: "bar",
             label: labelOption,
             data: [15, 14, 11, 9, 32, 7]
+=======
+          grid: {
+            left: '10%',
+            right: '6%',
+            top: '20%',
+            bottom: '2%',
+            containLabel: true
+>>>>>>> aba1e43ca22eaf0e7892cf34c3e6f228f7a05bc9
           },
           {
             name: "TOP5",
@@ -240,25 +249,25 @@ export default {
 </script>
 
 <style scoped>
-.main {
-  color: #ffffff;
-  padding: 1%;
-  position: relative;
-  width: 102.3%;
-  height: 100.7%;
-}
+  .main {
+    color: #ffffff;
+    padding: 1%;
+    position: relative;
+    width: 102.3%;
+    height: 100.7%;
+  }
 
-.main-id {
-  width: 100%;
-  height: 100%;
-  position: relative;
-}
+  .main-id {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
 
-.none-data {
-  font-size: 14px;
-  text-align: center;
-  padding-top: 20px;
-  width: 100%;
-  height: 100%;
-}
+  .none-data {
+    font-size: 14px;
+    text-align: center;
+    padding-top: 20px;
+    width: 100%;
+    height: 100%;
+  }
 </style>

@@ -119,9 +119,10 @@ export default {
       const option = {
         tooltip: {
           trigger: 'axis',
-          axisPointer: {
+          formatter: '{a0}: {c0}℃<hr />{a1}: {c1}℃<hr />{a2}: {c2}℃<hr />{a3}: {c3}%<hr />{a4}: {c4}%<hr />{a5}: {c5}%<hr />',
+          /*axisPointer: {
             type: 'cross'
-          }
+          }*/
         },
 
         color: colorTemplate,
@@ -164,7 +165,7 @@ export default {
           },
           {
             type: 'value',
-            name: '湿度（RH）',
+            name: '湿度（%RH）',
             axisLine: {
               lineStyle: {
                 color: '#fff'

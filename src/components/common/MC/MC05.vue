@@ -51,7 +51,7 @@
       initChart () {
         let chartInit = this.$echarts.init(document.getElementById('chart-id-1'));
 
-        const option = {
+        /*const option = {
           // 提示框
           tooltip: {
             trigger: 'axis',
@@ -97,6 +97,95 @@
                 position: 'insideRight'
               },
               data: [3, 2, 4, 3, 12, 0, 0]
+            }
+          ]
+        };*/
+        const option = {
+          tooltip: {
+            trigger: 'item',
+            formatter: '{a} <br/>{b}: {c} ({d}%)'
+          },
+          /*legend: {
+            orient: 'vertical',
+            left: 10,
+            data: ['异常', '正常',  'PDU800', 'UPS5000', '温湿度传感器', '门禁执行器', '水浸传感器', '交流执行器', '行级风冷空调']
+          },*/
+          series: [
+            {
+              name: '通信状态',
+              type: 'pie',
+              selectedMode: 'single',
+              radius: [0, '30%'],
+
+              label: {
+                position: 'inner'
+              },
+              labelLine: {
+                show: false
+              },
+              data: [
+                // {value: 6, name: '异常', selected: true},
+                {value: 30, name: '正常'}
+              ]
+            },
+            {
+              name: '通信状态',
+              type: 'pie',
+              radius: ['40%', '55%'],
+              label: {
+                // formatter: '{a|{a}}{abg|}\n{hr|}\n  {b|{b}：}{c}  {per|{d}%}  ',
+                formatter: '{a|{a}}{abg|}\n{hr|}\n  {b|{b}：}{c}  ',
+                backgroundColor: '#eee',
+                borderColor: '#aaa',
+                borderWidth: 1,
+                borderRadius: 6,
+                // shadowBlur:3,
+                // shadowOffsetX: 2,
+                // shadowOffsetY: 2,
+                // shadowColor: '#999',
+                // padding: [0, 7],
+                rich: {
+                  a: {
+                    color: '#999',
+                    lineHeight: 22,
+                    align: 'center'
+                  },
+                  // abg: {
+                  //     backgroundColor: '#333',
+                  //     width: '100%',
+                  //     align: 'right',
+                  //     height: 22,
+                  //     borderRadius: [4, 4, 0, 0]
+                  // },
+                  hr: {
+                    borderColor: '#aaa',
+                    width: '100%',
+                    borderWidth: 0.5,
+                    height: 0
+                  },
+                  b: {
+                    fontSize: 13,
+                    lineHeight: 33
+                  },
+                  per: {
+                    color: '#eee',
+                    backgroundColor: '#334455',
+                    padding: [2, 4],
+                    borderRadius: 2
+                  }
+                }
+              },
+              data: [
+                {value: 2, name: 'PDU800'},
+                // {value: 4, name: 'UPS5000'},
+                {value: 3, name: '温湿度传感器'},
+                {value: 3, name: '多功能传感器'},
+                {value: 2, name: '门禁执行器'},
+                {value: 2, name: '行级风冷空调'},
+                {value: 2, name: '交流执行器'},
+                {value: 2, name: '天窗执行器'},
+                {value: 1, name: '水浸传感器'}
+              ]
             }
           ]
         };
@@ -172,7 +261,7 @@
     font-size: 14px;
     text-align: center;
     padding-top: 20px;
-    width: 98%;
-    height: 90%;
+    width: 100%;
+    height: 100%;
   }
 </style>

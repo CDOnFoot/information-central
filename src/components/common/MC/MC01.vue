@@ -5,7 +5,7 @@
       <!--<div class="borde">{{mcTitle}}</div>-->
       <div class="borde">云计算&云桌面</div>
       <div class="module-icon">
-        <span style="font-size: 14px">{{this.$common.timestampToTime(new Date())}}</span>
+        <span>{{this.$common.timestampToTime(new Date())}}</span>
       </div>
       <div :id="mcId" class="main-id">
         <div class="none-data">

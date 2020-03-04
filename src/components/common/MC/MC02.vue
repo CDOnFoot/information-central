@@ -7,7 +7,7 @@
       <div class="module-icon">
         <!--<img src="../../../assets/img/main/module-information.png" alt="" width="23" height="23">
         <img src="../../../assets/img/main/module-save.png" alt="" width="23" height="23">-->
-        <span style="font-size: 14px">{{this.$common.timestampToTime(new Date())}}</span>
+        <span>{{this.$common.timestampToTime(new Date())}}</span>
       </div>
       <div :id="mcId" class="main-id">
         <div class="none-data" id="chart-0"></div>

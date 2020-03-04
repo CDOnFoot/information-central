@@ -50,7 +50,7 @@
           position: "insideBottom",
           distance: 20,
           onChange: function () {
-            var labelOption = {
+            let labelOption = {
               normal: {
                 rotate: app.config.rotate,
                 align: app.config.align,
@@ -107,7 +107,14 @@
             axisPointer: {
               type: "shadow"
             },
-            formatter: '{a0}: {c0}%<br />{a1}: {c1}%<br />{a2}: {c2}%<br />{a3}: {c3}%<br />{a4}: {c4}%'
+            // formatter: '{b}<br />{a0}: {c0}%<br />{a1}: {c1}%<br />{a2}: {c2}%<br />{a3}: {c3}%<br />{a4}: {c4}%'
+            formatter: function (params) {
+              let result = '';
+              params.forEach(function (item, i) {
+                result += (i == 0 ? item.name + '</br>' : '') + " " + item.marker + " " + item.seriesName + " : " + item.value + "%</br>";
+              });
+              return result;
+            }
           },
           legend: {
             x: "125px",
@@ -163,14 +170,14 @@
                 },
                 interval: 0,
                 formatter: function (value) {
-                  var ret = "";
-                  var maxLength = 3;
-                  var rowNum = Math.ceil(value.length / maxLength);
+                  let ret = "";
+                  let maxLength = 3;
+                  let rowNum = Math.ceil(value.length / maxLength);
                   if (rowNum > 1) {
-                    for (var i = 0; i < 3; i++) {
-                      var temp = "";
-                      var start = i * maxLength;
-                      var end = start + maxLength;
+                    for (let i = 0; i < 3; i++) {
+                      let temp = "";
+                      let start = i * maxLength;
+                      let end = start + maxLength;
                       temp = value.substring(start, end) + (i == 0 ? '\n' : '');
                       ret += temp;
                     }

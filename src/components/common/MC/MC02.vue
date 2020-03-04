@@ -90,7 +90,7 @@
           align: app.config.align,
           verticalAlign: app.config.verticalAlign,
           rotate: app.config.rotate,
-          // formatter: '{c}  {name|{a}}',
+          formatter: '{c} %',
           fontSize: 8,
           rich: {
             name: {
@@ -100,17 +100,17 @@
         };
 
         let option = {
-          // color: ['#003366', '#006699', '#4cabce', '#e5323e'],
           // color: ['#ff9745', '#a859ff', '#34abff', '#6b89ff', '#006699'],
           color: ["#60acfc", "#32d3eb", "#5bc49f", "#feb64d", "#9287e7"],
           tooltip: {
             trigger: "axis",
             axisPointer: {
               type: "shadow"
-            }
+            },
+            formatter: '{a0}: {c0}%<br />{a1}: {c1}%<br />{a2}: {c2}%<br />{a3}: {c3}%<br />{a4}: {c4}%'
           },
           legend: {
-            x: "115px",
+            x: "125px",
             y: "20px",
             textStyle: {
               color: "#ffffff",
@@ -135,7 +135,7 @@
             left: '8%',
             right: '6%',
             top: '20%',
-            bottom: '2%',
+            bottom: '4%',
             containLabel: true
           },
           xAxis: [
@@ -171,7 +171,7 @@
                       var temp = "";
                       var start = i * maxLength;
                       var end = start + maxLength;
-                      temp = value.substring(start, end) + "\n";
+                      temp = value.substring(start, end) + (i == 0 ? '\n' : '');
                       ret += temp;
                     }
                     return ret;
@@ -190,7 +190,7 @@
                 lineStyle: {
                   color: "#fff"
                 }
-              }
+              },
             }
           ],
           series: [

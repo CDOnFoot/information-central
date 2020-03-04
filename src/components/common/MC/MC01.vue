@@ -127,7 +127,7 @@
 
   .none-data {
     font-size: 14px;
-    padding-top: 40px;
+    padding-top: 36px;
     width: 98%;
     height: 90%;
   }

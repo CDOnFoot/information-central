@@ -144,7 +144,7 @@
     float: left;
     width: 15%;
     height: 100%;
-    line-height: 4;
+    line-height: 6;
     text-align: center;
     font-size: 14px;
     word-wrap: break-word;

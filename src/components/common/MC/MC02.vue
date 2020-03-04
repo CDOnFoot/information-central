@@ -100,7 +100,7 @@
             }
           },
           legend: {
-            x: '100px',
+            x: '115px',
             y: '20px',
             textStyle: {
               color: '#ffffff',

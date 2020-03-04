@@ -121,10 +121,10 @@
             }
           },
           grid: {
-            left: '8%',
-            right: '8%',
+            left: '10%',
+            right: '6%',
             top: '20%',
-            bottom: '8%',
+            bottom: '2%',
             containLabel: true
           },
           xAxis: [
@@ -205,25 +205,25 @@
 </script>
 
 <style scoped>
-.main {
-  color: #ffffff;
-  padding: 1%;
-  position: relative;
-  width: 102.3%;
-  height: 100.7%;
-}
+  .main {
+    color: #ffffff;
+    padding: 1%;
+    position: relative;
+    width: 102.3%;
+    height: 100.7%;
+  }
 
-.main-id {
-  width: 100%;
-  height: 100%;
-  position: relative;
-}
+  .main-id {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
 
-.none-data {
-  font-size: 14px;
-  text-align: center;
-  padding-top: 20px;
-  width: 100%;
-  height: 100%;
-}
+  .none-data {
+    font-size: 14px;
+    text-align: center;
+    padding-top: 20px;
+    width: 100%;
+    height: 100%;
+  }
 </style>

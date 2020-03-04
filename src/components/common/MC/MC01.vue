@@ -111,7 +111,7 @@
 </script>
 
 <style scoped>
-.main {
+  .main {
     color: #ffffff;
     padding: 1%;
     position: relative;
@@ -136,11 +136,11 @@
     float: left;
     width: 45%;
     height: 100%;
-    margin-left: 4%;
+    margin-left: 5%;
   }
 
   .module-area-item {
-    margin: 8px 0;
+    margin: 12px 4px;
   }
 
   .module-area-item img {
@@ -155,28 +155,35 @@
     margin-left: 5px;
     font-size: 12px;
   }
-.indexSix{
-  background-color: #6b89ff;
-}
-.indexFive{
-  background-color: blueviolet;
-}
-.indexOne{
-  background-color: #34abff;
-}
-.indexFour{
-  background-color: #ff9745;
-}
-.indexThree{
-  background-color: blueviolet;
-}
-.indexTwo{
-  background-color: #34abff;
-}
-.indexZreo{
+
+  .indexSix {
+    background-color: #6b89ff;
+  }
+
+  .indexFive {
+    background-color: blueviolet;
+  }
+
+  .indexOne {
+    background-color: #34abff;
+  }
+
+  .indexFour {
+    background-color: #ff9745;
+  }
+
+  .indexThree {
+    background-color: blueviolet;
+  }
+
+  .indexTwo {
+    background-color: #34abff;
+  }
+
+  .indexZreo {
     height: 28px;
     width: 28px;
     float: left;
     border-radius: 14px;
-}
+  }
 </style>

@@ -365,7 +365,8 @@ export default {
   name: "MC04",
   data() {
     return {
-      statusContainer: []
+      statusContainer: [],
+      timeOut: ''
     };
   },
   props: ["mcStatus", "mcTitle", "mcId", "statusList"],
@@ -412,6 +413,13 @@ export default {
     this.$('.exchange-module').hide();
     this.$('.water-check').hide();
 
+    let time = 0;
+    this.timeOut = setInterval(() => {
+      this.handleChange(time.toString());
+      if (time <= 5) time++;
+      if (time > 5) time = 0;
+    }, 5000);
+
     const statusList = this.$store.getters.getPointsList;
     // this.statusContainer = JSON.parse(statusList);
     console.log('after JSON.parse:');
@@ -421,6 +429,10 @@ export default {
   created() {
     const statusList = this.$store.getters.getPointsList;
     this.statusContainer = JSON.parse(statusList);
+  },
+
+  destroyed () {
+    clearInterval(this.timeOut)
   },
 
   methods: {

@@ -41,13 +41,13 @@
     },
     methods: {
       initChart() {
-        let chartInit = this.$echarts.init(document.getElementById('chart-0'));
+        let chartInit = this.$echarts.init(document.getElementById("chart-0"));
 
         app.config = {
           rotate: 90,
-          align: 'left',
-          verticalAlign: 'middle',
-          position: 'insideBottom',
+          align: "left",
+          verticalAlign: "middle",
+          position: "insideBottom",
           distance: 20,
           onChange: function () {
             var labelOption = {
@@ -57,18 +57,28 @@
                 verticalAlign: app.config.verticalAlign,
                 position: app.config.position,
                 distance: app.config.distance
+                // label:{
+                //   textStyle:{
+                //     fontSize: 10,
+                //   }
+                // }
               }
             };
             chartInit.setOption({
-              series: [{
-                label: labelOption
-              }, {
-                label: labelOption
-              }, {
-                label: labelOption
-              }, {
-                label: labelOption
-              }]
+              series: [
+                {
+                  label: labelOption
+                },
+                {
+                  label: labelOption
+                },
+                {
+                  label: labelOption
+                },
+                {
+                  label: labelOption
+                }
+              ]
             });
           }
         };
@@ -81,10 +91,10 @@
           verticalAlign: app.config.verticalAlign,
           rotate: app.config.rotate,
           // formatter: '{c}  {name|{a}}',
-          fontSize: 12,
+          fontSize: 8,
           rich: {
             name: {
-              textBorderColor: '#fff'
+              textBorderColor: "#fff"
             }
           }
         };
@@ -92,36 +102,37 @@
         let option = {
           // color: ['#003366', '#006699', '#4cabce', '#e5323e'],
           // color: ['#ff9745', '#a859ff', '#34abff', '#6b89ff', '#006699'],
-          color: ['#60acfc', '#32d3eb', '#5bc49f', '#feb64d', '#9287e7'],
+          color: ["#60acfc", "#32d3eb", "#5bc49f", "#feb64d", "#9287e7"],
           tooltip: {
-            trigger: 'axis',
+            trigger: "axis",
             axisPointer: {
-              type: 'shadow'
+              type: "shadow"
             }
           },
           legend: {
-            x: '115px',
-            y: '20px',
+            x: "115px",
+            y: "20px",
             textStyle: {
-              color: '#ffffff',
+              color: "#ffffff",
+              fontSize: 10
             },
-            data: ['TOP1', 'TOP2', 'TOP3', 'TOP4', 'TOP5']
+            data: ["TOP1", "TOP2", "TOP3", "TOP4", "TOP5"]
           },
           toolbox: {
             show: false,
-            orient: 'vertical',
-            left: 'right',
-            top: 'center',
+            orient: "vertical",
+            left: "right",
+            top: "center",
             feature: {
               mark: {show: true},
               dataView: {show: true, readOnly: false},
-              magicType: {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+              magicType: {show: true, type: ["line", "bar", "stack", "tiled"]},
               restore: {show: true},
               saveAsImage: {show: true}
             }
           },
           grid: {
-            left: '10%',
+            left: '8%',
             right: '6%',
             top: '20%',
             bottom: '2%',
@@ -129,63 +140,88 @@
           },
           xAxis: [
             {
-              type: 'category',
+              type: "category",
               axisTick: {
-                show: false,
+                show: false
               },
               axisLine: {
                 lineStyle: {
-                  color: '#fff',
+                  color: "#fff"
                 }
               },
-              axisLabel: {    //底部文字倾斜
+              data: [
+                "云计算CPU利用率",
+                "云计算内存利用率",
+                "云计算存储利用率",
+                "云桌面CPU利用率",
+                "云桌面内存利用率",
+                "云桌面存储利用率"
+              ],
+              axisLabel: {
+                textStyle: {
+                  fontSize: 10
+                },
                 interval: 0,
-                rotate: 15
-              },
-              data: ['云计算CPU利用率', '云计算内存利用率', '云计算存储利用率', '云桌面CPU利用率', '云桌面内存利用率', '云桌面存储利用率']
+                formatter: function (value) {
+                  var ret = "";
+                  var maxLength = 3;
+                  var rowNum = Math.ceil(value.length / maxLength);
+                  if (rowNum > 1) {
+                    for (var i = 0; i < 3; i++) {
+                      var temp = "";
+                      var start = i * maxLength;
+                      var end = start + maxLength;
+                      temp = value.substring(start, end) + "\n";
+                      ret += temp;
+                    }
+                    return ret;
+                  } else {
+                    return value;
+                  }
+                }
+              }
             }
-
           ],
           yAxis: [
             {
-              type: 'value',
-              name: '利用率（%）',
+              type: "value",
+              name: "利用率（%）",
               axisLine: {
                 lineStyle: {
-                  color: '#fff'
-                },
-              },
+                  color: "#fff"
+                }
+              }
             }
           ],
           series: [
             {
-              name: 'TOP1',
-              type: 'bar',
+              name: "TOP1",
+              type: "bar",
               barGap: 0,
               label: labelOption,
               data: [31, 22, 26, 23, 43, 21]
             },
             {
-              name: 'TOP2',
-              type: 'bar',
+              name: "TOP2",
+              type: "bar",
               label: labelOption,
               data: [24, 20, 23, 21, 38, 17]
             },
             {
-              name: 'TOP3',
-              type: 'bar',
+              name: "TOP3",
+              type: "bar",
               label: labelOption,
               data: [23, 17, 14, 17, 37, 8]
             },
             {
-              name: 'TOP4',
-              type: 'bar',
+              name: "TOP4",
+              type: "bar",
               label: labelOption,
               data: [15, 14, 11, 9, 32, 7]
             },
             {
-              name: 'TOP5',
-              type: 'bar',
+              name: "TOP5",
+              type: "bar",
               label: labelOption,
               data: [13, 7, 7, 32, 9, 5]
             }

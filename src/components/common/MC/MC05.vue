@@ -135,6 +135,7 @@
         };
 
         chartInit.setOption(option);
+
         // setInterval(() => {
         //   chartInit.clear();
         //   chartInit.setOption(option);

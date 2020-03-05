@@ -237,11 +237,11 @@
 
         chartInit.setOption(option);
 
-        setInterval(() => {
+        setTimeout(() => {
           const value = Math.random() * 100;
           chartInit.clear();
           chartInit.setOption(option);
-        }, 10000);
+        }, 1000);
       }
     }
   };

@@ -19,21 +19,21 @@
           <div class="module-area-data">
             <div class="none-data" id="chart-0">
               <a-progress type="circle" :percent="75" :format="percent => `${percent}% CPU`"
-                          status="active" strokeWidth="10" strokeColor="#0ff" width="92px"/>
+                          status="active" strokeWidth="10" strokeColor="#0ff" width="86px"/>
               <div>
                 78/240 <span>核</span>
               </div>
             </div>
             <div class="none-data" id="chart-1">
               <a-progress type="circle" :percent="25" :format="percent => `${percent}% 内存`"
-                          status="active" strokeWidth="10" strokeColor="#0ff" width="92px"/>
+                          status="active" strokeWidth="10" strokeColor="#0ff" width="86px"/>
               <div>
                 78/240 <span>MB</span>
               </div>
             </div>
             <div class="none-data" id="chart-2">
               <a-progress type="circle" :percent="66" :format="percent => `${percent}% 存储`"
-                          status="active" strokeWidth="10" strokeColor="#0ff" width="92px"/>
+                          status="active" strokeWidth="10" strokeColor="#0ff" width="86px"/>
               <div>
                 78/240 <span>GB</span>
               </div>
@@ -49,21 +49,21 @@
           <div class="module-area-data">
             <div class="none-data" id="chart-3">
               <a-progress type="circle" :percent="82" :format="percent => `${percent}% CPU`"
-                          status="active" strokeWidth="10" strokeColor="#0ff" width="92px"/>
+                          status="active" strokeWidth="10" strokeColor="#0ff" width="86px"/>
               <div>
                 78/240 <span>核</span>
               </div>
             </div>
             <div class="none-data" id="chart-4">
               <a-progress type="circle" :percent="75" :format="percent => `${percent}% 内存`"
-                          status="active" strokeWidth="10" strokeColor="#0ff" width="92px"/>
+                          status="active" strokeWidth="10" strokeColor="#0ff" width="86px"/>
               <div>
                 78/240 <span>GB</span>
               </div>
             </div>
             <div class="none-data" id="chart-5">
               <a-progress type="circle" :percent="48" :format="percent => `${percent}% 存储`"
-                          status="active" strokeWidth="10" strokeColor="#0ff" width="92px"/>
+                          status="active" strokeWidth="10" strokeColor="#0ff" width="86px"/>
               <div>
                 78/240 <span>TB</span>
               </div>
@@ -136,7 +136,7 @@
 
   .module-area {
     width: 100%;
-    height: 50%;
+    height: 52%;
     /*background-color: #3467c5;*/
   }
 

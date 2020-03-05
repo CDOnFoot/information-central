@@ -15,10 +15,16 @@
           <!--模块六-->
           <!-- 新增设备点报警数据 list -->
           <a-table :columns="column"
+                   class="flipInX"
                    :loading="loading"
                    :dataSource="tableList"
-                   :pagination="pagination"
+                   :pagination="false"
+                   :showHeader="false"
                    size="small">
+            <template slot="operation" slot-scope="text, record">
+              <!--<a-button type="dashed" ghost @click="checkUser(record)">查看</a-button>-->
+              <div><img src="../../../assets/img/menu-icon/alarm_1.png" alt="" width="20" height="20"></div>
+            </template>
           </a-table>
         </div>
       </div>
@@ -34,6 +40,13 @@ export default {
   data() {
     return {
       column: [
+        {
+          title: '操 作',
+          // dataIndex: 'tel',
+          align: 'center',
+          width: '5%',
+          scopedSlots: { customRender: 'operation' }
+        },
         {
           title: '报警名称',
           dataIndex: 'AlarmName',
@@ -124,7 +137,11 @@ export default {
                   formattedTable.push(values);
                 }
               });
-              this.tableList = formattedTable;
+              let lastTable = [];
+              for (let i=0;i<7;i++) {
+                lastTable.push(formattedTable[i])
+              }
+              this.tableList = lastTable;
               this.loading = false;
             }
           }
@@ -168,12 +185,62 @@ export default {
 .none-data{
   font-size: 14px;
   text-align: center;
-  padding-top: 6px;
+  padding-top: 15px;
   width: 98%;
   height: 98%;
 }
 
 /deep/ .ant-table-pagination.ant-pagination {
   height: 40px;
+}
+
+/deep/ .ant-table-row:nth-child(even) {
+  background: #0b4A86;
+}
+
+/deep/ .ant-table-row:nth-child(odd) {
+  background: #1875A6;
+}
+
+/deep/ .ant-table-row > td {
+  padding: 4px;
+}
+
+/deep/ .ant-table-placeholder {
+  color: #ffffff;
+  background: transparent;
+  border-bottom: none;
+}
+
+
+@keyframes flipInX {
+  from {
+    transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+    animation-timing-function: ease-in;
+    opacity: 0;
+  }
+
+  40% {
+    transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
+    animation-timing-function: ease-in;
+  }
+
+  60% {
+    transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
+    opacity: 1;
+  }
+
+  80% {
+    transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
+  }
+
+  to {
+    transform: perspective(400px);
+  }
+}
+
+.flipInX {
+  backface-visibility: visible !important;
+  animation-name: flipInX;
 }
 </style>

@@ -19,7 +19,6 @@
                    :loading="loading"
                    :dataSource="tableList"
                    :pagination="false"
-                   :showHeader="false"
                    size="small">
             <template slot="operation" slot-scope="text, record">
               <!--<a-button type="dashed" ghost @click="checkUser(record)">查看</a-button>-->
@@ -41,7 +40,7 @@ export default {
     return {
       column: [
         {
-          title: '操 作',
+          title: '',
           // dataIndex: 'tel',
           align: 'center',
           width: '5%',
@@ -138,7 +137,7 @@ export default {
                 }
               });
               let lastTable = [];
-              for (let i=0;i<7;i++) {
+              for (let i=0;i<6;i++) {
                 lastTable.push(formattedTable[i])
               }
               this.tableList = lastTable;
@@ -185,7 +184,7 @@ export default {
 .none-data{
   font-size: 14px;
   text-align: center;
-  padding-top: 15px;
+  padding: 15px 7px 0 0;
   width: 98%;
   height: 98%;
 }

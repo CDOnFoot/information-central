@@ -55,7 +55,7 @@ export default {
 
   mounted() {
     // 初始化一个空的图表
-    this.initChartForTemp('')
+    this.initChartForTemp('home')
   },
 
   created() {
@@ -75,114 +75,25 @@ export default {
       chartInit.clear();
       // 模拟数据
       let data0, data1, data2, data3, data4, data5;
+      let legend, series;
       if (key === 'home') {
         data0 = [47, 38, 29, 49, 40];
         data1 = [38, 56, 38, 58, 39];
         data2 = [39, 58, 49, 39, 57];
 
-        data3 = [104, 89, 94, 101, 99];
-        data4 = [80, 85, 87, 96, 105];
-        data5 = [96, 95, 97, 94, 96];
-      } else {
-        data0 = [30, 39, 40, 40, 38];
-        data1 = [20, 50, 48, 47, 39];
-        data2 = [39, 58, 49, 39, 57];
-
-        data3 = [104, 89, 94, 101, 99];
-        data4 = [80, 85, 87, 96, 105];
-        data5 = [96, 95, 97, 94, 96];
-      }
-
-      const that = this;
-      // const pointsList = JSON.parse(that.$store.getters.getPointsList);
-
-      // 横轴模板数据 - 日期
-      /*const dateTemplate = new Date();
-      const date_0 = dateTemplate.getDate() + "日";
-      const date_1 = dateTemplate.getDate() - 1 + "日";
-      const date_2 = dateTemplate.getDate() - 2 + "日";
-      const date_3 = dateTemplate.getDate() - 3 + "日";
-      const date_4 = dateTemplate.getDate() - 4 + "日";
-      const date_5 = dateTemplate.getDate() - 5 + "日";
-      const date_6 = dateTemplate.getDate() - 6 + "日";*/
-
-      /*const date_0 = "多功能传感器-1-", value_0 = pointsList[7].pointValue;
-      const date_1 = "多功能传感器-2-", value_1 = pointsList[28].pointValue;
-      const date_2 = "多功能传感器-3-", value_2 = pointsList[49].pointValue;
-      const date_3 = "温湿度传感器-1-", value_3 = pointsList[385].pointValue;
-      const date_4 = "温湿度传感器-2-", value_4 = pointsList[408].pointValue;
-      const date_5 = "温湿度传感器-3-", value_5 = pointsList[431].pointValue;*/
-      // const date_6 = "风冷空调", value_6 = pointsList[633].pointValue;
-
-      const colorTemplate = ['#ff9745', '#ff9745', '#ff9745', '#a859ff', '#a859ff', '#a859ff'];
-
-      const option = {
-        tooltip: {
-          trigger: 'axis',
-          formatter: '{a0}: {c0}℃<hr />{a1}: {c1}℃<hr />{a2}: {c2}℃<hr />{a3}: {c3}%<hr />{a4}: {c4}%<hr />{a5}: {c5}%<hr />',
-          /*axisPointer: {
-            type: 'cross'
-          }*/
-        },
-
-        color: colorTemplate,
-
-        legend: {
-          // y: '20px',
+        data3 = [60, 89, 76, 56, 77];
+        data4 = [87, 67, 56, 78, 67];
+        data5 = [67, 76, 87, 57, 76];
+        legend = {
           top: -5,
           data: ['多功能1-温度', '多功能2-温度', '多功能3-温度', '多功能1-湿度', '多功能2-湿度', '多功能3-湿度'],
           selectedMode: false,
           textStyle: {
             color: '#fff'
           }
-        },
-        xAxis: [
-          {
-            type: 'category',
-            name: '时间',
-            boundaryGap: false,
-            data: [0, 1, 2, 3, 4],
-            axisLine: {
-              lineStyle: {
-                color: '#fff'
-              }
-            }
-          }
-        ],
+        };
 
-        yAxis: [
-          {
-            type: 'value',
-            name: "温度（℃）",
-            axisLine: {
-              lineStyle: {
-                color: '#fff'
-              }
-            },
-            nameTextStyle: {
-              padding: [0, 10, 0, 0]
-            }
-          },
-          {
-            type: 'value',
-            name: '湿度（%RH）',
-            axisLine: {
-              lineStyle: {
-                color: '#fff'
-              }
-            },
-            // 坐标轴 grid 中的刻度线
-            splitLine: {
-              show: false
-            },
-            nameTextStyle: {
-              padding: [20, 0, 0, 30]
-            }
-          }
-        ],
-
-        // 曲线
-        series: [
+        series = [
           // 左边的数据
           {
             name: '多功能1-温度',
@@ -312,6 +223,273 @@ export default {
             data: data5
           }
         ]
+      } else {
+        data0 = [30, 39, 40, 40, 38];
+        data1 = [20, 50, 48, 47, 39];
+        data2 = [39, 58, 49, 39, 57];
+
+        data3 = [104, 89, 94, 101, 99];
+        data4 = [80, 85, 87, 96, 105];
+        data5 = [96, 95, 97, 94, 96];
+        legend = {
+          top: -5,
+          data: ['风冷行级空调', '配电柜输出', '配电柜输入'],
+          selectedMode: false,
+          textStyle: {
+            color: '#fff'
+          }
+        };
+
+        series = [
+          {
+            name: '风冷行级空调',
+            type: 'line',
+            smooth: true,
+            symbol: 'emptyCircle',
+            showAllSymbol: true, //动画效果
+            yAxisIndex: '0',
+            data: data0
+          },{
+            name: '配电柜输出',
+            type: 'line',
+            smooth: true,
+            symbol: 'emptyCircle',
+            showAllSymbol: true, //动画效果
+            yAxisIndex: '0',
+            data: data1
+          },{
+            name: '配电柜输入',
+            type: 'line',
+            smooth: true,
+            symbol: 'emptyCircle',
+            showAllSymbol: true, //动画效果
+            yAxisIndex: '1',
+            data: data2
+          }
+        ]
+      }
+
+      const that = this;
+      // const pointsList = JSON.parse(that.$store.getters.getPointsList);
+
+      // 横轴模板数据 - 日期
+      /*const dateTemplate = new Date();
+      const date_0 = dateTemplate.getDate() + "日";
+      const date_1 = dateTemplate.getDate() - 1 + "日";
+      const date_2 = dateTemplate.getDate() - 2 + "日";
+      const date_3 = dateTemplate.getDate() - 3 + "日";
+      const date_4 = dateTemplate.getDate() - 4 + "日";
+      const date_5 = dateTemplate.getDate() - 5 + "日";
+      const date_6 = dateTemplate.getDate() - 6 + "日";*/
+
+      /*const date_0 = "多功能传感器-1-", value_0 = pointsList[7].pointValue;
+      const date_1 = "多功能传感器-2-", value_1 = pointsList[28].pointValue;
+      const date_2 = "多功能传感器-3-", value_2 = pointsList[49].pointValue;
+      const date_3 = "温湿度传感器-1-", value_3 = pointsList[385].pointValue;
+      const date_4 = "温湿度传感器-2-", value_4 = pointsList[408].pointValue;
+      const date_5 = "温湿度传感器-3-", value_5 = pointsList[431].pointValue;*/
+      // const date_6 = "风冷空调", value_6 = pointsList[633].pointValue;
+
+      const colorTemplate = ['#ff9745', '#ff9745', '#ff9745', '#a859ff', '#a859ff', '#a859ff'];
+
+      const option = {
+        tooltip: {
+          trigger: 'axis',
+          formatter: '{a0}: {c0}℃<hr />{a1}: {c1}℃<hr />{a2}: {c2}℃<hr />{a3}: {c3}%<hr />{a4}: {c4}%<hr />{a5}: {c5}%<hr />',
+          /*axisPointer: {
+            type: 'cross'
+          }*/
+        },
+
+        color: colorTemplate,
+
+        /*legend: {
+          // y: '20px',
+          top: -5,
+          data: ['多功能1-温度', '多功能2-温度', '多功能3-温度', '多功能1-湿度', '多功能2-湿度', '多功能3-湿度'],
+          selectedMode: false,
+          textStyle: {
+            color: '#fff'
+          }
+        },*/
+        legend,
+        xAxis: [
+          {
+            type: 'category',
+            name: '时间',
+            boundaryGap: false,
+            data: [0, 1, 2, 3, 4],
+            axisLine: {
+              lineStyle: {
+                color: '#fff'
+              }
+            }
+          }
+        ],
+
+        yAxis: [
+          {
+            type: 'value',
+            name: "温度（℃）",
+            axisLine: {
+              lineStyle: {
+                color: '#fff'
+              }
+            },
+            nameTextStyle: {
+              padding: [0, 10, 0, 0]
+            }
+          },
+          {
+            type: 'value',
+            name: '湿度（%RH）',
+            axisLine: {
+              lineStyle: {
+                color: '#fff'
+              }
+            },
+            // 坐标轴 grid 中的刻度线
+            splitLine: {
+              show: false
+            },
+            nameTextStyle: {
+              padding: [20, 0, 0, 30]
+            }
+          }
+        ],
+
+        // 曲线
+        /*series: [
+          // 左边的数据
+          {
+            name: '多功能1-温度',
+            type: 'line',
+            symbol: 'emptyCircle',
+            smooth: true,
+            showAllSymbol: true, //动画效果
+            yAxisIndex: '0',
+            /!*areaStyle: {
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                offset: 0,
+                color: '#ff9745'
+              },{
+                offset: 0.4,
+                color: '#fdb751b0'
+              },{
+                offset: 1,
+                color: '#838383'
+              }])
+            },*!/
+            data: data0
+          },
+          {
+            name: '多功能2-温度',
+            type: 'line',
+            smooth: true,
+            symbol: 'emptyCircle',
+            showAllSymbol: true, //动画效果
+            yAxisIndex: '0',
+            /!*areaStyle: {
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                offset: 0,
+                color: '#d68262'
+              },{
+                offset: 0.4,
+                color: '#fdb751b0'
+              },{
+                offset: 1,
+                color: '#838383'
+              }])
+            },*!/
+            data: data1
+          },
+          {
+            name: '多功能3-温度',
+            type: 'line',
+            smooth: true,
+            symbol: 'emptyCircle',
+            showAllSymbol: true, //动画效果
+            yAxisIndex: '0',
+            /!*areaStyle: {
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                offset: 0,
+                color: '#d68262'
+              },{
+                offset: 0.4,
+                color: '#fdb751b0'
+              },{
+                offset: 1,
+                color: '#838383'
+              }])
+            },*!/
+            data: data2
+          },
+          // 以右边轴为基准的数据
+          {
+            name: '多功能1-湿度',
+            type: 'line',
+            symbol: 'emptyCircle',
+            smooth: true,
+            showAllSymbol: true, //动画效果
+            yAxisIndex: '1',
+            /!*areaStyle: {
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                offset: 0,
+                color: '#a859ff'
+              },{
+                offset: 0.4,
+                color: '#fdb751b0'
+              },{
+                offset: 1,
+                color: '#838383'
+              }])
+            },*!/
+            data: data3
+          },
+          {
+            name: '多功能2-湿度',
+            type: 'line',
+            smooth: true,
+            symbol: 'emptyCircle',
+            showAllSymbol: true, //动画效果
+            yAxisIndex: '1',
+            /!*areaStyle: {
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                offset: 0,
+                color: '#a859ff'
+              },{
+                offset: 0.4,
+                color: '#fdb751b0'
+              },{
+                offset: 1,
+                color: '#838383'
+              }])
+            },*!/
+            data: data4
+          },
+          {
+            name: '多功能3-湿度',
+            type: 'line',
+            smooth: true,
+            symbol: 'emptyCircle',
+            showAllSymbol: true, //动画效果
+            yAxisIndex: '1',
+            /!*areaStyle: {
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                offset: 0,
+                color: '#a859ff'
+              },{
+                offset: 0.4,
+                color: '#fdb751b0'
+              },{
+                offset: 1,
+                color: '#838383'
+              }])
+            },*!/
+            data: data5
+          }
+        ]*/
+        series
       };
 
       chartInit.setOption(option);
@@ -362,7 +540,7 @@ nav{
   display:inline-block;
   /*margin:60px auto 45px;*/
   margin: 0 0 0 130px;
-  background-color:#5597b4;
+  background-color: rgba(67, 192, 255, 0.29);
   box-shadow:0 1px 1px #ccc;
   border-radius:2px;
 }

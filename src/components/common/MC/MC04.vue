@@ -418,7 +418,7 @@ export default {
       this.handleChange(time.toString());
       if (time <= 5) time++;
       if (time > 5) time = 0;
-    }, 5000);
+    }, 8000);
 
     // const statusList = this.$store.getters.getPointsList;
     // this.statusContainer = JSON.parse(statusList);

@@ -31,6 +31,7 @@ import { Button } from 'ant-design-vue'
 import { Modal } from 'ant-design-vue'
 
 Vue.use(VueWechatTitle)
+// 关闭生产环境下的错误信息提示
 Vue.config.productionTip = false
 Vue.use(Antd);
 Vue.use(Button);

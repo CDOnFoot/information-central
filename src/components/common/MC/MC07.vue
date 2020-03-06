@@ -52,7 +52,6 @@
         this.mcId = val;
       }
     },
-
     mounted() {
       // 初始化一个空的图表
       this.initChartForTemp('home')

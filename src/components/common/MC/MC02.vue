@@ -118,7 +118,7 @@
           },
           legend: {
             x: "125px",
-            y: "20px",
+            y: "30px",
             textStyle: {
               color: "#ffffff",
               fontSize: 10
@@ -140,9 +140,9 @@
           },
           grid: {
             left: '8%',
-            right: '6%',
-            top: '20%',
-            bottom: '4%',
+            right: '8%',
+            top: '24%',
+            bottom: '6%',
             containLabel: true
           },
           xAxis: [
@@ -206,31 +206,97 @@
               type: "bar",
               barGap: 0,
               label: labelOption,
-              data: [31, 22, 26, 23, 43, 21]
+              data: [31, 22, 26, 23, 43, 21],
+              itemStyle: {
+                //柱形图圆角，鼠标移上去效果
+                emphasis: {
+                  barBorderRadius: [10, 10, 0, 0],
+
+                },
+                normal: {
+                  //柱形图圆角，初始化效果
+                  barBorderRadius: [10, 10, 0, 0],
+                }
+              },
             },
             {
               name: "TOP2",
               type: "bar",
               label: labelOption,
-              data: [24, 20, 23, 21, 38, 17]
+              data: [24, 20, 23, 21, 38, 17],
+              itemStyle: {
+                //柱形图圆角，鼠标移上去效果
+                emphasis: {
+                  barBorderRadius: [10, 10, 0, 0],
+
+                },
+                normal: {
+                  //柱形图圆角，初始化效果
+                  barBorderRadius: [10, 10, 0, 0],
+                }
+              },
             },
             {
               name: "TOP3",
               type: "bar",
               label: labelOption,
-              data: [23, 17, 14, 17, 37, 8]
+              data: [23, 17, 14, 17, 37, 8],
+              itemStyle: {
+                //柱形图圆角，鼠标移上去效果
+                emphasis: {
+                  barBorderRadius: [10, 10, 0, 0],
+
+                },
+                normal: {
+                  //柱形图圆角，初始化效果
+                  barBorderRadius: [10, 10, 0, 0],
+                }
+              },
             },
             {
               name: "TOP4",
               type: "bar",
               label: labelOption,
-              data: [15, 14, 11, 9, 32, 7]
+              data: [15, 14, 11, 9, 32, 7],
+              itemStyle: {
+                //柱形图圆角，鼠标移上去效果
+                emphasis: {
+                  barBorderRadius: [10, 10, 0, 0],
+
+                },
+                normal: {
+                  //柱形图圆角，初始化效果
+                  barBorderRadius: [10, 10, 0, 0],
+                }
+              },
             },
             {
               name: "TOP5",
               type: "bar",
               label: labelOption,
-              data: [13, 7, 7, 32, 9, 5]
+              data: [13, 7, 7, 32, 9, 5],
+              itemStyle: {
+                //柱形图圆角，鼠标移上去效果
+                emphasis: {
+                  barBorderRadius: [10, 10, 0, 0],
+                },
+                normal: {
+                  //柱形图圆角，初始化效果
+                  barBorderRadius: [10, 10, 0, 0],
+                  color: this.$echarts.graphic.LinearGradient(0, 0, 1, 1,
+                    [
+                      {
+                        offset: 0,
+                        color: '#207d98'
+                      },
+                      {
+                        offset: 1,
+                        color: '#40e6ec'
+                      }
+                    ]
+                  ),
+                }
+              },
             }
           ]
         };

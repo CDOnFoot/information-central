@@ -164,26 +164,27 @@
   }
 
   .indexOne {
-    background-color: #60acfc;
+    background-color: #6b89ff;
   }
 
   .indexTwo {
-    background-color: #32d3eb;
-  }
-
-  .indexThree {
-    background-color: #9287e7;
-  }
-
-  .indexFour {
     background-color: #feb64d;
   }
 
+  .indexThree {
+    background-color: #32d3eb;
+  }
+
+  .indexFour {
+    background-color: #9287e7;
+  }
+
   .indexFive {
-    background-color: #5bc49f;
+    background-color: #60acfc;
   }
 
   .indexSix {
-    background-color: #6b89ff;
+    background-color: #5bc49f;
+
   }
 </style>

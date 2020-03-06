@@ -43,14 +43,14 @@
             title: '',
             // dataIndex: 'tel',
             align: 'center',
-            width: '5%',
+            width: '3%',
             scopedSlots: { customRender: 'operation' }
           },
           {
             title: '报警名称',
             dataIndex: 'AlarmName',
             align: 'center',
-            width: '10%'
+            width: '8%'
           },
           {
             title: '告警时间',

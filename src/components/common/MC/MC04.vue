@@ -510,6 +510,17 @@ export default {
   width: 102.3%;
   height: 100.7%;
 }
+/deep/ .borde {
+  font-weight: 700;
+  color: #ffffff;
+  border-left: #3467c5 solid 4px;
+  position: absolute;
+  top: 20px;
+  left: 33px;
+  font-size: 16px;
+  padding-left: 27px;
+  width: 60%;
+}
 .main-id{
   width: 100%;
   height: 100%;

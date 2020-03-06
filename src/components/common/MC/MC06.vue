@@ -121,6 +121,9 @@
             console.log(res);
             if (res.status === 200) {
               if (res.data.value) {
+                setTimeout(() => {
+                  that.getCurrentAlarm();
+                }, 15000);
                 let formattedTable = [];
                 const tableContainer = res.data.value;
                 // 筛选等级
@@ -199,6 +202,20 @@
 
   /deep/ .ant-table-row:nth-child(odd) {
     background: #1875A6;
+  }
+
+  /deep/ .ant-table-tbody > tr {
+    transition: all 0.3s, height 0s;
+    /* background: #316bd0b8; */
+    background: rgba(24, 48, 96, 0.72);
+    /*box-shadow: 0px 2px 3px 2px #0259ad inset;*/
+    border: #193a4e 2px solid;
+  }
+  /deep/ .ant-table-thead > tr{
+    height: 30px;
+    background: rgba(0, 128, 255, 0.5);
+    /*box-shadow: 0px 2px 3px 2px #0259ad inset;*/
+    border: #193a4e 2px solid;
   }
 
   /deep/ .ant-table-row > td {

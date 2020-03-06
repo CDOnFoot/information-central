@@ -75,7 +75,7 @@ export default {
       chartInit.clear();
       // 模拟数据
       let data0, data1, data2, data3, data4, data5;
-      let legend, series;
+      let legend, series, tooltip;
       if (key === 'home') {
         data0 = [47, 38, 29, 49, 40];
         data1 = [38, 56, 38, 58, 39];
@@ -86,7 +86,14 @@ export default {
         data5 = [67, 76, 87, 57, 76];
         legend = {
           top: -5,
-          data: ['多功能1-温度', '多功能2-温度', '多功能3-温度', '多功能1-湿度', '多功能2-湿度', '多功能3-湿度'],
+          // data: ['多功能1-温度', '多功能2-温度', '多功能3-温度', '多功能1-湿度', '多功能2-湿度', '多功能3-湿度'],
+          data: [{
+            name: '多功能传感器1'
+          },{
+            name: '多功能传感器2'
+          },{
+            name: '多功能传感器3'
+          }],
           selectedMode: false,
           textStyle: {
             color: '#fff'
@@ -96,7 +103,7 @@ export default {
         series = [
           // 左边的数据
           {
-            name: '多功能1-温度',
+            name: '多功能传感器1',
             type: 'line',
             symbol: 'emptyCircle',
             smooth: true,
@@ -117,7 +124,7 @@ export default {
             data: data0
           },
           {
-            name: '多功能2-温度',
+            name: '多功能传感器2',
             type: 'line',
             smooth: true,
             symbol: 'emptyCircle',
@@ -138,7 +145,7 @@ export default {
             data: data1
           },
           {
-            name: '多功能3-温度',
+            name: '多功能传感器3',
             type: 'line',
             smooth: true,
             symbol: 'emptyCircle',
@@ -160,7 +167,7 @@ export default {
           },
           // 以右边轴为基准的数据
           {
-            name: '多功能1-湿度',
+            name: '多动能传感器1-湿度',
             type: 'line',
             symbol: 'emptyCircle',
             smooth: true,
@@ -181,7 +188,7 @@ export default {
             data: data3
           },
           {
-            name: '多功能2-湿度',
+            name: '多动能传感器2-湿度',
             type: 'line',
             smooth: true,
             symbol: 'emptyCircle',
@@ -202,7 +209,7 @@ export default {
             data: data4
           },
           {
-            name: '多功能3-湿度',
+            name: '多动能传感器3-湿度',
             type: 'line',
             smooth: true,
             symbol: 'emptyCircle',
@@ -222,15 +229,20 @@ export default {
             },*/
             data: data5
           }
-        ]
+        ];
+
+        tooltip = {
+          trigger: 'axis',
+          formatter: '{a0}-温度: {c0}℃<hr />{a1}-温度: {c1}℃<hr />{a2}-温度: {c2}℃<hr />{a3}: {c3}%RH<hr />{a4}: {c4}%RH<hr />{a5}: {c5}%RH<hr />'
+        };
       } else {
         data0 = [30, 39, 40, 40, 38];
         data1 = [20, 50, 48, 47, 39];
         data2 = [39, 58, 49, 39, 57];
 
-        data3 = [104, 89, 94, 101, 99];
-        data4 = [80, 85, 87, 96, 105];
-        data5 = [96, 95, 97, 94, 96];
+        data3 = [87, 76, 75, 64, 77];
+        data4 = [65, 85, 87, 65, 79];
+        data5 = [87, 75, 65, 58, 87];
         legend = {
           top: -5,
           data: ['风冷行级空调', '配电柜输出', '配电柜输入'],
@@ -263,10 +275,39 @@ export default {
             smooth: true,
             symbol: 'emptyCircle',
             showAllSymbol: true, //动画效果
-            yAxisIndex: '1',
+            yAxisIndex: '0',
             data: data2
+          },{
+            name: '风冷行级空调-湿度',
+            type: 'line',
+            smooth: true,
+            symbol: 'emptyCircle',
+            showAllSymbol: true, //动画效果
+            yAxisIndex: '1',
+            data: data3
+          },{
+            name: '配电柜输出-湿度',
+            type: 'line',
+            smooth: true,
+            symbol: 'emptyCircle',
+            showAllSymbol: true, //动画效果
+            yAxisIndex: '1',
+            data: data4
+          },{
+            name: '配电柜输入-湿度',
+            type: 'line',
+            smooth: true,
+            symbol: 'emptyCircle',
+            showAllSymbol: true, //动画效果
+            yAxisIndex: '1',
+            data: data5
           }
-        ]
+        ];
+
+        tooltip = {
+          trigger: 'axis',
+          formatter: '{a0}-温度: {c0}℃<hr />{a1}-温度: {c1}℃<hr />{a2}-温度: {c2}℃<hr />{a3}: {c3}%RH<hr />{a4}: {c4}%RH<hr />{a5}: {c5}%RH<hr />'
+        };
       }
 
       const that = this;
@@ -290,16 +331,10 @@ export default {
       const date_5 = "温湿度传感器-3-", value_5 = pointsList[431].pointValue;*/
       // const date_6 = "风冷空调", value_6 = pointsList[633].pointValue;
 
-      const colorTemplate = ['#ff9745', '#ff9745', '#ff9745', '#a859ff', '#a859ff', '#a859ff'];
+      const colorTemplate = ['#60acfc', '#32d3eb', '#9287e7', '#60acfc', '#32d3eb', '#9287e7'];
 
       const option = {
-        tooltip: {
-          trigger: 'axis',
-          formatter: '{a0}: {c0}℃<hr />{a1}: {c1}℃<hr />{a2}: {c2}℃<hr />{a3}: {c3}%<hr />{a4}: {c4}%<hr />{a5}: {c5}%<hr />',
-          /*axisPointer: {
-            type: 'cross'
-          }*/
-        },
+        tooltip,
 
         color: colorTemplate,
 

@@ -27,14 +27,14 @@
               <span class="module-area-title">
                  存储板卡（个）
               </span>
-              <span class="module-area-data">15</span>
+              <span class="module-area-data">18</span>
             </div>
             <div class="module-area-item">
               <div class="indexZreo indexThree"><img src="../../../assets/img/index/MC01/02.png" alt=""></div>
               <span class="module-area-title">
                  虚拟机（台）
               </span>
-              <span class="module-area-data">15</span>
+              <span class="module-area-data">21</span>
             </div>
           </div>
           <div class="module-area" style="margin-left: 4%">
@@ -75,7 +75,7 @@
               <span class="module-area-title">
                  图形工作站桌面（台）
               </span>
-              <span class="module-area-data">15</span>
+              <span class="module-area-data">60</span>
             </div>
           </div>
         </div>

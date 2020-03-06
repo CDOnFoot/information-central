@@ -274,7 +274,7 @@
               name: "TOP5",
               type: "bar",
               label: labelOption,
-              data: [13, 7, 7, 32, 9, 5],
+              data: [13, 7, 7, 12, 9, 5],
               itemStyle: {
                 //柱形图圆角，鼠标移上去效果
                 emphasis: {

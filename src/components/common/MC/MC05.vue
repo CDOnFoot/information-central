@@ -46,8 +46,8 @@
         let chartInit = this.$echarts.init(document.getElementById('chart-id-1'));
 
         let option = {
-          color: ["#60acfc", "#32d3eb", "#5bc49f", "#feb64d", "#9287e7", "#37A2DA", "#32C5E9", "#67E0E3", "#9FE6B8"],
-          // color: ["#60acfc", "#32d3eb", "#5bc49f", "#feb64d", "#9287e7", "#9FE6B8", "#FFDB5C", "#FF9F7F", "#FB7293"],
+          // color: ["#60acfc", "#32d3eb", "#5bc49f", "#feb64d", "#9287e7", "#37A2DA", "#32C5E9", "#67E0E3", "#9FE6B8"],
+          color: ["#60acfc", "#32d3eb", "#5bc49f", "#feb64d", "#9287e7", "#9FE6B8", "#FFDB5C", "#FF9F7F", "#FB7293"],
           // color: ["#37A2DA", "#32C5E9", "#67E0E3", "#9FE6B8", "#FFDB5C", "#FF9F7F", "#FB7293", "#E062AE", "#E690D1"],
           tooltip: {
             trigger: 'item',

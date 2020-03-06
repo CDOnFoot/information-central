@@ -74,7 +74,7 @@
         chartInit.clear();
         // 模拟数据
         let data0, data1, data2, data3, data4, data5;
-        let legend, series, tooltip;
+        let legend, series, tooltip, color;
         if (key === 'home') {
           data0 = [47, 38, 29, 49, 40];
           data1 = [38, 56, 38, 58, 39];
@@ -84,7 +84,7 @@
           data4 = [87, 67, 56, 78, 67];
           data5 = [67, 76, 87, 57, 76];
           legend = {
-            top: 2,
+            top: 0,
             // data: ['多功能1-温度', '多功能2-温度', '多功能3-温度', '多功能1-湿度', '多功能2-湿度', '多功能3-湿度'],
             data: [{
               name: '多功能传感器1'
@@ -98,6 +98,8 @@
               color: '#fff'
             }
           };
+
+          color = ['#feb64d', '#32d3eb', '#9287e7', '#feb64d', '#32d3eb', '#9287e7'];
 
           series = [
             // 左边的数据
@@ -243,8 +245,8 @@
           data4 = [65, 85, 87, 65, 79];
           data5 = [87, 75, 65, 58, 87];
           legend = {
-            top: 2,
-            data: ['风冷行级空调', '配电柜输出', '配电柜输入'],
+            top: 0,
+            data: ['风冷行级空调1', '风冷行级空调2'],
             selectedMode: false,
             textStyle: {
               color: '#fff'
@@ -253,7 +255,7 @@
 
           series = [
             {
-              name: '风冷行级空调',
+              name: '风冷行级空调1',
               type: 'line',
               smooth: true,
               symbol: 'emptyCircle',
@@ -261,7 +263,7 @@
               yAxisIndex: '0',
               data: data0
             },{
-              name: '配电柜输出',
+              name: '风冷行级空调2',
               type: 'line',
               smooth: true,
               symbol: 'emptyCircle',
@@ -269,44 +271,30 @@
               yAxisIndex: '0',
               data: data1
             },{
-              name: '配电柜输入',
+              name: '风冷行级空调1-湿度',
               type: 'line',
               smooth: true,
               symbol: 'emptyCircle',
               showAllSymbol: true, //动画效果
-              yAxisIndex: '0',
+              yAxisIndex: '1',
               data: data2
             },{
-              name: '风冷行级空调-湿度',
+              name: '风冷行级空调2-湿度',
               type: 'line',
               smooth: true,
               symbol: 'emptyCircle',
               showAllSymbol: true, //动画效果
               yAxisIndex: '1',
               data: data3
-            },{
-              name: '配电柜输出-湿度',
-              type: 'line',
-              smooth: true,
-              symbol: 'emptyCircle',
-              showAllSymbol: true, //动画效果
-              yAxisIndex: '1',
-              data: data4
-            },{
-              name: '配电柜输入-湿度',
-              type: 'line',
-              smooth: true,
-              symbol: 'emptyCircle',
-              showAllSymbol: true, //动画效果
-              yAxisIndex: '1',
-              data: data5
             }
           ];
 
           tooltip = {
             trigger: 'axis',
-            formatter: '{a0}-温度: {c0}℃<hr />{a1}-温度: {c1}℃<hr />{a2}-温度: {c2}℃<hr />{a3}: {c3}%RH<hr />{a4}: {c4}%RH<hr />{a5}: {c5}%RH<hr />'
+            formatter: '{a0}-温度: {c0}℃<hr />{a1}-温度: {c1}℃<hr />{a2}: {c2}%RH<hr />{a3}: {c3}%RH<hr />'
           };
+
+          color = ['#60acfc', '#FB7293', '#60acfc', '#FB7293'];
         }
 
         const that = this;
@@ -335,7 +323,7 @@
         const option = {
           tooltip,
 
-          color: colorTemplate,
+          color,
 
           /*legend: {
             // y: '20px',
@@ -573,7 +561,7 @@
   nav{
     display:inline-block;
     /*margin:60px auto 45px;*/
-    margin: 0 0 0 130px;
+    margin: 6px 0 0 160px;
     background-color: rgba(67, 192, 255, 0.29);
     box-shadow:0 1px 1px #ccc;
     border-radius:2px;

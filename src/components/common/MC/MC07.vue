@@ -85,7 +85,7 @@ export default {
         data4 = [87, 67, 56, 78, 67];
         data5 = [67, 76, 87, 57, 76];
         legend = {
-          top: 2,
+          top: 0,
           // data: ['多功能1-温度', '多功能2-温度', '多功能3-温度', '多功能1-湿度', '多功能2-湿度', '多功能3-湿度'],
           data: [{
             name: '多功能传感器1'
@@ -246,7 +246,7 @@ export default {
         data4 = [65, 85, 87, 65, 79];
         data5 = [87, 75, 65, 58, 87];
         legend = {
-          top: 2,
+          top: 0,
           data: ['风冷行级精密空调1', '风冷行级精密空调2'],
           selectedMode: false,
           textStyle: {
@@ -562,7 +562,7 @@ section, footer, header, aside, nav{
 nav{
   display:inline-block;
   /*margin:60px auto 45px;*/
-  margin: 5px 0 0 130px;
+  margin: 7px 0 0 160px;
   background-color: rgba(67, 192, 255, 0.29);
   box-shadow:0 1px 1px #ccc;
   border-radius:2px;

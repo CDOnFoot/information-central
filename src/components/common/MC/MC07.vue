@@ -85,7 +85,7 @@ export default {
         data4 = [87, 67, 56, 78, 67];
         data5 = [67, 76, 87, 57, 76];
         legend = {
-          top: -5,
+          top: 2,
           // data: ['多功能1-温度', '多功能2-温度', '多功能3-温度', '多功能1-湿度', '多功能2-湿度', '多功能3-湿度'],
           data: [{
             name: '多功能传感器1'
@@ -244,7 +244,7 @@ export default {
         data4 = [65, 85, 87, 65, 79];
         data5 = [87, 75, 65, 58, 87];
         legend = {
-          top: -5,
+          top: 2,
           data: ['风冷行级空调', '配电柜输出', '配电柜输入'],
           selectedMode: false,
           textStyle: {

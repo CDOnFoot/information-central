@@ -18,24 +18,24 @@
           </div>
           <div class="module-area-data">
             <div class="none-data" id="chart-0">
-              <a-progress type="circle" :percent="32" :format="percent => `${percent}% CPU`"
-                          status="active" strokeWidth="10" strokeColor="#0ff" width="86px"/>
+              <a-progress type="circle" :percent="CloudComputing.CPU.percent" :format="percent => `${percent}% CPU`"
+                          strokeWidth="10" :strokeColor="CloudComputing.CPU.strokeColor" width="86px"/>
               <div>
-                78/240 <span>核</span>
+                {{CloudComputing.CPU.current}}/{{CloudComputing.CPU.total}} <span>核</span>
               </div>
             </div>
             <div class="none-data" id="chart-1">
-              <a-progress type="circle" :percent="17" :format="percent => `${percent}% 内存`"
-                          status="active" strokeWidth="10" strokeColor="#0ff" width="86px"/>
+              <a-progress type="circle" :percent="CloudComputing.MB.percent" :format="percent => `${percent}% 内存`"
+                          strokeWidth="10" :strokeColor="CloudComputing.MB.strokeColor" width="86px"/>
               <div>
-                167424/981150 <span>MB</span>
+                {{CloudComputing.MB.current}}/{{CloudComputing.MB.total}} <span>MB</span>
               </div>
             </div>
             <div class="none-data" id="chart-2">
-              <a-progress type="circle" :percent="30" :format="percent => `${percent}% 存储`"
-                          status="active" strokeWidth="10" strokeColor="#0ff" width="86px"/>
+              <a-progress type="circle" :percent="CloudComputing.GB.percent" :format="percent => `${percent}% 存储`"
+                          strokeWidth="10" :strokeColor="CloudComputing.GB.strokeColor" width="86px"/>
               <div>
-                4684/15267 <span>GB</span>
+                {{CloudComputing.GB.current}}/{{CloudComputing.GB.total}} <span>GB</span>
               </div>
             </div>
           </div>
@@ -48,24 +48,24 @@
           </div>
           <div class="module-area-data">
             <div class="none-data" id="chart-3">
-              <a-progress type="circle" :percent="82" :format="percent => `${percent}% CPU`"
-                          status="active" strokeWidth="10" strokeColor="#0ff" width="86px"/>
+              <a-progress type="circle" :percent="CloudDesktop.CPU.percent" :format="percent => `${percent}% CPU`"
+                          strokeWidth="10" :strokeColor="CloudDesktop.CPU.strokeColor" width="86px"/>
               <div>
-                484/2016 <span>核</span>
+                {{CloudDesktop.CPU.current}}/{{CloudDesktop.CPU.total}} <span>核</span>
               </div>
             </div>
             <div class="none-data" id="chart-4">
-              <a-progress type="circle" :percent="75" :format="percent => `${percent}% 内存`"
-                          status="active" strokeWidth="10" strokeColor="#0ff" width="86px"/>
+              <a-progress type="circle" :percent="CloudDesktop.MB.percent" :format="percent => `${percent}% 内存`"
+                          strokeWidth="10" :strokeColor="CloudDesktop.MB.strokeColor" width="86px"/>
               <div>
-                488/3195 <span>GB</span>
+                {{CloudDesktop.MB.current}}/{{CloudDesktop.MB.total}} <span>GB</span>
               </div>
             </div>
             <div class="none-data" id="chart-5">
-              <a-progress type="circle" :percent="48" :format="percent => `${percent}% 存储`"
-                          status="active" strokeWidth="10" strokeColor="#0ff" width="86px"/>
+              <a-progress type="circle" :percent="CloudDesktop.GB.percent" :format="percent => `${percent}% 存储`"
+                          strokeWidth="10" :strokeColor="CloudDesktop.GB.strokeColor" width="86px"/>
               <div>
-                30/170 <span>TB</span>
+                {{CloudDesktop.GB.current}}/{{CloudDesktop.GB.total}} <span>TB</span>
               </div>
             </div>
           </div>
@@ -80,7 +80,50 @@
   export default {
     name: "MC03",
     data() {
-      return {};
+      return {
+        CloudComputing: {
+          CPU: {
+            current: '',
+            total: '',
+            percent: '',
+            strokeColor: '',
+          },
+          MB: {
+            current: '',
+            total: '',
+            percent: '',
+            strokeColor: '',
+          },
+          GB: {
+            current: '',
+            total: '',
+            percent: '',
+            strokeColor: '',
+          },
+        },
+
+        CloudDesktop: {
+          CPU: {
+            current: '',
+            total: '',
+            percent: '',
+            strokeColor: '',
+          },
+          MB: {
+            current: '',
+            total: '',
+            percent: '',
+            strokeColor: '',
+          },
+          GB: {
+            current: '',
+            total: '',
+            percent: '',
+            strokeColor: '',
+          },
+        },
+
+      };
     },
     props: ["mcStatus", "mcTitle", "mcId"],
     watch: {
@@ -93,9 +136,63 @@
       },
       mcId: function (val) {
         this.mcId = val;
-      }
+      },
     },
     created() {
+      this.CloudComputing.CPU.current = 78;
+      this.CloudComputing.CPU.total = 240;
+      this.CloudComputing.CPU.percent = parseInt((this.CloudComputing.CPU.current / this.CloudComputing.CPU.total) * 100);
+      if (this.CloudComputing.CPU.percent > 80) {
+        this.CloudComputing.CPU.strokeColor = '#feb64d'
+      } else {
+        this.CloudComputing.CPU.strokeColor = '#0ff'
+      }
+
+      this.CloudComputing.MB.current = 167424;
+      this.CloudComputing.MB.total = 981150;
+      this.CloudComputing.MB.percent = parseInt((this.CloudComputing.MB.current / this.CloudComputing.MB.total) * 100);
+      if (this.CloudComputing.MB.percent > 80) {
+        this.CloudComputing.MB.strokeColor = '#feb64d'
+      } else {
+        this.CloudComputing.MB.strokeColor = '#0ff'
+      }
+
+      this.CloudComputing.GB.current = 4684;
+      this.CloudComputing.GB.total = 15267;
+      this.CloudComputing.GB.percent = parseInt((this.CloudComputing.GB.current / this.CloudComputing.GB.total) * 100);
+      if (this.CloudComputing.GB.percent > 80) {
+        this.CloudComputing.GB.strokeColor = '#feb64d'
+      } else {
+        this.CloudComputing.GB.strokeColor = '#0ff'
+      }
+
+      this.CloudDesktop.CPU.current = 1800;
+      this.CloudDesktop.CPU.total = 2016;
+      this.CloudDesktop.CPU.percent = parseInt((this.CloudDesktop.CPU.current / this.CloudDesktop.CPU.total) * 100);
+      if (this.CloudDesktop.CPU.percent > 80) {
+        this.CloudDesktop.CPU.strokeColor = '#FB7293'
+      } else {
+        this.CloudDesktop.CPU.strokeColor = '#0ff'
+      }
+
+      this.CloudDesktop.MB.current = 488;
+      this.CloudDesktop.MB.total = 3195;
+      this.CloudDesktop.MB.percent = parseInt((this.CloudDesktop.MB.current / this.CloudDesktop.MB.total) * 100);
+      if (this.CloudDesktop.MB.percent > 80) {
+        this.CloudDesktop.MB.strokeColor = '#feb64d'
+      } else {
+        this.CloudDesktop.MB.strokeColor = '#0ff'
+      }
+
+      this.CloudDesktop.GB.current = 4684;
+      this.CloudDesktop.GB.total = 15267;
+      this.CloudDesktop.GB.percent = parseInt((this.CloudDesktop.GB.current / this.CloudDesktop.GB.total) * 100);
+      if (this.CloudDesktop.GB.percent > 80) {
+        this.CloudDesktop.GB.strokeColor = '#feb64d'
+      } else {
+        this.CloudDesktop.GB.strokeColor = '#0ff'
+      }
+
     },
     mounted() {
       this.initChart();

@@ -20,21 +20,27 @@
               <span class="module-area-title">
                  计算板卡（个）
               </span>
-              <span class="module-area-data">15</span>
+              <span class="module-area-data">
+                {{CloudComputing.ComputingBoard}}
+              </span>
             </div>
             <div class="module-area-item">
               <div class="indexZreo indexTwo"><img src="../../../assets/img/index/MC01/04.png" alt=""></div>
               <span class="module-area-title">
                  存储板卡（个）
               </span>
-              <span class="module-area-data">18</span>
+              <span class="module-area-data">
+                {{CloudComputing.StorageCard}}
+              </span>
             </div>
             <div class="module-area-item">
               <div class="indexZreo indexThree"><img src="../../../assets/img/index/MC01/02.png" alt=""></div>
               <span class="module-area-title">
                  虚拟机（台）
               </span>
-              <span class="module-area-data">21</span>
+              <span class="module-area-data">
+                {{CloudComputing.VirtualMachine}}
+              </span>
             </div>
           </div>
           <div class="module-area" style="margin-left: 4%">
@@ -47,35 +53,45 @@
               <span class="module-area-title">
                  计算板卡（个）
               </span>
-              <span class="module-area-data">15</span>
+              <span class="module-area-data">
+                {{CloudDesktop.ComputingBoard}}
+              </span>
             </div>
             <div class="module-area-item">
               <div class="indexZreo indexTwo"><img src="../../../assets/img/index/MC01/04.png" alt=""></div>
               <span class="module-area-title">
                  存储板卡（个）
               </span>
-              <span class="module-area-data">15</span>
+              <span class="module-area-data">
+                {{CloudDesktop.StorageCard}}
+              </span>
             </div>
             <div class="module-area-item">
               <div class="indexZreo indexThree"><img src="../../../assets/img/index/MC01/01.png" alt=""></div>
               <span class="module-area-title">
                  超融合GPU节点（台）
               </span>
-              <span class="module-area-data">15</span>
+              <span class="module-area-data">
+                {{CloudDesktop.HyperfusionGPUNode}}
+              </span>
             </div>
             <div class="module-area-item">
               <div class="indexZreo indexFour"><img src="../../../assets/img/index/MC01/05.png" alt=""></div>
               <span class="module-area-title">
                  办公云桌面（台）
               </span>
-              <span class="module-area-data">15</span>
+              <span class="module-area-data">
+                {{CloudDesktop.CloudDesktop}}
+              </span>
             </div>
             <div class="module-area-item">
               <div class="indexZreo indexFive"><img src="../../../assets/img/index/MC01/06.png" alt=""></div>
               <span class="module-area-title">
                  图形工作站桌面（台）
               </span>
-              <span class="module-area-data">60</span>
+              <span class="module-area-data">
+                {{CloudDesktop.WorkstationDesktop}}
+              </span>
             </div>
           </div>
         </div>
@@ -87,7 +103,20 @@
   export default {
     name: "MC01",
     data() {
-      return {};
+      return {
+        CloudComputing: {
+          ComputingBoard: '',
+          StorageCard: '',
+          VirtualMachine: '',
+        },
+        CloudDesktop: {
+          ComputingBoard: '',
+          StorageCard: '',
+          HyperfusionGPUNode: '',
+          CloudDesktop: '',
+          WorkstationDesktop: '',
+        },
+      };
     },
     props: ["mcStatus", "mcTitle", "mcId"],
     watch: {
@@ -103,6 +132,17 @@
       }
     },
     created() {
+      // 云计算
+      this.CloudComputing.ComputingBoard = 15;
+      this.CloudComputing.StorageCard = 18;
+      this.CloudComputing.VirtualMachine = 21;
+      // 云桌面
+      this.CloudDesktop.ComputingBoard = 15;
+      this.CloudDesktop.StorageCard = 32;
+      this.CloudDesktop.HyperfusionGPUNode = 15;
+      this.CloudDesktop.CloudDesktop = 15;
+      this.CloudDesktop.WorkstationDesktop = 60;
+
     },
     mounted() {
     },

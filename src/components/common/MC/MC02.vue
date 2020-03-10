@@ -118,7 +118,7 @@
           },
           legend: {
             x: "125px",
-            y: "30px",
+            y: "28px",
             textStyle: {
               color: "#ffffff",
               fontSize: 10

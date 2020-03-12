@@ -37,6 +37,8 @@ export default {
 
   allPointStatus: '/Point/api/GetPoint/GetPointValues',
 
+  checkHistoryPoints: '/Report/api/PointValueLog/GetPointValueStation',
+
   /**
    * @variation old API
    */

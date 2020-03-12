@@ -145,6 +145,24 @@
 
     },
     mounted() {
+
+      let param = {
+        "openstack_name": "车公庄数据中心",
+          "region_name": "RegionOne"
+      };
+      console.log(param)
+      // param  = JSON.stringify(param);
+      console.log(param)
+
+
+
+
+      let url = 'http://10.0.14.18:8107/v1/cloud/region/node_count/';
+      this.$http.post(url,param).then(res => {
+          console.log(res);
+      });
+
+
     },
     methods: {}
   };

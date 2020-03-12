@@ -54,11 +54,11 @@
                       <a-popover title="ETH插座1">
                         <template slot="content">
                           <!--<p>是否坏点：{{ statusContainer[69].isBadPoint ? "是" : "否" }}</p>-->
-                          <!--<p>{{ statusContainer[65].pointName }}：{{ statusContainer[65].pointValue }}</p>-->
-                          <!--<p>{{ statusContainer[66].pointName }}：{{ statusContainer[66].pointValue }}</p>-->
-                          <!--<p>{{ statusContainer[67].pointName }}：{{ statusContainer[67].pointValue }}</p>-->
-                          <!--<p>{{ statusContainer[68].pointName }}：{{ statusContainer[68].pointValue }}</p>-->
-                          <!--<p>{{ statusContainer[69].pointName }}：{{ statusContainer[69].pointValue }}</p>-->
+                          <p>{{ statusContainer[65].pointName }}：{{ statusContainer[65].pointValue }}</p>
+                          <p>{{ statusContainer[66].pointName }}：{{ statusContainer[66].pointValue }}</p>
+                          <p>{{ statusContainer[67].pointName }}：{{ statusContainer[67].pointValue }}</p>
+                          <p>{{ statusContainer[68].pointName }}：{{ statusContainer[68].pointValue }}</p>
+                          <p>{{ statusContainer[69].pointName }}：{{ statusContainer[69].pointValue }}</p>
                         </template>
                         <!--<a-button type="primary"></a-button>-->
                         <!--<img src="../../../assets/img/main/设备点.png" alt="" width="20" height="24">-->
@@ -73,11 +73,11 @@
                       <a-popover title="ETH插座2">
                         <template slot="content">
                           <!--<p>状态：正常</p>-->
-                          <!--<p>{{ statusContainer[86].pointName }}：{{ statusContainer[86].pointValue }}</p>-->
-                          <!--<p>{{ statusContainer[87].pointName }}：{{ statusContainer[87].pointValue }}</p>-->
-                          <!--<p>{{ statusContainer[88].pointName }}：{{ statusContainer[88].pointValue }}</p>-->
-                          <!--<p>{{ statusContainer[89].pointName }}：{{ statusContainer[89].pointValue }}</p>-->
-                          <!--<p>{{ statusContainer[90].pointName }}：{{ statusContainer[90].pointValue }}</p>-->
+                          <p>{{ statusContainer[86].pointName }}：{{ statusContainer[86].pointValue }}</p>
+                          <p>{{ statusContainer[87].pointName }}：{{ statusContainer[87].pointValue }}</p>
+                          <p>{{ statusContainer[88].pointName }}：{{ statusContainer[88].pointValue }}</p>
+                          <p>{{ statusContainer[89].pointName }}：{{ statusContainer[89].pointValue }}</p>
+                          <p>{{ statusContainer[90].pointName }}：{{ statusContainer[90].pointValue }}</p>
                         </template>
                         <!--<a-button type="primary"></a-button>-->
                         <!--<img src="../../../assets/img/main/设备点.png" alt="" width="20" height="24">-->
@@ -91,11 +91,11 @@
                       <a-popover title="ETH插座3">
                         <template slot="content">
                           <!--<p>状态：正常</p>-->
-                          <!--<p>{{ statusContainer[107].pointName }}：{{ statusContainer[107].pointValue }}</p>-->
-                          <!--<p>{{ statusContainer[108].pointName }}：{{ statusContainer[108].pointValue }}</p>-->
-                          <!--<p>{{ statusContainer[109].pointName }}：{{ statusContainer[109].pointValue }}</p>-->
-                          <!--<p>{{ statusContainer[110].pointName }}：{{ statusContainer[110].pointValue }}</p>-->
-                          <!--<p>{{ statusContainer[111].pointName }}：{{ statusContainer[111].pointValue }}</p>-->
+                          <p>{{ statusContainer[107].pointName }}：{{ statusContainer[107].pointValue }}</p>
+                          <p>{{ statusContainer[108].pointName }}：{{ statusContainer[108].pointValue }}</p>
+                          <p>{{ statusContainer[109].pointName }}：{{ statusContainer[109].pointValue }}</p>
+                          <p>{{ statusContainer[110].pointName }}：{{ statusContainer[110].pointValue }}</p>
+                          <p>{{ statusContainer[111].pointName }}：{{ statusContainer[111].pointValue }}</p>
                         </template>
                         <!--<a-button type="primary"></a-button>-->
                         <!--<img src="../../../assets/img/main/设备点.png" alt="" width="20" height="24">-->
@@ -113,7 +113,7 @@
                     <div class="guard-module">
                       <a-popover title="门禁执行器1">
                         <template slot="content">
-                          <!--<p>{{ statusContainer[195].pointName }}：{{ statusContainer[195].pointValue }}</p>-->
+                          <p>{{ statusContainer[195].pointName }}：{{ statusContainer[195].pointValue }}</p>
                         </template>
                         <!--<a-button type="primary"></a-button>-->
                         <!--<img src="../../../assets/img/main/设备点.png" alt="" width="20" height="24">-->
@@ -133,7 +133,7 @@
                     <div class="guard-module">
                       <a-popover title="门禁执行器2">
                         <template slot="content">
-                          <!--<p>{{ statusContainer[221].pointName }}：{{ statusContainer[221].pointValue }}</p>-->
+                          <p>{{ statusContainer[221].pointName }}：{{ statusContainer[221].pointValue }}</p>
                         </template>
                         <!--<a-button type="primary"></a-button>-->
                         <!--<img src="../../../assets/img/main/设备点.png" alt="" width="20" height="24">-->
@@ -149,8 +149,8 @@
                     <div class="trap-door-module">
                       <a-popover title="天窗执行器1">
                         <template slot="content">
-                          <!--<p>{{ statusContainer[299].pointName }}：{{ statusContainer[299].pointValue }}</p>-->
-                          <!--<p>{{ statusContainer[314].pointName }}：{{ statusContainer[314].pointValue }}</p>-->
+                          <p>{{ statusContainer[299].pointName }}：{{ statusContainer[299].pointValue }}</p>
+                          <p>{{ statusContainer[314].pointName }}：{{ statusContainer[314].pointValue }}</p>
                         </template>
                         <!--<a-button type="primary"></a-button>-->
                         <!--<img src="../../../assets/img/main/设备点.png" alt="" width="20" height="24">-->
@@ -165,8 +165,8 @@
                       <a-popover title="多功能传感器1">
                         <template slot="content">
                           <!--<p>是否坏点：{{ statusContainer[0].isBadPoint ? "是" : "否" }}</p>-->
-                          <!--<p>{{ statusContainer[0].pointName }}：{{ statusContainer[0].pointValue }}</p>-->
-                          <!--<p>湿度：{{ statusContainer[7].pointValue }}，温度：{{ statusContainer[19].pointValue }}</p>-->
+                          <p>{{ statusContainer[0].pointName }}：{{ statusContainer[0].pointValue }}</p>
+                          <p>湿度：{{ statusContainer[7].pointValue }}，温度：{{ statusContainer[19].pointValue }}</p>
                         </template>
                         <!--<a-button type="primary"></a-button>-->
                         <!--<img src="../../../assets/img/main/设备点.png" alt="" width="20" height="24">-->
@@ -182,8 +182,8 @@
                       <a-popover title="多功能传感器2">
                         <template slot="content">
                           <!--<p>状态：正常</p>-->
-                          <!--<p>{{ statusContainer[21].pointName }}：{{ statusContainer[21].pointValue }}</p>-->
-                          <!--<p>湿度：{{ statusContainer[28].pointValue }}，温度：{{ statusContainer[40].pointValue }}</p>-->
+                          <p>{{ statusContainer[21].pointName }}：{{ statusContainer[21].pointValue }}</p>
+                          <p>湿度：{{ statusContainer[28].pointValue }}，温度：{{ statusContainer[40].pointValue }}</p>
                         </template>
                         <!--<a-button type="primary"></a-button>-->
                         <!--<img src="../../../assets/img/main/设备点.png" alt="" width="20" height="24">-->
@@ -198,8 +198,8 @@
                       <a-popover title="多功能传感器3">
                         <template slot="content">
                           <!--<p>状态：正常</p>-->
-                          <!--<p>{{ statusContainer[42].pointName }}：{{ statusContainer[42].pointValue }}</p>-->
-                          <!--<p>湿度：{{ statusContainer[49].pointValue }}，温度：{{ statusContainer[61].pointValue }}</p>-->
+                          <p>{{ statusContainer[42].pointName }}：{{ statusContainer[42].pointValue }}</p>
+                          <p>湿度：{{ statusContainer[49].pointValue }}，温度：{{ statusContainer[61].pointValue }}</p>
                         </template>
                         <!--<a-button type="primary"></a-button>-->
                         <!--<img src="../../../assets/img/main/设备点.png" alt="" width="20" height="24">-->
@@ -212,8 +212,8 @@
                     <div class="trap-door-module">
                       <a-popover title="天窗执行器2">
                         <template slot="content">
-                          <!--<p>{{ statusContainer[315].pointName }}：{{ statusContainer[315].pointValue }}</p>-->
-                          <!--<p>{{ statusContainer[330].pointName }}：{{ statusContainer[330].pointValue }}</p>-->
+                          <p>{{ statusContainer[315].pointName }}：{{ statusContainer[315].pointValue }}</p>
+                          <p>{{ statusContainer[330].pointName }}：{{ statusContainer[330].pointValue }}</p>
                         </template>
                         <!--<a-button type="primary"></a-button>-->
                         <!--<img src="../../../assets/img/main/设备点.png" alt="" width="20" height="24">-->
@@ -229,10 +229,10 @@
                     <div class="exchange-module">
                       <a-popover title="交流执行器1">
                         <template slot="content">
-                          <!--<p>{{ statusContainer[241].pointName }}：{{ statusContainer[241].pointValue }}</p>-->
-                          <!--<p>{{ statusContainer[255].pointName }}：{{ statusContainer[255].pointValue }}</p>-->
-                          <!--<p>{{ statusContainer[256].pointName }}：{{ statusContainer[256].pointValue }}</p>-->
-                          <!--<p>{{ statusContainer[257].pointName }}：{{ statusContainer[257].pointValue }}</p>-->
+                          <p>{{ statusContainer[241].pointName }}：{{ statusContainer[241].pointValue }}</p>
+                          <p>{{ statusContainer[255].pointName }}：{{ statusContainer[255].pointValue }}</p>
+                          <p>{{ statusContainer[256].pointName }}：{{ statusContainer[256].pointValue }}</p>
+                          <p>{{ statusContainer[257].pointName }}：{{ statusContainer[257].pointValue }}</p>
                         </template>
                         <!--<a-button type="primary"></a-button>-->
                         <!--<img src="../../../assets/img/main/设备点.png" alt="" width="20" height="24">-->
@@ -252,10 +252,10 @@
                     <div class="exchange-module">
                       <a-popover title="交流执行器2">
                         <template slot="content">
-                          <!--<p>{{ statusContainer[270].pointName }}：{{ statusContainer[270].pointValue }}</p>-->
-                          <!--<p>{{ statusContainer[284].pointName }}：{{ statusContainer[284].pointValue }}</p>-->
-                          <!--<p>{{ statusContainer[285].pointName }}：{{ statusContainer[285].pointValue }}</p>-->
-                          <!--<p>{{ statusContainer[286].pointName }}：{{ statusContainer[286].pointValue }}</p>-->
+                          <p>{{ statusContainer[270].pointName }}：{{ statusContainer[270].pointValue }}</p>
+                          <p>{{ statusContainer[284].pointName }}：{{ statusContainer[284].pointValue }}</p>
+                          <p>{{ statusContainer[285].pointName }}：{{ statusContainer[285].pointValue }}</p>
+                          <p>{{ statusContainer[286].pointName }}：{{ statusContainer[286].pointValue }}</p>
                         </template>
                         <!--<a-button type="primary"></a-button>-->
                         <!--<img src="../../../assets/img/main/设备点.png" alt="" width="20" height="24">-->
@@ -275,11 +275,11 @@
                       <a-popover title="ETH插座4">
                         <template slot="content">
                           <!--<p>状态：正常</p>-->
-                          <!--<p>{{ statusContainer[128].pointName }}：{{ statusContainer[128].pointValue }}</p>-->
-                          <!--<p>{{ statusContainer[129].pointName }}：{{ statusContainer[129].pointValue }}</p>-->
-                          <!--<p>{{ statusContainer[130].pointName }}：{{ statusContainer[130].pointValue }}</p>-->
-                          <!--<p>{{ statusContainer[131].pointName }}：{{ statusContainer[131].pointValue }}</p>-->
-                          <!--<p>{{ statusContainer[132].pointName }}：{{ statusContainer[132].pointValue }}</p>-->
+                          <p>{{ statusContainer[128].pointName }}：{{ statusContainer[128].pointValue }}</p>
+                          <p>{{ statusContainer[129].pointName }}：{{ statusContainer[129].pointValue }}</p>
+                          <p>{{ statusContainer[130].pointName }}：{{ statusContainer[130].pointValue }}</p>
+                          <p>{{ statusContainer[131].pointName }}：{{ statusContainer[131].pointValue }}</p>
+                          <p>{{ statusContainer[132].pointName }}：{{ statusContainer[132].pointValue }}</p>
                         </template>
                         <!--<a-button type="primary"></a-button>-->
                         <!--<img src="../../../assets/img/main/设备点.png" alt="" width="20" height="24">-->
@@ -294,11 +294,11 @@
                       <a-popover title="ETH插座5">
                         <template slot="content">
                           <!--<p>状态：正常</p>-->
-                          <!--<p>{{ statusContainer[149].pointName }}：{{ statusContainer[149].pointValue }}</p>-->
-                          <!--<p>{{ statusContainer[150].pointName }}：{{ statusContainer[150].pointValue }}</p>-->
-                          <!--<p>{{ statusContainer[151].pointName }}：{{ statusContainer[151].pointValue }}</p>-->
-                          <!--<p>{{ statusContainer[152].pointName }}：{{ statusContainer[152].pointValue }}</p>-->
-                          <!--<p>{{ statusContainer[153].pointName }}：{{ statusContainer[153].pointValue }}</p>-->
+                          <p>{{ statusContainer[149].pointName }}：{{ statusContainer[149].pointValue }}</p>
+                          <p>{{ statusContainer[150].pointName }}：{{ statusContainer[150].pointValue }}</p>
+                          <p>{{ statusContainer[151].pointName }}：{{ statusContainer[151].pointValue }}</p>
+                          <p>{{ statusContainer[152].pointName }}：{{ statusContainer[152].pointValue }}</p>
+                          <p>{{ statusContainer[153].pointName }}：{{ statusContainer[153].pointValue }}</p>
                         </template>
                         <!--<a-button type="primary"></a-button>-->
                         <!--<img src="../../../assets/img/main/设备点.png" alt="" width="20" height="24">-->
@@ -312,11 +312,11 @@
                       <a-popover title="ETH插座6">
                         <template slot="content">
                           <!--<p>状态：正常</p>-->
-                          <!--<p>{{ statusContainer[170].pointName }}：{{ statusContainer[170].pointValue }}</p>-->
-                          <!--<p>{{ statusContainer[171].pointName }}：{{ statusContainer[171].pointValue }}</p>-->
-                          <!--<p>{{ statusContainer[172].pointName }}：{{ statusContainer[172].pointValue }}</p>-->
-                          <!--<p>{{ statusContainer[173].pointName }}：{{ statusContainer[173].pointValue }}</p>-->
-                          <!--<p>{{ statusContainer[174].pointName }}：{{ statusContainer[174].pointValue }}</p>-->
+                          <p>{{ statusContainer[170].pointName }}：{{ statusContainer[170].pointValue }}</p>
+                          <p>{{ statusContainer[171].pointName }}：{{ statusContainer[171].pointValue }}</p>
+                          <p>{{ statusContainer[172].pointName }}：{{ statusContainer[172].pointValue }}</p>
+                          <p>{{ statusContainer[173].pointName }}：{{ statusContainer[173].pointValue }}</p>
+                          <p>{{ statusContainer[174].pointName }}：{{ statusContainer[174].pointValue }}</p>
                         </template>
                         <!--<a-button type="primary"></a-button>-->
                         <!--<img src="../../../assets/img/main/设备点.png" alt="" width="20" height="24">-->
@@ -427,8 +427,8 @@ export default {
   },
 
   created() {
-    // const statusList = this.$store.getters.getPointsList;
-    // this.statusContainer = JSON.parse(statusList);
+    const statusList = this.$store.getters.getPointsList;
+    this.statusContainer = JSON.parse(statusList);
   },
 
   destroyed () {

@@ -115,12 +115,12 @@
       getCurrentAlarm () {
         const that = this;
         this.pagination.current = 1;
-        this.loading = true;
+        // this.loading = true;
         this.$http.get(that.$api.getAlarmForPagination)
           .then(res => {
             console.log(res);
             if (res.status === 200) {
-              if (res.data.value) {
+              if (res.data.value.length !== 0) {
                 setTimeout(() => {
                   that.getCurrentAlarm();
                 }, 15000);
@@ -144,7 +144,16 @@
                   lastTable.push(formattedTable[i])
                 }
                 this.tableList = lastTable;
-                this.loading = false;
+                // this.loading = false;
+              } else {
+                const model = {
+                  AlarmName: 'N/A',
+                  AlarmDateTime: 'N/A',
+                  AlarmLevel: 'N/A'
+                };
+                for (let i=0;i<6;i++) {
+                  this.tableList.push(model)
+                }
               }
             }
           })

@@ -36,7 +36,8 @@
     name: "MC07",
     data() {
       return {
-        pointValueContainer: ''
+        pointValueContainer: '',
+        historyPoints: []
       };
     },
     props: ["mcStatus", "mcTitle", "mcId"],
@@ -60,12 +61,78 @@
     created() {
       const that = this;
       // this.pointValueContainer = JSON.parse(that.$store.getters.getPointsList)
+      this.getHistoryPoints();
     },
 
     methods: {
       makeActive (item) {
         // this.active = item;
         this.initChartForTemp(item);
+      },
+
+      /* 获取 gap 天前的日期 */
+      handleTimeFormat (gap) {
+        let nowDate = new Date();
+        const nowTime = nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate();
+        // console.log("current time:", nowTime);
+        let Date2 = new Date();
+        Date2.setDate(nowDate.getDate() - gap);
+        // console.log("changed time:", Date2.getFullYear() + "-" + (Date2.getMonth() + 1) + "-" + Date2.getDate());
+        return Date2.getFullYear() + "-" + (Date2.getMonth() + 1) + "-" + Date2.getDate();
+      },
+
+      // 获取历史点值数据
+      getHistoryPoints () {
+        const that = this;
+        const now = new Date();
+        // this.handleTimeFormat(15);
+        let param = [
+          {
+            StationId: 2,
+            EquipmentId: "45, 46, 47",
+            StartTime: that.handleTimeFormat(15),
+            EndTime: now.getFullYear() + "-" + (now.getMonth() + 1) + "-" + now.getDate(),
+            IOType: "1,7,8,14"
+          }
+        ];
+        this.$http.post(that.$api.checkHistoryPoints, param)
+          .then(res => {
+            console.log("current getting status:", res);
+            if (res.data) {
+              // 筛选需要的点值 ID
+              const pointsValue = res.data;
+              let pointsContainer_0 = [], pointsContainer_1 = [], pointsContainer_2 = [],
+                pointsContainer_3 = [], pointsContainer_4 = [], pointsContainer_5 = [];
+              pointsValue.forEach((values, index) => {
+                if (values.id === 658) {
+                  pointsContainer_0.push(values.l); // 多功能传感器1 - 湿度
+                } else if (values.id === 670) {
+                  pointsContainer_1.push(values.l); // 多功能传感器1 - 温度
+                } else if (values.id === 679) {
+                  pointsContainer_2.push(values.l); // 多功能传感器2 - 湿度
+                } else if (values.id === 691) {
+                  pointsContainer_3.push(values.l); // 多功能传感器2 - 温度
+                } else if (values.id === 700) {
+                  pointsContainer_4.push(values.l); // 多功能传感器3 - 湿度
+                } else if (values.id === 712) {
+                  pointsContainer_5.push(values.l); // 多功能传感器3 - 温度
+                }
+              });
+              // console.log("多功能传感器1 - 湿度：", pointsContainer_0);
+              // console.log("多功能传感器1 - 温度：", pointsContainer_1);
+              // console.log("多功能传感器2 - 湿度：", pointsContainer_2);
+              // console.log("多功能传感器2 - 温度：", pointsContainer_3);
+              // console.log("多功能传感器3 - 湿度：", pointsContainer_4);
+              // console.log("多功能传感器3 - 温度：", pointsContainer_5);
+              this.historyPoints.push(pointsContainer_0);
+              this.historyPoints.push(pointsContainer_1);
+              this.historyPoints.push(pointsContainer_2);
+              this.historyPoints.push(pointsContainer_3);
+              this.historyPoints.push(pointsContainer_4);
+              this.historyPoints.push(pointsContainer_5);
+              console.log("处理完成的list:", this.historyPoints)
+            } else {}
+          })
       },
 
       initChartForTemp (key) {
@@ -76,13 +143,19 @@
         let data0, data1, data2, data3, data4, data5;
         let legend, series, tooltip, color;
         if (key === 'home') {
-          data0 = [47, 38, 29, 49, 40];
-          data1 = [38, 56, 38, 58, 39];
-          data2 = [39, 58, 49, 39, 57];
+          // data0 = [47, 38, 29, 49, 40];
+          data0 = this.historyPoints[0];
+          // data1 = [38, 56, 38, 58, 39];
+          data1 = this.historyPoints[1];
+          // data2 = [39, 58, 49, 39, 57];
+          data2 = this.historyPoints[2];
 
-          data3 = [60, 89, 76, 56, 77];
-          data4 = [87, 67, 56, 78, 67];
-          data5 = [67, 76, 87, 57, 76];
+          // data3 = [60, 89, 76, 56, 77];
+          data3 = this.historyPoints[3];
+          // data4 = [87, 67, 56, 78, 67];
+          data4 = this.historyPoints[4];
+          // data5 = [67, 76, 87, 57, 76];
+          data5 = this.historyPoints[5];
           legend = {
             top: 0,
             // data: ['多功能1-温度', '多功能2-温度', '多功能3-温度', '多功能1-湿度', '多功能2-湿度', '多功能3-湿度'],

@@ -198,6 +198,22 @@
       this.initChart();
     },
     methods: {
+      getResourceUsage () {
+        const that = this;
+        let param = {
+          openstack_name: '车公庄数据中心',
+          region_name: 'RegionOne'
+        };
+        this.$http.get(that.$api.checkResourceUsage, param).then(res => {
+          if (res.status === 200) {
+            if (res) {
+              // 直接填充数据
+            } else {
+              // 若返回报文没有数据的情况
+            }
+          }
+        })
+      },
       initChart() {
         let chartInit = this.$echarts.init(document.getElementById("chart-0"));
 

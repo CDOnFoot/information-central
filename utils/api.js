@@ -39,6 +39,17 @@ export default {
 
   checkHistoryPoints: '/Report/api/PointValueLog/GetPointValueStation',
 
+  checkResourceUsage: '/v1/cloud/region/resource_usage', //  资源使用情况 - 资源占用情况
+
+  checkResourceTotal: '/v1/cloud/region/node_count', //  设备数量 - 云计算&云桌面
+
+  /**
+   * @define 物理机/虚拟机资源排行 - 资源利用率
+   */
+  checkResourceUsageRank: '/v1/cloud/region/server/topn',
+
+  checkResourceUsageLink: '/v1/cloud/region/vm/topn',
+
   /**
    * @variation old API
    */

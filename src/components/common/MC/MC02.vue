@@ -40,7 +40,26 @@
       this.initChart();
     },
     methods: {
+      // 获取资源利用率
+      getResourceUsage () {
+        const that = this;
+        let param = {
+          counter: "",
+          openstack_name: "",
+          region_name: ""
+        };
+        this.$http.get(that.$api.checkResourceUsageRank, param).then(res => {
+          if (res.status === 200) {
+            if (res) {
+              // 填充数据
+            } else {
+              // 当数据库里没有数据时的处理
+            }
+          }
+        })
+      },
       initChart() {
+
         let chartInit = this.$echarts.init(document.getElementById("chart-0"));
 
         app.config = {

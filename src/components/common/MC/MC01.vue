@@ -159,7 +159,25 @@
 
 
     },
-    methods: {}
+    methods: {
+      checkResource () {
+        const that = this;
+        let param = {
+          openstack_name: "",
+          region_name: ""
+        };
+        this.$http.get(that.$api.checkResourceUsage, param).then(res => {
+          if (res.status === 200) {
+            console.log("current resource:", res);
+            if (res) {
+              // 加上数据
+            } else {
+              this.CloudComputing.ComputingBoard = 100;
+            }
+          }
+        })
+      }
+    }
   };
 </script>
 

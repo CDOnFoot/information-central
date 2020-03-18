@@ -198,7 +198,68 @@
       this.initChart();
     },
     methods: {
-      getResourceUsage () {
+      getResourceUsage() {
+        let test = [
+          {
+            "proxy_id": "422122A3-290A-1FE6-FEC5-6408C3652E24",
+            "name": "10.0.10.20-t2-com20",
+            "ip": "10.0.10.20",
+            "value": 30.895334,
+            "service_role": [
+              "计算节点"
+            ],
+            "monitor_name": "t2-com20-10.0.10.20",
+            "id": "83549408-9bc1-4e66-8da6-d9ac9f4d2fa7"
+          },
+          {
+            "proxy_id": "422122A3-290A-1FE6-FEC5-6408C3652E24",
+            "name": "10.0.10.17-t2-ctl17",
+            "ip": "10.0.10.17",
+            "value": 20.522388,
+            "service_role": [
+              "计算节点",
+              "控制节点"
+            ],
+            "monitor_name": "t2-ctl17-10.0.10.17",
+            "id": "8a66523f-6efb-4103-baec-1ac9646e763d"
+          },
+          {
+            "proxy_id": "422122A3-290A-1FE6-FEC5-6408C3652E24",
+            "name": "10.0.10.23-t2-ctl23",
+            "ip": "10.0.10.23",
+            "value": 13.602015,
+            "service_role": [
+              "计算节点",
+              "控制节点"
+            ],
+            "monitor_name": "t2-ctl23-10.0.10.23",
+            "id": "84c82ea5-2c54-4ce0-aa26-013c9e09ab77"
+          },
+          {
+            "proxy_id": "422122A3-290A-1FE6-FEC5-6408C3652E24",
+            "name": "10.0.10.22-t2-com22",
+            "ip": "10.0.10.22",
+            "value": 11.639549,
+            "service_role": [
+              "计算节点"
+            ],
+            "monitor_name": "t2-com22-10.0.10.22",
+            "id": "4ad0d0dd-d267-4afa-985c-617bc30eeb4f"
+          },
+          {
+            "proxy_id": "422122A3-290A-1FE6-FEC5-6408C3652E24",
+            "name": "10.0.10.26-t2-com26",
+            "ip": "10.0.10.26",
+            "value": 9.102564,
+            "service_role": [
+              "计算节点"
+            ],
+            "monitor_name": "t2-com26-10.0.10.26",
+            "id": "8fec164f-6240-4325-8136-2ed91da6e97f"
+          }
+        ];
+
+
         const that = this;
         let param = {
           openstack_name: '车公庄数据中心',

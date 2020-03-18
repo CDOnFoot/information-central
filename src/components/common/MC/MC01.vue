@@ -105,18 +105,18 @@
     data() {
       return {
         CloudComputing: {
-          ComputingBoard: '',
-          StorageCard: '',
-          VirtualMachine: '',
+          ComputingBoard: 0,
+          StorageCard: 0,
+          VirtualMachine: 0,
         },
         CloudDesktop: {
-          ComputingBoard: '',
-          StorageCard: '',
-          HyperfusionGPUNode: '',
-          CloudDesktop: '',
-          WorkstationDesktop: '',
+          ComputingBoard: 0,
+          StorageCard: 0,
+          HyperfusionGPUNode: 0,
+          CloudDesktop: 0,
+          WorkstationDesktop: 0,
         },
-      };
+      }
     },
     props: ["mcStatus", "mcTitle", "mcId"],
     watch: {
@@ -132,37 +132,59 @@
       }
     },
     created() {
-
     },
     mounted() {
-      this.checkResource();
+      let p1 = this.checkResource('');
+      let p2 = this.checkResource('');
+      Promise.all([p1, p2]).then((result) => {
+        // console.log(result);
+        let res0 = (result[0] == undefined) ? [] : result[0];
+        let res1 = (result[1] == undefined) ? [] : result[1];
+
+        // 云计算
+        this.CloudComputing.ComputingBoard = res0.compute;
+        this.CloudComputing.StorageCard = res0.storage;
+        this.CloudComputing.VirtualMachine = res0.vm_server;
+        // 云桌面
+        this.CloudDesktop.ComputingBoard = res1.compute;
+        this.CloudDesktop.StorageCard = res1.storage;
+        this.CloudDesktop.HyperfusionGPUNode = res1.gpu_node;
+        this.CloudDesktop.CloudDesktop = res1.cloud_desktop;
+        this.CloudDesktop.WorkstationDesktop = res1.graph_workstation;
+
+      }).catch((error) => {
+        console.log(error);
+      });
+
     },
     methods: {
-      checkResource() {
-        let url = 'http://10.0.14.18:8107/v1/cloud/region/node_count/?openstack_name=车公庄数据中心&region_name=RegionOne';
-        this.$http.get(url).then(res => {
-          console.log(res);
-          res = {
-            "vm_server": 25,
-            "compute": 18,
-            "gpu_node": 0,
-            "storage": 0,
-            "graph_workstation": 0,
-            "cloud_desktop": 25
-          };
-          // 云计算
-          this.CloudComputing.ComputingBoard = res.compute;
-          this.CloudComputing.StorageCard = res.storage;
-          this.CloudComputing.VirtualMachine = res.vm_server;
-          // 云桌面
-          this.CloudDesktop.ComputingBoard = res.compute;
-          this.CloudDesktop.StorageCard = res.storage;
-          this.CloudDesktop.HyperfusionGPUNode = res.gpu_node;
-          this.CloudDesktop.CloudDesktop = res.cloud_desktop;
-          this.CloudDesktop.WorkstationDesktop = res.graph_workstation;
+      checkResource(counter) {
+        const that = this;
+        let param = {
+          counter: counter,
+          openstack_name: "车公庄数据中心",
+          region_name: "RegionOne"
+        };
+        this.$http.get(that.$api.checkResourceTotal, param).then(res => {
+          if (res.status === 200) {
+            if (res) {
+              // 填充数据
+              return res;
+            } else {
+              // 当数据库里没有数据时的处理
+              return {
+                "vm_server": 25,
+                "compute": 18,
+                "gpu_node": 0,
+                "storage": 0,
+                "graph_workstation": 0,
+                "cloud_desktop": 25
+              };
+            }
+          }
         });
+      },
 
-      }
     }
   };
 </script>

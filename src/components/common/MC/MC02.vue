@@ -19,7 +19,13 @@
   export default {
     name: "MC02",
     data() {
-      return {};
+      return {
+        counter: {
+          cpu_busy: 'cpu.busy', //cpu利用率
+          mem_memused_percent: 'mem.memused.percent', //内存使用率
+          df_total_used_percent: 'df.total.used.percent', //存储使用率
+        }
+      };
     },
     props: ["mcStatus", "mcTitle", "mcId"],
     watch: {
@@ -37,104 +43,233 @@
     created() {
     },
     mounted() {
-      this.initChart();
+      let p1 = this.checkResourceUsageRank(this.counter.cpu_busy);
+      let p2 = this.checkResourceUsageRank(this.counter.mem_memused_percent);
+      let p3 = this.checkResourceUsageRank(this.counter.df_total_used_percent);
+      let p4 = this.checkResourceUsageLink(this.counter.cpu_busy);
+      let p5 = this.checkResourceUsageLink(this.counter.mem_memused_percent);
+      let p6 = this.checkResourceUsageLink(this.counter.df_total_used_percent);
+
+      Promise.all([p1, p2, p3, p4, p5, p6]).then((result) => {
+        // console.log(result);
+        let res0 = (result[0] == undefined) ? [] : result[0];
+        let res1 = (result[1] == undefined) ? [] : result[1];
+        let res2 = (result[2] == undefined) ? [] : result[2];
+        let res3 = (result[3] == undefined) ? [] : result[3];
+        let res4 = (result[4] == undefined) ? [] : result[4];
+        let res5 = (result[5] == undefined) ? [] : result[5];
+
+        this.initData([res0, res1, res2, res3, res4, res5]);
+
+      }).catch((error) => {
+        console.log(error);
+      });
+
+      // this.initChart();
     },
     methods: {
-      // 获取资源利用率
-      getResourceUsage() {
-        let res = [
-          {
-            "proxy_id": "422122A3-290A-1FE6-FEC5-6408C3652E24",
-            "id": "eb5f1fba-6461-425a-af7b-e494100cb35d",
-            "vm_monitor_name": "ec769a27-3d79-4194-ac74-1faa30cae26c",
-            "value": 0.6,
-            "name": "车公庄数据中心_redis-mysql_ec769a27-3d"
-          },
-          {
-            "proxy_id": "422122A3-290A-1FE6-FEC5-6408C3652E24",
-            "id": "0ad423fa-5938-4cb3-910d-4b11e4ed1624",
-            "vm_monitor_name": "bdb4bd70-1bda-42b3-b14a-b3bb847ac8a7",
-            "value": 0.6,
-            "name": "车公庄数据中心_ActiveMQ-2_bdb4bd70-1b"
-          },
-          {
-            "proxy_id": "422122A3-290A-1FE6-FEC5-6408C3652E24",
-            "id": "6302e001-c167-47d3-b963-88b673a7c961",
-            "vm_monitor_name": "6c117f22-dc0f-47cc-905b-eddea74ec39d",
-            "value": 0.6,
-            "name": "车公庄数据中心_ActiveMQ-1_6c117f22-dc"
-          },
-          {
-            "proxy_id": "422122A3-290A-1FE6-FEC5-6408C3652E24",
-            "id": "a7cdae96-01f9-4912-883d-de1c407423de",
-            "vm_monitor_name": "45b25619-fec8-4ed8-9635-1780e17b1539",
-            "value": 0.0,
-            "name": "车公庄数据中心_redis-1_45b25619-fe"
-          },
-          {
-            "proxy_id": "422122A3-290A-1FE6-FEC5-6408C3652E24",
-            "id": "32820f58-9df7-4f59-8ed1-595b46a140b0",
-            "vm_monitor_name": "766ad79f-355d-4924-9020-d7098ffec0e9",
-            "value": 0.0,
-            "name": "车公庄数据中心_Centos-1_766ad79f-35"
-          },
-          {
-            "proxy_id": "422122A3-290A-1FE6-FEC5-6408C3652E24",
-            "id": "0b763bff-fe42-4bbc-b7cc-04eef78a82ef",
-            "vm_monitor_name": "9e6204dd-211f-4b71-b100-81bf85b5f4cc",
-            "value": 0.0,
-            "name": "车公庄数据中心_Centos-2_9e6204dd-21"
-          },
-          {
-            "proxy_id": "422122A3-290A-1FE6-FEC5-6408C3652E24",
-            "id": "1c4839f1-6c44-41f8-97b6-4a247b6a5d5e",
-            "vm_monitor_name": "55ee6f9e-e509-438c-9bde-eca43d0b7184",
-            "value": 0.0,
-            "name": "车公庄数据中心_windows2012_55ee6f9e-e5"
-          },
-          {
-            "proxy_id": "422122A3-290A-1FE6-FEC5-6408C3652E24",
-            "id": "aeb1b950-1b69-48f9-a362-7eeb352e0ea5",
-            "vm_monitor_name": "258492da-adf2-48d3-933e-127737c93664",
-            "value": 0.0,
-            "name": "车公庄数据中心_redis-2_258492da-ad"
-          },
-          {
-            "proxy_id": "422122A3-290A-1FE6-FEC5-6408C3652E24",
-            "id": "d9e28f22-6848-4428-97d9-099d16c8971c",
-            "vm_monitor_name": "4cda3f90-1133-4ca5-abac-f5dd77bf626f",
-            "value": 0.0,
-            "name": "车公庄数据中心_DAQ-1_4cda3f90-11"
-          },
-          {
-            "proxy_id": "422122A3-290A-1FE6-FEC5-6408C3652E24",
-            "id": "364c433b-076a-4da7-966c-ca49e9a9d9f3",
-            "vm_monitor_name": "0a275057-f5ef-4b44-a8e6-4b530c7fbf40",
-            "value": 0.0,
-            "name": "车公庄数据中心_base_0a275057-f5"
-          }
-        ]
-
+      // 物理机资源利用率
+      checkResourceUsageRank(counter) {
         const that = this;
         let param = {
-          counter: "",
-          openstack_name: "",
-          region_name: ""
+          counter: counter,
+          openstack_name: "车公庄数据中心",
+          region_name: "RegionOne"
         };
         this.$http.get(that.$api.checkResourceUsageRank, param).then(res => {
           if (res.status === 200) {
             if (res) {
               // 填充数据
+              return res;
             } else {
               // 当数据库里没有数据时的处理
+              return [
+                {
+                  "proxy_id": "422122A3-290A-1FE6-FEC5-6408C3652E24",
+                  "name": "10.0.10.20-t2-com20",
+                  "ip": "10.0.10.20",
+                  "value": 31.558935,
+                  "service_role": [
+                    "计算节点"
+                  ],
+                  "monitor_name": "t2-com20-10.0.10.20",
+                  "id": "83549408-9bc1-4e66-8da6-d9ac9f4d2fa7"
+                },
+                {
+                  "proxy_id": "422122A3-290A-1FE6-FEC5-6408C3652E24",
+                  "name": "10.0.10.18-t2-com18",
+                  "ip": "10.0.10.18",
+                  "value": 30.982368,
+                  "service_role": [
+                    "计算节点"
+                  ],
+                  "monitor_name": "t2-com18-10.0.10.18",
+                  "id": "6cefe5fb-b1af-4b15-986a-f92dd76a849c"
+                },
+                {
+                  "proxy_id": "422122A3-290A-1FE6-FEC5-6408C3652E24",
+                  "name": "10.0.10.17-t2-ctl17",
+                  "ip": "10.0.10.17",
+                  "value": 15.710723,
+                  "service_role": [
+                    "计算节点",
+                    "控制节点"
+                  ],
+                  "monitor_name": "t2-ctl17-10.0.10.17",
+                  "id": "8a66523f-6efb-4103-baec-1ac9646e763d"
+                },
+                {
+                  "proxy_id": "422122A3-290A-1FE6-FEC5-6408C3652E24",
+                  "name": "10.0.10.11-t2-ctl11 ",
+                  "ip": "10.0.10.11",
+                  "value": 13.325031,
+                  "service_role": [
+                    "计算节点",
+                    "控制节点"
+                  ],
+                  "monitor_name": "t2-ctl11-10.0.10.11",
+                  "id": "afd37811-3372-4128-afe7-30b276353a0e"
+                },
+                {
+                  "proxy_id": "422122A3-290A-1FE6-FEC5-6408C3652E24",
+                  "name": "10.0.10.23-t2-ctl23",
+                  "ip": "10.0.10.23",
+                  "value": 12.262958,
+                  "service_role": [
+                    "计算节点",
+                    "控制节点"
+                  ],
+                  "monitor_name": "t2-ctl23-10.0.10.23",
+                  "id": "84c82ea5-2c54-4ce0-aa26-013c9e09ab77"
+                }
+              ];
             }
           }
-        })
+        });
       },
+      // 虚拟机资源利用率
+      checkResourceUsageLink(counter) {
+        const that = this;
+        let param = {
+          counter: counter,
+          openstack_name: "车公庄数据中心",
+          region_name: "RegionOne"
+        };
+        this.$http.get(that.$api.checkResourceUsageLink, param).then(res => {
+          if (res.status === 200) {
+            if (res) {
+              // 填充数据
+              return res;
+            } else {
+              // 当数据库里没有数据时的处理
+              return [
+                {
+                  "proxy_id": "422122A3-290A-1FE6-FEC5-6408C3652E24",
+                  "id": "d9e28f22-6848-4428-97d9-099d16c8971c",
+                  "vm_monitor_name": "4cda3f90-1133-4ca5-abac-f5dd77bf626f",
+                  "value": 51.0,
+                  "name": "车公庄数据中心_DAQ-1_4cda3f90-11"
+                },
+                {
+                  "proxy_id": "422122A3-290A-1FE6-FEC5-6408C3652E24",
+                  "id": "65e5bb04-9385-472c-a98e-cdfcb29ab63b",
+                  "vm_monitor_name": "74685e04-2e01-4dce-9bf8-a7e3ebb43c45",
+                  "value": 45.0,
+                  "name": "车公庄数据中心_SQL-1_74685e04-2e"
+                },
+                {
+                  "proxy_id": "422122A3-290A-1FE6-FEC5-6408C3652E24",
+                  "id": "18386d3c-923f-4d60-86d8-e834ef5ea0e7",
+                  "vm_monitor_name": "820c8fdb-90c3-4026-821f-126299a5c87c",
+                  "value": 5.0,
+                  "name": "车公庄数据中心_IIS-DC-DNS_820c8fdb-90"
+                },
+                {
+                  "proxy_id": "422122A3-290A-1FE6-FEC5-6408C3652E24",
+                  "id": "eb5f1fba-6461-425a-af7b-e494100cb35d",
+                  "vm_monitor_name": "ec769a27-3d79-4194-ac74-1faa30cae26c",
+                  "value": 0.6,
+                  "name": "车公庄数据中心_redis-mysql_ec769a27-3d"
+                },
+                {
+                  "proxy_id": "422122A3-290A-1FE6-FEC5-6408C3652E24",
+                  "id": "0ad423fa-5938-4cb3-910d-4b11e4ed1624",
+                  "vm_monitor_name": "bdb4bd70-1bda-42b3-b14a-b3bb847ac8a7",
+                  "value": 0.6,
+                  "name": "车公庄数据中心_ActiveMQ-2_bdb4bd70-1b"
+                },
+                {
+                  "proxy_id": "422122A3-290A-1FE6-FEC5-6408C3652E24",
+                  "id": "a7cdae96-01f9-4912-883d-de1c407423de",
+                  "vm_monitor_name": "45b25619-fec8-4ed8-9635-1780e17b1539",
+                  "value": 0.0,
+                  "name": "车公庄数据中心_redis-1_45b25619-fe"
+                },
+                {
+                  "proxy_id": "422122A3-290A-1FE6-FEC5-6408C3652E24",
+                  "id": "32820f58-9df7-4f59-8ed1-595b46a140b0",
+                  "vm_monitor_name": "766ad79f-355d-4924-9020-d7098ffec0e9",
+                  "value": 0.0,
+                  "name": "车公庄数据中心_Centos-1_766ad79f-35"
+                },
+                {
+                  "proxy_id": "422122A3-290A-1FE6-FEC5-6408C3652E24",
+                  "id": "0b763bff-fe42-4bbc-b7cc-04eef78a82ef",
+                  "vm_monitor_name": "9e6204dd-211f-4b71-b100-81bf85b5f4cc",
+                  "value": 0.0,
+                  "name": "车公庄数据中心_Centos-2_9e6204dd-21"
+                },
+                {
+                  "proxy_id": "422122A3-290A-1FE6-FEC5-6408C3652E24",
+                  "id": "1c4839f1-6c44-41f8-97b6-4a247b6a5d5e",
+                  "vm_monitor_name": "55ee6f9e-e509-438c-9bde-eca43d0b7184",
+                  "value": 0.0,
+                  "name": "车公庄数据中心_windows2012_55ee6f9e-e5"
+                },
+                {
+                  "proxy_id": "422122A3-290A-1FE6-FEC5-6408C3652E24",
+                  "id": "aeb1b950-1b69-48f9-a362-7eeb352e0ea5",
+                  "vm_monitor_name": "258492da-adf2-48d3-933e-127737c93664",
+                  "value": 0.0,
+                  "name": "车公庄数据中心_redis-2_258492da-ad"
+                }
+              ];
+            }
+          }
+        });
+      },
+      initData(data) {
+        let arr = [];
+        let datas = data;
+        datas.forEach((data, index) => {
+          arr.push([]);
+          data.forEach((item) => {
+            console.log(item);
+            arr[index].push(item.value);
+          });
+        });
+
+        console.log(arr);
+        arr.forEach((item, index) => {
+          item = item.sort(this.sortNumber);
+        });
+
+        let sortArr = [[], [], [], [], []];
+        sortArr.forEach((item, index) => {
+          arr.forEach((item2, index2) => {
+            item.push(item2[index2]);
+          });
+        });
+
+        this.initChart();
+      },
+
+      sortNumber(a, b) {
+        return b - a
+      },
+
       initChart() {
-
         let chartInit = this.$echarts.init(document.getElementById("chart-0"));
-
         app.config = {
           rotate: 90,
           align: "left",

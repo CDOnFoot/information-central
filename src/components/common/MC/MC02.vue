@@ -41,7 +41,81 @@
     },
     methods: {
       // 获取资源利用率
-      getResourceUsage () {
+      getResourceUsage() {
+        let res = [
+          {
+            "proxy_id": "422122A3-290A-1FE6-FEC5-6408C3652E24",
+            "id": "eb5f1fba-6461-425a-af7b-e494100cb35d",
+            "vm_monitor_name": "ec769a27-3d79-4194-ac74-1faa30cae26c",
+            "value": 0.6,
+            "name": "车公庄数据中心_redis-mysql_ec769a27-3d"
+          },
+          {
+            "proxy_id": "422122A3-290A-1FE6-FEC5-6408C3652E24",
+            "id": "0ad423fa-5938-4cb3-910d-4b11e4ed1624",
+            "vm_monitor_name": "bdb4bd70-1bda-42b3-b14a-b3bb847ac8a7",
+            "value": 0.6,
+            "name": "车公庄数据中心_ActiveMQ-2_bdb4bd70-1b"
+          },
+          {
+            "proxy_id": "422122A3-290A-1FE6-FEC5-6408C3652E24",
+            "id": "6302e001-c167-47d3-b963-88b673a7c961",
+            "vm_monitor_name": "6c117f22-dc0f-47cc-905b-eddea74ec39d",
+            "value": 0.6,
+            "name": "车公庄数据中心_ActiveMQ-1_6c117f22-dc"
+          },
+          {
+            "proxy_id": "422122A3-290A-1FE6-FEC5-6408C3652E24",
+            "id": "a7cdae96-01f9-4912-883d-de1c407423de",
+            "vm_monitor_name": "45b25619-fec8-4ed8-9635-1780e17b1539",
+            "value": 0.0,
+            "name": "车公庄数据中心_redis-1_45b25619-fe"
+          },
+          {
+            "proxy_id": "422122A3-290A-1FE6-FEC5-6408C3652E24",
+            "id": "32820f58-9df7-4f59-8ed1-595b46a140b0",
+            "vm_monitor_name": "766ad79f-355d-4924-9020-d7098ffec0e9",
+            "value": 0.0,
+            "name": "车公庄数据中心_Centos-1_766ad79f-35"
+          },
+          {
+            "proxy_id": "422122A3-290A-1FE6-FEC5-6408C3652E24",
+            "id": "0b763bff-fe42-4bbc-b7cc-04eef78a82ef",
+            "vm_monitor_name": "9e6204dd-211f-4b71-b100-81bf85b5f4cc",
+            "value": 0.0,
+            "name": "车公庄数据中心_Centos-2_9e6204dd-21"
+          },
+          {
+            "proxy_id": "422122A3-290A-1FE6-FEC5-6408C3652E24",
+            "id": "1c4839f1-6c44-41f8-97b6-4a247b6a5d5e",
+            "vm_monitor_name": "55ee6f9e-e509-438c-9bde-eca43d0b7184",
+            "value": 0.0,
+            "name": "车公庄数据中心_windows2012_55ee6f9e-e5"
+          },
+          {
+            "proxy_id": "422122A3-290A-1FE6-FEC5-6408C3652E24",
+            "id": "aeb1b950-1b69-48f9-a362-7eeb352e0ea5",
+            "vm_monitor_name": "258492da-adf2-48d3-933e-127737c93664",
+            "value": 0.0,
+            "name": "车公庄数据中心_redis-2_258492da-ad"
+          },
+          {
+            "proxy_id": "422122A3-290A-1FE6-FEC5-6408C3652E24",
+            "id": "d9e28f22-6848-4428-97d9-099d16c8971c",
+            "vm_monitor_name": "4cda3f90-1133-4ca5-abac-f5dd77bf626f",
+            "value": 0.0,
+            "name": "车公庄数据中心_DAQ-1_4cda3f90-11"
+          },
+          {
+            "proxy_id": "422122A3-290A-1FE6-FEC5-6408C3652E24",
+            "id": "364c433b-076a-4da7-966c-ca49e9a9d9f3",
+            "vm_monitor_name": "0a275057-f5ef-4b44-a8e6-4b530c7fbf40",
+            "value": 0.0,
+            "name": "车公庄数据中心_base_0a275057-f5"
+          }
+        ]
+
+
         const that = this;
         let param = {
           counter: "",

@@ -132,50 +132,36 @@
       }
     },
     created() {
-      // 云计算
-      this.CloudComputing.ComputingBoard = 15;
-      this.CloudComputing.StorageCard = 18;
-      this.CloudComputing.VirtualMachine = 21;
-      // 云桌面
-      this.CloudDesktop.ComputingBoard = 15;
-      this.CloudDesktop.StorageCard = 32;
-      this.CloudDesktop.HyperfusionGPUNode = 15;
-      this.CloudDesktop.CloudDesktop = 15;
-      this.CloudDesktop.WorkstationDesktop = 60;
 
     },
     mounted() {
-      let param = {
-        "openstack_name": "车公庄数据中心",
-        "region_name": "RegionOne"
-      };
-      // param  = JSON.stringify(param);
-      console.log(param);
-      // let url = 'http://10.0.14.18:8107/v1/cloud/region/node_count/';
-      let url = 'http://10.0.14.18:8107/v1/cloud/region/node_count/?openstack_name=车公庄数据中心&region_name=RegionOne';
-      this.$http.get(url).then(res => {
-        console.log(res);
-      });
-
-
+      this.checkResource();
     },
     methods: {
-      checkResource () {
-        const that = this;
-        let param = {
-          openstack_name: "",
-          region_name: ""
-        };
-        this.$http.get(that.$api.checkResourceUsage, param).then(res => {
-          if (res.status === 200) {
-            console.log("current resource:", res);
-            if (res) {
-              // 加上数据
-            } else {
-              this.CloudComputing.ComputingBoard = 100;
-            }
-          }
-        })
+      checkResource() {
+        let url = 'http://10.0.14.18:8107/v1/cloud/region/node_count/?openstack_name=车公庄数据中心&region_name=RegionOne';
+        this.$http.get(url).then(res => {
+          console.log(res);
+          res = {
+            "vm_server": 25,
+            "compute": 18,
+            "gpu_node": 0,
+            "storage": 0,
+            "graph_workstation": 0,
+            "cloud_desktop": 25
+          };
+          // 云计算
+          this.CloudComputing.ComputingBoard = res.compute;
+          this.CloudComputing.StorageCard = res.storage;
+          this.CloudComputing.VirtualMachine = res.vm_server;
+          // 云桌面
+          this.CloudDesktop.ComputingBoard = res.compute;
+          this.CloudDesktop.StorageCard = res.storage;
+          this.CloudDesktop.HyperfusionGPUNode = res.gpu_node;
+          this.CloudDesktop.CloudDesktop = res.cloud_desktop;
+          this.CloudDesktop.WorkstationDesktop = res.graph_workstation;
+        });
+
       }
     }
   };

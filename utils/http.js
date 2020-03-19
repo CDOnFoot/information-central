@@ -306,8 +306,8 @@ axios.defaults.headers.token = common.getCookie('dvptToken')
           axios.get(request[0]),
           axios.get(request[1])
         ]).then(axios.spread((res_0, res_1) => {
-          console.log("the first param:", res_0);
-          console.log("the second param:", res_1);
+          console.log("the first Response:", res_0);
+          console.log("the second Response:", res_1);
           let Response = [];
           Response.push(res_0);
           Response.push(res_1);

@@ -254,21 +254,22 @@
           item = item.sort(this.sortNumber);
         });
 
-        let sortArr = [[], [], [], [], []];
+        let sortArr = [[], [], [], [], [], []];
         sortArr.forEach((item, index) => {
           arr.forEach((item2, index2) => {
-            item.push(item2[index2]);
+            item.push(item2[index]);
           });
         });
 
-        this.initChart();
+        this.initChart(sortArr);
+
       },
 
       sortNumber(a, b) {
         return b - a
       },
 
-      initChart() {
+      initChart(data) {
         let chartInit = this.$echarts.init(document.getElementById("chart-0"));
         app.config = {
           rotate: 90,
@@ -433,7 +434,8 @@
               type: "bar",
               barGap: 0,
               label: labelOption,
-              data: [31, 22, 26, 23, 43, 21],
+              // data: [31, 22, 26, 23, 43, 21],
+              data: data[0],
               itemStyle: {
                 //柱形图圆角，鼠标移上去效果
                 emphasis: {
@@ -450,7 +452,8 @@
               name: "TOP2",
               type: "bar",
               label: labelOption,
-              data: [24, 20, 23, 21, 38, 17],
+              // data: [24, 20, 23, 21, 38, 17],
+              data: data[1],
               itemStyle: {
                 //柱形图圆角，鼠标移上去效果
                 emphasis: {
@@ -467,7 +470,8 @@
               name: "TOP3",
               type: "bar",
               label: labelOption,
-              data: [23, 17, 14, 17, 37, 8],
+              // data: [23, 17, 14, 17, 37, 8],
+              data: data[2],
               itemStyle: {
                 //柱形图圆角，鼠标移上去效果
                 emphasis: {
@@ -484,7 +488,8 @@
               name: "TOP4",
               type: "bar",
               label: labelOption,
-              data: [15, 14, 11, 9, 32, 7],
+              // data: [15, 14, 11, 9, 32, 7],
+              data: data[3],
               itemStyle: {
                 //柱形图圆角，鼠标移上去效果
                 emphasis: {
@@ -501,7 +506,8 @@
               name: "TOP5",
               type: "bar",
               label: labelOption,
-              data: [13, 7, 7, 12, 9, 5],
+              // data: [13, 7, 7, 12, 9, 5],
+              data: data[4],
               itemStyle: {
                 //柱形图圆角，鼠标移上去效果
                 emphasis: {

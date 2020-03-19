@@ -134,8 +134,8 @@
     created() {
     },
     mounted() {
-      let p1 = this.checkResource('');
-      let p2 = this.checkResource('');
+      let p1 = this.checkResourceTotal('');
+      let p2 = this.checkResourceTotal('');
       Promise.all([p1, p2]).then((result) => {
         // console.log(result);
         let res0 = (result[0] == undefined) ? [] : result[0];
@@ -158,7 +158,7 @@
 
     },
     methods: {
-      checkResource(counter) {
+      checkResourceTotal(counter) {
         const that = this;
         let param = {
           counter: counter,

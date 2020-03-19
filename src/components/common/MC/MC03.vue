@@ -139,65 +139,101 @@
       },
     },
     created() {
-      this.CloudComputing.CPU.current = 78;
-      this.CloudComputing.CPU.total = 240;
-      this.CloudComputing.CPU.percent = parseInt((this.CloudComputing.CPU.current / this.CloudComputing.CPU.total) * 100);
-      if (this.CloudComputing.CPU.percent > 80) {
-        this.CloudComputing.CPU.strokeColor = '#feb64d'
-      } else {
-        this.CloudComputing.CPU.strokeColor = '#0ff'
-      }
-
-      this.CloudComputing.MB.current = 167424;
-      this.CloudComputing.MB.total = 981150;
-      this.CloudComputing.MB.percent = parseInt((this.CloudComputing.MB.current / this.CloudComputing.MB.total) * 100);
-      if (this.CloudComputing.MB.percent > 80) {
-        this.CloudComputing.MB.strokeColor = '#feb64d'
-      } else {
-        this.CloudComputing.MB.strokeColor = '#0ff'
-      }
-
-      this.CloudComputing.GB.current = 4684;
-      this.CloudComputing.GB.total = 15267;
-      this.CloudComputing.GB.percent = parseInt((this.CloudComputing.GB.current / this.CloudComputing.GB.total) * 100);
-      if (this.CloudComputing.GB.percent > 80) {
-        this.CloudComputing.GB.strokeColor = '#feb64d'
-      } else {
-        this.CloudComputing.GB.strokeColor = '#0ff'
-      }
-
-      this.CloudDesktop.CPU.current = 1800;
-      this.CloudDesktop.CPU.total = 2016;
-      this.CloudDesktop.CPU.percent = parseInt((this.CloudDesktop.CPU.current / this.CloudDesktop.CPU.total) * 100);
-      if (this.CloudDesktop.CPU.percent > 80) {
-        this.CloudDesktop.CPU.strokeColor = '#FB7293'
-      } else {
-        this.CloudDesktop.CPU.strokeColor = '#0ff'
-      }
-
-      this.CloudDesktop.MB.current = 488;
-      this.CloudDesktop.MB.total = 3195;
-      this.CloudDesktop.MB.percent = parseInt((this.CloudDesktop.MB.current / this.CloudDesktop.MB.total) * 100);
-      if (this.CloudDesktop.MB.percent > 80) {
-        this.CloudDesktop.MB.strokeColor = '#feb64d'
-      } else {
-        this.CloudDesktop.MB.strokeColor = '#0ff'
-      }
-
-      this.CloudDesktop.GB.current = 4684;
-      this.CloudDesktop.GB.total = 15267;
-      this.CloudDesktop.GB.percent = parseInt((this.CloudDesktop.GB.current / this.CloudDesktop.GB.total) * 100);
-      if (this.CloudDesktop.GB.percent > 80) {
-        this.CloudDesktop.GB.strokeColor = '#feb64d'
-      } else {
-        this.CloudDesktop.GB.strokeColor = '#0ff'
-      }
-
     },
     mounted() {
-      this.initChart();
+      let p1 = this.checkResourceUsage();
+      let p2 = this.checkResourceUsage();
+      Promise.all([p1, p2]).then((result) => {
+        // console.log(result);
+        let res0 = (result[0] == undefined) ? [] : result[0];
+        let res1 = (result[1] == undefined) ? [] : result[1];
+
+        this.CloudComputing.CPU.current = parseInt(res0.cpu_used);
+        this.CloudComputing.CPU.total = parseInt(res0.cpu_total);
+        this.CloudComputing.CPU.percent = parseInt((this.CloudComputing.CPU.current / this.CloudComputing.CPU.total) * 100);
+        if (this.CloudComputing.CPU.percent > 80) {
+          this.CloudComputing.CPU.strokeColor = '#feb64d'
+        } else {
+          this.CloudComputing.CPU.strokeColor = '#0ff'
+        }
+
+        this.CloudComputing.MB.current = parseInt(res0.memory_used);
+        this.CloudComputing.MB.total = parseInt(res0.memory_total);
+        this.CloudComputing.MB.percent = parseInt((this.CloudComputing.MB.current / this.CloudComputing.MB.total) * 100);
+        if (this.CloudComputing.MB.percent > 80) {
+          this.CloudComputing.MB.strokeColor = '#feb64d'
+        } else {
+          this.CloudComputing.MB.strokeColor = '#0ff'
+        }
+
+        this.CloudComputing.GB.current = parseInt(res0.storage_in_use);
+        this.CloudComputing.GB.total = parseInt(res0.storage_limit);
+        this.CloudComputing.GB.percent = parseInt((this.CloudComputing.GB.current / this.CloudComputing.GB.total) * 100);
+        if (this.CloudComputing.GB.percent > 80) {
+          this.CloudComputing.GB.strokeColor = '#feb64d'
+        } else {
+          this.CloudComputing.GB.strokeColor = '#0ff'
+        }
+
+        this.CloudDesktop.CPU.current = parseInt(res1.cpu_used);
+        this.CloudDesktop.CPU.total = parseInt(res1.cpu_total);
+        this.CloudDesktop.CPU.percent = parseInt((this.CloudDesktop.CPU.current / this.CloudDesktop.CPU.total) * 100);
+        if (this.CloudDesktop.CPU.percent > 80) {
+          this.CloudDesktop.CPU.strokeColor = '#FB7293'
+        } else {
+          this.CloudDesktop.CPU.strokeColor = '#0ff'
+        }
+
+        this.CloudDesktop.MB.current = parseInt(res1.memory_used);
+        this.CloudDesktop.MB.total = parseInt(res1.memory_total);
+        this.CloudDesktop.MB.percent = parseInt((this.CloudDesktop.MB.current / this.CloudDesktop.MB.total) * 100);
+        if (this.CloudDesktop.MB.percent > 80) {
+          this.CloudDesktop.MB.strokeColor = '#feb64d'
+        } else {
+          this.CloudDesktop.MB.strokeColor = '#0ff'
+        }
+
+        this.CloudDesktop.GB.current = parseInt(res1.storage_in_use);
+        this.CloudDesktop.GB.total = parseInt(res1.storage_limit);
+        this.CloudDesktop.GB.percent = parseInt((this.CloudDesktop.GB.current / this.CloudDesktop.GB.total) * 100);
+        if (this.CloudDesktop.GB.percent > 80) {
+          this.CloudDesktop.GB.strokeColor = '#feb64d'
+        } else {
+          this.CloudDesktop.GB.strokeColor = '#0ff'
+        }
+
+
+      }).catch((error) => {
+        console.log(error);
+      });
     },
     methods: {
+      checkResourceUsage() {
+        const that = this;
+        let param = {
+          openstack_name: "车公庄数据中心",
+          region_name: "RegionOne"
+        };
+        this.$http.get(that.$api.checkResourceUsage, param).then(res => {
+          if (res.status === 200) {
+            if (res) {
+              // 填充数据
+              return res;
+            } else {
+              // 当数据库里没有数据时的处理
+              return {
+                "cpu_total": "64",
+                "cpu_used": "11",
+                "memory_total": "12342",
+                "memory_used": "1234",
+                "storage_limit": "3333",
+                "storage_in_use": "2222"
+              };
+            }
+          }
+        });
+      },
+
       getResourceUsage() {
         let test = [
           {

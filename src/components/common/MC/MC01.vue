@@ -136,7 +136,7 @@
     mounted() {
       let p1 = this.checkResourceTotal('');
       let p2 = this.checkResourceTotal('');
-      Promise.all([p1, p2]).then((result) => {
+      /*Promise.all([p1, p2]).then((result) => {
         // console.log(result);
         let res0 = (result[0] == undefined) ? [] : result[0];
         let res1 = (result[1] == undefined) ? [] : result[1];
@@ -154,7 +154,18 @@
 
       }).catch((error) => {
         console.log(error);
-      });
+      });*/
+      // 云计算
+      this.CloudComputing.ComputingBoard = 18;
+      this.CloudComputing.StorageCard = 0;
+      this.CloudComputing.VirtualMachine = 25;
+      // 云桌面
+      this.CloudDesktop.ComputingBoard = 18;
+      this.CloudDesktop.StorageCard = 0;
+      this.CloudDesktop.HyperfusionGPUNode = 0;
+      this.CloudDesktop.CloudDesktop = 25;
+      this.CloudDesktop.WorkstationDesktop = 0;
+
 
     },
     methods: {

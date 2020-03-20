@@ -141,9 +141,9 @@
     created() {
     },
     mounted() {
-      let p1 = this.checkResourceUsage();
-      let p2 = this.checkResourceUsage();
-      Promise.all([p1, p2]).then((result) => {
+      // let p1 = this.checkResourceUsage();
+      // let p2 = this.checkResourceUsage();
+      /*Promise.all([p1, p2]).then((result) => {
         // console.log(result);
         let res0 = (result[0] == undefined) ? [] : result[0];
         let res1 = (result[1] == undefined) ? [] : result[1];
@@ -205,7 +205,61 @@
 
       }).catch((error) => {
         console.log(error);
-      });
+      });*/
+
+      this.CloudComputing.CPU.current = 11;
+      this.CloudComputing.CPU.total = 64;
+      this.CloudComputing.CPU.percent = parseInt((this.CloudComputing.CPU.current / this.CloudComputing.CPU.total) * 100);
+      if (this.CloudComputing.CPU.percent > 80) {
+        this.CloudComputing.CPU.strokeColor = '#feb64d'
+      } else {
+        this.CloudComputing.CPU.strokeColor = '#0ff'
+      }
+
+      this.CloudComputing.MB.current = 1234;
+      this.CloudComputing.MB.total = 12342;
+      this.CloudComputing.MB.percent = parseInt((this.CloudComputing.MB.current / this.CloudComputing.MB.total) * 100);
+      if (this.CloudComputing.MB.percent > 80) {
+        this.CloudComputing.MB.strokeColor = '#feb64d'
+      } else {
+        this.CloudComputing.MB.strokeColor = '#0ff'
+      }
+
+      this.CloudComputing.GB.current = 2222;
+      this.CloudComputing.GB.total = 3333;
+      this.CloudComputing.GB.percent = parseInt((this.CloudComputing.GB.current / this.CloudComputing.GB.total) * 100);
+      if (this.CloudComputing.GB.percent > 80) {
+        this.CloudComputing.GB.strokeColor = '#feb64d'
+      } else {
+        this.CloudComputing.GB.strokeColor = '#0ff'
+      }
+
+      this.CloudDesktop.CPU.current = 11;
+      this.CloudDesktop.CPU.total = 64;
+      this.CloudDesktop.CPU.percent = parseInt((this.CloudDesktop.CPU.current / this.CloudDesktop.CPU.total) * 100);
+      if (this.CloudDesktop.CPU.percent > 80) {
+        this.CloudDesktop.CPU.strokeColor = '#FB7293'
+      } else {
+        this.CloudDesktop.CPU.strokeColor = '#0ff'
+      }
+
+      this.CloudDesktop.MB.current = 1234;
+      this.CloudDesktop.MB.total = 12342;
+      this.CloudDesktop.MB.percent = parseInt((this.CloudDesktop.MB.current / this.CloudDesktop.MB.total) * 100);
+      if (this.CloudDesktop.MB.percent > 80) {
+        this.CloudDesktop.MB.strokeColor = '#feb64d'
+      } else {
+        this.CloudDesktop.MB.strokeColor = '#0ff'
+      }
+
+      this.CloudDesktop.GB.current = 2222;
+      this.CloudDesktop.GB.total = 3333;
+      this.CloudDesktop.GB.percent = parseInt((this.CloudDesktop.GB.current / this.CloudDesktop.GB.total) * 100);
+      if (this.CloudDesktop.GB.percent > 80) {
+        this.CloudDesktop.GB.strokeColor = '#feb64d'
+      } else {
+        this.CloudDesktop.GB.strokeColor = '#0ff'
+      }
     },
     methods: {
       checkResourceUsage() {
@@ -382,7 +436,7 @@
     opacity: .3;
   }
 
-  /deep/ .ant-progress-text {
+  /deep/ .ant-progress-circle .ant-progress-text {
     color: #e4e8ec;
     font-size: 14px;
     font-weight: bold;

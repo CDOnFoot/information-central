@@ -43,14 +43,14 @@
     created() {
     },
     mounted() {
-      let p1 = this.checkResourceUsageRank(this.counter.cpu_busy);
-      let p2 = this.checkResourceUsageRank(this.counter.mem_memused_percent);
-      let p3 = this.checkResourceUsageRank(this.counter.df_total_used_percent);
-      let p4 = this.checkResourceUsageLink(this.counter.cpu_busy);
-      let p5 = this.checkResourceUsageLink(this.counter.mem_memused_percent);
-      let p6 = this.checkResourceUsageLink(this.counter.df_total_used_percent);
+      // let p1 = this.checkResourceUsageRank(this.counter.cpu_busy);
+      // let p2 = this.checkResourceUsageRank(this.counter.mem_memused_percent);
+      // let p3 = this.checkResourceUsageRank(this.counter.df_total_used_percent);
+      // let p4 = this.checkResourceUsageLink(this.counter.cpu_busy);
+      // let p5 = this.checkResourceUsageLink(this.counter.mem_memused_percent);
+      // let p6 = this.checkResourceUsageLink(this.counter.df_total_used_percent);
 
-      Promise.all([p1, p2, p3, p4, p5, p6]).then((result) => {
+      /*Promise.all([p1, p2, p3, p4, p5, p6]).then((result) => {
         // console.log(result);
         let res0 = (result[0] == undefined) ? [] : result[0];
         let res1 = (result[1] == undefined) ? [] : result[1];
@@ -63,9 +63,11 @@
 
       }).catch((error) => {
         console.log(error);
-      });
+      });*/
 
-      // this.initChart();
+      // this.initData([[20, 37], [48, 39], [59, 40], [50, 33], [29, 40], [50, 30]]);
+      this.initChart([[20, 37, 49, 30, 30, 50], [48, 39, 40, 37, 59, 48], [59, 40, 30, 50, 69, 50],
+        [50, 33, 30, 50, 47, 50], [29, 40, 40, 60, 38, 49], [50, 30, 40, 58, 38, 60]]);
     },
     methods: {
       // 物理机资源利用率

@@ -30,7 +30,7 @@
                            @checkTheRouter="changeRouter"></menu-module>
             </div>
           </td>
-          <td>
+          <!--<td>
             <div>
               <menu-module :module-name="name_0"
                            :module-icon="icon_0"
@@ -45,7 +45,7 @@
                            @handleMouseOut="handleMouseOut($event)"
                            @checkTheRouter="changeRouter"></menu-module>
             </div>
-          </td>
+          </td>-->
           <!--<td>$100</td>-->
           <!--<td>$100</td>-->
           <!--<td>$100</td>-->
@@ -135,21 +135,21 @@
           {name: '首页', icon: 'main-page'},
           {name: '当前报警', icon: 'alarm-2'},
           {name: '门禁卡管理', icon: 'card-manage'},
-          {name: '视频监控', icon: 'current-video'}
+          // {name: '视频监控', icon: 'current-video'}
         ],
 
         secondModuleList: [
           {name: '用户管理', icon: 'user-manage'},
           {name: '历史报警', icon: 'alarm-1'},
           {name: '门禁用户管理', icon: 'card-user'},
-          {name: '实时视频', icon: 'current-video'}
+          // {name: '实时视频', icon: 'current-video'}
         ],
 
         thirdModuleList: [
           {name: '实时监控', icon: 'control'},
           {name: '自定义报警', icon: 'alarm'},
           {name: '刷卡记录日志管理', icon: 'card-log'},
-          {name: '抓拍浏览', icon: 'browse'}
+          // {name: '抓拍浏览', icon: 'browse'}
         ]
       }
     },
@@ -171,15 +171,15 @@
         this.tableHeaderWidth = (widthParam * 0.16).toString();
         this.tableHeaderHeight = (heightParam * 0.09).toString();
 
-        this.moduleWidth = window.innerWidth * 0.138 + 'px';
-        this.moduleHeight = window.innerHeight * 0.169 + 'px';
+        this.moduleWidth = window.innerWidth * 0.18 + 'px';
+        this.moduleHeight = window.innerHeight * 0.17 + 'px';
         // 每一行的高度
         this.menuHeight = window.innerHeight * 0.2 + 'px';
 
         // 模块内的布局
         this.emptyWidth = that.tableHeaderWidth * 0.1;
         this.emptyHeight = parseInt(that.tableHeaderHeight) * 0.22;
-        this.iconWidth = that.tableHeaderWidth * 0.4;
+        this.iconWidth = that.tableHeaderWidth * 0.42;
         this.iconHeight = that.tableHeaderHeight * 1.4;
         this.nameWidth = that.tableHeaderWidth * 0.4;
       });
@@ -202,15 +202,15 @@
             this.tableHeaderWidth = (widthParam * 0.16).toString();
             this.tableHeaderHeight = (heightParam * 0.09).toString();
 
-            this.moduleWidth = window.innerWidth * 0.138 + 'px';
-            this.moduleHeight = window.innerHeight * 0.169 + 'px';
+            this.moduleWidth = window.innerWidth * 0.18 + 'px';
+            this.moduleHeight = window.innerHeight * 0.7 + 'px';
             // 每一行的高度
             this.menuHeight = window.innerHeight * 0.2 + 'px';
 
             // 模块内的布局
             this.emptyWidth = that.tableHeaderWidth * 0.1;
             this.emptyHeight = parseInt(that.tableHeaderHeight) * 0.22;
-            this.iconWidth = that.tableHeaderWidth * 0.4;
+            this.iconWidth = that.tableHeaderWidth * 0.42;
             this.iconHeight = that.tableHeaderHeight * 1.4;
             this.nameWidth = that.tableHeaderWidth * 0.4;
           })
@@ -310,7 +310,7 @@
     width: 90%;
     /*min-height: 80vh;*/
     margin: 0 auto;
-    padding: 35px 0 0 20px;
+    padding: 35px 0 0 240px;
     /*justify-content: center;*/
     /*align-items: center;*/
     /*align-content: center;*/

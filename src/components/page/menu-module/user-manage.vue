@@ -472,6 +472,11 @@
               const length = that.pagination.defaultPageSize;
               // 遍历处理数据
               table.forEach((value, index) => {
+                for (let valueKey in value) {
+                  if (value[valueKey] === '' || value[valueKey] === null || value[valueKey] === undefined) {
+                    value[valueKey] = 'N/A';
+                  }
+                }
                 value.Created = that.$common.timestampToTime(value.Created);
                 value.Updated = that.$common.timestampToTime(value.Updated);
                 value.Expired = that.$common.timestampToTime(value.Expired);
@@ -510,6 +515,11 @@
           let tableContainer = [];
           const table = res.data.value;
           table.forEach((value, index) => {
+            for (let valueKey in value) {
+              if (value[valueKey] === '' || value[valueKey] === null || value[valueKey] === undefined) {
+                value[valueKey] = 'N/A';
+              }
+            }
             value.Created = this.$common.timestampToTime(value.Created);
             value.Updated = this.$common.timestampToTime(value.Updated);
             value.Expired = this.$common.timestampToTime(value.Expired);
@@ -540,6 +550,11 @@
               // that.pagination.total = res.data.value.length;
               const table = res.data.value;
               table.forEach((value, index) => {
+                for (let valueKey in value) {
+                  if (value[valueKey] === '' || value[valueKey] === null || value[valueKey] === undefined) {
+                    value[valueKey] = 'N/A';
+                  }
+                }
                 value.Created = this.$common.timestampToTime(value.Created);
                 value.Updated = this.$common.timestampToTime(value.Updated);
                 value.Expired = this.$common.timestampToTime(value.Expired);
@@ -616,6 +631,11 @@
               let tableContainer = [];
               const table = response.data.value;
               table.forEach((value, index) => {
+                for (let valueKey in value) {
+                  if (value[valueKey] === '' || value[valueKey] === null || value[valueKey] === undefined) {
+                    value[valueKey] = 'N/A';
+                  }
+                }
                 value.Created = that.$common.timestampToTime(value.Created);
                 value.Updated = that.$common.timestampToTime(value.Updated);
                 value.Expired = that.$common.timestampToTime(value.Expired);

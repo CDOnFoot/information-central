@@ -4,7 +4,7 @@
   <div>
     <div class="main">
       <!--<div class="borde">{{mcTitle}}</div>-->
-      <div class="borde">设备湿度</div>
+      <div class="borde">设备温湿度</div>
       <div class="module-icon">
         <!--<img src="../../../assets/img/main/module-information.png" alt="" width="23" height="23">
         <img src="../../../assets/img/main/module-save.png" alt="" width="23" height="23">-->
@@ -141,8 +141,12 @@
         chartInit.clear();
         // 模拟数据
         let data0, data1, data2, data3, data4, data5;
-        let legend, series, tooltip, color;
+        let axisData=[], legend, series, tooltip, color;
         if (key === 'home') {
+          // 处理横轴长度
+          for (let i=0;i<this.historyPoints[0].length;i++) {
+            axisData.push(i);
+          }
           // data0 = [47, 38, 29, 49, 40];
           data0 = this.historyPoints[0];
           // data1 = [38, 56, 38, 58, 39];
@@ -310,6 +314,7 @@
             formatter: '{a0}-温度: {c0}℃<hr />{a1}-温度: {c1}℃<hr />{a2}-温度: {c2}℃<hr />{a3}: {c3}%RH<hr />{a4}: {c4}%RH<hr />{a5}: {c5}%RH<hr />'
           };
         } else {
+          axisData = [0, 1, 2, 3, 4];
           data0 = [30, 39, 40, 40, 38];
           data1 = [20, 50, 48, 47, 39];
           data2 = [39, 58, 49, 39, 57];
@@ -413,7 +418,8 @@
               type: 'category',
               name: '时间',
               boundaryGap: false,
-              data: [0, 1, 2, 3, 4],
+              // data: [0, 1, 2, 3, 4],
+              data: axisData,
               axisLine: {
                 lineStyle: {
                   color: '#fff'

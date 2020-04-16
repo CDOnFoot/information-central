@@ -9,7 +9,8 @@
         <!--<img src="../../../assets/img/main/module-information.png" alt="" width="23" height="23">
         <img src="../../../assets/img/main/module-save.png" alt="" width="23" height="23">-->
         <!--<span>{{this.$common.timestampToTime(pointValueContainer[7].pointTime)}}</span>-->
-        <span>{{this.$common.timestampToTime(new Date())}}</span>
+        <!--<span>{{this.$common.timestampToTime(new Date())}}</span>-->
+        <span>{{ nowTime }}</span>
       </div>
       <div :id="mcId" class="main-id">
         <div class="choose-menu">
@@ -37,7 +38,8 @@
     data() {
       return {
         pointValueContainer: '',
-        historyPoints: []
+        historyPoints: [],
+        nowTime: ''
       };
     },
     props: ["mcStatus", "mcTitle", "mcId"],
@@ -54,8 +56,11 @@
       }
     },
     mounted() {
+      setInterval(() => {
+        this.nowTime = this.$common.timestampToTime(new Date());
+      }, 1000);
       // 初始化一个空的图表
-      this.initChartForTemp('home')
+      this.initChartForTemp('home');
     },
 
     created() {

@@ -7,7 +7,8 @@
       <div class="module-icon">
         <!--<img src="../../../assets/img/main/module-information.png" alt="" width="23" height="23">
         <img src="../../../assets/img/main/module-save.png" alt="" width="23" height="23">-->
-        <span>{{this.$common.timestampToTime(new Date())}}</span>
+        <!--<span>{{this.$common.timestampToTime(new Date())}}</span>-->
+        <span>{{ nowTime }}</span>
       </div>
       <div :id="mcId" class="main-id">
         <div class="none-data" id="chart-0"></div>
@@ -20,6 +21,7 @@
     name: "MC02",
     data() {
       return {
+        nowTime: '',
         counter: {
           cpu_busy: 'cpu.busy', //cpu利用率
           mem_memused_percent: 'mem.memused.percent', //内存使用率
@@ -43,6 +45,9 @@
     created() {
     },
     mounted() {
+      setInterval(() => {
+        this.nowTime = this.$common.timestampToTime(new Date());
+      }, 1000);
       // let p1 = this.checkResourceUsageRank(this.counter.cpu_busy);
       // let p2 = this.checkResourceUsageRank(this.counter.mem_memused_percent);
       // let p3 = this.checkResourceUsageRank(this.counter.df_total_used_percent);

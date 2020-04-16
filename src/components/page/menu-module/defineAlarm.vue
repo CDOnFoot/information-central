@@ -129,16 +129,17 @@
 
         // 同理
         modalForm: {
-          /*alarmName: '',
-          alarmLevel: '',
-          alarmType: '',
-          device: '',
-          deviceDot: '',
-          alarmDetail: '',
-          upLimit: '',
-          lowerLimit: '',
-          fadeBack: '',
-          alarmStats: ''*/
+          EntityId: '', // key
+          AlarmName: '', // 报警名称
+          AlarmLevel: '', // 报警等级
+          AlarmType: '', // 报警类型
+          StationId: '', // 站 ID
+          SubsystemId: '', // 系统 ID
+          EquipmentId: '', // 设备 ID
+          PointId: '', // 设备点
+          HighLimit: '', // 上限点
+          LowLimit: '', // 下限点
+          SyncStatus: '' // 当前状态
         },
         column: [
           {
@@ -217,204 +218,7 @@
           }
         ],
         tableList: [],
-        tableListContainer: [],
-        /*tableList: [
-          {
-            alarmName: '烟雾报警',
-            alarmLevel: '一级',
-            alarmType: '设备报警/阈值报警',
-            alarmDetail: '烟雾浓度超标',
-            alarmTime: '9019-10-10 10:10',
-            device: '多功能传感器',
-            deviceDot: 'YW-288-01',
-            alarmStatus: '处理中',
-            upLimit: 109,
-            lowerLimit: 11,
-            fadeBack: 'ats_902'
-          },
-          {
-            alarmName: '烟雾报警',
-            alarmLevel: '一级',
-            alarmType: '设备报警/阈值报警',
-            alarmDetail: '烟雾浓度超标',
-            alarmTime: '9019-10-10 10:10',
-            device: '多功能传感器',
-            deviceDot: 'YW-288-01',
-            alarmStatus: '处理中',
-            upLimit: 109,
-            lowerLimit: 11,
-            fadeBack: 'ats_902'
-          },
-          {
-            alarmName: '烟雾报警',
-            alarmLevel: '一级',
-            alarmType: '设备报警/阈值报警',
-            alarmDetail: '烟雾浓度超标',
-            alarmTime: '9019-10-10 10:10',
-            device: '多功能传感器',
-            deviceDot: 'YW-288-01',
-            alarmStatus: '处理中',
-            upLimit: 109,
-            lowerLimit: 11,
-            fadeBack: 'ats_902'
-          },
-          {
-            alarmName: '烟雾报警',
-            alarmLevel: '一级',
-            alarmType: '设备报警/阈值报警',
-            alarmDetail: '烟雾浓度超标',
-            alarmTime: '9019-10-10 10:10',
-            device: '多功能传感器',
-            deviceDot: 'YW-288-01',
-            alarmStatus: '处理中',
-            upLimit: 109,
-            lowerLimit: 11,
-            fadeBack: 'ats_902'
-          },
-          {
-            alarmName: '烟雾报警',
-            alarmLevel: '一级',
-            alarmType: '设备报警/阈值报警',
-            alarmDetail: '烟雾浓度超标',
-            alarmTime: '9019-10-10 10:10',
-            device: '多功能传感器',
-            deviceDot: 'YW-288-01',
-            alarmStatus: '处理中',
-            upLimit: 109,
-            lowerLimit: 11,
-            fadeBack: 'ats_902'
-          },
-          {
-            alarmName: '烟雾报警',
-            alarmLevel: '一级',
-            alarmType: '设备报警/阈值报警',
-            alarmDetail: '烟雾浓度超标',
-            alarmTime: '9019-10-10 10:10',
-            device: '多功能传感器',
-            deviceDot: 'YW-288-01',
-            alarmStatus: '处理中',
-            upLimit: 109,
-            lowerLimit: 11,
-            fadeBack: 'ats_902'
-          },
-          {
-            alarmName: '烟雾报警',
-            alarmLevel: '一级',
-            alarmType: '设备报警/阈值报警',
-            alarmDetail: '烟雾浓度超标',
-            alarmTime: '9019-10-10 10:10',
-            device: '多功能传感器',
-            deviceDot: 'YW-288-01',
-            alarmStatus: '处理中',
-            upLimit: 109,
-            lowerLimit: 11,
-            fadeBack: 'ats_902'
-          },
-          {
-            alarmName: '烟雾报警',
-            alarmLevel: '一级',
-            alarmType: '设备报警/阈值报警',
-            alarmDetail: '烟雾浓度超标',
-            alarmTime: '9019-10-10 10:10',
-            device: '多功能传感器',
-            deviceDot: 'YW-288-01',
-            alarmStatus: '处理中',
-            upLimit: 109,
-            lowerLimit: 11,
-            fadeBack: 'ats_902'
-          },
-          {
-            alarmName: '烟雾报警',
-            alarmLevel: '一级',
-            alarmType: '设备报警/阈值报警',
-            alarmDetail: '烟雾浓度超标',
-            alarmTime: '9019-10-10 10:10',
-            device: '多功能传感器',
-            deviceDot: 'YW-288-01',
-            alarmStatus: '处理中',
-            upLimit: 109,
-            lowerLimit: 11,
-            fadeBack: 'ats_902'
-          },
-          {
-            alarmName: '烟雾报警',
-            alarmLevel: '一级',
-            alarmType: '设备报警/阈值报警',
-            alarmDetail: '烟雾浓度超标',
-            alarmTime: '9019-10-10 10:10',
-            device: '多功能传感器',
-            deviceDot: 'YW-288-01',
-            alarmStatus: '处理中',
-            upLimit: 109,
-            lowerLimit: 11,
-            fadeBack: 'ats_902'
-          },
-          {
-            alarmName: '烟雾报警',
-            alarmLevel: '一级',
-            alarmType: '设备报警/阈值报警',
-            alarmDetail: '烟雾浓度超标',
-            alarmTime: '9019-10-10 10:10',
-            device: '多功能传感器',
-            deviceDot: 'YW-288-01',
-            alarmStatus: '处理中',
-            upLimit: 109,
-            lowerLimit: 11,
-            fadeBack: 'ats_902'
-          },
-          {
-            alarmName: '烟雾报警',
-            alarmLevel: '一级',
-            alarmType: '设备报警/阈值报警',
-            alarmDetail: '烟雾浓度超标',
-            alarmTime: '9019-10-10 10:10',
-            device: '多功能传感器',
-            deviceDot: 'YW-288-01',
-            alarmStatus: '处理中',
-            upLimit: 109,
-            lowerLimit: 11,
-            fadeBack: 'ats_902'
-          },
-          {
-            alarmName: '烟雾报警',
-            alarmLevel: '一级',
-            alarmType: '设备报警/阈值报警',
-            alarmDetail: '烟雾浓度超标',
-            alarmTime: '9019-10-10 10:10',
-            device: '多功能传感器',
-            deviceDot: 'YW-288-01',
-            alarmStatus: '处理中',
-            upLimit: 109,
-            lowerLimit: 11,
-            fadeBack: 'ats_902'
-          },
-          {
-            alarmName: '烟雾报警',
-            alarmLevel: '一级',
-            alarmType: '设备报警/阈值报警',
-            alarmDetail: '烟雾浓度超标',
-            alarmTime: '9019-10-10 10:10',
-            device: '多功能传感器',
-            deviceDot: 'YW-288-01',
-            alarmStatus: '处理中',
-            upLimit: 109,
-            lowerLimit: 11,
-            fadeBack: 'ats_902'
-          },
-          {
-            alarmName: '烟雾报警',
-            alarmLevel: '一级',
-            alarmType: '设备报警/阈值报警',
-            alarmDetail: '烟雾浓度超标',
-            alarmTime: '9019-10-10 10:10',
-            device: '多功能传感器',
-            deviceDot: 'YW-288-01',
-            alarmStatus: '处理中',
-            upLimit: 109,
-            lowerLimit: 11,
-            fadeBack: 'ats_902'
-          }
-        ]*/
+        tableListContainer: []
       }
     },
 
@@ -463,6 +267,7 @@
             // 初始列表时查询所有数据，以显示全部的页码
             that.$http.get(that.$api.alarmRules).then(res => {
               if (res.status === 200) {
+                console.log("报警数据：", res);
                 // let table = [];
                 let tableContainer = res.data.value;
                 // const length = that.pagination.defaultPageSize;
@@ -475,6 +280,23 @@
               }
               this.loading = false;
             })
+          }
+        })
+      },
+
+      /**
+       * @function 获取新增多选框选项值
+       * @description 主要需要字段： 设备点
+       */
+      getAlarmRulesOptionValue () {
+        const that = this;
+        // request body
+        let param = {
+
+        };
+        this.$http.post('', param).then(res => {
+          if (res.status === 200) {
+            console.log("新增报警规则选项：", res)
           }
         })
       },
@@ -599,6 +421,7 @@
         this.isShowModal = true;
       },
       deleteAlarm (row) {
+        console.log("current row:", row);
         const that = this;
         this.modal = this.Modal.confirm({
           title: '删除报警',
@@ -620,14 +443,46 @@
       },
 
       handleOk () {
-        this.isShowModal = false;
+        // this.isShowModal = false;
+        let param = {}, that = this;
         if (this.modalTitle === '添加报警') {
+          param = {
+            EntityId: that.$common.createGUID(), // GUID 需填写
+            AlarmName: that.modalForm.AlarmName,
+            AlarmDescription: that.modalForm.AlarmDescription,
+            AlarmType: that.modalForm.AlarmType,
+            StationId: that.modalForm.StationId,
+            SubsystemId: that.modalForm.SubsystemId,
+            EquipmentId: that.modalForm.EquipmentId,
+            PointId: that.modalForm.PointId,
+            HighLimit: that.modalForm.HighLimit,
+            LowLimit: that.modalForm.LowLimit,
+            AlarmLevel: {
+              EntityId: 6875
+            }
+          };
           // 请求增加报警的 API
-          // this.$http.post('', {}).then(res => {})
+          this.confirmLoading = true;
+          this.$http.post(that.$api.alarmRules, param).then(res => {
+            if (res.status === 200) {
+              console.log("add alarm rules:", res);
+            }
+            that.confirmLoading = false;
+            that.isShowModal = false;
+          })
         } else if (this.modalTitle === '编辑报警') {
-          // this.$http.post('', {}).then(res => {})
+          param = {
+            EntityId: that.modalForm.EntityId
+          };
+          this.$http.post(that.$api.alarmRules, param).then(res => {
+            if (res.status === 200) {
+              console.log("add alarm rules:", res)
+            }
+          });
+          this.isShowModal = false;
         }
       },
+
       closeModal () {
         this.isShowModal = false;
       },

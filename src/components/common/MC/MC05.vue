@@ -7,7 +7,8 @@
       <div class="module-icon">
         <!--<img src="../../../assets/img/main/module-information.png" alt="" width="23" height="23">-->
         <!--<img src="../../../assets/img/main/module-save.png" alt="" width="23" height="23">-->
-        <span>{{this.$common.timestampToTime(new Date())}}</span>
+        <!--<span>{{this.$common.timestampToTime(new Date())}}</span>-->
+        <span>{{ nowTime }}</span>
       </div>
       <div :id="mcId" class="main-id">
         <div class="none-data" id="chart-id-1"></div>
@@ -19,7 +20,9 @@
   export default {
     name: "MC11",
     data() {
-      return {};
+      return {
+        nowTime: ''
+      };
     },
     props: ["mcStatus", "mcTitle", "mcId"],
     watch: {
@@ -38,6 +41,9 @@
     },
     mounted() {
       this.initChart();
+      setInterval(() => {
+        this.nowTime = this.$common.timestampToTime(new Date());
+      }, 1000)
     },
     methods: {
       getDeviceInfo() {

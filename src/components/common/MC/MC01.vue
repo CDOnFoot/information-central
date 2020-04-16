@@ -5,7 +5,8 @@
       <!--<div class="borde">{{mcTitle}}</div>-->
       <div class="borde">云计算&云桌面</div>
       <div class="module-icon">
-        <span>{{this.$common.timestampToTime(new Date())}}</span>
+        <!--<span>{{this.$common.timestampToTime(new Date())}}</span>-->
+        <span>{{ nowTime }}</span>
       </div>
       <div :id="mcId" class="main-id">
         <div class="none-data">
@@ -104,6 +105,7 @@
     name: "MC01",
     data() {
       return {
+        nowTime: '',
         CloudComputing: {
           ComputingBoard: 0,
           StorageCard: 0,
@@ -134,6 +136,9 @@
     created() {
     },
     mounted() {
+      setInterval(() => {
+        this.nowTime = this.$common.timestampToTime(new Date());
+      }, 1000);
       let p1 = this.checkResourceTotal('');
       let p2 = this.checkResourceTotal('');
       /*Promise.all([p1, p2]).then((result) => {

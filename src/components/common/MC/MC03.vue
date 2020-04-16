@@ -7,7 +7,8 @@
       <div class="module-icon">
         <!--<img src="../../../assets/img/main/module-information.png" alt="" width="23" height="23">
         <img src="../../../assets/img/main/module-save.png" alt="" width="23" height="23">-->
-        <span>{{this.$common.timestampToTime(new Date())}}</span>
+        <span>{{ nowTime }}</span>
+        <!--<span>{{this.$common.timestampToTime(new Date())}}</span>-->
       </div>
       <div :id="mcId" class="main-id">
         <div class="module-area">
@@ -81,6 +82,7 @@
     name: "MC03",
     data() {
       return {
+        nowTime: '',
         CloudComputing: {
           CPU: {
             current: '',
@@ -141,6 +143,9 @@
     created() {
     },
     mounted() {
+      setInterval(() => {
+        this.nowTime = this.$common.timestampToTime(new Date());
+      }, 1000);
       // let p1 = this.checkResourceUsage();
       // let p2 = this.checkResourceUsage();
       /*Promise.all([p1, p2]).then((result) => {

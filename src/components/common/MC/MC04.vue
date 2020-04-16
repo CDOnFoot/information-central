@@ -7,7 +7,8 @@
       <div class="module-icon">
        <!--<img src="../../../assets/img/main/module-information.png" alt="" width="23" height="23">
        <img src="../../../assets/img/main/module-save.png" alt="" width="23" height="23">-->
-        <span>{{this.$common.timestampToTime(new Date())}}</span>
+        <!--<span>{{this.$common.timestampToTime(new Date())}}</span>-->
+        <span>{{ nowTime }}</span>
      </div>
       <div :id="mcId" class="main-id">
         <div class="none-data">
@@ -366,7 +367,8 @@ export default {
   data() {
     return {
       statusContainer: [],
-      timeOut: ''
+      timeOut: '',
+      nowTime: ''
     };
   },
   props: ["mcStatus", "mcTitle", "mcId", "statusList"],
@@ -392,7 +394,10 @@ export default {
   },
 
   mounted() {
-    console.log("component MC mounted.");
+    setInterval(() => {
+      this.nowTime = this.$common.timestampToTime(new Date());
+    }, 1000);
+    // console.log("component MC mounted.");
     // const parentNode = this.$('.device-content-0').parent();
     const height = window.screen.height;
     // console.log(parentNode);
@@ -419,11 +424,6 @@ export default {
       if (time <= 5) time++;
       if (time > 5) time = 0;
     }, 8000);
-
-    // const statusList = this.$store.getters.getPointsList;
-    // this.statusContainer = JSON.parse(statusList);
-    // console.log('after JSON.parse:');
-    // console.log(JSON.parse(statusList));
   },
 
   created() {

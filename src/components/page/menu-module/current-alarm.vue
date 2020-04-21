@@ -230,22 +230,17 @@
               // 初始列表时查询所有数据，以显示全部的页码
               that.$http.get(that.$api.getAlarmForPagination).then(res => {
                 if (res.status === 200) {
-                  // let table = [];
-                  let tableContainer = res.data.value;
-                  const length = that.pagination.defaultPageSize;
-                  that.pagination.total = tableContainer.length;
-                  /*tableContainer.forEach((value, index) => {
-                    value.AlarmDateTime = that.$common.timestampToTime(value.AlarmDateTime);
-                    value.AlarmStatus = value.AlarmStatus === '"Unprocessed"' ? '处理中' : '未处理';
-                    // 只获取一个 Name 字段属性
-                    value.AlarmLevel = value.AlarmLevel.Name;
-                    that.tableList.push(value);
-                  })*/
-                  for (let i=0;i<length;i++) {
-                    tableContainer[i].AlarmDateTime = that.$common.timestampToTime(tableContainer[i].AlarmDateTime);
-                    tableContainer[i].AlarmStatus = tableContainer[i].AlarmStatus === '"Unprocessed"' ? '处理中' : '未处理';
-                    tableContainer[i].AlarmLevel = tableContainer[i].AlarmLevel.Name;
-                    that.tableList.push(tableContainer[i]);
+                  // console.log("报警数据：", res);
+                  if (res.data.value.length !== 0) {
+                    let tableContainer = res.data.value;
+                    const length = that.pagination.defaultPageSize;
+                    that.pagination.total = tableContainer.length;
+                    for (let i=0;i<length;i++) {
+                      tableContainer[i].AlarmDateTime = that.$common.timestampToTime(tableContainer[i].AlarmDateTime);
+                      tableContainer[i].AlarmStatus = tableContainer[i].AlarmStatus === '"Unprocessed"' ? '处理中' : '未处理';
+                      tableContainer[i].AlarmLevel = tableContainer[i].AlarmLevel.Name;
+                      that.tableList.push(tableContainer[i]);
+                    }
                   }
                 }
                 this.loading = false;
@@ -265,32 +260,33 @@
           // 使用当前绑定状态进行校验
           this.$http.get(that.$api.getAlarmForPagination).then(res => {
             if (res.status === 200) {
-              // console.log(res)
-              // let index = {};
-              let table = [];
-              let tableContainer = res.data.value;
-              // const length = that.pagination.defaultPageSize;
-              // that.pagination.total = tableContainer.length;
-              tableContainer.forEach((value, index) => {
-                value.AlarmDateTime = that.$common.timestampToTime(value.AlarmDateTime);
-                value.AlarmStatus = value.AlarmStatus === 'Unprocessed' ? '未处理' : '处理中';
-                // 只获取一个 Name 字段
-                value.AlarmLevel = value.AlarmLevel.Name;
-                if (that.alarmNameCurrent !== '') {
-                  if (/*value.AlarmName === that.condition.alarmName || value.AlarmLevel.Name === that.condition.alarmLevel*/
-                    value.AlarmName.includes(that.alarmNameCurrent) /*|| value.AlarmLevel.Name.includes(that.condition.alarmLevel)*/
-                  ) {
+              if (res.data.value.length !== 0) {
+                // console.log("搜索报警数据：", res);
+                let table = [];
+                let tableContainer = res.data.value;
+                // const length = that.pagination.defaultPageSize;
+                // that.pagination.total = tableContainer.length;
+                tableContainer.forEach((value, index) => {
+                  value.AlarmDateTime = that.$common.timestampToTime(value.AlarmDateTime);
+                  value.AlarmStatus = value.AlarmStatus === 'Unprocessed' ? '未处理' : '处理中';
+                  // 只获取一个 Name 字段
+                  value.AlarmLevel = value.AlarmLevel.Name;
+                  if (that.alarmNameCurrent !== '') {
+                    if (/*value.AlarmName === that.condition.alarmName || value.AlarmLevel.Name === that.condition.alarmLevel*/
+                      value.AlarmName.includes(that.alarmNameCurrent) /*|| value.AlarmLevel.Name.includes(that.condition.alarmLevel)*/
+                    ) {
+                      that.tableList.push(value);
+                      // table.splice(0, 1, value);
+                      table.push(value);
+                      // 额外的缓存
+                      that.tableListContainer = table;
+                    }
+                  } else {
                     that.tableList.push(value);
-                    // table.splice(0, 1, value);
-                    table.push(value);
-                    // 额外的缓存
-                    that.tableListContainer = table;
                   }
-                } else {
-                  that.tableList.push(value);
-                }
-              });
-              that.pagination.total = that.tableList.length;
+                });
+                that.pagination.total = that.tableList.length;
+              }
             }
             this.loading = false;
           })

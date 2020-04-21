@@ -49,7 +49,15 @@ axios.defaults.headers.token = common.getCookie('dvptToken')
       // 拦截器在请求头中加token/userId
       if(config.url!='/Authorization/api/Authentication/LoginForWeb'){
         if (token === 'null' || token === '' || token==="undefined") {
-          self.$info({
+          /*self.$info({
+            title: '提示',
+            content: '当前登录状态已过期！',
+            onOk() {
+              // self.$router.push('/login');
+              router.push('/login');
+            },
+          });*/
+          message.info({
             title: '提示',
             content: '当前登录状态已过期！',
             onOk() {

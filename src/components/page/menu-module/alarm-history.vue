@@ -136,17 +136,21 @@
             this.pagination.current = 1;
             try {
               this.$http.get(that.$api.getAlarmHistory).then(res => {
-                let table = [];
-                let tableContainer = res.data.value;
-                // const length = that.pagination.defaultPageSize;
-                tableContainer.forEach((value, index) => {
-                  value.AlarmDateTime = that.$common.timestampToTime(value.AlarmDateTime);
-                  value.AlarmStatus = value.AlarmStatus === '"Unprocessed"' ? '处理中' : '未处理';
-                  // value.AlarmLevel = value.AlarmLevel.Name;
-                  table.push(value);
-                });
-                that.tableList = table;
-                that.pagination.total = that.tableList.length;
+                if (res.status === 200) {
+                  if (res.data.value.length !== 0) {
+                    let table = [];
+                    let tableContainer = res.data.value;
+                    // const length = that.pagination.defaultPageSize;
+                    tableContainer.forEach((value, index) => {
+                      value.AlarmDateTime = that.$common.timestampToTime(value.AlarmDateTime);
+                      value.AlarmStatus = value.AlarmStatus === '"Unprocessed"' ? '处理中' : '未处理';
+                      // value.AlarmLevel = value.AlarmLevel.Name;
+                      table.push(value);
+                    });
+                    that.tableList = table;
+                    that.pagination.total = that.tableList.length;
+                  }
+                }
                 that.loading = false;
               })
             } catch (e) {

@@ -123,7 +123,7 @@
         // this.loading = true;
         this.$http.get(that.$api.getAlarmForPagination)
           .then(res => {
-            console.log(res);
+            // console.log(res);
             if (res.status === 200) {
               if (res.data.value.length !== 0) {
                 setTimeout(() => {

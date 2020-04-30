@@ -172,9 +172,11 @@
         this.tableHeaderHeight = (heightParam * 0.09).toString();
 
         this.moduleWidth = window.innerWidth * 0.18 + 'px';
-        this.moduleHeight = window.innerHeight * 0.17 + 'px';
+        // this.moduleHeight = window.innerHeight * 0.17 + 'px';
+        this.moduleHeight = heightParam * 0.17 + 'px';
         // 每一行的高度
-        this.menuHeight = window.innerHeight * 0.2 + 'px';
+        // this.menuHeight = window.innerHeight * 0.2 + 'px';
+        this.menuHeight = heightParam * 0.2 + 'px';
 
         // 模块内的布局
         this.emptyWidth = that.tableHeaderWidth * 0.1;
@@ -203,9 +205,11 @@
             this.tableHeaderHeight = (heightParam * 0.09).toString();
 
             this.moduleWidth = window.innerWidth * 0.18 + 'px';
-            this.moduleHeight = window.innerHeight * 0.7 + 'px';
+            // this.moduleHeight = window.innerHeight * 0.17 + 'px';
+            this.moduleHeight = heightParam * 0.17 + 'px';
             // 每一行的高度
-            this.menuHeight = window.innerHeight * 0.2 + 'px';
+            // this.menuHeight = window.innerHeight * 0.2 + 'px';
+            this.menuHeight = heightParam * 0.2 + 'px';
 
             // 模块内的布局
             this.emptyWidth = that.tableHeaderWidth * 0.1;

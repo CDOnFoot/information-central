@@ -472,7 +472,19 @@
           })
         } else if (this.modalTitle === '编辑报警') {
           param = {
-            EntityId: that.modalForm.EntityId
+            EntityId: that.modalForm.EntityId,
+            AlarmName: that.modalForm.AlarmName,
+            AlarmDescription: that.modalForm.AlarmDescription,
+            AlarmType: that.modalForm.AlarmType,
+            StationId: that.modalForm.StationId,
+            SubsystemId: that.modalForm.SubsystemId,
+            EquipmentId: that.modalForm.EquipmentId,
+            PointId: that.modalForm.PointId,
+            HighLimit: that.modalForm.HighLimit,
+            LowLimit: that.modalForm.LowLimit,
+            AlarmLevel: {
+              EntityId: 6875
+            }
           };
           this.$http.post(that.$api.alarmRules, param).then(res => {
             if (res.status === 200) {

@@ -34,7 +34,7 @@
             <div class="device-content-1">
               <div class="device-point-content">
                 <tr class="the-first-row">
-                  <td width="60"></td>
+                  <td width="80"></td>
                   <td width="12" height="105"></td>
                   <td width="10"></td>
                   <td width="62"></td>
@@ -42,7 +42,7 @@
                   <td width="80"></td>
                   <td width="125"></td>
                   <td width="58"></td>
-                  <td width="33"></td>
+                  <td width="20"></td>
                   <td width="12"></td>
                 </tr>
                 <tr class="the-second-row">
@@ -182,7 +182,6 @@
                     <div class="multifunction-module">
                       <a-popover title="多功能传感器2">
                         <template slot="content">
-                          <!--<p>状态：正常</p>-->
                           <p>{{ statusContainer[21].pointName }}：{{ statusContainer[21].pointValue }}</p>
                           <p>湿度：{{ statusContainer[28].pointValue }}，温度：{{ statusContainer[40].pointValue }}</p>
                         </template>
@@ -198,7 +197,6 @@
                     <div class="multifunction-module">
                       <a-popover title="多功能传感器3">
                         <template slot="content">
-                          <!--<p>状态：正常</p>-->
                           <p>{{ statusContainer[42].pointName }}：{{ statusContainer[42].pointValue }}</p>
                           <p>湿度：{{ statusContainer[49].pointValue }}，温度：{{ statusContainer[61].pointValue }}</p>
                         </template>
@@ -330,6 +328,7 @@
                     <div class="water-check">
                       <a-popover title="水浸传感器">
                         <template slot="content">
+                          <!-- 水浸传感器无数据 -->
                           <!--<p>{{ statusContainer[353].pointName }}：{{ statusContainer[353].pointValue }}</p>-->
                         </template>
                         <!--<a-button type="primary"></a-button>-->
@@ -537,12 +536,12 @@ export default {
 }
 
   .device-content-0 {
-    background: url("../../../assets/img/main/设备柜.png");
+    background: url("../../../assets/img/main/plane_0.jpg");
     background-size: 100% 100%;
   }
 
 .device-content-1 {
-  background: url("../../../assets/img/main/机房.png");
+  background: url("../../../assets/img/main/plane_1.jpg");
   background-size: 100% 100%;
 }
 

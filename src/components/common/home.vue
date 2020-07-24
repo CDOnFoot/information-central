@@ -351,51 +351,55 @@
               if (response.data) {
                 let allPointsValue = response.data;
                 // 开始比较
-                usedEquipment.forEach((items) => {
-                  allEquipmentPointValue.forEach((value, index) => {
-                    usedPoints.splice(index, 1, {});
-                    if (allPointsValue[index] !== null) {
-                      // 当前点名称
-                      usedPoints[index].name = value.Name.match(/[\u4e00-\u9fa5]/g).join("");
-                      // 当前点描述
-                      usedPoints[index].pointName = value.DisplayName;
-                      // unit of value
-                      usedPoints[index].unitOfValue = value.UnitOfMeasurement;
-                      // 是否报警
-                      usedPoints[index].isAlarm = allPointsValue[index].st.ia;
-                      // is it bad point
-                      usedPoints[index].isBadPoint = allPointsValue[index].st.ib;
-                      usedPoints[index].pointTime = allPointsValue[index].ti;
-                      const dataType = allPointsValue[index].t;
-                      switch (dataType) {
-                        case "Long":
-                          if (value.MeaningOfValue !== '') {
-                            // 将当前点值的值描述的 JSON 字符串转成对象，再根据当前索引的所有点值的实际值去找到对应含义
-                            usedPoints[index].pointValue = JSON.parse(value.MeaningOfValue)[allPointsValue[index].l];
-                            // 当为坏点时的取值
-                            if (usedPoints[index].pointValue === '') {
-                              usedPoints[index].pointValue = 'N/A'
+                try {
+                  usedEquipment.forEach((items) => {
+                    allEquipmentPointValue.forEach((value, index) => {
+                      usedPoints.splice(index, 1, {});
+                      if (allPointsValue[index] !== null) {
+                        // 当前点名称
+                        usedPoints[index].name = value.Name.match(/[\u4e00-\u9fa5]/g).join("");
+                        // 当前点描述
+                        usedPoints[index].pointName = value.DisplayName;
+                        // unit of value
+                        usedPoints[index].unitOfValue = value.UnitOfMeasurement;
+                        // 是否报警
+                        usedPoints[index].isAlarm = allPointsValue[index].st.ia;
+                        // is it bad point
+                        usedPoints[index].isBadPoint = allPointsValue[index].st.ib;
+                        usedPoints[index].pointTime = allPointsValue[index].ti;
+                        const dataType = allPointsValue[index].t;
+                        switch (dataType) {
+                          case "Long":
+                            if (value.MeaningOfValue !== '') {
+                              // 将当前点值的值描述的 JSON 字符串转成对象，再根据当前索引的所有点值的实际值去找到对应含义
+                              usedPoints[index].pointValue = JSON.parse(value.MeaningOfValue)[allPointsValue[index].l];
+                              // 当为坏点时的取值
+                              if (usedPoints[index].pointValue === '') {
+                                usedPoints[index].pointValue = 'N/A'
+                              }
+                              // that.$set(usedPoints[index], "pointValue", JSON.parse(value.MeaningOfValue)[parseInt(allPointsValue[index].l)])
+                              // console.log(allPointsValue[index]);
+                            } else {
+                              usedPoints[index].pointValue = allPointsValue[index].l;
                             }
-                            // that.$set(usedPoints[index], "pointValue", JSON.parse(value.MeaningOfValue)[parseInt(allPointsValue[index].l)])
-                            // console.log(allPointsValue[index]);
-                          } else {
-                            usedPoints[index].pointValue = allPointsValue[index].l;
-                          }
-                          break;
-                        case "String":
-                          usedPoints[index].pointValue = allPointsValue[index].s;
-                          break;
-                        case "DWord":
-                          usedPoints[index].pointValue = allPointsValue[index].dw;
-                          break;
-                        default:
-                          return true;
+                            break;
+                          case "String":
+                            usedPoints[index].pointValue = allPointsValue[index].s;
+                            break;
+                          case "DWord":
+                            usedPoints[index].pointValue = allPointsValue[index].dw;
+                            break;
+                          default:
+                            return true;
+                        }
+                      } else {
+                        return false;
                       }
-                    } else {
-                      return false;
-                    }
-                  })
-                });
+                    })
+                  });
+                } catch (e) {
+                  console.log("some error take:", e);
+                }
                 // the var not use.
                 // that.statusList = usedPoints;
                 /**

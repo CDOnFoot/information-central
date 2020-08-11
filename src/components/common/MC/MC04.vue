@@ -397,9 +397,7 @@ export default {
       this.nowTime = this.$common.timestampToTime(new Date());
     }, 1000);
     // console.log("component MC mounted.");
-    // const parentNode = this.$('.device-content-0').parent();
     const height = window.screen.height;
-    // console.log(parentNode);
     this.$('.device-content-0').css({
       'height': height * 0.36 + 'px',
       'width': '98%'
@@ -442,8 +440,6 @@ export default {
       const multifunction = this.$('.multifunction-module');
       const exchange = this.$('.exchange-module');
       const waterCheck = this.$('.water-check');
-      // console.log('selected:');
-      // console.log(value);
       switch (value) {
         case "0":
           multifunction.show();

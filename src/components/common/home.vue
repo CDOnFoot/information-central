@@ -399,6 +399,24 @@
                   });
                 } catch (e) {
                   console.log("some error take:", e);
+                  // 处理在获取点值 list 元素字段缺失的异常，以模拟假数据处理
+                  const element = {
+                    dw: 0,
+                    eid: 0,
+                    id: 0,
+                    st: {
+                      ia: true,
+                      ib: true,
+                      ie: false,
+                      it: 1,
+                      ov: "0"
+                    }
+                  };
+                  for (let i = 0; i <= 1961; i++) {
+                    usedPoints.push(element);
+                    usedPoints[i].id = i;
+                    usedPoints[i].eid = i;
+                  }
                 }
                 // the var not use.
                 // that.statusList = usedPoints;

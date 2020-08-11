@@ -59,8 +59,10 @@
       setInterval(() => {
         this.nowTime = this.$common.timestampToTime(new Date());
       }, 1000);
-      // 初始化一个空的图表
-      this.initChartForTemp('home');
+      // 初始化一个空的图表，增加一个定时器，以避免数据同步异步情况
+      setTimeout(() => {
+        this.initChartForTemp('home');
+      }, 2000);
     },
 
     created() {
@@ -78,11 +80,9 @@
       /* 获取 gap 天前的日期 */
       handleTimeFormat (gap) {
         let nowDate = new Date();
-        const nowTime = nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate();
-        // console.log("current time:", nowTime);
+        // const nowTime = nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate();
         let Date2 = new Date();
         Date2.setDate(nowDate.getDate() - gap);
-        // console.log("changed time:", Date2.getFullYear() + "-" + (Date2.getMonth() + 1) + "-" + Date2.getDate());
         return Date2.getFullYear() + "-" + (Date2.getMonth() + 1) + "-" + Date2.getDate();
       },
 
@@ -123,12 +123,6 @@
                   pointsContainer_5.push(values.l); // 多功能传感器3 - 温度
                 }
               });
-              // console.log("多功能传感器1 - 湿度：", pointsContainer_0);
-              // console.log("多功能传感器1 - 温度：", pointsContainer_1);
-              // console.log("多功能传感器2 - 湿度：", pointsContainer_2);
-              // console.log("多功能传感器2 - 温度：", pointsContainer_3);
-              // console.log("多功能传感器3 - 湿度：", pointsContainer_4);
-              // console.log("多功能传感器3 - 温度：", pointsContainer_5);
               this.historyPoints.push(pointsContainer_0);
               this.historyPoints.push(pointsContainer_1);
               this.historyPoints.push(pointsContainer_2);
@@ -136,7 +130,17 @@
               this.historyPoints.push(pointsContainer_4);
               this.historyPoints.push(pointsContainer_5);
               console.log("处理完成的list:", this.historyPoints)
-            } else {}
+            } else {
+              // 当前没有任何数据时的假数据处理
+              this.historyPoints = [
+                [50, 58, 49, 59, 60],
+                [40, 30, 39, 67, 40],
+                [38, 49, 39, 56, 35],
+                [79, 87, 97, 95, 74],
+                [39, 23, 54, 46, 34],
+                [43, 34, 65, 47, 75]
+              ]
+            }
           })
       },
 
@@ -152,18 +156,11 @@
           for (let i=0;i<this.historyPoints[0].length;i++) {
             axisData.push(i);
           }
-          // data0 = [47, 38, 29, 49, 40];
           data0 = this.historyPoints[0];
-          // data1 = [38, 56, 38, 58, 39];
           data1 = this.historyPoints[1];
-          // data2 = [39, 58, 49, 39, 57];
           data2 = this.historyPoints[2];
-
-          // data3 = [60, 89, 76, 56, 77];
           data3 = this.historyPoints[3];
-          // data4 = [87, 67, 56, 78, 67];
           data4 = this.historyPoints[4];
-          // data5 = [67, 76, 87, 57, 76];
           data5 = this.historyPoints[5];
           legend = {
             top: 0,
@@ -404,19 +401,10 @@
         const colorTemplate = ['#60acfc', '#32d3eb', '#9287e7', '#60acfc', '#32d3eb', '#9287e7'];
 
         const option = {
+          // 获取指针时的提示框
           tooltip,
-
+          // 曲线颜色， 根据选择不同层数选择
           color,
-
-          /*legend: {
-            // y: '20px',
-            top: -5,
-            data: ['多功能1-温度', '多功能2-温度', '多功能3-温度', '多功能1-湿度', '多功能2-湿度', '多功能3-湿度'],
-            selectedMode: false,
-            textStyle: {
-              color: '#fff'
-            }
-          },*/
           legend,
           xAxis: [
             {
@@ -432,7 +420,6 @@
               }
             }
           ],
-
           yAxis: [
             {
               type: 'value',
@@ -463,7 +450,6 @@
               }
             }
           ],
-
           // 曲线
           /*series: [
             // 左边的数据
@@ -599,6 +585,7 @@
         };
 
         chartInit.setOption(option);
+        // 定时刷新图表，已不使用
         /*setInterval(() => {
           chartInit.clear();
           chartInit.setOption(option);

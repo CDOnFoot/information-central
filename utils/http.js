@@ -16,8 +16,6 @@
 
     //配置信息
     var useStaging = false;
-    // var host = useStaging ? 'http://10.66.1.102:28070':'http://10.66.1.160:28070';
-    // var host = useStaging ? 'http://10.66.1.102:28070':'http://10.28.3.81:28070';
 
 /**
  * @variation 新的登录 IP
@@ -32,13 +30,8 @@ var homeHost = useStaging ? 'http://10.66.1.102:28070':'http://10.66.1.160:28070
     // websocket配置信息/url+user/id+token
     var websocketHost = useStaging ? 'ws://10.66.1.160:28070/subway/info/ws/':'ws://10.66.1.160:28070/subway/info/ws/';
     var websocketService = useStaging ? 'ws://10.66.1.160:28070/subway/info/ws/':'ws://10.66.1.160:28070/equipment/info/ws/';
-    // var websocketHost = useStaging ? 'ws://10.28.3.81:28070/subway/info/ws/':'ws://10.28.3.81:28070/subway/info/ws/';
-    // var websocketService = useStaging ? 'ws://10.28.3.81:28070/subway/info/ws/':'ws://10.28.3.81:28070/equipment/info/ws/';
 
-    // var host = useStaging ? 'http://10.66.1.102:28070':'http://10.66.1.192:28070';
-    // var host = useStaging ? 'http://10.66.1.102:28070':'http://10.66.1.102:28070';
-    // var host = useStaging ? 'http://10.66.1.102:28070':'http://10.66.11.144:28070';
-
+    // 单独模块中使用 this 指向不到当前 vue 实例
     var self = this;
     // **路由请求拦截**
     // http request 拦截器
@@ -83,11 +76,11 @@ axios.defaults.headers.token = common.getCookie('dvptToken')
     });
     // **路由响应拦截**
     axios.interceptors.response.use(response => {
-      if(response.data.code==='40001'||response.data.code==='40002' ||response.data.code==='60002' || response.data.code==='60001' ||response.data.code==='60005'){
+      /*if(response.data.code==='40001'||response.data.code==='40002' ||response.data.code==='60002' || response.data.code==='60001' ||response.data.code==='60005'){
          router.push({
           path: '/login' // 到登录页重新获取token
         });
-      }
+      }*/
       return response;
     }, err => {
 

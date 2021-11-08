@@ -81,9 +81,9 @@
       handleTimeFormat (gap) {
         let nowDate = new Date();
         // const nowTime = nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate();
-        let Date2 = new Date();
-        Date2.setDate(nowDate.getDate() - gap);
-        return Date2.getFullYear() + "-" + (Date2.getMonth() + 1) + "-" + Date2.getDate();
+        let setDate = new Date();
+        setDate.setDate(nowDate.getDate() - gap);
+        return setDate.getFullYear() + "-" + (setDate.getMonth() + 1) + "-" + setDate.getDate();
       },
 
       // 获取历史点值数据
@@ -129,17 +129,29 @@
               this.historyPoints.push(pointsContainer_3);
               this.historyPoints.push(pointsContainer_4);
               this.historyPoints.push(pointsContainer_5);
-              console.log("处理完成的list:", this.historyPoints)
+              // console.log("处理完成的list:", this.historyPoints)
             } else {
               // 当前没有任何数据时的假数据处理
-              this.historyPoints = [
-                [50, 58, 49, 59, 60],
-                [40, 30, 39, 67, 40],
-                [38, 49, 39, 56, 35],
-                [79, 87, 97, 95, 74],
-                [39, 23, 54, 46, 34],
-                [43, 34, 65, 47, 75]
-              ]
+              while (this.historyPoints.length !== 6) {
+                let list = [];
+                // 循环次数为当前采集数据次数，因为模拟数据可随意定义
+                for (let i = 0; i <= 4; i++) {
+                  list.push(parseInt(Math.random() * 100));
+                }
+                this.historyPoints.push(list);
+              }
+            }
+          })
+          // 请求过程发生错误时的异常处理
+          .catch(err => {
+            console.log("request has error:", err);
+            // 为绑定 data 模拟数据
+            while (this.historyPoints.length !== 6) {
+              let list = [];
+              for (let i = 0; i <= 4; i++) {
+                list.push(parseInt(Math.random() * 100));
+              }
+              this.historyPoints.push(list);
             }
           })
       },
